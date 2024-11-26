@@ -1,0 +1,812 @@
+ARM GAS  /tmp/ccXam0KR.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"modem_supervisor_light.c"
+  10              		.text
+  11              		.section	.text.supervisor_idle_task_on_launch,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	supervisor_idle_task_on_launch:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		@ link register save eliminated.
+  23              		@ sp needed
+  24 0000 7047     		bx	lr
+  26              		.section	.text.supervisor_idle_task_on_update,"ax",%progbits
+  27              		.align	1
+  28              		.syntax unified
+  29              		.code	16
+  30              		.thumb_func
+  31              		.fpu softvfp
+  33              	supervisor_idle_task_on_update:
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  36              		@ link register save eliminated.
+  37              		@ sp needed
+  38 0000 7047     		bx	lr
+  40              		.section	.rodata.modem_supervisor_init_callback.str1.1,"aMS",%progbits,1
+  41              	.LC1:
+  42 0000 00       		.ascii	"\000"
+  43              		.section	.text.modem_supervisor_init_callback,"ax",%progbits
+  44              		.align	1
+  45              		.global	modem_supervisor_init_callback
+  46              		.syntax unified
+  47              		.code	16
+  48              		.thumb_func
+  49              		.fpu softvfp
+  51              	modem_supervisor_init_callback:
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  55 0002 0600     		movs	r6, r0
+  56 0004 114D     		ldr	r5, .L13
+  57 0006 2436     		adds	r6, r6, #36
+  58 0008 B600     		lsls	r6, r6, #2
+  59 000a 7459     		ldr	r4, [r6, r5]
+  60 000c 002C     		cmp	r4, #0
+  61 000e 12D1     		bne	.L4
+  62 0010 0400     		movs	r4, r0
+ARM GAS  /tmp/ccXam0KR.s 			page 2
+
+
+  63 0012 2A34     		adds	r4, r4, #42
+  64 0014 A400     		lsls	r4, r4, #2
+  65 0016 2C19     		adds	r4, r5, r4
+  66 0018 6768     		ldr	r7, [r4, #4]
+  67 001a 002F     		cmp	r7, #0
+  68 001c 0BD1     		bne	.L4
+  69 001e 1C30     		adds	r0, r0, #28
+  70 0020 8000     		lsls	r0, r0, #2
+  71 0022 2818     		adds	r0, r5, r0
+  72 0024 4768     		ldr	r7, [r0, #4]
+  73 0026 002F     		cmp	r7, #0
+  74 0028 05D1     		bne	.L4
+  75 002a 0029     		cmp	r1, #0
+  76 002c 03D0     		beq	.L4
+  77 002e 002A     		cmp	r2, #0
+  78 0030 01D0     		beq	.L4
+  79 0032 002B     		cmp	r3, #0
+  80 0034 05D1     		bne	.L5
+  81              	.L4:
+  82 0036 B221     		movs	r1, #178
+  83 0038 054A     		ldr	r2, .L13+4
+  84 003a 0648     		ldr	r0, .L13+8
+  85 003c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+  86              	.L3:
+  87              		@ sp needed
+  88 0040 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  89              	.L5:
+  90 0042 7151     		str	r1, [r6, r5]
+  91 0044 6260     		str	r2, [r4, #4]
+  92 0046 4360     		str	r3, [r0, #4]
+  93 0048 FAE7     		b	.L3
+  94              	.L14:
+  95 004a C046     		.align	2
+  96              	.L13:
+  97 004c 00000000 		.word	modem_supervisor_context
+  98 0050 00000000 		.word	.LC1
+  99 0054 00000000 		.word	.LANCHOR0
+ 101              		.section	.text.modem_supervisor_init,"ax",%progbits
+ 102              		.align	1
+ 103              		.global	modem_supervisor_init
+ 104              		.syntax unified
+ 105              		.code	16
+ 106              		.thumb_func
+ 107              		.fpu softvfp
+ 109              	modem_supervisor_init:
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112 0000 10B5     		push	{r4, lr}
+ 113 0002 144C     		ldr	r4, .L20
+ 114 0004 7422     		movs	r2, #116
+ 115 0006 0021     		movs	r1, #0
+ 116 0008 2000     		movs	r0, r4
+ 117 000a FFF7FEFF 		bl	memset
+ 118 000e 0020     		movs	r0, #0
+ 119 0010 2300     		movs	r3, r4
+ 120 0012 0521     		movs	r1, #5
+ 121 0014 0200     		movs	r2, r0
+ARM GAS  /tmp/ccXam0KR.s 			page 3
+
+
+ 122              	.L16:
+ 123 0016 1870     		strb	r0, [r3]
+ 124 0018 0130     		adds	r0, r0, #1
+ 125 001a C0B2     		uxtb	r0, r0
+ 126 001c 1972     		strb	r1, [r3, #8]
+ 127 001e 5A70     		strb	r2, [r3, #1]
+ 128 0020 DA72     		strb	r2, [r3, #11]
+ 129 0022 1033     		adds	r3, r3, #16
+ 130 0024 0728     		cmp	r0, #7
+ 131 0026 F6D1     		bne	.L16
+ 132 0028 2300     		movs	r3, r4
+ 133 002a 7033     		adds	r3, r3, #112
+ 134 002c 1A70     		strb	r2, [r3]
+ 135 002e 0022     		movs	r2, #0
+ 136 0030 094B     		ldr	r3, .L20+4
+ 137              	.L17:
+ 138 0032 0138     		subs	r0, r0, #1
+ 139 0034 C0B2     		uxtb	r0, r0
+ 140 0036 DA61     		str	r2, [r3, #28]
+ 141 0038 9A63     		str	r2, [r3, #56]
+ 142 003a 04C3     		stmia	r3!, {r2}
+ 143 003c 0028     		cmp	r0, #0
+ 144 003e F8D1     		bne	.L17
+ 145              		@ sp needed
+ 146 0040 2300     		movs	r3, r4
+ 147 0042 0422     		movs	r2, #4
+ 148 0044 7233     		adds	r3, r3, #114
+ 149 0046 1A70     		strb	r2, [r3]
+ 150 0048 0449     		ldr	r1, .L20+8
+ 151 004a 2300     		movs	r3, r4
+ 152 004c 044A     		ldr	r2, .L20+12
+ 153 004e FFF7FEFF 		bl	modem_supervisor_init_callback
+ 154 0052 10BD     		pop	{r4, pc}
+ 155              	.L21:
+ 156              		.align	2
+ 157              	.L20:
+ 158 0054 00000000 		.word	modem_supervisor_context
+ 159 0058 74000000 		.word	modem_supervisor_context+116
+ 160 005c 00000000 		.word	supervisor_idle_task_on_launch
+ 161 0060 00000000 		.word	supervisor_idle_task_on_update
+ 163              		.section	.text.modem_supervisor_remove_task,"ax",%progbits
+ 164              		.align	1
+ 165              		.global	modem_supervisor_remove_task
+ 166              		.syntax unified
+ 167              		.code	16
+ 168              		.thumb_func
+ 169              		.fpu softvfp
+ 171              	modem_supervisor_remove_task:
+ 172              		@ args = 0, pretend = 0, frame = 0
+ 173              		@ frame_needed = 0, uses_anonymous_args = 0
+ 174              		@ link register save eliminated.
+ 175 0000 0300     		movs	r3, r0
+ 176 0002 0120     		movs	r0, #1
+ 177 0004 062B     		cmp	r3, #6
+ 178 0006 06D8     		bhi	.L23
+ 179 0008 0348     		ldr	r0, .L25
+ 180 000a 1B01     		lsls	r3, r3, #4
+ARM GAS  /tmp/ccXam0KR.s 			page 4
+
+
+ 181 000c C318     		adds	r3, r0, r3
+ 182 000e 0522     		movs	r2, #5
+ 183 0010 0020     		movs	r0, #0
+ 184 0012 1A72     		strb	r2, [r3, #8]
+ 185 0014 9872     		strb	r0, [r3, #10]
+ 186              	.L23:
+ 187              		@ sp needed
+ 188 0016 7047     		bx	lr
+ 189              	.L26:
+ 190              		.align	2
+ 191              	.L25:
+ 192 0018 00000000 		.word	modem_supervisor_context
+ 194              		.section	.text.modem_supervisor_abort_tasks_in_range,"ax",%progbits
+ 195              		.align	1
+ 196              		.global	modem_supervisor_abort_tasks_in_range
+ 197              		.syntax unified
+ 198              		.code	16
+ 199              		.thumb_func
+ 200              		.fpu softvfp
+ 202              	modem_supervisor_abort_tasks_in_range:
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 206 0002 0600     		movs	r6, r0
+ 207 0004 0C00     		movs	r4, r1
+ 208 0006 0729     		cmp	r1, #7
+ 209 0008 0FD8     		bhi	.L27
+ 210 000a 8142     		cmp	r1, r0
+ 211 000c 0DD3     		bcc	.L27
+ 212 000e 0500     		movs	r5, r0
+ 213 0010 4F1C     		adds	r7, r1, #1
+ 214 0012 BFB2     		uxth	r7, r7
+ 215              	.L31:
+ 216 0014 BD42     		cmp	r5, r7
+ 217 0016 09D1     		bne	.L32
+ 218 0018 074B     		ldr	r3, .L33
+ 219 001a 7033     		adds	r3, r3, #112
+ 220 001c 1A78     		ldrb	r2, [r3]
+ 221 001e B242     		cmp	r2, r6
+ 222 0020 03D3     		bcc	.L27
+ 223 0022 A242     		cmp	r2, r4
+ 224 0024 01D8     		bhi	.L27
+ 225 0026 0022     		movs	r2, #0
+ 226 0028 1A70     		strb	r2, [r3]
+ 227              	.L27:
+ 228              		@ sp needed
+ 229 002a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 230              	.L32:
+ 231 002c 2800     		movs	r0, r5
+ 232 002e 0135     		adds	r5, r5, #1
+ 233 0030 FFF7FEFF 		bl	modem_supervisor_remove_task
+ 234 0034 ADB2     		uxth	r5, r5
+ 235 0036 EDE7     		b	.L31
+ 236              	.L34:
+ 237              		.align	2
+ 238              	.L33:
+ 239 0038 00000000 		.word	modem_supervisor_context
+ARM GAS  /tmp/ccXam0KR.s 			page 5
+
+
+ 241              		.section	.text.modem_supervisor_add_task,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	modem_supervisor_add_task
+ 244              		.syntax unified
+ 245              		.code	16
+ 246              		.thumb_func
+ 247              		.fpu softvfp
+ 249              	modem_supervisor_add_task:
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253 0000 0178     		ldrb	r1, [r0]
+ 254 0002 0200     		movs	r2, r0
+ 255 0004 0120     		movs	r0, #1
+ 256 0006 0629     		cmp	r1, #6
+ 257 0008 0ED8     		bhi	.L36
+ 258 000a 084B     		ldr	r3, .L38
+ 259 000c 0901     		lsls	r1, r1, #4
+ 260 000e 5B18     		adds	r3, r3, r1
+ 261 0010 5168     		ldr	r1, [r2, #4]
+ 262 0012 5960     		str	r1, [r3, #4]
+ 263 0014 117A     		ldrb	r1, [r2, #8]
+ 264 0016 1972     		strb	r1, [r3, #8]
+ 265 0018 5178     		ldrb	r1, [r2, #1]
+ 266 001a 5970     		strb	r1, [r3, #1]
+ 267 001c 517A     		ldrb	r1, [r2, #9]
+ 268 001e 9872     		strb	r0, [r3, #10]
+ 269 0020 0020     		movs	r0, #0
+ 270 0022 5972     		strb	r1, [r3, #9]
+ 271 0024 D27A     		ldrb	r2, [r2, #11]
+ 272 0026 DA72     		strb	r2, [r3, #11]
+ 273              	.L36:
+ 274              		@ sp needed
+ 275 0028 7047     		bx	lr
+ 276              	.L39:
+ 277 002a C046     		.align	2
+ 278              	.L38:
+ 279 002c 00000000 		.word	modem_supervisor_context
+ 281              		.section	.text.modem_supervisor_get_task,"ax",%progbits
+ 282              		.align	1
+ 283              		.global	modem_supervisor_get_task
+ 284              		.syntax unified
+ 285              		.code	16
+ 286              		.thumb_func
+ 287              		.fpu softvfp
+ 289              	modem_supervisor_get_task:
+ 290              		@ args = 0, pretend = 0, frame = 0
+ 291              		@ frame_needed = 0, uses_anonymous_args = 0
+ 292              		@ link register save eliminated.
+ 293 0000 0048     		ldr	r0, .L41
+ 294              		@ sp needed
+ 295 0002 7047     		bx	lr
+ 296              	.L42:
+ 297              		.align	2
+ 298              	.L41:
+ 299 0004 00000000 		.word	modem_supervisor_context
+ 301              		.section	.rodata.modem_supervisor_engine.str1.1,"aMS",%progbits,1
+ARM GAS  /tmp/ccXam0KR.s 			page 6
+
+
+ 302              	.LC16:
+ 303 0000 53757065 		.ascii	"Supervisor FAILSAFE EVENT OCCUR task:0x%x)\012\000"
+ 303      72766973 
+ 303      6F722046 
+ 303      41494C53 
+ 303      41464520 
+ 304              		.section	.text.modem_supervisor_engine,"ax",%progbits
+ 305              		.align	1
+ 306              		.global	modem_supervisor_engine
+ 307              		.syntax unified
+ 308              		.code	16
+ 309              		.thumb_func
+ 310              		.fpu softvfp
+ 312              	modem_supervisor_engine:
+ 313              		@ args = 0, pretend = 0, frame = 24
+ 314              		@ frame_needed = 0, uses_anonymous_args = 0
+ 315 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 316 0002 87B0     		sub	sp, sp, #28
+ 317 0004 FFF7FEFF 		bl	tx_protocol_manager_is_busy
+ 318 0008 0190     		str	r0, [sp, #4]
+ 319 000a FFF7FEFF 		bl	modem_get_user_alarm
+ 320 000e 051E     		subs	r5, r0, #0
+ 321 0010 0CD0     		beq	.L68
+ 322 0012 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 323 0016 2D1A     		subs	r5, r5, r0
+ 324 0018 002D     		cmp	r5, #0
+ 325 001a 08DC     		bgt	.L44
+ 326 001c 0020     		movs	r0, #0
+ 327 001e FFF7FEFF 		bl	modem_set_user_alarm
+ 328 0022 FF22     		movs	r2, #255
+ 329 0024 0021     		movs	r1, #0
+ 330 0026 0120     		movs	r0, #1
+ 331 0028 FFF7FEFF 		bl	increment_asynchronous_msgnumber
+ 332              	.L68:
+ 333 002c 804D     		ldr	r5, .L94
+ 334              	.L44:
+ 335 002e 019B     		ldr	r3, [sp, #4]
+ 336 0030 002B     		cmp	r3, #0
+ 337 0032 07D0     		beq	.L45
+ 338              	.L49:
+ 339 0034 FA20     		movs	r0, #250
+ 340 0036 8000     		lsls	r0, r0, #2
+ 341 0038 6843     		muls	r0, r5
+ 342              	.L93:
+ 343 003a 9842     		cmp	r0, r3
+ 344 003c 00D9     		bls	.L43
+ 345 003e 1800     		movs	r0, r3
+ 346              	.L43:
+ 347 0040 07B0     		add	sp, sp, #28
+ 348              		@ sp needed
+ 349 0042 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 350              	.L45:
+ 351 0044 7B4C     		ldr	r4, .L94+4
+ 352 0046 2300     		movs	r3, r4
+ 353 0048 7033     		adds	r3, r3, #112
+ 354 004a 1B78     		ldrb	r3, [r3]
+ 355 004c 1B01     		lsls	r3, r3, #4
+ARM GAS  /tmp/ccXam0KR.s 			page 7
+
+
+ 356 004e E318     		adds	r3, r4, r3
+ 357 0050 5878     		ldrb	r0, [r3, #1]
+ 358 0052 FFF7FEFF 		bl	lorawan_api_process
+ 359 0056 0428     		cmp	r0, #4
+ 360 0058 04D1     		bne	.L48
+ 361 005a FFF7FEFF 		bl	tx_protocol_manager_lr1mac_stand_alone_tx
+ 362 005e FA23     		movs	r3, #250
+ 363 0060 9B00     		lsls	r3, r3, #2
+ 364 0062 E7E7     		b	.L49
+ 365              	.L48:
+ 366 0064 0028     		cmp	r0, #0
+ 367 0066 03D0     		beq	.L50
+ 368 0068 0628     		cmp	r0, #6
+ 369 006a 01D0     		beq	.L50
+ 370 006c 724B     		ldr	r3, .L94+8
+ 371 006e E1E7     		b	.L49
+ 372              	.L50:
+ 373 0070 2500     		movs	r5, r4
+ 374 0072 7035     		adds	r5, r5, #112
+ 375 0074 2B78     		ldrb	r3, [r5]
+ 376 0076 1B01     		lsls	r3, r3, #4
+ 377 0078 E318     		adds	r3, r4, r3
+ 378 007a DB7A     		ldrb	r3, [r3, #11]
+ 379 007c 002B     		cmp	r3, #0
+ 380 007e 10D0     		beq	.L52
+ 381 0080 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 382 0084 2B78     		ldrb	r3, [r5]
+ 383 0086 1A01     		lsls	r2, r3, #4
+ 384 0088 A218     		adds	r2, r4, r2
+ 385 008a D268     		ldr	r2, [r2, #12]
+ 386 008c 801A     		subs	r0, r0, r2
+ 387 008e 7838     		subs	r0, r0, #120
+ 388 0090 0028     		cmp	r0, #0
+ 389 0092 00DC     		bgt	.LCB387
+ 390 0094 C9E0     		b	.L69	@long jump
+ 391              	.LCB387:
+ 392 0096 1A21     		movs	r1, #26
+ 393 0098 684A     		ldr	r2, .L94+12
+ 394 009a 6948     		ldr	r0, .L94+16
+ 395 009c FF31     		adds	r1, r1, #255
+ 396 009e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 397              	.L52:
+ 398 00a2 2500     		movs	r5, r4
+ 399 00a4 7035     		adds	r5, r5, #112
+ 400 00a6 2978     		ldrb	r1, [r5]
+ 401 00a8 0029     		cmp	r1, #0
+ 402 00aa 11D0     		beq	.L53
+ 403 00ac 0B01     		lsls	r3, r1, #4
+ 404 00ae E318     		adds	r3, r4, r3
+ 405 00b0 5A78     		ldrb	r2, [r3, #1]
+ 406 00b2 D300     		lsls	r3, r2, #3
+ 407 00b4 D31A     		subs	r3, r2, r3
+ 408 00b6 5B18     		adds	r3, r3, r1
+ 409 00b8 1A00     		movs	r2, r3
+ 410 00ba 2A33     		adds	r3, r3, #42
+ 411 00bc 1C32     		adds	r2, r2, #28
+ 412 00be 9200     		lsls	r2, r2, #2
+ARM GAS  /tmp/ccXam0KR.s 			page 8
+
+
+ 413 00c0 9B00     		lsls	r3, r3, #2
+ 414 00c2 A218     		adds	r2, r4, r2
+ 415 00c4 E318     		adds	r3, r4, r3
+ 416 00c6 5B68     		ldr	r3, [r3, #4]
+ 417 00c8 5068     		ldr	r0, [r2, #4]
+ 418 00ca 9847     		blx	r3
+ 419 00cc 0023     		movs	r3, #0
+ 420 00ce 2B70     		strb	r3, [r5]
+ 421              	.L53:
+ 422 00d0 0020     		movs	r0, #0
+ 423 00d2 FFF7FEFF 		bl	modem_duty_cycle_get_status
+ 424 00d6 5B4B     		ldr	r3, .L94+20
+ 425 00d8 2600     		movs	r6, r4
+ 426 00da 0293     		str	r3, [sp, #8]
+ 427 00dc 0523     		movs	r3, #5
+ 428 00de 0027     		movs	r7, #0
+ 429 00e0 0490     		str	r0, [sp, #16]
+ 430 00e2 0394     		str	r4, [sp, #12]
+ 431 00e4 0593     		str	r3, [sp, #20]
+ 432              	.L56:
+ 433 00e6 327A     		ldrb	r2, [r6, #8]
+ 434 00e8 052A     		cmp	r2, #5
+ 435 00ea 20D0     		beq	.L54
+ 436 00ec 514B     		ldr	r3, .L94+4
+ 437 00ee 1900     		movs	r1, r3
+ 438 00f0 7231     		adds	r1, r1, #114
+ 439 00f2 0978     		ldrb	r1, [r1]
+ 440 00f4 9142     		cmp	r1, r2
+ 441 00f6 1AD3     		bcc	.L54
+ 442 00f8 7133     		adds	r3, r3, #113
+ 443 00fa 1B78     		ldrb	r3, [r3]
+ 444 00fc 002B     		cmp	r3, #0
+ 445 00fe 16D1     		bne	.L54
+ 446 0100 7568     		ldr	r5, [r6, #4]
+ 447 0102 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 448 0106 2D1A     		subs	r5, r5, r0
+ 449 0108 002D     		cmp	r5, #0
+ 450 010a 10DC     		bgt	.L54
+ 451 010c 337A     		ldrb	r3, [r6, #8]
+ 452 010e 059A     		ldr	r2, [sp, #20]
+ 453 0110 9342     		cmp	r3, r2
+ 454 0112 0CD8     		bhi	.L54
+ 455 0114 029A     		ldr	r2, [sp, #8]
+ 456 0116 9542     		cmp	r5, r2
+ 457 0118 09DC     		bgt	.L54
+ 458 011a 049A     		ldr	r2, [sp, #16]
+ 459 011c 002A     		cmp	r2, #0
+ 460 011e 01DD     		ble	.L55
+ 461 0120 002B     		cmp	r3, #0
+ 462 0122 04D1     		bne	.L54
+ 463              	.L55:
+ 464 0124 434A     		ldr	r2, .L94+4
+ 465 0126 0295     		str	r5, [sp, #8]
+ 466 0128 7032     		adds	r2, r2, #112
+ 467 012a 1770     		strb	r7, [r2]
+ 468 012c 0593     		str	r3, [sp, #20]
+ 469              	.L54:
+ARM GAS  /tmp/ccXam0KR.s 			page 9
+
+
+ 470 012e 0137     		adds	r7, r7, #1
+ 471 0130 FFB2     		uxtb	r7, r7
+ 472 0132 1036     		adds	r6, r6, #16
+ 473 0134 072F     		cmp	r7, #7
+ 474 0136 D6D1     		bne	.L56
+ 475 0138 059B     		ldr	r3, [sp, #20]
+ 476 013a 052B     		cmp	r3, #5
+ 477 013c 28D1     		bne	.L57
+ 478 013e 0025     		movs	r5, #0
+ 479              	.L60:
+ 480 0140 039B     		ldr	r3, [sp, #12]
+ 481 0142 1B7A     		ldrb	r3, [r3, #8]
+ 482 0144 052B     		cmp	r3, #5
+ 483 0146 1CD0     		beq	.L58
+ 484 0148 3A4E     		ldr	r6, .L94+4
+ 485 014a 3200     		movs	r2, r6
+ 486 014c 7232     		adds	r2, r2, #114
+ 487 014e 1278     		ldrb	r2, [r2]
+ 488 0150 9A42     		cmp	r2, r3
+ 489 0152 16D3     		bcc	.L58
+ 490 0154 3300     		movs	r3, r6
+ 491 0156 7133     		adds	r3, r3, #113
+ 492 0158 1B78     		ldrb	r3, [r3]
+ 493 015a 002B     		cmp	r3, #0
+ 494 015c 11D1     		bne	.L58
+ 495 015e 039B     		ldr	r3, [sp, #12]
+ 496 0160 5F68     		ldr	r7, [r3, #4]
+ 497 0162 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 498 0166 029B     		ldr	r3, [sp, #8]
+ 499 0168 3F1A     		subs	r7, r7, r0
+ 500 016a 9F42     		cmp	r7, r3
+ 501 016c 09DA     		bge	.L58
+ 502 016e 049B     		ldr	r3, [sp, #16]
+ 503 0170 002B     		cmp	r3, #0
+ 504 0172 03DD     		ble	.L59
+ 505 0174 039B     		ldr	r3, [sp, #12]
+ 506 0176 1B7A     		ldrb	r3, [r3, #8]
+ 507 0178 002B     		cmp	r3, #0
+ 508 017a 02D1     		bne	.L58
+ 509              	.L59:
+ 510 017c 7036     		adds	r6, r6, #112
+ 511 017e 3570     		strb	r5, [r6]
+ 512 0180 0297     		str	r7, [sp, #8]
+ 513              	.L58:
+ 514 0182 039B     		ldr	r3, [sp, #12]
+ 515 0184 0135     		adds	r5, r5, #1
+ 516 0186 1033     		adds	r3, r3, #16
+ 517 0188 EDB2     		uxtb	r5, r5
+ 518 018a 0393     		str	r3, [sp, #12]
+ 519 018c 072D     		cmp	r5, #7
+ 520 018e D7D1     		bne	.L60
+ 521              	.L57:
+ 522 0190 049B     		ldr	r3, [sp, #16]
+ 523 0192 002B     		cmp	r3, #0
+ 524 0194 10DD     		ble	.L61
+ 525 0196 029B     		ldr	r3, [sp, #8]
+ 526 0198 2A4A     		ldr	r2, .L94+20
+ARM GAS  /tmp/ccXam0KR.s 			page 10
+
+
+ 527 019a 9342     		cmp	r3, r2
+ 528 019c 0CD1     		bne	.L61
+ 529 019e 0023     		movs	r3, #0
+ 530 01a0 7034     		adds	r4, r4, #112
+ 531 01a2 2370     		strb	r3, [r4]
+ 532 01a4 049B     		ldr	r3, [sp, #16]
+ 533 01a6 0193     		str	r3, [sp, #4]
+ 534 01a8 8023     		movs	r3, #128
+ 535 01aa 019A     		ldr	r2, [sp, #4]
+ 536 01ac 9B03     		lsls	r3, r3, #14
+ 537 01ae 9A42     		cmp	r2, r3
+ 538 01b0 22DB     		blt	.L63
+ 539 01b2 029B     		ldr	r3, [sp, #8]
+ 540              	.L91:
+ 541 01b4 0193     		str	r3, [sp, #4]
+ 542 01b6 1FE0     		b	.L63
+ 543              	.L61:
+ 544 01b8 029B     		ldr	r3, [sp, #8]
+ 545 01ba 002B     		cmp	r3, #0
+ 546 01bc 2BDC     		bgt	.L64
+ 547 01be 2500     		movs	r5, r4
+ 548 01c0 7035     		adds	r5, r5, #112
+ 549 01c2 2E78     		ldrb	r6, [r5]
+ 550 01c4 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 551 01c8 3601     		lsls	r6, r6, #4
+ 552 01ca A619     		adds	r6, r4, r6
+ 553 01cc F060     		str	r0, [r6, #12]
+ 554 01ce 2978     		ldrb	r1, [r5]
+ 555 01d0 0A01     		lsls	r2, r1, #4
+ 556 01d2 A218     		adds	r2, r4, r2
+ 557 01d4 5278     		ldrb	r2, [r2, #1]
+ 558 01d6 D300     		lsls	r3, r2, #3
+ 559 01d8 D31A     		subs	r3, r2, r3
+ 560 01da 5B18     		adds	r3, r3, r1
+ 561 01dc 1A00     		movs	r2, r3
+ 562 01de 1C32     		adds	r2, r2, #28
+ 563 01e0 9200     		lsls	r2, r2, #2
+ 564 01e2 2433     		adds	r3, r3, #36
+ 565 01e4 A218     		adds	r2, r4, r2
+ 566 01e6 9B00     		lsls	r3, r3, #2
+ 567 01e8 E358     		ldr	r3, [r4, r3]
+ 568 01ea 5068     		ldr	r0, [r2, #4]
+ 569 01ec 9847     		blx	r3
+ 570 01ee 2B78     		ldrb	r3, [r5]
+ 571 01f0 1B01     		lsls	r3, r3, #4
+ 572 01f2 E418     		adds	r4, r4, r3
+ 573 01f4 0523     		movs	r3, #5
+ 574 01f6 2372     		strb	r3, [r4, #8]
+ 575              	.L63:
+ 576 01f8 FFF7FEFF 		bl	modem_get_user_alarm
+ 577 01fc 041E     		subs	r4, r0, #0
+ 578 01fe 12D0     		beq	.L70
+ 579 0200 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 580 0204 241A     		subs	r4, r4, r0
+ 581 0206 E243     		mvns	r2, r4
+ 582 0208 D217     		asrs	r2, r2, #31
+ 583 020a 1440     		ands	r4, r2
+ARM GAS  /tmp/ccXam0KR.s 			page 11
+
+
+ 584              	.L65:
+ 585 020c FA20     		movs	r0, #250
+ 586 020e 8000     		lsls	r0, r0, #2
+ 587 0210 6043     		muls	r0, r4
+ 588 0212 019B     		ldr	r3, [sp, #4]
+ 589 0214 11E7     		b	.L93
+ 590              	.L64:
+ 591 0216 0023     		movs	r3, #0
+ 592 0218 FA20     		movs	r0, #250
+ 593 021a 7034     		adds	r4, r4, #112
+ 594 021c 2370     		strb	r3, [r4]
+ 595 021e 029B     		ldr	r3, [sp, #8]
+ 596 0220 8000     		lsls	r0, r0, #2
+ 597 0222 4343     		muls	r3, r0
+ 598 0224 C6E7     		b	.L91
+ 599              	.L70:
+ 600 0226 084C     		ldr	r4, .L94+24
+ 601 0228 F0E7     		b	.L65
+ 602              	.L69:
+ 603 022a 0348     		ldr	r0, .L94+8
+ 604 022c 08E7     		b	.L43
+ 605              	.L95:
+ 606 022e C046     		.align	2
+ 607              	.L94:
+ 608 0230 FFFFFF7F 		.word	2147483647
+ 609 0234 00000000 		.word	modem_supervisor_context
+ 610 0238 C0D40100 		.word	120000
+ 611 023c 00000000 		.word	.LC16
+ 612 0240 00000000 		.word	.LANCHOR1
+ 613 0244 FFFF1F00 		.word	2097151
+ 614 0248 9BC42000 		.word	2147483
+ 616              		.section	.text.modem_supervisor_get_modem_is_suspended,"ax",%progbits
+ 617              		.align	1
+ 618              		.global	modem_supervisor_get_modem_is_suspended
+ 619              		.syntax unified
+ 620              		.code	16
+ 621              		.thumb_func
+ 622              		.fpu softvfp
+ 624              	modem_supervisor_get_modem_is_suspended:
+ 625              		@ args = 0, pretend = 0, frame = 0
+ 626              		@ frame_needed = 0, uses_anonymous_args = 0
+ 627              		@ link register save eliminated.
+ 628 0000 024B     		ldr	r3, .L97
+ 629              		@ sp needed
+ 630 0002 1B18     		adds	r3, r3, r0
+ 631 0004 7133     		adds	r3, r3, #113
+ 632 0006 1878     		ldrb	r0, [r3]
+ 633 0008 7047     		bx	lr
+ 634              	.L98:
+ 635 000a C046     		.align	2
+ 636              	.L97:
+ 637 000c 00000000 		.word	modem_supervisor_context
+ 639              		.section	.text.modem_supervisor_set_modem_is_suspended,"ax",%progbits
+ 640              		.align	1
+ 641              		.global	modem_supervisor_set_modem_is_suspended
+ 642              		.syntax unified
+ 643              		.code	16
+ARM GAS  /tmp/ccXam0KR.s 			page 12
+
+
+ 644              		.thumb_func
+ 645              		.fpu softvfp
+ 647              	modem_supervisor_set_modem_is_suspended:
+ 648              		@ args = 0, pretend = 0, frame = 0
+ 649              		@ frame_needed = 0, uses_anonymous_args = 0
+ 650              		@ link register save eliminated.
+ 651 0000 024B     		ldr	r3, .L100
+ 652              		@ sp needed
+ 653 0002 5B18     		adds	r3, r3, r1
+ 654 0004 7133     		adds	r3, r3, #113
+ 655 0006 1870     		strb	r0, [r3]
+ 656 0008 7047     		bx	lr
+ 657              	.L101:
+ 658 000a C046     		.align	2
+ 659              	.L100:
+ 660 000c 00000000 		.word	modem_supervisor_context
+ 662              		.section	.text.modem_supervisor_get_modem_mute_with_priority_parameter,"ax",%progbits
+ 663              		.align	1
+ 664              		.global	modem_supervisor_get_modem_mute_with_priority_parameter
+ 665              		.syntax unified
+ 666              		.code	16
+ 667              		.thumb_func
+ 668              		.fpu softvfp
+ 670              	modem_supervisor_get_modem_mute_with_priority_parameter:
+ 671              		@ args = 0, pretend = 0, frame = 0
+ 672              		@ frame_needed = 0, uses_anonymous_args = 0
+ 673              		@ link register save eliminated.
+ 674 0000 024B     		ldr	r3, .L103
+ 675              		@ sp needed
+ 676 0002 1B18     		adds	r3, r3, r0
+ 677 0004 7233     		adds	r3, r3, #114
+ 678 0006 1878     		ldrb	r0, [r3]
+ 679 0008 7047     		bx	lr
+ 680              	.L104:
+ 681 000a C046     		.align	2
+ 682              	.L103:
+ 683 000c 00000000 		.word	modem_supervisor_context
+ 685              		.section	.text.modem_supervisor_set_modem_mute_with_priority_parameter,"ax",%progbits
+ 686              		.align	1
+ 687              		.global	modem_supervisor_set_modem_mute_with_priority_parameter
+ 688              		.syntax unified
+ 689              		.code	16
+ 690              		.thumb_func
+ 691              		.fpu softvfp
+ 693              	modem_supervisor_set_modem_mute_with_priority_parameter:
+ 694              		@ args = 0, pretend = 0, frame = 0
+ 695              		@ frame_needed = 0, uses_anonymous_args = 0
+ 696              		@ link register save eliminated.
+ 697 0000 0B00     		movs	r3, r1
+ 698 0002 0428     		cmp	r0, #4
+ 699 0004 03D8     		bhi	.L105
+ 700 0006 0249     		ldr	r1, .L107
+ 701 0008 C918     		adds	r1, r1, r3
+ 702 000a 7231     		adds	r1, r1, #114
+ 703 000c 0870     		strb	r0, [r1]
+ 704              	.L105:
+ 705              		@ sp needed
+ARM GAS  /tmp/ccXam0KR.s 			page 13
+
+
+ 706 000e 7047     		bx	lr
+ 707              	.L108:
+ 708              		.align	2
+ 709              	.L107:
+ 710 0010 00000000 		.word	modem_supervisor_context
+ 712              		.global	modem_supervisor_context
+ 713              		.section	.bss.modem_supervisor_context,"aw",%nobits
+ 714              		.align	2
+ 717              	modem_supervisor_context:
+ 718 0000 00000000 		.space	200
+ 718      00000000 
+ 718      00000000 
+ 718      00000000 
+ 718      00000000 
+ 719              		.section	.rodata.__func__.0,"a"
+ 720              		.set	.LANCHOR1,. + 0
+ 723              	__func__.0:
+ 724 0000 6D6F6465 		.ascii	"modem_supervisor_engine\000"
+ 724      6D5F7375 
+ 724      70657276 
+ 724      69736F72 
+ 724      5F656E67 
+ 725              		.section	.rodata.__func__.1,"a"
+ 726              		.set	.LANCHOR0,. + 0
+ 729              	__func__.1:
+ 730 0000 6D6F6465 		.ascii	"modem_supervisor_init_callback\000"
+ 730      6D5F7375 
+ 730      70657276 
+ 730      69736F72 
+ 730      5F696E69 
+ 731              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccXam0KR.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 modem_supervisor_light.c
+     /tmp/ccXam0KR.s:12     .text.supervisor_idle_task_on_launch:0000000000000000 $t
+     /tmp/ccXam0KR.s:19     .text.supervisor_idle_task_on_launch:0000000000000000 supervisor_idle_task_on_launch
+     /tmp/ccXam0KR.s:27     .text.supervisor_idle_task_on_update:0000000000000000 $t
+     /tmp/ccXam0KR.s:33     .text.supervisor_idle_task_on_update:0000000000000000 supervisor_idle_task_on_update
+     /tmp/ccXam0KR.s:44     .text.modem_supervisor_init_callback:0000000000000000 $t
+     /tmp/ccXam0KR.s:51     .text.modem_supervisor_init_callback:0000000000000000 modem_supervisor_init_callback
+     /tmp/ccXam0KR.s:97     .text.modem_supervisor_init_callback:000000000000004c $d
+     /tmp/ccXam0KR.s:717    .bss.modem_supervisor_context:0000000000000000 modem_supervisor_context
+     /tmp/ccXam0KR.s:102    .text.modem_supervisor_init:0000000000000000 $t
+     /tmp/ccXam0KR.s:109    .text.modem_supervisor_init:0000000000000000 modem_supervisor_init
+     /tmp/ccXam0KR.s:158    .text.modem_supervisor_init:0000000000000054 $d
+     /tmp/ccXam0KR.s:164    .text.modem_supervisor_remove_task:0000000000000000 $t
+     /tmp/ccXam0KR.s:171    .text.modem_supervisor_remove_task:0000000000000000 modem_supervisor_remove_task
+     /tmp/ccXam0KR.s:192    .text.modem_supervisor_remove_task:0000000000000018 $d
+     /tmp/ccXam0KR.s:195    .text.modem_supervisor_abort_tasks_in_range:0000000000000000 $t
+     /tmp/ccXam0KR.s:202    .text.modem_supervisor_abort_tasks_in_range:0000000000000000 modem_supervisor_abort_tasks_in_range
+     /tmp/ccXam0KR.s:239    .text.modem_supervisor_abort_tasks_in_range:0000000000000038 $d
+     /tmp/ccXam0KR.s:242    .text.modem_supervisor_add_task:0000000000000000 $t
+     /tmp/ccXam0KR.s:249    .text.modem_supervisor_add_task:0000000000000000 modem_supervisor_add_task
+     /tmp/ccXam0KR.s:279    .text.modem_supervisor_add_task:000000000000002c $d
+     /tmp/ccXam0KR.s:282    .text.modem_supervisor_get_task:0000000000000000 $t
+     /tmp/ccXam0KR.s:289    .text.modem_supervisor_get_task:0000000000000000 modem_supervisor_get_task
+     /tmp/ccXam0KR.s:299    .text.modem_supervisor_get_task:0000000000000004 $d
+     /tmp/ccXam0KR.s:305    .text.modem_supervisor_engine:0000000000000000 $t
+     /tmp/ccXam0KR.s:312    .text.modem_supervisor_engine:0000000000000000 modem_supervisor_engine
+     /tmp/ccXam0KR.s:608    .text.modem_supervisor_engine:0000000000000230 $d
+     /tmp/ccXam0KR.s:617    .text.modem_supervisor_get_modem_is_suspended:0000000000000000 $t
+     /tmp/ccXam0KR.s:624    .text.modem_supervisor_get_modem_is_suspended:0000000000000000 modem_supervisor_get_modem_is_suspended
+     /tmp/ccXam0KR.s:637    .text.modem_supervisor_get_modem_is_suspended:000000000000000c $d
+     /tmp/ccXam0KR.s:640    .text.modem_supervisor_set_modem_is_suspended:0000000000000000 $t
+     /tmp/ccXam0KR.s:647    .text.modem_supervisor_set_modem_is_suspended:0000000000000000 modem_supervisor_set_modem_is_suspended
+     /tmp/ccXam0KR.s:660    .text.modem_supervisor_set_modem_is_suspended:000000000000000c $d
+     /tmp/ccXam0KR.s:663    .text.modem_supervisor_get_modem_mute_with_priority_parameter:0000000000000000 $t
+     /tmp/ccXam0KR.s:670    .text.modem_supervisor_get_modem_mute_with_priority_parameter:0000000000000000 modem_supervisor_get_modem_mute_with_priority_parameter
+     /tmp/ccXam0KR.s:683    .text.modem_supervisor_get_modem_mute_with_priority_parameter:000000000000000c $d
+     /tmp/ccXam0KR.s:686    .text.modem_supervisor_set_modem_mute_with_priority_parameter:0000000000000000 $t
+     /tmp/ccXam0KR.s:693    .text.modem_supervisor_set_modem_mute_with_priority_parameter:0000000000000000 modem_supervisor_set_modem_mute_with_priority_parameter
+     /tmp/ccXam0KR.s:710    .text.modem_supervisor_set_modem_mute_with_priority_parameter:0000000000000010 $d
+     /tmp/ccXam0KR.s:714    .bss.modem_supervisor_context:0000000000000000 $d
+     /tmp/ccXam0KR.s:723    .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccXam0KR.s:729    .rodata.__func__.1:0000000000000000 __func__.1
+
+UNDEFINED SYMBOLS
+smtc_modem_hal_on_panic
+memset
+tx_protocol_manager_is_busy
+modem_get_user_alarm
+smtc_modem_hal_get_time_in_s
+modem_set_user_alarm
+increment_asynchronous_msgnumber
+lorawan_api_process
+tx_protocol_manager_lr1mac_stand_alone_tx
+modem_duty_cycle_get_status

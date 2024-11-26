@@ -1,0 +1,266 @@
+ARM GAS  /tmp/ccx5nxfX.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"stm32l0xx_ll_lptim.c"
+  10              		.text
+  11              		.section	.text.LL_LPTIM_DeInit,"ax",%progbits
+  12              		.align	1
+  13              		.global	LL_LPTIM_DeInit
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	LL_LPTIM_DeInit:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23              		@ link register save eliminated.
+  24 0000 084A     		ldr	r2, .L4
+  25 0002 0123     		movs	r3, #1
+  26 0004 9042     		cmp	r0, r2
+  27 0006 0AD1     		bne	.L2
+  28 0008 8023     		movs	r3, #128
+  29 000a 074A     		ldr	r2, .L4+4
+  30 000c 1B06     		lsls	r3, r3, #24
+  31 000e 916A     		ldr	r1, [r2, #40]
+  32 0010 0B43     		orrs	r3, r1
+  33 0012 9362     		str	r3, [r2, #40]
+  34 0014 936A     		ldr	r3, [r2, #40]
+  35 0016 5B00     		lsls	r3, r3, #1
+  36 0018 5B08     		lsrs	r3, r3, #1
+  37 001a 9362     		str	r3, [r2, #40]
+  38 001c 0023     		movs	r3, #0
+  39              	.L2:
+  40              		@ sp needed
+  41 001e 1800     		movs	r0, r3
+  42 0020 7047     		bx	lr
+  43              	.L5:
+  44 0022 C046     		.align	2
+  45              	.L4:
+  46 0024 007C0040 		.word	1073773568
+  47 0028 00100240 		.word	1073876992
+  49              		.section	.text.LL_LPTIM_StructInit,"ax",%progbits
+  50              		.align	1
+  51              		.global	LL_LPTIM_StructInit
+  52              		.syntax unified
+  53              		.code	16
+  54              		.thumb_func
+  55              		.fpu softvfp
+  57              	LL_LPTIM_StructInit:
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60              		@ link register save eliminated.
+ARM GAS  /tmp/ccx5nxfX.s 			page 2
+
+
+  61 0000 0023     		movs	r3, #0
+  62              		@ sp needed
+  63 0002 0360     		str	r3, [r0]
+  64 0004 4360     		str	r3, [r0, #4]
+  65 0006 8360     		str	r3, [r0, #8]
+  66 0008 C360     		str	r3, [r0, #12]
+  67 000a 7047     		bx	lr
+  69              		.section	.text.LL_LPTIM_Init,"ax",%progbits
+  70              		.align	1
+  71              		.global	LL_LPTIM_Init
+  72              		.syntax unified
+  73              		.code	16
+  74              		.thumb_func
+  75              		.fpu softvfp
+  77              	LL_LPTIM_Init:
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80 0000 0369     		ldr	r3, [r0, #16]
+  81 0002 0200     		movs	r2, r0
+  82 0004 30B5     		push	{r4, r5, lr}
+  83 0006 0120     		movs	r0, #1
+  84 0008 1C00     		movs	r4, r3
+  85 000a 0440     		ands	r4, r0
+  86 000c 0342     		tst	r3, r0
+  87 000e 0CD1     		bne	.L8
+  88 0010 4D68     		ldr	r5, [r1, #4]
+  89 0012 0B68     		ldr	r3, [r1]
+  90 0014 D068     		ldr	r0, [r2, #12]
+  91 0016 2B43     		orrs	r3, r5
+  92 0018 8D68     		ldr	r5, [r1, #8]
+  93 001a C968     		ldr	r1, [r1, #12]
+  94 001c 2B43     		orrs	r3, r5
+  95 001e 0B43     		orrs	r3, r1
+  96 0020 0249     		ldr	r1, .L10
+  97 0022 0140     		ands	r1, r0
+  98 0024 2000     		movs	r0, r4
+  99 0026 0B43     		orrs	r3, r1
+ 100 0028 D360     		str	r3, [r2, #12]
+ 101              	.L8:
+ 102              		@ sp needed
+ 103 002a 30BD     		pop	{r4, r5, pc}
+ 104              	.L11:
+ 105              		.align	2
+ 106              	.L10:
+ 107 002c FEF1CFFF 		.word	-3149314
+ 109              		.section	.text.LL_LPTIM_Disable,"ax",%progbits
+ 110              		.align	1
+ 111              		.global	LL_LPTIM_Disable
+ 112              		.syntax unified
+ 113              		.code	16
+ 114              		.thumb_func
+ 115              		.fpu softvfp
+ 117              	LL_LPTIM_Disable:
+ 118              		@ args = 0, pretend = 0, frame = 32
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 121 0002 0400     		movs	r4, r0
+ARM GAS  /tmp/ccx5nxfX.s 			page 3
+
+
+ 122 0004 89B0     		sub	sp, sp, #36
+ 123              		.syntax divided
+ 124              	@ 209 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 125 0006 72B6     		cpsid i
+ 126              	@ 0 "" 2
+ 127              		.thumb
+ 128              		.syntax unified
+ 129 0008 0023     		movs	r3, #0
+ 130 000a 2D4F     		ldr	r7, .L36
+ 131 000c 0193     		str	r3, [sp, #4]
+ 132 000e B842     		cmp	r0, r7
+ 133 0010 05D1     		bne	.L13
+ 134 0012 2C4B     		ldr	r3, .L36+4
+ 135 0014 DA6C     		ldr	r2, [r3, #76]
+ 136 0016 C023     		movs	r3, #192
+ 137 0018 1B03     		lsls	r3, r3, #12
+ 138 001a 1A40     		ands	r2, r3
+ 139 001c 0192     		str	r2, [sp, #4]
+ 140              	.L13:
+ 141 001e A368     		ldr	r3, [r4, #8]
+ 142 0020 2000     		movs	r0, r4
+ 143 0022 0293     		str	r3, [sp, #8]
+ 144 0024 E368     		ldr	r3, [r4, #12]
+ 145 0026 6669     		ldr	r6, [r4, #20]
+ 146 0028 0393     		str	r3, [sp, #12]
+ 147 002a A569     		ldr	r5, [r4, #24]
+ 148 002c FFF7FEFF 		bl	LL_LPTIM_DeInit
+ 149 0030 04A8     		add	r0, sp, #16
+ 150 0032 FFF7FEFF 		bl	LL_RCC_GetSystemClocksFreq
+ 151 0036 3300     		movs	r3, r6
+ 152 0038 2B43     		orrs	r3, r5
+ 153 003a 36D0     		beq	.L14
+ 154 003c BC42     		cmp	r4, r7
+ 155 003e 04D1     		bne	.L15
+ 156 0040 204A     		ldr	r2, .L36+4
+ 157 0042 2149     		ldr	r1, .L36+8
+ 158 0044 D36C     		ldr	r3, [r2, #76]
+ 159 0046 0B40     		ands	r3, r1
+ 160 0048 D364     		str	r3, [r2, #76]
+ 161              	.L15:
+ 162 004a 002E     		cmp	r6, #0
+ 163 004c 10D0     		beq	.L16
+ 164 004e 0123     		movs	r3, #1
+ 165 0050 2269     		ldr	r2, [r4, #16]
+ 166 0052 1343     		orrs	r3, r2
+ 167 0054 0822     		movs	r2, #8
+ 168 0056 2361     		str	r3, [r4, #16]
+ 169 0058 049B     		ldr	r3, [sp, #16]
+ 170 005a 6661     		str	r6, [r4, #20]
+ 171              	.L18:
+ 172 005c 2168     		ldr	r1, [r4]
+ 173 005e 013B     		subs	r3, r3, #1
+ 174 0060 1142     		tst	r1, r2
+ 175 0062 01D1     		bne	.L17
+ 176 0064 002B     		cmp	r3, #0
+ 177 0066 F9D1     		bne	.L18
+ 178              	.L17:
+ARM GAS  /tmp/ccx5nxfX.s 			page 4
+
+
+ 179 0068 0493     		str	r3, [sp, #16]
+ 180 006a 6368     		ldr	r3, [r4, #4]
+ 181 006c 1A43     		orrs	r2, r3
+ 182 006e 6260     		str	r2, [r4, #4]
+ 183              	.L16:
+ 184 0070 002D     		cmp	r5, #0
+ 185 0072 13D0     		beq	.L20
+ 186 0074 0123     		movs	r3, #1
+ 187 0076 2269     		ldr	r2, [r4, #16]
+ 188 0078 04A8     		add	r0, sp, #16
+ 189 007a 1343     		orrs	r3, r2
+ 190 007c 2361     		str	r3, [r4, #16]
+ 191 007e A561     		str	r5, [r4, #24]
+ 192 0080 FFF7FEFF 		bl	LL_RCC_GetSystemClocksFreq
+ 193 0084 1022     		movs	r2, #16
+ 194 0086 049B     		ldr	r3, [sp, #16]
+ 195              	.L22:
+ 196 0088 2168     		ldr	r1, [r4]
+ 197 008a 013B     		subs	r3, r3, #1
+ 198 008c 1142     		tst	r1, r2
+ 199 008e 01D1     		bne	.L21
+ 200 0090 002B     		cmp	r3, #0
+ 201 0092 F9D1     		bne	.L22
+ 202              	.L21:
+ 203 0094 0493     		str	r3, [sp, #16]
+ 204 0096 6368     		ldr	r3, [r4, #4]
+ 205 0098 1A43     		orrs	r2, r3
+ 206 009a 6260     		str	r2, [r4, #4]
+ 207              	.L20:
+ 208 009c 094A     		ldr	r2, .L36+4
+ 209 009e 0A49     		ldr	r1, .L36+8
+ 210 00a0 D36C     		ldr	r3, [r2, #76]
+ 211 00a2 0B40     		ands	r3, r1
+ 212 00a4 0199     		ldr	r1, [sp, #4]
+ 213 00a6 0B43     		orrs	r3, r1
+ 214 00a8 D364     		str	r3, [r2, #76]
+ 215              	.L14:
+ 216 00aa 0122     		movs	r2, #1
+ 217 00ac 2369     		ldr	r3, [r4, #16]
+ 218 00ae 9343     		bics	r3, r2
+ 219 00b0 2361     		str	r3, [r4, #16]
+ 220 00b2 029B     		ldr	r3, [sp, #8]
+ 221 00b4 A360     		str	r3, [r4, #8]
+ 222 00b6 039B     		ldr	r3, [sp, #12]
+ 223 00b8 E360     		str	r3, [r4, #12]
+ 224              		.syntax divided
+ 225              	@ 198 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 226 00ba 62B6     		cpsie i
+ 227              	@ 0 "" 2
+ 228              		.thumb
+ 229              		.syntax unified
+ 230 00bc 09B0     		add	sp, sp, #36
+ 231              		@ sp needed
+ 232 00be F0BD     		pop	{r4, r5, r6, r7, pc}
+ 233              	.L37:
+ 234              		.align	2
+ 235              	.L36:
+ARM GAS  /tmp/ccx5nxfX.s 			page 5
+
+
+ 236 00c0 007C0040 		.word	1073773568
+ 237 00c4 00100240 		.word	1073876992
+ 238 00c8 FFFFF3FF 		.word	-786433
+ 240              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccx5nxfX.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32l0xx_ll_lptim.c
+     /tmp/ccx5nxfX.s:12     .text.LL_LPTIM_DeInit:0000000000000000 $t
+     /tmp/ccx5nxfX.s:20     .text.LL_LPTIM_DeInit:0000000000000000 LL_LPTIM_DeInit
+     /tmp/ccx5nxfX.s:46     .text.LL_LPTIM_DeInit:0000000000000024 $d
+     /tmp/ccx5nxfX.s:50     .text.LL_LPTIM_StructInit:0000000000000000 $t
+     /tmp/ccx5nxfX.s:57     .text.LL_LPTIM_StructInit:0000000000000000 LL_LPTIM_StructInit
+     /tmp/ccx5nxfX.s:70     .text.LL_LPTIM_Init:0000000000000000 $t
+     /tmp/ccx5nxfX.s:77     .text.LL_LPTIM_Init:0000000000000000 LL_LPTIM_Init
+     /tmp/ccx5nxfX.s:107    .text.LL_LPTIM_Init:000000000000002c $d
+     /tmp/ccx5nxfX.s:110    .text.LL_LPTIM_Disable:0000000000000000 $t
+     /tmp/ccx5nxfX.s:117    .text.LL_LPTIM_Disable:0000000000000000 LL_LPTIM_Disable
+     /tmp/ccx5nxfX.s:236    .text.LL_LPTIM_Disable:00000000000000c0 $d
+
+UNDEFINED SYMBOLS
+LL_RCC_GetSystemClocksFreq

@@ -1,0 +1,11 @@
+bsp_l0/smtc_hal/smtc_hal_rtc.c:170:32:hal_rtc_init	8	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:230:32:hal_rtc_wakeup_timer_set_ms	0	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:258:32:hal_rtc_wakeup_timer_stop	0	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:264:32:hal_rtc_set_offset_to_test_wrapping	0	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:268:36:rtc_get_timestamp_in_ticks	48	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:352:17:rtc_get_calendar_time.constprop	16	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:220:36:hal_rtc_get_time_ms	16	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:215:36:hal_rtc_get_time_s	16	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:322:36:rtc_tick_2_ms	0	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:329:36:rtc_ms_2_tick	8	static
+bsp_l0/smtc_hal/smtc_hal_rtc.c:366:6:RTC_IRQHandler	8	static

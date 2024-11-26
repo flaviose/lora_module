@@ -1,0 +1,852 @@
+ARM GAS  /tmp/ccSDbwDc.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"smtc_modem_crypto.c"
+  10              		.text
+  11              		.section	.text.smtc_modem_crypto_payload_encrypt,"ax",%progbits
+  12              		.align	1
+  13              		.global	smtc_modem_crypto_payload_encrypt
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	smtc_modem_crypto_payload_encrypt:
+  21              		@ args = 16, pretend = 0, frame = 48
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  24 0002 8FB0     		sub	sp, sp, #60
+  25 0004 1E00     		movs	r6, r3
+  26 0006 14AB     		add	r3, sp, #80
+  27 0008 1B78     		ldrb	r3, [r3]
+  28 000a 0290     		str	r0, [sp, #8]
+  29 000c 0393     		str	r3, [sp, #12]
+  30 000e 17AB     		add	r3, sp, #92
+  31 0010 1B78     		ldrb	r3, [r3]
+  32 0012 0C00     		movs	r4, r1
+  33 0014 0593     		str	r3, [sp, #20]
+  34 0016 029B     		ldr	r3, [sp, #8]
+  35 0018 0920     		movs	r0, #9
+  36 001a 0492     		str	r2, [sp, #16]
+  37 001c 002B     		cmp	r3, #0
+  38 001e 2ED0     		beq	.L2
+  39 0020 169B     		ldr	r3, [sp, #88]
+  40 0022 002B     		cmp	r3, #0
+  41 0024 2BD0     		beq	.L2
+  42 0026 0027     		movs	r7, #0
+  43 0028 0C22     		movs	r2, #12
+  44 002a 3900     		movs	r1, r7
+  45 002c 07A8     		add	r0, sp, #28
+  46 002e 0697     		str	r7, [sp, #24]
+  47 0030 FFF7FEFF 		bl	memset
+  48 0034 0C22     		movs	r2, #12
+  49 0036 3900     		movs	r1, r7
+  50 0038 0BA8     		add	r0, sp, #44
+  51 003a 0A97     		str	r7, [sp, #40]
+  52 003c FFF7FEFF 		bl	memset
+  53 0040 0122     		movs	r2, #1
+  54 0042 039B     		ldr	r3, [sp, #12]
+  55 0044 0AAD     		add	r5, sp, #40
+  56 0046 6B71     		strb	r3, [r5, #5]
+  57 0048 330A     		lsrs	r3, r6, #8
+  58 004a EB71     		strb	r3, [r5, #7]
+ARM GAS  /tmp/ccSDbwDc.s 			page 2
+
+
+  59 004c 330C     		lsrs	r3, r6, #16
+  60 004e 2B72     		strb	r3, [r5, #8]
+  61 0050 159B     		ldr	r3, [sp, #84]
+  62 0052 AE71     		strb	r6, [r5, #6]
+  63 0054 AB72     		strb	r3, [r5, #10]
+  64 0056 1B0A     		lsrs	r3, r3, #8
+  65 0058 EB72     		strb	r3, [r5, #11]
+  66 005a 159B     		ldr	r3, [sp, #84]
+  67 005c 360E     		lsrs	r6, r6, #24
+  68 005e 1B0C     		lsrs	r3, r3, #16
+  69 0060 2B73     		strb	r3, [r5, #12]
+  70 0062 159B     		ldr	r3, [sp, #84]
+  71 0064 2A70     		strb	r2, [r5]
+  72 0066 1B0E     		lsrs	r3, r3, #24
+  73 0068 6E72     		strb	r6, [r5, #9]
+  74 006a 6B73     		strb	r3, [r5, #13]
+  75 006c 1500     		movs	r5, r2
+  76 006e 24B2     		sxth	r4, r4
+  77              	.L3:
+  78 0070 2B01     		lsls	r3, r5, #4
+  79 0072 103B     		subs	r3, r3, #16
+  80 0074 9BB2     		uxth	r3, r3
+  81 0076 0393     		str	r3, [sp, #12]
+  82 0078 002C     		cmp	r4, #0
+  83 007a 02DC     		bgt	.L7
+  84 007c 0020     		movs	r0, #0
+  85              	.L2:
+  86 007e 0FB0     		add	sp, sp, #60
+  87              		@ sp needed
+  88 0080 F0BD     		pop	{r4, r5, r6, r7, pc}
+  89              	.L7:
+  90 0082 059B     		ldr	r3, [sp, #20]
+  91 0084 0AA8     		add	r0, sp, #40
+  92 0086 06AE     		add	r6, sp, #24
+  93 0088 C573     		strb	r5, [r0, #15]
+  94 008a 1021     		movs	r1, #16
+  95 008c 0135     		adds	r5, r5, #1
+  96 008e 0093     		str	r3, [sp]
+  97 0090 049A     		ldr	r2, [sp, #16]
+  98 0092 3300     		movs	r3, r6
+  99 0094 ADB2     		uxth	r5, r5
+ 100 0096 FFF7FEFF 		bl	smtc_secure_element_aes_encrypt
+ 101 009a 0028     		cmp	r0, #0
+ 102 009c 15D1     		bne	.L10
+ 103 009e 211C     		adds	r1, r4, #0
+ 104              	.L4:
+ 105 00a0 0B1C     		adds	r3, r1, #0
+ 106 00a2 102C     		cmp	r4, #16
+ 107 00a4 00DD     		ble	.L6
+ 108 00a6 1023     		movs	r3, #16
+ 109              	.L6:
+ 110 00a8 1BB2     		sxth	r3, r3
+ 111 00aa 9842     		cmp	r0, r3
+ 112 00ac 02DB     		blt	.L5
+ 113 00ae 103C     		subs	r4, r4, #16
+ 114 00b0 24B2     		sxth	r4, r4
+ 115 00b2 DDE7     		b	.L3
+ARM GAS  /tmp/ccSDbwDc.s 			page 3
+
+
+ 116              	.L5:
+ 117 00b4 039B     		ldr	r3, [sp, #12]
+ 118 00b6 375C     		ldrb	r7, [r6, r0]
+ 119 00b8 1A18     		adds	r2, r3, r0
+ 120 00ba 029B     		ldr	r3, [sp, #8]
+ 121 00bc 0130     		adds	r0, r0, #1
+ 122 00be 9B5C     		ldrb	r3, [r3, r2]
+ 123 00c0 C0B2     		uxtb	r0, r0
+ 124 00c2 7B40     		eors	r3, r7
+ 125 00c4 169F     		ldr	r7, [sp, #88]
+ 126 00c6 BB54     		strb	r3, [r7, r2]
+ 127 00c8 EAE7     		b	.L4
+ 128              	.L10:
+ 129 00ca 0E20     		movs	r0, #14
+ 130 00cc D7E7     		b	.L2
+ 132              		.section	.text.smtc_modem_crypto_payload_decrypt,"ax",%progbits
+ 133              		.align	1
+ 134              		.global	smtc_modem_crypto_payload_decrypt
+ 135              		.syntax unified
+ 136              		.code	16
+ 137              		.thumb_func
+ 138              		.fpu softvfp
+ 140              	smtc_modem_crypto_payload_decrypt:
+ 141              		@ args = 16, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143 0000 30B5     		push	{r4, r5, lr}
+ 144 0002 85B0     		sub	sp, sp, #20
+ 145 0004 0BAD     		add	r5, sp, #44
+ 146 0006 2D78     		ldrb	r5, [r5]
+ 147 0008 08AC     		add	r4, sp, #32
+ 148 000a 2478     		ldrb	r4, [r4]
+ 149 000c 0395     		str	r5, [sp, #12]
+ 150 000e 0A9D     		ldr	r5, [sp, #40]
+ 151 0010 0094     		str	r4, [sp]
+ 152 0012 0295     		str	r5, [sp, #8]
+ 153 0014 099D     		ldr	r5, [sp, #36]
+ 154 0016 0195     		str	r5, [sp, #4]
+ 155 0018 FFF7FEFF 		bl	smtc_modem_crypto_payload_encrypt
+ 156 001c 05B0     		add	sp, sp, #20
+ 157              		@ sp needed
+ 158 001e 30BD     		pop	{r4, r5, pc}
+ 160              		.section	.text.smtc_modem_crypto_compute_join_mic,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	smtc_modem_crypto_compute_join_mic
+ 163              		.syntax unified
+ 164              		.code	16
+ 165              		.thumb_func
+ 166              		.fpu softvfp
+ 168              	smtc_modem_crypto_compute_join_mic:
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171 0000 07B5     		push	{r0, r1, r2, lr}
+ 172 0002 0193     		str	r3, [sp, #4]
+ 173 0004 0092     		str	r2, [sp]
+ 174 0006 0123     		movs	r3, #1
+ 175 0008 0A00     		movs	r2, r1
+ 176 000a 0100     		movs	r1, r0
+ARM GAS  /tmp/ccSDbwDc.s 			page 4
+
+
+ 177 000c 0020     		movs	r0, #0
+ 178 000e FFF7FEFF 		bl	smtc_secure_element_compute_aes_cmac
+ 179 0012 0028     		cmp	r0, #0
+ 180 0014 00D0     		beq	.L13
+ 181 0016 0E20     		movs	r0, #14
+ 182              	.L13:
+ 183              		@ sp needed
+ 184 0018 0EBD     		pop	{r1, r2, r3, pc}
+ 186              		.section	.text.smtc_modem_crypto_process_join_accept,"ax",%progbits
+ 187              		.align	1
+ 188              		.global	smtc_modem_crypto_process_join_accept
+ 189              		.syntax unified
+ 190              		.code	16
+ 191              		.thumb_func
+ 192              		.fpu softvfp
+ 194              	smtc_modem_crypto_process_join_accept:
+ 195              		@ args = 0, pretend = 0, frame = 8
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197 0000 30B5     		push	{r4, r5, lr}
+ 198 0002 1725     		movs	r5, #23
+ 199 0004 0024     		movs	r4, #0
+ 200 0006 87B0     		sub	sp, sp, #28
+ 201 0008 6D44     		add	r5, r5, sp
+ 202 000a C9B2     		uxtb	r1, r1
+ 203 000c 2C70     		strb	r4, [r5]
+ 204 000e 0393     		str	r3, [sp, #12]
+ 205 0010 0192     		str	r2, [sp, #4]
+ 206 0012 0300     		movs	r3, r0
+ 207 0014 0091     		str	r1, [sp]
+ 208 0016 2200     		movs	r2, r4
+ 209 0018 2100     		movs	r1, r4
+ 210 001a FF20     		movs	r0, #255
+ 211 001c 0295     		str	r5, [sp, #8]
+ 212 001e FFF7FEFF 		bl	smtc_secure_element_process_join_accept
+ 213 0022 A042     		cmp	r0, r4
+ 214 0024 00D0     		beq	.L18
+ 215 0026 0E20     		movs	r0, #14
+ 216              	.L18:
+ 217 0028 07B0     		add	sp, sp, #28
+ 218              		@ sp needed
+ 219 002a 30BD     		pop	{r4, r5, pc}
+ 221              		.section	.text.smtc_modem_crypto_derive_skeys,"ax",%progbits
+ 222              		.align	1
+ 223              		.global	smtc_modem_crypto_derive_skeys
+ 224              		.syntax unified
+ 225              		.code	16
+ 226              		.thumb_func
+ 227              		.fpu softvfp
+ 229              	smtc_modem_crypto_derive_skeys:
+ 230              		@ args = 0, pretend = 0, frame = 24
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 233 0002 87B0     		sub	sp, sp, #28
+ 234 0004 0500     		movs	r5, r0
+ 235 0006 0C00     		movs	r4, r1
+ 236 0008 1700     		movs	r7, r2
+ 237 000a 0021     		movs	r1, #0
+ARM GAS  /tmp/ccSDbwDc.s 			page 5
+
+
+ 238 000c 0C22     		movs	r2, #12
+ 239 000e 03A8     		add	r0, sp, #12
+ 240 0010 1E00     		movs	r6, r3
+ 241 0012 FFF7FEFF 		bl	memset
+ 242 0016 0223     		movs	r3, #2
+ 243 0018 02AA     		add	r2, sp, #8
+ 244 001a 1370     		strb	r3, [r2]
+ 245 001c 2B78     		ldrb	r3, [r5]
+ 246 001e 0121     		movs	r1, #1
+ 247 0020 5370     		strb	r3, [r2, #1]
+ 248 0022 6B78     		ldrb	r3, [r5, #1]
+ 249 0024 02A8     		add	r0, sp, #8
+ 250 0026 9370     		strb	r3, [r2, #2]
+ 251 0028 AB78     		ldrb	r3, [r5, #2]
+ 252 002a D370     		strb	r3, [r2, #3]
+ 253 002c 2378     		ldrb	r3, [r4]
+ 254 002e 1371     		strb	r3, [r2, #4]
+ 255 0030 6378     		ldrb	r3, [r4, #1]
+ 256 0032 5371     		strb	r3, [r2, #5]
+ 257 0034 A378     		ldrb	r3, [r4, #2]
+ 258 0036 9371     		strb	r3, [r2, #6]
+ 259 0038 FBB2     		uxtb	r3, r7
+ 260 003a 0193     		str	r3, [sp, #4]
+ 261 003c 1300     		movs	r3, r2
+ 262 003e FAB2     		uxtb	r2, r7
+ 263 0040 3F0A     		lsrs	r7, r7, #8
+ 264 0042 DA71     		strb	r2, [r3, #7]
+ 265 0044 1F72     		strb	r7, [r3, #8]
+ 266 0046 0722     		movs	r2, #7
+ 267 0048 3300     		movs	r3, r6
+ 268 004a FFF7FEFF 		bl	smtc_secure_element_derive_and_store_key
+ 269 004e 011E     		subs	r1, r0, #0
+ 270 0050 01D0     		beq	.L23
+ 271              	.L29:
+ 272 0052 0E20     		movs	r0, #14
+ 273 0054 1EE0     		b	.L24
+ 274              	.L23:
+ 275 0056 0C22     		movs	r2, #12
+ 276 0058 03A8     		add	r0, sp, #12
+ 277 005a FFF7FEFF 		bl	memset
+ 278 005e 0121     		movs	r1, #1
+ 279 0060 02AB     		add	r3, sp, #8
+ 280 0062 1970     		strb	r1, [r3]
+ 281 0064 2B78     		ldrb	r3, [r5]
+ 282 0066 02AA     		add	r2, sp, #8
+ 283 0068 5370     		strb	r3, [r2, #1]
+ 284 006a 6B78     		ldrb	r3, [r5, #1]
+ 285 006c 02A8     		add	r0, sp, #8
+ 286 006e 9370     		strb	r3, [r2, #2]
+ 287 0070 AB78     		ldrb	r3, [r5, #2]
+ 288 0072 D370     		strb	r3, [r2, #3]
+ 289 0074 2378     		ldrb	r3, [r4]
+ 290 0076 1371     		strb	r3, [r2, #4]
+ 291 0078 6378     		ldrb	r3, [r4, #1]
+ 292 007a 5371     		strb	r3, [r2, #5]
+ 293 007c A378     		ldrb	r3, [r4, #2]
+ 294 007e 9371     		strb	r3, [r2, #6]
+ARM GAS  /tmp/ccSDbwDc.s 			page 6
+
+
+ 295 0080 1300     		movs	r3, r2
+ 296 0082 019A     		ldr	r2, [sp, #4]
+ 297 0084 1F72     		strb	r7, [r3, #8]
+ 298 0086 DA71     		strb	r2, [r3, #7]
+ 299 0088 3300     		movs	r3, r6
+ 300 008a 0622     		movs	r2, #6
+ 301 008c FFF7FEFF 		bl	smtc_secure_element_derive_and_store_key
+ 302 0090 0028     		cmp	r0, #0
+ 303 0092 DED1     		bne	.L29
+ 304              	.L24:
+ 305 0094 07B0     		add	sp, sp, #28
+ 306              		@ sp needed
+ 307 0096 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 309              		.section	.text.smtc_modem_crypto_verify_mic,"ax",%progbits
+ 310              		.align	1
+ 311              		.global	smtc_modem_crypto_verify_mic
+ 312              		.syntax unified
+ 313              		.code	16
+ 314              		.thumb_func
+ 315              		.fpu softvfp
+ 317              	smtc_modem_crypto_verify_mic:
+ 318              		@ args = 16, pretend = 0, frame = 288
+ 319              		@ frame_needed = 0, uses_anonymous_args = 0
+ 320 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 321 0002 CBB0     		sub	sp, sp, #300
+ 322 0004 1E00     		movs	r6, r3
+ 323 0006 50AB     		add	r3, sp, #320
+ 324 0008 1B78     		ldrb	r3, [r3]
+ 325 000a 0700     		movs	r7, r0
+ 326 000c 0493     		str	r3, [sp, #16]
+ 327 000e 53AB     		add	r3, sp, #332
+ 328 0010 1B78     		ldrb	r3, [r3]
+ 329 0012 0D00     		movs	r5, r1
+ 330 0014 0920     		movs	r0, #9
+ 331 0016 0392     		str	r2, [sp, #12]
+ 332 0018 0593     		str	r3, [sp, #20]
+ 333 001a 002F     		cmp	r7, #0
+ 334 001c 36D0     		beq	.L31
+ 335 001e 8023     		movs	r3, #128
+ 336 0020 0430     		adds	r0, r0, #4
+ 337 0022 5B00     		lsls	r3, r3, #1
+ 338 0024 9942     		cmp	r1, r3
+ 339 0026 31D8     		bhi	.L31
+ 340 0028 8622     		movs	r2, #134
+ 341 002a 0021     		movs	r1, #0
+ 342 002c 5200     		lsls	r2, r2, #1
+ 343 002e 07A8     		add	r0, sp, #28
+ 344 0030 0691     		str	r1, [sp, #24]
+ 345 0032 FFF7FEFF 		bl	memset
+ 346 0036 4923     		movs	r3, #73
+ 347 0038 06AC     		add	r4, sp, #24
+ 348 003a 2370     		strb	r3, [r4]
+ 349 003c 049B     		ldr	r3, [sp, #16]
+ 350 003e 2A00     		movs	r2, r5
+ 351 0040 6371     		strb	r3, [r4, #5]
+ 352 0042 330A     		lsrs	r3, r6, #8
+ 353 0044 E371     		strb	r3, [r4, #7]
+ARM GAS  /tmp/ccSDbwDc.s 			page 7
+
+
+ 354 0046 330C     		lsrs	r3, r6, #16
+ 355 0048 2372     		strb	r3, [r4, #8]
+ 356 004a 519B     		ldr	r3, [sp, #324]
+ 357 004c 3900     		movs	r1, r7
+ 358 004e A372     		strb	r3, [r4, #10]
+ 359 0050 1B0A     		lsrs	r3, r3, #8
+ 360 0052 E372     		strb	r3, [r4, #11]
+ 361 0054 519B     		ldr	r3, [sp, #324]
+ 362 0056 A671     		strb	r6, [r4, #6]
+ 363 0058 1B0C     		lsrs	r3, r3, #16
+ 364 005a 2373     		strb	r3, [r4, #12]
+ 365 005c 519B     		ldr	r3, [sp, #324]
+ 366 005e 360E     		lsrs	r6, r6, #24
+ 367 0060 1B0E     		lsrs	r3, r3, #24
+ 368 0062 0AA8     		add	r0, sp, #40
+ 369 0064 6373     		strb	r3, [r4, #13]
+ 370 0066 6672     		strb	r6, [r4, #9]
+ 371 0068 E573     		strb	r5, [r4, #15]
+ 372 006a FFF7FEFF 		bl	memcpy
+ 373 006e 2900     		movs	r1, r5
+ 374 0070 059B     		ldr	r3, [sp, #20]
+ 375 0072 1031     		adds	r1, r1, #16
+ 376 0074 0093     		str	r3, [sp]
+ 377 0076 2000     		movs	r0, r4
+ 378 0078 039B     		ldr	r3, [sp, #12]
+ 379 007a 529A     		ldr	r2, [sp, #328]
+ 380 007c 89B2     		uxth	r1, r1
+ 381 007e FFF7FEFF 		bl	smtc_secure_element_verify_aes_cmac
+ 382 0082 0028     		cmp	r0, #0
+ 383 0084 02D0     		beq	.L31
+ 384 0086 0128     		cmp	r0, #1
+ 385 0088 00D0     		beq	.L31
+ 386 008a 0E20     		movs	r0, #14
+ 387              	.L31:
+ 388 008c 4BB0     		add	sp, sp, #300
+ 389              		@ sp needed
+ 390 008e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 392              		.section	.text.smtc_modem_crypto_compute_and_add_mic,"ax",%progbits
+ 393              		.align	1
+ 394              		.global	smtc_modem_crypto_compute_and_add_mic
+ 395              		.syntax unified
+ 396              		.code	16
+ 397              		.thumb_func
+ 398              		.fpu softvfp
+ 400              	smtc_modem_crypto_compute_and_add_mic:
+ 401              		@ args = 12, pretend = 0, frame = 32
+ 402              		@ frame_needed = 0, uses_anonymous_args = 0
+ 403 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 404 0002 8BB0     		sub	sp, sp, #44
+ 405 0004 0E00     		movs	r6, r1
+ 406 0006 10A9     		add	r1, sp, #64
+ 407 0008 0978     		ldrb	r1, [r1]
+ 408 000a 0500     		movs	r5, r0
+ 409 000c 12A8     		add	r0, sp, #72
+ 410 000e 8C46     		mov	ip, r1
+ 411 0010 0924     		movs	r4, #9
+ 412 0012 1199     		ldr	r1, [sp, #68]
+ARM GAS  /tmp/ccSDbwDc.s 			page 8
+
+
+ 413 0014 0778     		ldrb	r7, [r0]
+ 414 0016 0392     		str	r2, [sp, #12]
+ 415 0018 002D     		cmp	r5, #0
+ 416 001a 22D0     		beq	.L41
+ 417 001c 8020     		movs	r0, #128
+ 418 001e 0434     		adds	r4, r4, #4
+ 419 0020 4000     		lsls	r0, r0, #1
+ 420 0022 8642     		cmp	r6, r0
+ 421 0024 1DD8     		bhi	.L41
+ 422 0026 6246     		mov	r2, ip
+ 423 0028 0024     		movs	r4, #0
+ 424 002a B738     		subs	r0, r0, #183
+ 425 002c 0690     		str	r0, [sp, #24]
+ 426 002e 06A8     		add	r0, sp, #24
+ 427 0030 4271     		strb	r2, [r0, #5]
+ 428 0032 C380     		strh	r3, [r0, #6]
+ 429 0034 1A0C     		lsrs	r2, r3, #16
+ 430 0036 1B0E     		lsrs	r3, r3, #24
+ 431 0038 4372     		strb	r3, [r0, #9]
+ 432 003a 0B0C     		lsrs	r3, r1, #16
+ 433 003c 4181     		strh	r1, [r0, #10]
+ 434 003e 0373     		strb	r3, [r0, #12]
+ 435 0040 090E     		lsrs	r1, r1, #24
+ 436 0042 05AB     		add	r3, sp, #20
+ 437 0044 0471     		strb	r4, [r0, #4]
+ 438 0046 0272     		strb	r2, [r0, #8]
+ 439 0048 4173     		strb	r1, [r0, #13]
+ 440 004a 8473     		strb	r4, [r0, #14]
+ 441 004c C673     		strb	r6, [r0, #15]
+ 442 004e 3200     		movs	r2, r6
+ 443 0050 0093     		str	r3, [sp]
+ 444 0052 2900     		movs	r1, r5
+ 445 0054 039B     		ldr	r3, [sp, #12]
+ 446 0056 0197     		str	r7, [sp, #4]
+ 447 0058 FFF7FEFF 		bl	smtc_secure_element_compute_aes_cmac
+ 448 005c 041E     		subs	r4, r0, #0
+ 449 005e 00D0     		beq	.L41
+ 450 0060 0E24     		movs	r4, #14
+ 451              	.L41:
+ 452 0062 0422     		movs	r2, #4
+ 453 0064 A819     		adds	r0, r5, r6
+ 454 0066 05A9     		add	r1, sp, #20
+ 455 0068 FFF7FEFF 		bl	memcpy
+ 456 006c 2000     		movs	r0, r4
+ 457 006e 0BB0     		add	sp, sp, #44
+ 458              		@ sp needed
+ 459 0070 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 461              		.section	.text.smtc_modem_crypto_set_key,"ax",%progbits
+ 462              		.align	1
+ 463              		.global	smtc_modem_crypto_set_key
+ 464              		.syntax unified
+ 465              		.code	16
+ 466              		.thumb_func
+ 467              		.fpu softvfp
+ 469              	smtc_modem_crypto_set_key:
+ 470              		@ args = 0, pretend = 0, frame = 16
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccSDbwDc.s 			page 9
+
+
+ 472 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 473 0002 0600     		movs	r6, r0
+ 474 0004 1500     		movs	r5, r2
+ 475 0006 FFF7FEFF 		bl	smtc_secure_element_set_key
+ 476 000a 041E     		subs	r4, r0, #0
+ 477 000c 1DD1     		bne	.L52
+ 478 000e 002E     		cmp	r6, #0
+ 479 0010 1CD1     		bne	.L48
+ 480 0012 0100     		movs	r1, r0
+ 481 0014 0C22     		movs	r2, #12
+ 482 0016 0090     		str	r0, [sp]
+ 483 0018 01A8     		add	r0, sp, #4
+ 484 001a FFF7FEFF 		bl	memset
+ 485 001e 2B00     		movs	r3, r5
+ 486 0020 0822     		movs	r2, #8
+ 487 0022 2100     		movs	r1, r4
+ 488 0024 6846     		mov	r0, sp
+ 489 0026 FFF7FEFF 		bl	smtc_secure_element_derive_and_store_key
+ 490 002a 0028     		cmp	r0, #0
+ 491 002c 0DD1     		bne	.L52
+ 492 002e 2100     		movs	r1, r4
+ 493 0030 0C22     		movs	r2, #12
+ 494 0032 01A8     		add	r0, sp, #4
+ 495 0034 0094     		str	r4, [sp]
+ 496 0036 FFF7FEFF 		bl	memset
+ 497 003a 2B00     		movs	r3, r5
+ 498 003c 7F22     		movs	r2, #127
+ 499 003e 0821     		movs	r1, #8
+ 500 0040 6846     		mov	r0, sp
+ 501 0042 FFF7FEFF 		bl	smtc_secure_element_derive_and_store_key
+ 502 0046 041E     		subs	r4, r0, #0
+ 503 0048 00D0     		beq	.L48
+ 504              	.L52:
+ 505 004a 0E24     		movs	r4, #14
+ 506              	.L48:
+ 507 004c 2000     		movs	r0, r4
+ 508 004e 04B0     		add	sp, sp, #16
+ 509              		@ sp needed
+ 510 0050 70BD     		pop	{r4, r5, r6, pc}
+ 512              		.section	.text.smtc_modem_crypto_derive_multicast_session_keys,"ax",%progbits
+ 513              		.align	1
+ 514              		.global	smtc_modem_crypto_derive_multicast_session_keys
+ 515              		.syntax unified
+ 516              		.code	16
+ 517              		.thumb_func
+ 518              		.fpu softvfp
+ 520              	smtc_modem_crypto_derive_multicast_session_keys:
+ 521              		@ args = 0, pretend = 0, frame = 40
+ 522              		@ frame_needed = 0, uses_anonymous_args = 0
+ 523 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 524 0002 0500     		movs	r5, r0
+ 525 0004 0C00     		movs	r4, r1
+ 526 0006 1600     		movs	r6, r2
+ 527 0008 0920     		movs	r0, #9
+ 528 000a 8BB0     		sub	sp, sp, #44
+ 529 000c 0029     		cmp	r1, #0
+ 530 000e 3DD0     		beq	.L54
+ARM GAS  /tmp/ccSDbwDc.s 			page 10
+
+
+ 531 0010 0230     		adds	r0, r0, #2
+ 532 0012 032D     		cmp	r5, #3
+ 533 0014 3AD8     		bhi	.L54
+ 534 0016 0023     		movs	r3, #0
+ 535              	.L58:
+ 536 0018 9A00     		lsls	r2, r3, #2
+ 537 001a 0192     		str	r2, [sp, #4]
+ 538 001c 214A     		ldr	r2, .L66
+ 539 001e 9900     		lsls	r1, r3, #2
+ 540 0020 8A5C     		ldrb	r2, [r1, r2]
+ 541 0022 AA42     		cmp	r2, r5
+ 542 0024 2ED1     		bne	.L55
+ 543 0026 0027     		movs	r7, #0
+ 544 0028 0C22     		movs	r2, #12
+ 545 002a 3900     		movs	r1, r7
+ 546 002c 03A8     		add	r0, sp, #12
+ 547 002e FFF7FEFF 		bl	memset
+ 548 0032 0C22     		movs	r2, #12
+ 549 0034 3900     		movs	r1, r7
+ 550 0036 07A8     		add	r0, sp, #28
+ 551 0038 FFF7FEFF 		bl	memset
+ 552 003c 0123     		movs	r3, #1
+ 553 003e 02AA     		add	r2, sp, #8
+ 554 0040 1370     		strb	r3, [r2]
+ 555 0042 1300     		movs	r3, r2
+ 556 0044 E1B2     		uxtb	r1, r4
+ 557 0046 5170     		strb	r1, [r2, #1]
+ 558 0048 220A     		lsrs	r2, r4, #8
+ 559 004a D2B2     		uxtb	r2, r2
+ 560 004c 9A70     		strb	r2, [r3, #2]
+ 561 004e 230C     		lsrs	r3, r4, #16
+ 562 0050 06AD     		add	r5, sp, #24
+ 563 0052 DBB2     		uxtb	r3, r3
+ 564 0054 02A8     		add	r0, sp, #8
+ 565 0056 C370     		strb	r3, [r0, #3]
+ 566 0058 EB70     		strb	r3, [r5, #3]
+ 567 005a 124B     		ldr	r3, .L66
+ 568 005c 240E     		lsrs	r4, r4, #24
+ 569 005e 9C46     		mov	ip, r3
+ 570 0060 0471     		strb	r4, [r0, #4]
+ 571 0062 0220     		movs	r0, #2
+ 572 0064 2C71     		strb	r4, [r5, #4]
+ 573 0066 019C     		ldr	r4, [sp, #4]
+ 574 0068 2870     		strb	r0, [r5]
+ 575 006a 6444     		add	r4, r4, ip
+ 576 006c 6970     		strb	r1, [r5, #1]
+ 577 006e AA70     		strb	r2, [r5, #2]
+ 578 0070 3300     		movs	r3, r6
+ 579 0072 6278     		ldrb	r2, [r4, #1]
+ 580 0074 E178     		ldrb	r1, [r4, #3]
+ 581 0076 02A8     		add	r0, sp, #8
+ 582 0078 FFF7FEFF 		bl	smtc_secure_element_derive_and_store_key
+ 583 007c B842     		cmp	r0, r7
+ 584 007e 07D0     		beq	.L65
+ 585              	.L56:
+ 586 0080 0E20     		movs	r0, #14
+ 587 0082 03E0     		b	.L54
+ARM GAS  /tmp/ccSDbwDc.s 			page 11
+
+
+ 588              	.L55:
+ 589 0084 0133     		adds	r3, r3, #1
+ 590 0086 042B     		cmp	r3, #4
+ 591 0088 C6D1     		bne	.L58
+ 592 008a 0B20     		movs	r0, #11
+ 593              	.L54:
+ 594 008c 0BB0     		add	sp, sp, #44
+ 595              		@ sp needed
+ 596 008e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 597              	.L65:
+ 598 0090 3300     		movs	r3, r6
+ 599 0092 2800     		movs	r0, r5
+ 600 0094 A278     		ldrb	r2, [r4, #2]
+ 601 0096 E178     		ldrb	r1, [r4, #3]
+ 602 0098 FFF7FEFF 		bl	smtc_secure_element_derive_and_store_key
+ 603 009c 0028     		cmp	r0, #0
+ 604 009e F5D0     		beq	.L54
+ 605 00a0 EEE7     		b	.L56
+ 606              	.L67:
+ 607 00a2 C046     		.align	2
+ 608              	.L66:
+ 609 00a4 00000000 		.word	.LANCHOR0
+ 611              		.section	.text.smtc_modem_crypto_get_class_b_rand,"ax",%progbits
+ 612              		.align	1
+ 613              		.global	smtc_modem_crypto_get_class_b_rand
+ 614              		.syntax unified
+ 615              		.code	16
+ 616              		.thumb_func
+ 617              		.fpu softvfp
+ 619              	smtc_modem_crypto_get_class_b_rand:
+ 620              		@ args = 0, pretend = 0, frame = 24
+ 621              		@ frame_needed = 0, uses_anonymous_args = 0
+ 622 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 623 0002 1F00     		movs	r7, r3
+ 624 0004 0D00     		movs	r5, r1
+ 625 0006 0021     		movs	r1, #0
+ 626 0008 89B0     		sub	sp, sp, #36
+ 627 000a 0392     		str	r2, [sp, #12]
+ 628 000c 0600     		movs	r6, r0
+ 629 000e 0C22     		movs	r2, #12
+ 630 0010 04AC     		add	r4, sp, #16
+ 631 0012 05A8     		add	r0, sp, #20
+ 632 0014 0491     		str	r1, [sp, #16]
+ 633 0016 FFF7FEFF 		bl	memset
+ 634 001a 3A00     		movs	r2, r7
+ 635 001c 2100     		movs	r1, r4
+ 636 001e 8F20     		movs	r0, #143
+ 637 0020 FFF7FEFF 		bl	smtc_secure_element_set_key
+ 638 0024 0028     		cmp	r0, #0
+ 639 0026 16D1     		bne	.L69
+ 640 0028 330A     		lsrs	r3, r6, #8
+ 641 002a 6370     		strb	r3, [r4, #1]
+ 642 002c 330C     		lsrs	r3, r6, #16
+ 643 002e A370     		strb	r3, [r4, #2]
+ 644 0030 2B0A     		lsrs	r3, r5, #8
+ 645 0032 2670     		strb	r6, [r4]
+ 646 0034 2571     		strb	r5, [r4, #4]
+ARM GAS  /tmp/ccSDbwDc.s 			page 12
+
+
+ 647 0036 6371     		strb	r3, [r4, #5]
+ 648 0038 360E     		lsrs	r6, r6, #24
+ 649 003a 2B0C     		lsrs	r3, r5, #16
+ 650 003c 2D0E     		lsrs	r5, r5, #24
+ 651 003e A371     		strb	r3, [r4, #6]
+ 652 0040 E670     		strb	r6, [r4, #3]
+ 653 0042 E571     		strb	r5, [r4, #7]
+ 654 0044 8F22     		movs	r2, #143
+ 655 0046 1021     		movs	r1, #16
+ 656 0048 2000     		movs	r0, r4
+ 657 004a 039B     		ldr	r3, [sp, #12]
+ 658 004c 0097     		str	r7, [sp]
+ 659 004e FFF7FEFF 		bl	smtc_secure_element_aes_encrypt
+ 660 0052 0028     		cmp	r0, #0
+ 661 0054 00D0     		beq	.L70
+ 662              	.L69:
+ 663 0056 0E20     		movs	r0, #14
+ 664              	.L70:
+ 665 0058 09B0     		add	sp, sp, #36
+ 666              		@ sp needed
+ 667 005a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 669              		.section	.text.smtc_modem_crypto_service_encrypt,"ax",%progbits
+ 670              		.align	1
+ 671              		.global	smtc_modem_crypto_service_encrypt
+ 672              		.syntax unified
+ 673              		.code	16
+ 674              		.thumb_func
+ 675              		.fpu softvfp
+ 677              	smtc_modem_crypto_service_encrypt:
+ 678              		@ args = 4, pretend = 0, frame = 48
+ 679              		@ frame_needed = 0, uses_anonymous_args = 0
+ 680 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 681 0002 8FB0     		sub	sp, sp, #60
+ 682 0004 1E00     		movs	r6, r3
+ 683 0006 14AB     		add	r3, sp, #80
+ 684 0008 1B78     		ldrb	r3, [r3]
+ 685 000a 0390     		str	r0, [sp, #12]
+ 686 000c 0593     		str	r3, [sp, #20]
+ 687 000e 039B     		ldr	r3, [sp, #12]
+ 688 0010 0C00     		movs	r4, r1
+ 689 0012 1700     		movs	r7, r2
+ 690 0014 0920     		movs	r0, #9
+ 691 0016 002B     		cmp	r3, #0
+ 692 0018 1CD0     		beq	.L75
+ 693 001a 002E     		cmp	r6, #0
+ 694 001c 1AD0     		beq	.L75
+ 695 001e 0025     		movs	r5, #0
+ 696 0020 0C22     		movs	r2, #12
+ 697 0022 2900     		movs	r1, r5
+ 698 0024 07A8     		add	r0, sp, #28
+ 699 0026 0695     		str	r5, [sp, #24]
+ 700 0028 FFF7FEFF 		bl	memset
+ 701 002c 2900     		movs	r1, r5
+ 702 002e 0C22     		movs	r2, #12
+ 703 0030 0BA8     		add	r0, sp, #44
+ 704 0032 0A95     		str	r5, [sp, #40]
+ 705 0034 FFF7FEFF 		bl	memset
+ARM GAS  /tmp/ccSDbwDc.s 			page 13
+
+
+ 706 0038 0E22     		movs	r2, #14
+ 707 003a 3900     		movs	r1, r7
+ 708 003c 0AA8     		add	r0, sp, #40
+ 709 003e FFF7FEFF 		bl	memcpy
+ 710 0042 24B2     		sxth	r4, r4
+ 711 0044 0135     		adds	r5, r5, #1
+ 712              	.L76:
+ 713 0046 2B01     		lsls	r3, r5, #4
+ 714 0048 103B     		subs	r3, r3, #16
+ 715 004a 9BB2     		uxth	r3, r3
+ 716 004c 0493     		str	r3, [sp, #16]
+ 717 004e 002C     		cmp	r4, #0
+ 718 0050 02DC     		bgt	.L80
+ 719 0052 0020     		movs	r0, #0
+ 720              	.L75:
+ 721 0054 0FB0     		add	sp, sp, #60
+ 722              		@ sp needed
+ 723 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 724              	.L80:
+ 725 0058 2722     		movs	r2, #39
+ 726 005a 2621     		movs	r1, #38
+ 727 005c 04AB     		add	r3, sp, #16
+ 728 005e 9B18     		adds	r3, r3, r2
+ 729 0060 04AA     		add	r2, sp, #16
+ 730 0062 1D70     		strb	r5, [r3]
+ 731 0064 5218     		adds	r2, r2, r1
+ 732 0066 2B0A     		lsrs	r3, r5, #8
+ 733 0068 1370     		strb	r3, [r2]
+ 734 006a 059B     		ldr	r3, [sp, #20]
+ 735 006c 06AF     		add	r7, sp, #24
+ 736 006e 0135     		adds	r5, r5, #1
+ 737 0070 0093     		str	r3, [sp]
+ 738 0072 0722     		movs	r2, #7
+ 739 0074 3B00     		movs	r3, r7
+ 740 0076 1639     		subs	r1, r1, #22
+ 741 0078 0AA8     		add	r0, sp, #40
+ 742 007a ADB2     		uxth	r5, r5
+ 743 007c FFF7FEFF 		bl	smtc_secure_element_aes_encrypt
+ 744 0080 0028     		cmp	r0, #0
+ 745 0082 14D1     		bne	.L83
+ 746 0084 A446     		mov	ip, r4
+ 747              	.L77:
+ 748 0086 6346     		mov	r3, ip
+ 749 0088 102C     		cmp	r4, #16
+ 750 008a 00DD     		ble	.L79
+ 751 008c 1023     		movs	r3, #16
+ 752              	.L79:
+ 753 008e 1BB2     		sxth	r3, r3
+ 754 0090 9842     		cmp	r0, r3
+ 755 0092 02DB     		blt	.L78
+ 756 0094 103C     		subs	r4, r4, #16
+ 757 0096 24B2     		sxth	r4, r4
+ 758 0098 D5E7     		b	.L76
+ 759              	.L78:
+ 760 009a 049B     		ldr	r3, [sp, #16]
+ 761 009c 395C     		ldrb	r1, [r7, r0]
+ 762 009e 1A18     		adds	r2, r3, r0
+ARM GAS  /tmp/ccSDbwDc.s 			page 14
+
+
+ 763 00a0 039B     		ldr	r3, [sp, #12]
+ 764 00a2 0130     		adds	r0, r0, #1
+ 765 00a4 9B5C     		ldrb	r3, [r3, r2]
+ 766 00a6 C0B2     		uxtb	r0, r0
+ 767 00a8 4B40     		eors	r3, r1
+ 768 00aa B354     		strb	r3, [r6, r2]
+ 769 00ac EBE7     		b	.L77
+ 770              	.L83:
+ 771 00ae 0E20     		movs	r0, #14
+ 772 00b0 D0E7     		b	.L75
+ 774              		.section	.data.smtc_crypto_key_addr_list,"aw"
+ 775              		.set	.LANCHOR0,. + 0
+ 778              	smtc_crypto_key_addr_list:
+ 779 0000 00       		.byte	0
+ 780 0001 81       		.byte	-127
+ 781 0002 82       		.byte	-126
+ 782 0003 80       		.byte	-128
+ 783 0004 01       		.byte	1
+ 784 0005 84       		.byte	-124
+ 785 0006 85       		.byte	-123
+ 786 0007 83       		.byte	-125
+ 787 0008 02       		.byte	2
+ 788 0009 87       		.byte	-121
+ 789 000a 88       		.byte	-120
+ 790 000b 86       		.byte	-122
+ 791 000c 03       		.byte	3
+ 792 000d 8A       		.byte	-118
+ 793 000e 8B       		.byte	-117
+ 794 000f 89       		.byte	-119
+ 795              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccSDbwDc.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 smtc_modem_crypto.c
+     /tmp/ccSDbwDc.s:12     .text.smtc_modem_crypto_payload_encrypt:0000000000000000 $t
+     /tmp/ccSDbwDc.s:20     .text.smtc_modem_crypto_payload_encrypt:0000000000000000 smtc_modem_crypto_payload_encrypt
+     /tmp/ccSDbwDc.s:133    .text.smtc_modem_crypto_payload_decrypt:0000000000000000 $t
+     /tmp/ccSDbwDc.s:140    .text.smtc_modem_crypto_payload_decrypt:0000000000000000 smtc_modem_crypto_payload_decrypt
+     /tmp/ccSDbwDc.s:161    .text.smtc_modem_crypto_compute_join_mic:0000000000000000 $t
+     /tmp/ccSDbwDc.s:168    .text.smtc_modem_crypto_compute_join_mic:0000000000000000 smtc_modem_crypto_compute_join_mic
+     /tmp/ccSDbwDc.s:187    .text.smtc_modem_crypto_process_join_accept:0000000000000000 $t
+     /tmp/ccSDbwDc.s:194    .text.smtc_modem_crypto_process_join_accept:0000000000000000 smtc_modem_crypto_process_join_accept
+     /tmp/ccSDbwDc.s:222    .text.smtc_modem_crypto_derive_skeys:0000000000000000 $t
+     /tmp/ccSDbwDc.s:229    .text.smtc_modem_crypto_derive_skeys:0000000000000000 smtc_modem_crypto_derive_skeys
+     /tmp/ccSDbwDc.s:310    .text.smtc_modem_crypto_verify_mic:0000000000000000 $t
+     /tmp/ccSDbwDc.s:317    .text.smtc_modem_crypto_verify_mic:0000000000000000 smtc_modem_crypto_verify_mic
+     /tmp/ccSDbwDc.s:393    .text.smtc_modem_crypto_compute_and_add_mic:0000000000000000 $t
+     /tmp/ccSDbwDc.s:400    .text.smtc_modem_crypto_compute_and_add_mic:0000000000000000 smtc_modem_crypto_compute_and_add_mic
+     /tmp/ccSDbwDc.s:462    .text.smtc_modem_crypto_set_key:0000000000000000 $t
+     /tmp/ccSDbwDc.s:469    .text.smtc_modem_crypto_set_key:0000000000000000 smtc_modem_crypto_set_key
+     /tmp/ccSDbwDc.s:513    .text.smtc_modem_crypto_derive_multicast_session_keys:0000000000000000 $t
+     /tmp/ccSDbwDc.s:520    .text.smtc_modem_crypto_derive_multicast_session_keys:0000000000000000 smtc_modem_crypto_derive_multicast_session_keys
+     /tmp/ccSDbwDc.s:609    .text.smtc_modem_crypto_derive_multicast_session_keys:00000000000000a4 $d
+     /tmp/ccSDbwDc.s:612    .text.smtc_modem_crypto_get_class_b_rand:0000000000000000 $t
+     /tmp/ccSDbwDc.s:619    .text.smtc_modem_crypto_get_class_b_rand:0000000000000000 smtc_modem_crypto_get_class_b_rand
+     /tmp/ccSDbwDc.s:670    .text.smtc_modem_crypto_service_encrypt:0000000000000000 $t
+     /tmp/ccSDbwDc.s:677    .text.smtc_modem_crypto_service_encrypt:0000000000000000 smtc_modem_crypto_service_encrypt
+     /tmp/ccSDbwDc.s:778    .data.smtc_crypto_key_addr_list:0000000000000000 smtc_crypto_key_addr_list
+
+UNDEFINED SYMBOLS
+memset
+smtc_secure_element_aes_encrypt
+smtc_secure_element_compute_aes_cmac
+smtc_secure_element_process_join_accept
+smtc_secure_element_derive_and_store_key
+memcpy
+smtc_secure_element_verify_aes_cmac
+smtc_secure_element_set_key

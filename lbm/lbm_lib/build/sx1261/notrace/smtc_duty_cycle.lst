@@ -1,0 +1,1029 @@
+ARM GAS  /tmp/ccD8qSsY.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"smtc_duty_cycle.c"
+  10              		.text
+  11              		.section	.text.smtc_duty_cycle_get_band,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	smtc_duty_cycle_get_band:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 0023     		movs	r3, #0
+  23 0002 30B5     		push	{r4, r5, lr}
+  24 0004 4478     		ldrb	r4, [r0, #1]
+  25 0006 0430     		adds	r0, r0, #4
+  26              	.L2:
+  27 0008 9C42     		cmp	r4, r3
+  28 000a 01D1     		bne	.L5
+  29 000c 0020     		movs	r0, #0
+  30 000e 07E0     		b	.L4
+  31              	.L5:
+  32 0010 0568     		ldr	r5, [r0]
+  33 0012 8D42     		cmp	r5, r1
+  34 0014 05D8     		bhi	.L3
+  35 0016 4568     		ldr	r5, [r0, #4]
+  36 0018 8D42     		cmp	r5, r1
+  37 001a 02D9     		bls	.L3
+  38 001c 0120     		movs	r0, #1
+  39 001e 1370     		strb	r3, [r2]
+  40              	.L4:
+  41              		@ sp needed
+  42 0020 30BD     		pop	{r4, r5, pc}
+  43              	.L3:
+  44 0022 0133     		adds	r3, r3, #1
+  45 0024 DBB2     		uxtb	r3, r3
+  46 0026 5030     		adds	r0, r0, #80
+  47 0028 EEE7     		b	.L2
+  49              		.section	.text.smtc_duty_cycle_init,"ax",%progbits
+  50              		.align	1
+  51              		.global	smtc_duty_cycle_init
+  52              		.syntax unified
+  53              		.code	16
+  54              		.thumb_func
+  55              		.fpu softvfp
+  57              	smtc_duty_cycle_init:
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0000 F222     		movs	r2, #242
+ARM GAS  /tmp/ccD8qSsY.s 			page 2
+
+
+  61 0002 10B5     		push	{r4, lr}
+  62 0004 0348     		ldr	r0, .L7
+  63 0006 044B     		ldr	r3, .L7+4
+  64 0008 0021     		movs	r1, #0
+  65              		@ sp needed
+  66 000a 5200     		lsls	r2, r2, #1
+  67 000c 1860     		str	r0, [r3]
+  68 000e FFF7FEFF 		bl	memset
+  69 0012 10BD     		pop	{r4, pc}
+  70              	.L8:
+  71              		.align	2
+  72              	.L7:
+  73 0014 04000000 		.word	dtc_context+4
+  74 0018 00000000 		.word	dtc_context
+  76              		.section	.rodata.smtc_duty_cycle_config.str1.1,"aMS",%progbits,1
+  77              	.LC3:
+  78 0000 00       		.ascii	"\000"
+  79              		.section	.text.smtc_duty_cycle_config,"ax",%progbits
+  80              		.align	1
+  81              		.global	smtc_duty_cycle_config
+  82              		.syntax unified
+  83              		.code	16
+  84              		.thumb_func
+  85              		.fpu softvfp
+  87              	smtc_duty_cycle_config:
+  88              		@ args = 4, pretend = 0, frame = 8
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  91 0002 114F     		ldr	r7, .L16
+  92 0004 0193     		str	r3, [sp, #4]
+  93 0006 3B68     		ldr	r3, [r7]
+  94 0008 0400     		movs	r4, r0
+  95 000a 0D00     		movs	r5, r1
+  96 000c 1600     		movs	r6, r2
+  97 000e 002B     		cmp	r3, #0
+  98 0010 18D0     		beq	.L9
+  99 0012 0628     		cmp	r0, #6
+ 100 0014 04D9     		bls	.L11
+ 101 0016 9C21     		movs	r1, #156
+ 102 0018 0C4A     		ldr	r2, .L16+4
+ 103 001a 0D48     		ldr	r0, .L16+8
+ 104 001c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 105              	.L11:
+ 106 0020 3B68     		ldr	r3, [r7]
+ 107 0022 5C70     		strb	r4, [r3, #1]
+ 108 0024 AC42     		cmp	r4, r5
+ 109 0026 04D8     		bhi	.L12
+ 110 0028 A121     		movs	r1, #161
+ 111 002a 084A     		ldr	r2, .L16+4
+ 112 002c 0848     		ldr	r0, .L16+8
+ 113 002e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 114              	.L12:
+ 115 0032 5021     		movs	r1, #80
+ 116 0034 4D43     		muls	r5, r1
+ 117 0036 3B68     		ldr	r3, [r7]
+ 118 0038 5D19     		adds	r5, r3, r5
+ 119 003a 019B     		ldr	r3, [sp, #4]
+ARM GAS  /tmp/ccD8qSsY.s 			page 3
+
+
+ 120 003c AE81     		strh	r6, [r5, #12]
+ 121 003e 6B60     		str	r3, [r5, #4]
+ 122 0040 089B     		ldr	r3, [sp, #32]
+ 123 0042 AB60     		str	r3, [r5, #8]
+ 124              	.L9:
+ 125              		@ sp needed
+ 126 0044 F7BD     		pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+ 127              	.L17:
+ 128 0046 C046     		.align	2
+ 129              	.L16:
+ 130 0048 00000000 		.word	dtc_context
+ 131 004c 00000000 		.word	.LC3
+ 132 0050 00000000 		.word	.LANCHOR0
+ 134              		.section	.text.smtc_duty_cycle_enable_set,"ax",%progbits
+ 135              		.align	1
+ 136              		.global	smtc_duty_cycle_enable_set
+ 137              		.syntax unified
+ 138              		.code	16
+ 139              		.thumb_func
+ 140              		.fpu softvfp
+ 142              	smtc_duty_cycle_enable_set:
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145              		@ link register save eliminated.
+ 146 0000 064A     		ldr	r2, .L26
+ 147 0002 0300     		movs	r3, r0
+ 148 0004 1268     		ldr	r2, [r2]
+ 149 0006 0120     		movs	r0, #1
+ 150 0008 002A     		cmp	r2, #0
+ 151 000a 06D0     		beq	.L19
+ 152 000c 022B     		cmp	r3, #2
+ 153 000e 02D0     		beq	.L20
+ 154 0010 5178     		ldrb	r1, [r2, #1]
+ 155 0012 0029     		cmp	r1, #0
+ 156 0014 01D0     		beq	.L19
+ 157              	.L20:
+ 158 0016 0020     		movs	r0, #0
+ 159 0018 1370     		strb	r3, [r2]
+ 160              	.L19:
+ 161              		@ sp needed
+ 162 001a 7047     		bx	lr
+ 163              	.L27:
+ 164              		.align	2
+ 165              	.L26:
+ 166 001c 00000000 		.word	dtc_context
+ 168              		.section	.text.smtc_duty_cycle_enable_get,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	smtc_duty_cycle_enable_get
+ 171              		.syntax unified
+ 172              		.code	16
+ 173              		.thumb_func
+ 174              		.fpu softvfp
+ 176              	smtc_duty_cycle_enable_get:
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179              		@ link register save eliminated.
+ 180 0000 034B     		ldr	r3, .L31
+ARM GAS  /tmp/ccD8qSsY.s 			page 4
+
+
+ 181 0002 0220     		movs	r0, #2
+ 182 0004 1B68     		ldr	r3, [r3]
+ 183 0006 002B     		cmp	r3, #0
+ 184 0008 00D0     		beq	.L29
+ 185 000a 1878     		ldrb	r0, [r3]
+ 186              	.L29:
+ 187              		@ sp needed
+ 188 000c 7047     		bx	lr
+ 189              	.L32:
+ 190 000e C046     		.align	2
+ 191              	.L31:
+ 192 0010 00000000 		.word	dtc_context
+ 194              		.global	__aeabi_uidivmod
+ 195              		.global	__aeabi_uidiv
+ 196              		.global	__aeabi_idivmod
+ 197              		.section	.text.smtc_duty_cycle_sum,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	smtc_duty_cycle_sum
+ 200              		.syntax unified
+ 201              		.code	16
+ 202              		.thumb_func
+ 203              		.fpu softvfp
+ 205              	smtc_duty_cycle_sum:
+ 206              		@ args = 0, pretend = 0, frame = 32
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 209 0002 414F     		ldr	r7, .L58
+ 210 0004 89B0     		sub	sp, sp, #36
+ 211 0006 3B68     		ldr	r3, [r7]
+ 212 0008 0500     		movs	r5, r0
+ 213 000a 0591     		str	r1, [sp, #20]
+ 214 000c 002B     		cmp	r3, #0
+ 215 000e 56D0     		beq	.L33
+ 216 0010 5A78     		ldrb	r2, [r3, #1]
+ 217 0012 002A     		cmp	r2, #0
+ 218 0014 53D0     		beq	.L33
+ 219 0016 1B78     		ldrb	r3, [r3]
+ 220 0018 022B     		cmp	r3, #2
+ 221 001a 50D0     		beq	.L33
+ 222 001c FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 223 0020 06AB     		add	r3, sp, #24
+ 224 0022 DC1D     		adds	r4, r3, #7
+ 225 0024 0490     		str	r0, [sp, #16]
+ 226 0026 2200     		movs	r2, r4
+ 227 0028 2900     		movs	r1, r5
+ 228 002a 3868     		ldr	r0, [r7]
+ 229 002c FFF7FEFF 		bl	smtc_duty_cycle_get_band
+ 230 0030 0028     		cmp	r0, #0
+ 231 0032 44D0     		beq	.L33
+ 232 0034 3B68     		ldr	r3, [r7]
+ 233 0036 3549     		ldr	r1, .L58+4
+ 234 0038 0193     		str	r3, [sp, #4]
+ 235 003a 2378     		ldrb	r3, [r4]
+ 236 003c 0126     		movs	r6, #1
+ 237 003e 0293     		str	r3, [sp, #8]
+ 238 0040 5023     		movs	r3, #80
+ 239 0042 029A     		ldr	r2, [sp, #8]
+ARM GAS  /tmp/ccD8qSsY.s 			page 5
+
+
+ 240 0044 5343     		muls	r3, r2
+ 241 0046 019A     		ldr	r2, [sp, #4]
+ 242 0048 D318     		adds	r3, r2, r3
+ 243 004a 1D69     		ldr	r5, [r3, #16]
+ 244 004c 1C7D     		ldrb	r4, [r3, #20]
+ 245 004e 2800     		movs	r0, r5
+ 246 0050 FFF7FEFF 		bl	__aeabi_uidivmod
+ 247 0054 049B     		ldr	r3, [sp, #16]
+ 248 0056 491B     		subs	r1, r1, r5
+ 249 0058 CB18     		adds	r3, r1, r3
+ 250 005a 1800     		movs	r0, r3
+ 251 005c 2C49     		ldr	r1, .L58+8
+ 252 005e 0393     		str	r3, [sp, #12]
+ 253 0060 FFF7FEFF 		bl	__aeabi_uidiv
+ 254 0064 3E21     		movs	r1, #62
+ 255 0066 FFF7FEFF 		bl	__aeabi_uidivmod
+ 256 006a 4808     		lsrs	r0, r1, #1
+ 257 006c 0019     		adds	r0, r0, r4
+ 258 006e 1E21     		movs	r1, #30
+ 259 0070 C0B2     		uxtb	r0, r0
+ 260 0072 FFF7FEFF 		bl	__aeabi_uidivmod
+ 261 0076 059B     		ldr	r3, [sp, #20]
+ 262 0078 CDB2     		uxtb	r5, r1
+ 263 007a B342     		cmp	r3, r6
+ 264 007c 01D9     		bls	.L35
+ 265 007e 5E08     		lsrs	r6, r3, #1
+ 266 0080 0136     		adds	r6, r6, #1
+ 267              	.L35:
+ 268 0082 244B     		ldr	r3, .L58+12
+ 269 0084 039A     		ldr	r2, [sp, #12]
+ 270 0086 9A42     		cmp	r2, r3
+ 271 0088 1BD9     		bls	.L36
+ 272 008a 5020     		movs	r0, #80
+ 273 008c 029B     		ldr	r3, [sp, #8]
+ 274 008e 3C22     		movs	r2, #60
+ 275 0090 5843     		muls	r0, r3
+ 276 0092 019B     		ldr	r3, [sp, #4]
+ 277 0094 1630     		adds	r0, r0, #22
+ 278 0096 0021     		movs	r1, #0
+ 279 0098 1818     		adds	r0, r3, r0
+ 280 009a FFF7FEFF 		bl	memset
+ 281              	.L37:
+ 282 009e 06AB     		add	r3, sp, #24
+ 283 00a0 D979     		ldrb	r1, [r3, #7]
+ 284 00a2 2823     		movs	r3, #40
+ 285 00a4 4B43     		muls	r3, r1
+ 286 00a6 5B19     		adds	r3, r3, r5
+ 287 00a8 3A68     		ldr	r2, [r7]
+ 288 00aa 0833     		adds	r3, r3, #8
+ 289 00ac 5B00     		lsls	r3, r3, #1
+ 290 00ae D318     		adds	r3, r2, r3
+ 291 00b0 DE80     		strh	r6, [r3, #6]
+ 292 00b2 5023     		movs	r3, #80
+ 293 00b4 5943     		muls	r1, r3
+ 294 00b6 049B     		ldr	r3, [sp, #16]
+ 295 00b8 5218     		adds	r2, r2, r1
+ 296 00ba 1361     		str	r3, [r2, #16]
+ARM GAS  /tmp/ccD8qSsY.s 			page 6
+
+
+ 297 00bc 1575     		strb	r5, [r2, #20]
+ 298              	.L33:
+ 299 00be 09B0     		add	sp, sp, #36
+ 300              		@ sp needed
+ 301 00c0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 302              	.L36:
+ 303 00c2 AC42     		cmp	r4, r5
+ 304 00c4 11D0     		beq	.L57
+ 305 00c6 2820     		movs	r0, #40
+ 306 00c8 0022     		movs	r2, #0
+ 307 00ca 029B     		ldr	r3, [sp, #8]
+ 308 00cc 5843     		muls	r0, r3
+ 309              	.L38:
+ 310 00ce 0134     		adds	r4, r4, #1
+ 311 00d0 E4B2     		uxtb	r4, r4
+ 312 00d2 1D2C     		cmp	r4, #29
+ 313 00d4 00D9     		bls	.L39
+ 314 00d6 0024     		movs	r4, #0
+ 315              	.L39:
+ 316 00d8 0319     		adds	r3, r0, r4
+ 317 00da 0199     		ldr	r1, [sp, #4]
+ 318 00dc 0833     		adds	r3, r3, #8
+ 319 00de 5B00     		lsls	r3, r3, #1
+ 320 00e0 CB18     		adds	r3, r1, r3
+ 321 00e2 DA80     		strh	r2, [r3, #6]
+ 322 00e4 AC42     		cmp	r4, r5
+ 323 00e6 F2D1     		bne	.L38
+ 324 00e8 D9E7     		b	.L37
+ 325              	.L57:
+ 326 00ea 0B4B     		ldr	r3, .L58+16
+ 327 00ec 039A     		ldr	r2, [sp, #12]
+ 328 00ee 9A42     		cmp	r2, r3
+ 329 00f0 D5D8     		bhi	.L37
+ 330 00f2 2820     		movs	r0, #40
+ 331 00f4 029B     		ldr	r3, [sp, #8]
+ 332 00f6 5843     		muls	r0, r3
+ 333 00f8 4019     		adds	r0, r0, r5
+ 334 00fa 019B     		ldr	r3, [sp, #4]
+ 335 00fc 0830     		adds	r0, r0, #8
+ 336 00fe 4000     		lsls	r0, r0, #1
+ 337 0100 1818     		adds	r0, r3, r0
+ 338 0102 C388     		ldrh	r3, [r0, #6]
+ 339 0104 F618     		adds	r6, r6, r3
+ 340 0106 CAE7     		b	.L37
+ 341              	.L59:
+ 342              		.align	2
+ 343              	.L58:
+ 344 0108 00000000 		.word	dtc_context
+ 345 010c C0D40100 		.word	120000
+ 346 0110 60EA0000 		.word	60000
+ 347 0114 7FEE3600 		.word	3599999
+ 348 0118 BFD40100 		.word	119999
+ 350              		.section	.text.smtc_duty_cycle_update,"ax",%progbits
+ 351              		.align	1
+ 352              		.global	smtc_duty_cycle_update
+ 353              		.syntax unified
+ 354              		.code	16
+ARM GAS  /tmp/ccD8qSsY.s 			page 7
+
+
+ 355              		.thumb_func
+ 356              		.fpu softvfp
+ 358              	smtc_duty_cycle_update:
+ 359              		@ args = 0, pretend = 0, frame = 16
+ 360              		@ frame_needed = 0, uses_anonymous_args = 0
+ 361 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 362 0002 2E4B     		ldr	r3, .L77
+ 363 0004 85B0     		sub	sp, sp, #20
+ 364 0006 1B68     		ldr	r3, [r3]
+ 365 0008 002B     		cmp	r3, #0
+ 366 000a 0CD0     		beq	.L60
+ 367 000c 5B78     		ldrb	r3, [r3, #1]
+ 368 000e 002B     		cmp	r3, #0
+ 369 0010 09D0     		beq	.L60
+ 370 0012 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 371 0016 0027     		movs	r7, #0
+ 372 0018 0390     		str	r0, [sp, #12]
+ 373              	.L63:
+ 374 001a 284B     		ldr	r3, .L77
+ 375 001c 1B68     		ldr	r3, [r3]
+ 376 001e 0193     		str	r3, [sp, #4]
+ 377 0020 5B78     		ldrb	r3, [r3, #1]
+ 378 0022 BB42     		cmp	r3, r7
+ 379 0024 01D8     		bhi	.L70
+ 380              	.L60:
+ 381 0026 05B0     		add	sp, sp, #20
+ 382              		@ sp needed
+ 383 0028 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 384              	.L70:
+ 385 002a 5026     		movs	r6, #80
+ 386 002c 7E43     		muls	r6, r7
+ 387 002e 019B     		ldr	r3, [sp, #4]
+ 388 0030 2349     		ldr	r1, .L77+4
+ 389 0032 9B19     		adds	r3, r3, r6
+ 390 0034 1D69     		ldr	r5, [r3, #16]
+ 391 0036 1C7D     		ldrb	r4, [r3, #20]
+ 392 0038 2800     		movs	r0, r5
+ 393 003a FFF7FEFF 		bl	__aeabi_uidivmod
+ 394 003e 039B     		ldr	r3, [sp, #12]
+ 395 0040 4D1B     		subs	r5, r1, r5
+ 396 0042 ED18     		adds	r5, r5, r3
+ 397 0044 1F49     		ldr	r1, .L77+8
+ 398 0046 2800     		movs	r0, r5
+ 399 0048 FFF7FEFF 		bl	__aeabi_uidiv
+ 400 004c 3E21     		movs	r1, #62
+ 401 004e FFF7FEFF 		bl	__aeabi_uidivmod
+ 402 0052 4808     		lsrs	r0, r1, #1
+ 403 0054 0019     		adds	r0, r0, r4
+ 404 0056 1E21     		movs	r1, #30
+ 405 0058 C0B2     		uxtb	r0, r0
+ 406 005a FFF7FEFF 		bl	__aeabi_uidivmod
+ 407 005e CBB2     		uxtb	r3, r1
+ 408 0060 0293     		str	r3, [sp, #8]
+ 409 0062 194B     		ldr	r3, .L77+12
+ 410 0064 9D42     		cmp	r5, r3
+ 411 0066 17D8     		bhi	.L76
+ 412 0068 2822     		movs	r2, #40
+ARM GAS  /tmp/ccD8qSsY.s 			page 8
+
+
+ 413 006a 0021     		movs	r1, #0
+ 414 006c 7A43     		muls	r2, r7
+ 415 006e 1748     		ldr	r0, .L77+16
+ 416              	.L64:
+ 417 0070 029B     		ldr	r3, [sp, #8]
+ 418 0072 9C42     		cmp	r4, r3
+ 419 0074 1FD0     		beq	.L65
+ 420 0076 0134     		adds	r4, r4, #1
+ 421 0078 E4B2     		uxtb	r4, r4
+ 422 007a 1D2C     		cmp	r4, #29
+ 423 007c 00D9     		bls	.L66
+ 424 007e 0024     		movs	r4, #0
+ 425              	.L66:
+ 426 0080 029B     		ldr	r3, [sp, #8]
+ 427 0082 9C42     		cmp	r4, r3
+ 428 0084 01D1     		bne	.L67
+ 429 0086 8542     		cmp	r5, r0
+ 430 0088 F2D9     		bls	.L64
+ 431              	.L67:
+ 432 008a 1319     		adds	r3, r2, r4
+ 433 008c 019E     		ldr	r6, [sp, #4]
+ 434 008e 0833     		adds	r3, r3, #8
+ 435 0090 5B00     		lsls	r3, r3, #1
+ 436 0092 F318     		adds	r3, r6, r3
+ 437 0094 D980     		strh	r1, [r3, #6]
+ 438 0096 EBE7     		b	.L64
+ 439              	.L76:
+ 440 0098 3000     		movs	r0, r6
+ 441 009a 019B     		ldr	r3, [sp, #4]
+ 442 009c 1630     		adds	r0, r0, #22
+ 443 009e 1818     		adds	r0, r3, r0
+ 444 00a0 3C22     		movs	r2, #60
+ 445 00a2 0021     		movs	r1, #0
+ 446 00a4 FFF7FEFF 		bl	memset
+ 447 00a8 044B     		ldr	r3, .L77
+ 448 00aa 1B68     		ldr	r3, [r3]
+ 449 00ac 9E19     		adds	r6, r3, r6
+ 450 00ae 039B     		ldr	r3, [sp, #12]
+ 451 00b0 3361     		str	r3, [r6, #16]
+ 452 00b2 029B     		ldr	r3, [sp, #8]
+ 453 00b4 3375     		strb	r3, [r6, #20]
+ 454              	.L65:
+ 455 00b6 0137     		adds	r7, r7, #1
+ 456 00b8 FFB2     		uxtb	r7, r7
+ 457 00ba AEE7     		b	.L63
+ 458              	.L78:
+ 459              		.align	2
+ 460              	.L77:
+ 461 00bc 00000000 		.word	dtc_context
+ 462 00c0 C0D40100 		.word	120000
+ 463 00c4 60EA0000 		.word	60000
+ 464 00c8 7FEE3600 		.word	3599999
+ 465 00cc BFD40100 		.word	119999
+ 467              		.global	__aeabi_idiv
+ 468              		.section	.text.smtc_duty_cycle_is_toa_accepted,"ax",%progbits
+ 469              		.align	1
+ 470              		.global	smtc_duty_cycle_is_toa_accepted
+ARM GAS  /tmp/ccD8qSsY.s 			page 9
+
+
+ 471              		.syntax unified
+ 472              		.code	16
+ 473              		.thumb_func
+ 474              		.fpu softvfp
+ 476              	smtc_duty_cycle_is_toa_accepted:
+ 477              		@ args = 0, pretend = 0, frame = 8
+ 478              		@ frame_needed = 0, uses_anonymous_args = 0
+ 479 0000 194B     		ldr	r3, .L92
+ 480 0002 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 481 0004 1B68     		ldr	r3, [r3]
+ 482 0006 0400     		movs	r4, r0
+ 483 0008 1500     		movs	r5, r2
+ 484 000a 002B     		cmp	r3, #0
+ 485 000c 01D1     		bne	.L80
+ 486              	.L82:
+ 487 000e 0120     		movs	r0, #1
+ 488              	.L81:
+ 489              		@ sp needed
+ 490 0010 76BD     		pop	{r1, r2, r4, r5, r6, pc}
+ 491              	.L80:
+ 492 0012 0378     		ldrb	r3, [r0]
+ 493 0014 012B     		cmp	r3, #1
+ 494 0016 FAD1     		bne	.L82
+ 495 0018 4378     		ldrb	r3, [r0, #1]
+ 496 001a 002B     		cmp	r3, #0
+ 497 001c F7D0     		beq	.L82
+ 498 001e 6B46     		mov	r3, sp
+ 499 0020 DE1D     		adds	r6, r3, #7
+ 500 0022 3200     		movs	r2, r6
+ 501 0024 FFF7FEFF 		bl	smtc_duty_cycle_get_band
+ 502 0028 0028     		cmp	r0, #0
+ 503 002a F0D0     		beq	.L82
+ 504 002c 5023     		movs	r3, #80
+ 505 002e 3078     		ldrb	r0, [r6]
+ 506 0030 0026     		movs	r6, #0
+ 507 0032 4343     		muls	r3, r0
+ 508 0034 E218     		adds	r2, r4, r3
+ 509 0036 3C33     		adds	r3, r3, #60
+ 510 0038 E318     		adds	r3, r4, r3
+ 511              	.L83:
+ 512 003a D18A     		ldrh	r1, [r2, #22]
+ 513 003c 0232     		adds	r2, r2, #2
+ 514 003e 7618     		adds	r6, r6, r1
+ 515 0040 9A42     		cmp	r2, r3
+ 516 0042 FAD1     		bne	.L83
+ 517 0044 5023     		movs	r3, #80
+ 518 0046 5843     		muls	r0, r3
+ 519 0048 2418     		adds	r4, r4, r0
+ 520 004a A189     		ldrh	r1, [r4, #12]
+ 521 004c 0748     		ldr	r0, .L92+4
+ 522 004e FFF7FEFF 		bl	__aeabi_uidiv
+ 523 0052 0023     		movs	r3, #0
+ 524 0054 7600     		lsls	r6, r6, #1
+ 525 0056 861B     		subs	r6, r0, r6
+ 526 0058 1800     		movs	r0, r3
+ 527 005a 9E42     		cmp	r6, r3
+ 528 005c D8DB     		blt	.L81
+ARM GAS  /tmp/ccD8qSsY.s 			page 10
+
+
+ 529 005e AE42     		cmp	r6, r5
+ 530 0060 5B41     		adcs	r3, r3, r3
+ 531 0062 D8B2     		uxtb	r0, r3
+ 532 0064 D4E7     		b	.L81
+ 533              	.L93:
+ 534 0066 C046     		.align	2
+ 535              	.L92:
+ 536 0068 00000000 		.word	dtc_context
+ 537 006c 80EE3600 		.word	3600000
+ 539              		.section	.text.smtc_duty_cycle_band_get_available_toa_ms,"ax",%progbits
+ 540              		.align	1
+ 541              		.global	smtc_duty_cycle_band_get_available_toa_ms
+ 542              		.syntax unified
+ 543              		.code	16
+ 544              		.thumb_func
+ 545              		.fpu softvfp
+ 547              	smtc_duty_cycle_band_get_available_toa_ms:
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550 0000 104B     		ldr	r3, .L101
+ 551 0002 0200     		movs	r2, r0
+ 552 0004 1B68     		ldr	r3, [r3]
+ 553 0006 0120     		movs	r0, #1
+ 554 0008 70B5     		push	{r4, r5, r6, lr}
+ 555 000a 002B     		cmp	r3, #0
+ 556 000c 19D0     		beq	.L94
+ 557 000e 1378     		ldrb	r3, [r2]
+ 558 0010 8342     		cmp	r3, r0
+ 559 0012 16D1     		bne	.L94
+ 560 0014 5378     		ldrb	r3, [r2, #1]
+ 561 0016 002B     		cmp	r3, #0
+ 562 0018 13D0     		beq	.L94
+ 563 001a 5023     		movs	r3, #80
+ 564 001c 4B43     		muls	r3, r1
+ 565 001e D318     		adds	r3, r2, r3
+ 566 0020 1800     		movs	r0, r3
+ 567 0022 0024     		movs	r4, #0
+ 568 0024 3C30     		adds	r0, r0, #60
+ 569              	.L96:
+ 570 0026 DD8A     		ldrh	r5, [r3, #22]
+ 571 0028 0233     		adds	r3, r3, #2
+ 572 002a 6419     		adds	r4, r4, r5
+ 573 002c 8342     		cmp	r3, r0
+ 574 002e FAD1     		bne	.L96
+ 575 0030 5020     		movs	r0, #80
+ 576 0032 4143     		muls	r1, r0
+ 577 0034 5218     		adds	r2, r2, r1
+ 578 0036 9189     		ldrh	r1, [r2, #12]
+ 579 0038 0348     		ldr	r0, .L101+4
+ 580 003a FFF7FEFF 		bl	__aeabi_uidiv
+ 581 003e 6400     		lsls	r4, r4, #1
+ 582 0040 001B     		subs	r0, r0, r4
+ 583              	.L94:
+ 584              		@ sp needed
+ 585 0042 70BD     		pop	{r4, r5, r6, pc}
+ 586              	.L102:
+ 587              		.align	2
+ARM GAS  /tmp/ccD8qSsY.s 			page 11
+
+
+ 588              	.L101:
+ 589 0044 00000000 		.word	dtc_context
+ 590 0048 80EE3600 		.word	3600000
+ 592              		.section	.text.smtc_duty_cycle_is_channel_free,"ax",%progbits
+ 593              		.align	1
+ 594              		.global	smtc_duty_cycle_is_channel_free
+ 595              		.syntax unified
+ 596              		.code	16
+ 597              		.thumb_func
+ 598              		.fpu softvfp
+ 600              	smtc_duty_cycle_is_channel_free:
+ 601              		@ args = 0, pretend = 0, frame = 8
+ 602              		@ frame_needed = 0, uses_anonymous_args = 0
+ 603 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 604 0002 0E4C     		ldr	r4, .L113
+ 605 0004 0100     		movs	r1, r0
+ 606 0006 2068     		ldr	r0, [r4]
+ 607 0008 0028     		cmp	r0, #0
+ 608 000a 01D1     		bne	.L104
+ 609              	.L106:
+ 610 000c 0120     		movs	r0, #1
+ 611              	.L105:
+ 612              		@ sp needed
+ 613 000e 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 614              	.L104:
+ 615 0010 0378     		ldrb	r3, [r0]
+ 616 0012 012B     		cmp	r3, #1
+ 617 0014 FAD1     		bne	.L106
+ 618 0016 4378     		ldrb	r3, [r0, #1]
+ 619 0018 002B     		cmp	r3, #0
+ 620 001a F7D0     		beq	.L106
+ 621 001c 6B46     		mov	r3, sp
+ 622 001e DD1D     		adds	r5, r3, #7
+ 623 0020 2A00     		movs	r2, r5
+ 624 0022 FFF7FEFF 		bl	smtc_duty_cycle_get_band
+ 625 0026 0028     		cmp	r0, #0
+ 626 0028 F0D0     		beq	.L106
+ 627 002a 2978     		ldrb	r1, [r5]
+ 628 002c 2068     		ldr	r0, [r4]
+ 629 002e FFF7FEFF 		bl	smtc_duty_cycle_band_get_available_toa_ms
+ 630 0032 C317     		asrs	r3, r0, #31
+ 631 0034 181A     		subs	r0, r3, r0
+ 632 0036 C00F     		lsrs	r0, r0, #31
+ 633 0038 E9E7     		b	.L105
+ 634              	.L114:
+ 635 003a C046     		.align	2
+ 636              	.L113:
+ 637 003c 00000000 		.word	dtc_context
+ 639              		.section	.text.smtc_duty_cycle_is_band_free,"ax",%progbits
+ 640              		.align	1
+ 641              		.global	smtc_duty_cycle_is_band_free
+ 642              		.syntax unified
+ 643              		.code	16
+ 644              		.thumb_func
+ 645              		.fpu softvfp
+ 647              	smtc_duty_cycle_is_band_free:
+ 648              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccD8qSsY.s 			page 12
+
+
+ 649              		@ frame_needed = 0, uses_anonymous_args = 0
+ 650 0000 094B     		ldr	r3, .L120
+ 651 0002 10B5     		push	{r4, lr}
+ 652 0004 1A68     		ldr	r2, [r3]
+ 653 0006 0123     		movs	r3, #1
+ 654 0008 002A     		cmp	r2, #0
+ 655 000a 0AD0     		beq	.L116
+ 656 000c 0278     		ldrb	r2, [r0]
+ 657 000e 9A42     		cmp	r2, r3
+ 658 0010 07D1     		bne	.L116
+ 659 0012 4278     		ldrb	r2, [r0, #1]
+ 660 0014 002A     		cmp	r2, #0
+ 661 0016 04D0     		beq	.L116
+ 662 0018 FFF7FEFF 		bl	smtc_duty_cycle_band_get_available_toa_ms
+ 663 001c C317     		asrs	r3, r0, #31
+ 664 001e 1B1A     		subs	r3, r3, r0
+ 665 0020 DB0F     		lsrs	r3, r3, #31
+ 666              	.L116:
+ 667 0022 1800     		movs	r0, r3
+ 668              		@ sp needed
+ 669 0024 10BD     		pop	{r4, pc}
+ 670              	.L121:
+ 671 0026 C046     		.align	2
+ 672              	.L120:
+ 673 0028 00000000 		.word	dtc_context
+ 675              		.section	.text.smtc_duty_cycle_get_next_free_time_ms,"ax",%progbits
+ 676              		.align	1
+ 677              		.global	smtc_duty_cycle_get_next_free_time_ms
+ 678              		.syntax unified
+ 679              		.code	16
+ 680              		.thumb_func
+ 681              		.fpu softvfp
+ 683              	smtc_duty_cycle_get_next_free_time_ms:
+ 684              		@ args = 0, pretend = 0, frame = 48
+ 685              		@ frame_needed = 0, uses_anonymous_args = 0
+ 686 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 687 0002 6D4B     		ldr	r3, .L162
+ 688 0004 0400     		movs	r4, r0
+ 689 0006 1B68     		ldr	r3, [r3]
+ 690 0008 0F00     		movs	r7, r1
+ 691 000a 8DB0     		sub	sp, sp, #52
+ 692 000c 002B     		cmp	r3, #0
+ 693 000e 03D1     		bne	.L123
+ 694              	.L125:
+ 695 0010 0025     		movs	r5, #0
+ 696              	.L122:
+ 697 0012 2800     		movs	r0, r5
+ 698 0014 0DB0     		add	sp, sp, #52
+ 699              		@ sp needed
+ 700 0016 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 701              	.L123:
+ 702 0018 1A78     		ldrb	r2, [r3]
+ 703 001a 012A     		cmp	r2, #1
+ 704 001c F8D1     		bne	.L125
+ 705 001e 5B78     		ldrb	r3, [r3, #1]
+ 706 0020 002B     		cmp	r3, #0
+ 707 0022 F5D0     		beq	.L125
+ARM GAS  /tmp/ccD8qSsY.s 			page 13
+
+
+ 708 0024 FF21     		movs	r1, #255
+ 709 0026 0532     		adds	r2, r2, #5
+ 710 0028 08A8     		add	r0, sp, #32
+ 711 002a FFF7FEFF 		bl	memset
+ 712 002e A400     		lsls	r4, r4, #2
+ 713 0030 0622     		movs	r2, #6
+ 714 0032 FF21     		movs	r1, #255
+ 715 0034 0AA8     		add	r0, sp, #40
+ 716 0036 FFF7FEFF 		bl	memset
+ 717 003a FFF7FEFF 		bl	smtc_duty_cycle_update
+ 718 003e 3B19     		adds	r3, r7, r4
+ 719 0040 0293     		str	r3, [sp, #8]
+ 720 0042 0023     		movs	r3, #0
+ 721 0044 FF26     		movs	r6, #255
+ 722 0046 1C00     		movs	r4, r3
+ 723 0048 0193     		str	r3, [sp, #4]
+ 724              	.L126:
+ 725 004a 029B     		ldr	r3, [sp, #8]
+ 726 004c BB42     		cmp	r3, r7
+ 727 004e 15D1     		bne	.L134
+ 728 0050 019B     		ldr	r3, [sp, #4]
+ 729 0052 002B     		cmp	r3, #0
+ 730 0054 4FD1     		bne	.L135
+ 731 0056 002C     		cmp	r4, #0
+ 732 0058 DAD0     		beq	.L125
+ 733              	.L136:
+ 734 005a 0026     		movs	r6, #0
+ 735 005c 3500     		movs	r5, r6
+ 736 005e 564B     		ldr	r3, .L162
+ 737 0060 1F68     		ldr	r7, [r3]
+ 738              	.L138:
+ 739 0062 0822     		movs	r2, #8
+ 740 0064 06AB     		add	r3, sp, #24
+ 741 0066 9B18     		adds	r3, r3, r2
+ 742 0068 995D     		ldrb	r1, [r3, r6]
+ 743 006a 3800     		movs	r0, r7
+ 744 006c FFF7FEFF 		bl	smtc_duty_cycle_band_get_available_toa_ms
+ 745 0070 0136     		adds	r6, r6, #1
+ 746 0072 F3B2     		uxtb	r3, r6
+ 747 0074 2D1A     		subs	r5, r5, r0
+ 748 0076 9C42     		cmp	r4, r3
+ 749 0078 F3D8     		bhi	.L138
+ 750 007a CAE7     		b	.L122
+ 751              	.L134:
+ 752 007c 06AB     		add	r3, sp, #24
+ 753 007e DA1D     		adds	r2, r3, #7
+ 754 0080 4D4B     		ldr	r3, .L162
+ 755 0082 3968     		ldr	r1, [r7]
+ 756 0084 1868     		ldr	r0, [r3]
+ 757 0086 FFF7FEFF 		bl	smtc_duty_cycle_get_band
+ 758 008a 0028     		cmp	r0, #0
+ 759 008c 1ED0     		beq	.L127
+ 760 008e 06AB     		add	r3, sp, #24
+ 761 0090 DD79     		ldrb	r5, [r3, #7]
+ 762 0092 B542     		cmp	r5, r6
+ 763 0094 1AD0     		beq	.L127
+ 764 0096 484B     		ldr	r3, .L162
+ARM GAS  /tmp/ccD8qSsY.s 			page 14
+
+
+ 765 0098 2900     		movs	r1, r5
+ 766 009a 1E68     		ldr	r6, [r3]
+ 767 009c 3000     		movs	r0, r6
+ 768 009e FFF7FEFF 		bl	smtc_duty_cycle_is_band_free
+ 769 00a2 7178     		ldrb	r1, [r6, #1]
+ 770 00a4 0028     		cmp	r0, #0
+ 771 00a6 13D1     		bne	.L147
+ 772 00a8 0F22     		movs	r2, #15
+ 773 00aa 06AB     		add	r3, sp, #24
+ 774 00ac D218     		adds	r2, r2, r3
+ 775              	.L129:
+ 776 00ae C3B2     		uxtb	r3, r0
+ 777 00b0 8B42     		cmp	r3, r1
+ 778 00b2 1BD3     		bcc	.L132
+ 779 00b4 019A     		ldr	r2, [sp, #4]
+ 780 00b6 0AAB     		add	r3, sp, #40
+ 781 00b8 9D54     		strb	r5, [r3, r2]
+ 782 00ba 1300     		movs	r3, r2
+ 783 00bc 0133     		adds	r3, r3, #1
+ 784 00be DBB2     		uxtb	r3, r3
+ 785 00c0 0193     		str	r3, [sp, #4]
+ 786 00c2 11E0     		b	.L161
+ 787              	.L130:
+ 788 00c4 0132     		adds	r2, r2, #1
+ 789 00c6 9E5C     		ldrb	r6, [r3, r2]
+ 790 00c8 B542     		cmp	r5, r6
+ 791 00ca 04D1     		bne	.L128
+ 792              	.L127:
+ 793 00cc 0437     		adds	r7, r7, #4
+ 794 00ce BCE7     		b	.L126
+ 795              	.L147:
+ 796 00d0 0022     		movs	r2, #0
+ 797 00d2 06AB     		add	r3, sp, #24
+ 798 00d4 0733     		adds	r3, r3, #7
+ 799              	.L128:
+ 800 00d6 D0B2     		uxtb	r0, r2
+ 801 00d8 8842     		cmp	r0, r1
+ 802 00da F3D3     		bcc	.L130
+ 803 00dc 0822     		movs	r2, #8
+ 804 00de 06AB     		add	r3, sp, #24
+ 805 00e0 9B18     		adds	r3, r3, r2
+ 806 00e2 1D55     		strb	r5, [r3, r4]
+ 807 00e4 0134     		adds	r4, r4, #1
+ 808 00e6 E4B2     		uxtb	r4, r4
+ 809              	.L161:
+ 810 00e8 2E00     		movs	r6, r5
+ 811 00ea EFE7     		b	.L127
+ 812              	.L132:
+ 813 00ec 0130     		adds	r0, r0, #1
+ 814 00ee 165C     		ldrb	r6, [r2, r0]
+ 815 00f0 B542     		cmp	r5, r6
+ 816 00f2 DCD1     		bne	.L129
+ 817 00f4 EAE7     		b	.L127
+ 818              	.L135:
+ 819 00f6 002C     		cmp	r4, #0
+ 820 00f8 AFD1     		bne	.L136
+ 821 00fa FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ARM GAS  /tmp/ccD8qSsY.s 			page 15
+
+
+ 822 00fe 2F49     		ldr	r1, .L162+4
+ 823 0100 0490     		str	r0, [sp, #16]
+ 824 0102 FFF7FEFF 		bl	__aeabi_uidivmod
+ 825 0106 2D4B     		ldr	r3, .L162+4
+ 826 0108 2700     		movs	r7, r4
+ 827 010a 5B1A     		subs	r3, r3, r1
+ 828 010c 0593     		str	r3, [sp, #20]
+ 829 010e 0123     		movs	r3, #1
+ 830 0110 5B42     		rsbs	r3, r3, #0
+ 831 0112 0293     		str	r3, [sp, #8]
+ 832              	.L145:
+ 833 0114 0AAA     		add	r2, sp, #40
+ 834 0116 BE5C     		ldrb	r6, [r7, r2]
+ 835 0118 5022     		movs	r2, #80
+ 836 011a 274B     		ldr	r3, .L162
+ 837 011c 7243     		muls	r2, r6
+ 838 011e 1B68     		ldr	r3, [r3]
+ 839 0120 2649     		ldr	r1, .L162+4
+ 840 0122 9B18     		adds	r3, r3, r2
+ 841 0124 1C69     		ldr	r4, [r3, #16]
+ 842 0126 1A7D     		ldrb	r2, [r3, #20]
+ 843 0128 2000     		movs	r0, r4
+ 844 012a 0392     		str	r2, [sp, #12]
+ 845 012c FFF7FEFF 		bl	__aeabi_uidivmod
+ 846 0130 049B     		ldr	r3, [sp, #16]
+ 847 0132 081B     		subs	r0, r1, r4
+ 848 0134 C018     		adds	r0, r0, r3
+ 849 0136 2249     		ldr	r1, .L162+8
+ 850 0138 FFF7FEFF 		bl	__aeabi_uidiv
+ 851 013c 3E21     		movs	r1, #62
+ 852 013e FFF7FEFF 		bl	__aeabi_uidivmod
+ 853 0142 039B     		ldr	r3, [sp, #12]
+ 854 0144 4808     		lsrs	r0, r1, #1
+ 855 0146 C018     		adds	r0, r0, r3
+ 856 0148 1E21     		movs	r1, #30
+ 857 014a C0B2     		uxtb	r0, r0
+ 858 014c FFF7FEFF 		bl	__aeabi_uidivmod
+ 859 0150 2823     		movs	r3, #40
+ 860 0152 0024     		movs	r4, #0
+ 861 0154 5E43     		muls	r6, r3
+ 862 0156 CDB2     		uxtb	r5, r1
+ 863              	.L143:
+ 864 0158 0135     		adds	r5, r5, #1
+ 865 015a EDB2     		uxtb	r5, r5
+ 866 015c 1E2D     		cmp	r5, #30
+ 867 015e 00D1     		bne	.L139
+ 868 0160 0025     		movs	r5, #0
+ 869              	.L139:
+ 870 0162 154B     		ldr	r3, .L162
+ 871 0164 1A68     		ldr	r2, [r3]
+ 872 0166 7319     		adds	r3, r6, r5
+ 873 0168 0833     		adds	r3, r3, #8
+ 874 016a 5B00     		lsls	r3, r3, #1
+ 875 016c D318     		adds	r3, r2, r3
+ 876 016e DB88     		ldrh	r3, [r3, #6]
+ 877 0170 002B     		cmp	r3, #0
+ 878 0172 0ED1     		bne	.L140
+ARM GAS  /tmp/ccD8qSsY.s 			page 16
+
+
+ 879 0174 039B     		ldr	r3, [sp, #12]
+ 880 0176 9D42     		cmp	r5, r3
+ 881 0178 1AD0     		beq	.L141
+ 882 017a 0134     		adds	r4, r4, #1
+ 883 017c E4B2     		uxtb	r4, r4
+ 884 017e 1E2C     		cmp	r4, #30
+ 885 0180 EAD9     		bls	.L143
+ 886              	.L146:
+ 887 0182 104A     		ldr	r2, .L162+12
+ 888 0184 1049     		ldr	r1, .L162+16
+ 889 0186 1148     		ldr	r0, .L162+20
+ 890 0188 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 891 018c 039B     		ldr	r3, [sp, #12]
+ 892 018e 9D42     		cmp	r5, r3
+ 893 0190 E2D1     		bne	.L143
+ 894              	.L140:
+ 895 0192 0A4B     		ldr	r3, .L162+4
+ 896 0194 5C43     		muls	r4, r3
+ 897 0196 059B     		ldr	r3, [sp, #20]
+ 898 0198 E418     		adds	r4, r4, r3
+ 899 019a 029B     		ldr	r3, [sp, #8]
+ 900 019c A342     		cmp	r3, r4
+ 901 019e 00D9     		bls	.L144
+ 902 01a0 0294     		str	r4, [sp, #8]
+ 903              	.L144:
+ 904 01a2 0137     		adds	r7, r7, #1
+ 905 01a4 019A     		ldr	r2, [sp, #4]
+ 906 01a6 FBB2     		uxtb	r3, r7
+ 907 01a8 9A42     		cmp	r2, r3
+ 908 01aa B3D8     		bhi	.L145
+ 909 01ac 029D     		ldr	r5, [sp, #8]
+ 910 01ae 30E7     		b	.L122
+ 911              	.L141:
+ 912 01b0 1E2C     		cmp	r4, #30
+ 913 01b2 E6D8     		bhi	.L146
+ 914 01b4 EDE7     		b	.L140
+ 915              	.L163:
+ 916 01b6 C046     		.align	2
+ 917              	.L162:
+ 918 01b8 00000000 		.word	dtc_context
+ 919 01bc C0D40100 		.word	120000
+ 920 01c0 60EA0000 		.word	60000
+ 921 01c4 00000000 		.word	.LC3
+ 922 01c8 FF010000 		.word	511
+ 923 01cc 00000000 		.word	.LANCHOR1
+ 925              		.section	.bss.dtc_context,"aw",%nobits
+ 926              		.align	2
+ 929              	dtc_context:
+ 930 0000 00000000 		.space	488
+ 930      00000000 
+ 930      00000000 
+ 930      00000000 
+ 930      00000000 
+ 931              		.section	.rodata.__func__.0,"a"
+ 932              		.set	.LANCHOR1,. + 0
+ 935              	__func__.0:
+ 936 0000 736D7463 		.ascii	"smtc_duty_cycle_get_next_free_time_ms\000"
+ARM GAS  /tmp/ccD8qSsY.s 			page 17
+
+
+ 936      5F647574 
+ 936      795F6379 
+ 936      636C655F 
+ 936      6765745F 
+ 937              		.section	.rodata.__func__.1,"a"
+ 938              		.set	.LANCHOR0,. + 0
+ 941              	__func__.1:
+ 942 0000 736D7463 		.ascii	"smtc_duty_cycle_config\000"
+ 942      5F647574 
+ 942      795F6379 
+ 942      636C655F 
+ 942      636F6E66 
+ 943              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccD8qSsY.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 smtc_duty_cycle.c
+     /tmp/ccD8qSsY.s:12     .text.smtc_duty_cycle_get_band:0000000000000000 $t
+     /tmp/ccD8qSsY.s:19     .text.smtc_duty_cycle_get_band:0000000000000000 smtc_duty_cycle_get_band
+     /tmp/ccD8qSsY.s:50     .text.smtc_duty_cycle_init:0000000000000000 $t
+     /tmp/ccD8qSsY.s:57     .text.smtc_duty_cycle_init:0000000000000000 smtc_duty_cycle_init
+     /tmp/ccD8qSsY.s:73     .text.smtc_duty_cycle_init:0000000000000014 $d
+     /tmp/ccD8qSsY.s:929    .bss.dtc_context:0000000000000000 dtc_context
+     /tmp/ccD8qSsY.s:80     .text.smtc_duty_cycle_config:0000000000000000 $t
+     /tmp/ccD8qSsY.s:87     .text.smtc_duty_cycle_config:0000000000000000 smtc_duty_cycle_config
+     /tmp/ccD8qSsY.s:130    .text.smtc_duty_cycle_config:0000000000000048 $d
+     /tmp/ccD8qSsY.s:135    .text.smtc_duty_cycle_enable_set:0000000000000000 $t
+     /tmp/ccD8qSsY.s:142    .text.smtc_duty_cycle_enable_set:0000000000000000 smtc_duty_cycle_enable_set
+     /tmp/ccD8qSsY.s:166    .text.smtc_duty_cycle_enable_set:000000000000001c $d
+     /tmp/ccD8qSsY.s:169    .text.smtc_duty_cycle_enable_get:0000000000000000 $t
+     /tmp/ccD8qSsY.s:176    .text.smtc_duty_cycle_enable_get:0000000000000000 smtc_duty_cycle_enable_get
+     /tmp/ccD8qSsY.s:192    .text.smtc_duty_cycle_enable_get:0000000000000010 $d
+     /tmp/ccD8qSsY.s:198    .text.smtc_duty_cycle_sum:0000000000000000 $t
+     /tmp/ccD8qSsY.s:205    .text.smtc_duty_cycle_sum:0000000000000000 smtc_duty_cycle_sum
+     /tmp/ccD8qSsY.s:344    .text.smtc_duty_cycle_sum:0000000000000108 $d
+     /tmp/ccD8qSsY.s:351    .text.smtc_duty_cycle_update:0000000000000000 $t
+     /tmp/ccD8qSsY.s:358    .text.smtc_duty_cycle_update:0000000000000000 smtc_duty_cycle_update
+     /tmp/ccD8qSsY.s:461    .text.smtc_duty_cycle_update:00000000000000bc $d
+     /tmp/ccD8qSsY.s:469    .text.smtc_duty_cycle_is_toa_accepted:0000000000000000 $t
+     /tmp/ccD8qSsY.s:476    .text.smtc_duty_cycle_is_toa_accepted:0000000000000000 smtc_duty_cycle_is_toa_accepted
+     /tmp/ccD8qSsY.s:536    .text.smtc_duty_cycle_is_toa_accepted:0000000000000068 $d
+     /tmp/ccD8qSsY.s:540    .text.smtc_duty_cycle_band_get_available_toa_ms:0000000000000000 $t
+     /tmp/ccD8qSsY.s:547    .text.smtc_duty_cycle_band_get_available_toa_ms:0000000000000000 smtc_duty_cycle_band_get_available_toa_ms
+     /tmp/ccD8qSsY.s:589    .text.smtc_duty_cycle_band_get_available_toa_ms:0000000000000044 $d
+     /tmp/ccD8qSsY.s:593    .text.smtc_duty_cycle_is_channel_free:0000000000000000 $t
+     /tmp/ccD8qSsY.s:600    .text.smtc_duty_cycle_is_channel_free:0000000000000000 smtc_duty_cycle_is_channel_free
+     /tmp/ccD8qSsY.s:637    .text.smtc_duty_cycle_is_channel_free:000000000000003c $d
+     /tmp/ccD8qSsY.s:640    .text.smtc_duty_cycle_is_band_free:0000000000000000 $t
+     /tmp/ccD8qSsY.s:647    .text.smtc_duty_cycle_is_band_free:0000000000000000 smtc_duty_cycle_is_band_free
+     /tmp/ccD8qSsY.s:673    .text.smtc_duty_cycle_is_band_free:0000000000000028 $d
+     /tmp/ccD8qSsY.s:676    .text.smtc_duty_cycle_get_next_free_time_ms:0000000000000000 $t
+     /tmp/ccD8qSsY.s:683    .text.smtc_duty_cycle_get_next_free_time_ms:0000000000000000 smtc_duty_cycle_get_next_free_time_ms
+     /tmp/ccD8qSsY.s:918    .text.smtc_duty_cycle_get_next_free_time_ms:00000000000001b8 $d
+     /tmp/ccD8qSsY.s:926    .bss.dtc_context:0000000000000000 $d
+     /tmp/ccD8qSsY.s:935    .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccD8qSsY.s:941    .rodata.__func__.1:0000000000000000 __func__.1
+
+UNDEFINED SYMBOLS
+memset
+smtc_modem_hal_on_panic
+__aeabi_uidivmod
+__aeabi_uidiv
+__aeabi_idivmod
+smtc_modem_hal_get_time_in_ms
+__aeabi_idiv

@@ -1,0 +1,8 @@
+extensions/common/radio_hal/ral_sx126x_bsp.c:75:6:ral_sx126x_bsp_get_reg_mode	0	static
+extensions/common/radio_hal/ral_sx126x_bsp.c:79:6:ral_sx126x_bsp_get_rf_switch_cfg	0	static
+extensions/common/radio_hal/ral_sx126x_bsp.c:83:6:ral_sx126x_bsp_get_tx_cfg	16	static
+extensions/common/radio_hal/ral_sx126x_bsp.c:146:6:ral_sx126x_bsp_get_xosc_cfg	0	static
+extensions/common/radio_hal/ral_sx126x_bsp.c:152:6:ral_sx126x_bsp_get_trim_cap	0	static
+extensions/common/radio_hal/ral_sx126x_bsp.c:156:6:ral_sx126x_bsp_get_rx_boost_cfg	0	static
+extensions/common/radio_hal/ral_sx126x_bsp.c:160:6:ral_sx126x_bsp_get_ocp_value	0	static
+extensions/common/radio_hal/ral_sx126x_bsp.c:164:6:ral_sx126x_bsp_get_lora_cad_det_peak	0	static

@@ -1,0 +1,4 @@
+smtc_modem_core/smtc_ralf/src/ralf_sx126x.c:73:14:ralf_sx126x_setup_gfsk	16	static
+smtc_modem_core/smtc_ralf/src/ralf_sx126x.c:130:14:ralf_sx126x_setup_lora	16	static
+smtc_modem_core/smtc_ralf/src/ralf_sx126x.c:177:14:ralf_sx126x_setup_flrc	0	static
+smtc_modem_core/smtc_ralf/src/ralf_sx126x.c:182:14:ralf_sx126x_setup_lora_cad	40	static

@@ -1,0 +1,628 @@
+ARM GAS  /tmp/ccrpmRVl.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"lr1mac_utilities.c"
+  10              		.text
+  11              		.section	.text.lr1mac_utilities_crc,"ax",%progbits
+  12              		.align	1
+  13              		.global	lr1mac_utilities_crc
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	lr1mac_utilities_crc:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 0623     		movs	r3, #6
+  24 0002 70B5     		push	{r4, r5, r6, lr}
+  25 0004 0124     		movs	r4, #1
+  26 0006 0B4D     		ldr	r5, .L6
+  27 0008 5B42     		rsbs	r3, r3, #0
+  28 000a 4118     		adds	r1, r0, r1
+  29              	.L2:
+  30 000c 0A1A     		subs	r2, r1, r0
+  31 000e 002A     		cmp	r2, #0
+  32 0010 02DC     		bgt	.L4
+  33              		@ sp needed
+  34 0012 0220     		movs	r0, #2
+  35 0014 C01A     		subs	r0, r0, r3
+  36 0016 70BD     		pop	{r4, r5, r6, pc}
+  37              	.L4:
+  38 0018 0278     		ldrb	r2, [r0]
+  39 001a 5340     		eors	r3, r2
+  40 001c 0822     		movs	r2, #8
+  41              	.L3:
+  42 001e 5E08     		lsrs	r6, r3, #1
+  43 0020 2340     		ands	r3, r4
+  44 0022 5B42     		rsbs	r3, r3, #0
+  45 0024 2B40     		ands	r3, r5
+  46 0026 013A     		subs	r2, r2, #1
+  47 0028 7340     		eors	r3, r6
+  48 002a 002A     		cmp	r2, #0
+  49 002c F7D1     		bne	.L3
+  50 002e 0130     		adds	r0, r0, #1
+  51 0030 ECE7     		b	.L2
+  52              	.L7:
+  53 0032 C046     		.align	2
+  54              	.L6:
+  55 0034 2083B8ED 		.word	-306674912
+  57              		.global	__aeabi_uidiv
+  58              		.section	.text.lr1mac_utilities_get_symb_time_us,"ax",%progbits
+  59              		.align	1
+ARM GAS  /tmp/ccrpmRVl.s 			page 2
+
+
+  60              		.global	lr1mac_utilities_get_symb_time_us
+  61              		.syntax unified
+  62              		.code	16
+  63              		.thumb_func
+  64              		.fpu softvfp
+  66              	lr1mac_utilities_get_symb_time_us:
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69 0000 10B5     		push	{r4, lr}
+  70 0002 4C1F     		subs	r4, r1, #5
+  71 0004 0300     		movs	r3, r0
+  72 0006 0020     		movs	r0, #0
+  73 0008 072C     		cmp	r4, #7
+  74 000a 0AD8     		bhi	.L8
+  75 000c 0D2A     		cmp	r2, #13
+  76 000e 08D8     		bhi	.L8
+  77 0010 FA20     		movs	r0, #250
+  78 0012 8000     		lsls	r0, r0, #2
+  79 0014 5843     		muls	r0, r3
+  80 0016 034B     		ldr	r3, .L12
+  81 0018 5200     		lsls	r2, r2, #1
+  82 001a 8840     		lsls	r0, r0, r1
+  83 001c D15A     		ldrh	r1, [r2, r3]
+  84 001e FFF7FEFF 		bl	__aeabi_uidiv
+  85              	.L8:
+  86              		@ sp needed
+  87 0022 10BD     		pop	{r4, pc}
+  88              	.L13:
+  89              		.align	2
+  90              	.L12:
+  91 0024 00000000 		.word	.LANCHOR0
+  93              		.section	.text.SMTC_GET_BIT8,"ax",%progbits
+  94              		.align	1
+  95              		.global	SMTC_GET_BIT8
+  96              		.syntax unified
+  97              		.code	16
+  98              		.thumb_func
+  99              		.fpu softvfp
+ 101              	SMTC_GET_BIT8:
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104              		@ link register save eliminated.
+ 105 0000 CB08     		lsrs	r3, r1, #3
+ 106 0002 C05C     		ldrb	r0, [r0, r3]
+ 107 0004 0723     		movs	r3, #7
+ 108              		@ sp needed
+ 109 0006 1940     		ands	r1, r3
+ 110 0008 0841     		asrs	r0, r0, r1
+ 111 000a 063B     		subs	r3, r3, #6
+ 112 000c 1840     		ands	r0, r3
+ 113 000e 7047     		bx	lr
+ 115              		.section	.text.SMTC_SET_BIT8,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	SMTC_SET_BIT8
+ 118              		.syntax unified
+ 119              		.code	16
+ 120              		.thumb_func
+ARM GAS  /tmp/ccrpmRVl.s 			page 3
+
+
+ 121              		.fpu softvfp
+ 123              	SMTC_SET_BIT8:
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127 0000 0723     		movs	r3, #7
+ 128              		@ sp needed
+ 129 0002 CA08     		lsrs	r2, r1, #3
+ 130 0004 1940     		ands	r1, r3
+ 131 0006 063B     		subs	r3, r3, #6
+ 132 0008 8B40     		lsls	r3, r3, r1
+ 133 000a 815C     		ldrb	r1, [r0, r2]
+ 134 000c 0B43     		orrs	r3, r1
+ 135 000e 8354     		strb	r3, [r0, r2]
+ 136 0010 7047     		bx	lr
+ 138              		.section	.text.SMTC_CLR_BIT8,"ax",%progbits
+ 139              		.align	1
+ 140              		.global	SMTC_CLR_BIT8
+ 141              		.syntax unified
+ 142              		.code	16
+ 143              		.thumb_func
+ 144              		.fpu softvfp
+ 146              	SMTC_CLR_BIT8:
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149 0000 0723     		movs	r3, #7
+ 150 0002 0122     		movs	r2, #1
+ 151 0004 10B5     		push	{r4, lr}
+ 152 0006 CC08     		lsrs	r4, r1, #3
+ 153 0008 1940     		ands	r1, r3
+ 154 000a 8A40     		lsls	r2, r2, r1
+ 155              		@ sp needed
+ 156 000c 035D     		ldrb	r3, [r0, r4]
+ 157 000e 9343     		bics	r3, r2
+ 158 0010 0355     		strb	r3, [r0, r4]
+ 159 0012 10BD     		pop	{r4, pc}
+ 161              		.section	.text.SMTC_PUT_BIT8,"ax",%progbits
+ 162              		.align	1
+ 163              		.global	SMTC_PUT_BIT8
+ 164              		.syntax unified
+ 165              		.code	16
+ 166              		.thumb_func
+ 167              		.fpu softvfp
+ 169              	SMTC_PUT_BIT8:
+ 170              		@ args = 0, pretend = 0, frame = 0
+ 171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 172 0000 10B5     		push	{r4, lr}
+ 173 0002 D307     		lsls	r3, r2, #31
+ 174 0004 02D5     		bpl	.L18
+ 175 0006 FFF7FEFF 		bl	SMTC_SET_BIT8
+ 176              	.L17:
+ 177              		@ sp needed
+ 178 000a 10BD     		pop	{r4, pc}
+ 179              	.L18:
+ 180 000c FFF7FEFF 		bl	SMTC_CLR_BIT8
+ 181 0010 FBE7     		b	.L17
+ 183              		.section	.text.SMTC_ARE_CLR_BYTE8,"ax",%progbits
+ARM GAS  /tmp/ccrpmRVl.s 			page 4
+
+
+ 184              		.align	1
+ 185              		.global	SMTC_ARE_CLR_BYTE8
+ 186              		.syntax unified
+ 187              		.code	16
+ 188              		.thumb_func
+ 189              		.fpu softvfp
+ 191              	SMTC_ARE_CLR_BYTE8:
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+ 195 0000 4118     		adds	r1, r0, r1
+ 196              	.L21:
+ 197 0002 8842     		cmp	r0, r1
+ 198 0004 01D1     		bne	.L23
+ 199 0006 0120     		movs	r0, #1
+ 200              	.L22:
+ 201              		@ sp needed
+ 202 0008 7047     		bx	lr
+ 203              	.L23:
+ 204 000a 0130     		adds	r0, r0, #1
+ 205 000c 431E     		subs	r3, r0, #1
+ 206 000e 1B78     		ldrb	r3, [r3]
+ 207 0010 002B     		cmp	r3, #0
+ 208 0012 F6D0     		beq	.L21
+ 209 0014 0020     		movs	r0, #0
+ 210 0016 F7E7     		b	.L22
+ 212              		.section	.text.SMTC_GET_BIT16,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	SMTC_GET_BIT16
+ 215              		.syntax unified
+ 216              		.code	16
+ 217              		.thumb_func
+ 218              		.fpu softvfp
+ 220              	SMTC_GET_BIT16:
+ 221              		@ args = 0, pretend = 0, frame = 0
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223              		@ link register save eliminated.
+ 224 0000 0B09     		lsrs	r3, r1, #4
+ 225 0002 5B00     		lsls	r3, r3, #1
+ 226 0004 185A     		ldrh	r0, [r3, r0]
+ 227 0006 0F23     		movs	r3, #15
+ 228              		@ sp needed
+ 229 0008 1940     		ands	r1, r3
+ 230 000a 0841     		asrs	r0, r0, r1
+ 231 000c 0E3B     		subs	r3, r3, #14
+ 232 000e 1840     		ands	r0, r3
+ 233 0010 7047     		bx	lr
+ 235              		.section	.text.SMTC_SET_BIT16,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	SMTC_SET_BIT16
+ 238              		.syntax unified
+ 239              		.code	16
+ 240              		.thumb_func
+ 241              		.fpu softvfp
+ 243              	SMTC_SET_BIT16:
+ 244              		@ args = 0, pretend = 0, frame = 0
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccrpmRVl.s 			page 5
+
+
+ 246              		@ link register save eliminated.
+ 247 0000 0F23     		movs	r3, #15
+ 248              		@ sp needed
+ 249 0002 0A09     		lsrs	r2, r1, #4
+ 250 0004 1940     		ands	r1, r3
+ 251 0006 0E3B     		subs	r3, r3, #14
+ 252 0008 8B40     		lsls	r3, r3, r1
+ 253 000a 5200     		lsls	r2, r2, #1
+ 254 000c 815A     		ldrh	r1, [r0, r2]
+ 255 000e 0B43     		orrs	r3, r1
+ 256 0010 8352     		strh	r3, [r0, r2]
+ 257 0012 7047     		bx	lr
+ 259              		.section	.text.SMTC_CLR_BIT16,"ax",%progbits
+ 260              		.align	1
+ 261              		.global	SMTC_CLR_BIT16
+ 262              		.syntax unified
+ 263              		.code	16
+ 264              		.thumb_func
+ 265              		.fpu softvfp
+ 267              	SMTC_CLR_BIT16:
+ 268              		@ args = 0, pretend = 0, frame = 0
+ 269              		@ frame_needed = 0, uses_anonymous_args = 0
+ 270              		@ link register save eliminated.
+ 271 0000 0F22     		movs	r2, #15
+ 272              		@ sp needed
+ 273 0002 0B09     		lsrs	r3, r1, #4
+ 274 0004 1140     		ands	r1, r2
+ 275 0006 0E3A     		subs	r2, r2, #14
+ 276 0008 8A40     		lsls	r2, r2, r1
+ 277 000a 1100     		movs	r1, r2
+ 278 000c 5B00     		lsls	r3, r3, #1
+ 279 000e C25A     		ldrh	r2, [r0, r3]
+ 280 0010 8A43     		bics	r2, r1
+ 281 0012 C252     		strh	r2, [r0, r3]
+ 282 0014 7047     		bx	lr
+ 284              		.section	.text.SMTC_PUT_BIT16,"ax",%progbits
+ 285              		.align	1
+ 286              		.global	SMTC_PUT_BIT16
+ 287              		.syntax unified
+ 288              		.code	16
+ 289              		.thumb_func
+ 290              		.fpu softvfp
+ 292              	SMTC_PUT_BIT16:
+ 293              		@ args = 0, pretend = 0, frame = 0
+ 294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 295 0000 10B5     		push	{r4, lr}
+ 296 0002 D307     		lsls	r3, r2, #31
+ 297 0004 02D5     		bpl	.L29
+ 298 0006 FFF7FEFF 		bl	SMTC_SET_BIT16
+ 299              	.L28:
+ 300              		@ sp needed
+ 301 000a 10BD     		pop	{r4, pc}
+ 302              	.L29:
+ 303 000c FFF7FEFF 		bl	SMTC_CLR_BIT16
+ 304 0010 FBE7     		b	.L28
+ 306              		.section	.text.SMTC_ARE_CLR_BYTE16,"ax",%progbits
+ 307              		.align	1
+ARM GAS  /tmp/ccrpmRVl.s 			page 6
+
+
+ 308              		.global	SMTC_ARE_CLR_BYTE16
+ 309              		.syntax unified
+ 310              		.code	16
+ 311              		.thumb_func
+ 312              		.fpu softvfp
+ 314              	SMTC_ARE_CLR_BYTE16:
+ 315              		@ args = 0, pretend = 0, frame = 0
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317              		@ link register save eliminated.
+ 318 0000 4900     		lsls	r1, r1, #1
+ 319 0002 4118     		adds	r1, r0, r1
+ 320              	.L32:
+ 321 0004 8842     		cmp	r0, r1
+ 322 0006 01D1     		bne	.L34
+ 323 0008 0120     		movs	r0, #1
+ 324              	.L33:
+ 325              		@ sp needed
+ 326 000a 7047     		bx	lr
+ 327              	.L34:
+ 328 000c 0230     		adds	r0, r0, #2
+ 329 000e 831E     		subs	r3, r0, #2
+ 330 0010 1B88     		ldrh	r3, [r3]
+ 331 0012 002B     		cmp	r3, #0
+ 332 0014 F6D0     		beq	.L32
+ 333 0016 0020     		movs	r0, #0
+ 334 0018 F7E7     		b	.L33
+ 336              		.section	.text.lr1mac_rx_payload_min_size_check,"ax",%progbits
+ 337              		.align	1
+ 338              		.global	lr1mac_rx_payload_min_size_check
+ 339              		.syntax unified
+ 340              		.code	16
+ 341              		.thumb_func
+ 342              		.fpu softvfp
+ 344              	lr1mac_rx_payload_min_size_check:
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347              		@ link register save eliminated.
+ 348 0000 0B22     		movs	r2, #11
+ 349              		@ sp needed
+ 350 0002 0023     		movs	r3, #0
+ 351 0004 8242     		cmp	r2, r0
+ 352 0006 5B41     		adcs	r3, r3, r3
+ 353 0008 5842     		rsbs	r0, r3, #0
+ 354 000a 40B2     		sxtb	r0, r0
+ 355 000c 7047     		bx	lr
+ 357              		.section	.text.lr1mac_rx_mhdr_extract,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	lr1mac_rx_mhdr_extract
+ 360              		.syntax unified
+ 361              		.code	16
+ 362              		.thumb_func
+ 363              		.fpu softvfp
+ 365              	lr1mac_rx_mhdr_extract:
+ 366              		@ args = 0, pretend = 0, frame = 0
+ 367              		@ frame_needed = 0, uses_anonymous_args = 0
+ 368 0000 10B5     		push	{r4, lr}
+ 369 0002 0478     		ldrb	r4, [r0]
+ARM GAS  /tmp/ccrpmRVl.s 			page 7
+
+
+ 370 0004 6409     		lsrs	r4, r4, #5
+ 371 0006 0C70     		strb	r4, [r1]
+ 372 0008 0324     		movs	r4, #3
+ 373 000a 0078     		ldrb	r0, [r0]
+ 374 000c 2040     		ands	r0, r4
+ 375 000e 1070     		strb	r0, [r2]
+ 376 0010 0A78     		ldrb	r2, [r1]
+ 377 0012 072A     		cmp	r2, #7
+ 378 0014 03D8     		bhi	.L38
+ 379 0016 D521     		movs	r1, #213
+ 380 0018 D140     		lsrs	r1, r1, r2
+ 381 001a C907     		lsls	r1, r1, #31
+ 382 001c 07D4     		bmi	.L40
+ 383              	.L38:
+ 384 001e 411E     		subs	r1, r0, #1
+ 385 0020 8841     		sbcs	r0, r0, r1
+ 386              	.L41:
+ 387              		@ sp needed
+ 388 0022 053A     		subs	r2, r2, #5
+ 389 0024 5142     		rsbs	r1, r2, #0
+ 390 0026 4A41     		adcs	r2, r2, r1
+ 391 0028 4042     		rsbs	r0, r0, #0
+ 392 002a 1A70     		strb	r2, [r3]
+ 393 002c 10BD     		pop	{r4, pc}
+ 394              	.L40:
+ 395 002e 0120     		movs	r0, #1
+ 396 0030 F7E7     		b	.L41
+ 398              		.section	.text.lr1mac_rx_fhdr_extract,"ax",%progbits
+ 399              		.align	1
+ 400              		.global	lr1mac_rx_fhdr_extract
+ 401              		.syntax unified
+ 402              		.code	16
+ 403              		.thumb_func
+ 404              		.fpu softvfp
+ 406              	lr1mac_rx_fhdr_extract:
+ 407              		@ args = 20, pretend = 0, frame = 0
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 409 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 410 0002 0500     		movs	r5, r0
+ 411 0004 8478     		ldrb	r4, [r0, #2]
+ 412 0006 0F00     		movs	r7, r1
+ 413 0008 4178     		ldrb	r1, [r0, #1]
+ 414 000a 2402     		lsls	r4, r4, #8
+ 415 000c 6418     		adds	r4, r4, r1
+ 416 000e C178     		ldrb	r1, [r0, #3]
+ 417 0010 1600     		movs	r6, r2
+ 418 0012 0904     		lsls	r1, r1, #16
+ 419 0014 6418     		adds	r4, r4, r1
+ 420 0016 0179     		ldrb	r1, [r0, #4]
+ 421 0018 099A     		ldr	r2, [sp, #36]
+ 422 001a 0906     		lsls	r1, r1, #24
+ 423 001c 6418     		adds	r4, r4, r1
+ 424 001e 0699     		ldr	r1, [sp, #24]
+ 425 0020 641A     		subs	r4, r4, r1
+ 426 0022 611E     		subs	r1, r4, #1
+ 427 0024 8C41     		sbcs	r4, r4, r1
+ 428 0026 4179     		ldrb	r1, [r0, #5]
+ARM GAS  /tmp/ccrpmRVl.s 			page 8
+
+
+ 429 0028 6442     		rsbs	r4, r4, #0
+ 430 002a 1170     		strb	r1, [r2]
+ 431 002c C079     		ldrb	r0, [r0, #7]
+ 432 002e A979     		ldrb	r1, [r5, #6]
+ 433 0030 0002     		lsls	r0, r0, #8
+ 434 0032 0918     		adds	r1, r1, r0
+ 435 0034 1980     		strh	r1, [r3]
+ 436 0036 0F23     		movs	r3, #15
+ 437 0038 2900     		movs	r1, r5
+ 438 003a 1278     		ldrb	r2, [r2]
+ 439 003c 0A98     		ldr	r0, [sp, #40]
+ 440 003e 1A40     		ands	r2, r3
+ 441 0040 3270     		strb	r2, [r6]
+ 442 0042 0831     		adds	r1, r1, #8
+ 443 0044 FFF7FEFF 		bl	memcpy
+ 444 0048 3078     		ldrb	r0, [r6]
+ 445 004a 0300     		movs	r3, r0
+ 446 004c 0C33     		adds	r3, r3, #12
+ 447 004e 9F42     		cmp	r7, r3
+ 448 0050 08DD     		ble	.L43
+ 449 0052 2D18     		adds	r5, r5, r0
+ 450 0054 2B7A     		ldrb	r3, [r5, #8]
+ 451 0056 079A     		ldr	r2, [sp, #28]
+ 452 0058 1370     		strb	r3, [r2]
+ 453 005a 0123     		movs	r3, #1
+ 454              	.L45:
+ 455              		@ sp needed
+ 456 005c 089A     		ldr	r2, [sp, #32]
+ 457 005e 2000     		movs	r0, r4
+ 458 0060 1370     		strb	r3, [r2]
+ 459 0062 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 460              	.L43:
+ 461 0064 0023     		movs	r3, #0
+ 462 0066 079A     		ldr	r2, [sp, #28]
+ 463 0068 1370     		strb	r3, [r2]
+ 464 006a F7E7     		b	.L45
+ 466              		.section	.text.lr1mac_fcnt_dwn_accept,"ax",%progbits
+ 467              		.align	1
+ 468              		.global	lr1mac_fcnt_dwn_accept
+ 469              		.syntax unified
+ 470              		.code	16
+ 471              		.thumb_func
+ 472              		.fpu softvfp
+ 474              	lr1mac_fcnt_dwn_accept:
+ 475              		@ args = 0, pretend = 0, frame = 0
+ 476              		@ frame_needed = 0, uses_anonymous_args = 0
+ 477 0000 0A68     		ldr	r2, [r1]
+ 478 0002 10B5     		push	{r4, lr}
+ 479 0004 130C     		lsrs	r3, r2, #16
+ 480 0006 94B2     		uxth	r4, r2
+ 481 0008 1B04     		lsls	r3, r3, #16
+ 482 000a 8442     		cmp	r4, r0
+ 483 000c 04D3     		bcc	.L47
+ 484 000e 0132     		adds	r2, r2, #1
+ 485 0010 06D1     		bne	.L56
+ 486              	.L58:
+ 487 0012 0860     		str	r0, [r1]
+ARM GAS  /tmp/ccrpmRVl.s 			page 9
+
+
+ 488 0014 0020     		movs	r0, #0
+ 489              	.L51:
+ 490              		@ sp needed
+ 491 0016 10BD     		pop	{r4, pc}
+ 492              	.L47:
+ 493 0018 0132     		adds	r2, r2, #1
+ 494 001a FAD0     		beq	.L58
+ 495              	.L57:
+ 496 001c C018     		adds	r0, r0, r3
+ 497 001e F8E7     		b	.L58
+ 498              	.L56:
+ 499 0020 8442     		cmp	r4, r0
+ 500 0022 03D9     		bls	.L52
+ 501 0024 8022     		movs	r2, #128
+ 502 0026 5202     		lsls	r2, r2, #9
+ 503 0028 8018     		adds	r0, r0, r2
+ 504 002a F7E7     		b	.L57
+ 505              	.L52:
+ 506 002c 0120     		movs	r0, #1
+ 507 002e 4042     		rsbs	r0, r0, #0
+ 508 0030 F1E7     		b	.L51
+ 510              		.section	.text.lr1_stack_mac_cmd_ans_cut,"ax",%progbits
+ 511              		.align	1
+ 512              		.global	lr1_stack_mac_cmd_ans_cut
+ 513              		.syntax unified
+ 514              		.code	16
+ 515              		.thumb_func
+ 516              		.fpu softvfp
+ 518              	lr1_stack_mac_cmd_ans_cut:
+ 519              		@ args = 0, pretend = 0, frame = 8
+ 520              		@ frame_needed = 0, uses_anonymous_args = 0
+ 521 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 522 0002 6C46     		mov	r4, sp
+ 523 0004 E271     		strb	r2, [r4, #7]
+ 524 0006 0B4C     		ldr	r4, .L66
+ 525 0008 0300     		movs	r3, r0
+ 526 000a A446     		mov	ip, r4
+ 527 000c 0F1C     		adds	r7, r1, #0
+ 528              	.L60:
+ 529 000e 6D46     		mov	r5, sp
+ 530 0010 1C1A     		subs	r4, r3, r0
+ 531 0012 ED79     		ldrb	r5, [r5, #7]
+ 532 0014 8A42     		cmp	r2, r1
+ 533 0016 00D9     		bls	.L62
+ 534 0018 3D1C     		adds	r5, r7, #0
+ 535              	.L62:
+ 536 001a EDB2     		uxtb	r5, r5
+ 537 001c AC42     		cmp	r4, r5
+ 538 001e 06DA     		bge	.L63
+ 539 0020 6646     		mov	r6, ip
+ 540 0022 1D78     		ldrb	r5, [r3]
+ 541 0024 755D     		ldrb	r5, [r6, r5]
+ 542 0026 5B19     		adds	r3, r3, r5
+ 543 0028 1D1A     		subs	r5, r3, r0
+ 544 002a 9542     		cmp	r5, r2
+ 545 002c EFDD     		ble	.L60
+ 546              	.L63:
+ARM GAS  /tmp/ccrpmRVl.s 			page 10
+
+
+ 547 002e E0B2     		uxtb	r0, r4
+ 548              		@ sp needed
+ 549 0030 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 550              	.L67:
+ 551 0032 C046     		.align	2
+ 552              	.L66:
+ 553 0034 00000000 		.word	.LANCHOR1
+ 555              		.section	.rodata.CSWTCH.7,"a"
+ 556              		.align	1
+ 557              		.set	.LANCHOR0,. + 0
+ 560              	CSWTCH.7:
+ 561 0000 0700     		.short	7
+ 562 0002 0A00     		.short	10
+ 563 0004 0F00     		.short	15
+ 564 0006 1400     		.short	20
+ 565 0008 1F00     		.short	31
+ 566 000a 2900     		.short	41
+ 567 000c 3E00     		.short	62
+ 568 000e 7D00     		.short	125
+ 569 0010 CB00     		.short	203
+ 570 0012 FA00     		.short	250
+ 571 0014 9601     		.short	406
+ 572 0016 F401     		.short	500
+ 573 0018 2C03     		.short	812
+ 574 001a 5906     		.short	1625
+ 575              		.section	.rodata.lr1mac_cmd_mac_ans_size,"a"
+ 576              		.align	2
+ 577              		.set	.LANCHOR1,. + 0
+ 580              	lr1mac_cmd_mac_ans_size:
+ 581 0000 00000302 		.ascii	"\000\000\003\002\001\002\003\002\001\001\002\000"
+ 581      01020302 
+ 581      01010200 
+ 582 000c 00000000 		.space	8
+ 582      00000000 
+ 583              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccrpmRVl.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 lr1mac_utilities.c
+     /tmp/ccrpmRVl.s:12     .text.lr1mac_utilities_crc:0000000000000000 $t
+     /tmp/ccrpmRVl.s:20     .text.lr1mac_utilities_crc:0000000000000000 lr1mac_utilities_crc
+     /tmp/ccrpmRVl.s:55     .text.lr1mac_utilities_crc:0000000000000034 $d
+     /tmp/ccrpmRVl.s:59     .text.lr1mac_utilities_get_symb_time_us:0000000000000000 $t
+     /tmp/ccrpmRVl.s:66     .text.lr1mac_utilities_get_symb_time_us:0000000000000000 lr1mac_utilities_get_symb_time_us
+     /tmp/ccrpmRVl.s:91     .text.lr1mac_utilities_get_symb_time_us:0000000000000024 $d
+     /tmp/ccrpmRVl.s:94     .text.SMTC_GET_BIT8:0000000000000000 $t
+     /tmp/ccrpmRVl.s:101    .text.SMTC_GET_BIT8:0000000000000000 SMTC_GET_BIT8
+     /tmp/ccrpmRVl.s:116    .text.SMTC_SET_BIT8:0000000000000000 $t
+     /tmp/ccrpmRVl.s:123    .text.SMTC_SET_BIT8:0000000000000000 SMTC_SET_BIT8
+     /tmp/ccrpmRVl.s:139    .text.SMTC_CLR_BIT8:0000000000000000 $t
+     /tmp/ccrpmRVl.s:146    .text.SMTC_CLR_BIT8:0000000000000000 SMTC_CLR_BIT8
+     /tmp/ccrpmRVl.s:162    .text.SMTC_PUT_BIT8:0000000000000000 $t
+     /tmp/ccrpmRVl.s:169    .text.SMTC_PUT_BIT8:0000000000000000 SMTC_PUT_BIT8
+     /tmp/ccrpmRVl.s:184    .text.SMTC_ARE_CLR_BYTE8:0000000000000000 $t
+     /tmp/ccrpmRVl.s:191    .text.SMTC_ARE_CLR_BYTE8:0000000000000000 SMTC_ARE_CLR_BYTE8
+     /tmp/ccrpmRVl.s:213    .text.SMTC_GET_BIT16:0000000000000000 $t
+     /tmp/ccrpmRVl.s:220    .text.SMTC_GET_BIT16:0000000000000000 SMTC_GET_BIT16
+     /tmp/ccrpmRVl.s:236    .text.SMTC_SET_BIT16:0000000000000000 $t
+     /tmp/ccrpmRVl.s:243    .text.SMTC_SET_BIT16:0000000000000000 SMTC_SET_BIT16
+     /tmp/ccrpmRVl.s:260    .text.SMTC_CLR_BIT16:0000000000000000 $t
+     /tmp/ccrpmRVl.s:267    .text.SMTC_CLR_BIT16:0000000000000000 SMTC_CLR_BIT16
+     /tmp/ccrpmRVl.s:285    .text.SMTC_PUT_BIT16:0000000000000000 $t
+     /tmp/ccrpmRVl.s:292    .text.SMTC_PUT_BIT16:0000000000000000 SMTC_PUT_BIT16
+     /tmp/ccrpmRVl.s:307    .text.SMTC_ARE_CLR_BYTE16:0000000000000000 $t
+     /tmp/ccrpmRVl.s:314    .text.SMTC_ARE_CLR_BYTE16:0000000000000000 SMTC_ARE_CLR_BYTE16
+     /tmp/ccrpmRVl.s:337    .text.lr1mac_rx_payload_min_size_check:0000000000000000 $t
+     /tmp/ccrpmRVl.s:344    .text.lr1mac_rx_payload_min_size_check:0000000000000000 lr1mac_rx_payload_min_size_check
+     /tmp/ccrpmRVl.s:358    .text.lr1mac_rx_mhdr_extract:0000000000000000 $t
+     /tmp/ccrpmRVl.s:365    .text.lr1mac_rx_mhdr_extract:0000000000000000 lr1mac_rx_mhdr_extract
+     /tmp/ccrpmRVl.s:399    .text.lr1mac_rx_fhdr_extract:0000000000000000 $t
+     /tmp/ccrpmRVl.s:406    .text.lr1mac_rx_fhdr_extract:0000000000000000 lr1mac_rx_fhdr_extract
+     /tmp/ccrpmRVl.s:467    .text.lr1mac_fcnt_dwn_accept:0000000000000000 $t
+     /tmp/ccrpmRVl.s:474    .text.lr1mac_fcnt_dwn_accept:0000000000000000 lr1mac_fcnt_dwn_accept
+     /tmp/ccrpmRVl.s:511    .text.lr1_stack_mac_cmd_ans_cut:0000000000000000 $t
+     /tmp/ccrpmRVl.s:518    .text.lr1_stack_mac_cmd_ans_cut:0000000000000000 lr1_stack_mac_cmd_ans_cut
+     /tmp/ccrpmRVl.s:553    .text.lr1_stack_mac_cmd_ans_cut:0000000000000034 $d
+     /tmp/ccrpmRVl.s:556    .rodata.CSWTCH.7:0000000000000000 $d
+     /tmp/ccrpmRVl.s:560    .rodata.CSWTCH.7:0000000000000000 CSWTCH.7
+     /tmp/ccrpmRVl.s:576    .rodata.lr1mac_cmd_mac_ans_size:0000000000000000 $d
+     /tmp/ccrpmRVl.s:580    .rodata.lr1mac_cmd_mac_ans_size:0000000000000000 lr1mac_cmd_mac_ans_size
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv
+memcpy

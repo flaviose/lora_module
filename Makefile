@@ -1,0 +1,1 @@
+-include extensions/common/makefiles/main.mk

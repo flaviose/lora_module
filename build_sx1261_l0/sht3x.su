@@ -1,0 +1,3 @@
+extensions/drivers/sht3x/sht3x.c:59:20:sht3x_check_crc.constprop	12	static
+extensions/drivers/sht3x/sht3x.c:12:6:sht3x_init	16	static
+extensions/drivers/sht3x/sht3x.c:20:6:sht3x_read_temp	24	static

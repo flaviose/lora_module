@@ -1,0 +1,350 @@
+ARM GAS  /tmp/ccKDQTHn.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"smtc_hal_adc.c"
+  10              		.text
+  11              		.section	.text.adc_read,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	adc_read:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 0122     		movs	r2, #1
+  23 0002 0E4B     		ldr	r3, .L9
+  24 0004 10B5     		push	{r4, lr}
+  25 0006 9968     		ldr	r1, [r3, #8]
+  26 0008 0D4C     		ldr	r4, .L9+4
+  27 000a 1142     		tst	r1, r2
+  28 000c 06D1     		bne	.L2
+  29 000e 9968     		ldr	r1, [r3, #8]
+  30 0010 2140     		ands	r1, r4
+  31 0012 1143     		orrs	r1, r2
+  32 0014 9960     		str	r1, [r3, #8]
+  33              	.L3:
+  34 0016 1968     		ldr	r1, [r3]
+  35 0018 1142     		tst	r1, r2
+  36 001a FCD0     		beq	.L3
+  37              	.L2:
+  38 001c 0421     		movs	r1, #4
+  39 001e 4003     		lsls	r0, r0, #13
+  40 0020 400B     		lsrs	r0, r0, #13
+  41 0022 9862     		str	r0, [r3, #40]
+  42 0024 9A68     		ldr	r2, [r3, #8]
+  43 0026 2240     		ands	r2, r4
+  44 0028 0A43     		orrs	r2, r1
+  45 002a 9A60     		str	r2, [r3, #8]
+  46              	.L4:
+  47 002c 1A68     		ldr	r2, [r3]
+  48 002e 0A42     		tst	r2, r1
+  49 0030 FCD0     		beq	.L4
+  50              		@ sp needed
+  51 0032 186C     		ldr	r0, [r3, #64]
+  52 0034 1960     		str	r1, [r3]
+  53 0036 80B2     		uxth	r0, r0
+  54 0038 10BD     		pop	{r4, pc}
+  55              	.L10:
+  56 003a C046     		.align	2
+  57              	.L9:
+  58 003c 00240140 		.word	1073816576
+ARM GAS  /tmp/ccKDQTHn.s 			page 2
+
+
+  59 0040 E8FFFF7F 		.word	2147483624
+  61              		.section	.text.hal_adc_init,"ax",%progbits
+  62              		.align	1
+  63              		.weak	hal_adc_init
+  64              		.syntax unified
+  65              		.code	16
+  66              		.thumb_func
+  67              		.fpu softvfp
+  69              	hal_adc_init:
+  70              		@ args = 0, pretend = 0, frame = 48
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0000 8020     		movs	r0, #128
+  73 0002 214A     		ldr	r2, .L17
+  74 0004 30B5     		push	{r4, r5, lr}
+  75 0006 516B     		ldr	r1, [r2, #52]
+  76 0008 8000     		lsls	r0, r0, #2
+  77 000a 0143     		orrs	r1, r0
+  78 000c 5163     		str	r1, [r2, #52]
+  79 000e 536B     		ldr	r3, [r2, #52]
+  80 0010 8DB0     		sub	sp, sp, #52
+  81 0012 0340     		ands	r3, r0
+  82 0014 1022     		movs	r2, #16
+  83 0016 0021     		movs	r1, #0
+  84 0018 0293     		str	r3, [sp, #8]
+  85 001a 03A8     		add	r0, sp, #12
+  86 001c 029B     		ldr	r3, [sp, #8]
+  87 001e FFF7FEFF 		bl	memset
+  88 0022 1022     		movs	r2, #16
+  89 0024 0021     		movs	r1, #0
+  90 0026 07A8     		add	r0, sp, #28
+  91 0028 FFF7FEFF 		bl	memset
+  92 002c C023     		movs	r3, #192
+  93 002e 5B03     		lsls	r3, r3, #13
+  94 0030 0193     		str	r3, [sp, #4]
+  95 0032 8023     		movs	r3, #128
+  96 0034 154C     		ldr	r4, .L17+4
+  97 0036 164D     		ldr	r5, .L17+8
+  98 0038 5B01     		lsls	r3, r3, #5
+  99 003a 03A9     		add	r1, sp, #12
+ 100 003c 2000     		movs	r0, r4
+ 101 003e 0B93     		str	r3, [sp, #44]
+ 102 0040 FFF7FEFF 		bl	LL_ADC_Init
+ 103 0044 01A9     		add	r1, sp, #4
+ 104 0046 2800     		movs	r0, r5
+ 105 0048 FFF7FEFF 		bl	LL_ADC_CommonInit
+ 106 004c 07A9     		add	r1, sp, #28
+ 107 004e 2000     		movs	r0, r4
+ 108 0050 FFF7FEFF 		bl	LL_ADC_REG_Init
+ 109 0054 C022     		movs	r2, #192
+ 110 0056 2B68     		ldr	r3, [r5]
+ 111 0058 1204     		lsls	r2, r2, #16
+ 112 005a 1343     		orrs	r3, r2
+ 113 005c 8022     		movs	r2, #128
+ 114 005e 2B60     		str	r3, [r5]
+ 115 0060 A168     		ldr	r1, [r4, #8]
+ 116 0062 0C48     		ldr	r0, .L17+12
+ 117 0064 1206     		lsls	r2, r2, #24
+ARM GAS  /tmp/ccKDQTHn.s 			page 3
+
+
+ 118 0066 0140     		ands	r1, r0
+ 119 0068 0A43     		orrs	r2, r1
+ 120 006a A260     		str	r2, [r4, #8]
+ 121              	.L12:
+ 122 006c A368     		ldr	r3, [r4, #8]
+ 123 006e 002B     		cmp	r3, #0
+ 124 0070 FCDB     		blt	.L12
+ 125 0072 0122     		movs	r2, #1
+ 126 0074 A368     		ldr	r3, [r4, #8]
+ 127 0076 0340     		ands	r3, r0
+ 128 0078 1343     		orrs	r3, r2
+ 129 007a A360     		str	r3, [r4, #8]
+ 130              	.L13:
+ 131 007c 2368     		ldr	r3, [r4]
+ 132 007e 1342     		tst	r3, r2
+ 133 0080 FCD0     		beq	.L13
+ 134 0082 0DB0     		add	sp, sp, #52
+ 135              		@ sp needed
+ 136 0084 30BD     		pop	{r4, r5, pc}
+ 137              	.L18:
+ 138 0086 C046     		.align	2
+ 139              	.L17:
+ 140 0088 00100240 		.word	1073876992
+ 141 008c 00240140 		.word	1073816576
+ 142 0090 08270140 		.word	1073817352
+ 143 0094 E8FFFF7F 		.word	2147483624
+ 145              		.section	.text.hal_adc_deinit,"ax",%progbits
+ 146              		.align	1
+ 147              		.weak	hal_adc_deinit
+ 148              		.syntax unified
+ 149              		.code	16
+ 150              		.thumb_func
+ 151              		.fpu softvfp
+ 153              	hal_adc_deinit:
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 0120     		movs	r0, #1
+ 157 0002 0D4B     		ldr	r3, .L26
+ 158 0004 10B5     		push	{r4, lr}
+ 159 0006 9A68     		ldr	r2, [r3, #8]
+ 160 0008 0242     		tst	r2, r0
+ 161 000a 08D0     		beq	.L20
+ 162 000c 9A68     		ldr	r2, [r3, #8]
+ 163 000e 0B49     		ldr	r1, .L26+4
+ 164 0010 1140     		ands	r1, r2
+ 165 0012 0222     		movs	r2, #2
+ 166 0014 0A43     		orrs	r2, r1
+ 167 0016 9A60     		str	r2, [r3, #8]
+ 168              	.L21:
+ 169 0018 9A68     		ldr	r2, [r3, #8]
+ 170 001a 0242     		tst	r2, r0
+ 171 001c FCD1     		bne	.L21
+ 172              	.L20:
+ 173              		@ sp needed
+ 174 001e 0648     		ldr	r0, .L26
+ 175 0020 FFF7FEFF 		bl	LL_ADC_DeInit
+ 176 0024 0648     		ldr	r0, .L26+8
+ARM GAS  /tmp/ccKDQTHn.s 			page 4
+
+
+ 177 0026 FFF7FEFF 		bl	LL_ADC_CommonDeInit
+ 178 002a 064A     		ldr	r2, .L26+12
+ 179 002c 0649     		ldr	r1, .L26+16
+ 180 002e 536B     		ldr	r3, [r2, #52]
+ 181 0030 0B40     		ands	r3, r1
+ 182 0032 5363     		str	r3, [r2, #52]
+ 183 0034 10BD     		pop	{r4, pc}
+ 184              	.L27:
+ 185 0036 C046     		.align	2
+ 186              	.L26:
+ 187 0038 00240140 		.word	1073816576
+ 188 003c E8FFFF7F 		.word	2147483624
+ 189 0040 08270140 		.word	1073817352
+ 190 0044 00100240 		.word	1073876992
+ 191 0048 FFFDFFFF 		.word	-513
+ 193              		.global	__aeabi_uidiv
+ 194              		.global	__aeabi_idiv
+ 195              		.section	.text.hal_adc_get_vref_int,"ax",%progbits
+ 196              		.align	1
+ 197              		.weak	hal_adc_get_vref_int
+ 198              		.syntax unified
+ 199              		.code	16
+ 200              		.thumb_func
+ 201              		.fpu softvfp
+ 203              	hal_adc_get_vref_int:
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206 0000 0722     		movs	r2, #7
+ 207 0002 0A49     		ldr	r1, .L29
+ 208 0004 10B5     		push	{r4, lr}
+ 209 0006 4B69     		ldr	r3, [r1, #20]
+ 210 0008 0948     		ldr	r0, .L29+4
+ 211 000a 9343     		bics	r3, r2
+ 212 000c 1A00     		movs	r2, r3
+ 213              		@ sp needed
+ 214 000e 0423     		movs	r3, #4
+ 215 0010 1343     		orrs	r3, r2
+ 216 0012 4B61     		str	r3, [r1, #20]
+ 217 0014 FFF7FEFF 		bl	adc_read
+ 218 0018 064B     		ldr	r3, .L29+8
+ 219 001a 0100     		movs	r1, r0
+ 220 001c 1B88     		ldrh	r3, [r3]
+ 221 001e 0648     		ldr	r0, .L29+12
+ 222 0020 5843     		muls	r0, r3
+ 223 0022 FFF7FEFF 		bl	__aeabi_uidiv
+ 224 0026 80B2     		uxth	r0, r0
+ 225 0028 10BD     		pop	{r4, pc}
+ 226              	.L30:
+ 227 002a C046     		.align	2
+ 228              	.L29:
+ 229 002c 00240140 		.word	1073816576
+ 230 0030 000002C4 		.word	-1006501888
+ 231 0034 7800F81F 		.word	536346744
+ 232 0038 B80B0000 		.word	3000
+ 234              		.section	.text.hal_adc_get_temp,"ax",%progbits
+ 235              		.align	1
+ 236              		.weak	hal_adc_get_temp
+ARM GAS  /tmp/ccKDQTHn.s 			page 5
+
+
+ 237              		.syntax unified
+ 238              		.code	16
+ 239              		.thumb_func
+ 240              		.fpu softvfp
+ 242              	hal_adc_get_temp:
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245 0000 0722     		movs	r2, #7
+ 246 0002 0F49     		ldr	r1, .L32
+ 247 0004 70B5     		push	{r4, r5, r6, lr}
+ 248 0006 4B69     		ldr	r3, [r1, #20]
+ 249              		@ sp needed
+ 250 0008 9343     		bics	r3, r2
+ 251 000a 1A00     		movs	r2, r3
+ 252 000c 0423     		movs	r3, #4
+ 253 000e 1343     		orrs	r3, r2
+ 254 0010 4B61     		str	r3, [r1, #20]
+ 255 0012 FFF7FEFF 		bl	hal_adc_get_vref_int
+ 256 0016 0400     		movs	r4, r0
+ 257 0018 0A48     		ldr	r0, .L32+4
+ 258 001a FFF7FEFF 		bl	adc_read
+ 259 001e 0A4B     		ldr	r3, .L32+8
+ 260 0020 6043     		muls	r0, r4
+ 261 0022 0A49     		ldr	r1, .L32+12
+ 262 0024 1D88     		ldrh	r5, [r3]
+ 263 0026 FFF7FEFF 		bl	__aeabi_uidiv
+ 264 002a 431B     		subs	r3, r0, r5
+ 265 002c 6420     		movs	r0, #100
+ 266 002e 5843     		muls	r0, r3
+ 267 0030 074B     		ldr	r3, .L32+16
+ 268 0032 1988     		ldrh	r1, [r3]
+ 269 0034 491B     		subs	r1, r1, r5
+ 270 0036 FFF7FEFF 		bl	__aeabi_idiv
+ 271 003a 1E30     		adds	r0, r0, #30
+ 272 003c 40B2     		sxtb	r0, r0
+ 273 003e 70BD     		pop	{r4, r5, r6, pc}
+ 274              	.L33:
+ 275              		.align	2
+ 276              	.L32:
+ 277 0040 00240140 		.word	1073816576
+ 278 0044 000004C8 		.word	-939261952
+ 279 0048 7A00F81F 		.word	536346746
+ 280 004c B80B0000 		.word	3000
+ 281 0050 7E00F81F 		.word	536346750
+ 283              		.section	.text.hal_adc_get_channel,"ax",%progbits
+ 284              		.align	1
+ 285              		.weak	hal_adc_get_channel
+ 286              		.syntax unified
+ 287              		.code	16
+ 288              		.thumb_func
+ 289              		.fpu softvfp
+ 291              	hal_adc_get_channel:
+ 292              		@ args = 0, pretend = 0, frame = 0
+ 293              		@ frame_needed = 0, uses_anonymous_args = 0
+ 294 0000 70B5     		push	{r4, r5, r6, lr}
+ 295 0002 0500     		movs	r5, r0
+ 296              		@ sp needed
+ARM GAS  /tmp/ccKDQTHn.s 			page 6
+
+
+ 297 0004 FFF7FEFF 		bl	hal_adc_get_vref_int
+ 298 0008 0400     		movs	r4, r0
+ 299 000a 2800     		movs	r0, r5
+ 300 000c FFF7FEFF 		bl	adc_read
+ 301 0010 0249     		ldr	r1, .L35
+ 302 0012 6043     		muls	r0, r4
+ 303 0014 FFF7FEFF 		bl	__aeabi_uidiv
+ 304 0018 80B2     		uxth	r0, r0
+ 305 001a 70BD     		pop	{r4, r5, r6, pc}
+ 306              	.L36:
+ 307              		.align	2
+ 308              	.L35:
+ 309 001c FF0F0000 		.word	4095
+ 311              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccKDQTHn.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 smtc_hal_adc.c
+     /tmp/ccKDQTHn.s:12     .text.adc_read:0000000000000000 $t
+     /tmp/ccKDQTHn.s:19     .text.adc_read:0000000000000000 adc_read
+     /tmp/ccKDQTHn.s:58     .text.adc_read:000000000000003c $d
+     /tmp/ccKDQTHn.s:62     .text.hal_adc_init:0000000000000000 $t
+     /tmp/ccKDQTHn.s:69     .text.hal_adc_init:0000000000000000 hal_adc_init
+     /tmp/ccKDQTHn.s:140    .text.hal_adc_init:0000000000000088 $d
+     /tmp/ccKDQTHn.s:146    .text.hal_adc_deinit:0000000000000000 $t
+     /tmp/ccKDQTHn.s:153    .text.hal_adc_deinit:0000000000000000 hal_adc_deinit
+     /tmp/ccKDQTHn.s:187    .text.hal_adc_deinit:0000000000000038 $d
+     /tmp/ccKDQTHn.s:196    .text.hal_adc_get_vref_int:0000000000000000 $t
+     /tmp/ccKDQTHn.s:203    .text.hal_adc_get_vref_int:0000000000000000 hal_adc_get_vref_int
+     /tmp/ccKDQTHn.s:229    .text.hal_adc_get_vref_int:000000000000002c $d
+     /tmp/ccKDQTHn.s:235    .text.hal_adc_get_temp:0000000000000000 $t
+     /tmp/ccKDQTHn.s:242    .text.hal_adc_get_temp:0000000000000000 hal_adc_get_temp
+     /tmp/ccKDQTHn.s:277    .text.hal_adc_get_temp:0000000000000040 $d
+     /tmp/ccKDQTHn.s:284    .text.hal_adc_get_channel:0000000000000000 $t
+     /tmp/ccKDQTHn.s:291    .text.hal_adc_get_channel:0000000000000000 hal_adc_get_channel
+     /tmp/ccKDQTHn.s:309    .text.hal_adc_get_channel:000000000000001c $d
+
+UNDEFINED SYMBOLS
+memset
+LL_ADC_Init
+LL_ADC_CommonInit
+LL_ADC_REG_Init
+LL_ADC_DeInit
+LL_ADC_CommonDeInit
+__aeabi_uidiv
+__aeabi_idiv

@@ -1,0 +1,332 @@
+ARM GAS  /tmp/ccMgldhq.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"settings.c"
+  10              		.text
+  11              		.section	.rodata.settings_init.str1.1,"aMS",%progbits,1
+  12              	.LC2:
+  13 0000 4552524F 		.ascii	"ERROR: Failed to load settings\012\000"
+  13      523A2046 
+  13      61696C65 
+  13      6420746F 
+  13      206C6F61 
+  14              	.LC4:
+  15 0020 00       		.ascii	"\000"
+  16              	.LC6:
+  17 0021 494E464F 		.ascii	"INFO: Abort startup\012\000"
+  17      3A204162 
+  17      6F727420 
+  17      73746172 
+  17      7475700A 
+  18              		.section	.text.settings_init,"ax",%progbits
+  19              		.align	1
+  20              		.global	settings_init
+  21              		.arch armv6s-m
+  22              		.syntax unified
+  23              		.code	16
+  24              		.thumb_func
+  25              		.fpu softvfp
+  27              	settings_init:
+  28              		@ args = 0, pretend = 0, frame = 32
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 30B5     		push	{r4, r5, lr}
+  31 0002 1C4C     		ldr	r4, .L4
+  32 0004 89B0     		sub	sp, sp, #36
+  33 0006 2100     		movs	r1, r4
+  34 0008 4022     		movs	r2, #64
+  35 000a 0020     		movs	r0, #0
+  36 000c FFF7FEFF 		bl	hal_eeprom_read_buffer
+  37 0010 194D     		ldr	r5, .L4+4
+  38 0012 2822     		movs	r2, #40
+  39 0014 2900     		movs	r1, r5
+  40 0016 4020     		movs	r0, #64
+  41 0018 FFF7FEFF 		bl	hal_eeprom_read_buffer
+  42 001c 2100     		movs	r1, r4
+  43 001e 2022     		movs	r2, #32
+  44 0020 6846     		mov	r0, sp
+  45 0022 FFF7FEFF 		bl	sha256
+  46 0026 2100     		movs	r1, r4
+  47 0028 2022     		movs	r2, #32
+  48 002a 2031     		adds	r1, r1, #32
+  49 002c 6846     		mov	r0, sp
+  50 002e FFF7FEFF 		bl	memcmp
+ARM GAS  /tmp/ccMgldhq.s 			page 2
+
+
+  51 0032 0822     		movs	r2, #8
+  52 0034 0400     		movs	r4, r0
+  53 0036 2900     		movs	r1, r5
+  54 0038 6846     		mov	r0, sp
+  55 003a FFF7FEFF 		bl	sha256
+  56 003e 2900     		movs	r1, r5
+  57 0040 2022     		movs	r2, #32
+  58 0042 6846     		mov	r0, sp
+  59 0044 0831     		adds	r1, r1, #8
+  60 0046 FFF7FEFF 		bl	memcmp
+  61 004a 0443     		orrs	r4, r0
+  62 004c E4B2     		uxtb	r4, r4
+  63 004e 002C     		cmp	r4, #0
+  64 0050 0DD0     		beq	.L1
+  65 0052 0A48     		ldr	r0, .L4+8
+  66 0054 FFF7FEFF 		bl	hal_trace_print_var
+  67 0058 094C     		ldr	r4, .L4+12
+  68 005a 2000     		movs	r0, r4
+  69 005c FFF7FEFF 		bl	hal_trace_print_var
+  70 0060 0848     		ldr	r0, .L4+16
+  71 0062 FFF7FEFF 		bl	hal_trace_print_var
+  72 0066 2000     		movs	r0, r4
+  73 0068 FFF7FEFF 		bl	hal_trace_print_var
+  74              	.L3:
+  75 006c FEE7     		b	.L3
+  76              	.L1:
+  77 006e 09B0     		add	sp, sp, #36
+  78              		@ sp needed
+  79 0070 30BD     		pop	{r4, r5, pc}
+  80              	.L5:
+  81 0072 C046     		.align	2
+  82              	.L4:
+  83 0074 00000000 		.word	.LANCHOR0
+  84 0078 00000000 		.word	.LANCHOR1
+  85 007c 00000000 		.word	.LC2
+  86 0080 20000000 		.word	.LC4
+  87 0084 21000000 		.word	.LC6
+  89              		.section	.text.settings_save,"ax",%progbits
+  90              		.align	1
+  91              		.global	settings_save
+  92              		.syntax unified
+  93              		.code	16
+  94              		.thumb_func
+  95              		.fpu softvfp
+  97              	settings_save:
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100 0000 70B5     		push	{r4, r5, r6, lr}
+ 101 0002 0C4D     		ldr	r5, .L7
+ 102 0004 2022     		movs	r2, #32
+ 103              		@ sp needed
+ 104 0006 2800     		movs	r0, r5
+ 105 0008 2900     		movs	r1, r5
+ 106 000a 2030     		adds	r0, r0, #32
+ 107 000c FFF7FEFF 		bl	sha256
+ 108 0010 094C     		ldr	r4, .L7+4
+ 109 0012 0822     		movs	r2, #8
+ARM GAS  /tmp/ccMgldhq.s 			page 3
+
+
+ 110 0014 2000     		movs	r0, r4
+ 111 0016 2100     		movs	r1, r4
+ 112 0018 0830     		adds	r0, r0, #8
+ 113 001a FFF7FEFF 		bl	sha256
+ 114 001e 2900     		movs	r1, r5
+ 115 0020 4022     		movs	r2, #64
+ 116 0022 0020     		movs	r0, #0
+ 117 0024 FFF7FEFF 		bl	hal_eeprom_write_buffer
+ 118 0028 2822     		movs	r2, #40
+ 119 002a 2100     		movs	r1, r4
+ 120 002c 4020     		movs	r0, #64
+ 121 002e FFF7FEFF 		bl	hal_eeprom_write_buffer
+ 122 0032 70BD     		pop	{r4, r5, r6, pc}
+ 123              	.L8:
+ 124              		.align	2
+ 125              	.L7:
+ 126 0034 00000000 		.word	.LANCHOR0
+ 127 0038 00000000 		.word	.LANCHOR1
+ 129              		.section	.rodata.settings_print.str1.1,"aMS",%progbits,1
+ 130              	.LC14:
+ 131 0000 494E464F 		.ascii	"INFO: Settings:\012\000"
+ 131      3A205365 
+ 131      7474696E 
+ 131      67733A0A 
+ 131      00
+ 132              	.LC18:
+ 133 0011 494E464F 		.ascii	"INFO:  - deveui:                   %02X%02X%02X%02X"
+ 133      3A20202D 
+ 133      20646576 
+ 133      6575693A 
+ 133      20202020 
+ 134 0044 25303258 		.ascii	"%02X%02X%02X%02X\012\000"
+ 134      25303258 
+ 134      25303258 
+ 134      25303258 
+ 134      0A00
+ 135              	.LC20:
+ 136 0056 494E464F 		.ascii	"INFO:  - joineui:                  %02X%02X%02X%02X"
+ 136      3A20202D 
+ 136      206A6F69 
+ 136      6E657569 
+ 136      3A202020 
+ 137 0089 25303258 		.ascii	"%02X%02X%02X%02X\012\000"
+ 137      25303258 
+ 137      25303258 
+ 137      25303258 
+ 137      0A00
+ 138              	.LC22:
+ 139 009b 494E464F 		.ascii	"INFO:  - nwkey:                    ????????????????"
+ 139      3A20202D 
+ 139      206E776B 
+ 139      65793A20 
+ 139      20202020 
+ 140 00ce 3F3F3F3F 		.ascii	"????????????%02X%02X\012\000"
+ 140      3F3F3F3F 
+ 140      3F3F3F3F 
+ 140      25303258 
+ARM GAS  /tmp/ccMgldhq.s 			page 4
+
+
+ 140      25303258 
+ 141              	.LC25:
+ 142 00e4 494E464F 		.ascii	"INFO:  - region:                   %u\012\000"
+ 142      3A20202D 
+ 142      20726567 
+ 142      696F6E3A 
+ 142      20202020 
+ 143              	.LC27:
+ 144 010b 494E464F 		.ascii	"INFO:  - transmission_interval:    %u\012\000"
+ 144      3A20202D 
+ 144      20747261 
+ 144      6E736D69 
+ 144      7373696F 
+ 145              		.section	.text.settings_print,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	settings_print
+ 148              		.syntax unified
+ 149              		.code	16
+ 150              		.thumb_func
+ 151              		.fpu softvfp
+ 153              	settings_print:
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 30B5     		push	{r4, r5, lr}
+ 157 0002 2448     		ldr	r0, .L10
+ 158 0004 87B0     		sub	sp, sp, #28
+ 159 0006 FFF7FEFF 		bl	hal_trace_print_var
+ 160 000a 234D     		ldr	r5, .L10+4
+ 161 000c 2800     		movs	r0, r5
+ 162 000e FFF7FEFF 		bl	hal_trace_print_var
+ 163 0012 224C     		ldr	r4, .L10+8
+ 164 0014 E079     		ldrb	r0, [r4, #7]
+ 165 0016 A378     		ldrb	r3, [r4, #2]
+ 166 0018 6278     		ldrb	r2, [r4, #1]
+ 167 001a 2178     		ldrb	r1, [r4]
+ 168 001c 0490     		str	r0, [sp, #16]
+ 169 001e A079     		ldrb	r0, [r4, #6]
+ 170 0020 0390     		str	r0, [sp, #12]
+ 171 0022 6079     		ldrb	r0, [r4, #5]
+ 172 0024 0290     		str	r0, [sp, #8]
+ 173 0026 2079     		ldrb	r0, [r4, #4]
+ 174 0028 0190     		str	r0, [sp, #4]
+ 175 002a E078     		ldrb	r0, [r4, #3]
+ 176 002c 0090     		str	r0, [sp]
+ 177 002e 1C48     		ldr	r0, .L10+12
+ 178 0030 FFF7FEFF 		bl	hal_trace_print_var
+ 179 0034 2800     		movs	r0, r5
+ 180 0036 FFF7FEFF 		bl	hal_trace_print_var
+ 181 003a E07B     		ldrb	r0, [r4, #15]
+ 182 003c A37A     		ldrb	r3, [r4, #10]
+ 183 003e 627A     		ldrb	r2, [r4, #9]
+ 184 0040 217A     		ldrb	r1, [r4, #8]
+ 185 0042 0490     		str	r0, [sp, #16]
+ 186 0044 A07B     		ldrb	r0, [r4, #14]
+ 187 0046 0390     		str	r0, [sp, #12]
+ 188 0048 607B     		ldrb	r0, [r4, #13]
+ 189 004a 0290     		str	r0, [sp, #8]
+ARM GAS  /tmp/ccMgldhq.s 			page 5
+
+
+ 190 004c 207B     		ldrb	r0, [r4, #12]
+ 191 004e 0190     		str	r0, [sp, #4]
+ 192 0050 E07A     		ldrb	r0, [r4, #11]
+ 193 0052 0090     		str	r0, [sp]
+ 194 0054 1348     		ldr	r0, .L10+16
+ 195 0056 FFF7FEFF 		bl	hal_trace_print_var
+ 196 005a 2800     		movs	r0, r5
+ 197 005c FFF7FEFF 		bl	hal_trace_print_var
+ 198 0060 E27F     		ldrb	r2, [r4, #31]
+ 199 0062 A17F     		ldrb	r1, [r4, #30]
+ 200 0064 1048     		ldr	r0, .L10+20
+ 201 0066 FFF7FEFF 		bl	hal_trace_print_var
+ 202 006a 2800     		movs	r0, r5
+ 203 006c FFF7FEFF 		bl	hal_trace_print_var
+ 204 0070 0E4C     		ldr	r4, .L10+24
+ 205 0072 0F48     		ldr	r0, .L10+28
+ 206 0074 2178     		ldrb	r1, [r4]
+ 207 0076 FFF7FEFF 		bl	hal_trace_print_var
+ 208 007a 2800     		movs	r0, r5
+ 209 007c FFF7FEFF 		bl	hal_trace_print_var
+ 210 0080 A188     		ldrh	r1, [r4, #4]
+ 211 0082 0C48     		ldr	r0, .L10+32
+ 212 0084 FFF7FEFF 		bl	hal_trace_print_var
+ 213 0088 2800     		movs	r0, r5
+ 214 008a FFF7FEFF 		bl	hal_trace_print_var
+ 215 008e 07B0     		add	sp, sp, #28
+ 216              		@ sp needed
+ 217 0090 30BD     		pop	{r4, r5, pc}
+ 218              	.L11:
+ 219 0092 C046     		.align	2
+ 220              	.L10:
+ 221 0094 00000000 		.word	.LC14
+ 222 0098 20000000 		.word	.LC4
+ 223 009c 00000000 		.word	.LANCHOR0
+ 224 00a0 11000000 		.word	.LC18
+ 225 00a4 56000000 		.word	.LC20
+ 226 00a8 9B000000 		.word	.LC22
+ 227 00ac 00000000 		.word	.LANCHOR1
+ 228 00b0 E4000000 		.word	.LC25
+ 229 00b4 0B010000 		.word	.LC27
+ 231              		.global	settings
+ 232              		.global	keys
+ 233              		.section	.bss.keys,"aw",%nobits
+ 234              		.align	2
+ 235              		.set	.LANCHOR0,. + 0
+ 238              	keys:
+ 239 0000 00000000 		.space	64
+ 239      00000000 
+ 239      00000000 
+ 239      00000000 
+ 239      00000000 
+ 240              		.section	.bss.settings,"aw",%nobits
+ 241              		.align	2
+ 242              		.set	.LANCHOR1,. + 0
+ 245              	settings:
+ 246 0000 00000000 		.space	40
+ 246      00000000 
+ARM GAS  /tmp/ccMgldhq.s 			page 6
+
+
+ 246      00000000 
+ 246      00000000 
+ 246      00000000 
+ 247              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccMgldhq.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 settings.c
+     /tmp/ccMgldhq.s:19     .text.settings_init:0000000000000000 $t
+     /tmp/ccMgldhq.s:27     .text.settings_init:0000000000000000 settings_init
+     /tmp/ccMgldhq.s:83     .text.settings_init:0000000000000074 $d
+     /tmp/ccMgldhq.s:90     .text.settings_save:0000000000000000 $t
+     /tmp/ccMgldhq.s:97     .text.settings_save:0000000000000000 settings_save
+     /tmp/ccMgldhq.s:126    .text.settings_save:0000000000000034 $d
+     /tmp/ccMgldhq.s:146    .text.settings_print:0000000000000000 $t
+     /tmp/ccMgldhq.s:153    .text.settings_print:0000000000000000 settings_print
+     /tmp/ccMgldhq.s:221    .text.settings_print:0000000000000094 $d
+     /tmp/ccMgldhq.s:245    .bss.settings:0000000000000000 settings
+     /tmp/ccMgldhq.s:238    .bss.keys:0000000000000000 keys
+     /tmp/ccMgldhq.s:234    .bss.keys:0000000000000000 $d
+     /tmp/ccMgldhq.s:241    .bss.settings:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+hal_eeprom_read_buffer
+sha256
+memcmp
+hal_trace_print_var
+hal_eeprom_write_buffer

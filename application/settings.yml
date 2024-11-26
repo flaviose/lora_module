@@ -1,0 +1,47 @@
+keys:
+  config:
+    offset_l0: 0x08080000
+    size_l0: 0x0040
+    offset_l4: 0x0804A000
+    size_l4: 0x0800
+
+  items:
+    deveui:
+      type: key
+      size: 8
+      data: "10CE45FFFE013FFC"
+      desc: lorawan deveui
+
+    joineui:
+      type: key
+      size: 8
+      data: "10CE45FFFE013FFB"
+      desc: lorawan joineui
+
+    nwkey:
+      type: key
+      size: 16
+      data: "C994148F77F0C9B4E805FD3AC4BD48EF"
+      desc: lorawan nwkey
+
+settings:
+  config:
+    offset_l0: 0x08080040
+    size_l0: 0x07c0
+    offset_l4: 0x0804A800
+    size_l4: 0x0800
+
+  items:
+    region:
+      type: uint
+      size: 1
+      data: 0x01
+      le: True
+      desc: lorawan region
+
+    transmission_interval:
+      type: uint
+      size: 2
+      data: 300
+      le: True
+      desc: transmission interval in seconds

@@ -1,0 +1,7 @@
+smtc_modem_core/lorawan_manager/lorawan_join_management.c:190:16:lorawan_join_management_service_downlink_handler	0	static
+smtc_modem_core/lorawan_manager/lorawan_join_management.c:195:13:lorawan_join_internal_add_task	40	static
+smtc_modem_core/lorawan_manager/lorawan_join_management.c:168:13:lorawan_join_management_service_on_update	16	static
+smtc_modem_core/lorawan_manager/lorawan_join_management.c:154:13:lorawan_join_management_service_on_launch	32	static
+smtc_modem_core/lorawan_manager/lorawan_join_management.c:121:6:lorawan_join_management_services_init	8	static
+smtc_modem_core/lorawan_manager/lorawan_join_management.c:132:6:lorawan_join_add_task	8	static
+smtc_modem_core/lorawan_manager/lorawan_join_management.c:143:6:lorawan_join_remove_task	8	static

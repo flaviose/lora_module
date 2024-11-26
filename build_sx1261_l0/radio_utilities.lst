@@ -1,0 +1,73 @@
+ARM GAS  /tmp/ccNpLcBb.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"radio_utilities.c"
+  10              		.text
+  11              		.section	.text.radio_utilities_set_tx_power_offset,"ax",%progbits
+  12              		.align	1
+  13              		.global	radio_utilities_set_tx_power_offset
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	radio_utilities_set_tx_power_offset:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23              		@ link register save eliminated.
+  24 0000 014B     		ldr	r3, .L2
+  25              		@ sp needed
+  26 0002 1870     		strb	r0, [r3]
+  27 0004 7047     		bx	lr
+  28              	.L3:
+  29 0006 C046     		.align	2
+  30              	.L2:
+  31 0008 00000000 		.word	.LANCHOR0
+  33              		.section	.text.radio_utilities_get_tx_power_offset,"ax",%progbits
+  34              		.align	1
+  35              		.global	radio_utilities_get_tx_power_offset
+  36              		.syntax unified
+  37              		.code	16
+  38              		.thumb_func
+  39              		.fpu softvfp
+  41              	radio_utilities_get_tx_power_offset:
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  44              		@ link register save eliminated.
+  45 0000 0020     		movs	r0, #0
+  46              		@ sp needed
+  47 0002 014B     		ldr	r3, .L5
+  48 0004 1856     		ldrsb	r0, [r3, r0]
+  49 0006 7047     		bx	lr
+  50              	.L6:
+  51              		.align	2
+  52              	.L5:
+  53 0008 00000000 		.word	.LANCHOR0
+  55              		.section	.bss.board_tx_pwr_offset_db,"aw",%nobits
+  56              		.set	.LANCHOR0,. + 0
+  59              	board_tx_pwr_offset_db:
+  60 0000 00       		.space	1
+  61              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccNpLcBb.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 radio_utilities.c
+     /tmp/ccNpLcBb.s:12     .text.radio_utilities_set_tx_power_offset:0000000000000000 $t
+     /tmp/ccNpLcBb.s:20     .text.radio_utilities_set_tx_power_offset:0000000000000000 radio_utilities_set_tx_power_offset
+     /tmp/ccNpLcBb.s:31     .text.radio_utilities_set_tx_power_offset:0000000000000008 $d
+     /tmp/ccNpLcBb.s:34     .text.radio_utilities_get_tx_power_offset:0000000000000000 $t
+     /tmp/ccNpLcBb.s:41     .text.radio_utilities_get_tx_power_offset:0000000000000000 radio_utilities_get_tx_power_offset
+     /tmp/ccNpLcBb.s:53     .text.radio_utilities_get_tx_power_offset:0000000000000008 $d
+     /tmp/ccNpLcBb.s:59     .bss.board_tx_pwr_offset_db:0000000000000000 board_tx_pwr_offset_db
+     /tmp/ccNpLcBb.s:60     .bss.board_tx_pwr_offset_db:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS

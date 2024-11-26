@@ -1,0 +1,157 @@
+ARM GAS  /tmp/ccan1cQk.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"smtc_hal_eeprom.c"
+  10              		.text
+  11              		.section	.rodata.hal_eeprom_write_buffer.str1.1,"aMS",%progbits,1
+  12              	.LC1:
+  13 0000 4552524F 		.ascii	"ERROR: mcu_panic:%s\012\000"
+  13      523A206D 
+  13      63755F70 
+  13      616E6963 
+  13      3A25730A 
+  14              	.LC3:
+  15 0015 00       		.ascii	"\000"
+  16              	.LC5:
+  17 0016 4552524F 		.ascii	"ERROR: -> \000"
+  17      523A202D 
+  17      3E2000
+  18              		.section	.text.hal_eeprom_write_buffer,"ax",%progbits
+  19              		.align	1
+  20              		.weak	hal_eeprom_write_buffer
+  21              		.arch armv6s-m
+  22              		.syntax unified
+  23              		.code	16
+  24              		.thumb_func
+  25              		.fpu softvfp
+  27              	hal_eeprom_write_buffer:
+  28              		@ args = 0, pretend = 0, frame = 16
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  31 0002 0127     		movs	r7, #1
+  32 0004 1A4C     		ldr	r4, .L12
+  33 0006 85B0     		sub	sp, sp, #20
+  34 0008 6368     		ldr	r3, [r4, #4]
+  35 000a 0500     		movs	r5, r0
+  36 000c 0E00     		movs	r6, r1
+  37 000e 0192     		str	r2, [sp, #4]
+  38 0010 3B42     		tst	r3, r7
+  39 0012 1CD0     		beq	.L2
+  40 0014 03A8     		add	r0, sp, #12
+  41 0016 FFF7FEFF 		bl	hal_mcu_critical_section_begin
+  42 001a 164B     		ldr	r3, .L12+4
+  43 001c 03A8     		add	r0, sp, #12
+  44 001e E360     		str	r3, [r4, #12]
+  45 0020 154B     		ldr	r3, .L12+8
+  46 0022 E360     		str	r3, [r4, #12]
+  47 0024 FFF7FEFF 		bl	hal_mcu_critical_section_end
+  48 0028 6368     		ldr	r3, [r4, #4]
+  49 002a 3B42     		tst	r3, r7
+  50 002c 0FD0     		beq	.L2
+  51 002e 1349     		ldr	r1, .L12+12
+  52 0030 1348     		ldr	r0, .L12+16
+ARM GAS  /tmp/ccan1cQk.s 			page 2
+
+
+  53 0032 FFF7FEFF 		bl	hal_trace_print_var
+  54 0036 134F     		ldr	r7, .L12+20
+  55 0038 3800     		movs	r0, r7
+  56 003a FFF7FEFF 		bl	hal_trace_print_var
+  57 003e 1248     		ldr	r0, .L12+24
+  58 0040 FFF7FEFF 		bl	hal_trace_print_var
+  59 0044 3800     		movs	r0, r7
+  60 0046 FFF7FEFF 		bl	hal_trace_print_var
+  61 004a FFF7FEFF 		bl	hal_mcu_reset
+  62              	.L2:
+  63 004e 0023     		movs	r3, #0
+  64              	.L4:
+  65 0050 019A     		ldr	r2, [sp, #4]
+  66 0052 9342     		cmp	r3, r2
+  67 0054 05D1     		bne	.L5
+  68 0056 0123     		movs	r3, #1
+  69 0058 6268     		ldr	r2, [r4, #4]
+  70 005a 1343     		orrs	r3, r2
+  71 005c 6360     		str	r3, [r4, #4]
+  72 005e 05B0     		add	sp, sp, #20
+  73              		@ sp needed
+  74 0060 F0BD     		pop	{r4, r5, r6, r7, pc}
+  75              	.L5:
+  76 0062 0A48     		ldr	r0, .L12+28
+  77 0064 F15C     		ldrb	r1, [r6, r3]
+  78 0066 5A19     		adds	r2, r3, r5
+  79 0068 1218     		adds	r2, r2, r0
+  80 006a 1170     		strb	r1, [r2]
+  81 006c 0133     		adds	r3, r3, #1
+  82 006e EFE7     		b	.L4
+  83              	.L13:
+  84              		.align	2
+  85              	.L12:
+  86 0070 00200240 		.word	1073881088
+  87 0074 EFCDAB89 		.word	-1985229329
+  88 0078 05040302 		.word	33752069
+  89 007c 00000000 		.word	.LANCHOR0
+  90 0080 00000000 		.word	.LC1
+  91 0084 15000000 		.word	.LC3
+  92 0088 16000000 		.word	.LC5
+  93 008c 00000808 		.word	134742016
+  95              		.section	.text.hal_eeprom_read_buffer,"ax",%progbits
+  96              		.align	1
+  97              		.weak	hal_eeprom_read_buffer
+  98              		.syntax unified
+  99              		.code	16
+ 100              		.thumb_func
+ 101              		.fpu softvfp
+ 103              	hal_eeprom_read_buffer:
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106 0000 0B00     		movs	r3, r1
+ 107 0002 10B5     		push	{r4, lr}
+ 108 0004 0249     		ldr	r1, .L15
+ 109              		@ sp needed
+ 110 0006 4118     		adds	r1, r0, r1
+ 111 0008 1800     		movs	r0, r3
+ARM GAS  /tmp/ccan1cQk.s 			page 3
+
+
+ 112 000a FFF7FEFF 		bl	memcpy
+ 113 000e 10BD     		pop	{r4, pc}
+ 114              	.L16:
+ 115              		.align	2
+ 116              	.L15:
+ 117 0010 00000808 		.word	134742016
+ 119              		.section	.rodata.__func__.0,"a"
+ 120              		.set	.LANCHOR0,. + 0
+ 123              	__func__.0:
+ 124 0000 68616C5F 		.ascii	"hal_eeprom_write_buffer\000"
+ 124      65657072 
+ 124      6F6D5F77 
+ 124      72697465 
+ 124      5F627566 
+ 125              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccan1cQk.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 smtc_hal_eeprom.c
+     /tmp/ccan1cQk.s:19     .text.hal_eeprom_write_buffer:0000000000000000 $t
+     /tmp/ccan1cQk.s:27     .text.hal_eeprom_write_buffer:0000000000000000 hal_eeprom_write_buffer
+     /tmp/ccan1cQk.s:86     .text.hal_eeprom_write_buffer:0000000000000070 $d
+     /tmp/ccan1cQk.s:96     .text.hal_eeprom_read_buffer:0000000000000000 $t
+     /tmp/ccan1cQk.s:103    .text.hal_eeprom_read_buffer:0000000000000000 hal_eeprom_read_buffer
+     /tmp/ccan1cQk.s:117    .text.hal_eeprom_read_buffer:0000000000000010 $d
+     /tmp/ccan1cQk.s:123    .rodata.__func__.0:0000000000000000 __func__.0
+
+UNDEFINED SYMBOLS
+hal_mcu_critical_section_begin
+hal_mcu_critical_section_end
+hal_trace_print_var
+hal_mcu_reset
+memcpy

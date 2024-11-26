@@ -1,0 +1,276 @@
+ARM GAS  /tmp/ccKDNVi6.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"ralf_sx126x.c"
+  10              		.text
+  11              		.section	.text.ralf_sx126x_setup_gfsk,"ax",%progbits
+  12              		.align	1
+  13              		.global	ralf_sx126x_setup_gfsk
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	ralf_sx126x_setup_gfsk:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 70B5     		push	{r4, r5, r6, lr}
+  24 0002 0400     		movs	r4, r0
+  25 0004 0D00     		movs	r5, r1
+  26 0006 0068     		ldr	r0, [r0]
+  27 0008 0021     		movs	r1, #0
+  28 000a 236B     		ldr	r3, [r4, #48]
+  29 000c 9847     		blx	r3
+  30 000e 0028     		cmp	r0, #0
+  31 0010 2ED1     		bne	.L2
+  32 0012 0100     		movs	r1, r0
+  33 0014 A36E     		ldr	r3, [r4, #104]
+  34 0016 2068     		ldr	r0, [r4]
+  35 0018 9847     		blx	r3
+  36 001a 0028     		cmp	r0, #0
+  37 001c 28D1     		bne	.L2
+  38 001e 296A     		ldr	r1, [r5, #32]
+  39 0020 2068     		ldr	r0, [r4]
+  40 0022 636E     		ldr	r3, [r4, #100]
+  41 0024 9847     		blx	r3
+  42 0026 0028     		cmp	r0, #0
+  43 0028 22D1     		bne	.L2
+  44 002a 2A21     		movs	r1, #42
+  45 002c 2A6A     		ldr	r2, [r5, #32]
+  46 002e 6956     		ldrsb	r1, [r5, r1]
+  47 0030 2068     		ldr	r0, [r4]
+  48 0032 A36C     		ldr	r3, [r4, #72]
+  49 0034 9847     		blx	r3
+  50 0036 0028     		cmp	r0, #0
+  51 0038 1AD1     		bne	.L2
+  52 003a 2900     		movs	r1, r5
+  53 003c 2068     		ldr	r0, [r4]
+  54 003e 236F     		ldr	r3, [r4, #112]
+  55 0040 9847     		blx	r3
+  56 0042 0028     		cmp	r0, #0
+  57 0044 14D1     		bne	.L2
+  58 0046 2900     		movs	r1, r5
+ARM GAS  /tmp/ccKDNVi6.s 			page 2
+
+
+  59 0048 2068     		ldr	r0, [r4]
+  60 004a 636F     		ldr	r3, [r4, #116]
+  61 004c 1031     		adds	r1, r1, #16
+  62 004e 9847     		blx	r3
+  63 0050 0028     		cmp	r0, #0
+  64 0052 0DD1     		bne	.L2
+  65 0054 2B7E     		ldrb	r3, [r5, #24]
+  66 0056 002B     		cmp	r3, #0
+  67 0058 0BD1     		bne	.L3
+  68              	.L5:
+  69 005a 2300     		movs	r3, r4
+  70 005c EA7C     		ldrb	r2, [r5, #19]
+  71 005e AC33     		adds	r3, r3, #172
+  72 0060 0732     		adds	r2, r2, #7
+  73 0062 1B68     		ldr	r3, [r3]
+  74 0064 E969     		ldr	r1, [r5, #28]
+  75 0066 2068     		ldr	r0, [r4]
+  76 0068 D208     		lsrs	r2, r2, #3
+  77 006a 9847     		blx	r3
+  78 006c 0028     		cmp	r0, #0
+  79 006e 0AD0     		beq	.L9
+  80              	.L2:
+  81              		@ sp needed
+  82 0070 70BD     		pop	{r4, r5, r6, pc}
+  83              	.L3:
+  84 0072 2300     		movs	r3, r4
+  85 0074 B833     		adds	r3, r3, #184
+  86 0076 EA8C     		ldrh	r2, [r5, #38]
+  87 0078 A98C     		ldrh	r1, [r5, #36]
+  88 007a 1B68     		ldr	r3, [r3]
+  89 007c 2068     		ldr	r0, [r4]
+  90 007e 9847     		blx	r3
+  91 0080 0028     		cmp	r0, #0
+  92 0082 EAD0     		beq	.L5
+  93 0084 F4E7     		b	.L2
+  94              	.L9:
+  95 0086 687E     		ldrb	r0, [r5, #25]
+  96 0088 0028     		cmp	r0, #0
+  97 008a F1D0     		beq	.L2
+  98 008c 2300     		movs	r3, r4
+  99 008e C033     		adds	r3, r3, #192
+ 100 0090 298D     		ldrh	r1, [r5, #40]
+ 101 0092 1B68     		ldr	r3, [r3]
+ 102 0094 2068     		ldr	r0, [r4]
+ 103 0096 9847     		blx	r3
+ 104 0098 EAE7     		b	.L2
+ 106              		.section	.text.ralf_sx126x_setup_lora,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	ralf_sx126x_setup_lora
+ 109              		.syntax unified
+ 110              		.code	16
+ 111              		.thumb_func
+ 112              		.fpu softvfp
+ 114              	ralf_sx126x_setup_lora:
+ 115              		@ args = 0, pretend = 0, frame = 0
+ 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  /tmp/ccKDNVi6.s 			page 3
+
+
+ 118 0002 0400     		movs	r4, r0
+ 119 0004 0D00     		movs	r5, r1
+ 120 0006 0068     		ldr	r0, [r0]
+ 121 0008 0021     		movs	r1, #0
+ 122 000a 236B     		ldr	r3, [r4, #48]
+ 123 000c 9847     		blx	r3
+ 124 000e 0028     		cmp	r0, #0
+ 125 0010 2DD1     		bne	.L11
+ 126 0012 2300     		movs	r3, r4
+ 127 0014 0833     		adds	r3, r3, #8
+ 128 0016 A97C     		ldrb	r1, [r5, #18]
+ 129 0018 DB6F     		ldr	r3, [r3, #124]
+ 130 001a 2068     		ldr	r0, [r4]
+ 131 001c 9847     		blx	r3
+ 132 001e 0028     		cmp	r0, #0
+ 133 0020 25D1     		bne	.L11
+ 134 0022 0121     		movs	r1, #1
+ 135 0024 2068     		ldr	r0, [r4]
+ 136 0026 A36E     		ldr	r3, [r4, #104]
+ 137 0028 9847     		blx	r3
+ 138 002a 0028     		cmp	r0, #0
+ 139 002c 1FD1     		bne	.L11
+ 140 002e E968     		ldr	r1, [r5, #12]
+ 141 0030 2068     		ldr	r0, [r4]
+ 142 0032 636E     		ldr	r3, [r4, #100]
+ 143 0034 9847     		blx	r3
+ 144 0036 0028     		cmp	r0, #0
+ 145 0038 19D1     		bne	.L11
+ 146 003a 1021     		movs	r1, #16
+ 147 003c EA68     		ldr	r2, [r5, #12]
+ 148 003e 6956     		ldrsb	r1, [r5, r1]
+ 149 0040 2068     		ldr	r0, [r4]
+ 150 0042 A36C     		ldr	r3, [r4, #72]
+ 151 0044 9847     		blx	r3
+ 152 0046 0028     		cmp	r0, #0
+ 153 0048 11D1     		bne	.L11
+ 154 004a 2900     		movs	r1, r5
+ 155 004c 2068     		ldr	r0, [r4]
+ 156 004e A36F     		ldr	r3, [r4, #120]
+ 157 0050 9847     		blx	r3
+ 158 0052 0028     		cmp	r0, #0
+ 159 0054 0BD1     		bne	.L11
+ 160 0056 2068     		ldr	r0, [r4]
+ 161 0058 E36F     		ldr	r3, [r4, #124]
+ 162 005a 291D     		adds	r1, r5, #4
+ 163 005c 9847     		blx	r3
+ 164 005e 0028     		cmp	r0, #0
+ 165 0060 05D1     		bne	.L11
+ 166 0062 2300     		movs	r3, r4
+ 167 0064 B033     		adds	r3, r3, #176
+ 168 0066 697C     		ldrb	r1, [r5, #17]
+ 169 0068 1B68     		ldr	r3, [r3]
+ 170 006a 2068     		ldr	r0, [r4]
+ 171 006c 9847     		blx	r3
+ 172              	.L11:
+ 173              		@ sp needed
+ 174 006e 70BD     		pop	{r4, r5, r6, pc}
+ARM GAS  /tmp/ccKDNVi6.s 			page 4
+
+
+ 176              		.section	.text.ralf_sx126x_setup_flrc,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	ralf_sx126x_setup_flrc
+ 179              		.syntax unified
+ 180              		.code	16
+ 181              		.thumb_func
+ 182              		.fpu softvfp
+ 184              	ralf_sx126x_setup_flrc:
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+ 188 0000 0120     		movs	r0, #1
+ 189              		@ sp needed
+ 190 0002 7047     		bx	lr
+ 192              		.section	.text.ralf_sx126x_setup_lora_cad,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	ralf_sx126x_setup_lora_cad
+ 195              		.syntax unified
+ 196              		.code	16
+ 197              		.thumb_func
+ 198              		.fpu softvfp
+ 200              	ralf_sx126x_setup_lora_cad:
+ 201              		@ args = 0, pretend = 0, frame = 16
+ 202              		@ frame_needed = 0, uses_anonymous_args = 0
+ 203 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 204 0002 85B0     		sub	sp, sp, #20
+ 205 0004 0D00     		movs	r5, r1
+ 206 0006 6B46     		mov	r3, sp
+ 207 0008 0021     		movs	r1, #0
+ 208 000a 0400     		movs	r4, r0
+ 209 000c 02AE     		add	r6, sp, #8
+ 210 000e D980     		strh	r1, [r3, #6]
+ 211 0010 0522     		movs	r2, #5
+ 212 0012 3000     		movs	r0, r6
+ 213 0014 FFF7FEFF 		bl	memset
+ 214 0018 2B89     		ldrh	r3, [r5, #8]
+ 215 001a 01AF     		add	r7, sp, #4
+ 216 001c 3B80     		strh	r3, [r7]
+ 217 001e 2B7C     		ldrb	r3, [r5, #16]
+ 218 0020 0121     		movs	r1, #1
+ 219 0022 7371     		strb	r3, [r6, #5]
+ 220 0024 2068     		ldr	r0, [r4]
+ 221 0026 A36E     		ldr	r3, [r4, #104]
+ 222 0028 9847     		blx	r3
+ 223 002a 0028     		cmp	r0, #0
+ 224 002c 16D1     		bne	.L14
+ 225 002e E968     		ldr	r1, [r5, #12]
+ 226 0030 2068     		ldr	r0, [r4]
+ 227 0032 636E     		ldr	r3, [r4, #100]
+ 228 0034 9847     		blx	r3
+ 229 0036 0028     		cmp	r0, #0
+ 230 0038 10D1     		bne	.L14
+ 231 003a 3900     		movs	r1, r7
+ 232 003c 2068     		ldr	r0, [r4]
+ 233 003e A36F     		ldr	r3, [r4, #120]
+ 234 0040 9847     		blx	r3
+ 235 0042 0028     		cmp	r0, #0
+ARM GAS  /tmp/ccKDNVi6.s 			page 5
+
+
+ 236 0044 0AD1     		bne	.L14
+ 237 0046 3100     		movs	r1, r6
+ 238 0048 2068     		ldr	r0, [r4]
+ 239 004a E36F     		ldr	r3, [r4, #124]
+ 240 004c 9847     		blx	r3
+ 241 004e 0028     		cmp	r0, #0
+ 242 0050 04D1     		bne	.L14
+ 243 0052 231D     		adds	r3, r4, #4
+ 244 0054 2900     		movs	r1, r5
+ 245 0056 DB6F     		ldr	r3, [r3, #124]
+ 246 0058 2068     		ldr	r0, [r4]
+ 247 005a 9847     		blx	r3
+ 248              	.L14:
+ 249 005c 05B0     		add	sp, sp, #20
+ 250              		@ sp needed
+ 251 005e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 253              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccKDNVi6.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ralf_sx126x.c
+     /tmp/ccKDNVi6.s:12     .text.ralf_sx126x_setup_gfsk:0000000000000000 $t
+     /tmp/ccKDNVi6.s:20     .text.ralf_sx126x_setup_gfsk:0000000000000000 ralf_sx126x_setup_gfsk
+     /tmp/ccKDNVi6.s:107    .text.ralf_sx126x_setup_lora:0000000000000000 $t
+     /tmp/ccKDNVi6.s:114    .text.ralf_sx126x_setup_lora:0000000000000000 ralf_sx126x_setup_lora
+     /tmp/ccKDNVi6.s:177    .text.ralf_sx126x_setup_flrc:0000000000000000 $t
+     /tmp/ccKDNVi6.s:184    .text.ralf_sx126x_setup_flrc:0000000000000000 ralf_sx126x_setup_flrc
+     /tmp/ccKDNVi6.s:193    .text.ralf_sx126x_setup_lora_cad:0000000000000000 $t
+     /tmp/ccKDNVi6.s:200    .text.ralf_sx126x_setup_lora_cad:0000000000000000 ralf_sx126x_setup_lora_cad
+
+UNDEFINED SYMBOLS
+memset

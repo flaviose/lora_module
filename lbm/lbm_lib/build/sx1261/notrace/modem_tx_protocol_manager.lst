@@ -1,0 +1,1022 @@
+ARM GAS  /tmp/ccGtGsCB.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"modem_tx_protocol_manager.c"
+  10              		.text
+  11              		.section	.text.shift_left_tpm_list,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	shift_left_tpm_list:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		@ link register save eliminated.
+  23 0000 054B     		ldr	r3, .L4
+  24 0002 0022     		movs	r2, #0
+  25 0004 1900     		movs	r1, r3
+  26              	.L2:
+  27 0006 D878     		ldrb	r0, [r3, #3]
+  28 0008 0132     		adds	r2, r2, #1
+  29 000a 9870     		strb	r0, [r3, #2]
+  30 000c 0133     		adds	r3, r3, #1
+  31 000e 092A     		cmp	r2, #9
+  32 0010 F9D1     		bne	.L2
+  33              		@ sp needed
+  34 0012 0323     		movs	r3, #3
+  35 0014 CB72     		strb	r3, [r1, #11]
+  36 0016 7047     		bx	lr
+  37              	.L5:
+  38              		.align	2
+  39              	.L4:
+  40 0018 00000000 		.word	modem_tpm_context
+  42              		.section	.text.reset_tpm_list,"ax",%progbits
+  43              		.align	1
+  44              		.syntax unified
+  45              		.code	16
+  46              		.thumb_func
+  47              		.fpu softvfp
+  49              	reset_tpm_list:
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52              		@ link register save eliminated.
+  53 0000 0023     		movs	r3, #0
+  54 0002 0321     		movs	r1, #3
+  55 0004 024A     		ldr	r2, .L9
+  56              	.L7:
+  57 0006 D154     		strb	r1, [r2, r3]
+  58 0008 0133     		adds	r3, r3, #1
+  59 000a 0A2B     		cmp	r3, #10
+  60 000c FBD1     		bne	.L7
+ARM GAS  /tmp/ccGtGsCB.s 			page 2
+
+
+  61              		@ sp needed
+  62 000e 7047     		bx	lr
+  63              	.L10:
+  64              		.align	2
+  65              	.L9:
+  66 0010 02000000 		.word	modem_tpm_context+2
+  68              		.section	.text.manage_idle_state,"ax",%progbits
+  69              		.align	1
+  70              		.syntax unified
+  71              		.code	16
+  72              		.thumb_func
+  73              		.fpu softvfp
+  75              	manage_idle_state:
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78              		@ link register save eliminated.
+  79 0000 0020     		movs	r0, #0
+  80              		@ sp needed
+  81 0002 7047     		bx	lr
+  83              		.section	.text.tpm_abort,"ax",%progbits
+  84              		.align	1
+  85              		.syntax unified
+  86              		.code	16
+  87              		.thumb_func
+  88              		.fpu softvfp
+  90              	tpm_abort:
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93 0000 10B5     		push	{r4, lr}
+  94 0002 FFF7FEFF 		bl	reset_tpm_list
+  95              		@ sp needed
+  96 0006 9422     		movs	r2, #148
+  97 0008 0121     		movs	r1, #1
+  98 000a 044B     		ldr	r3, .L13
+  99 000c 5200     		lsls	r2, r2, #1
+ 100 000e 9954     		strb	r1, [r3, r2]
+ 101 0010 FF33     		adds	r3, r3, #255
+ 102 0012 587F     		ldrb	r0, [r3, #29]
+ 103 0014 FFF7FEFF 		bl	lorawan_api_core_abort
+ 104 0018 10BD     		pop	{r4, pc}
+ 105              	.L14:
+ 106 001a C046     		.align	2
+ 107              	.L13:
+ 108 001c 00000000 		.word	modem_tpm_context
+ 110              		.section	.text.modem_tpm_radio_abort_lbt,"ax",%progbits
+ 111              		.align	1
+ 112              		.syntax unified
+ 113              		.code	16
+ 114              		.thumb_func
+ 115              		.fpu softvfp
+ 117              	modem_tpm_radio_abort_lbt:
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120 0000 10B5     		push	{r4, lr}
+ 121 0002 FFF7FEFF 		bl	tpm_abort
+ 122              		@ sp needed
+ 123 0006 10BD     		pop	{r4, pc}
+ARM GAS  /tmp/ccGtGsCB.s 			page 3
+
+
+ 125              		.section	.text.modem_tx_protocol_manager_engine,"ax",%progbits
+ 126              		.align	1
+ 127              		.syntax unified
+ 128              		.code	16
+ 129              		.thumb_func
+ 130              		.fpu softvfp
+ 132              	modem_tx_protocol_manager_engine:
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135 0000 10B5     		push	{r4, lr}
+ 136 0002 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 137 0006 0A4B     		ldr	r3, .L19
+ 138 0008 1A00     		movs	r2, r3
+ 139 000a FC32     		adds	r2, r2, #252
+ 140 000c 126B     		ldr	r2, [r2, #48]
+ 141 000e 801A     		subs	r0, r0, r2
+ 142 0010 2D38     		subs	r0, r0, #45
+ 143 0012 FF38     		subs	r0, r0, #255
+ 144 0014 0028     		cmp	r0, #0
+ 145 0016 04DD     		ble	.L17
+ 146 0018 FFF7FEFF 		bl	tpm_abort
+ 147 001c 0120     		movs	r0, #1
+ 148 001e 4042     		rsbs	r0, r0, #0
+ 149              	.L18:
+ 150              		@ sp needed
+ 151 0020 10BD     		pop	{r4, pc}
+ 152              	.L17:
+ 153 0022 9B78     		ldrb	r3, [r3, #2]
+ 154 0024 034A     		ldr	r2, .L19+4
+ 155 0026 9B00     		lsls	r3, r3, #2
+ 156 0028 9B58     		ldr	r3, [r3, r2]
+ 157 002a 9847     		blx	r3
+ 158 002c F8E7     		b	.L18
+ 159              	.L20:
+ 160 002e C046     		.align	2
+ 161              	.L19:
+ 162 0030 00000000 		.word	modem_tpm_context
+ 163 0034 00000000 		.word	.LANCHOR0
+ 165              		.section	.text.modem_tpm_radio_free_lbt,"ax",%progbits
+ 166              		.align	1
+ 167              		.syntax unified
+ 168              		.code	16
+ 169              		.thumb_func
+ 170              		.fpu softvfp
+ 172              	modem_tpm_radio_free_lbt:
+ 173              		@ args = 0, pretend = 0, frame = 0
+ 174              		@ frame_needed = 0, uses_anonymous_args = 0
+ 175 0000 10B5     		push	{r4, lr}
+ 176 0002 FFF7FEFF 		bl	shift_left_tpm_list
+ 177 0006 074C     		ldr	r4, .L23
+ 178 0008 0022     		movs	r2, #0
+ 179 000a 2300     		movs	r3, r4
+ 180 000c FF33     		adds	r3, r3, #255
+ 181 000e 9A77     		strb	r2, [r3, #30]
+ 182 0010 5B7D     		ldrb	r3, [r3, #21]
+ 183 0012 9342     		cmp	r3, r2
+ 184 0014 03D1     		bne	.L22
+ARM GAS  /tmp/ccGtGsCB.s 			page 4
+
+
+ 185 0016 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 186 001a FC34     		adds	r4, r4, #252
+ 187 001c 2061     		str	r0, [r4, #16]
+ 188              	.L22:
+ 189 001e FFF7FEFF 		bl	modem_tx_protocol_manager_engine
+ 190              		@ sp needed
+ 191 0022 10BD     		pop	{r4, pc}
+ 192              	.L24:
+ 193              		.align	2
+ 194              	.L23:
+ 195 0024 00000000 		.word	modem_tpm_context
+ 197              		.section	.text.manage_tx_nwk_lora_state,"ax",%progbits
+ 198              		.align	1
+ 199              		.syntax unified
+ 200              		.code	16
+ 201              		.thumb_func
+ 202              		.fpu softvfp
+ 204              	manage_tx_nwk_lora_state:
+ 205              		@ args = 0, pretend = 0, frame = 0
+ 206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 207 0000 10B5     		push	{r4, lr}
+ 208 0002 FFF7FEFF 		bl	shift_left_tpm_list
+ 209 0006 094C     		ldr	r4, .L30
+ 210 0008 2300     		movs	r3, r4
+ 211 000a FF33     		adds	r3, r3, #255
+ 212 000c 5A7D     		ldrb	r2, [r3, #21]
+ 213 000e 002A     		cmp	r2, #0
+ 214 0010 03D0     		beq	.L26
+ 215 0012 0121     		movs	r1, #1
+ 216 0014 587F     		ldrb	r0, [r3, #29]
+ 217 0016 FFF7FEFF 		bl	lorawan_api_set_next_tx_at_time
+ 218              	.L26:
+ 219              		@ sp needed
+ 220 001a 2300     		movs	r3, r4
+ 221 001c FF34     		adds	r4, r4, #255
+ 222 001e FC33     		adds	r3, r3, #252
+ 223 0020 607F     		ldrb	r0, [r4, #29]
+ 224 0022 1969     		ldr	r1, [r3, #16]
+ 225 0024 FFF7FEFF 		bl	lorawan_api_set_time_of_nwk_ans
+ 226 0028 0020     		movs	r0, #0
+ 227 002a 10BD     		pop	{r4, pc}
+ 228              	.L31:
+ 229              		.align	2
+ 230              	.L30:
+ 231 002c 00000000 		.word	modem_tpm_context
+ 233              		.section	.text.compute_tpm_list,"ax",%progbits
+ 234              		.align	1
+ 235              		.syntax unified
+ 236              		.code	16
+ 237              		.thumb_func
+ 238              		.fpu softvfp
+ 240              	compute_tpm_list:
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243 0000 10B5     		push	{r4, lr}
+ 244 0002 FFF7FEFF 		bl	reset_tpm_list
+ 245 0006 0D4C     		ldr	r4, .L39
+ARM GAS  /tmp/ccGtGsCB.s 			page 5
+
+
+ 246 0008 2300     		movs	r3, r4
+ 247 000a FF33     		adds	r3, r3, #255
+ 248 000c 587F     		ldrb	r0, [r3, #29]
+ 249 000e FFF7FEFF 		bl	smtc_lbt_get_obj
+ 250 0012 FFF7FEFF 		bl	smtc_lbt_get_state
+ 251 0016 0023     		movs	r3, #0
+ 252 0018 9842     		cmp	r0, r3
+ 253 001a 01D0     		beq	.L33
+ 254 001c A370     		strb	r3, [r4, #2]
+ 255 001e 0133     		adds	r3, r3, #1
+ 256              	.L33:
+ 257 0020 217B     		ldrb	r1, [r4, #12]
+ 258 0022 5A1C     		adds	r2, r3, #1
+ 259 0024 E318     		adds	r3, r4, r3
+ 260 0026 0029     		cmp	r1, #0
+ 261 0028 05D1     		bne	.L34
+ 262 002a 0131     		adds	r1, r1, #1
+ 263              	.L38:
+ 264 002c 9970     		strb	r1, [r3, #2]
+ 265 002e 0323     		movs	r3, #3
+ 266              		@ sp needed
+ 267 0030 A418     		adds	r4, r4, r2
+ 268 0032 A370     		strb	r3, [r4, #2]
+ 269 0034 10BD     		pop	{r4, pc}
+ 270              	.L34:
+ 271 0036 0221     		movs	r1, #2
+ 272 0038 F8E7     		b	.L38
+ 273              	.L40:
+ 274 003a C046     		.align	2
+ 275              	.L39:
+ 276 003c 00000000 		.word	modem_tpm_context
+ 278              		.section	.text.update_add_delay_ms,"ax",%progbits
+ 279              		.align	1
+ 280              		.syntax unified
+ 281              		.code	16
+ 282              		.thumb_func
+ 283              		.fpu softvfp
+ 285              	update_add_delay_ms:
+ 286              		@ args = 0, pretend = 0, frame = 16
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 289 0002 114C     		ldr	r4, .L46
+ 290 0004 0023     		movs	r3, #0
+ 291 0006 2500     		movs	r5, r4
+ 292 0008 2600     		movs	r6, r4
+ 293 000a FC35     		adds	r5, r5, #252
+ 294 000c 6B61     		str	r3, [r5, #20]
+ 295 000e FF36     		adds	r6, r6, #255
+ 296 0010 707F     		ldrb	r0, [r6, #29]
+ 297 0012 FFF7FEFF 		bl	smtc_lbt_get_obj
+ 298 0016 FFF7FEFF 		bl	smtc_lbt_get_state
+ 299 001a 0028     		cmp	r0, #0
+ 300 001c 0FD0     		beq	.L42
+ 301 001e 707F     		ldrb	r0, [r6, #29]
+ 302 0020 FFF7FEFF 		bl	smtc_lbt_get_obj
+ 303 0024 6A46     		mov	r2, sp
+ 304 0026 03AB     		add	r3, sp, #12
+ARM GAS  /tmp/ccGtGsCB.s 			page 6
+
+
+ 305 0028 0632     		adds	r2, r2, #6
+ 306 002a 02A9     		add	r1, sp, #8
+ 307 002c FFF7FEFF 		bl	smtc_lbt_get_parameters
+ 308 0030 FFF7FEFF 		bl	smtc_modem_hal_get_radio_tcxo_startup_delay_ms
+ 309 0034 6A69     		ldr	r2, [r5, #20]
+ 310 0036 029B     		ldr	r3, [sp, #8]
+ 311 0038 9B18     		adds	r3, r3, r2
+ 312 003a 1B18     		adds	r3, r3, r0
+ 313 003c 6B61     		str	r3, [r5, #20]
+ 314              	.L42:
+ 315 003e FC34     		adds	r4, r4, #252
+ 316 0040 6069     		ldr	r0, [r4, #20]
+ 317 0042 04B0     		add	sp, sp, #16
+ 318              		@ sp needed
+ 319 0044 70BD     		pop	{r4, r5, r6, pc}
+ 320              	.L47:
+ 321 0046 C046     		.align	2
+ 322              	.L46:
+ 323 0048 00000000 		.word	modem_tpm_context
+ 325              		.section	.text.manage_tx_lora_state,"ax",%progbits
+ 326              		.align	1
+ 327              		.syntax unified
+ 328              		.code	16
+ 329              		.thumb_func
+ 330              		.fpu softvfp
+ 332              	manage_tx_lora_state:
+ 333              		@ args = 0, pretend = 0, frame = 8
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 336 0002 87B0     		sub	sp, sp, #28
+ 337 0004 FFF7FEFF 		bl	shift_left_tpm_list
+ 338 0008 334C     		ldr	r4, .L63
+ 339 000a 2078     		ldrb	r0, [r4]
+ 340 000c 0138     		subs	r0, r0, #1
+ 341 000e 0328     		cmp	r0, #3
+ 342 0010 5FD8     		bhi	.L58
+ 343 0012 FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 344              	.L51:
+ 345 0016 02       		.byte	(.L54-.L51)/2
+ 346 0017 18       		.byte	(.L53-.L51)/2
+ 347 0018 54       		.byte	(.L52-.L51)/2
+ 348 0019 28       		.byte	(.L50-.L51)/2
+ 349              		.p2align 1
+ 350              	.L54:
+ 351 001a 2300     		movs	r3, r4
+ 352 001c FC34     		adds	r4, r4, #252
+ 353 001e FF33     		adds	r3, r3, #255
+ 354 0020 597F     		ldrb	r1, [r3, #29]
+ 355 0022 2069     		ldr	r0, [r4, #16]
+ 356 0024 FFF7FEFF 		bl	lorawan_api_join
+ 357              	.L62:
+ 358 0028 0500     		movs	r5, r0
+ 359              	.L49:
+ 360 002a 2B4B     		ldr	r3, .L63
+ 361 002c FF33     		adds	r3, r3, #255
+ 362 002e 5A7D     		ldrb	r2, [r3, #21]
+ 363 0030 002A     		cmp	r2, #0
+ARM GAS  /tmp/ccGtGsCB.s 			page 7
+
+
+ 364 0032 03D0     		beq	.L57
+ 365 0034 0121     		movs	r1, #1
+ 366 0036 587F     		ldrb	r0, [r3, #29]
+ 367 0038 FFF7FEFF 		bl	lorawan_api_set_next_tx_at_time
+ 368              	.L57:
+ 369 003c 6B1C     		adds	r3, r5, #1
+ 370 003e 21D1     		bne	.L56
+ 371 0040 FFF7FEFF 		bl	tpm_abort
+ 372 0044 1EE0     		b	.L56
+ 373              	.L53:
+ 374 0046 2200     		movs	r2, r4
+ 375 0048 FF32     		adds	r2, r2, #255
+ 376 004a 557F     		ldrb	r5, [r2, #29]
+ 377 004c 537A     		ldrb	r3, [r2, #9]
+ 378 004e 617D     		ldrb	r1, [r4, #21]
+ 379 0050 207D     		ldrb	r0, [r4, #20]
+ 380 0052 0295     		str	r5, [sp, #8]
+ 381 0054 FC34     		adds	r4, r4, #252
+ 382 0056 2469     		ldr	r4, [r4, #16]
+ 383 0058 0194     		str	r4, [sp, #4]
+ 384 005a 927A     		ldrb	r2, [r2, #10]
+ 385 005c 0092     		str	r2, [sp]
+ 386 005e 1F4A     		ldr	r2, .L63+4
+ 387 0060 FFF7FEFF 		bl	lorawan_api_payload_send
+ 388 0064 E0E7     		b	.L62
+ 389              	.L50:
+ 390 0066 2500     		movs	r5, r4
+ 391 0068 FC35     		adds	r5, r5, #252
+ 392 006a EE69     		ldr	r6, [r5, #28]
+ 393 006c 2F69     		ldr	r7, [r5, #16]
+ 394 006e FFF7FEFF 		bl	update_add_delay_ms
+ 395 0072 F536     		adds	r6, r6, #245
+ 396 0074 FF36     		adds	r6, r6, #255
+ 397 0076 F61B     		subs	r6, r6, r7
+ 398 0078 361A     		subs	r6, r6, r0
+ 399 007a 06D5     		bpl	.L55
+ 400 007c 0125     		movs	r5, #1
+ 401 007e FFF7FEFF 		bl	tpm_abort
+ 402 0082 6D42     		rsbs	r5, r5, #0
+ 403              	.L56:
+ 404 0084 2800     		movs	r0, r5
+ 405 0086 07B0     		add	sp, sp, #28
+ 406              		@ sp needed
+ 407 0088 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 408              	.L55:
+ 409 008a 637D     		ldrb	r3, [r4, #21]
+ 410 008c 267D     		ldrb	r6, [r4, #20]
+ 411 008e FF34     		adds	r4, r4, #255
+ 412 0090 0493     		str	r3, [sp, #16]
+ 413 0092 A37A     		ldrb	r3, [r4, #10]
+ 414 0094 677A     		ldrb	r7, [r4, #9]
+ 415 0096 2D69     		ldr	r5, [r5, #16]
+ 416 0098 0593     		str	r3, [sp, #20]
+ 417 009a FFF7FEFF 		bl	update_add_delay_ms
+ 418 009e 637F     		ldrb	r3, [r4, #29]
+ 419 00a0 2D18     		adds	r5, r5, r0
+ 420 00a2 0293     		str	r3, [sp, #8]
+ARM GAS  /tmp/ccGtGsCB.s 			page 8
+
+
+ 421 00a4 059B     		ldr	r3, [sp, #20]
+ 422 00a6 0195     		str	r5, [sp, #4]
+ 423 00a8 0093     		str	r3, [sp]
+ 424 00aa 3000     		movs	r0, r6
+ 425 00ac 3B00     		movs	r3, r7
+ 426 00ae 0B4A     		ldr	r2, .L63+4
+ 427 00b0 0499     		ldr	r1, [sp, #16]
+ 428 00b2 FFF7FEFF 		bl	lorawan_api_payload_send
+ 429 00b6 0123     		movs	r3, #1
+ 430 00b8 0500     		movs	r5, r0
+ 431 00ba 6375     		strb	r3, [r4, #21]
+ 432 00bc B5E7     		b	.L49
+ 433              	.L52:
+ 434 00be 2200     		movs	r2, r4
+ 435 00c0 FC34     		adds	r4, r4, #252
+ 436 00c2 FF32     		adds	r2, r2, #255
+ 437 00c4 537F     		ldrb	r3, [r2, #29]
+ 438 00c6 517A     		ldrb	r1, [r2, #9]
+ 439 00c8 0448     		ldr	r0, .L63+4
+ 440 00ca 2269     		ldr	r2, [r4, #16]
+ 441 00cc FFF7FEFF 		bl	lorawan_api_send_stack_cid_req
+ 442 00d0 AAE7     		b	.L62
+ 443              	.L58:
+ 444 00d2 0125     		movs	r5, #1
+ 445 00d4 6D42     		rsbs	r5, r5, #0
+ 446 00d6 A8E7     		b	.L49
+ 447              	.L64:
+ 448              		.align	2
+ 449              	.L63:
+ 450 00d8 00000000 		.word	modem_tpm_context
+ 451 00dc 16000000 		.word	modem_tpm_context+22
+ 453              		.section	.text.manage_lbt_state,"ax",%progbits
+ 454              		.align	1
+ 455              		.syntax unified
+ 456              		.code	16
+ 457              		.thumb_func
+ 458              		.fpu softvfp
+ 460              	manage_lbt_state:
+ 461              		@ args = 0, pretend = 0, frame = 0
+ 462              		@ frame_needed = 0, uses_anonymous_args = 0
+ 463 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 464 0002 144D     		ldr	r5, .L69
+ 465 0004 2E00     		movs	r6, r5
+ 466 0006 FF36     		adds	r6, r6, #255
+ 467 0008 707F     		ldrb	r0, [r6, #29]
+ 468 000a FFF7FEFF 		bl	lorawan_api_stack_mac_get
+ 469 000e 777D     		ldrb	r7, [r6, #21]
+ 470 0010 0400     		movs	r4, r0
+ 471 0012 707F     		ldrb	r0, [r6, #29]
+ 472 0014 002F     		cmp	r7, #0
+ 473 0016 12D0     		beq	.L66
+ 474 0018 0A23     		movs	r3, #10
+ 475 001a B377     		strb	r3, [r6, #30]
+ 476 001c FFF7FEFF 		bl	smtc_lbt_get_obj
+ 477 0020 D923     		movs	r3, #217
+ 478 0022 9B00     		lsls	r3, r3, #2
+ 479 0024 E458     		ldr	r4, [r4, r3]
+ARM GAS  /tmp/ccGtGsCB.s 			page 9
+
+
+ 480 0026 0500     		movs	r5, r0
+ 481 0028 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 482 002c 0022     		movs	r2, #0
+ 483 002e 0300     		movs	r3, r0
+ 484 0030 2100     		movs	r1, r4
+ 485 0032 2800     		movs	r0, r5
+ 486 0034 0092     		str	r2, [sp]
+ 487              	.L68:
+ 488 0036 FFF7FEFF 		bl	smtc_lbt_listen_channel
+ 489              		@ sp needed
+ 490 003a 0020     		movs	r0, #0
+ 491 003c FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 492              	.L66:
+ 493 003e FC35     		adds	r5, r5, #252
+ 494 0040 2D69     		ldr	r5, [r5, #16]
+ 495 0042 FFF7FEFF 		bl	smtc_lbt_get_obj
+ 496 0046 D921     		movs	r1, #217
+ 497 0048 0097     		str	r7, [sp]
+ 498 004a 8900     		lsls	r1, r1, #2
+ 499 004c 2B00     		movs	r3, r5
+ 500 004e 3A00     		movs	r2, r7
+ 501 0050 6158     		ldr	r1, [r4, r1]
+ 502 0052 F0E7     		b	.L68
+ 503              	.L70:
+ 504              		.align	2
+ 505              	.L69:
+ 506 0054 00000000 		.word	modem_tpm_context
+ 508              		.section	.text.tpm_get_next_channel,"ax",%progbits
+ 509              		.align	1
+ 510              		.syntax unified
+ 511              		.code	16
+ 512              		.thumb_func
+ 513              		.fpu softvfp
+ 515              	tpm_get_next_channel:
+ 516              		@ args = 0, pretend = 0, frame = 0
+ 517              		@ frame_needed = 0, uses_anonymous_args = 0
+ 518 0000 064B     		ldr	r3, .L74
+ 519 0002 10B5     		push	{r4, lr}
+ 520 0004 1A00     		movs	r2, r3
+ 521 0006 1B78     		ldrb	r3, [r3]
+ 522 0008 FF32     		adds	r2, r2, #255
+ 523 000a 507F     		ldrb	r0, [r2, #29]
+ 524 000c 012B     		cmp	r3, #1
+ 525 000e 02D1     		bne	.L72
+ 526 0010 FFF7FEFF 		bl	lorawan_api_update_join_channel
+ 527              	.L73:
+ 528              		@ sp needed
+ 529 0014 10BD     		pop	{r4, pc}
+ 530              	.L72:
+ 531 0016 FFF7FEFF 		bl	lorawan_api_update_next_tx_channel
+ 532 001a FBE7     		b	.L73
+ 533              	.L75:
+ 534              		.align	2
+ 535              	.L74:
+ 536 001c 00000000 		.word	modem_tpm_context
+ 538              		.section	.text.modem_tpm_radio_busy_lbt,"ax",%progbits
+ 539              		.align	1
+ARM GAS  /tmp/ccGtGsCB.s 			page 10
+
+
+ 540              		.syntax unified
+ 541              		.code	16
+ 542              		.thumb_func
+ 543              		.fpu softvfp
+ 545              	modem_tpm_radio_busy_lbt:
+ 546              		@ args = 0, pretend = 0, frame = 0
+ 547              		@ frame_needed = 0, uses_anonymous_args = 0
+ 548 0000 10B5     		push	{r4, lr}
+ 549 0002 FFF7FEFF 		bl	tpm_get_next_channel
+ 550 0006 0B4C     		ldr	r4, .L79
+ 551 0008 2200     		movs	r2, r4
+ 552 000a FF32     		adds	r2, r2, #255
+ 553 000c 937F     		ldrb	r3, [r2, #30]
+ 554 000e 0133     		adds	r3, r3, #1
+ 555 0010 DBB2     		uxtb	r3, r3
+ 556 0012 9377     		strb	r3, [r2, #30]
+ 557 0014 092B     		cmp	r3, #9
+ 558 0016 0AD8     		bhi	.L77
+ 559 0018 0028     		cmp	r0, #0
+ 560 001a 08D1     		bne	.L77
+ 561 001c FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 562 0020 F530     		adds	r0, r0, #245
+ 563 0022 FC34     		adds	r4, r4, #252
+ 564 0024 FF30     		adds	r0, r0, #255
+ 565 0026 2061     		str	r0, [r4, #16]
+ 566 0028 FFF7FEFF 		bl	modem_tx_protocol_manager_engine
+ 567              	.L76:
+ 568              		@ sp needed
+ 569 002c 10BD     		pop	{r4, pc}
+ 570              	.L77:
+ 571 002e FFF7FEFF 		bl	tpm_abort
+ 572 0032 FBE7     		b	.L76
+ 573              	.L80:
+ 574              		.align	2
+ 575              	.L79:
+ 576 0034 00000000 		.word	modem_tpm_context
+ 578              		.section	.text.modem_tx_protcol_manager_init,"ax",%progbits
+ 579              		.align	1
+ 580              		.global	modem_tx_protcol_manager_init
+ 581              		.syntax unified
+ 582              		.code	16
+ 583              		.thumb_func
+ 584              		.fpu softvfp
+ 586              	modem_tx_protcol_manager_init:
+ 587              		@ args = 0, pretend = 0, frame = 8
+ 588              		@ frame_needed = 0, uses_anonymous_args = 0
+ 589 0000 9822     		movs	r2, #152
+ 590 0002 F0B5     		push	{r4, r5, r6, r7, lr}
+ 591 0004 0400     		movs	r4, r0
+ 592 0006 294D     		ldr	r5, .L86
+ 593 0008 89B0     		sub	sp, sp, #36
+ 594 000a 0021     		movs	r1, #0
+ 595 000c 5200     		lsls	r2, r2, #1
+ 596 000e 2800     		movs	r0, r5
+ 597 0010 FFF7FEFF 		bl	memset
+ 598 0014 2C61     		str	r4, [r5, #16]
+ 599 0016 2B00     		movs	r3, r5
+ARM GAS  /tmp/ccGtGsCB.s 			page 11
+
+
+ 600 0018 0024     		movs	r4, #0
+ 601 001a FF33     		adds	r3, r3, #255
+ 602 001c 2000     		movs	r0, r4
+ 603 001e 5C75     		strb	r4, [r3, #21]
+ 604 0020 2C73     		strb	r4, [r5, #12]
+ 605 0022 FFF7FEFF 		bl	smtc_lbt_get_obj
+ 606 0026 224B     		ldr	r3, .L86+4
+ 607 0028 0494     		str	r4, [sp, #16]
+ 608 002a 0393     		str	r3, [sp, #12]
+ 609 002c 214B     		ldr	r3, .L86+8
+ 610 002e 0294     		str	r4, [sp, #8]
+ 611 0030 0193     		str	r3, [sp, #4]
+ 612 0032 0094     		str	r4, [sp]
+ 613 0034 204B     		ldr	r3, .L86+12
+ 614 0036 0222     		movs	r2, #2
+ 615 0038 2969     		ldr	r1, [r5, #16]
+ 616 003a FFF7FEFF 		bl	smtc_lbt_init
+ 617 003e 2000     		movs	r0, r4
+ 618 0040 FFF7FEFF 		bl	lorawan_api_stack_mac_get
+ 619 0044 0368     		ldr	r3, [r0]
+ 620 0046 4A33     		adds	r3, r3, #74
+ 621 0048 1B78     		ldrb	r3, [r3]
+ 622 004a A342     		cmp	r3, r4
+ 623 004c 2AD0     		beq	.L82
+ 624 004e 2000     		movs	r0, r4
+ 625 0050 FFF7FEFF 		bl	lorawan_api_stack_mac_get
+ 626 0054 194F     		ldr	r7, .L86+16
+ 627 0056 C05D     		ldrb	r0, [r0, r7]
+ 628 0058 FFF7FEFF 		bl	smtc_lbt_get_obj
+ 629 005c 0500     		movs	r5, r0
+ 630 005e 2000     		movs	r0, r4
+ 631 0060 FFF7FEFF 		bl	lorawan_api_stack_mac_get
+ 632 0064 0068     		ldr	r0, [r0]
+ 633 0066 FFF7FEFF 		bl	smtc_real_get_lbt_duration_ms
+ 634 006a 0790     		str	r0, [sp, #28]
+ 635 006c 2000     		movs	r0, r4
+ 636 006e FFF7FEFF 		bl	lorawan_api_stack_mac_get
+ 637 0072 0068     		ldr	r0, [r0]
+ 638 0074 FFF7FEFF 		bl	smtc_real_get_lbt_threshold_dbm
+ 639 0078 0600     		movs	r6, r0
+ 640 007a 2000     		movs	r0, r4
+ 641 007c FFF7FEFF 		bl	lorawan_api_stack_mac_get
+ 642 0080 0068     		ldr	r0, [r0]
+ 643 0082 FFF7FEFF 		bl	smtc_real_get_lbt_bw_hz
+ 644 0086 0799     		ldr	r1, [sp, #28]
+ 645 0088 0300     		movs	r3, r0
+ 646 008a 3200     		movs	r2, r6
+ 647 008c 2800     		movs	r0, r5
+ 648 008e FFF7FEFF 		bl	smtc_lbt_set_parameters
+ 649 0092 2000     		movs	r0, r4
+ 650 0094 FFF7FEFF 		bl	lorawan_api_stack_mac_get
+ 651 0098 C05D     		ldrb	r0, [r0, r7]
+ 652 009a FFF7FEFF 		bl	smtc_lbt_get_obj
+ 653 009e 0121     		movs	r1, #1
+ 654 00a0 FFF7FEFF 		bl	smtc_lbt_set_state
+ 655              	.L82:
+ 656 00a4 FFF7FEFF 		bl	reset_tpm_list
+ARM GAS  /tmp/ccGtGsCB.s 			page 12
+
+
+ 657 00a8 09B0     		add	sp, sp, #36
+ 658              		@ sp needed
+ 659 00aa F0BD     		pop	{r4, r5, r6, r7, pc}
+ 660              	.L87:
+ 661              		.align	2
+ 662              	.L86:
+ 663 00ac 00000000 		.word	modem_tpm_context
+ 664 00b0 00000000 		.word	modem_tpm_radio_abort_lbt
+ 665 00b4 00000000 		.word	modem_tpm_radio_busy_lbt
+ 666 00b8 00000000 		.word	modem_tpm_radio_free_lbt
+ 667 00bc 04050000 		.word	1284
+ 669              		.section	.text.tx_protocol_manager_is_busy,"ax",%progbits
+ 670              		.align	1
+ 671              		.global	tx_protocol_manager_is_busy
+ 672              		.syntax unified
+ 673              		.code	16
+ 674              		.thumb_func
+ 675              		.fpu softvfp
+ 677              	tx_protocol_manager_is_busy:
+ 678              		@ args = 0, pretend = 0, frame = 0
+ 679              		@ frame_needed = 0, uses_anonymous_args = 0
+ 680              		@ link register save eliminated.
+ 681 0000 044B     		ldr	r3, .L91
+ 682              		@ sp needed
+ 683 0002 9878     		ldrb	r0, [r3, #2]
+ 684 0004 431E     		subs	r3, r0, #1
+ 685 0006 9841     		sbcs	r0, r0, r3
+ 686 0008 034B     		ldr	r3, .L91+4
+ 687 000a 4042     		rsbs	r0, r0, #0
+ 688 000c 1840     		ands	r0, r3
+ 689 000e 034B     		ldr	r3, .L91+8
+ 690 0010 C018     		adds	r0, r0, r3
+ 691 0012 7047     		bx	lr
+ 692              	.L92:
+ 693              		.align	2
+ 694              	.L91:
+ 695 0014 00000000 		.word	modem_tpm_context
+ 696 0018 F0D8FFFF 		.word	-10000
+ 697 001c 10270000 		.word	10000
+ 699              		.section	.text.tx_protocol_manager_request,"ax",%progbits
+ 700              		.align	1
+ 701              		.global	tx_protocol_manager_request
+ 702              		.syntax unified
+ 703              		.code	16
+ 704              		.thumb_func
+ 705              		.fpu softvfp
+ 707              	tx_protocol_manager_request:
+ 708              		@ args = 16, pretend = 0, frame = 24
+ 709              		@ frame_needed = 0, uses_anonymous_args = 0
+ 710 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 711 0002 87B0     		sub	sp, sp, #28
+ 712 0004 0393     		str	r3, [sp, #12]
+ 713 0006 0CAB     		add	r3, sp, #48
+ 714 0008 1F78     		ldrb	r7, [r3]
+ 715 000a 0DAB     		add	r3, sp, #52
+ 716 000c 1B78     		ldrb	r3, [r3]
+ 717 000e 0191     		str	r1, [sp, #4]
+ARM GAS  /tmp/ccGtGsCB.s 			page 13
+
+
+ 718 0010 0493     		str	r3, [sp, #16]
+ 719 0012 0FAB     		add	r3, sp, #60
+ 720 0014 1B78     		ldrb	r3, [r3]
+ 721 0016 0292     		str	r2, [sp, #8]
+ 722 0018 0593     		str	r3, [sp, #20]
+ 723 001a 0600     		movs	r6, r0
+ 724 001c FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 725 0020 224B     		ldr	r3, .L99
+ 726 0022 9421     		movs	r1, #148
+ 727 0024 1C00     		movs	r4, r3
+ 728 0026 1D00     		movs	r5, r3
+ 729 0028 0022     		movs	r2, #0
+ 730 002a FC34     		adds	r4, r4, #252
+ 731 002c FF35     		adds	r5, r5, #255
+ 732 002e 4900     		lsls	r1, r1, #1
+ 733 0030 2063     		str	r0, [r4, #48]
+ 734 0032 1A73     		strb	r2, [r3, #12]
+ 735 0034 5A54     		strb	r2, [r3, r1]
+ 736 0036 EA77     		strb	r2, [r5, #31]
+ 737 0038 AA77     		strb	r2, [r5, #30]
+ 738 003a 6261     		str	r2, [r4, #20]
+ 739 003c E261     		str	r2, [r4, #28]
+ 740 003e 9642     		cmp	r6, r2
+ 741 0040 03D1     		bne	.L94
+ 742              	.L97:
+ 743 0042 0120     		movs	r0, #1
+ 744 0044 4042     		rsbs	r0, r0, #0
+ 745              	.L95:
+ 746 0046 07B0     		add	sp, sp, #28
+ 747              		@ sp needed
+ 748 0048 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 749              	.L94:
+ 750 004a 0199     		ldr	r1, [sp, #4]
+ 751 004c 6A75     		strb	r2, [r5, #21]
+ 752 004e 029A     		ldr	r2, [sp, #8]
+ 753 0050 1975     		strb	r1, [r3, #20]
+ 754 0052 5A75     		strb	r2, [r3, #21]
+ 755 0054 0399     		ldr	r1, [sp, #12]
+ 756 0056 3A00     		movs	r2, r7
+ 757 0058 1548     		ldr	r0, .L99+4
+ 758 005a 1E70     		strb	r6, [r3]
+ 759 005c FFF7FEFF 		bl	memcpy
+ 760 0060 049B     		ldr	r3, [sp, #16]
+ 761 0062 6F72     		strb	r7, [r5, #9]
+ 762 0064 AB72     		strb	r3, [r5, #10]
+ 763 0066 059B     		ldr	r3, [sp, #20]
+ 764 0068 6B77     		strb	r3, [r5, #29]
+ 765 006a FFF7FEFF 		bl	compute_tpm_list
+ 766 006e 042E     		cmp	r6, #4
+ 767 0070 13D1     		bne	.L96
+ 768 0072 0E9B     		ldr	r3, [sp, #56]
+ 769 0074 E361     		str	r3, [r4, #28]
+ 770 0076 FFF7FEFF 		bl	update_add_delay_ms
+ 771 007a 0E9B     		ldr	r3, [sp, #56]
+ 772 007c 1F1A     		subs	r7, r3, r0
+ 773 007e 2761     		str	r7, [r4, #16]
+ 774 0080 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ARM GAS  /tmp/ccGtGsCB.s 			page 14
+
+
+ 775 0084 2369     		ldr	r3, [r4, #16]
+ 776 0086 C01A     		subs	r0, r0, r3
+ 777 0088 0028     		cmp	r0, #0
+ 778 008a DADC     		bgt	.L97
+ 779              	.L98:
+ 780 008c FFF7FEFF 		bl	tpm_get_next_channel
+ 781 0090 0028     		cmp	r0, #0
+ 782 0092 D6D1     		bne	.L97
+ 783 0094 FFF7FEFF 		bl	modem_tx_protocol_manager_engine
+ 784 0098 D5E7     		b	.L95
+ 785              	.L96:
+ 786 009a FA20     		movs	r0, #250
+ 787 009c 0549     		ldr	r1, .L99+8
+ 788 009e 4000     		lsls	r0, r0, #1
+ 789 00a0 FFF7FEFF 		bl	smtc_modem_hal_get_random_nb_in_range
+ 790 00a4 0E9B     		ldr	r3, [sp, #56]
+ 791 00a6 C718     		adds	r7, r0, r3
+ 792 00a8 2761     		str	r7, [r4, #16]
+ 793 00aa EFE7     		b	.L98
+ 794              	.L100:
+ 795              		.align	2
+ 796              	.L99:
+ 797 00ac 00000000 		.word	modem_tpm_context
+ 798 00b0 16000000 		.word	modem_tpm_context+22
+ 799 00b4 70170000 		.word	6000
+ 801              		.section	.text.tx_protocol_manager_lr1mac_stand_alone_tx,"ax",%progbits
+ 802              		.align	1
+ 803              		.global	tx_protocol_manager_lr1mac_stand_alone_tx
+ 804              		.syntax unified
+ 805              		.code	16
+ 806              		.thumb_func
+ 807              		.fpu softvfp
+ 809              	tx_protocol_manager_lr1mac_stand_alone_tx:
+ 810              		@ args = 0, pretend = 0, frame = 0
+ 811              		@ frame_needed = 0, uses_anonymous_args = 0
+ 812 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 813 0002 144D     		ldr	r5, .L104
+ 814 0004 0026     		movs	r6, #0
+ 815 0006 2C00     		movs	r4, r5
+ 816 0008 0123     		movs	r3, #1
+ 817 000a FF34     		adds	r4, r4, #255
+ 818 000c 2F00     		movs	r7, r5
+ 819 000e 2B73     		strb	r3, [r5, #12]
+ 820 0010 E677     		strb	r6, [r4, #31]
+ 821 0012 A677     		strb	r6, [r4, #30]
+ 822 0014 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 823 0018 FC37     		adds	r7, r7, #252
+ 824 001a 3863     		str	r0, [r7, #48]
+ 825 001c 607F     		ldrb	r0, [r4, #29]
+ 826 001e FFF7FEFF 		bl	lorawan_api_get_time_of_nwk_ans
+ 827 0022 0223     		movs	r3, #2
+ 828 0024 3861     		str	r0, [r7, #16]
+ 829 0026 7E61     		str	r6, [r7, #20]
+ 830 0028 2B70     		strb	r3, [r5]
+ 831 002a 6675     		strb	r6, [r4, #21]
+ 832 002c FFF7FEFF 		bl	tpm_get_next_channel
+ 833 0030 B042     		cmp	r0, r6
+ARM GAS  /tmp/ccGtGsCB.s 			page 15
+
+
+ 834 0032 09D0     		beq	.L102
+ 835 0034 FFF7FEFF 		bl	reset_tpm_list
+ 836 0038 9423     		movs	r3, #148
+ 837 003a 0122     		movs	r2, #1
+ 838 003c 5B00     		lsls	r3, r3, #1
+ 839 003e EA54     		strb	r2, [r5, r3]
+ 840 0040 607F     		ldrb	r0, [r4, #29]
+ 841 0042 FFF7FEFF 		bl	lorawan_api_core_abort
+ 842              	.L101:
+ 843              		@ sp needed
+ 844 0046 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 845              	.L102:
+ 846 0048 FFF7FEFF 		bl	compute_tpm_list
+ 847 004c FFF7FEFF 		bl	modem_tx_protocol_manager_engine
+ 848 0050 F9E7     		b	.L101
+ 849              	.L105:
+ 850 0052 C046     		.align	2
+ 851              	.L104:
+ 852 0054 00000000 		.word	modem_tpm_context
+ 854              		.section	.text.tx_protocol_manager_tx_is_aborted,"ax",%progbits
+ 855              		.align	1
+ 856              		.global	tx_protocol_manager_tx_is_aborted
+ 857              		.syntax unified
+ 858              		.code	16
+ 859              		.thumb_func
+ 860              		.fpu softvfp
+ 862              	tx_protocol_manager_tx_is_aborted:
+ 863              		@ args = 0, pretend = 0, frame = 0
+ 864              		@ frame_needed = 0, uses_anonymous_args = 0
+ 865              		@ link register save eliminated.
+ 866 0000 0020     		movs	r0, #0
+ 867 0002 044B     		ldr	r3, .L109
+ 868 0004 1A7B     		ldrb	r2, [r3, #12]
+ 869 0006 8242     		cmp	r2, r0
+ 870 0008 02D1     		bne	.L107
+ 871 000a 9422     		movs	r2, #148
+ 872 000c 5200     		lsls	r2, r2, #1
+ 873 000e 985C     		ldrb	r0, [r3, r2]
+ 874              	.L107:
+ 875              		@ sp needed
+ 876 0010 7047     		bx	lr
+ 877              	.L110:
+ 878 0012 C046     		.align	2
+ 879              	.L109:
+ 880 0014 00000000 		.word	modem_tpm_context
+ 882              		.section	.text.tx_protocol_manager_abort,"ax",%progbits
+ 883              		.align	1
+ 884              		.global	tx_protocol_manager_abort
+ 885              		.syntax unified
+ 886              		.code	16
+ 887              		.thumb_func
+ 888              		.fpu softvfp
+ 890              	tx_protocol_manager_abort:
+ 891              		@ args = 0, pretend = 0, frame = 0
+ 892              		@ frame_needed = 0, uses_anonymous_args = 0
+ 893 0000 10B5     		push	{r4, lr}
+ 894 0002 FFF7FEFF 		bl	tpm_abort
+ARM GAS  /tmp/ccGtGsCB.s 			page 16
+
+
+ 895              		@ sp needed
+ 896 0006 10BD     		pop	{r4, pc}
+ 898              		.section	.bss.modem_tpm_context,"aw",%nobits
+ 899              		.align	2
+ 902              	modem_tpm_context:
+ 903 0000 00000000 		.space	304
+ 903      00000000 
+ 903      00000000 
+ 903      00000000 
+ 903      00000000 
+ 904              		.section	.rodata.launch_tpm_func,"a"
+ 905              		.align	2
+ 906              		.set	.LANCHOR0,. + 0
+ 909              	launch_tpm_func:
+ 910 0000 00000000 		.word	manage_lbt_state
+ 911 0004 00000000 		.word	manage_tx_lora_state
+ 912 0008 00000000 		.word	manage_tx_nwk_lora_state
+ 913 000c 00000000 		.word	manage_idle_state
+ 914              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccGtGsCB.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 modem_tx_protocol_manager.c
+     /tmp/ccGtGsCB.s:12     .text.shift_left_tpm_list:0000000000000000 $t
+     /tmp/ccGtGsCB.s:19     .text.shift_left_tpm_list:0000000000000000 shift_left_tpm_list
+     /tmp/ccGtGsCB.s:40     .text.shift_left_tpm_list:0000000000000018 $d
+     /tmp/ccGtGsCB.s:902    .bss.modem_tpm_context:0000000000000000 modem_tpm_context
+     /tmp/ccGtGsCB.s:43     .text.reset_tpm_list:0000000000000000 $t
+     /tmp/ccGtGsCB.s:49     .text.reset_tpm_list:0000000000000000 reset_tpm_list
+     /tmp/ccGtGsCB.s:66     .text.reset_tpm_list:0000000000000010 $d
+     /tmp/ccGtGsCB.s:69     .text.manage_idle_state:0000000000000000 $t
+     /tmp/ccGtGsCB.s:75     .text.manage_idle_state:0000000000000000 manage_idle_state
+     /tmp/ccGtGsCB.s:84     .text.tpm_abort:0000000000000000 $t
+     /tmp/ccGtGsCB.s:90     .text.tpm_abort:0000000000000000 tpm_abort
+     /tmp/ccGtGsCB.s:108    .text.tpm_abort:000000000000001c $d
+     /tmp/ccGtGsCB.s:111    .text.modem_tpm_radio_abort_lbt:0000000000000000 $t
+     /tmp/ccGtGsCB.s:117    .text.modem_tpm_radio_abort_lbt:0000000000000000 modem_tpm_radio_abort_lbt
+     /tmp/ccGtGsCB.s:126    .text.modem_tx_protocol_manager_engine:0000000000000000 $t
+     /tmp/ccGtGsCB.s:132    .text.modem_tx_protocol_manager_engine:0000000000000000 modem_tx_protocol_manager_engine
+     /tmp/ccGtGsCB.s:162    .text.modem_tx_protocol_manager_engine:0000000000000030 $d
+     /tmp/ccGtGsCB.s:166    .text.modem_tpm_radio_free_lbt:0000000000000000 $t
+     /tmp/ccGtGsCB.s:172    .text.modem_tpm_radio_free_lbt:0000000000000000 modem_tpm_radio_free_lbt
+     /tmp/ccGtGsCB.s:195    .text.modem_tpm_radio_free_lbt:0000000000000024 $d
+     /tmp/ccGtGsCB.s:198    .text.manage_tx_nwk_lora_state:0000000000000000 $t
+     /tmp/ccGtGsCB.s:204    .text.manage_tx_nwk_lora_state:0000000000000000 manage_tx_nwk_lora_state
+     /tmp/ccGtGsCB.s:231    .text.manage_tx_nwk_lora_state:000000000000002c $d
+     /tmp/ccGtGsCB.s:234    .text.compute_tpm_list:0000000000000000 $t
+     /tmp/ccGtGsCB.s:240    .text.compute_tpm_list:0000000000000000 compute_tpm_list
+     /tmp/ccGtGsCB.s:276    .text.compute_tpm_list:000000000000003c $d
+     /tmp/ccGtGsCB.s:279    .text.update_add_delay_ms:0000000000000000 $t
+     /tmp/ccGtGsCB.s:285    .text.update_add_delay_ms:0000000000000000 update_add_delay_ms
+     /tmp/ccGtGsCB.s:323    .text.update_add_delay_ms:0000000000000048 $d
+     /tmp/ccGtGsCB.s:326    .text.manage_tx_lora_state:0000000000000000 $t
+     /tmp/ccGtGsCB.s:332    .text.manage_tx_lora_state:0000000000000000 manage_tx_lora_state
+     /tmp/ccGtGsCB.s:345    .text.manage_tx_lora_state:0000000000000016 $d
+     /tmp/ccGtGsCB.s:349    .text.manage_tx_lora_state:000000000000001a $t
+     /tmp/ccGtGsCB.s:450    .text.manage_tx_lora_state:00000000000000d8 $d
+     /tmp/ccGtGsCB.s:454    .text.manage_lbt_state:0000000000000000 $t
+     /tmp/ccGtGsCB.s:460    .text.manage_lbt_state:0000000000000000 manage_lbt_state
+     /tmp/ccGtGsCB.s:506    .text.manage_lbt_state:0000000000000054 $d
+     /tmp/ccGtGsCB.s:509    .text.tpm_get_next_channel:0000000000000000 $t
+     /tmp/ccGtGsCB.s:515    .text.tpm_get_next_channel:0000000000000000 tpm_get_next_channel
+     /tmp/ccGtGsCB.s:536    .text.tpm_get_next_channel:000000000000001c $d
+     /tmp/ccGtGsCB.s:539    .text.modem_tpm_radio_busy_lbt:0000000000000000 $t
+     /tmp/ccGtGsCB.s:545    .text.modem_tpm_radio_busy_lbt:0000000000000000 modem_tpm_radio_busy_lbt
+     /tmp/ccGtGsCB.s:576    .text.modem_tpm_radio_busy_lbt:0000000000000034 $d
+     /tmp/ccGtGsCB.s:579    .text.modem_tx_protcol_manager_init:0000000000000000 $t
+     /tmp/ccGtGsCB.s:586    .text.modem_tx_protcol_manager_init:0000000000000000 modem_tx_protcol_manager_init
+     /tmp/ccGtGsCB.s:663    .text.modem_tx_protcol_manager_init:00000000000000ac $d
+     /tmp/ccGtGsCB.s:670    .text.tx_protocol_manager_is_busy:0000000000000000 $t
+     /tmp/ccGtGsCB.s:677    .text.tx_protocol_manager_is_busy:0000000000000000 tx_protocol_manager_is_busy
+     /tmp/ccGtGsCB.s:695    .text.tx_protocol_manager_is_busy:0000000000000014 $d
+     /tmp/ccGtGsCB.s:700    .text.tx_protocol_manager_request:0000000000000000 $t
+     /tmp/ccGtGsCB.s:707    .text.tx_protocol_manager_request:0000000000000000 tx_protocol_manager_request
+     /tmp/ccGtGsCB.s:797    .text.tx_protocol_manager_request:00000000000000ac $d
+     /tmp/ccGtGsCB.s:802    .text.tx_protocol_manager_lr1mac_stand_alone_tx:0000000000000000 $t
+     /tmp/ccGtGsCB.s:809    .text.tx_protocol_manager_lr1mac_stand_alone_tx:0000000000000000 tx_protocol_manager_lr1mac_stand_alone_tx
+     /tmp/ccGtGsCB.s:852    .text.tx_protocol_manager_lr1mac_stand_alone_tx:0000000000000054 $d
+ARM GAS  /tmp/ccGtGsCB.s 			page 18
+
+
+     /tmp/ccGtGsCB.s:855    .text.tx_protocol_manager_tx_is_aborted:0000000000000000 $t
+     /tmp/ccGtGsCB.s:862    .text.tx_protocol_manager_tx_is_aborted:0000000000000000 tx_protocol_manager_tx_is_aborted
+     /tmp/ccGtGsCB.s:880    .text.tx_protocol_manager_tx_is_aborted:0000000000000014 $d
+     /tmp/ccGtGsCB.s:883    .text.tx_protocol_manager_abort:0000000000000000 $t
+     /tmp/ccGtGsCB.s:890    .text.tx_protocol_manager_abort:0000000000000000 tx_protocol_manager_abort
+     /tmp/ccGtGsCB.s:899    .bss.modem_tpm_context:0000000000000000 $d
+     /tmp/ccGtGsCB.s:905    .rodata.launch_tpm_func:0000000000000000 $d
+     /tmp/ccGtGsCB.s:909    .rodata.launch_tpm_func:0000000000000000 launch_tpm_func
+
+UNDEFINED SYMBOLS
+lorawan_api_core_abort
+smtc_modem_hal_get_time_in_s
+smtc_modem_hal_get_time_in_ms
+lorawan_api_set_next_tx_at_time
+lorawan_api_set_time_of_nwk_ans
+smtc_lbt_get_obj
+smtc_lbt_get_state
+smtc_lbt_get_parameters
+smtc_modem_hal_get_radio_tcxo_startup_delay_ms
+__gnu_thumb1_case_uqi
+lorawan_api_join
+lorawan_api_payload_send
+lorawan_api_send_stack_cid_req
+lorawan_api_stack_mac_get
+smtc_lbt_listen_channel
+lorawan_api_update_join_channel
+lorawan_api_update_next_tx_channel
+memset
+smtc_lbt_init
+smtc_real_get_lbt_duration_ms
+smtc_real_get_lbt_threshold_dbm
+smtc_real_get_lbt_bw_hz
+smtc_lbt_set_parameters
+smtc_lbt_set_state
+memcpy
+smtc_modem_hal_get_random_nb_in_range
+lorawan_api_get_time_of_nwk_ans

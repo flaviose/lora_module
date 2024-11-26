@@ -1,0 +1,1339 @@
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"lorawan_certification.c"
+  10              		.text
+  11              		.section	.rodata.lorawan_certification_service_on_update.str1.1,"aMS",%progbits,1
+  12              	.LC0:
+  13 0000 69647820 		.ascii	"idx < NUMBER_OF_CERTIF_OBJ\000"
+  13      3C204E55 
+  13      4D424552 
+  13      5F4F465F 
+  13      43455254 
+  14              		.global	__aeabi_uidiv
+  15              		.section	.text.lorawan_certification_service_on_update,"ax",%progbits
+  16              		.align	1
+  17              		.arch armv6s-m
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	lorawan_certification_service_on_update:
+  24              		@ args = 0, pretend = 0, frame = 16
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  27 0002 0478     		ldrb	r4, [r0]
+  28 0004 85B0     		sub	sp, sp, #20
+  29 0006 002C     		cmp	r4, #0
+  30 0008 05D0     		beq	.L2
+  31 000a B921     		movs	r1, #185
+  32 000c 204A     		ldr	r2, .L14
+  33 000e 2148     		ldr	r0, .L14+4
+  34 0010 4900     		lsls	r1, r1, #1
+  35 0012 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+  36              	.L2:
+  37 0016 8825     		movs	r5, #136
+  38 0018 6D00     		lsls	r5, r5, #1
+  39 001a 2F00     		movs	r7, r5
+  40 001c 1022     		movs	r2, #16
+  41 001e 0021     		movs	r1, #0
+  42 0020 6846     		mov	r0, sp
+  43 0022 FFF7FEFF 		bl	memset
+  44 0026 0323     		movs	r3, #3
+  45 0028 6A46     		mov	r2, sp
+  46 002a 6743     		muls	r7, r4
+  47 002c 1A4E     		ldr	r6, .L14+8
+  48 002e 1372     		strb	r3, [r2, #8]
+  49 0030 F719     		adds	r7, r6, r7
+  50 0032 BB88     		ldrh	r3, [r7, #4]
+  51 0034 3879     		ldrb	r0, [r7, #4]
+  52 0036 5BBA     		rev16	r3, r3
+  53 0038 1380     		strh	r3, [r2]
+  54 003a FFF7FEFF 		bl	lorawan_api_isjoined
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 2
+
+
+  55 003e 0228     		cmp	r0, #2
+  56 0040 05D1     		bne	.L3
+  57 0042 FF37     		adds	r7, r7, #255
+  58 0044 7B7B     		ldrb	r3, [r7, #13]
+  59 0046 032B     		cmp	r3, #3
+  60 0048 01D1     		bne	.L3
+  61 004a 0023     		movs	r3, #0
+  62 004c 7B73     		strb	r3, [r7, #13]
+  63              	.L3:
+  64 004e 6543     		muls	r5, r4
+  65 0050 7519     		adds	r5, r6, r5
+  66 0052 AB79     		ldrb	r3, [r5, #6]
+  67 0054 002B     		cmp	r3, #0
+  68 0056 14D0     		beq	.L1
+  69 0058 FA27     		movs	r7, #250
+  70 005a 6B7B     		ldrb	r3, [r5, #13]
+  71 005c A400     		lsls	r4, r4, #2
+  72 005e BF00     		lsls	r7, r7, #2
+  73 0060 002B     		cmp	r3, #0
+  74 0062 10D0     		beq	.L5
+  75 0064 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+  76 0068 EB89     		ldrh	r3, [r5, #14]
+  77 006a 7B43     		muls	r3, r7
+  78 006c 1B18     		adds	r3, r3, r0
+  79              	.L13:
+  80 006e FA21     		movs	r1, #250
+  81 0070 3351     		str	r3, [r6, r4]
+  82 0072 3059     		ldr	r0, [r6, r4]
+  83 0074 8900     		lsls	r1, r1, #2
+  84 0076 FFF7FEFF 		bl	__aeabi_uidiv
+  85 007a 0190     		str	r0, [sp, #4]
+  86 007c 6846     		mov	r0, sp
+  87 007e FFF7FEFF 		bl	modem_supervisor_add_task
+  88              	.L1:
+  89 0082 05B0     		add	sp, sp, #20
+  90              		@ sp needed
+  91 0084 F0BD     		pop	{r4, r5, r6, r7, pc}
+  92              	.L5:
+  93 0086 6B89     		ldrh	r3, [r5, #10]
+  94 0088 3259     		ldr	r2, [r6, r4]
+  95 008a 7B43     		muls	r3, r7
+  96 008c 9B18     		adds	r3, r3, r2
+  97 008e EEE7     		b	.L13
+  98              	.L15:
+  99              		.align	2
+ 100              	.L14:
+ 101 0090 00000000 		.word	.LC0
+ 102 0094 00000000 		.word	.LANCHOR0
+ 103 0098 00000000 		.word	certif_service_ctx
+ 105              		.section	.text.lorawan_certification_service_on_launch,"ax",%progbits
+ 106              		.align	1
+ 107              		.syntax unified
+ 108              		.code	16
+ 109              		.thumb_func
+ 110              		.fpu softvfp
+ 112              	lorawan_certification_service_on_launch:
+ 113              		@ args = 0, pretend = 0, frame = 16
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 3
+
+
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 116 0002 0578     		ldrb	r5, [r0]
+ 117 0004 89B0     		sub	sp, sp, #36
+ 118 0006 002D     		cmp	r5, #0
+ 119 0008 05D0     		beq	.L17
+ 120 000a 9921     		movs	r1, #153
+ 121 000c 454A     		ldr	r2, .L48
+ 122 000e 4648     		ldr	r0, .L48+4
+ 123 0010 4900     		lsls	r1, r1, #1
+ 124 0012 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 125              	.L17:
+ 126 0016 8826     		movs	r6, #136
+ 127 0018 7600     		lsls	r6, r6, #1
+ 128 001a FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 129 001e 3300     		movs	r3, r6
+ 130 0020 6B43     		muls	r3, r5
+ 131 0022 424C     		ldr	r4, .L48+8
+ 132 0024 AF00     		lsls	r7, r5, #2
+ 133 0026 0A30     		adds	r0, r0, #10
+ 134 0028 3851     		str	r0, [r7, r4]
+ 135 002a E318     		adds	r3, r4, r3
+ 136 002c 5A7B     		ldrb	r2, [r3, #13]
+ 137 002e 002A     		cmp	r2, #0
+ 138 0030 03D0     		beq	.L18
+ 139 0032 0022     		movs	r2, #0
+ 140 0034 5A73     		strb	r2, [r3, #13]
+ 141 0036 FFF7FEFF 		bl	smtc_modem_test_stop
+ 142              	.L18:
+ 143 003a 6E43     		muls	r6, r5
+ 144 003c 0596     		str	r6, [sp, #20]
+ 145 003e A619     		adds	r6, r4, r6
+ 146 0040 3079     		ldrb	r0, [r6, #4]
+ 147 0042 FFF7FEFF 		bl	lorawan_api_isjoined
+ 148 0046 3300     		movs	r3, r6
+ 149 0048 FF33     		adds	r3, r3, #255
+ 150 004a 0493     		str	r3, [sp, #16]
+ 151 004c 0228     		cmp	r0, #2
+ 152 004e 10D0     		beq	.L19
+ 153 0050 0323     		movs	r3, #3
+ 154 0052 049A     		ldr	r2, [sp, #16]
+ 155 0054 5373     		strb	r3, [r2, #13]
+ 156              	.L20:
+ 157 0056 8823     		movs	r3, #136
+ 158 0058 5B00     		lsls	r3, r3, #1
+ 159 005a 5D43     		muls	r5, r3
+ 160 005c 6419     		adds	r4, r4, r5
+ 161 005e 2079     		ldrb	r0, [r4, #4]
+ 162 0060 FFF7FEFF 		bl	lorawan_api_isjoined
+ 163 0064 0228     		cmp	r0, #2
+ 164 0066 02D0     		beq	.L16
+ 165 0068 2079     		ldrb	r0, [r4, #4]
+ 166 006a FFF7FEFF 		bl	lorawan_join_add_task
+ 167              	.L16:
+ 168 006e 09B0     		add	sp, sp, #36
+ 169              		@ sp needed
+ 170 0070 F0BD     		pop	{r4, r5, r6, r7, pc}
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 4
+
+
+ 171              	.L19:
+ 172 0072 049B     		ldr	r3, [sp, #16]
+ 173 0074 5B7B     		ldrb	r3, [r3, #13]
+ 174 0076 022B     		cmp	r3, #2
+ 175 0078 1ED0     		beq	.L21
+ 176 007a 032B     		cmp	r3, #3
+ 177 007c EBD0     		beq	.L20
+ 178 007e 317B     		ldrb	r1, [r6, #12]
+ 179 0080 012B     		cmp	r3, #1
+ 180 0082 3AD1     		bne	.L22
+ 181 0084 367E     		ldrb	r6, [r6, #24]
+ 182 0086 3200     		movs	r2, r6
+ 183 0088 531E     		subs	r3, r2, #1
+ 184 008a 9A41     		sbcs	r2, r2, r3
+ 185 008c 059B     		ldr	r3, [sp, #20]
+ 186 008e D2B2     		uxtb	r2, r2
+ 187 0090 1933     		adds	r3, r3, #25
+ 188 0092 E318     		adds	r3, r4, r3
+ 189 0094 0029     		cmp	r1, #0
+ 190 0096 00D0     		beq	.L23
+ 191 0098 0420     		movs	r0, #4
+ 192              	.L23:
+ 193 009a 8821     		movs	r1, #136
+ 194 009c 4900     		lsls	r1, r1, #1
+ 195 009e 6943     		muls	r1, r5
+ 196 00a0 6118     		adds	r1, r4, r1
+ 197 00a2 0979     		ldrb	r1, [r1, #4]
+ 198 00a4 0391     		str	r1, [sp, #12]
+ 199 00a6 E159     		ldr	r1, [r4, r7]
+ 200 00a8 0190     		str	r0, [sp, #4]
+ 201 00aa 0291     		str	r1, [sp, #8]
+ 202 00ac E021     		movs	r1, #224
+ 203 00ae 0096     		str	r6, [sp]
+ 204              	.L47:
+ 205 00b0 0220     		movs	r0, #2
+ 206 00b2 FFF7FEFF 		bl	tx_protocol_manager_request
+ 207 00b6 14E0     		b	.L24
+ 208              	.L21:
+ 209 00b8 049B     		ldr	r3, [sp, #16]
+ 210 00ba 9F7B     		ldrb	r7, [r3, #14]
+ 211 00bc FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 212 00c0 3279     		ldrb	r2, [r6, #4]
+ 213 00c2 0026     		movs	r6, #0
+ 214 00c4 059B     		ldr	r3, [sp, #20]
+ 215 00c6 0392     		str	r2, [sp, #12]
+ 216 00c8 0F33     		adds	r3, r3, #15
+ 217 00ca FF33     		adds	r3, r3, #255
+ 218 00cc E318     		adds	r3, r4, r3
+ 219 00ce 0290     		str	r0, [sp, #8]
+ 220 00d0 3200     		movs	r2, r6
+ 221 00d2 3100     		movs	r1, r6
+ 222 00d4 0320     		movs	r0, #3
+ 223 00d6 0196     		str	r6, [sp, #4]
+ 224 00d8 0097     		str	r7, [sp]
+ 225 00da FFF7FEFF 		bl	tx_protocol_manager_request
+ 226 00de 049B     		ldr	r3, [sp, #16]
+ 227 00e0 9E73     		strb	r6, [r3, #14]
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 5
+
+
+ 228              	.L24:
+ 229 00e2 0028     		cmp	r0, #0
+ 230 00e4 C3D1     		bne	.L16
+ 231 00e6 8823     		movs	r3, #136
+ 232 00e8 5B00     		lsls	r3, r3, #1
+ 233 00ea 5D43     		muls	r5, r3
+ 234 00ec 6419     		adds	r4, r4, r5
+ 235 00ee FF34     		adds	r4, r4, #255
+ 236 00f0 637B     		ldrb	r3, [r4, #13]
+ 237 00f2 032B     		cmp	r3, #3
+ 238 00f4 BBD0     		beq	.L16
+ 239 00f6 6073     		strb	r0, [r4, #13]
+ 240 00f8 B9E7     		b	.L16
+ 241              	.L22:
+ 242 00fa 0D4B     		ldr	r3, .L48+12
+ 243 00fc 0793     		str	r3, [sp, #28]
+ 244 00fe 0029     		cmp	r1, #0
+ 245 0100 00D0     		beq	.L27
+ 246 0102 0420     		movs	r0, #4
+ 247              	.L27:
+ 248 0104 8823     		movs	r3, #136
+ 249 0106 5B00     		lsls	r3, r3, #1
+ 250 0108 6B43     		muls	r3, r5
+ 251 010a E318     		adds	r3, r4, r3
+ 252 010c 1B79     		ldrb	r3, [r3, #4]
+ 253 010e 0122     		movs	r2, #1
+ 254 0110 0393     		str	r3, [sp, #12]
+ 255 0112 E359     		ldr	r3, [r4, r7]
+ 256 0114 1100     		movs	r1, r2
+ 257 0116 0293     		str	r3, [sp, #8]
+ 258 0118 0423     		movs	r3, #4
+ 259 011a 0190     		str	r0, [sp, #4]
+ 260 011c 0093     		str	r3, [sp]
+ 261 011e 07AB     		add	r3, sp, #28
+ 262 0120 C6E7     		b	.L47
+ 263              	.L49:
+ 264 0122 C046     		.align	2
+ 265              	.L48:
+ 266 0124 00000000 		.word	.LC0
+ 267 0128 00000000 		.word	.LANCHOR1
+ 268 012c 00000000 		.word	certif_service_ctx
+ 269 0130 11121314 		.word	336794129
+ 271              		.section	.rodata.lorawan_certification_service_downlink_handler.str1.1,"aMS",%progbits,1
+ 272              	.LC8:
+ 273 0000 03030303 		.ascii	"\003\003\003\003\003\003\003\003\003\003\003\003\003"
+ 273      03030303 
+ 273      03030303 
+ 273      03
+ 274 000d 03030300 		.ascii	"\003\003\003\000"
+ 275              		.section	.text.lorawan_certification_service_downlink_handler,"ax",%progbits
+ 276              		.align	1
+ 277              		.syntax unified
+ 278              		.code	16
+ 279              		.thumb_func
+ 280              		.fpu softvfp
+ 282              	lorawan_certification_service_downlink_handler:
+ 283              		@ args = 0, pretend = 0, frame = 40
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 6
+
+
+ 284              		@ frame_needed = 0, uses_anonymous_args = 0
+ 285 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 286 0002 0400     		movs	r4, r0
+ 287 0004 8BB0     		sub	sp, sp, #44
+ 288 0006 0190     		str	r0, [sp, #4]
+ 289 0008 FF34     		adds	r4, r4, #255
+ 290 000a 657D     		ldrb	r5, [r4, #21]
+ 291 000c 002D     		cmp	r5, #0
+ 292 000e 00D0     		beq	.LCB303
+ 293 0010 65E2     		b	.L95	@long jump
+ 294              	.LCB303:
+ 295 0012 04AB     		add	r3, sp, #16
+ 296 0014 DE1C     		adds	r6, r3, #3
+ 297 0016 FF23     		movs	r3, #255
+ 298 0018 3370     		strb	r3, [r6]
+ 299 001a B94B     		ldr	r3, .L117
+ 300 001c 1B79     		ldrb	r3, [r3, #4]
+ 301 001e 002B     		cmp	r3, #0
+ 302 0020 00D1     		bne	.L52
+ 303 0022 3570     		strb	r5, [r6]
+ 304              	.L52:
+ 305 0024 3378     		ldrb	r3, [r6]
+ 306 0026 FF2B     		cmp	r3, #255
+ 307 0028 29D0     		beq	.L51
+ 308 002a 8827     		movs	r7, #136
+ 309 002c 7F00     		lsls	r7, r7, #1
+ 310 002e 7B43     		muls	r3, r7
+ 311 0030 B34A     		ldr	r2, .L117
+ 312 0032 D318     		adds	r3, r2, r3
+ 313 0034 9B79     		ldrb	r3, [r3, #6]
+ 314 0036 002B     		cmp	r3, #0
+ 315 0038 21D0     		beq	.L51
+ 316 003a 237D     		ldrb	r3, [r4, #20]
+ 317 003c 002B     		cmp	r3, #0
+ 318 003e 0DD0     		beq	.L57
+ 319 0040 FFF7FEFF 		bl	modem_supervisor_get_task
+ 320 0044 3378     		ldrb	r3, [r6]
+ 321 0046 7030     		adds	r0, r0, #112
+ 322 0048 5F43     		muls	r7, r3
+ 323 004a AD4B     		ldr	r3, .L117
+ 324 004c 0278     		ldrb	r2, [r0]
+ 325 004e DF19     		adds	r7, r3, r7
+ 326 0050 7B79     		ldrb	r3, [r7, #5]
+ 327 0052 9A42     		cmp	r2, r3
+ 328 0054 02D0     		beq	.L57
+ 329 0056 3000     		movs	r0, r6
+ 330 0058 FFF7FEFF 		bl	lorawan_certification_service_on_update
+ 331              	.L57:
+ 332 005c E37A     		ldrb	r3, [r4, #11]
+ 333 005e 0D2B     		cmp	r3, #13
+ 334 0060 10D1     		bne	.L59
+ 335 0062 3378     		ldrb	r3, [r6]
+ 336 0064 8826     		movs	r6, #136
+ 337 0066 7600     		lsls	r6, r6, #1
+ 338 0068 5E43     		muls	r6, r3
+ 339 006a A54B     		ldr	r3, .L117
+ 340 006c 9E19     		adds	r6, r3, r6
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 7
+
+
+ 341 006e 737D     		ldrb	r3, [r6, #21]
+ 342 0070 002B     		cmp	r3, #0
+ 343 0072 01D1     		bne	.L60
+ 344              	.L116:
+ 345 0074 0125     		movs	r5, #1
+ 346 0076 02E0     		b	.L51
+ 347              	.L60:
+ 348 0078 0125     		movs	r5, #1
+ 349 007a FF36     		adds	r6, r6, #255
+ 350 007c 7573     		strb	r5, [r6, #13]
+ 351              	.L51:
+ 352 007e 2800     		movs	r0, r5
+ 353 0080 0BB0     		add	sp, sp, #44
+ 354              		@ sp needed
+ 355 0082 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 356              	.L59:
+ 357 0084 A37C     		ldrb	r3, [r4, #18]
+ 358 0086 A07A     		ldrb	r0, [r4, #10]
+ 359 0088 002B     		cmp	r3, #0
+ 360 008a 04D1     		bne	.L61
+ 361 008c 0028     		cmp	r0, #0
+ 362 008e F6D0     		beq	.L51
+ 363 0090 637A     		ldrb	r3, [r4, #9]
+ 364 0092 002B     		cmp	r3, #0
+ 365 0094 F3D0     		beq	.L51
+ 366              	.L61:
+ 367 0096 3378     		ldrb	r3, [r6]
+ 368 0098 994E     		ldr	r6, .L117
+ 369 009a 0293     		str	r3, [sp, #8]
+ 370 009c 8823     		movs	r3, #136
+ 371 009e 029A     		ldr	r2, [sp, #8]
+ 372 00a0 5B00     		lsls	r3, r3, #1
+ 373 00a2 5A43     		muls	r2, r3
+ 374 00a4 B118     		adds	r1, r6, r2
+ 375 00a6 0391     		str	r1, [sp, #12]
+ 376 00a8 0989     		ldrh	r1, [r1, #8]
+ 377 00aa B718     		adds	r7, r6, r2
+ 378 00ac 0131     		adds	r1, r1, #1
+ 379 00ae 3981     		strh	r1, [r7, #8]
+ 380 00b0 0028     		cmp	r0, #0
+ 381 00b2 E4D0     		beq	.L51
+ 382 00b4 617A     		ldrb	r1, [r4, #9]
+ 383 00b6 0029     		cmp	r1, #0
+ 384 00b8 E1D0     		beq	.L51
+ 385 00ba E029     		cmp	r1, #224
+ 386 00bc DAD1     		bne	.L116
+ 387 00be 0020     		movs	r0, #0
+ 388 00c0 0199     		ldr	r1, [sp, #4]
+ 389 00c2 0C78     		ldrb	r4, [r1]
+ 390 00c4 3876     		strb	r0, [r7, #24]
+ 391 00c6 8442     		cmp	r4, r0
+ 392 00c8 39D0     		beq	.L64
+ 393 00ca 1932     		adds	r2, r2, #25
+ 394 00cc 9719     		adds	r7, r2, r6
+ 395 00ce 019A     		ldr	r2, [sp, #4]
+ 396 00d0 5278     		ldrb	r2, [r2, #1]
+ 397 00d2 222A     		cmp	r2, #34
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 8
+
+
+ 398 00d4 25D8     		bhi	.L65
+ 399 00d6 1000     		movs	r0, r2
+ 400 00d8 FFF7FEFF 		bl	__gnu_thumb1_case_uhi
+ 401              	.L67:
+ 402 00dc 9500     		.2byte	(.L80-.L67)/2
+ 403 00de A800     		.2byte	(.L79-.L67)/2
+ 404 00e0 AD00     		.2byte	(.L78-.L67)/2
+ 405 00e2 B800     		.2byte	(.L77-.L67)/2
+ 406 00e4 C700     		.2byte	(.L76-.L67)/2
+ 407 00e6 DF00     		.2byte	(.L75-.L67)/2
+ 408 00e8 EF00     		.2byte	(.L74-.L67)/2
+ 409 00ea FC00     		.2byte	(.L73-.L67)/2
+ 410 00ec 1801     		.2byte	(.L72-.L67)/2
+ 411 00ee 4A01     		.2byte	(.L71-.L67)/2
+ 412 00f0 6001     		.2byte	(.L70-.L67)/2
+ 413 00f2 3100     		.2byte	(.L64-.L67)/2
+ 414 00f4 3100     		.2byte	(.L64-.L67)/2
+ 415 00f6 3100     		.2byte	(.L64-.L67)/2
+ 416 00f8 3100     		.2byte	(.L64-.L67)/2
+ 417 00fa 3100     		.2byte	(.L64-.L67)/2
+ 418 00fc 3100     		.2byte	(.L64-.L67)/2
+ 419 00fe 3100     		.2byte	(.L64-.L67)/2
+ 420 0100 3100     		.2byte	(.L64-.L67)/2
+ 421 0102 3100     		.2byte	(.L64-.L67)/2
+ 422 0104 3100     		.2byte	(.L64-.L67)/2
+ 423 0106 3100     		.2byte	(.L64-.L67)/2
+ 424 0108 3100     		.2byte	(.L64-.L67)/2
+ 425 010a 3100     		.2byte	(.L64-.L67)/2
+ 426 010c 3100     		.2byte	(.L64-.L67)/2
+ 427 010e 3100     		.2byte	(.L64-.L67)/2
+ 428 0110 3100     		.2byte	(.L64-.L67)/2
+ 429 0112 3100     		.2byte	(.L64-.L67)/2
+ 430 0114 3100     		.2byte	(.L64-.L67)/2
+ 431 0116 3100     		.2byte	(.L64-.L67)/2
+ 432 0118 3100     		.2byte	(.L64-.L67)/2
+ 433 011a 3100     		.2byte	(.L64-.L67)/2
+ 434 011c 6901     		.2byte	(.L69-.L67)/2
+ 435 011e 7C01     		.2byte	(.L68-.L67)/2
+ 436 0120 9001     		.2byte	(.L66-.L67)/2
+ 437              		.p2align 1
+ 438              	.L65:
+ 439 0122 0121     		movs	r1, #1
+ 440 0124 7D2A     		cmp	r2, #125
+ 441 0126 00D1     		bne	.LCB436
+ 442 0128 A7E1     		b	.L81	@long jump
+ 443              	.LCB436:
+ 444 012a 11D8     		bhi	.L82
+ 445 012c 422A     		cmp	r2, #66
+ 446 012e 00D1     		bne	.LCB440
+ 447 0130 87E1     		b	.L83	@long jump
+ 448              	.LCB440:
+ 449 0132 432A     		cmp	r2, #67
+ 450 0134 00D1     		bne	.LCB442
+ 451 0136 97E1     		b	.L84	@long jump
+ 452              	.LCB442:
+ 453 0138 402A     		cmp	r2, #64
+ 454 013a 00D1     		bne	.LCB444
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 9
+
+
+ 455 013c 75E1     		b	.L85	@long jump
+ 456              	.LCB444:
+ 457              	.L64:
+ 458 013e 8822     		movs	r2, #136
+ 459 0140 029B     		ldr	r3, [sp, #8]
+ 460 0142 5200     		lsls	r2, r2, #1
+ 461 0144 5A43     		muls	r2, r3
+ 462 0146 6E4B     		ldr	r3, .L117
+ 463 0148 9B18     		adds	r3, r3, r2
+ 464 014a FF33     		adds	r3, r3, #255
+ 465 014c 5D73     		strb	r5, [r3, #13]
+ 466 014e 91E7     		b	.L116
+ 467              	.L82:
+ 468 0150 7E2A     		cmp	r2, #126
+ 469 0152 00D1     		bne	.LCB459
+ 470 0154 BAE1     		b	.L86	@long jump
+ 471              	.LCB459:
+ 472 0156 7F2A     		cmp	r2, #127
+ 473 0158 F1D1     		bne	.L64
+ 474 015a 012C     		cmp	r4, #1
+ 475 015c EFD1     		bne	.L64
+ 476 015e 029A     		ldr	r2, [sp, #8]
+ 477 0160 5343     		muls	r3, r2
+ 478 0162 F618     		adds	r6, r6, r3
+ 479 0164 3079     		ldrb	r0, [r6, #4]
+ 480 0166 FFF7FEFF 		bl	lorawan_api_next_max_payload_length_get
+ 481 016a 0C28     		cmp	r0, #12
+ 482 016c E7D9     		bls	.L64
+ 483 016e 337E     		ldrb	r3, [r6, #24]
+ 484 0170 05AD     		add	r5, sp, #20
+ 485 0172 5A1C     		adds	r2, r3, #1
+ 486 0174 3276     		strb	r2, [r6, #24]
+ 487 0176 7F22     		movs	r2, #127
+ 488 0178 FA54     		strb	r2, [r7, r3]
+ 489 017a 3079     		ldrb	r0, [r6, #4]
+ 490 017c FFF7FEFF 		bl	lorawan_api_get_spec_version
+ 491 0180 0590     		str	r0, [sp, #20]
+ 492 0182 3079     		ldrb	r0, [r6, #4]
+ 493 0184 FFF7FEFF 		bl	lorawan_api_get_regional_parameters_version
+ 494 0188 030C     		lsrs	r3, r0, #16
+ 495 018a 9C46     		mov	ip, r3
+ 496 018c 337E     		ldrb	r3, [r6, #24]
+ 497 018e 0690     		str	r0, [sp, #24]
+ 498 0190 5A1C     		adds	r2, r3, #1
+ 499 0192 3276     		strb	r2, [r6, #24]
+ 500 0194 0422     		movs	r2, #4
+ 501 0196 FA54     		strb	r2, [r7, r3]
+ 502 0198 337E     		ldrb	r3, [r6, #24]
+ 503 019a 010A     		lsrs	r1, r0, #8
+ 504 019c 5A1C     		adds	r2, r3, #1
+ 505 019e 3276     		strb	r2, [r6, #24]
+ 506 01a0 0522     		movs	r2, #5
+ 507 01a2 FA54     		strb	r2, [r7, r3]
+ 508 01a4 337E     		ldrb	r3, [r6, #24]
+ 509 01a6 5A1C     		adds	r2, r3, #1
+ 510 01a8 3276     		strb	r2, [r6, #24]
+ 511 01aa 0022     		movs	r2, #0
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 10
+
+
+ 512 01ac FA54     		strb	r2, [r7, r3]
+ 513 01ae 337E     		ldrb	r3, [r6, #24]
+ 514 01b0 5A1C     		adds	r2, r3, #1
+ 515 01b2 3276     		strb	r2, [r6, #24]
+ 516 01b4 0022     		movs	r2, #0
+ 517 01b6 FA54     		strb	r2, [r7, r3]
+ 518 01b8 337E     		ldrb	r3, [r6, #24]
+ 519 01ba 5A1C     		adds	r2, r3, #1
+ 520 01bc 3276     		strb	r2, [r6, #24]
+ 521 01be 2A78     		ldrb	r2, [r5]
+ 522 01c0 FA54     		strb	r2, [r7, r3]
+ 523 01c2 337E     		ldrb	r3, [r6, #24]
+ 524 01c4 5A1C     		adds	r2, r3, #1
+ 525 01c6 3276     		strb	r2, [r6, #24]
+ 526 01c8 6A78     		ldrb	r2, [r5, #1]
+ 527 01ca FA54     		strb	r2, [r7, r3]
+ 528 01cc 337E     		ldrb	r3, [r6, #24]
+ 529 01ce 5A1C     		adds	r2, r3, #1
+ 530 01d0 3276     		strb	r2, [r6, #24]
+ 531 01d2 AA78     		ldrb	r2, [r5, #2]
+ 532 01d4 FA54     		strb	r2, [r7, r3]
+ 533 01d6 337E     		ldrb	r3, [r6, #24]
+ 534 01d8 5A1C     		adds	r2, r3, #1
+ 535 01da 3276     		strb	r2, [r6, #24]
+ 536 01dc EA78     		ldrb	r2, [r5, #3]
+ 537 01de FA54     		strb	r2, [r7, r3]
+ 538 01e0 337E     		ldrb	r3, [r6, #24]
+ 539 01e2 5A1C     		adds	r2, r3, #1
+ 540 01e4 3276     		strb	r2, [r6, #24]
+ 541 01e6 F854     		strb	r0, [r7, r3]
+ 542 01e8 337E     		ldrb	r3, [r6, #24]
+ 543 01ea 000E     		lsrs	r0, r0, #24
+ 544 01ec 5A1C     		adds	r2, r3, #1
+ 545 01ee 3276     		strb	r2, [r6, #24]
+ 546 01f0 F954     		strb	r1, [r7, r3]
+ 547 01f2 337E     		ldrb	r3, [r6, #24]
+ 548 01f4 5A1C     		adds	r2, r3, #1
+ 549 01f6 3276     		strb	r2, [r6, #24]
+ 550 01f8 6246     		mov	r2, ip
+ 551 01fa FA54     		strb	r2, [r7, r3]
+ 552 01fc 337E     		ldrb	r3, [r6, #24]
+ 553 01fe 5A1C     		adds	r2, r3, #1
+ 554 0200 3276     		strb	r2, [r6, #24]
+ 555 0202 F854     		strb	r0, [r7, r3]
+ 556 0204 10E0     		b	.L112
+ 557              	.L80:
+ 558 0206 012C     		cmp	r4, #1
+ 559 0208 99D1     		bne	.L64
+ 560 020a 029A     		ldr	r2, [sp, #8]
+ 561 020c 5343     		muls	r3, r2
+ 562 020e F618     		adds	r6, r6, r3
+ 563 0210 0023     		movs	r3, #0
+ 564 0212 3476     		strb	r4, [r6, #24]
+ 565 0214 3B70     		strb	r3, [r7]
+ 566 0216 337E     		ldrb	r3, [r6, #24]
+ 567 0218 5A1C     		adds	r2, r3, #1
+ 568 021a 3276     		strb	r2, [r6, #24]
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 11
+
+
+ 569 021c 0622     		movs	r2, #6
+ 570 021e FA54     		strb	r2, [r7, r3]
+ 571 0220 337E     		ldrb	r3, [r6, #24]
+ 572 0222 5A1C     		adds	r2, r3, #1
+ 573 0224 3276     		strb	r2, [r6, #24]
+ 574 0226 FC54     		strb	r4, [r7, r3]
+ 575              	.L112:
+ 576 0228 2500     		movs	r5, r4
+ 577 022a 88E7     		b	.L64
+ 578              	.L79:
+ 579 022c 012C     		cmp	r4, #1
+ 580 022e 86D1     		bne	.L64
+ 581              	.L114:
+ 582 0230 FFF7FEFF 		bl	smtc_modem_hal_reset_mcu
+ 583 0234 83E7     		b	.L64
+ 584              	.L78:
+ 585 0236 012C     		cmp	r4, #1
+ 586 0238 81D1     		bne	.L64
+ 587 023a 3079     		ldrb	r0, [r6, #4]
+ 588 023c FFF7FEFF 		bl	lorawan_api_join_status_clear
+ 589 0240 0020     		movs	r0, #0
+ 590 0242 3179     		ldrb	r1, [r6, #4]
+ 591 0244 FFF7FEFF 		bl	lorawan_api_set_activation_mode
+ 592 0248 0325     		movs	r5, #3
+ 593 024a 78E7     		b	.L64
+ 594              	.L77:
+ 595 024c 022C     		cmp	r4, #2
+ 596 024e 00D0     		beq	.LCB610
+ 597 0250 75E7     		b	.L64	@long jump
+ 598              	.LCB610:
+ 599 0252 019A     		ldr	r2, [sp, #4]
+ 600 0254 9178     		ldrb	r1, [r2, #2]
+ 601 0256 0229     		cmp	r1, #2
+ 602 0258 00D9     		bls	.LCB614
+ 603 025a 70E7     		b	.L64	@long jump
+ 604              	.LCB614:
+ 605 025c 029A     		ldr	r2, [sp, #8]
+ 606 025e 5343     		muls	r3, r2
+ 607 0260 F618     		adds	r6, r6, r3
+ 608 0262 3079     		ldrb	r0, [r6, #4]
+ 609 0264 FFF7FEFF 		bl	smtc_modem_set_class
+ 610 0268 69E7     		b	.L64
+ 611              	.L76:
+ 612 026a 022C     		cmp	r4, #2
+ 613 026c 00D0     		beq	.LCB625
+ 614 026e 66E7     		b	.L64	@long jump
+ 615              	.LCB625:
+ 616 0270 019B     		ldr	r3, [sp, #4]
+ 617 0272 3679     		ldrb	r6, [r6, #4]
+ 618 0274 9C78     		ldrb	r4, [r3, #2]
+ 619 0276 002C     		cmp	r4, #0
+ 620 0278 0AD1     		bne	.L89
+ 621 027a 1022     		movs	r2, #16
+ 622 027c 2149     		ldr	r1, .L117+4
+ 623 027e 06A8     		add	r0, sp, #24
+ 624 0280 FFF7FEFF 		bl	memcpy
+ 625 0284 0321     		movs	r1, #3
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 12
+
+
+ 626 0286 3000     		movs	r0, r6
+ 627 0288 06AA     		add	r2, sp, #24
+ 628 028a FFF7FEFF 		bl	smtc_modem_adr_set_profile
+ 629 028e CBE7     		b	.L112
+ 630              	.L89:
+ 631 0290 3100     		movs	r1, r6
+ 632 0292 0020     		movs	r0, #0
+ 633 0294 FFF7FEFF 		bl	lorawan_api_dr_strategy_set
+ 634 0298 51E7     		b	.L64
+ 635              	.L75:
+ 636 029a 022C     		cmp	r4, #2
+ 637 029c 00D0     		beq	.LCB652
+ 638 029e 4EE7     		b	.L64	@long jump
+ 639              	.LCB652:
+ 640 02a0 019B     		ldr	r3, [sp, #4]
+ 641 02a2 9E78     		ldrb	r6, [r3, #2]
+ 642 02a4 002E     		cmp	r6, #0
+ 643 02a6 04D1     		bne	.L90
+ 644 02a8 2000     		movs	r0, r4
+ 645 02aa FFF7FEFF 		bl	smtc_duty_cycle_enable_set
+ 646 02ae 3500     		movs	r5, r6
+ 647 02b0 45E7     		b	.L64
+ 648              	.L90:
+ 649 02b2 0120     		movs	r0, #1
+ 650 02b4 FFF7FEFF 		bl	smtc_duty_cycle_enable_set
+ 651 02b8 41E7     		b	.L64
+ 652              	.L74:
+ 653 02ba 022C     		cmp	r4, #2
+ 654 02bc 00D0     		beq	.LCB671
+ 655 02be 3EE7     		b	.L64	@long jump
+ 656              	.LCB671:
+ 657 02c0 029A     		ldr	r2, [sp, #8]
+ 658 02c2 5343     		muls	r3, r2
+ 659 02c4 F618     		adds	r6, r6, r3
+ 660 02c6 019B     		ldr	r3, [sp, #4]
+ 661 02c8 0F4A     		ldr	r2, .L117+8
+ 662 02ca 9B78     		ldrb	r3, [r3, #2]
+ 663 02cc 5B00     		lsls	r3, r3, #1
+ 664 02ce 9B5A     		ldrh	r3, [r3, r2]
+ 665 02d0 7381     		strh	r3, [r6, #10]
+ 666 02d2 34E7     		b	.L64
+ 667              	.L73:
+ 668 02d4 F22C     		cmp	r4, #242
+ 669 02d6 00D9     		bls	.LCB686
+ 670 02d8 31E7     		b	.L64	@long jump
+ 671              	.LCB686:
+ 672 02da 019A     		ldr	r2, [sp, #4]
+ 673 02dc 9278     		ldrb	r2, [r2, #2]
+ 674 02de 012A     		cmp	r2, #1
+ 675 02e0 05D1     		bne	.L91
+ 676 02e2 029A     		ldr	r2, [sp, #8]
+ 677 02e4 5343     		muls	r3, r2
+ 678 02e6 F618     		adds	r6, r6, r3
+ 679 02e8 0023     		movs	r3, #0
+ 680              	.L115:
+ 681 02ea 3373     		strb	r3, [r6, #12]
+ 682 02ec 27E7     		b	.L64
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 13
+
+
+ 683              	.L91:
+ 684 02ee 022A     		cmp	r2, #2
+ 685 02f0 00D0     		beq	.LCB703
+ 686 02f2 24E7     		b	.L64	@long jump
+ 687              	.LCB703:
+ 688 02f4 029A     		ldr	r2, [sp, #8]
+ 689 02f6 5343     		muls	r3, r2
+ 690 02f8 F618     		adds	r6, r6, r3
+ 691 02fa 0123     		movs	r3, #1
+ 692 02fc F5E7     		b	.L115
+ 693              	.L118:
+ 694 02fe C046     		.align	2
+ 695              	.L117:
+ 696 0300 00000000 		.word	certif_service_ctx
+ 697 0304 00000000 		.word	.LC8
+ 698 0308 00000000 		.word	.LANCHOR2
+ 699              	.L72:
+ 700 030c F22C     		cmp	r4, #242
+ 701 030e 00D9     		bls	.LCB721
+ 702 0310 15E7     		b	.L64	@long jump
+ 703              	.LCB721:
+ 704 0312 029D     		ldr	r5, [sp, #8]
+ 705 0314 5D43     		muls	r5, r3
+ 706 0316 7519     		adds	r5, r6, r5
+ 707 0318 2879     		ldrb	r0, [r5, #4]
+ 708 031a FFF7FEFF 		bl	lorawan_api_next_max_payload_length_get
+ 709 031e 2B7E     		ldrb	r3, [r5, #24]
+ 710 0320 C01A     		subs	r0, r0, r3
+ 711 0322 8442     		cmp	r4, r0
+ 712 0324 05D3     		bcc	.L92
+ 713 0326 2879     		ldrb	r0, [r5, #4]
+ 714 0328 FFF7FEFF 		bl	lorawan_api_next_max_payload_length_get
+ 715 032c 2C7E     		ldrb	r4, [r5, #24]
+ 716 032e 041B     		subs	r4, r0, r4
+ 717 0330 E4B2     		uxtb	r4, r4
+ 718              	.L92:
+ 719 0332 8821     		movs	r1, #136
+ 720 0334 029B     		ldr	r3, [sp, #8]
+ 721 0336 4900     		lsls	r1, r1, #1
+ 722 0338 5943     		muls	r1, r3
+ 723 033a 7618     		adds	r6, r6, r1
+ 724 033c 337E     		ldrb	r3, [r6, #24]
+ 725 033e 013C     		subs	r4, r4, #1
+ 726 0340 5A1C     		adds	r2, r3, #1
+ 727 0342 3276     		strb	r2, [r6, #24]
+ 728 0344 0822     		movs	r2, #8
+ 729 0346 FA54     		strb	r2, [r7, r3]
+ 730 0348 664B     		ldr	r3, .L119
+ 731 034a 019A     		ldr	r2, [sp, #4]
+ 732 034c E4B2     		uxtb	r4, r4
+ 733 034e 5918     		adds	r1, r3, r1
+ 734              	.L93:
+ 735 0350 0198     		ldr	r0, [sp, #4]
+ 736 0352 0132     		adds	r2, r2, #1
+ 737 0354 531E     		subs	r3, r2, #1
+ 738 0356 1B1A     		subs	r3, r3, r0
+ 739 0358 DBB2     		uxtb	r3, r3
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 14
+
+
+ 740 035a A342     		cmp	r3, r4
+ 741 035c 01D3     		bcc	.L94
+ 742              	.L111:
+ 743 035e 0125     		movs	r5, #1
+ 744 0360 EDE6     		b	.L64
+ 745              	.L94:
+ 746 0362 5378     		ldrb	r3, [r2, #1]
+ 747 0364 087E     		ldrb	r0, [r1, #24]
+ 748 0366 0133     		adds	r3, r3, #1
+ 749 0368 451C     		adds	r5, r0, #1
+ 750 036a 0D76     		strb	r5, [r1, #24]
+ 751 036c 3B54     		strb	r3, [r7, r0]
+ 752 036e EFE7     		b	.L93
+ 753              	.L71:
+ 754 0370 012C     		cmp	r4, #1
+ 755 0372 00D0     		beq	.LCB781
+ 756 0374 E3E6     		b	.L64	@long jump
+ 757              	.LCB781:
+ 758 0376 029A     		ldr	r2, [sp, #8]
+ 759 0378 5343     		muls	r3, r2
+ 760 037a 5A4A     		ldr	r2, .L119
+ 761 037c D318     		adds	r3, r2, r3
+ 762 037e 0922     		movs	r2, #9
+ 763 0380 1C76     		strb	r4, [r3, #24]
+ 764 0382 3A70     		strb	r2, [r7]
+ 765 0384 1A7E     		ldrb	r2, [r3, #24]
+ 766 0386 1989     		ldrh	r1, [r3, #8]
+ 767 0388 501C     		adds	r0, r2, #1
+ 768 038a 1876     		strb	r0, [r3, #24]
+ 769 038c B954     		strb	r1, [r7, r2]
+ 770 038e 197E     		ldrb	r1, [r3, #24]
+ 771 0390 1A89     		ldrh	r2, [r3, #8]
+ 772 0392 481C     		adds	r0, r1, #1
+ 773 0394 120A     		lsrs	r2, r2, #8
+ 774 0396 1876     		strb	r0, [r3, #24]
+ 775 0398 7A54     		strb	r2, [r7, r1]
+ 776 039a E0E7     		b	.L111
+ 777              	.L70:
+ 778 039c 012C     		cmp	r4, #1
+ 779 039e 00D0     		beq	.LCB806
+ 780 03a0 CDE6     		b	.L64	@long jump
+ 781              	.LCB806:
+ 782 03a2 029A     		ldr	r2, [sp, #8]
+ 783 03a4 5343     		muls	r3, r2
+ 784 03a6 F618     		adds	r6, r6, r3
+ 785 03a8 0023     		movs	r3, #0
+ 786 03aa 3381     		strh	r3, [r6, #8]
+ 787 03ac C7E6     		b	.L64
+ 788              	.L69:
+ 789 03ae 012C     		cmp	r4, #1
+ 790 03b0 00D0     		beq	.LCB817
+ 791 03b2 C4E6     		b	.L64	@long jump
+ 792              	.LCB817:
+ 793 03b4 029A     		ldr	r2, [sp, #8]
+ 794 03b6 5343     		muls	r3, r2
+ 795 03b8 F618     		adds	r6, r6, r3
+ 796 03ba 3200     		movs	r2, r6
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 15
+
+
+ 797 03bc FF32     		adds	r2, r2, #255
+ 798 03be 937B     		ldrb	r3, [r2, #14]
+ 799 03c0 022B     		cmp	r3, #2
+ 800 03c2 00D9     		bls	.LCB825
+ 801 03c4 BBE6     		b	.L64	@long jump
+ 802              	.LCB825:
+ 803 03c6 0225     		movs	r5, #2
+ 804 03c8 F618     		adds	r6, r6, r3
+ 805 03ca 591C     		adds	r1, r3, #1
+ 806 03cc FF36     		adds	r6, r6, #255
+ 807 03ce 9173     		strb	r1, [r2, #14]
+ 808 03d0 F573     		strb	r5, [r6, #15]
+ 809 03d2 B4E6     		b	.L64
+ 810              	.L68:
+ 811 03d4 012C     		cmp	r4, #1
+ 812 03d6 00D0     		beq	.LCB837
+ 813 03d8 B1E6     		b	.L64	@long jump
+ 814              	.LCB837:
+ 815 03da 029A     		ldr	r2, [sp, #8]
+ 816 03dc 5343     		muls	r3, r2
+ 817 03de F618     		adds	r6, r6, r3
+ 818 03e0 3200     		movs	r2, r6
+ 819 03e2 FF32     		adds	r2, r2, #255
+ 820 03e4 937B     		ldrb	r3, [r2, #14]
+ 821 03e6 022B     		cmp	r3, #2
+ 822 03e8 00D9     		bls	.LCB845
+ 823 03ea A8E6     		b	.L64	@long jump
+ 824              	.LCB845:
+ 825 03ec 591C     		adds	r1, r3, #1
+ 826 03ee F618     		adds	r6, r6, r3
+ 827 03f0 0D23     		movs	r3, #13
+ 828 03f2 9173     		strb	r1, [r2, #14]
+ 829 03f4 FF36     		adds	r6, r6, #255
+ 830              	.L113:
+ 831 03f6 0225     		movs	r5, #2
+ 832 03f8 F373     		strb	r3, [r6, #15]
+ 833 03fa A0E6     		b	.L64
+ 834              	.L66:
+ 835 03fc 022C     		cmp	r4, #2
+ 836 03fe 00D0     		beq	.LCB860
+ 837 0400 9DE6     		b	.L64	@long jump
+ 838              	.LCB860:
+ 839 0402 029A     		ldr	r2, [sp, #8]
+ 840 0404 5343     		muls	r3, r2
+ 841 0406 F618     		adds	r6, r6, r3
+ 842 0408 019B     		ldr	r3, [sp, #4]
+ 843 040a 3179     		ldrb	r1, [r6, #4]
+ 844 040c 9878     		ldrb	r0, [r3, #2]
+ 845 040e FFF7FEFF 		bl	lorawan_api_set_ping_slot_periodicity
+ 846 0412 3200     		movs	r2, r6
+ 847 0414 FF32     		adds	r2, r2, #255
+ 848 0416 937B     		ldrb	r3, [r2, #14]
+ 849 0418 022B     		cmp	r3, #2
+ 850 041a 00D9     		bls	.LCB872
+ 851 041c 8FE6     		b	.L64	@long jump
+ 852              	.LCB872:
+ 853 041e 591C     		adds	r1, r3, #1
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 16
+
+
+ 854 0420 F618     		adds	r6, r6, r3
+ 855 0422 9173     		strb	r1, [r2, #14]
+ 856 0424 1023     		movs	r3, #16
+ 857 0426 FF36     		adds	r6, r6, #255
+ 858 0428 E5E7     		b	.L113
+ 859              	.L85:
+ 860 042a 022C     		cmp	r4, #2
+ 861 042c 00D0     		beq	.LCB883
+ 862 042e 86E6     		b	.L64	@long jump
+ 863              	.LCB883:
+ 864 0430 029A     		ldr	r2, [sp, #8]
+ 865 0432 5343     		muls	r3, r2
+ 866 0434 F618     		adds	r6, r6, r3
+ 867 0436 019B     		ldr	r3, [sp, #4]
+ 868 0438 9B78     		ldrb	r3, [r3, #2]
+ 869 043a 5A1E     		subs	r2, r3, #1
+ 870 043c 9341     		sbcs	r3, r3, r2
+ 871 043e 7375     		strb	r3, [r6, #21]
+ 872 0440 7DE6     		b	.L64
+ 873              	.L83:
+ 874 0442 022C     		cmp	r4, #2
+ 875 0444 00D0     		beq	.LCB896
+ 876 0446 7AE6     		b	.L64	@long jump
+ 877              	.LCB896:
+ 878 0448 039B     		ldr	r3, [sp, #12]
+ 879 044a 039C     		ldr	r4, [sp, #12]
+ 880 044c 1976     		strb	r1, [r3, #24]
+ 881 044e 3A70     		strb	r2, [r7]
+ 882 0450 DA8A     		ldrh	r2, [r3, #22]
+ 883 0452 1B7E     		ldrb	r3, [r3, #24]
+ 884 0454 581C     		adds	r0, r3, #1
+ 885 0456 2076     		strb	r0, [r4, #24]
+ 886 0458 FA54     		strb	r2, [r7, r3]
+ 887 045a 227E     		ldrb	r2, [r4, #24]
+ 888 045c E38A     		ldrh	r3, [r4, #22]
+ 889 045e 501C     		adds	r0, r2, #1
+ 890 0460 1B0A     		lsrs	r3, r3, #8
+ 891 0462 2076     		strb	r0, [r4, #24]
+ 892 0464 BB54     		strb	r3, [r7, r2]
+ 893 0466 7AE7     		b	.L111
+ 894              	.L84:
+ 895 0468 012C     		cmp	r4, #1
+ 896 046a 00D0     		beq	.LCB918
+ 897 046c 67E6     		b	.L64	@long jump
+ 898              	.LCB918:
+ 899 046e 029A     		ldr	r2, [sp, #8]
+ 900 0470 5343     		muls	r3, r2
+ 901 0472 F618     		adds	r6, r6, r3
+ 902 0474 0023     		movs	r3, #0
+ 903 0476 F382     		strh	r3, [r6, #22]
+ 904 0478 61E6     		b	.L64
+ 905              	.L81:
+ 906 047a 072C     		cmp	r4, #7
+ 907 047c 00D0     		beq	.LCB929
+ 908 047e 5EE6     		b	.L64	@long jump
+ 909              	.LCB929:
+ 910 0480 039B     		ldr	r3, [sp, #12]
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 17
+
+
+ 911 0482 5973     		strb	r1, [r3, #13]
+ 912 0484 019B     		ldr	r3, [sp, #4]
+ 913 0486 DA78     		ldrb	r2, [r3, #3]
+ 914 0488 9B78     		ldrb	r3, [r3, #2]
+ 915 048a 1202     		lsls	r2, r2, #8
+ 916 048c 9B18     		adds	r3, r3, r2
+ 917 048e 039A     		ldr	r2, [sp, #12]
+ 918 0490 D381     		strh	r3, [r2, #14]
+ 919 0492 019B     		ldr	r3, [sp, #4]
+ 920 0494 019A     		ldr	r2, [sp, #4]
+ 921 0496 9B79     		ldrb	r3, [r3, #6]
+ 922 0498 5279     		ldrb	r2, [r2, #5]
+ 923 049a 1B04     		lsls	r3, r3, #16
+ 924 049c 1202     		lsls	r2, r2, #8
+ 925 049e 9B18     		adds	r3, r3, r2
+ 926 04a0 019A     		ldr	r2, [sp, #4]
+ 927 04a2 1279     		ldrb	r2, [r2, #4]
+ 928 04a4 9B18     		adds	r3, r3, r2
+ 929 04a6 6422     		movs	r2, #100
+ 930 04a8 5343     		muls	r3, r2
+ 931 04aa 039A     		ldr	r2, [sp, #12]
+ 932 04ac 1361     		str	r3, [r2, #16]
+ 933 04ae 019B     		ldr	r3, [sp, #4]
+ 934 04b0 DB79     		ldrb	r3, [r3, #7]
+ 935 04b2 1375     		strb	r3, [r2, #20]
+ 936 04b4 3079     		ldrb	r0, [r6, #4]
+ 937 04b6 FFF7FEFF 		bl	lorawan_api_join_status_clear
+ 938 04ba FFF7FEFF 		bl	smtc_modem_test_start
+ 939 04be 1421     		movs	r1, #20
+ 940 04c0 039B     		ldr	r3, [sp, #12]
+ 941 04c2 5956     		ldrsb	r1, [r3, r1]
+ 942 04c4 1869     		ldr	r0, [r3, #16]
+ 943 04c6 FFF7FEFF 		bl	smtc_modem_test_tx_cw
+ 944 04ca 38E6     		b	.L64
+ 945              	.L86:
+ 946 04cc 012C     		cmp	r4, #1
+ 947 04ce 00D0     		beq	.LCB969
+ 948 04d0 35E6     		b	.L64	@long jump
+ 949              	.LCB969:
+ 950 04d2 039B     		ldr	r3, [sp, #12]
+ 951 04d4 1979     		ldrb	r1, [r3, #4]
+ 952 04d6 9871     		strb	r0, [r3, #6]
+ 953 04d8 FFF7FEFF 		bl	lorawan_api_modem_certification_set
+ 954 04dc A8E6     		b	.L114
+ 955              	.L95:
+ 956 04de 0025     		movs	r5, #0
+ 957 04e0 CDE5     		b	.L51
+ 958              	.L120:
+ 959 04e2 C046     		.align	2
+ 960              	.L119:
+ 961 04e4 00000000 		.word	certif_service_ctx
+ 963              		.section	.rodata.lorawan_certification_services_init.str1.1,"aMS",%progbits,1
+ 964              	.LC11:
+ 965 0000 2A736572 		.ascii	"*service_id < NUMBER_OF_CERTIF_OBJ\000"
+ 965      76696365 
+ 965      5F696420 
+ 965      3C204E55 
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 18
+
+
+ 965      4D424552 
+ 966              		.section	.text.lorawan_certification_services_init,"ax",%progbits
+ 967              		.align	1
+ 968              		.global	lorawan_certification_services_init
+ 969              		.syntax unified
+ 970              		.code	16
+ 971              		.thumb_func
+ 972              		.fpu softvfp
+ 974              	lorawan_certification_services_init:
+ 975              		@ args = 8, pretend = 0, frame = 24
+ 976              		@ frame_needed = 0, uses_anonymous_args = 0
+ 977 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 978 0002 1E00     		movs	r6, r3
+ 979 0004 0378     		ldrb	r3, [r0]
+ 980 0006 0400     		movs	r4, r0
+ 981 0008 0D00     		movs	r5, r1
+ 982 000a 1700     		movs	r7, r2
+ 983 000c 87B0     		sub	sp, sp, #28
+ 984 000e 002B     		cmp	r3, #0
+ 985 0010 04D0     		beq	.L122
+ 986 0012 CE21     		movs	r1, #206
+ 987 0014 244A     		ldr	r2, .L130
+ 988 0016 2548     		ldr	r0, .L130+4
+ 989 0018 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 990              	.L122:
+ 991 001c 8822     		movs	r2, #136
+ 992 001e 2378     		ldrb	r3, [r4]
+ 993 0020 5200     		lsls	r2, r2, #1
+ 994 0022 5343     		muls	r3, r2
+ 995 0024 0193     		str	r3, [sp, #4]
+ 996 0026 181D     		adds	r0, r3, #4
+ 997 0028 214B     		ldr	r3, .L130+8
+ 998 002a 0021     		movs	r1, #0
+ 999 002c C018     		adds	r0, r0, r3
+ 1000 002e FFF7FEFF 		bl	memset
+ 1001 0032 204B     		ldr	r3, .L130+12
+ 1002 0034 204A     		ldr	r2, .L130+16
+ 1003 0036 3B60     		str	r3, [r7]
+ 1004 0038 204B     		ldr	r3, .L130+20
+ 1005 003a 0721     		movs	r1, #7
+ 1006 003c 3360     		str	r3, [r6]
+ 1007 003e 0C9B     		ldr	r3, [sp, #48]
+ 1008 0040 2800     		movs	r0, r5
+ 1009 0042 1A60     		str	r2, [r3]
+ 1010 0044 0D9B     		ldr	r3, [sp, #52]
+ 1011 0046 0027     		movs	r7, #0
+ 1012 0048 1C60     		str	r4, [r3]
+ 1013 004a 194B     		ldr	r3, .L130+8
+ 1014 004c 019C     		ldr	r4, [sp, #4]
+ 1015 004e 9C46     		mov	ip, r3
+ 1016 0050 6444     		add	r4, r4, ip
+ 1017 0052 6571     		strb	r5, [r4, #5]
+ 1018 0054 FFF7FEFF 		bl	__aeabi_uidiv
+ 1019 0058 C5B2     		uxtb	r5, r0
+ 1020 005a 2800     		movs	r0, r5
+ 1021 005c 2571     		strb	r5, [r4, #4]
+ 1022 005e FFF7FEFF 		bl	lorawan_api_modem_certification_is_enabled
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 19
+
+
+ 1023 0062 0300     		movs	r3, r0
+ 1024 0064 5A1E     		subs	r2, r3, #1
+ 1025 0066 9341     		sbcs	r3, r3, r2
+ 1026 0068 A371     		strb	r3, [r4, #6]
+ 1027 006a 0523     		movs	r3, #5
+ 1028 006c 6381     		strh	r3, [r4, #10]
+ 1029 006e 2300     		movs	r3, r4
+ 1030 0070 0326     		movs	r6, #3
+ 1031 0072 FF33     		adds	r3, r3, #255
+ 1032 0074 2773     		strb	r7, [r4, #12]
+ 1033 0076 5E73     		strb	r6, [r3, #13]
+ 1034 0078 B842     		cmp	r0, r7
+ 1035 007a 12D0     		beq	.L121
+ 1036 007c 2800     		movs	r0, r5
+ 1037 007e FFF7FEFF 		bl	smtc_secure_element_restore_context
+ 1038 0082 1022     		movs	r2, #16
+ 1039 0084 3900     		movs	r1, r7
+ 1040 0086 02A8     		add	r0, sp, #8
+ 1041 0088 FFF7FEFF 		bl	memset
+ 1042 008c A388     		ldrh	r3, [r4, #4]
+ 1043 008e 02AA     		add	r2, sp, #8
+ 1044 0090 5BBA     		rev16	r3, r3
+ 1045 0092 1380     		strh	r3, [r2]
+ 1046 0094 1672     		strb	r6, [r2, #8]
+ 1047 0096 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 1048 009a 0390     		str	r0, [sp, #12]
+ 1049 009c 02A8     		add	r0, sp, #8
+ 1050 009e FFF7FEFF 		bl	modem_supervisor_add_task
+ 1051              	.L121:
+ 1052 00a2 07B0     		add	sp, sp, #28
+ 1053              		@ sp needed
+ 1054 00a4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1055              	.L131:
+ 1056 00a6 C046     		.align	2
+ 1057              	.L130:
+ 1058 00a8 00000000 		.word	.LC11
+ 1059 00ac 00000000 		.word	.LANCHOR3
+ 1060 00b0 00000000 		.word	certif_service_ctx
+ 1061 00b4 00000000 		.word	lorawan_certification_service_downlink_handler
+ 1062 00b8 00000000 		.word	lorawan_certification_service_on_update
+ 1063 00bc 00000000 		.word	lorawan_certification_service_on_launch
+ 1065              		.section	.text.lorawan_certification_get_enabled,"ax",%progbits
+ 1066              		.align	1
+ 1067              		.global	lorawan_certification_get_enabled
+ 1068              		.syntax unified
+ 1069              		.code	16
+ 1070              		.thumb_func
+ 1071              		.fpu softvfp
+ 1073              	lorawan_certification_get_enabled:
+ 1074              		@ args = 0, pretend = 0, frame = 0
+ 1075              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1076              		@ link register save eliminated.
+ 1077 0000 0300     		movs	r3, r0
+ 1078 0002 0120     		movs	r0, #1
+ 1079 0004 002B     		cmp	r3, #0
+ 1080 0006 05D1     		bne	.L137
+ 1081 0008 044A     		ldr	r2, .L138
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 20
+
+
+ 1082 000a 1079     		ldrb	r0, [r2, #4]
+ 1083 000c 0028     		cmp	r0, #0
+ 1084 000e 02D0     		beq	.L134
+ 1085 0010 0120     		movs	r0, #1
+ 1086 0012 0B70     		strb	r3, [r1]
+ 1087              	.L137:
+ 1088              		@ sp needed
+ 1089 0014 7047     		bx	lr
+ 1090              	.L134:
+ 1091 0016 9379     		ldrb	r3, [r2, #6]
+ 1092 0018 0B70     		strb	r3, [r1]
+ 1093 001a FBE7     		b	.L137
+ 1094              	.L139:
+ 1095              		.align	2
+ 1096              	.L138:
+ 1097 001c 00000000 		.word	certif_service_ctx
+ 1099              		.section	.text.lorawan_certification_set_enabled,"ax",%progbits
+ 1100              		.align	1
+ 1101              		.global	lorawan_certification_set_enabled
+ 1102              		.syntax unified
+ 1103              		.code	16
+ 1104              		.thumb_func
+ 1105              		.fpu softvfp
+ 1107              	lorawan_certification_set_enabled:
+ 1108              		@ args = 0, pretend = 0, frame = 16
+ 1109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1110 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 1111 0002 164D     		ldr	r5, .L147
+ 1112 0004 0B00     		movs	r3, r1
+ 1113 0006 2C79     		ldrb	r4, [r5, #4]
+ 1114 0008 0443     		orrs	r4, r0
+ 1115 000a 03D0     		beq	.L141
+ 1116 000c 0124     		movs	r4, #1
+ 1117              	.L146:
+ 1118 000e 2000     		movs	r0, r4
+ 1119 0010 04B0     		add	sp, sp, #16
+ 1120              		@ sp needed
+ 1121 0012 70BD     		pop	{r4, r5, r6, pc}
+ 1122              	.L141:
+ 1123 0014 AA79     		ldrb	r2, [r5, #6]
+ 1124 0016 8A42     		cmp	r2, r1
+ 1125 0018 F9D0     		beq	.L146
+ 1126 001a 1800     		movs	r0, r3
+ 1127 001c AB71     		strb	r3, [r5, #6]
+ 1128 001e 2100     		movs	r1, r4
+ 1129 0020 FFF7FEFF 		bl	lorawan_api_modem_certification_set
+ 1130 0024 0523     		movs	r3, #5
+ 1131 0026 6B81     		strh	r3, [r5, #10]
+ 1132 0028 2B00     		movs	r3, r5
+ 1133 002a 0326     		movs	r6, #3
+ 1134 002c FF33     		adds	r3, r3, #255
+ 1135 002e 5E73     		strb	r6, [r3, #13]
+ 1136 0030 AB79     		ldrb	r3, [r5, #6]
+ 1137 0032 2C73     		strb	r4, [r5, #12]
+ 1138 0034 002B     		cmp	r3, #0
+ 1139 0036 EAD0     		beq	.L146
+ 1140 0038 2100     		movs	r1, r4
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 21
+
+
+ 1141 003a 1022     		movs	r2, #16
+ 1142 003c 6846     		mov	r0, sp
+ 1143 003e FFF7FEFF 		bl	memset
+ 1144 0042 6A46     		mov	r2, sp
+ 1145 0044 AB88     		ldrh	r3, [r5, #4]
+ 1146 0046 1672     		strb	r6, [r2, #8]
+ 1147 0048 5BBA     		rev16	r3, r3
+ 1148 004a 1380     		strh	r3, [r2]
+ 1149 004c FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 1150 0050 0190     		str	r0, [sp, #4]
+ 1151 0052 6846     		mov	r0, sp
+ 1152 0054 FFF7FEFF 		bl	modem_supervisor_add_task
+ 1153 0058 D9E7     		b	.L146
+ 1154              	.L148:
+ 1155 005a C046     		.align	2
+ 1156              	.L147:
+ 1157 005c 00000000 		.word	certif_service_ctx
+ 1159              		.section	.bss.certif_service_ctx,"aw",%nobits
+ 1160              		.align	2
+ 1163              	certif_service_ctx:
+ 1164 0000 00000000 		.space	276
+ 1164      00000000 
+ 1164      00000000 
+ 1164      00000000 
+ 1164      00000000 
+ 1165              		.section	.rodata.__func__.0,"a"
+ 1166              		.set	.LANCHOR1,. + 0
+ 1169              	__func__.0:
+ 1170 0000 6C6F7261 		.ascii	"lorawan_certification_service_on_launch\000"
+ 1170      77616E5F 
+ 1170      63657274 
+ 1170      69666963 
+ 1170      6174696F 
+ 1171              		.section	.rodata.__func__.1,"a"
+ 1172              		.set	.LANCHOR0,. + 0
+ 1175              	__func__.1:
+ 1176 0000 6C6F7261 		.ascii	"lorawan_certification_service_on_update\000"
+ 1176      77616E5F 
+ 1176      63657274 
+ 1176      69666963 
+ 1176      6174696F 
+ 1177              		.section	.rodata.__func__.2,"a"
+ 1178              		.set	.LANCHOR3,. + 0
+ 1181              	__func__.2:
+ 1182 0000 6C6F7261 		.ascii	"lorawan_certification_services_init\000"
+ 1182      77616E5F 
+ 1182      63657274 
+ 1182      69666963 
+ 1182      6174696F 
+ 1183              		.section	.rodata.lorawan_certification_periodicity_table_s,"a"
+ 1184              		.align	2
+ 1185              		.set	.LANCHOR2,. + 0
+ 1188              	lorawan_certification_periodicity_table_s:
+ 1189 0000 0000     		.short	0
+ 1190 0002 0500     		.short	5
+ 1191 0004 0A00     		.short	10
+ 1192 0006 1400     		.short	20
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 22
+
+
+ 1193 0008 1E00     		.short	30
+ 1194 000a 2800     		.short	40
+ 1195 000c 3200     		.short	50
+ 1196 000e 3C00     		.short	60
+ 1197 0010 7800     		.short	120
+ 1198 0012 F000     		.short	240
+ 1199 0014 E001     		.short	480
+ 1200              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 lorawan_certification.c
+     /tmp/cc0cZ9Ga.s:16     .text.lorawan_certification_service_on_update:0000000000000000 $t
+     /tmp/cc0cZ9Ga.s:23     .text.lorawan_certification_service_on_update:0000000000000000 lorawan_certification_service_on_update
+     /tmp/cc0cZ9Ga.s:101    .text.lorawan_certification_service_on_update:0000000000000090 $d
+     /tmp/cc0cZ9Ga.s:1163   .bss.certif_service_ctx:0000000000000000 certif_service_ctx
+     /tmp/cc0cZ9Ga.s:106    .text.lorawan_certification_service_on_launch:0000000000000000 $t
+     /tmp/cc0cZ9Ga.s:112    .text.lorawan_certification_service_on_launch:0000000000000000 lorawan_certification_service_on_launch
+     /tmp/cc0cZ9Ga.s:266    .text.lorawan_certification_service_on_launch:0000000000000124 $d
+     /tmp/cc0cZ9Ga.s:276    .text.lorawan_certification_service_downlink_handler:0000000000000000 $t
+     /tmp/cc0cZ9Ga.s:282    .text.lorawan_certification_service_downlink_handler:0000000000000000 lorawan_certification_service_downlink_handler
+     /tmp/cc0cZ9Ga.s:402    .text.lorawan_certification_service_downlink_handler:00000000000000dc $d
+     /tmp/cc0cZ9Ga.s:437    .text.lorawan_certification_service_downlink_handler:0000000000000122 $t
+     /tmp/cc0cZ9Ga.s:696    .text.lorawan_certification_service_downlink_handler:0000000000000300 $d
+     /tmp/cc0cZ9Ga.s:700    .text.lorawan_certification_service_downlink_handler:000000000000030c $t
+     /tmp/cc0cZ9Ga.s:961    .text.lorawan_certification_service_downlink_handler:00000000000004e4 $d
+     /tmp/cc0cZ9Ga.s:967    .text.lorawan_certification_services_init:0000000000000000 $t
+     /tmp/cc0cZ9Ga.s:974    .text.lorawan_certification_services_init:0000000000000000 lorawan_certification_services_init
+     /tmp/cc0cZ9Ga.s:1058   .text.lorawan_certification_services_init:00000000000000a8 $d
+     /tmp/cc0cZ9Ga.s:1066   .text.lorawan_certification_get_enabled:0000000000000000 $t
+     /tmp/cc0cZ9Ga.s:1073   .text.lorawan_certification_get_enabled:0000000000000000 lorawan_certification_get_enabled
+     /tmp/cc0cZ9Ga.s:1097   .text.lorawan_certification_get_enabled:000000000000001c $d
+     /tmp/cc0cZ9Ga.s:1100   .text.lorawan_certification_set_enabled:0000000000000000 $t
+     /tmp/cc0cZ9Ga.s:1107   .text.lorawan_certification_set_enabled:0000000000000000 lorawan_certification_set_enabled
+     /tmp/cc0cZ9Ga.s:1157   .text.lorawan_certification_set_enabled:000000000000005c $d
+     /tmp/cc0cZ9Ga.s:1160   .bss.certif_service_ctx:0000000000000000 $d
+     /tmp/cc0cZ9Ga.s:1169   .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/cc0cZ9Ga.s:1175   .rodata.__func__.1:0000000000000000 __func__.1
+     /tmp/cc0cZ9Ga.s:1181   .rodata.__func__.2:0000000000000000 __func__.2
+     /tmp/cc0cZ9Ga.s:1184   .rodata.lorawan_certification_periodicity_table_s:0000000000000000 $d
+     /tmp/cc0cZ9Ga.s:1188   .rodata.lorawan_certification_periodicity_table_s:0000000000000000 lorawan_certification_periodicity_table_s
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv
+smtc_modem_hal_on_panic
+memset
+lorawan_api_isjoined
+smtc_modem_hal_get_time_in_ms
+modem_supervisor_add_task
+smtc_modem_test_stop
+lorawan_join_add_task
+tx_protocol_manager_request
+modem_supervisor_get_task
+__gnu_thumb1_case_uhi
+lorawan_api_next_max_payload_length_get
+lorawan_api_get_spec_version
+lorawan_api_get_regional_parameters_version
+smtc_modem_hal_reset_mcu
+lorawan_api_join_status_clear
+lorawan_api_set_activation_mode
+smtc_modem_set_class
+memcpy
+smtc_modem_adr_set_profile
+lorawan_api_dr_strategy_set
+smtc_duty_cycle_enable_set
+lorawan_api_set_ping_slot_periodicity
+smtc_modem_test_start
+ARM GAS  /tmp/cc0cZ9Ga.s 			page 24
+
+
+smtc_modem_test_tx_cw
+lorawan_api_modem_certification_set
+lorawan_api_modem_certification_is_enabled
+smtc_secure_element_restore_context
+smtc_modem_hal_get_time_in_s

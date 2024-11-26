@@ -1,0 +1,2879 @@
+ARM GAS  /tmp/ccwi6Oux.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"ral_sx126x.c"
+  10              		.text
+  11              		.section	.text.ral_sx126x_cfg_trim_cap,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	ral_sx126x_cfg_trim_cap:
+  20              		@ args = 0, pretend = 0, frame = 16
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  23 0002 85B0     		sub	sp, sp, #20
+  24 0004 6B46     		mov	r3, sp
+  25 0006 0026     		movs	r6, #0
+  26 0008 5D1D     		adds	r5, r3, #5
+  27 000a 2900     		movs	r1, r5
+  28 000c 03AB     		add	r3, sp, #12
+  29 000e 01AA     		add	r2, sp, #4
+  30 0010 0400     		movs	r4, r0
+  31 0012 0396     		str	r6, [sp, #12]
+  32 0014 FFF7FEFF 		bl	ral_sx126x_bsp_get_xosc_cfg
+  33 0018 2D78     		ldrb	r5, [r5]
+  34 001a B542     		cmp	r5, r6
+  35 001c 2DD1     		bne	.L9
+  36 001e 6B46     		mov	r3, sp
+  37 0020 6A46     		mov	r2, sp
+  38 0022 9E1D     		adds	r6, r3, #6
+  39 0024 1223     		movs	r3, #18
+  40 0026 D71D     		adds	r7, r2, #7
+  41 0028 3A00     		movs	r2, r7
+  42 002a 3100     		movs	r1, r6
+  43 002c 2000     		movs	r0, r4
+  44 002e 3370     		strb	r3, [r6]
+  45 0030 3B70     		strb	r3, [r7]
+  46 0032 FFF7FEFF 		bl	ral_sx126x_bsp_get_trim_cap
+  47 0036 3378     		ldrb	r3, [r6]
+  48 0038 122B     		cmp	r3, #18
+  49 003a 02D1     		bne	.L3
+  50 003c 3B78     		ldrb	r3, [r7]
+  51 003e 122B     		cmp	r3, #18
+  52 0040 11D0     		beq	.L2
+  53              	.L3:
+  54 0042 2000     		movs	r0, r4
+  55 0044 02A9     		add	r1, sp, #8
+  56 0046 FFF7FEFF 		bl	sx126x_get_status
+  57 004a 0028     		cmp	r0, #0
+  58 004c 0AD1     		bne	.L5
+ARM GAS  /tmp/ccwi6Oux.s 			page 2
+
+
+  59 004e 6B46     		mov	r3, sp
+  60 0050 5B7A     		ldrb	r3, [r3, #9]
+  61 0052 022B     		cmp	r3, #2
+  62 0054 0AD0     		beq	.L6
+  63              	.L8:
+  64 0056 2000     		movs	r0, r4
+  65 0058 3A78     		ldrb	r2, [r7]
+  66 005a 3178     		ldrb	r1, [r6]
+  67 005c FFF7FEFF 		bl	sx126x_set_trimming_capacitor_values
+  68 0060 0028     		cmp	r0, #0
+  69 0062 00D0     		beq	.L2
+  70              	.L5:
+  71 0064 0500     		movs	r5, r0
+  72              	.L2:
+  73 0066 2800     		movs	r0, r5
+  74 0068 05B0     		add	sp, sp, #20
+  75              		@ sp needed
+  76 006a F0BD     		pop	{r4, r5, r6, r7, pc}
+  77              	.L6:
+  78 006c 0121     		movs	r1, #1
+  79 006e 2000     		movs	r0, r4
+  80 0070 FFF7FEFF 		bl	sx126x_set_standby
+  81 0074 0028     		cmp	r0, #0
+  82 0076 EED0     		beq	.L8
+  83 0078 F4E7     		b	.L5
+  84              	.L9:
+  85 007a 3500     		movs	r5, r6
+  86 007c F3E7     		b	.L2
+  88              		.section	.rodata.ral_sx126x_handles_part.str1.1,"aMS",%progbits,1
+  89              	.LC0:
+  90 0000 73783132 		.ascii	"sx1261\000"
+  90      363100
+  91              	.LC2:
+  92 0007 73783132 		.ascii	"sx1262\000"
+  92      363200
+  93              		.section	.text.ral_sx126x_handles_part,"ax",%progbits
+  94              		.align	1
+  95              		.global	ral_sx126x_handles_part
+  96              		.syntax unified
+  97              		.code	16
+  98              		.thumb_func
+  99              		.fpu softvfp
+ 101              	ral_sx126x_handles_part:
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104 0000 0100     		movs	r1, r0
+ 105 0002 10B5     		push	{r4, lr}
+ 106 0004 0400     		movs	r4, r0
+ 107 0006 0748     		ldr	r0, .L17
+ 108 0008 FFF7FEFF 		bl	strcmp
+ 109 000c 0123     		movs	r3, #1
+ 110 000e 0028     		cmp	r0, #0
+ 111 0010 05D0     		beq	.L14
+ 112 0012 2100     		movs	r1, r4
+ 113 0014 0448     		ldr	r0, .L17+4
+ 114 0016 FFF7FEFF 		bl	strcmp
+ 115 001a 4342     		rsbs	r3, r0, #0
+ARM GAS  /tmp/ccwi6Oux.s 			page 3
+
+
+ 116 001c 4341     		adcs	r3, r3, r0
+ 117              	.L14:
+ 118              		@ sp needed
+ 119 001e 1800     		movs	r0, r3
+ 120 0020 10BD     		pop	{r4, pc}
+ 121              	.L18:
+ 122 0022 C046     		.align	2
+ 123              	.L17:
+ 124 0024 00000000 		.word	.LC0
+ 125 0028 07000000 		.word	.LC2
+ 127              		.section	.text.ral_sx126x_reset,"ax",%progbits
+ 128              		.align	1
+ 129              		.global	ral_sx126x_reset
+ 130              		.syntax unified
+ 131              		.code	16
+ 132              		.thumb_func
+ 133              		.fpu softvfp
+ 135              	ral_sx126x_reset:
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138 0000 10B5     		push	{r4, lr}
+ 139 0002 FFF7FEFF 		bl	sx126x_reset
+ 140              		@ sp needed
+ 141 0006 10BD     		pop	{r4, pc}
+ 143              		.section	.text.ral_sx126x_init,"ax",%progbits
+ 144              		.align	1
+ 145              		.global	ral_sx126x_init
+ 146              		.syntax unified
+ 147              		.code	16
+ 148              		.thumb_func
+ 149              		.fpu softvfp
+ 151              	ral_sx126x_init:
+ 152              		@ args = 0, pretend = 0, frame = 16
+ 153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 155 0002 0023     		movs	r3, #0
+ 156 0004 6A46     		mov	r2, sp
+ 157 0006 0400     		movs	r4, r0
+ 158 0008 5372     		strb	r3, [r2, #9]
+ 159 000a 0393     		str	r3, [sp, #12]
+ 160 000c FFF7FEFF 		bl	sx126x_init_retention_list
+ 161 0010 0028     		cmp	r0, #0
+ 162 0012 2ED1     		bne	.L21
+ 163 0014 02AD     		add	r5, sp, #8
+ 164 0016 2900     		movs	r1, r5
+ 165 0018 2000     		movs	r0, r4
+ 166 001a FFF7FEFF 		bl	ral_sx126x_bsp_get_reg_mode
+ 167 001e 2000     		movs	r0, r4
+ 168 0020 2978     		ldrb	r1, [r5]
+ 169 0022 FFF7FEFF 		bl	sx126x_set_reg_mode
+ 170 0026 0028     		cmp	r0, #0
+ 171 0028 23D1     		bne	.L21
+ 172 002a 0923     		movs	r3, #9
+ 173 002c 6B44     		add	r3, r3, sp
+ 174 002e 1900     		movs	r1, r3
+ 175 0030 2000     		movs	r0, r4
+ 176 0032 FFF7FEFF 		bl	ral_sx126x_bsp_get_rf_switch_cfg
+ARM GAS  /tmp/ccwi6Oux.s 			page 4
+
+
+ 177 0036 6B46     		mov	r3, sp
+ 178 0038 2000     		movs	r0, r4
+ 179 003a 597A     		ldrb	r1, [r3, #9]
+ 180 003c FFF7FEFF 		bl	sx126x_set_dio2_as_rf_sw_ctrl
+ 181 0040 0028     		cmp	r0, #0
+ 182 0042 16D1     		bne	.L21
+ 183 0044 6B46     		mov	r3, sp
+ 184 0046 0A26     		movs	r6, #10
+ 185 0048 DD1D     		adds	r5, r3, #7
+ 186 004a 6E44     		add	r6, r6, sp
+ 187 004c 03AB     		add	r3, sp, #12
+ 188 004e 2A00     		movs	r2, r5
+ 189 0050 3100     		movs	r1, r6
+ 190 0052 2000     		movs	r0, r4
+ 191 0054 FFF7FEFF 		bl	ral_sx126x_bsp_get_xosc_cfg
+ 192 0058 3378     		ldrb	r3, [r6]
+ 193 005a 012B     		cmp	r3, #1
+ 194 005c 0BD0     		beq	.L22
+ 195              	.L23:
+ 196 005e 0B25     		movs	r5, #11
+ 197 0060 6D44     		add	r5, r5, sp
+ 198 0062 2900     		movs	r1, r5
+ 199 0064 2000     		movs	r0, r4
+ 200 0066 FFF7FEFF 		bl	ral_sx126x_bsp_get_rx_boost_cfg
+ 201 006a 2000     		movs	r0, r4
+ 202 006c 2978     		ldrb	r1, [r5]
+ 203 006e FFF7FEFF 		bl	sx126x_cfg_rx_boosted
+ 204              	.L21:
+ 205 0072 04B0     		add	sp, sp, #16
+ 206              		@ sp needed
+ 207 0074 70BD     		pop	{r4, r5, r6, pc}
+ 208              	.L22:
+ 209 0076 2000     		movs	r0, r4
+ 210 0078 2978     		ldrb	r1, [r5]
+ 211 007a 039A     		ldr	r2, [sp, #12]
+ 212 007c FFF7FEFF 		bl	sx126x_set_dio3_as_tcxo_ctrl
+ 213 0080 0028     		cmp	r0, #0
+ 214 0082 F6D1     		bne	.L21
+ 215 0084 7F21     		movs	r1, #127
+ 216 0086 2000     		movs	r0, r4
+ 217 0088 FFF7FEFF 		bl	sx126x_cal
+ 218 008c 0028     		cmp	r0, #0
+ 219 008e E6D0     		beq	.L23
+ 220 0090 EFE7     		b	.L21
+ 222              		.section	.text.ral_sx126x_wakeup,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	ral_sx126x_wakeup
+ 225              		.syntax unified
+ 226              		.code	16
+ 227              		.thumb_func
+ 228              		.fpu softvfp
+ 230              	ral_sx126x_wakeup:
+ 231              		@ args = 0, pretend = 0, frame = 0
+ 232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 233 0000 10B5     		push	{r4, lr}
+ 234 0002 FFF7FEFF 		bl	sx126x_wakeup
+ 235              		@ sp needed
+ARM GAS  /tmp/ccwi6Oux.s 			page 5
+
+
+ 236 0006 10BD     		pop	{r4, pc}
+ 238              		.section	.text.ral_sx126x_set_sleep,"ax",%progbits
+ 239              		.align	1
+ 240              		.global	ral_sx126x_set_sleep
+ 241              		.syntax unified
+ 242              		.code	16
+ 243              		.thumb_func
+ 244              		.fpu softvfp
+ 246              	ral_sx126x_set_sleep:
+ 247              		@ args = 0, pretend = 0, frame = 0
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 249 0000 4B1E     		subs	r3, r1, #1
+ 250 0002 9941     		sbcs	r1, r1, r3
+ 251 0004 10B5     		push	{r4, lr}
+ 252 0006 8900     		lsls	r1, r1, #2
+ 253 0008 FFF7FEFF 		bl	sx126x_set_sleep
+ 254              		@ sp needed
+ 255 000c 10BD     		pop	{r4, pc}
+ 257              		.section	.text.ral_sx126x_set_standby,"ax",%progbits
+ 258              		.align	1
+ 259              		.global	ral_sx126x_set_standby
+ 260              		.syntax unified
+ 261              		.code	16
+ 262              		.thumb_func
+ 263              		.fpu softvfp
+ 265              	ral_sx126x_set_standby:
+ 266              		@ args = 0, pretend = 0, frame = 0
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268 0000 0300     		movs	r3, r0
+ 269 0002 10B5     		push	{r4, lr}
+ 270 0004 0029     		cmp	r1, #0
+ 271 0006 02D0     		beq	.L32
+ 272 0008 0220     		movs	r0, #2
+ 273 000a 0129     		cmp	r1, #1
+ 274 000c 02D1     		bne	.L33
+ 275              	.L32:
+ 276 000e 1800     		movs	r0, r3
+ 277 0010 FFF7FEFF 		bl	sx126x_set_standby
+ 278              	.L33:
+ 279              		@ sp needed
+ 280 0014 10BD     		pop	{r4, pc}
+ 282              		.section	.text.ral_sx126x_set_fs,"ax",%progbits
+ 283              		.align	1
+ 284              		.global	ral_sx126x_set_fs
+ 285              		.syntax unified
+ 286              		.code	16
+ 287              		.thumb_func
+ 288              		.fpu softvfp
+ 290              	ral_sx126x_set_fs:
+ 291              		@ args = 0, pretend = 0, frame = 0
+ 292              		@ frame_needed = 0, uses_anonymous_args = 0
+ 293 0000 10B5     		push	{r4, lr}
+ 294 0002 FFF7FEFF 		bl	sx126x_set_fs
+ 295              		@ sp needed
+ 296 0006 10BD     		pop	{r4, pc}
+ 298              		.section	.text.ral_sx126x_set_tx,"ax",%progbits
+ 299              		.align	1
+ARM GAS  /tmp/ccwi6Oux.s 			page 6
+
+
+ 300              		.global	ral_sx126x_set_tx
+ 301              		.syntax unified
+ 302              		.code	16
+ 303              		.thumb_func
+ 304              		.fpu softvfp
+ 306              	ral_sx126x_set_tx:
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309 0000 10B5     		push	{r4, lr}
+ 310 0002 0400     		movs	r4, r0
+ 311 0004 FFF7FEFF 		bl	ral_sx126x_cfg_trim_cap
+ 312 0008 0028     		cmp	r0, #0
+ 313 000a 03D1     		bne	.L40
+ 314 000c 0100     		movs	r1, r0
+ 315 000e 2000     		movs	r0, r4
+ 316 0010 FFF7FEFF 		bl	sx126x_set_tx
+ 317              	.L40:
+ 318              		@ sp needed
+ 319 0014 10BD     		pop	{r4, pc}
+ 321              		.section	.text.ral_sx126x_set_rx,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	ral_sx126x_set_rx
+ 324              		.syntax unified
+ 325              		.code	16
+ 326              		.thumb_func
+ 327              		.fpu softvfp
+ 329              	ral_sx126x_set_rx:
+ 330              		@ args = 0, pretend = 0, frame = 0
+ 331              		@ frame_needed = 0, uses_anonymous_args = 0
+ 332 0000 70B5     		push	{r4, r5, r6, lr}
+ 333 0002 0400     		movs	r4, r0
+ 334 0004 0D00     		movs	r5, r1
+ 335 0006 FFF7FEFF 		bl	ral_sx126x_cfg_trim_cap
+ 336 000a 0300     		movs	r3, r0
+ 337 000c 0320     		movs	r0, #3
+ 338 000e 002B     		cmp	r3, #0
+ 339 0010 05D1     		bne	.L42
+ 340 0012 6B1C     		adds	r3, r5, #1
+ 341 0014 04D1     		bne	.L43
+ 342 0016 2000     		movs	r0, r4
+ 343 0018 0649     		ldr	r1, .L46
+ 344 001a FFF7FEFF 		bl	sx126x_set_rx_with_timeout_in_rtc_step
+ 345              	.L42:
+ 346              		@ sp needed
+ 347 001e 70BD     		pop	{r4, r5, r6, pc}
+ 348              	.L43:
+ 349 0020 8023     		movs	r3, #128
+ 350 0022 0320     		movs	r0, #3
+ 351 0024 DB02     		lsls	r3, r3, #11
+ 352 0026 9D42     		cmp	r5, r3
+ 353 0028 F9D2     		bcs	.L42
+ 354 002a 2900     		movs	r1, r5
+ 355 002c 2000     		movs	r0, r4
+ 356 002e FFF7FEFF 		bl	sx126x_set_rx
+ 357 0032 F4E7     		b	.L42
+ 358              	.L47:
+ 359              		.align	2
+ARM GAS  /tmp/ccwi6Oux.s 			page 7
+
+
+ 360              	.L46:
+ 361 0034 FFFFFF00 		.word	16777215
+ 363              		.section	.text.ral_sx126x_cfg_rx_boosted,"ax",%progbits
+ 364              		.align	1
+ 365              		.global	ral_sx126x_cfg_rx_boosted
+ 366              		.syntax unified
+ 367              		.code	16
+ 368              		.thumb_func
+ 369              		.fpu softvfp
+ 371              	ral_sx126x_cfg_rx_boosted:
+ 372              		@ args = 0, pretend = 0, frame = 0
+ 373              		@ frame_needed = 0, uses_anonymous_args = 0
+ 374 0000 10B5     		push	{r4, lr}
+ 375 0002 FFF7FEFF 		bl	sx126x_cfg_rx_boosted
+ 376              		@ sp needed
+ 377 0006 10BD     		pop	{r4, pc}
+ 379              		.section	.text.ral_sx126x_set_rx_tx_fallback_mode,"ax",%progbits
+ 380              		.align	1
+ 381              		.global	ral_sx126x_set_rx_tx_fallback_mode
+ 382              		.syntax unified
+ 383              		.code	16
+ 384              		.thumb_func
+ 385              		.fpu softvfp
+ 387              	ral_sx126x_set_rx_tx_fallback_mode:
+ 388              		@ args = 0, pretend = 0, frame = 0
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390 0000 0300     		movs	r3, r0
+ 391 0002 0220     		movs	r0, #2
+ 392 0004 10B5     		push	{r4, lr}
+ 393 0006 8142     		cmp	r1, r0
+ 394 0008 05D8     		bhi	.L50
+ 395 000a 0901     		lsls	r1, r1, #4
+ 396 000c 2031     		adds	r1, r1, #32
+ 397 000e 1800     		movs	r0, r3
+ 398 0010 C9B2     		uxtb	r1, r1
+ 399 0012 FFF7FEFF 		bl	sx126x_set_rx_tx_fallback_mode
+ 400              	.L50:
+ 401              		@ sp needed
+ 402 0016 10BD     		pop	{r4, pc}
+ 404              		.section	.text.ral_sx126x_stop_timer_on_preamble,"ax",%progbits
+ 405              		.align	1
+ 406              		.global	ral_sx126x_stop_timer_on_preamble
+ 407              		.syntax unified
+ 408              		.code	16
+ 409              		.thumb_func
+ 410              		.fpu softvfp
+ 412              	ral_sx126x_stop_timer_on_preamble:
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 415 0000 10B5     		push	{r4, lr}
+ 416 0002 FFF7FEFF 		bl	sx126x_stop_timer_on_preamble
+ 417              		@ sp needed
+ 418 0006 10BD     		pop	{r4, pc}
+ 420              		.section	.text.ral_sx126x_set_rx_duty_cycle,"ax",%progbits
+ 421              		.align	1
+ 422              		.global	ral_sx126x_set_rx_duty_cycle
+ 423              		.syntax unified
+ARM GAS  /tmp/ccwi6Oux.s 			page 8
+
+
+ 424              		.code	16
+ 425              		.thumb_func
+ 426              		.fpu softvfp
+ 428              	ral_sx126x_set_rx_duty_cycle:
+ 429              		@ args = 0, pretend = 0, frame = 0
+ 430              		@ frame_needed = 0, uses_anonymous_args = 0
+ 431 0000 10B5     		push	{r4, lr}
+ 432 0002 FFF7FEFF 		bl	sx126x_set_rx_duty_cycle
+ 433              		@ sp needed
+ 434 0006 10BD     		pop	{r4, pc}
+ 436              		.section	.text.ral_sx126x_set_lora_cad,"ax",%progbits
+ 437              		.align	1
+ 438              		.global	ral_sx126x_set_lora_cad
+ 439              		.syntax unified
+ 440              		.code	16
+ 441              		.thumb_func
+ 442              		.fpu softvfp
+ 444              	ral_sx126x_set_lora_cad:
+ 445              		@ args = 0, pretend = 0, frame = 0
+ 446              		@ frame_needed = 0, uses_anonymous_args = 0
+ 447 0000 10B5     		push	{r4, lr}
+ 448 0002 0400     		movs	r4, r0
+ 449 0004 FFF7FEFF 		bl	ral_sx126x_cfg_trim_cap
+ 450 0008 0028     		cmp	r0, #0
+ 451 000a 02D1     		bne	.L55
+ 452 000c 2000     		movs	r0, r4
+ 453 000e FFF7FEFF 		bl	sx126x_set_cad
+ 454              	.L55:
+ 455              		@ sp needed
+ 456 0012 10BD     		pop	{r4, pc}
+ 458              		.section	.text.ral_sx126x_set_tx_cw,"ax",%progbits
+ 459              		.align	1
+ 460              		.global	ral_sx126x_set_tx_cw
+ 461              		.syntax unified
+ 462              		.code	16
+ 463              		.thumb_func
+ 464              		.fpu softvfp
+ 466              	ral_sx126x_set_tx_cw:
+ 467              		@ args = 0, pretend = 0, frame = 0
+ 468              		@ frame_needed = 0, uses_anonymous_args = 0
+ 469 0000 10B5     		push	{r4, lr}
+ 470 0002 0400     		movs	r4, r0
+ 471 0004 FFF7FEFF 		bl	ral_sx126x_cfg_trim_cap
+ 472 0008 0028     		cmp	r0, #0
+ 473 000a 02D1     		bne	.L57
+ 474 000c 2000     		movs	r0, r4
+ 475 000e FFF7FEFF 		bl	sx126x_set_tx_cw
+ 476              	.L57:
+ 477              		@ sp needed
+ 478 0012 10BD     		pop	{r4, pc}
+ 480              		.section	.text.ral_sx126x_set_tx_infinite_preamble,"ax",%progbits
+ 481              		.align	1
+ 482              		.global	ral_sx126x_set_tx_infinite_preamble
+ 483              		.syntax unified
+ 484              		.code	16
+ 485              		.thumb_func
+ 486              		.fpu softvfp
+ARM GAS  /tmp/ccwi6Oux.s 			page 9
+
+
+ 488              	ral_sx126x_set_tx_infinite_preamble:
+ 489              		@ args = 0, pretend = 0, frame = 0
+ 490              		@ frame_needed = 0, uses_anonymous_args = 0
+ 491 0000 10B5     		push	{r4, lr}
+ 492 0002 0400     		movs	r4, r0
+ 493 0004 FFF7FEFF 		bl	ral_sx126x_cfg_trim_cap
+ 494 0008 0028     		cmp	r0, #0
+ 495 000a 02D1     		bne	.L59
+ 496 000c 2000     		movs	r0, r4
+ 497 000e FFF7FEFF 		bl	sx126x_set_tx_infinite_preamble
+ 498              	.L59:
+ 499              		@ sp needed
+ 500 0012 10BD     		pop	{r4, pc}
+ 502              		.section	.text.ral_sx126x_cal_img,"ax",%progbits
+ 503              		.align	1
+ 504              		.global	ral_sx126x_cal_img
+ 505              		.syntax unified
+ 506              		.code	16
+ 507              		.thumb_func
+ 508              		.fpu softvfp
+ 510              	ral_sx126x_cal_img:
+ 511              		@ args = 0, pretend = 0, frame = 0
+ 512              		@ frame_needed = 0, uses_anonymous_args = 0
+ 513 0000 10B5     		push	{r4, lr}
+ 514 0002 FFF7FEFF 		bl	sx126x_cal_img_in_mhz
+ 515              		@ sp needed
+ 516 0006 10BD     		pop	{r4, pc}
+ 518              		.section	.text.ral_sx126x_set_tx_cfg,"ax",%progbits
+ 519              		.align	1
+ 520              		.global	ral_sx126x_set_tx_cfg
+ 521              		.syntax unified
+ 522              		.code	16
+ 523              		.thumb_func
+ 524              		.fpu softvfp
+ 526              	ral_sx126x_set_tx_cfg:
+ 527              		@ args = 0, pretend = 0, frame = 24
+ 528              		@ frame_needed = 0, uses_anonymous_args = 0
+ 529 0000 70B5     		push	{r4, r5, r6, lr}
+ 530 0002 86B0     		sub	sp, sp, #24
+ 531 0004 04AB     		add	r3, sp, #16
+ 532 0006 02AD     		add	r5, sp, #8
+ 533 0008 1970     		strb	r1, [r3]
+ 534 000a 0592     		str	r2, [sp, #20]
+ 535 000c 1900     		movs	r1, r3
+ 536 000e 2A00     		movs	r2, r5
+ 537 0010 0400     		movs	r4, r0
+ 538 0012 FFF7FEFF 		bl	ral_sx126x_bsp_get_tx_cfg
+ 539 0016 AB78     		ldrb	r3, [r5, #2]
+ 540 0018 002B     		cmp	r3, #0
+ 541 001a 07D0     		beq	.L62
+ 542              	.L65:
+ 543 001c 2900     		movs	r1, r5
+ 544 001e 2000     		movs	r0, r4
+ 545 0020 FFF7FEFF 		bl	sx126x_set_pa_cfg
+ 546 0024 0028     		cmp	r0, #0
+ 547 0026 07D0     		beq	.L78
+ 548              	.L63:
+ARM GAS  /tmp/ccwi6Oux.s 			page 10
+
+
+ 549 0028 06B0     		add	sp, sp, #24
+ 550              		@ sp needed
+ 551 002a 70BD     		pop	{r4, r5, r6, pc}
+ 552              	.L62:
+ 553 002c 2000     		movs	r0, r4
+ 554 002e FFF7FEFF 		bl	sx126x_cfg_tx_clamp
+ 555 0032 0028     		cmp	r0, #0
+ 556 0034 F2D0     		beq	.L65
+ 557 0036 F7E7     		b	.L63
+ 558              	.L78:
+ 559 0038 AA78     		ldrb	r2, [r5, #2]
+ 560 003a 3823     		movs	r3, #56
+ 561 003c 002A     		cmp	r2, #0
+ 562 003e 00D0     		beq	.L66
+ 563 0040 203B     		subs	r3, r3, #32
+ 564              	.L66:
+ 565 0042 6A46     		mov	r2, sp
+ 566 0044 D61D     		adds	r6, r2, #7
+ 567 0046 3100     		movs	r1, r6
+ 568 0048 2000     		movs	r0, r4
+ 569 004a 3370     		strb	r3, [r6]
+ 570 004c FFF7FEFF 		bl	ral_sx126x_bsp_get_ocp_value
+ 571 0050 AB78     		ldrb	r3, [r5, #2]
+ 572 0052 002B     		cmp	r3, #0
+ 573 0054 09D1     		bne	.L67
+ 574 0056 3378     		ldrb	r3, [r6]
+ 575 0058 382B     		cmp	r3, #56
+ 576 005a 0BD1     		bne	.L68
+ 577              	.L69:
+ 578 005c 0521     		movs	r1, #5
+ 579 005e 2000     		movs	r0, r4
+ 580 0060 2A79     		ldrb	r2, [r5, #4]
+ 581 0062 6956     		ldrsb	r1, [r5, r1]
+ 582 0064 FFF7FEFF 		bl	sx126x_set_tx_params
+ 583 0068 DEE7     		b	.L63
+ 584              	.L67:
+ 585 006a 012B     		cmp	r3, #1
+ 586 006c F6D1     		bne	.L69
+ 587 006e 3378     		ldrb	r3, [r6]
+ 588 0070 182B     		cmp	r3, #24
+ 589 0072 F3D0     		beq	.L69
+ 590              	.L68:
+ 591 0074 2000     		movs	r0, r4
+ 592 0076 3178     		ldrb	r1, [r6]
+ 593 0078 FFF7FEFF 		bl	sx126x_set_ocp_value
+ 594 007c 0028     		cmp	r0, #0
+ 595 007e EDD0     		beq	.L69
+ 596 0080 D2E7     		b	.L63
+ 598              		.section	.text.ral_sx126x_set_pkt_payload,"ax",%progbits
+ 599              		.align	1
+ 600              		.global	ral_sx126x_set_pkt_payload
+ 601              		.syntax unified
+ 602              		.code	16
+ 603              		.thumb_func
+ 604              		.fpu softvfp
+ 606              	ral_sx126x_set_pkt_payload:
+ 607              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccwi6Oux.s 			page 11
+
+
+ 608              		@ frame_needed = 0, uses_anonymous_args = 0
+ 609 0000 70B5     		push	{r4, r5, r6, lr}
+ 610 0002 1400     		movs	r4, r2
+ 611 0004 0022     		movs	r2, #0
+ 612 0006 0E00     		movs	r6, r1
+ 613 0008 1100     		movs	r1, r2
+ 614 000a 0500     		movs	r5, r0
+ 615 000c FFF7FEFF 		bl	sx126x_set_buffer_base_address
+ 616 0010 0028     		cmp	r0, #0
+ 617 0012 05D1     		bne	.L80
+ 618 0014 0100     		movs	r1, r0
+ 619 0016 3200     		movs	r2, r6
+ 620 0018 2800     		movs	r0, r5
+ 621 001a E3B2     		uxtb	r3, r4
+ 622 001c FFF7FEFF 		bl	sx126x_write_buffer
+ 623              	.L80:
+ 624              		@ sp needed
+ 625 0020 70BD     		pop	{r4, r5, r6, pc}
+ 627              		.section	.text.ral_sx126x_get_pkt_payload,"ax",%progbits
+ 628              		.align	1
+ 629              		.global	ral_sx126x_get_pkt_payload
+ 630              		.syntax unified
+ 631              		.code	16
+ 632              		.thumb_func
+ 633              		.fpu softvfp
+ 635              	ral_sx126x_get_pkt_payload:
+ 636              		@ args = 0, pretend = 0, frame = 8
+ 637              		@ frame_needed = 0, uses_anonymous_args = 0
+ 638 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 639 0002 0F00     		movs	r7, r1
+ 640 0004 01A9     		add	r1, sp, #4
+ 641 0006 0400     		movs	r4, r0
+ 642 0008 1600     		movs	r6, r2
+ 643 000a 1D00     		movs	r5, r3
+ 644 000c FFF7FEFF 		bl	sx126x_get_rx_buffer_status
+ 645 0010 0028     		cmp	r0, #0
+ 646 0012 0ED1     		bne	.L82
+ 647 0014 6B46     		mov	r3, sp
+ 648 0016 1B79     		ldrb	r3, [r3, #4]
+ 649 0018 9AB2     		uxth	r2, r3
+ 650 001a 002D     		cmp	r5, #0
+ 651 001c 00D0     		beq	.L83
+ 652 001e 2A80     		strh	r2, [r5]
+ 653              	.L83:
+ 654 0020 0320     		movs	r0, #3
+ 655 0022 9742     		cmp	r7, r2
+ 656 0024 05D3     		bcc	.L82
+ 657 0026 6A46     		mov	r2, sp
+ 658 0028 2000     		movs	r0, r4
+ 659 002a 5179     		ldrb	r1, [r2, #5]
+ 660 002c 3200     		movs	r2, r6
+ 661 002e FFF7FEFF 		bl	sx126x_read_buffer
+ 662              	.L82:
+ 663              		@ sp needed
+ 664 0032 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 666              		.section	.text.ral_sx126x_set_rf_freq,"ax",%progbits
+ 667              		.align	1
+ARM GAS  /tmp/ccwi6Oux.s 			page 12
+
+
+ 668              		.global	ral_sx126x_set_rf_freq
+ 669              		.syntax unified
+ 670              		.code	16
+ 671              		.thumb_func
+ 672              		.fpu softvfp
+ 674              	ral_sx126x_set_rf_freq:
+ 675              		@ args = 0, pretend = 0, frame = 0
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677 0000 10B5     		push	{r4, lr}
+ 678 0002 FFF7FEFF 		bl	sx126x_set_rf_freq
+ 679              		@ sp needed
+ 680 0006 10BD     		pop	{r4, pc}
+ 682              		.section	.text.ral_sx126x_set_pkt_type,"ax",%progbits
+ 683              		.align	1
+ 684              		.global	ral_sx126x_set_pkt_type
+ 685              		.syntax unified
+ 686              		.code	16
+ 687              		.thumb_func
+ 688              		.fpu softvfp
+ 690              	ral_sx126x_set_pkt_type:
+ 691              		@ args = 0, pretend = 0, frame = 0
+ 692              		@ frame_needed = 0, uses_anonymous_args = 0
+ 693 0000 0300     		movs	r3, r0
+ 694 0002 10B5     		push	{r4, lr}
+ 695 0004 0029     		cmp	r1, #0
+ 696 0006 02D0     		beq	.L90
+ 697 0008 0220     		movs	r0, #2
+ 698 000a 0129     		cmp	r1, #1
+ 699 000c 02D1     		bne	.L91
+ 700              	.L90:
+ 701 000e 1800     		movs	r0, r3
+ 702 0010 FFF7FEFF 		bl	sx126x_set_pkt_type
+ 703              	.L91:
+ 704              		@ sp needed
+ 705 0014 10BD     		pop	{r4, pc}
+ 707              		.section	.text.ral_sx126x_get_pkt_type,"ax",%progbits
+ 708              		.align	1
+ 709              		.global	ral_sx126x_get_pkt_type
+ 710              		.syntax unified
+ 711              		.code	16
+ 712              		.thumb_func
+ 713              		.fpu softvfp
+ 715              	ral_sx126x_get_pkt_type:
+ 716              		@ args = 0, pretend = 0, frame = 8
+ 717              		@ frame_needed = 0, uses_anonymous_args = 0
+ 718 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 719 0002 6B46     		mov	r3, sp
+ 720 0004 DD1D     		adds	r5, r3, #7
+ 721 0006 0C00     		movs	r4, r1
+ 722 0008 2900     		movs	r1, r5
+ 723 000a FFF7FEFF 		bl	sx126x_get_pkt_type
+ 724 000e 0028     		cmp	r0, #0
+ 725 0010 05D1     		bne	.L97
+ 726 0012 2B78     		ldrb	r3, [r5]
+ 727 0014 002B     		cmp	r3, #0
+ 728 0016 03D0     		beq	.L98
+ 729 0018 012B     		cmp	r3, #1
+ARM GAS  /tmp/ccwi6Oux.s 			page 13
+
+
+ 730 001a 03D0     		beq	.L99
+ 731 001c 0230     		adds	r0, r0, #2
+ 732              	.L97:
+ 733              		@ sp needed
+ 734 001e 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 735              	.L98:
+ 736 0020 2070     		strb	r0, [r4]
+ 737 0022 FCE7     		b	.L97
+ 738              	.L99:
+ 739 0024 2370     		strb	r3, [r4]
+ 740 0026 FAE7     		b	.L97
+ 742              		.section	.text.ral_sx126x_set_lora_symb_nb_timeout,"ax",%progbits
+ 743              		.align	1
+ 744              		.global	ral_sx126x_set_lora_symb_nb_timeout
+ 745              		.syntax unified
+ 746              		.code	16
+ 747              		.thumb_func
+ 748              		.fpu softvfp
+ 750              	ral_sx126x_set_lora_symb_nb_timeout:
+ 751              		@ args = 0, pretend = 0, frame = 0
+ 752              		@ frame_needed = 0, uses_anonymous_args = 0
+ 753 0000 0300     		movs	r3, r0
+ 754 0002 10B5     		push	{r4, lr}
+ 755 0004 0220     		movs	r0, #2
+ 756 0006 F829     		cmp	r1, #248
+ 757 0008 03D8     		bhi	.L101
+ 758 000a 1800     		movs	r0, r3
+ 759 000c C9B2     		uxtb	r1, r1
+ 760 000e FFF7FEFF 		bl	sx126x_set_lora_symb_nb_timeout
+ 761              	.L101:
+ 762              		@ sp needed
+ 763 0012 10BD     		pop	{r4, pc}
+ 765              		.section	.text.ral_sx126x_set_flrc_mod_params,"ax",%progbits
+ 766              		.align	1
+ 767              		.global	ral_sx126x_set_flrc_mod_params
+ 768              		.syntax unified
+ 769              		.code	16
+ 770              		.thumb_func
+ 771              		.fpu softvfp
+ 773              	ral_sx126x_set_flrc_mod_params:
+ 774              		@ args = 0, pretend = 0, frame = 0
+ 775              		@ frame_needed = 0, uses_anonymous_args = 0
+ 776              		@ link register save eliminated.
+ 777 0000 0120     		movs	r0, #1
+ 778              		@ sp needed
+ 779 0002 7047     		bx	lr
+ 781              		.section	.text.ral_sx126x_set_flrc_pkt_params,"ax",%progbits
+ 782              		.align	1
+ 783              		.global	ral_sx126x_set_flrc_pkt_params
+ 784              		.syntax unified
+ 785              		.code	16
+ 786              		.thumb_func
+ 787              		.fpu softvfp
+ 789              	ral_sx126x_set_flrc_pkt_params:
+ 790              		@ args = 0, pretend = 0, frame = 0
+ 791              		@ frame_needed = 0, uses_anonymous_args = 0
+ 792              		@ link register save eliminated.
+ARM GAS  /tmp/ccwi6Oux.s 			page 14
+
+
+ 793 0000 0120     		movs	r0, #1
+ 794              		@ sp needed
+ 795 0002 7047     		bx	lr
+ 797              		.section	.text.ral_sx126x_get_gfsk_rx_pkt_status,"ax",%progbits
+ 798              		.align	1
+ 799              		.global	ral_sx126x_get_gfsk_rx_pkt_status
+ 800              		.syntax unified
+ 801              		.code	16
+ 802              		.thumb_func
+ 803              		.fpu softvfp
+ 805              	ral_sx126x_get_gfsk_rx_pkt_status:
+ 806              		@ args = 0, pretend = 0, frame = 8
+ 807              		@ frame_needed = 0, uses_anonymous_args = 0
+ 808 0000 13B5     		push	{r0, r1, r4, lr}
+ 809 0002 0C00     		movs	r4, r1
+ 810 0004 6946     		mov	r1, sp
+ 811 0006 FFF7FEFF 		bl	sx126x_get_gfsk_pkt_status
+ 812 000a 0028     		cmp	r0, #0
+ 813 000c 29D1     		bne	.L106
+ 814 000e 6A46     		mov	r2, sp
+ 815 0010 6B46     		mov	r3, sp
+ 816 0012 5278     		ldrb	r2, [r2, #1]
+ 817 0014 1B78     		ldrb	r3, [r3]
+ 818 0016 511E     		subs	r1, r2, #1
+ 819 0018 8A41     		sbcs	r2, r2, r1
+ 820 001a 5BB2     		sxtb	r3, r3
+ 821 001c 5200     		lsls	r2, r2, #1
+ 822 001e 1343     		orrs	r3, r2
+ 823 0020 6A46     		mov	r2, sp
+ 824 0022 9278     		ldrb	r2, [r2, #2]
+ 825 0024 511E     		subs	r1, r2, #1
+ 826 0026 8A41     		sbcs	r2, r2, r1
+ 827 0028 9200     		lsls	r2, r2, #2
+ 828 002a 1343     		orrs	r3, r2
+ 829 002c 6A46     		mov	r2, sp
+ 830 002e D278     		ldrb	r2, [r2, #3]
+ 831 0030 511E     		subs	r1, r2, #1
+ 832 0032 8A41     		sbcs	r2, r2, r1
+ 833 0034 D200     		lsls	r2, r2, #3
+ 834 0036 1343     		orrs	r3, r2
+ 835 0038 6A46     		mov	r2, sp
+ 836 003a 1279     		ldrb	r2, [r2, #4]
+ 837 003c 511E     		subs	r1, r2, #1
+ 838 003e 8A41     		sbcs	r2, r2, r1
+ 839 0040 1201     		lsls	r2, r2, #4
+ 840 0042 1343     		orrs	r3, r2
+ 841 0044 6A46     		mov	r2, sp
+ 842 0046 5279     		ldrb	r2, [r2, #5]
+ 843 0048 511E     		subs	r1, r2, #1
+ 844 004a 8A41     		sbcs	r2, r2, r1
+ 845 004c 5201     		lsls	r2, r2, #5
+ 846 004e 1343     		orrs	r3, r2
+ 847 0050 2380     		strh	r3, [r4]
+ 848 0052 6B46     		mov	r3, sp
+ 849 0054 9B79     		ldrb	r3, [r3, #6]
+ 850 0056 5BB2     		sxtb	r3, r3
+ 851 0058 6380     		strh	r3, [r4, #2]
+ARM GAS  /tmp/ccwi6Oux.s 			page 15
+
+
+ 852 005a 6B46     		mov	r3, sp
+ 853 005c DB79     		ldrb	r3, [r3, #7]
+ 854 005e 5BB2     		sxtb	r3, r3
+ 855 0060 A380     		strh	r3, [r4, #4]
+ 856              	.L106:
+ 857              		@ sp needed
+ 858 0062 16BD     		pop	{r1, r2, r4, pc}
+ 860              		.section	.text.ral_sx126x_get_lora_rx_pkt_status,"ax",%progbits
+ 861              		.align	1
+ 862              		.global	ral_sx126x_get_lora_rx_pkt_status
+ 863              		.syntax unified
+ 864              		.code	16
+ 865              		.thumb_func
+ 866              		.fpu softvfp
+ 868              	ral_sx126x_get_lora_rx_pkt_status:
+ 869              		@ args = 0, pretend = 0, frame = 8
+ 870              		@ frame_needed = 0, uses_anonymous_args = 0
+ 871 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 872 0002 01AD     		add	r5, sp, #4
+ 873 0004 0C00     		movs	r4, r1
+ 874 0006 2900     		movs	r1, r5
+ 875 0008 FFF7FEFF 		bl	sx126x_get_lora_pkt_status
+ 876 000c 0028     		cmp	r0, #0
+ 877 000e 08D1     		bne	.L118
+ 878 0010 0023     		movs	r3, #0
+ 879 0012 EB56     		ldrsb	r3, [r5, r3]
+ 880 0014 2380     		strh	r3, [r4]
+ 881 0016 0123     		movs	r3, #1
+ 882 0018 EB56     		ldrsb	r3, [r5, r3]
+ 883 001a 6380     		strh	r3, [r4, #2]
+ 884 001c 0223     		movs	r3, #2
+ 885 001e EB56     		ldrsb	r3, [r5, r3]
+ 886 0020 A380     		strh	r3, [r4, #4]
+ 887              	.L118:
+ 888              		@ sp needed
+ 889 0022 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 891              		.section	.text.ral_sx126x_get_flrc_rx_pkt_status,"ax",%progbits
+ 892              		.align	1
+ 893              		.global	ral_sx126x_get_flrc_rx_pkt_status
+ 894              		.syntax unified
+ 895              		.code	16
+ 896              		.thumb_func
+ 897              		.fpu softvfp
+ 899              	ral_sx126x_get_flrc_rx_pkt_status:
+ 900              		@ args = 0, pretend = 0, frame = 0
+ 901              		@ frame_needed = 0, uses_anonymous_args = 0
+ 902              		@ link register save eliminated.
+ 903 0000 0120     		movs	r0, #1
+ 904              		@ sp needed
+ 905 0002 7047     		bx	lr
+ 907              		.section	.text.ral_sx126x_get_rssi_inst,"ax",%progbits
+ 908              		.align	1
+ 909              		.global	ral_sx126x_get_rssi_inst
+ 910              		.syntax unified
+ 911              		.code	16
+ 912              		.thumb_func
+ 913              		.fpu softvfp
+ARM GAS  /tmp/ccwi6Oux.s 			page 16
+
+
+ 915              	ral_sx126x_get_rssi_inst:
+ 916              		@ args = 0, pretend = 0, frame = 0
+ 917              		@ frame_needed = 0, uses_anonymous_args = 0
+ 918 0000 10B5     		push	{r4, lr}
+ 919 0002 FFF7FEFF 		bl	sx126x_get_rssi_inst
+ 920              		@ sp needed
+ 921 0006 10BD     		pop	{r4, pc}
+ 923              		.section	.text.ral_sx126x_get_flrc_time_on_air_in_ms,"ax",%progbits
+ 924              		.align	1
+ 925              		.global	ral_sx126x_get_flrc_time_on_air_in_ms
+ 926              		.syntax unified
+ 927              		.code	16
+ 928              		.thumb_func
+ 929              		.fpu softvfp
+ 931              	ral_sx126x_get_flrc_time_on_air_in_ms:
+ 932              		@ args = 0, pretend = 0, frame = 0
+ 933              		@ frame_needed = 0, uses_anonymous_args = 0
+ 934              		@ link register save eliminated.
+ 935 0000 0120     		movs	r0, #1
+ 936              		@ sp needed
+ 937 0002 7047     		bx	lr
+ 939              		.section	.text.ral_sx126x_set_gfsk_sync_word,"ax",%progbits
+ 940              		.align	1
+ 941              		.global	ral_sx126x_set_gfsk_sync_word
+ 942              		.syntax unified
+ 943              		.code	16
+ 944              		.thumb_func
+ 945              		.fpu softvfp
+ 947              	ral_sx126x_set_gfsk_sync_word:
+ 948              		@ args = 0, pretend = 0, frame = 0
+ 949              		@ frame_needed = 0, uses_anonymous_args = 0
+ 950 0000 10B5     		push	{r4, lr}
+ 951 0002 FFF7FEFF 		bl	sx126x_set_gfsk_sync_word
+ 952              		@ sp needed
+ 953 0006 10BD     		pop	{r4, pc}
+ 955              		.section	.text.ral_sx126x_set_lora_sync_word,"ax",%progbits
+ 956              		.align	1
+ 957              		.global	ral_sx126x_set_lora_sync_word
+ 958              		.syntax unified
+ 959              		.code	16
+ 960              		.thumb_func
+ 961              		.fpu softvfp
+ 963              	ral_sx126x_set_lora_sync_word:
+ 964              		@ args = 0, pretend = 0, frame = 0
+ 965              		@ frame_needed = 0, uses_anonymous_args = 0
+ 966 0000 10B5     		push	{r4, lr}
+ 967 0002 FFF7FEFF 		bl	sx126x_set_lora_sync_word
+ 968              		@ sp needed
+ 969 0006 10BD     		pop	{r4, pc}
+ 971              		.section	.text.ral_sx126x_set_flrc_sync_word,"ax",%progbits
+ 972              		.align	1
+ 973              		.global	ral_sx126x_set_flrc_sync_word
+ 974              		.syntax unified
+ 975              		.code	16
+ 976              		.thumb_func
+ 977              		.fpu softvfp
+ 979              	ral_sx126x_set_flrc_sync_word:
+ARM GAS  /tmp/ccwi6Oux.s 			page 17
+
+
+ 980              		@ args = 0, pretend = 0, frame = 0
+ 981              		@ frame_needed = 0, uses_anonymous_args = 0
+ 982              		@ link register save eliminated.
+ 983 0000 0120     		movs	r0, #1
+ 984              		@ sp needed
+ 985 0002 7047     		bx	lr
+ 987              		.section	.text.ral_sx126x_set_gfsk_crc_params,"ax",%progbits
+ 988              		.align	1
+ 989              		.global	ral_sx126x_set_gfsk_crc_params
+ 990              		.syntax unified
+ 991              		.code	16
+ 992              		.thumb_func
+ 993              		.fpu softvfp
+ 995              	ral_sx126x_set_gfsk_crc_params:
+ 996              		@ args = 0, pretend = 0, frame = 0
+ 997              		@ frame_needed = 0, uses_anonymous_args = 0
+ 998 0000 70B5     		push	{r4, r5, r6, lr}
+ 999 0002 0400     		movs	r4, r0
+ 1000 0004 1500     		movs	r5, r2
+ 1001 0006 FFF7FEFF 		bl	sx126x_set_gfsk_crc_seed
+ 1002 000a 0028     		cmp	r0, #0
+ 1003 000c 03D1     		bne	.L126
+ 1004 000e 2900     		movs	r1, r5
+ 1005 0010 2000     		movs	r0, r4
+ 1006 0012 FFF7FEFF 		bl	sx126x_set_gfsk_crc_polynomial
+ 1007              	.L126:
+ 1008              		@ sp needed
+ 1009 0016 70BD     		pop	{r4, r5, r6, pc}
+ 1011              		.section	.text.ral_sx126x_set_flrc_crc_params,"ax",%progbits
+ 1012              		.align	1
+ 1013              		.global	ral_sx126x_set_flrc_crc_params
+ 1014              		.syntax unified
+ 1015              		.code	16
+ 1016              		.thumb_func
+ 1017              		.fpu softvfp
+ 1019              	ral_sx126x_set_flrc_crc_params:
+ 1020              		@ args = 0, pretend = 0, frame = 0
+ 1021              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1022              		@ link register save eliminated.
+ 1023 0000 0120     		movs	r0, #1
+ 1024              		@ sp needed
+ 1025 0002 7047     		bx	lr
+ 1027              		.section	.text.ral_sx126x_set_gfsk_whitening_seed,"ax",%progbits
+ 1028              		.align	1
+ 1029              		.global	ral_sx126x_set_gfsk_whitening_seed
+ 1030              		.syntax unified
+ 1031              		.code	16
+ 1032              		.thumb_func
+ 1033              		.fpu softvfp
+ 1035              	ral_sx126x_set_gfsk_whitening_seed:
+ 1036              		@ args = 0, pretend = 0, frame = 0
+ 1037              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1038 0000 10B5     		push	{r4, lr}
+ 1039 0002 FFF7FEFF 		bl	sx126x_set_gfsk_whitening_seed
+ 1040              		@ sp needed
+ 1041 0006 10BD     		pop	{r4, pc}
+ 1043              		.section	.text.ral_sx126x_get_tx_consumption_in_ua,"ax",%progbits
+ARM GAS  /tmp/ccwi6Oux.s 			page 18
+
+
+ 1044              		.align	1
+ 1045              		.global	ral_sx126x_get_tx_consumption_in_ua
+ 1046              		.syntax unified
+ 1047              		.code	16
+ 1048              		.thumb_func
+ 1049              		.fpu softvfp
+ 1051              	ral_sx126x_get_tx_consumption_in_ua:
+ 1052              		@ args = 0, pretend = 0, frame = 24
+ 1053              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1054 0000 70B5     		push	{r4, r5, r6, lr}
+ 1055 0002 86B0     		sub	sp, sp, #24
+ 1056 0004 02AD     		add	r5, sp, #8
+ 1057 0006 1C00     		movs	r4, r3
+ 1058 0008 04AB     		add	r3, sp, #16
+ 1059 000a 1970     		strb	r1, [r3]
+ 1060 000c 0592     		str	r2, [sp, #20]
+ 1061 000e 1900     		movs	r1, r3
+ 1062 0010 2A00     		movs	r2, r5
+ 1063 0012 0600     		movs	r6, r0
+ 1064 0014 FFF7FEFF 		bl	ral_sx126x_bsp_get_tx_cfg
+ 1065 0018 6B46     		mov	r3, sp
+ 1066 001a 3000     		movs	r0, r6
+ 1067 001c D91D     		adds	r1, r3, #7
+ 1068 001e FFF7FEFF 		bl	ral_sx126x_bsp_get_reg_mode
+ 1069 0022 A878     		ldrb	r0, [r5, #2]
+ 1070 0024 0128     		cmp	r0, #1
+ 1071 0026 17D1     		bne	.L130
+ 1072 0028 0622     		movs	r2, #6
+ 1073 002a AA56     		ldrsb	r2, [r5, r2]
+ 1074 002c 2023     		movs	r3, #32
+ 1075 002e 0F2A     		cmp	r2, #15
+ 1076 0030 05DC     		bgt	.L131
+ 1077 0032 1100     		movs	r1, r2
+ 1078 0034 0023     		movs	r3, #0
+ 1079 0036 1131     		adds	r1, r1, #17
+ 1080 0038 01DB     		blt	.L131
+ 1081 003a 1132     		adds	r2, r2, #17
+ 1082 003c D3B2     		uxtb	r3, r2
+ 1083              	.L131:
+ 1084 003e 6A46     		mov	r2, sp
+ 1085 0040 D279     		ldrb	r2, [r2, #7]
+ 1086 0042 9B00     		lsls	r3, r3, #2
+ 1087 0044 012A     		cmp	r2, #1
+ 1088 0046 05D1     		bne	.L132
+ 1089 0048 104A     		ldr	r2, .L143
+ 1090              	.L142:
+ 1091 004a 0020     		movs	r0, #0
+ 1092 004c D358     		ldr	r3, [r2, r3]
+ 1093 004e 2360     		str	r3, [r4]
+ 1094              	.L133:
+ 1095 0050 06B0     		add	sp, sp, #24
+ 1096              		@ sp needed
+ 1097 0052 70BD     		pop	{r4, r5, r6, pc}
+ 1098              	.L132:
+ 1099 0054 0E4A     		ldr	r2, .L143+4
+ 1100 0056 F8E7     		b	.L142
+ 1101              	.L130:
+ARM GAS  /tmp/ccwi6Oux.s 			page 19
+
+
+ 1102 0058 0028     		cmp	r0, #0
+ 1103 005a 15D1     		bne	.L138
+ 1104 005c 0622     		movs	r2, #6
+ 1105 005e AA56     		ldrsb	r2, [r5, r2]
+ 1106 0060 1F23     		movs	r3, #31
+ 1107 0062 162A     		cmp	r2, #22
+ 1108 0064 05DC     		bgt	.L134
+ 1109 0066 1100     		movs	r1, r2
+ 1110 0068 0300     		movs	r3, r0
+ 1111 006a 0931     		adds	r1, r1, #9
+ 1112 006c 01DB     		blt	.L134
+ 1113 006e 0932     		adds	r2, r2, #9
+ 1114 0070 D3B2     		uxtb	r3, r2
+ 1115              	.L134:
+ 1116 0072 6A46     		mov	r2, sp
+ 1117 0074 D279     		ldrb	r2, [r2, #7]
+ 1118 0076 9B00     		lsls	r3, r3, #2
+ 1119 0078 012A     		cmp	r2, #1
+ 1120 007a 03D1     		bne	.L135
+ 1121 007c 054A     		ldr	r2, .L143+8
+ 1122              	.L141:
+ 1123 007e D358     		ldr	r3, [r2, r3]
+ 1124 0080 2360     		str	r3, [r4]
+ 1125 0082 E5E7     		b	.L133
+ 1126              	.L135:
+ 1127 0084 044A     		ldr	r2, .L143+12
+ 1128 0086 FAE7     		b	.L141
+ 1129              	.L138:
+ 1130 0088 0220     		movs	r0, #2
+ 1131 008a E1E7     		b	.L133
+ 1132              	.L144:
+ 1133              		.align	2
+ 1134              	.L143:
+ 1135 008c 00000000 		.word	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_lp
+ 1136 0090 00000000 		.word	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_lp
+ 1137 0094 00000000 		.word	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_hp
+ 1138 0098 00000000 		.word	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_hp
+ 1140              		.section	.text.ral_sx126x_get_gfsk_rx_consumption_in_ua,"ax",%progbits
+ 1141              		.align	1
+ 1142              		.global	ral_sx126x_get_gfsk_rx_consumption_in_ua
+ 1143              		.syntax unified
+ 1144              		.code	16
+ 1145              		.thumb_func
+ 1146              		.fpu softvfp
+ 1148              	ral_sx126x_get_gfsk_rx_consumption_in_ua:
+ 1149              		@ args = 4, pretend = 0, frame = 8
+ 1150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1151 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 1152 0002 1D00     		movs	r5, r3
+ 1153 0004 6B46     		mov	r3, sp
+ 1154 0006 DE1D     		adds	r6, r3, #7
+ 1155 0008 3100     		movs	r1, r6
+ 1156 000a 069C     		ldr	r4, [sp, #24]
+ 1157 000c FFF7FEFF 		bl	ral_sx126x_bsp_get_reg_mode
+ 1158 0010 3378     		ldrb	r3, [r6]
+ 1159 0012 6A1E     		subs	r2, r5, #1
+ 1160 0014 9541     		sbcs	r5, r5, r2
+ARM GAS  /tmp/ccwi6Oux.s 			page 20
+
+
+ 1161 0016 012B     		cmp	r3, #1
+ 1162 0018 08D1     		bne	.L146
+ 1163 001a 9622     		movs	r2, #150
+ 1164 001c 6B42     		rsbs	r3, r5, #0
+ 1165 001e 9200     		lsls	r2, r2, #2
+ 1166 0020 1340     		ands	r3, r2
+ 1167 0022 054A     		ldr	r2, .L153
+ 1168              	.L152:
+ 1169 0024 9B18     		adds	r3, r3, r2
+ 1170 0026 0020     		movs	r0, #0
+ 1171              		@ sp needed
+ 1172 0028 2360     		str	r3, [r4]
+ 1173 002a 76BD     		pop	{r1, r2, r4, r5, r6, pc}
+ 1174              	.L146:
+ 1175 002c 034A     		ldr	r2, .L153+4
+ 1176 002e 6B42     		rsbs	r3, r5, #0
+ 1177 0030 1340     		ands	r3, r2
+ 1178 0032 FA22     		movs	r2, #250
+ 1179 0034 5201     		lsls	r2, r2, #5
+ 1180 0036 F5E7     		b	.L152
+ 1181              	.L154:
+ 1182              		.align	2
+ 1183              	.L153:
+ 1184 0038 68100000 		.word	4200
+ 1185 003c 14050000 		.word	1300
+ 1187              		.section	.text.ral_sx126x_get_lora_rx_consumption_in_ua,"ax",%progbits
+ 1188              		.align	1
+ 1189              		.global	ral_sx126x_get_lora_rx_consumption_in_ua
+ 1190              		.syntax unified
+ 1191              		.code	16
+ 1192              		.thumb_func
+ 1193              		.fpu softvfp
+ 1195              	ral_sx126x_get_lora_rx_consumption_in_ua:
+ 1196              		@ args = 0, pretend = 0, frame = 8
+ 1197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1198 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 1199 0002 1C00     		movs	r4, r3
+ 1200 0004 6B46     		mov	r3, sp
+ 1201 0006 DE1D     		adds	r6, r3, #7
+ 1202 0008 3100     		movs	r1, r6
+ 1203 000a 1500     		movs	r5, r2
+ 1204 000c FFF7FEFF 		bl	ral_sx126x_bsp_get_reg_mode
+ 1205 0010 3378     		ldrb	r3, [r6]
+ 1206 0012 012B     		cmp	r3, #1
+ 1207 0014 0AD1     		bne	.L156
+ 1208 0016 6B1E     		subs	r3, r5, #1
+ 1209 0018 9D41     		sbcs	r5, r5, r3
+ 1210 001a AF23     		movs	r3, #175
+ 1211 001c 6A42     		rsbs	r2, r5, #0
+ 1212 001e 9B00     		lsls	r3, r3, #2
+ 1213 0020 1A40     		ands	r2, r3
+ 1214 0022 064B     		ldr	r3, .L163
+ 1215              	.L162:
+ 1216 0024 D218     		adds	r2, r2, r3
+ 1217 0026 0020     		movs	r0, #0
+ 1218              		@ sp needed
+ 1219 0028 2260     		str	r2, [r4]
+ARM GAS  /tmp/ccwi6Oux.s 			page 21
+
+
+ 1220 002a 76BD     		pop	{r1, r2, r4, r5, r6, pc}
+ 1221              	.L156:
+ 1222 002c 6B1E     		subs	r3, r5, #1
+ 1223 002e 9D41     		sbcs	r5, r5, r3
+ 1224 0030 034B     		ldr	r3, .L163+4
+ 1225 0032 6A42     		rsbs	r2, r5, #0
+ 1226 0034 1A40     		ands	r2, r3
+ 1227 0036 034B     		ldr	r3, .L163+8
+ 1228 0038 F4E7     		b	.L162
+ 1229              	.L164:
+ 1230 003a C046     		.align	2
+ 1231              	.L163:
+ 1232 003c F8110000 		.word	4600
+ 1233 0040 C4040000 		.word	1220
+ 1234 0044 B0220000 		.word	8880
+ 1236              		.section	.text.ral_sx126x_get_random_numbers,"ax",%progbits
+ 1237              		.align	1
+ 1238              		.global	ral_sx126x_get_random_numbers
+ 1239              		.syntax unified
+ 1240              		.code	16
+ 1241              		.thumb_func
+ 1242              		.fpu softvfp
+ 1244              	ral_sx126x_get_random_numbers:
+ 1245              		@ args = 0, pretend = 0, frame = 0
+ 1246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1247 0000 10B5     		push	{r4, lr}
+ 1248 0002 FFF7FEFF 		bl	sx126x_get_random_numbers
+ 1249              		@ sp needed
+ 1250 0006 10BD     		pop	{r4, pc}
+ 1252              		.section	.text.ral_sx126x_handle_rx_done,"ax",%progbits
+ 1253              		.align	1
+ 1254              		.global	ral_sx126x_handle_rx_done
+ 1255              		.syntax unified
+ 1256              		.code	16
+ 1257              		.thumb_func
+ 1258              		.fpu softvfp
+ 1260              	ral_sx126x_handle_rx_done:
+ 1261              		@ args = 0, pretend = 0, frame = 0
+ 1262              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1263 0000 10B5     		push	{r4, lr}
+ 1264 0002 FFF7FEFF 		bl	sx126x_handle_rx_done
+ 1265              		@ sp needed
+ 1266 0006 10BD     		pop	{r4, pc}
+ 1268              		.section	.text.ral_sx126x_handle_tx_done,"ax",%progbits
+ 1269              		.align	1
+ 1270              		.global	ral_sx126x_handle_tx_done
+ 1271              		.syntax unified
+ 1272              		.code	16
+ 1273              		.thumb_func
+ 1274              		.fpu softvfp
+ 1276              	ral_sx126x_handle_tx_done:
+ 1277              		@ args = 0, pretend = 0, frame = 0
+ 1278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1279              		@ link register save eliminated.
+ 1280 0000 0020     		movs	r0, #0
+ 1281              		@ sp needed
+ 1282 0002 7047     		bx	lr
+ARM GAS  /tmp/ccwi6Oux.s 			page 22
+
+
+ 1284              		.section	.text.ral_sx126x_get_lora_cad_det_peak,"ax",%progbits
+ 1285              		.align	1
+ 1286              		.global	ral_sx126x_get_lora_cad_det_peak
+ 1287              		.syntax unified
+ 1288              		.code	16
+ 1289              		.thumb_func
+ 1290              		.fpu softvfp
+ 1292              	ral_sx126x_get_lora_cad_det_peak:
+ 1293              		@ args = 4, pretend = 0, frame = 0
+ 1294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1295 0000 10B5     		push	{r4, lr}
+ 1296 0002 0C00     		movs	r4, r1
+ 1297 0004 1100     		movs	r1, r2
+ 1298 0006 1A00     		movs	r2, r3
+ 1299 0008 029B     		ldr	r3, [sp, #8]
+ 1300 000a 0A29     		cmp	r1, #10
+ 1301 000c 1ED9     		bls	.L169
+ 1302 000e 601F     		subs	r0, r4, #5
+ 1303 0010 0728     		cmp	r0, #7
+ 1304 0012 0DD8     		bhi	.L170
+ 1305 0014 FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 1306              	.L172:
+ 1307 0018 04       		.byte	(.L178-.L172)/2
+ 1308 0019 0E       		.byte	(.L177-.L172)/2
+ 1309 001a 10       		.byte	(.L176-.L172)/2
+ 1310 001b 12       		.byte	(.L175-.L172)/2
+ 1311 001c 14       		.byte	(.L174-.L172)/2
+ 1312 001d 14       		.byte	(.L174-.L172)/2
+ 1313 001e 16       		.byte	(.L173-.L172)/2
+ 1314 001f 18       		.byte	(.L171-.L172)/2
+ 1315              		.p2align 1
+ 1316              	.L178:
+ 1317 0020 1320     		movs	r0, #19
+ 1318              	.L190:
+ 1319 0022 1870     		strb	r0, [r3]
+ 1320 0024 022A     		cmp	r2, #2
+ 1321 0026 23D0     		beq	.L185
+ 1322 0028 25D9     		bls	.L186
+ 1323 002a D01E     		subs	r0, r2, #3
+ 1324 002c 0128     		cmp	r0, #1
+ 1325 002e 27D9     		bls	.L189
+ 1326              	.L170:
+ 1327 0030 0220     		movs	r0, #2
+ 1328              	.L179:
+ 1329              		@ sp needed
+ 1330 0032 10BD     		pop	{r4, pc}
+ 1331              	.L177:
+ 1332 0034 1420     		movs	r0, #20
+ 1333 0036 F4E7     		b	.L190
+ 1334              	.L176:
+ 1335 0038 1520     		movs	r0, #21
+ 1336 003a F2E7     		b	.L190
+ 1337              	.L175:
+ 1338 003c 1620     		movs	r0, #22
+ 1339 003e F0E7     		b	.L190
+ 1340              	.L174:
+ 1341 0040 1720     		movs	r0, #23
+ARM GAS  /tmp/ccwi6Oux.s 			page 23
+
+
+ 1342 0042 EEE7     		b	.L190
+ 1343              	.L173:
+ 1344 0044 1A20     		movs	r0, #26
+ 1345 0046 ECE7     		b	.L190
+ 1346              	.L171:
+ 1347 0048 1E20     		movs	r0, #30
+ 1348 004a EAE7     		b	.L190
+ 1349              	.L169:
+ 1350 004c 0220     		movs	r0, #2
+ 1351 004e 0629     		cmp	r1, #6
+ 1352 0050 EFD9     		bls	.L179
+ 1353 0052 601F     		subs	r0, r4, #5
+ 1354 0054 0728     		cmp	r0, #7
+ 1355 0056 EBD8     		bhi	.L170
+ 1356 0058 FFF7FEFF 		bl	__gnu_thumb1_case_sqi
+ 1357              	.L182:
+ 1358 005c E2       		.byte	(.L178-.L182)/2
+ 1359 005d EC       		.byte	(.L177-.L182)/2
+ 1360 005e F0       		.byte	(.L175-.L182)/2
+ 1361 005f F0       		.byte	(.L175-.L182)/2
+ 1362 0060 04       		.byte	(.L184-.L182)/2
+ 1363 0061 06       		.byte	(.L183-.L182)/2
+ 1364 0062 F4       		.byte	(.L173-.L182)/2
+ 1365 0063 08       		.byte	(.L181-.L182)/2
+ 1366              		.p2align 1
+ 1367              	.L184:
+ 1368 0064 1820     		movs	r0, #24
+ 1369 0066 DCE7     		b	.L190
+ 1370              	.L183:
+ 1371 0068 1920     		movs	r0, #25
+ 1372 006a DAE7     		b	.L190
+ 1373              	.L181:
+ 1374 006c 1D20     		movs	r0, #29
+ 1375 006e D8E7     		b	.L190
+ 1376              	.L185:
+ 1377 0070 1878     		ldrb	r0, [r3]
+ 1378 0072 0138     		subs	r0, r0, #1
+ 1379              	.L191:
+ 1380 0074 1870     		strb	r0, [r3]
+ 1381              	.L186:
+ 1382 0076 2000     		movs	r0, r4
+ 1383 0078 FFF7FEFF 		bl	ral_sx126x_bsp_get_lora_cad_det_peak
+ 1384 007c 0020     		movs	r0, #0
+ 1385 007e D8E7     		b	.L179
+ 1386              	.L189:
+ 1387 0080 1878     		ldrb	r0, [r3]
+ 1388 0082 0238     		subs	r0, r0, #2
+ 1389 0084 F6E7     		b	.L191
+ 1391              		.section	.text.ral_sx126x_convert_irq_flags_to_ral,"ax",%progbits
+ 1392              		.align	1
+ 1393              		.global	ral_sx126x_convert_irq_flags_to_ral
+ 1394              		.syntax unified
+ 1395              		.code	16
+ 1396              		.thumb_func
+ 1397              		.fpu softvfp
+ 1399              	ral_sx126x_convert_irq_flags_to_ral:
+ 1400              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccwi6Oux.s 			page 24
+
+
+ 1401              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1402              		@ link register save eliminated.
+ 1403 0000 0300     		movs	r3, r0
+ 1404 0002 0121     		movs	r1, #1
+ 1405 0004 0222     		movs	r2, #2
+ 1406 0006 0840     		ands	r0, r1
+ 1407 0008 0B42     		tst	r3, r1
+ 1408 000a 00D0     		beq	.L193
+ 1409 000c 1000     		movs	r0, r2
+ 1410              	.L193:
+ 1411 000e 1342     		tst	r3, r2
+ 1412 0010 01D0     		beq	.L194
+ 1413 0012 0422     		movs	r2, #4
+ 1414 0014 1043     		orrs	r0, r2
+ 1415              	.L194:
+ 1416 0016 9A05     		lsls	r2, r3, #22
+ 1417 0018 01D5     		bpl	.L195
+ 1418 001a 0822     		movs	r2, #8
+ 1419 001c 1043     		orrs	r0, r2
+ 1420              	.L195:
+ 1421 001e 1822     		movs	r2, #24
+ 1422 0020 2021     		movs	r1, #32
+ 1423 0022 1342     		tst	r3, r2
+ 1424 0024 00D0     		beq	.L196
+ 1425 0026 0843     		orrs	r0, r1
+ 1426              	.L196:
+ 1427 0028 4022     		movs	r2, #64
+ 1428 002a 0B42     		tst	r3, r1
+ 1429 002c 00D0     		beq	.L197
+ 1430 002e 1043     		orrs	r0, r2
+ 1431              	.L197:
+ 1432 0030 8021     		movs	r1, #128
+ 1433 0032 1342     		tst	r3, r2
+ 1434 0034 00D0     		beq	.L198
+ 1435 0036 0843     		orrs	r0, r1
+ 1436              	.L198:
+ 1437 0038 8022     		movs	r2, #128
+ 1438 003a 5200     		lsls	r2, r2, #1
+ 1439 003c 0B42     		tst	r3, r1
+ 1440 003e 00D0     		beq	.L199
+ 1441 0040 1043     		orrs	r0, r2
+ 1442              	.L199:
+ 1443 0042 1342     		tst	r3, r2
+ 1444 0044 02D0     		beq	.L200
+ 1445 0046 8022     		movs	r2, #128
+ 1446 0048 9200     		lsls	r2, r2, #2
+ 1447 004a 1043     		orrs	r0, r2
+ 1448              	.L200:
+ 1449 004c 5A07     		lsls	r2, r3, #29
+ 1450 004e 01D5     		bpl	.L201
+ 1451 0050 1022     		movs	r2, #16
+ 1452 0052 1043     		orrs	r0, r2
+ 1453              	.L201:
+ 1454 0054 5B04     		lsls	r3, r3, #17
+ 1455 0056 02D5     		bpl	.L202
+ 1456 0058 8023     		movs	r3, #128
+ 1457 005a DB00     		lsls	r3, r3, #3
+ARM GAS  /tmp/ccwi6Oux.s 			page 25
+
+
+ 1458 005c 1843     		orrs	r0, r3
+ 1459              	.L202:
+ 1460              		@ sp needed
+ 1461 005e 7047     		bx	lr
+ 1463              		.section	.text.ral_sx126x_get_irq_status,"ax",%progbits
+ 1464              		.align	1
+ 1465              		.global	ral_sx126x_get_irq_status
+ 1466              		.syntax unified
+ 1467              		.code	16
+ 1468              		.thumb_func
+ 1469              		.fpu softvfp
+ 1471              	ral_sx126x_get_irq_status:
+ 1472              		@ args = 0, pretend = 0, frame = 8
+ 1473              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1474 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 1475 0002 6A46     		mov	r2, sp
+ 1476 0004 0023     		movs	r3, #0
+ 1477 0006 0D00     		movs	r5, r1
+ 1478 0008 911D     		adds	r1, r2, #6
+ 1479 000a D380     		strh	r3, [r2, #6]
+ 1480 000c FFF7FEFF 		bl	sx126x_get_irq_status
+ 1481 0010 041E     		subs	r4, r0, #0
+ 1482 0012 04D1     		bne	.L234
+ 1483 0014 6B46     		mov	r3, sp
+ 1484 0016 D888     		ldrh	r0, [r3, #6]
+ 1485 0018 FFF7FEFF 		bl	ral_sx126x_convert_irq_flags_to_ral
+ 1486 001c 2880     		strh	r0, [r5]
+ 1487              	.L234:
+ 1488 001e 2000     		movs	r0, r4
+ 1489              		@ sp needed
+ 1490 0020 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 1492              		.section	.text.ral_sx126x_get_and_clear_irq_status,"ax",%progbits
+ 1493              		.align	1
+ 1494              		.global	ral_sx126x_get_and_clear_irq_status
+ 1495              		.syntax unified
+ 1496              		.code	16
+ 1497              		.thumb_func
+ 1498              		.fpu softvfp
+ 1500              	ral_sx126x_get_and_clear_irq_status:
+ 1501              		@ args = 0, pretend = 0, frame = 8
+ 1502              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1503 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 1504 0002 6A46     		mov	r2, sp
+ 1505 0004 0023     		movs	r3, #0
+ 1506 0006 0D00     		movs	r5, r1
+ 1507 0008 911D     		adds	r1, r2, #6
+ 1508 000a D380     		strh	r3, [r2, #6]
+ 1509 000c FFF7FEFF 		bl	sx126x_get_and_clear_irq_status
+ 1510 0010 041E     		subs	r4, r0, #0
+ 1511 0012 06D1     		bne	.L236
+ 1512 0014 002D     		cmp	r5, #0
+ 1513 0016 04D0     		beq	.L236
+ 1514 0018 6B46     		mov	r3, sp
+ 1515 001a D888     		ldrh	r0, [r3, #6]
+ 1516 001c FFF7FEFF 		bl	ral_sx126x_convert_irq_flags_to_ral
+ 1517 0020 2880     		strh	r0, [r5]
+ 1518              	.L236:
+ARM GAS  /tmp/ccwi6Oux.s 			page 26
+
+
+ 1519 0022 2000     		movs	r0, r4
+ 1520              		@ sp needed
+ 1521 0024 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 1523              		.section	.text.ral_sx126x_convert_irq_flags_from_ral,"ax",%progbits
+ 1524              		.align	1
+ 1525              		.global	ral_sx126x_convert_irq_flags_from_ral
+ 1526              		.syntax unified
+ 1527              		.code	16
+ 1528              		.thumb_func
+ 1529              		.fpu softvfp
+ 1531              	ral_sx126x_convert_irq_flags_from_ral:
+ 1532              		@ args = 0, pretend = 0, frame = 0
+ 1533              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1534              		@ link register save eliminated.
+ 1535 0000 0300     		movs	r3, r0
+ 1536 0002 8007     		lsls	r0, r0, #30
+ 1537 0004 C00F     		lsrs	r0, r0, #31
+ 1538 0006 5A07     		lsls	r2, r3, #29
+ 1539 0008 01D5     		bpl	.L241
+ 1540 000a 0222     		movs	r2, #2
+ 1541 000c 1043     		orrs	r0, r2
+ 1542              	.L241:
+ 1543 000e 1A07     		lsls	r2, r3, #28
+ 1544 0010 02D5     		bpl	.L242
+ 1545 0012 8022     		movs	r2, #128
+ 1546 0014 9200     		lsls	r2, r2, #2
+ 1547 0016 1043     		orrs	r0, r2
+ 1548              	.L242:
+ 1549 0018 9A06     		lsls	r2, r3, #26
+ 1550 001a 01D5     		bpl	.L243
+ 1551 001c 1822     		movs	r2, #24
+ 1552 001e 1043     		orrs	r0, r2
+ 1553              	.L243:
+ 1554 0020 5A06     		lsls	r2, r3, #25
+ 1555 0022 01D5     		bpl	.L244
+ 1556 0024 2022     		movs	r2, #32
+ 1557 0026 1043     		orrs	r0, r2
+ 1558              	.L244:
+ 1559 0028 1A06     		lsls	r2, r3, #24
+ 1560 002a 01D5     		bpl	.L245
+ 1561 002c 4022     		movs	r2, #64
+ 1562 002e 1043     		orrs	r0, r2
+ 1563              	.L245:
+ 1564 0030 8022     		movs	r2, #128
+ 1565 0032 5200     		lsls	r2, r2, #1
+ 1566 0034 1342     		tst	r3, r2
+ 1567 0036 01D0     		beq	.L246
+ 1568 0038 8021     		movs	r1, #128
+ 1569 003a 0843     		orrs	r0, r1
+ 1570              	.L246:
+ 1571 003c 9905     		lsls	r1, r3, #22
+ 1572 003e 00D5     		bpl	.L247
+ 1573 0040 1043     		orrs	r0, r2
+ 1574              	.L247:
+ 1575 0042 DA06     		lsls	r2, r3, #27
+ 1576 0044 01D5     		bpl	.L248
+ 1577 0046 0422     		movs	r2, #4
+ARM GAS  /tmp/ccwi6Oux.s 			page 27
+
+
+ 1578 0048 1043     		orrs	r0, r2
+ 1579              	.L248:
+ 1580 004a 5B05     		lsls	r3, r3, #21
+ 1581 004c 02D5     		bpl	.L249
+ 1582 004e 8023     		movs	r3, #128
+ 1583 0050 DB01     		lsls	r3, r3, #7
+ 1584 0052 1843     		orrs	r0, r3
+ 1585              	.L249:
+ 1586              		@ sp needed
+ 1587 0054 7047     		bx	lr
+ 1589              		.section	.text.ral_sx126x_clear_irq_status,"ax",%progbits
+ 1590              		.align	1
+ 1591              		.global	ral_sx126x_clear_irq_status
+ 1592              		.syntax unified
+ 1593              		.code	16
+ 1594              		.thumb_func
+ 1595              		.fpu softvfp
+ 1597              	ral_sx126x_clear_irq_status:
+ 1598              		@ args = 0, pretend = 0, frame = 0
+ 1599              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1600 0000 10B5     		push	{r4, lr}
+ 1601 0002 0400     		movs	r4, r0
+ 1602              		@ sp needed
+ 1603 0004 0800     		movs	r0, r1
+ 1604 0006 FFF7FEFF 		bl	ral_sx126x_convert_irq_flags_from_ral
+ 1605 000a 0100     		movs	r1, r0
+ 1606 000c 2000     		movs	r0, r4
+ 1607 000e FFF7FEFF 		bl	sx126x_clear_irq_status
+ 1608 0012 10BD     		pop	{r4, pc}
+ 1610              		.section	.text.ral_sx126x_set_dio_irq_params,"ax",%progbits
+ 1611              		.align	1
+ 1612              		.global	ral_sx126x_set_dio_irq_params
+ 1613              		.syntax unified
+ 1614              		.code	16
+ 1615              		.thumb_func
+ 1616              		.fpu softvfp
+ 1618              	ral_sx126x_set_dio_irq_params:
+ 1619              		@ args = 0, pretend = 0, frame = 0
+ 1620              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1621 0000 13B5     		push	{r0, r1, r4, lr}
+ 1622 0002 0400     		movs	r4, r0
+ 1623              		@ sp needed
+ 1624 0004 0800     		movs	r0, r1
+ 1625 0006 FFF7FEFF 		bl	ral_sx126x_convert_irq_flags_from_ral
+ 1626 000a 0023     		movs	r3, #0
+ 1627 000c 0200     		movs	r2, r0
+ 1628 000e 0349     		ldr	r1, .L279
+ 1629 0010 2000     		movs	r0, r4
+ 1630 0012 0093     		str	r3, [sp]
+ 1631 0014 FFF7FEFF 		bl	sx126x_set_dio_irq_params
+ 1632 0018 16BD     		pop	{r1, r2, r4, pc}
+ 1633              	.L280:
+ 1634 001a C046     		.align	2
+ 1635              	.L279:
+ 1636 001c FF430000 		.word	17407
+ 1638              		.section	.text.ral_sx126x_convert_gfsk_mod_params_from_ral,"ax",%progbits
+ 1639              		.align	1
+ARM GAS  /tmp/ccwi6Oux.s 			page 28
+
+
+ 1640              		.global	ral_sx126x_convert_gfsk_mod_params_from_ral
+ 1641              		.syntax unified
+ 1642              		.code	16
+ 1643              		.thumb_func
+ 1644              		.fpu softvfp
+ 1646              	ral_sx126x_convert_gfsk_mod_params_from_ral:
+ 1647              		@ args = 0, pretend = 0, frame = 8
+ 1648              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1649 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 1650 0002 6A46     		mov	r2, sp
+ 1651 0004 0023     		movs	r3, #0
+ 1652 0006 0500     		movs	r5, r0
+ 1653 0008 0C00     		movs	r4, r1
+ 1654 000a 8068     		ldr	r0, [r0, #8]
+ 1655 000c D11D     		adds	r1, r2, #7
+ 1656 000e D371     		strb	r3, [r2, #7]
+ 1657 0010 FFF7FEFF 		bl	sx126x_get_gfsk_bw_param
+ 1658 0014 031E     		subs	r3, r0, #0
+ 1659 0016 11D1     		bne	.L282
+ 1660 0018 6A68     		ldr	r2, [r5, #4]
+ 1661 001a 2968     		ldr	r1, [r5]
+ 1662 001c 6260     		str	r2, [r4, #4]
+ 1663 001e 6A46     		mov	r2, sp
+ 1664 0020 D279     		ldrb	r2, [r2, #7]
+ 1665 0022 2160     		str	r1, [r4]
+ 1666 0024 6272     		strb	r2, [r4, #9]
+ 1667 0026 287B     		ldrb	r0, [r5, #12]
+ 1668 0028 0428     		cmp	r0, #4
+ 1669 002a 12D8     		bhi	.L289
+ 1670 002c FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 1671              	.L284:
+ 1672 0030 03       		.byte	(.L288-.L284)/2
+ 1673 0031 08       		.byte	(.L287-.L284)/2
+ 1674 0032 0B       		.byte	(.L286-.L284)/2
+ 1675 0033 0D       		.byte	(.L285-.L284)/2
+ 1676 0034 0F       		.byte	(.L283-.L284)/2
+ 1677 0035 00       		.p2align 1
+ 1678              	.L288:
+ 1679 0036 0023     		movs	r3, #0
+ 1680 0038 2372     		strb	r3, [r4, #8]
+ 1681 003a 0300     		movs	r3, r0
+ 1682              	.L282:
+ 1683              		@ sp needed
+ 1684 003c 1800     		movs	r0, r3
+ 1685 003e 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 1686              	.L287:
+ 1687 0040 0822     		movs	r2, #8
+ 1688              	.L290:
+ 1689 0042 2272     		strb	r2, [r4, #8]
+ 1690 0044 FAE7     		b	.L282
+ 1691              	.L286:
+ 1692 0046 0922     		movs	r2, #9
+ 1693 0048 FBE7     		b	.L290
+ 1694              	.L285:
+ 1695 004a 0A22     		movs	r2, #10
+ 1696 004c F9E7     		b	.L290
+ 1697              	.L283:
+ARM GAS  /tmp/ccwi6Oux.s 			page 29
+
+
+ 1698 004e 0B22     		movs	r2, #11
+ 1699 0050 F7E7     		b	.L290
+ 1700              	.L289:
+ 1701 0052 0223     		movs	r3, #2
+ 1702 0054 F2E7     		b	.L282
+ 1704              		.section	.text.ral_sx126x_set_gfsk_mod_params,"ax",%progbits
+ 1705              		.align	1
+ 1706              		.global	ral_sx126x_set_gfsk_mod_params
+ 1707              		.syntax unified
+ 1708              		.code	16
+ 1709              		.thumb_func
+ 1710              		.fpu softvfp
+ 1712              	ral_sx126x_set_gfsk_mod_params:
+ 1713              		@ args = 0, pretend = 0, frame = 16
+ 1714              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1715 0000 30B5     		push	{r4, r5, lr}
+ 1716 0002 0D00     		movs	r5, r1
+ 1717 0004 85B0     		sub	sp, sp, #20
+ 1718 0006 0021     		movs	r1, #0
+ 1719 0008 0400     		movs	r4, r0
+ 1720 000a 0C22     		movs	r2, #12
+ 1721 000c 01A8     		add	r0, sp, #4
+ 1722 000e FFF7FEFF 		bl	memset
+ 1723 0012 2800     		movs	r0, r5
+ 1724 0014 01A9     		add	r1, sp, #4
+ 1725 0016 FFF7FEFF 		bl	ral_sx126x_convert_gfsk_mod_params_from_ral
+ 1726 001a 0028     		cmp	r0, #0
+ 1727 001c 03D1     		bne	.L292
+ 1728 001e 2000     		movs	r0, r4
+ 1729 0020 01A9     		add	r1, sp, #4
+ 1730 0022 FFF7FEFF 		bl	sx126x_set_gfsk_mod_params
+ 1731              	.L292:
+ 1732 0026 05B0     		add	sp, sp, #20
+ 1733              		@ sp needed
+ 1734 0028 30BD     		pop	{r4, r5, pc}
+ 1736              		.section	.text.ral_sx126x_convert_gfsk_pkt_params_from_ral,"ax",%progbits
+ 1737              		.align	1
+ 1738              		.global	ral_sx126x_convert_gfsk_pkt_params_from_ral
+ 1739              		.syntax unified
+ 1740              		.code	16
+ 1741              		.thumb_func
+ 1742              		.fpu softvfp
+ 1744              	ral_sx126x_convert_gfsk_pkt_params_from_ral:
+ 1745              		@ args = 0, pretend = 0, frame = 0
+ 1746              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1747 0000 00B5     		push	{lr}
+ 1748 0002 0288     		ldrh	r2, [r0]
+ 1749 0004 0300     		movs	r3, r0
+ 1750 0006 0A80     		strh	r2, [r1]
+ 1751 0008 8078     		ldrb	r0, [r0, #2]
+ 1752 000a 0428     		cmp	r0, #4
+ 1753 000c 15D8     		bhi	.L294
+ 1754 000e FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 1755              	.L296:
+ 1756 0012 03       		.byte	(.L300-.L296)/2
+ 1757 0013 16       		.byte	(.L299-.L296)/2
+ 1758 0014 18       		.byte	(.L298-.L296)/2
+ARM GAS  /tmp/ccwi6Oux.s 			page 30
+
+
+ 1759 0015 1A       		.byte	(.L297-.L296)/2
+ 1760 0016 1C       		.byte	(.L295-.L296)/2
+ 1761 0017 00       		.p2align 1
+ 1762              	.L300:
+ 1763 0018 0022     		movs	r2, #0
+ 1764              	.L318:
+ 1765 001a 8A70     		strb	r2, [r1, #2]
+ 1766 001c DA78     		ldrb	r2, [r3, #3]
+ 1767 001e CA70     		strb	r2, [r1, #3]
+ 1768 0020 1A79     		ldrb	r2, [r3, #4]
+ 1769 0022 012A     		cmp	r2, #1
+ 1770 0024 03D0     		beq	.L304
+ 1771 0026 022A     		cmp	r2, #2
+ 1772 0028 01D0     		beq	.L304
+ 1773 002a 002A     		cmp	r2, #0
+ 1774 002c 05D1     		bne	.L294
+ 1775              	.L304:
+ 1776 002e 0A71     		strb	r2, [r1, #4]
+ 1777 0030 5A79     		ldrb	r2, [r3, #5]
+ 1778 0032 002A     		cmp	r2, #0
+ 1779 0034 0BD0     		beq	.L307
+ 1780 0036 012A     		cmp	r2, #1
+ 1781 0038 09D0     		beq	.L307
+ 1782              	.L294:
+ 1783 003a 0220     		movs	r0, #2
+ 1784              	.L301:
+ 1785              		@ sp needed
+ 1786 003c 00BD     		pop	{pc}
+ 1787              	.L299:
+ 1788 003e 0422     		movs	r2, #4
+ 1789 0040 EBE7     		b	.L318
+ 1790              	.L298:
+ 1791 0042 0522     		movs	r2, #5
+ 1792 0044 E9E7     		b	.L318
+ 1793              	.L297:
+ 1794 0046 0622     		movs	r2, #6
+ 1795 0048 E7E7     		b	.L318
+ 1796              	.L295:
+ 1797 004a 0722     		movs	r2, #7
+ 1798 004c E5E7     		b	.L318
+ 1799              	.L307:
+ 1800 004e 4A71     		strb	r2, [r1, #5]
+ 1801 0050 DA88     		ldrh	r2, [r3, #6]
+ 1802 0052 8A71     		strb	r2, [r1, #6]
+ 1803 0054 187A     		ldrb	r0, [r3, #8]
+ 1804 0056 0428     		cmp	r0, #4
+ 1805 0058 EFD8     		bhi	.L294
+ 1806 005a FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 1807              	.L310:
+ 1808 005e 03       		.byte	(.L314-.L310)/2
+ 1809 005f 0D       		.byte	(.L313-.L310)/2
+ 1810 0060 0F       		.byte	(.L312-.L310)/2
+ 1811 0061 11       		.byte	(.L311-.L310)/2
+ 1812 0062 13       		.byte	(.L309-.L310)/2
+ 1813 0063 00       		.p2align 1
+ 1814              	.L314:
+ 1815 0064 0122     		movs	r2, #1
+ARM GAS  /tmp/ccwi6Oux.s 			page 31
+
+
+ 1816              	.L319:
+ 1817 0066 CA71     		strb	r2, [r1, #7]
+ 1818 0068 587A     		ldrb	r0, [r3, #9]
+ 1819 006a 0028     		cmp	r0, #0
+ 1820 006c 0CD0     		beq	.L316
+ 1821 006e 0128     		cmp	r0, #1
+ 1822 0070 E3D1     		bne	.L294
+ 1823 0072 0872     		strb	r0, [r1, #8]
+ 1824 0074 0020     		movs	r0, #0
+ 1825 0076 E1E7     		b	.L301
+ 1826              	.L313:
+ 1827 0078 0022     		movs	r2, #0
+ 1828 007a F4E7     		b	.L319
+ 1829              	.L312:
+ 1830 007c 0222     		movs	r2, #2
+ 1831 007e F2E7     		b	.L319
+ 1832              	.L311:
+ 1833 0080 0422     		movs	r2, #4
+ 1834 0082 F0E7     		b	.L319
+ 1835              	.L309:
+ 1836 0084 0622     		movs	r2, #6
+ 1837 0086 EEE7     		b	.L319
+ 1838              	.L316:
+ 1839 0088 0872     		strb	r0, [r1, #8]
+ 1840 008a D7E7     		b	.L301
+ 1842              		.section	.text.ral_sx126x_set_gfsk_pkt_params,"ax",%progbits
+ 1843              		.align	1
+ 1844              		.global	ral_sx126x_set_gfsk_pkt_params
+ 1845              		.syntax unified
+ 1846              		.code	16
+ 1847              		.thumb_func
+ 1848              		.fpu softvfp
+ 1850              	ral_sx126x_set_gfsk_pkt_params:
+ 1851              		@ args = 0, pretend = 0, frame = 16
+ 1852              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1853 0000 30B5     		push	{r4, r5, lr}
+ 1854 0002 0D00     		movs	r5, r1
+ 1855 0004 85B0     		sub	sp, sp, #20
+ 1856 0006 0021     		movs	r1, #0
+ 1857 0008 0400     		movs	r4, r0
+ 1858 000a 0A22     		movs	r2, #10
+ 1859 000c 01A8     		add	r0, sp, #4
+ 1860 000e FFF7FEFF 		bl	memset
+ 1861 0012 2800     		movs	r0, r5
+ 1862 0014 01A9     		add	r1, sp, #4
+ 1863 0016 FFF7FEFF 		bl	ral_sx126x_convert_gfsk_pkt_params_from_ral
+ 1864 001a 0028     		cmp	r0, #0
+ 1865 001c 03D1     		bne	.L321
+ 1866 001e 2000     		movs	r0, r4
+ 1867 0020 01A9     		add	r1, sp, #4
+ 1868 0022 FFF7FEFF 		bl	sx126x_set_gfsk_pkt_params
+ 1869              	.L321:
+ 1870 0026 05B0     		add	sp, sp, #20
+ 1871              		@ sp needed
+ 1872 0028 30BD     		pop	{r4, r5, pc}
+ 1874              		.section	.text.ral_sx126x_get_gfsk_time_on_air_in_ms,"ax",%progbits
+ 1875              		.align	1
+ARM GAS  /tmp/ccwi6Oux.s 			page 32
+
+
+ 1876              		.global	ral_sx126x_get_gfsk_time_on_air_in_ms
+ 1877              		.syntax unified
+ 1878              		.code	16
+ 1879              		.thumb_func
+ 1880              		.fpu softvfp
+ 1882              	ral_sx126x_get_gfsk_time_on_air_in_ms:
+ 1883              		@ args = 0, pretend = 0, frame = 24
+ 1884              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1885 0000 10B5     		push	{r4, lr}
+ 1886 0002 0400     		movs	r4, r0
+ 1887 0004 86B0     		sub	sp, sp, #24
+ 1888 0006 0800     		movs	r0, r1
+ 1889 0008 03A9     		add	r1, sp, #12
+ 1890 000a FFF7FEFF 		bl	ral_sx126x_convert_gfsk_mod_params_from_ral
+ 1891 000e 6946     		mov	r1, sp
+ 1892 0010 2000     		movs	r0, r4
+ 1893 0012 FFF7FEFF 		bl	ral_sx126x_convert_gfsk_pkt_params_from_ral
+ 1894 0016 6846     		mov	r0, sp
+ 1895 0018 03A9     		add	r1, sp, #12
+ 1896 001a FFF7FEFF 		bl	sx126x_get_gfsk_time_on_air_in_ms
+ 1897 001e 06B0     		add	sp, sp, #24
+ 1898              		@ sp needed
+ 1899 0020 10BD     		pop	{r4, pc}
+ 1901              		.section	.text.ral_sx126x_convert_lora_mod_params_from_ral,"ax",%progbits
+ 1902              		.align	1
+ 1903              		.global	ral_sx126x_convert_lora_mod_params_from_ral
+ 1904              		.syntax unified
+ 1905              		.code	16
+ 1906              		.thumb_func
+ 1907              		.fpu softvfp
+ 1909              	ral_sx126x_convert_lora_mod_params_from_ral:
+ 1910              		@ args = 0, pretend = 0, frame = 0
+ 1911              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1912 0000 00B5     		push	{lr}
+ 1913 0002 0278     		ldrb	r2, [r0]
+ 1914 0004 0300     		movs	r3, r0
+ 1915 0006 0A70     		strb	r2, [r1]
+ 1916 0008 4078     		ldrb	r0, [r0, #1]
+ 1917 000a 0B28     		cmp	r0, #11
+ 1918 000c 21D8     		bhi	.L337
+ 1919 000e FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 1920              	.L326:
+ 1921 0012 06       		.byte	(.L335-.L326)/2
+ 1922 0013 0E       		.byte	(.L334-.L326)/2
+ 1923 0014 10       		.byte	(.L333-.L326)/2
+ 1924 0015 12       		.byte	(.L332-.L326)/2
+ 1925 0016 14       		.byte	(.L331-.L326)/2
+ 1926 0017 16       		.byte	(.L330-.L326)/2
+ 1927 0018 18       		.byte	(.L329-.L326)/2
+ 1928 0019 1A       		.byte	(.L328-.L326)/2
+ 1929 001a 20       		.byte	(.L337-.L326)/2
+ 1930 001b 1C       		.byte	(.L327-.L326)/2
+ 1931 001c 20       		.byte	(.L337-.L326)/2
+ 1932 001d 1E       		.byte	(.L325-.L326)/2
+ 1933              		.p2align 1
+ 1934              	.L335:
+ 1935 001e 0022     		movs	r2, #0
+ARM GAS  /tmp/ccwi6Oux.s 			page 33
+
+
+ 1936              	.L338:
+ 1937 0020 0020     		movs	r0, #0
+ 1938 0022 4A70     		strb	r2, [r1, #1]
+ 1939 0024 9A78     		ldrb	r2, [r3, #2]
+ 1940 0026 8A70     		strb	r2, [r1, #2]
+ 1941 0028 DB78     		ldrb	r3, [r3, #3]
+ 1942 002a CB70     		strb	r3, [r1, #3]
+ 1943              	.L324:
+ 1944              		@ sp needed
+ 1945 002c 00BD     		pop	{pc}
+ 1946              	.L334:
+ 1947 002e 0822     		movs	r2, #8
+ 1948 0030 F6E7     		b	.L338
+ 1949              	.L333:
+ 1950 0032 0122     		movs	r2, #1
+ 1951 0034 F4E7     		b	.L338
+ 1952              	.L332:
+ 1953 0036 0922     		movs	r2, #9
+ 1954 0038 F2E7     		b	.L338
+ 1955              	.L331:
+ 1956 003a 0222     		movs	r2, #2
+ 1957 003c F0E7     		b	.L338
+ 1958              	.L330:
+ 1959 003e 0A22     		movs	r2, #10
+ 1960 0040 EEE7     		b	.L338
+ 1961              	.L329:
+ 1962 0042 0322     		movs	r2, #3
+ 1963 0044 ECE7     		b	.L338
+ 1964              	.L328:
+ 1965 0046 0422     		movs	r2, #4
+ 1966 0048 EAE7     		b	.L338
+ 1967              	.L327:
+ 1968 004a 0522     		movs	r2, #5
+ 1969 004c E8E7     		b	.L338
+ 1970              	.L325:
+ 1971 004e 0622     		movs	r2, #6
+ 1972 0050 E6E7     		b	.L338
+ 1973              	.L337:
+ 1974 0052 0220     		movs	r0, #2
+ 1975 0054 EAE7     		b	.L324
+ 1977              		.section	.text.ral_sx126x_set_lora_mod_params,"ax",%progbits
+ 1978              		.align	1
+ 1979              		.global	ral_sx126x_set_lora_mod_params
+ 1980              		.syntax unified
+ 1981              		.code	16
+ 1982              		.thumb_func
+ 1983              		.fpu softvfp
+ 1985              	ral_sx126x_set_lora_mod_params:
+ 1986              		@ args = 0, pretend = 0, frame = 8
+ 1987              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1988 0000 13B5     		push	{r0, r1, r4, lr}
+ 1989 0002 0400     		movs	r4, r0
+ 1990 0004 0800     		movs	r0, r1
+ 1991 0006 01A9     		add	r1, sp, #4
+ 1992 0008 FFF7FEFF 		bl	ral_sx126x_convert_lora_mod_params_from_ral
+ 1993 000c 0028     		cmp	r0, #0
+ 1994 000e 03D1     		bne	.L340
+ARM GAS  /tmp/ccwi6Oux.s 			page 34
+
+
+ 1995 0010 2000     		movs	r0, r4
+ 1996 0012 01A9     		add	r1, sp, #4
+ 1997 0014 FFF7FEFF 		bl	sx126x_set_lora_mod_params
+ 1998              	.L340:
+ 1999              		@ sp needed
+ 2000 0018 16BD     		pop	{r1, r2, r4, pc}
+ 2002              		.section	.text.ral_sx126x_convert_lora_pkt_params_from_ral,"ax",%progbits
+ 2003              		.align	1
+ 2004              		.global	ral_sx126x_convert_lora_pkt_params_from_ral
+ 2005              		.syntax unified
+ 2006              		.code	16
+ 2007              		.thumb_func
+ 2008              		.fpu softvfp
+ 2010              	ral_sx126x_convert_lora_pkt_params_from_ral:
+ 2011              		@ args = 0, pretend = 0, frame = 0
+ 2012              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2013 0000 10B5     		push	{r4, lr}
+ 2014 0002 0388     		ldrh	r3, [r0]
+ 2015 0004 0B80     		strh	r3, [r1]
+ 2016 0006 8378     		ldrb	r3, [r0, #2]
+ 2017 0008 002B     		cmp	r3, #0
+ 2018 000a 03D0     		beq	.L343
+ 2019 000c 012B     		cmp	r3, #1
+ 2020 000e 01D0     		beq	.L343
+ 2021 0010 0220     		movs	r0, #2
+ 2022              	.L344:
+ 2023              		@ sp needed
+ 2024 0012 10BD     		pop	{r4, pc}
+ 2025              	.L343:
+ 2026 0014 8B70     		strb	r3, [r1, #2]
+ 2027 0016 C478     		ldrb	r4, [r0, #3]
+ 2028 0018 0279     		ldrb	r2, [r0, #4]
+ 2029 001a 4379     		ldrb	r3, [r0, #5]
+ 2030 001c 0020     		movs	r0, #0
+ 2031 001e CC70     		strb	r4, [r1, #3]
+ 2032 0020 0A71     		strb	r2, [r1, #4]
+ 2033 0022 4B71     		strb	r3, [r1, #5]
+ 2034 0024 F5E7     		b	.L344
+ 2036              		.section	.text.ral_sx126x_set_lora_pkt_params,"ax",%progbits
+ 2037              		.align	1
+ 2038              		.global	ral_sx126x_set_lora_pkt_params
+ 2039              		.syntax unified
+ 2040              		.code	16
+ 2041              		.thumb_func
+ 2042              		.fpu softvfp
+ 2044              	ral_sx126x_set_lora_pkt_params:
+ 2045              		@ args = 0, pretend = 0, frame = 8
+ 2046              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2047 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 2048 0002 0D00     		movs	r5, r1
+ 2049 0004 0400     		movs	r4, r0
+ 2050 0006 0021     		movs	r1, #0
+ 2051 0008 0622     		movs	r2, #6
+ 2052 000a 6846     		mov	r0, sp
+ 2053 000c FFF7FEFF 		bl	memset
+ 2054 0010 6946     		mov	r1, sp
+ 2055 0012 2800     		movs	r0, r5
+ARM GAS  /tmp/ccwi6Oux.s 			page 35
+
+
+ 2056 0014 FFF7FEFF 		bl	ral_sx126x_convert_lora_pkt_params_from_ral
+ 2057 0018 0028     		cmp	r0, #0
+ 2058 001a 03D1     		bne	.L347
+ 2059 001c 6946     		mov	r1, sp
+ 2060 001e 2000     		movs	r0, r4
+ 2061 0020 FFF7FEFF 		bl	sx126x_set_lora_pkt_params
+ 2062              	.L347:
+ 2063              		@ sp needed
+ 2064 0024 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 2066              		.section	.text.ral_sx126x_get_lora_time_on_air_in_ms,"ax",%progbits
+ 2067              		.align	1
+ 2068              		.global	ral_sx126x_get_lora_time_on_air_in_ms
+ 2069              		.syntax unified
+ 2070              		.code	16
+ 2071              		.thumb_func
+ 2072              		.fpu softvfp
+ 2074              	ral_sx126x_get_lora_time_on_air_in_ms:
+ 2075              		@ args = 0, pretend = 0, frame = 16
+ 2076              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2077 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 2078 0002 0400     		movs	r4, r0
+ 2079 0004 0800     		movs	r0, r1
+ 2080 0006 01A9     		add	r1, sp, #4
+ 2081 0008 FFF7FEFF 		bl	ral_sx126x_convert_lora_mod_params_from_ral
+ 2082 000c 02A9     		add	r1, sp, #8
+ 2083 000e 2000     		movs	r0, r4
+ 2084 0010 FFF7FEFF 		bl	ral_sx126x_convert_lora_pkt_params_from_ral
+ 2085 0014 01A9     		add	r1, sp, #4
+ 2086 0016 02A8     		add	r0, sp, #8
+ 2087 0018 FFF7FEFF 		bl	sx126x_get_lora_time_on_air_in_ms
+ 2088 001c 04B0     		add	sp, sp, #16
+ 2089              		@ sp needed
+ 2090 001e 10BD     		pop	{r4, pc}
+ 2092              		.section	.text.ral_sx126x_convert_lora_cr_to_ral,"ax",%progbits
+ 2093              		.align	1
+ 2094              		.global	ral_sx126x_convert_lora_cr_to_ral
+ 2095              		.syntax unified
+ 2096              		.code	16
+ 2097              		.thumb_func
+ 2098              		.fpu softvfp
+ 2100              	ral_sx126x_convert_lora_cr_to_ral:
+ 2101              		@ args = 0, pretend = 0, frame = 0
+ 2102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2103 0000 0138     		subs	r0, r0, #1
+ 2104 0002 0223     		movs	r3, #2
+ 2105 0004 00B5     		push	{lr}
+ 2106 0006 0328     		cmp	r0, #3
+ 2107 0008 06D8     		bhi	.L350
+ 2108 000a FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 2109              	.L352:
+ 2110 000e 02       		.byte	(.L355-.L352)/2
+ 2111 000f 07       		.byte	(.L354-.L352)/2
+ 2112 0010 09       		.byte	(.L353-.L352)/2
+ 2113 0011 0B       		.byte	(.L351-.L352)/2
+ 2114              		.p2align 1
+ 2115              	.L355:
+ 2116 0012 0123     		movs	r3, #1
+ARM GAS  /tmp/ccwi6Oux.s 			page 36
+
+
+ 2117              	.L357:
+ 2118 0014 0B70     		strb	r3, [r1]
+ 2119 0016 0023     		movs	r3, #0
+ 2120              	.L350:
+ 2121              		@ sp needed
+ 2122 0018 1800     		movs	r0, r3
+ 2123 001a 00BD     		pop	{pc}
+ 2124              	.L354:
+ 2125 001c 0223     		movs	r3, #2
+ 2126 001e F9E7     		b	.L357
+ 2127              	.L353:
+ 2128 0020 0323     		movs	r3, #3
+ 2129 0022 F7E7     		b	.L357
+ 2130              	.L351:
+ 2131 0024 0423     		movs	r3, #4
+ 2132 0026 F5E7     		b	.L357
+ 2134              		.section	.text.ral_sx126x_get_lora_rx_pkt_cr_crc,"ax",%progbits
+ 2135              		.align	1
+ 2136              		.global	ral_sx126x_get_lora_rx_pkt_cr_crc
+ 2137              		.syntax unified
+ 2138              		.code	16
+ 2139              		.thumb_func
+ 2140              		.fpu softvfp
+ 2142              	ral_sx126x_get_lora_rx_pkt_cr_crc:
+ 2143              		@ args = 0, pretend = 0, frame = 8
+ 2144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2145 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 2146 0002 6B46     		mov	r3, sp
+ 2147 0004 DD1D     		adds	r5, r3, #7
+ 2148 0006 0C00     		movs	r4, r1
+ 2149 0008 2900     		movs	r1, r5
+ 2150 000a FFF7FEFF 		bl	sx126x_get_lora_params_from_header
+ 2151 000e 0028     		cmp	r0, #0
+ 2152 0010 03D1     		bne	.L359
+ 2153 0012 2100     		movs	r1, r4
+ 2154 0014 2878     		ldrb	r0, [r5]
+ 2155 0016 FFF7FEFF 		bl	ral_sx126x_convert_lora_cr_to_ral
+ 2156              	.L359:
+ 2157              		@ sp needed
+ 2158 001a 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 2160              		.section	.text.ral_sx126x_convert_lora_cad_params_from_ral,"ax",%progbits
+ 2161              		.align	1
+ 2162              		.global	ral_sx126x_convert_lora_cad_params_from_ral
+ 2163              		.syntax unified
+ 2164              		.code	16
+ 2165              		.thumb_func
+ 2166              		.fpu softvfp
+ 2168              	ral_sx126x_convert_lora_cad_params_from_ral:
+ 2169              		@ args = 0, pretend = 0, frame = 0
+ 2170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2171 0000 0300     		movs	r3, r0
+ 2172 0002 0078     		ldrb	r0, [r0]
+ 2173 0004 10B5     		push	{r4, lr}
+ 2174 0006 0C00     		movs	r4, r1
+ 2175 0008 0428     		cmp	r0, #4
+ 2176 000a 04D8     		bhi	.L361
+ 2177 000c FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ARM GAS  /tmp/ccwi6Oux.s 			page 37
+
+
+ 2178              	.L363:
+ 2179 0010 05       		.byte	(.L367-.L363)/2
+ 2180 0011 19       		.byte	(.L366-.L363)/2
+ 2181 0012 1B       		.byte	(.L365-.L363)/2
+ 2182 0013 1D       		.byte	(.L364-.L363)/2
+ 2183 0014 1F       		.byte	(.L362-.L363)/2
+ 2184 0015 00       		.p2align 1
+ 2185              	.L361:
+ 2186 0016 0220     		movs	r0, #2
+ 2187              	.L368:
+ 2188              		@ sp needed
+ 2189 0018 10BD     		pop	{r4, pc}
+ 2190              	.L367:
+ 2191 001a 0022     		movs	r2, #0
+ 2192              	.L373:
+ 2193 001c 2270     		strb	r2, [r4]
+ 2194 001e 5A78     		ldrb	r2, [r3, #1]
+ 2195 0020 6270     		strb	r2, [r4, #1]
+ 2196 0022 9A78     		ldrb	r2, [r3, #2]
+ 2197 0024 A270     		strb	r2, [r4, #2]
+ 2198 0026 DA78     		ldrb	r2, [r3, #3]
+ 2199 0028 012A     		cmp	r2, #1
+ 2200 002a 03D0     		beq	.L374
+ 2201 002c 022A     		cmp	r2, #2
+ 2202 002e 10D0     		beq	.L371
+ 2203 0030 002A     		cmp	r2, #0
+ 2204 0032 F0D1     		bne	.L361
+ 2205              	.L374:
+ 2206 0034 E270     		strb	r2, [r4, #3]
+ 2207 0036 5868     		ldr	r0, [r3, #4]
+ 2208 0038 FFF7FEFF 		bl	sx126x_convert_timeout_in_ms_to_rtc_step
+ 2209 003c 6060     		str	r0, [r4, #4]
+ 2210 003e 0020     		movs	r0, #0
+ 2211 0040 EAE7     		b	.L368
+ 2212              	.L366:
+ 2213 0042 0122     		movs	r2, #1
+ 2214 0044 EAE7     		b	.L373
+ 2215              	.L365:
+ 2216 0046 0222     		movs	r2, #2
+ 2217 0048 E8E7     		b	.L373
+ 2218              	.L364:
+ 2219 004a 0322     		movs	r2, #3
+ 2220 004c E6E7     		b	.L373
+ 2221              	.L362:
+ 2222 004e 0422     		movs	r2, #4
+ 2223 0050 E4E7     		b	.L373
+ 2224              	.L371:
+ 2225 0052 1022     		movs	r2, #16
+ 2226 0054 EEE7     		b	.L374
+ 2228              		.section	.text.ral_sx126x_set_lora_cad_params,"ax",%progbits
+ 2229              		.align	1
+ 2230              		.global	ral_sx126x_set_lora_cad_params
+ 2231              		.syntax unified
+ 2232              		.code	16
+ 2233              		.thumb_func
+ 2234              		.fpu softvfp
+ 2236              	ral_sx126x_set_lora_cad_params:
+ARM GAS  /tmp/ccwi6Oux.s 			page 38
+
+
+ 2237              		@ args = 0, pretend = 0, frame = 8
+ 2238              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2239 0000 13B5     		push	{r0, r1, r4, lr}
+ 2240 0002 0400     		movs	r4, r0
+ 2241 0004 0800     		movs	r0, r1
+ 2242 0006 6946     		mov	r1, sp
+ 2243 0008 FFF7FEFF 		bl	ral_sx126x_convert_lora_cad_params_from_ral
+ 2244 000c 0028     		cmp	r0, #0
+ 2245 000e 03D1     		bne	.L376
+ 2246 0010 6946     		mov	r1, sp
+ 2247 0012 2000     		movs	r0, r4
+ 2248 0014 FFF7FEFF 		bl	sx126x_set_cad_params
+ 2249              	.L376:
+ 2250              		@ sp needed
+ 2251 0018 16BD     		pop	{r1, r2, r4, pc}
+ 2253              		.section	.text.ral_sx126x_convert_lr_fhss_params_from_ral,"ax",%progbits
+ 2254              		.align	1
+ 2255              		.global	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2256              		.syntax unified
+ 2257              		.code	16
+ 2258              		.thumb_func
+ 2259              		.fpu softvfp
+ 2261              	ral_sx126x_convert_lr_fhss_params_from_ral:
+ 2262              		@ args = 0, pretend = 0, frame = 0
+ 2263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2264 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 2265 0002 0D00     		movs	r5, r1
+ 2266              		@ sp needed
+ 2267 0004 0400     		movs	r4, r0
+ 2268 0006 C068     		ldr	r0, [r0, #12]
+ 2269 0008 FFF7FEFF 		bl	sx126x_convert_freq_in_hz_to_pll_step
+ 2270 000c 1023     		movs	r3, #16
+ 2271 000e 2A00     		movs	r2, r5
+ 2272 0010 E356     		ldrsb	r3, [r4, r3]
+ 2273 0012 C2CC     		ldmia	r4!, {r1, r6, r7}
+ 2274 0014 C2C2     		stmia	r2!, {r1, r6, r7}
+ 2275 0016 E860     		str	r0, [r5, #12]
+ 2276 0018 2B74     		strb	r3, [r5, #16]
+ 2277 001a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2279              		.section	.text.ral_sx126x_lr_fhss_init,"ax",%progbits
+ 2280              		.align	1
+ 2281              		.global	ral_sx126x_lr_fhss_init
+ 2282              		.syntax unified
+ 2283              		.code	16
+ 2284              		.thumb_func
+ 2285              		.fpu softvfp
+ 2287              	ral_sx126x_lr_fhss_init:
+ 2288              		@ args = 0, pretend = 0, frame = 24
+ 2289              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2290 0000 10B5     		push	{r4, lr}
+ 2291 0002 0400     		movs	r4, r0
+ 2292 0004 86B0     		sub	sp, sp, #24
+ 2293 0006 0800     		movs	r0, r1
+ 2294 0008 01A9     		add	r1, sp, #4
+ 2295 000a FFF7FEFF 		bl	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2296 000e 2000     		movs	r0, r4
+ 2297 0010 01A9     		add	r1, sp, #4
+ARM GAS  /tmp/ccwi6Oux.s 			page 39
+
+
+ 2298 0012 FFF7FEFF 		bl	sx126x_lr_fhss_init
+ 2299 0016 06B0     		add	sp, sp, #24
+ 2300              		@ sp needed
+ 2301 0018 10BD     		pop	{r4, pc}
+ 2303              		.section	.text.ral_sx126x_lr_fhss_build_frame,"ax",%progbits
+ 2304              		.align	1
+ 2305              		.global	ral_sx126x_lr_fhss_build_frame
+ 2306              		.syntax unified
+ 2307              		.code	16
+ 2308              		.thumb_func
+ 2309              		.fpu softvfp
+ 2311              	ral_sx126x_lr_fhss_build_frame:
+ 2312              		@ args = 8, pretend = 0, frame = 32
+ 2313              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2314 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 2315 0002 8DB0     		sub	sp, sp, #52
+ 2316 0004 1E00     		movs	r6, r3
+ 2317 0006 12AB     		add	r3, sp, #72
+ 2318 0008 1500     		movs	r5, r2
+ 2319 000a 04CB     		ldmia	r3!, {r2}
+ 2320 000c 0400     		movs	r4, r0
+ 2321 000e 0800     		movs	r0, r1
+ 2322 0010 07A9     		add	r1, sp, #28
+ 2323 0012 1F88     		ldrh	r7, [r3]
+ 2324 0014 0592     		str	r2, [sp, #20]
+ 2325 0016 FFF7FEFF 		bl	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2326 001a 0023     		movs	r3, #0
+ 2327 001c 0293     		str	r3, [sp, #8]
+ 2328 001e 059B     		ldr	r3, [sp, #20]
+ 2329 0020 2A00     		movs	r2, r5
+ 2330 0022 0093     		str	r3, [sp]
+ 2331 0024 2000     		movs	r0, r4
+ 2332 0026 3300     		movs	r3, r6
+ 2333 0028 0197     		str	r7, [sp, #4]
+ 2334 002a 07A9     		add	r1, sp, #28
+ 2335 002c FFF7FEFF 		bl	sx126x_lr_fhss_build_frame
+ 2336 0030 0DB0     		add	sp, sp, #52
+ 2337              		@ sp needed
+ 2338 0032 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 2340              		.section	.text.ral_sx126x_lr_fhss_handle_hop,"ax",%progbits
+ 2341              		.align	1
+ 2342              		.global	ral_sx126x_lr_fhss_handle_hop
+ 2343              		.syntax unified
+ 2344              		.code	16
+ 2345              		.thumb_func
+ 2346              		.fpu softvfp
+ 2348              	ral_sx126x_lr_fhss_handle_hop:
+ 2349              		@ args = 0, pretend = 0, frame = 24
+ 2350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2351 0000 30B5     		push	{r4, r5, lr}
+ 2352 0002 0400     		movs	r4, r0
+ 2353 0004 1500     		movs	r5, r2
+ 2354 0006 87B0     		sub	sp, sp, #28
+ 2355 0008 0800     		movs	r0, r1
+ 2356 000a 01A9     		add	r1, sp, #4
+ 2357 000c FFF7FEFF 		bl	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2358 0010 2A00     		movs	r2, r5
+ARM GAS  /tmp/ccwi6Oux.s 			page 40
+
+
+ 2359 0012 2000     		movs	r0, r4
+ 2360 0014 01A9     		add	r1, sp, #4
+ 2361 0016 FFF7FEFF 		bl	sx126x_lr_fhss_handle_hop
+ 2362 001a 07B0     		add	sp, sp, #28
+ 2363              		@ sp needed
+ 2364 001c 30BD     		pop	{r4, r5, pc}
+ 2366              		.section	.text.ral_sx126x_lr_fhss_handle_tx_done,"ax",%progbits
+ 2367              		.align	1
+ 2368              		.global	ral_sx126x_lr_fhss_handle_tx_done
+ 2369              		.syntax unified
+ 2370              		.code	16
+ 2371              		.thumb_func
+ 2372              		.fpu softvfp
+ 2374              	ral_sx126x_lr_fhss_handle_tx_done:
+ 2375              		@ args = 0, pretend = 0, frame = 24
+ 2376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2377 0000 30B5     		push	{r4, r5, lr}
+ 2378 0002 0400     		movs	r4, r0
+ 2379 0004 1500     		movs	r5, r2
+ 2380 0006 87B0     		sub	sp, sp, #28
+ 2381 0008 0800     		movs	r0, r1
+ 2382 000a 01A9     		add	r1, sp, #4
+ 2383 000c FFF7FEFF 		bl	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2384 0010 2A00     		movs	r2, r5
+ 2385 0012 2000     		movs	r0, r4
+ 2386 0014 01A9     		add	r1, sp, #4
+ 2387 0016 FFF7FEFF 		bl	sx126x_lr_fhss_handle_tx_done
+ 2388 001a 07B0     		add	sp, sp, #28
+ 2389              		@ sp needed
+ 2390 001c 30BD     		pop	{r4, r5, pc}
+ 2392              		.section	.text.ral_sx126x_lr_fhss_get_time_on_air_in_ms,"ax",%progbits
+ 2393              		.align	1
+ 2394              		.global	ral_sx126x_lr_fhss_get_time_on_air_in_ms
+ 2395              		.syntax unified
+ 2396              		.code	16
+ 2397              		.thumb_func
+ 2398              		.fpu softvfp
+ 2400              	ral_sx126x_lr_fhss_get_time_on_air_in_ms:
+ 2401              		@ args = 0, pretend = 0, frame = 24
+ 2402              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2403 0000 30B5     		push	{r4, r5, lr}
+ 2404 0002 1500     		movs	r5, r2
+ 2405 0004 87B0     		sub	sp, sp, #28
+ 2406 0006 0800     		movs	r0, r1
+ 2407 0008 01A9     		add	r1, sp, #4
+ 2408 000a 1C00     		movs	r4, r3
+ 2409 000c FFF7FEFF 		bl	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2410 0010 2900     		movs	r1, r5
+ 2411 0012 01A8     		add	r0, sp, #4
+ 2412 0014 FFF7FEFF 		bl	lr_fhss_get_time_on_air_in_ms
+ 2413 0018 2060     		str	r0, [r4]
+ 2414 001a 0020     		movs	r0, #0
+ 2415 001c 07B0     		add	sp, sp, #28
+ 2416              		@ sp needed
+ 2417 001e 30BD     		pop	{r4, r5, pc}
+ 2419              		.section	.text.ral_sx126x_lr_fhss_get_hop_sequence_count,"ax",%progbits
+ 2420              		.align	1
+ARM GAS  /tmp/ccwi6Oux.s 			page 41
+
+
+ 2421              		.global	ral_sx126x_lr_fhss_get_hop_sequence_count
+ 2422              		.syntax unified
+ 2423              		.code	16
+ 2424              		.thumb_func
+ 2425              		.fpu softvfp
+ 2427              	ral_sx126x_lr_fhss_get_hop_sequence_count:
+ 2428              		@ args = 0, pretend = 0, frame = 24
+ 2429              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2430 0000 10B5     		push	{r4, lr}
+ 2431 0002 86B0     		sub	sp, sp, #24
+ 2432 0004 0800     		movs	r0, r1
+ 2433 0006 01A9     		add	r1, sp, #4
+ 2434 0008 1400     		movs	r4, r2
+ 2435 000a FFF7FEFF 		bl	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2436 000e 01A8     		add	r0, sp, #4
+ 2437 0010 FFF7FEFF 		bl	lr_fhss_get_hop_sequence_count
+ 2438 0014 2060     		str	r0, [r4]
+ 2439 0016 0020     		movs	r0, #0
+ 2440 0018 06B0     		add	sp, sp, #24
+ 2441              		@ sp needed
+ 2442 001a 10BD     		pop	{r4, pc}
+ 2444              		.section	.text.ral_sx126x_lr_fhss_get_bit_delay_in_us,"ax",%progbits
+ 2445              		.align	1
+ 2446              		.global	ral_sx126x_lr_fhss_get_bit_delay_in_us
+ 2447              		.syntax unified
+ 2448              		.code	16
+ 2449              		.thumb_func
+ 2450              		.fpu softvfp
+ 2452              	ral_sx126x_lr_fhss_get_bit_delay_in_us:
+ 2453              		@ args = 0, pretend = 0, frame = 24
+ 2454              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2455 0000 30B5     		push	{r4, r5, lr}
+ 2456 0002 1500     		movs	r5, r2
+ 2457 0004 87B0     		sub	sp, sp, #28
+ 2458 0006 0800     		movs	r0, r1
+ 2459 0008 01A9     		add	r1, sp, #4
+ 2460 000a 1C00     		movs	r4, r3
+ 2461 000c FFF7FEFF 		bl	ral_sx126x_convert_lr_fhss_params_from_ral
+ 2462 0010 2900     		movs	r1, r5
+ 2463 0012 01A8     		add	r0, sp, #4
+ 2464 0014 FFF7FEFF 		bl	sx126x_lr_fhss_get_bit_delay_in_us
+ 2465 0018 2080     		strh	r0, [r4]
+ 2466 001a 0020     		movs	r0, #0
+ 2467 001c 07B0     		add	sp, sp, #28
+ 2468              		@ sp needed
+ 2469 001e 30BD     		pop	{r4, r5, pc}
+ 2471              		.section	.rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_hp,"a"
+ 2472              		.align	2
+ 2475              	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_hp:
+ 2476 0000 C05D0000 		.word	24000
+ 2477 0004 38630000 		.word	25400
+ 2478 0008 4C680000 		.word	26700
+ 2479 000c 606D0000 		.word	28000
+ 2480 0010 88770000 		.word	30600
+ 2481 0014 9C7C0000 		.word	31900
+ 2482 0018 B0810000 		.word	33200
+ 2483 001c 748B0000 		.word	35700
+ARM GAS  /tmp/ccwi6Oux.s 			page 42
+
+
+ 2484 0020 38950000 		.word	38200
+ 2485 0024 989E0000 		.word	40600
+ 2486 0028 94A70000 		.word	42900
+ 2487 002c 78B40000 		.word	46200
+ 2488 0030 48BC0000 		.word	48200
+ 2489 0034 58CA0000 		.word	51800
+ 2490 0038 54D30000 		.word	54100
+ 2491 003c A8DE0000 		.word	57000
+ 2492 0040 8CEB0000 		.word	60300
+ 2493 0044 0CF80000 		.word	63500
+ 2494 0048 1C060100 		.word	67100
+ 2495 004c 64130100 		.word	70500
+ 2496 0050 D8210100 		.word	74200
+ 2497 0054 40320100 		.word	78400
+ 2498 0058 2C460100 		.word	83500
+ 2499 005c D45C0100 		.word	89300
+ 2500 0060 F0680100 		.word	92400
+ 2501 0064 24710100 		.word	94500
+ 2502 0068 A8740100 		.word	95400
+ 2503 006c DC7C0100 		.word	97500
+ 2504 0070 04870100 		.word	100100
+ 2505 0074 78950100 		.word	103800
+ 2506 0078 2CAA0100 		.word	109100
+ 2507 007c 8CCC0100 		.word	117900
+ 2508              		.section	.rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_lp,"a"
+ 2509              		.align	2
+ 2512              	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_lp:
+ 2513 0000 50140000 		.word	5200
+ 2514 0004 18150000 		.word	5400
+ 2515 0008 E0150000 		.word	5600
+ 2516 000c 44160000 		.word	5700
+ 2517 0010 A8160000 		.word	5800
+ 2518 0014 70170000 		.word	6000
+ 2519 0018 D4170000 		.word	6100
+ 2520 001c 38180000 		.word	6200
+ 2521 0020 64190000 		.word	6500
+ 2522 0024 901A0000 		.word	6800
+ 2523 0028 581B0000 		.word	7000
+ 2524 002c 841C0000 		.word	7300
+ 2525 0030 4C1D0000 		.word	7500
+ 2526 0034 DC1E0000 		.word	7900
+ 2527 0038 6C200000 		.word	8300
+ 2528 003c 60220000 		.word	8800
+ 2529 0040 54240000 		.word	9300
+ 2530 0044 48260000 		.word	9800
+ 2531 0048 68290000 		.word	10600
+ 2532 004c 882C0000 		.word	11400
+ 2533 0050 A82F0000 		.word	12200
+ 2534 0054 64320000 		.word	12900
+ 2535 0058 E8350000 		.word	13800
+ 2536 005c 6C390000 		.word	14700
+ 2537 0060 543D0000 		.word	15700
+ 2538 0064 D8400000 		.word	16600
+ 2539 0068 EC450000 		.word	17900
+ 2540 006c 44480000 		.word	18500
+ 2541 0070 14500000 		.word	20500
+ 2542 0074 8C550000 		.word	21900
+ARM GAS  /tmp/ccwi6Oux.s 			page 43
+
+
+ 2543 0078 CC5B0000 		.word	23500
+ 2544 007c 9C630000 		.word	25500
+ 2545 0080 F47E0000 		.word	32500
+ 2546              		.section	.rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_hp,"a"
+ 2547              		.align	2
+ 2550              	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_hp:
+ 2551 0000 2C650000 		.word	25900
+ 2552 0004 086B0000 		.word	27400
+ 2553 0008 1C700000 		.word	28700
+ 2554 000c 30750000 		.word	30000
+ 2555 0010 587F0000 		.word	32600
+ 2556 0014 6C840000 		.word	33900
+ 2557 0018 80890000 		.word	35200
+ 2558 001c 44930000 		.word	37700
+ 2559 0020 A49C0000 		.word	40100
+ 2560 0024 68A60000 		.word	42600
+ 2561 0028 64AF0000 		.word	44900
+ 2562 002c 48BC0000 		.word	48200
+ 2563 0030 18C40000 		.word	50200
+ 2564 0034 28D20000 		.word	53800
+ 2565 0038 24DB0000 		.word	56100
+ 2566 003c 78E60000 		.word	59000
+ 2567 0040 5CF30000 		.word	62300
+ 2568 0044 DCFF0000 		.word	65500
+ 2569 0048 880D0100 		.word	69000
+ 2570 004c 341B0100 		.word	72500
+ 2571 0050 A8290100 		.word	76200
+ 2572 0054 103A0100 		.word	80400
+ 2573 0058 984D0100 		.word	85400
+ 2574 005c 58600100 		.word	90200
+ 2575 0060 C0700100 		.word	94400
+ 2576 0064 F4780100 		.word	96500
+ 2577 0068 A47D0100 		.word	97700
+ 2578 006c AC840100 		.word	99500
+ 2579 0070 D48E0100 		.word	102100
+ 2580 0074 489D0100 		.word	105800
+ 2581 0078 98B10100 		.word	111000
+ 2582 007c F8D30100 		.word	119800
+ 2583              		.section	.rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_lp,"a"
+ 2584              		.align	2
+ 2587              	ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_lp:
+ 2588 0000 48260000 		.word	9800
+ 2589 0004 3C280000 		.word	10300
+ 2590 0008 04290000 		.word	10500
+ 2591 000c 302A0000 		.word	10800
+ 2592 0010 5C2B0000 		.word	11100
+ 2593 0014 242C0000 		.word	11300
+ 2594 0018 502D0000 		.word	11600
+ 2595 001c 7C2E0000 		.word	11900
+ 2596 0020 70300000 		.word	12400
+ 2597 0024 64320000 		.word	12900
+ 2598 0028 58340000 		.word	13400
+ 2599 002c 4C360000 		.word	13900
+ 2600 0030 A4380000 		.word	14500
+ 2601 0034 C43B0000 		.word	15300
+ 2602 0038 803E0000 		.word	16000
+ 2603 003c 68420000 		.word	17000
+ARM GAS  /tmp/ccwi6Oux.s 			page 44
+
+
+ 2604 0040 50460000 		.word	18000
+ 2605 0044 384A0000 		.word	19000
+ 2606 0048 78500000 		.word	20600
+ 2607 004c F0550000 		.word	22000
+ 2608 0050 CC5B0000 		.word	23500
+ 2609 0054 44610000 		.word	24900
+ 2610 0058 E8670000 		.word	26600
+ 2611 005c F06E0000 		.word	28400
+ 2612 0060 F8750000 		.word	30200
+ 2613 0064 007D0000 		.word	32000
+ 2614 0068 FC850000 		.word	34300
+ 2615 006c F88E0000 		.word	36600
+ 2616 0070 20990000 		.word	39200
+ 2617 0074 E4A20000 		.word	41700
+ 2618 0078 9CAE0000 		.word	44700
+ 2619 007c 48BC0000 		.word	48200
+ 2620 0080 E8CB0000 		.word	52200
+ 2621              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccwi6Oux.s 			page 45
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ral_sx126x.c
+     /tmp/ccwi6Oux.s:12     .text.ral_sx126x_cfg_trim_cap:0000000000000000 $t
+     /tmp/ccwi6Oux.s:19     .text.ral_sx126x_cfg_trim_cap:0000000000000000 ral_sx126x_cfg_trim_cap
+     /tmp/ccwi6Oux.s:94     .text.ral_sx126x_handles_part:0000000000000000 $t
+     /tmp/ccwi6Oux.s:101    .text.ral_sx126x_handles_part:0000000000000000 ral_sx126x_handles_part
+     /tmp/ccwi6Oux.s:124    .text.ral_sx126x_handles_part:0000000000000024 $d
+     /tmp/ccwi6Oux.s:128    .text.ral_sx126x_reset:0000000000000000 $t
+     /tmp/ccwi6Oux.s:135    .text.ral_sx126x_reset:0000000000000000 ral_sx126x_reset
+     /tmp/ccwi6Oux.s:144    .text.ral_sx126x_init:0000000000000000 $t
+     /tmp/ccwi6Oux.s:151    .text.ral_sx126x_init:0000000000000000 ral_sx126x_init
+     /tmp/ccwi6Oux.s:223    .text.ral_sx126x_wakeup:0000000000000000 $t
+     /tmp/ccwi6Oux.s:230    .text.ral_sx126x_wakeup:0000000000000000 ral_sx126x_wakeup
+     /tmp/ccwi6Oux.s:239    .text.ral_sx126x_set_sleep:0000000000000000 $t
+     /tmp/ccwi6Oux.s:246    .text.ral_sx126x_set_sleep:0000000000000000 ral_sx126x_set_sleep
+     /tmp/ccwi6Oux.s:258    .text.ral_sx126x_set_standby:0000000000000000 $t
+     /tmp/ccwi6Oux.s:265    .text.ral_sx126x_set_standby:0000000000000000 ral_sx126x_set_standby
+     /tmp/ccwi6Oux.s:283    .text.ral_sx126x_set_fs:0000000000000000 $t
+     /tmp/ccwi6Oux.s:290    .text.ral_sx126x_set_fs:0000000000000000 ral_sx126x_set_fs
+     /tmp/ccwi6Oux.s:299    .text.ral_sx126x_set_tx:0000000000000000 $t
+     /tmp/ccwi6Oux.s:306    .text.ral_sx126x_set_tx:0000000000000000 ral_sx126x_set_tx
+     /tmp/ccwi6Oux.s:322    .text.ral_sx126x_set_rx:0000000000000000 $t
+     /tmp/ccwi6Oux.s:329    .text.ral_sx126x_set_rx:0000000000000000 ral_sx126x_set_rx
+     /tmp/ccwi6Oux.s:361    .text.ral_sx126x_set_rx:0000000000000034 $d
+     /tmp/ccwi6Oux.s:364    .text.ral_sx126x_cfg_rx_boosted:0000000000000000 $t
+     /tmp/ccwi6Oux.s:371    .text.ral_sx126x_cfg_rx_boosted:0000000000000000 ral_sx126x_cfg_rx_boosted
+     /tmp/ccwi6Oux.s:380    .text.ral_sx126x_set_rx_tx_fallback_mode:0000000000000000 $t
+     /tmp/ccwi6Oux.s:387    .text.ral_sx126x_set_rx_tx_fallback_mode:0000000000000000 ral_sx126x_set_rx_tx_fallback_mode
+     /tmp/ccwi6Oux.s:405    .text.ral_sx126x_stop_timer_on_preamble:0000000000000000 $t
+     /tmp/ccwi6Oux.s:412    .text.ral_sx126x_stop_timer_on_preamble:0000000000000000 ral_sx126x_stop_timer_on_preamble
+     /tmp/ccwi6Oux.s:421    .text.ral_sx126x_set_rx_duty_cycle:0000000000000000 $t
+     /tmp/ccwi6Oux.s:428    .text.ral_sx126x_set_rx_duty_cycle:0000000000000000 ral_sx126x_set_rx_duty_cycle
+     /tmp/ccwi6Oux.s:437    .text.ral_sx126x_set_lora_cad:0000000000000000 $t
+     /tmp/ccwi6Oux.s:444    .text.ral_sx126x_set_lora_cad:0000000000000000 ral_sx126x_set_lora_cad
+     /tmp/ccwi6Oux.s:459    .text.ral_sx126x_set_tx_cw:0000000000000000 $t
+     /tmp/ccwi6Oux.s:466    .text.ral_sx126x_set_tx_cw:0000000000000000 ral_sx126x_set_tx_cw
+     /tmp/ccwi6Oux.s:481    .text.ral_sx126x_set_tx_infinite_preamble:0000000000000000 $t
+     /tmp/ccwi6Oux.s:488    .text.ral_sx126x_set_tx_infinite_preamble:0000000000000000 ral_sx126x_set_tx_infinite_preamble
+     /tmp/ccwi6Oux.s:503    .text.ral_sx126x_cal_img:0000000000000000 $t
+     /tmp/ccwi6Oux.s:510    .text.ral_sx126x_cal_img:0000000000000000 ral_sx126x_cal_img
+     /tmp/ccwi6Oux.s:519    .text.ral_sx126x_set_tx_cfg:0000000000000000 $t
+     /tmp/ccwi6Oux.s:526    .text.ral_sx126x_set_tx_cfg:0000000000000000 ral_sx126x_set_tx_cfg
+     /tmp/ccwi6Oux.s:599    .text.ral_sx126x_set_pkt_payload:0000000000000000 $t
+     /tmp/ccwi6Oux.s:606    .text.ral_sx126x_set_pkt_payload:0000000000000000 ral_sx126x_set_pkt_payload
+     /tmp/ccwi6Oux.s:628    .text.ral_sx126x_get_pkt_payload:0000000000000000 $t
+     /tmp/ccwi6Oux.s:635    .text.ral_sx126x_get_pkt_payload:0000000000000000 ral_sx126x_get_pkt_payload
+     /tmp/ccwi6Oux.s:667    .text.ral_sx126x_set_rf_freq:0000000000000000 $t
+     /tmp/ccwi6Oux.s:674    .text.ral_sx126x_set_rf_freq:0000000000000000 ral_sx126x_set_rf_freq
+     /tmp/ccwi6Oux.s:683    .text.ral_sx126x_set_pkt_type:0000000000000000 $t
+     /tmp/ccwi6Oux.s:690    .text.ral_sx126x_set_pkt_type:0000000000000000 ral_sx126x_set_pkt_type
+     /tmp/ccwi6Oux.s:708    .text.ral_sx126x_get_pkt_type:0000000000000000 $t
+     /tmp/ccwi6Oux.s:715    .text.ral_sx126x_get_pkt_type:0000000000000000 ral_sx126x_get_pkt_type
+     /tmp/ccwi6Oux.s:743    .text.ral_sx126x_set_lora_symb_nb_timeout:0000000000000000 $t
+     /tmp/ccwi6Oux.s:750    .text.ral_sx126x_set_lora_symb_nb_timeout:0000000000000000 ral_sx126x_set_lora_symb_nb_timeout
+     /tmp/ccwi6Oux.s:766    .text.ral_sx126x_set_flrc_mod_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:773    .text.ral_sx126x_set_flrc_mod_params:0000000000000000 ral_sx126x_set_flrc_mod_params
+     /tmp/ccwi6Oux.s:782    .text.ral_sx126x_set_flrc_pkt_params:0000000000000000 $t
+ARM GAS  /tmp/ccwi6Oux.s 			page 46
+
+
+     /tmp/ccwi6Oux.s:789    .text.ral_sx126x_set_flrc_pkt_params:0000000000000000 ral_sx126x_set_flrc_pkt_params
+     /tmp/ccwi6Oux.s:798    .text.ral_sx126x_get_gfsk_rx_pkt_status:0000000000000000 $t
+     /tmp/ccwi6Oux.s:805    .text.ral_sx126x_get_gfsk_rx_pkt_status:0000000000000000 ral_sx126x_get_gfsk_rx_pkt_status
+     /tmp/ccwi6Oux.s:861    .text.ral_sx126x_get_lora_rx_pkt_status:0000000000000000 $t
+     /tmp/ccwi6Oux.s:868    .text.ral_sx126x_get_lora_rx_pkt_status:0000000000000000 ral_sx126x_get_lora_rx_pkt_status
+     /tmp/ccwi6Oux.s:892    .text.ral_sx126x_get_flrc_rx_pkt_status:0000000000000000 $t
+     /tmp/ccwi6Oux.s:899    .text.ral_sx126x_get_flrc_rx_pkt_status:0000000000000000 ral_sx126x_get_flrc_rx_pkt_status
+     /tmp/ccwi6Oux.s:908    .text.ral_sx126x_get_rssi_inst:0000000000000000 $t
+     /tmp/ccwi6Oux.s:915    .text.ral_sx126x_get_rssi_inst:0000000000000000 ral_sx126x_get_rssi_inst
+     /tmp/ccwi6Oux.s:924    .text.ral_sx126x_get_flrc_time_on_air_in_ms:0000000000000000 $t
+     /tmp/ccwi6Oux.s:931    .text.ral_sx126x_get_flrc_time_on_air_in_ms:0000000000000000 ral_sx126x_get_flrc_time_on_air_in_ms
+     /tmp/ccwi6Oux.s:940    .text.ral_sx126x_set_gfsk_sync_word:0000000000000000 $t
+     /tmp/ccwi6Oux.s:947    .text.ral_sx126x_set_gfsk_sync_word:0000000000000000 ral_sx126x_set_gfsk_sync_word
+     /tmp/ccwi6Oux.s:956    .text.ral_sx126x_set_lora_sync_word:0000000000000000 $t
+     /tmp/ccwi6Oux.s:963    .text.ral_sx126x_set_lora_sync_word:0000000000000000 ral_sx126x_set_lora_sync_word
+     /tmp/ccwi6Oux.s:972    .text.ral_sx126x_set_flrc_sync_word:0000000000000000 $t
+     /tmp/ccwi6Oux.s:979    .text.ral_sx126x_set_flrc_sync_word:0000000000000000 ral_sx126x_set_flrc_sync_word
+     /tmp/ccwi6Oux.s:988    .text.ral_sx126x_set_gfsk_crc_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:995    .text.ral_sx126x_set_gfsk_crc_params:0000000000000000 ral_sx126x_set_gfsk_crc_params
+     /tmp/ccwi6Oux.s:1012   .text.ral_sx126x_set_flrc_crc_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1019   .text.ral_sx126x_set_flrc_crc_params:0000000000000000 ral_sx126x_set_flrc_crc_params
+     /tmp/ccwi6Oux.s:1028   .text.ral_sx126x_set_gfsk_whitening_seed:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1035   .text.ral_sx126x_set_gfsk_whitening_seed:0000000000000000 ral_sx126x_set_gfsk_whitening_seed
+     /tmp/ccwi6Oux.s:1044   .text.ral_sx126x_get_tx_consumption_in_ua:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1051   .text.ral_sx126x_get_tx_consumption_in_ua:0000000000000000 ral_sx126x_get_tx_consumption_in_ua
+     /tmp/ccwi6Oux.s:1135   .text.ral_sx126x_get_tx_consumption_in_ua:000000000000008c $d
+     /tmp/ccwi6Oux.s:2512   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_lp:0000000000000000 ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_lp
+     /tmp/ccwi6Oux.s:2587   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_lp:0000000000000000 ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_lp
+     /tmp/ccwi6Oux.s:2475   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_hp:0000000000000000 ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_hp
+     /tmp/ccwi6Oux.s:2550   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_hp:0000000000000000 ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_hp
+     /tmp/ccwi6Oux.s:1141   .text.ral_sx126x_get_gfsk_rx_consumption_in_ua:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1148   .text.ral_sx126x_get_gfsk_rx_consumption_in_ua:0000000000000000 ral_sx126x_get_gfsk_rx_consumption_in_ua
+     /tmp/ccwi6Oux.s:1184   .text.ral_sx126x_get_gfsk_rx_consumption_in_ua:0000000000000038 $d
+     /tmp/ccwi6Oux.s:1188   .text.ral_sx126x_get_lora_rx_consumption_in_ua:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1195   .text.ral_sx126x_get_lora_rx_consumption_in_ua:0000000000000000 ral_sx126x_get_lora_rx_consumption_in_ua
+     /tmp/ccwi6Oux.s:1232   .text.ral_sx126x_get_lora_rx_consumption_in_ua:000000000000003c $d
+     /tmp/ccwi6Oux.s:1237   .text.ral_sx126x_get_random_numbers:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1244   .text.ral_sx126x_get_random_numbers:0000000000000000 ral_sx126x_get_random_numbers
+     /tmp/ccwi6Oux.s:1253   .text.ral_sx126x_handle_rx_done:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1260   .text.ral_sx126x_handle_rx_done:0000000000000000 ral_sx126x_handle_rx_done
+     /tmp/ccwi6Oux.s:1269   .text.ral_sx126x_handle_tx_done:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1276   .text.ral_sx126x_handle_tx_done:0000000000000000 ral_sx126x_handle_tx_done
+     /tmp/ccwi6Oux.s:1285   .text.ral_sx126x_get_lora_cad_det_peak:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1292   .text.ral_sx126x_get_lora_cad_det_peak:0000000000000000 ral_sx126x_get_lora_cad_det_peak
+     /tmp/ccwi6Oux.s:1307   .text.ral_sx126x_get_lora_cad_det_peak:0000000000000018 $d
+     /tmp/ccwi6Oux.s:1315   .text.ral_sx126x_get_lora_cad_det_peak:0000000000000020 $t
+     /tmp/ccwi6Oux.s:1358   .text.ral_sx126x_get_lora_cad_det_peak:000000000000005c $d
+     /tmp/ccwi6Oux.s:1366   .text.ral_sx126x_get_lora_cad_det_peak:0000000000000064 $t
+     /tmp/ccwi6Oux.s:1392   .text.ral_sx126x_convert_irq_flags_to_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1399   .text.ral_sx126x_convert_irq_flags_to_ral:0000000000000000 ral_sx126x_convert_irq_flags_to_ral
+     /tmp/ccwi6Oux.s:1464   .text.ral_sx126x_get_irq_status:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1471   .text.ral_sx126x_get_irq_status:0000000000000000 ral_sx126x_get_irq_status
+     /tmp/ccwi6Oux.s:1493   .text.ral_sx126x_get_and_clear_irq_status:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1500   .text.ral_sx126x_get_and_clear_irq_status:0000000000000000 ral_sx126x_get_and_clear_irq_status
+     /tmp/ccwi6Oux.s:1524   .text.ral_sx126x_convert_irq_flags_from_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1531   .text.ral_sx126x_convert_irq_flags_from_ral:0000000000000000 ral_sx126x_convert_irq_flags_from_ral
+     /tmp/ccwi6Oux.s:1590   .text.ral_sx126x_clear_irq_status:0000000000000000 $t
+ARM GAS  /tmp/ccwi6Oux.s 			page 47
+
+
+     /tmp/ccwi6Oux.s:1597   .text.ral_sx126x_clear_irq_status:0000000000000000 ral_sx126x_clear_irq_status
+     /tmp/ccwi6Oux.s:1611   .text.ral_sx126x_set_dio_irq_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1618   .text.ral_sx126x_set_dio_irq_params:0000000000000000 ral_sx126x_set_dio_irq_params
+     /tmp/ccwi6Oux.s:1636   .text.ral_sx126x_set_dio_irq_params:000000000000001c $d
+     /tmp/ccwi6Oux.s:1639   .text.ral_sx126x_convert_gfsk_mod_params_from_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1646   .text.ral_sx126x_convert_gfsk_mod_params_from_ral:0000000000000000 ral_sx126x_convert_gfsk_mod_params_from_ral
+     /tmp/ccwi6Oux.s:1672   .text.ral_sx126x_convert_gfsk_mod_params_from_ral:0000000000000030 $d
+     /tmp/ccwi6Oux.s:1705   .text.ral_sx126x_set_gfsk_mod_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1712   .text.ral_sx126x_set_gfsk_mod_params:0000000000000000 ral_sx126x_set_gfsk_mod_params
+     /tmp/ccwi6Oux.s:1737   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1744   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:0000000000000000 ral_sx126x_convert_gfsk_pkt_params_from_ral
+     /tmp/ccwi6Oux.s:1756   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:0000000000000012 $d
+     /tmp/ccwi6Oux.s:1808   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:000000000000005e $d
+     /tmp/ccwi6Oux.s:1843   .text.ral_sx126x_set_gfsk_pkt_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1850   .text.ral_sx126x_set_gfsk_pkt_params:0000000000000000 ral_sx126x_set_gfsk_pkt_params
+     /tmp/ccwi6Oux.s:1875   .text.ral_sx126x_get_gfsk_time_on_air_in_ms:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1882   .text.ral_sx126x_get_gfsk_time_on_air_in_ms:0000000000000000 ral_sx126x_get_gfsk_time_on_air_in_ms
+     /tmp/ccwi6Oux.s:1902   .text.ral_sx126x_convert_lora_mod_params_from_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1909   .text.ral_sx126x_convert_lora_mod_params_from_ral:0000000000000000 ral_sx126x_convert_lora_mod_params_from_ral
+     /tmp/ccwi6Oux.s:1921   .text.ral_sx126x_convert_lora_mod_params_from_ral:0000000000000012 $d
+     /tmp/ccwi6Oux.s:1933   .text.ral_sx126x_convert_lora_mod_params_from_ral:000000000000001e $t
+     /tmp/ccwi6Oux.s:1978   .text.ral_sx126x_set_lora_mod_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:1985   .text.ral_sx126x_set_lora_mod_params:0000000000000000 ral_sx126x_set_lora_mod_params
+     /tmp/ccwi6Oux.s:2003   .text.ral_sx126x_convert_lora_pkt_params_from_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2010   .text.ral_sx126x_convert_lora_pkt_params_from_ral:0000000000000000 ral_sx126x_convert_lora_pkt_params_from_ral
+     /tmp/ccwi6Oux.s:2037   .text.ral_sx126x_set_lora_pkt_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2044   .text.ral_sx126x_set_lora_pkt_params:0000000000000000 ral_sx126x_set_lora_pkt_params
+     /tmp/ccwi6Oux.s:2067   .text.ral_sx126x_get_lora_time_on_air_in_ms:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2074   .text.ral_sx126x_get_lora_time_on_air_in_ms:0000000000000000 ral_sx126x_get_lora_time_on_air_in_ms
+     /tmp/ccwi6Oux.s:2093   .text.ral_sx126x_convert_lora_cr_to_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2100   .text.ral_sx126x_convert_lora_cr_to_ral:0000000000000000 ral_sx126x_convert_lora_cr_to_ral
+     /tmp/ccwi6Oux.s:2110   .text.ral_sx126x_convert_lora_cr_to_ral:000000000000000e $d
+     /tmp/ccwi6Oux.s:2114   .text.ral_sx126x_convert_lora_cr_to_ral:0000000000000012 $t
+     /tmp/ccwi6Oux.s:2135   .text.ral_sx126x_get_lora_rx_pkt_cr_crc:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2142   .text.ral_sx126x_get_lora_rx_pkt_cr_crc:0000000000000000 ral_sx126x_get_lora_rx_pkt_cr_crc
+     /tmp/ccwi6Oux.s:2161   .text.ral_sx126x_convert_lora_cad_params_from_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2168   .text.ral_sx126x_convert_lora_cad_params_from_ral:0000000000000000 ral_sx126x_convert_lora_cad_params_from_ral
+     /tmp/ccwi6Oux.s:2179   .text.ral_sx126x_convert_lora_cad_params_from_ral:0000000000000010 $d
+     /tmp/ccwi6Oux.s:2229   .text.ral_sx126x_set_lora_cad_params:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2236   .text.ral_sx126x_set_lora_cad_params:0000000000000000 ral_sx126x_set_lora_cad_params
+     /tmp/ccwi6Oux.s:2254   .text.ral_sx126x_convert_lr_fhss_params_from_ral:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2261   .text.ral_sx126x_convert_lr_fhss_params_from_ral:0000000000000000 ral_sx126x_convert_lr_fhss_params_from_ral
+     /tmp/ccwi6Oux.s:2280   .text.ral_sx126x_lr_fhss_init:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2287   .text.ral_sx126x_lr_fhss_init:0000000000000000 ral_sx126x_lr_fhss_init
+     /tmp/ccwi6Oux.s:2304   .text.ral_sx126x_lr_fhss_build_frame:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2311   .text.ral_sx126x_lr_fhss_build_frame:0000000000000000 ral_sx126x_lr_fhss_build_frame
+     /tmp/ccwi6Oux.s:2341   .text.ral_sx126x_lr_fhss_handle_hop:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2348   .text.ral_sx126x_lr_fhss_handle_hop:0000000000000000 ral_sx126x_lr_fhss_handle_hop
+     /tmp/ccwi6Oux.s:2367   .text.ral_sx126x_lr_fhss_handle_tx_done:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2374   .text.ral_sx126x_lr_fhss_handle_tx_done:0000000000000000 ral_sx126x_lr_fhss_handle_tx_done
+     /tmp/ccwi6Oux.s:2393   .text.ral_sx126x_lr_fhss_get_time_on_air_in_ms:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2400   .text.ral_sx126x_lr_fhss_get_time_on_air_in_ms:0000000000000000 ral_sx126x_lr_fhss_get_time_on_air_in_ms
+     /tmp/ccwi6Oux.s:2420   .text.ral_sx126x_lr_fhss_get_hop_sequence_count:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2427   .text.ral_sx126x_lr_fhss_get_hop_sequence_count:0000000000000000 ral_sx126x_lr_fhss_get_hop_sequence_count
+     /tmp/ccwi6Oux.s:2445   .text.ral_sx126x_lr_fhss_get_bit_delay_in_us:0000000000000000 $t
+     /tmp/ccwi6Oux.s:2452   .text.ral_sx126x_lr_fhss_get_bit_delay_in_us:0000000000000000 ral_sx126x_lr_fhss_get_bit_delay_in_us
+     /tmp/ccwi6Oux.s:2472   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_hp:0000000000000000 $d
+ARM GAS  /tmp/ccwi6Oux.s 			page 48
+
+
+     /tmp/ccwi6Oux.s:2509   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_dcdc_lp:0000000000000000 $d
+     /tmp/ccwi6Oux.s:2547   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_hp:0000000000000000 $d
+     /tmp/ccwi6Oux.s:2584   .rodata.ral_sx126x_convert_tx_dbm_to_ua_reg_mode_ldo_lp:0000000000000000 $d
+     /tmp/ccwi6Oux.s:1677   .text.ral_sx126x_convert_gfsk_mod_params_from_ral:0000000000000035 $d
+     /tmp/ccwi6Oux.s:1677   .text.ral_sx126x_convert_gfsk_mod_params_from_ral:0000000000000036 $t
+     /tmp/ccwi6Oux.s:1761   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:0000000000000017 $d
+     /tmp/ccwi6Oux.s:1761   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:0000000000000018 $t
+     /tmp/ccwi6Oux.s:1813   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:0000000000000063 $d
+     /tmp/ccwi6Oux.s:1813   .text.ral_sx126x_convert_gfsk_pkt_params_from_ral:0000000000000064 $t
+     /tmp/ccwi6Oux.s:2184   .text.ral_sx126x_convert_lora_cad_params_from_ral:0000000000000015 $d
+     /tmp/ccwi6Oux.s:2184   .text.ral_sx126x_convert_lora_cad_params_from_ral:0000000000000016 $t
+
+UNDEFINED SYMBOLS
+ral_sx126x_bsp_get_xosc_cfg
+ral_sx126x_bsp_get_trim_cap
+sx126x_get_status
+sx126x_set_trimming_capacitor_values
+sx126x_set_standby
+strcmp
+sx126x_reset
+sx126x_init_retention_list
+ral_sx126x_bsp_get_reg_mode
+sx126x_set_reg_mode
+ral_sx126x_bsp_get_rf_switch_cfg
+sx126x_set_dio2_as_rf_sw_ctrl
+ral_sx126x_bsp_get_rx_boost_cfg
+sx126x_cfg_rx_boosted
+sx126x_set_dio3_as_tcxo_ctrl
+sx126x_cal
+sx126x_wakeup
+sx126x_set_sleep
+sx126x_set_fs
+sx126x_set_tx
+sx126x_set_rx_with_timeout_in_rtc_step
+sx126x_set_rx
+sx126x_set_rx_tx_fallback_mode
+sx126x_stop_timer_on_preamble
+sx126x_set_rx_duty_cycle
+sx126x_set_cad
+sx126x_set_tx_cw
+sx126x_set_tx_infinite_preamble
+sx126x_cal_img_in_mhz
+ral_sx126x_bsp_get_tx_cfg
+sx126x_set_pa_cfg
+sx126x_cfg_tx_clamp
+ral_sx126x_bsp_get_ocp_value
+sx126x_set_tx_params
+sx126x_set_ocp_value
+sx126x_set_buffer_base_address
+sx126x_write_buffer
+sx126x_get_rx_buffer_status
+sx126x_read_buffer
+sx126x_set_rf_freq
+sx126x_set_pkt_type
+sx126x_get_pkt_type
+sx126x_set_lora_symb_nb_timeout
+sx126x_get_gfsk_pkt_status
+ARM GAS  /tmp/ccwi6Oux.s 			page 49
+
+
+sx126x_get_lora_pkt_status
+sx126x_get_rssi_inst
+sx126x_set_gfsk_sync_word
+sx126x_set_lora_sync_word
+sx126x_set_gfsk_crc_seed
+sx126x_set_gfsk_crc_polynomial
+sx126x_set_gfsk_whitening_seed
+sx126x_get_random_numbers
+sx126x_handle_rx_done
+__gnu_thumb1_case_uqi
+__gnu_thumb1_case_sqi
+ral_sx126x_bsp_get_lora_cad_det_peak
+sx126x_get_irq_status
+sx126x_get_and_clear_irq_status
+sx126x_clear_irq_status
+sx126x_set_dio_irq_params
+sx126x_get_gfsk_bw_param
+memset
+sx126x_set_gfsk_mod_params
+sx126x_set_gfsk_pkt_params
+sx126x_get_gfsk_time_on_air_in_ms
+sx126x_set_lora_mod_params
+sx126x_set_lora_pkt_params
+sx126x_get_lora_time_on_air_in_ms
+sx126x_get_lora_params_from_header
+sx126x_convert_timeout_in_ms_to_rtc_step
+sx126x_set_cad_params
+sx126x_convert_freq_in_hz_to_pll_step
+sx126x_lr_fhss_init
+sx126x_lr_fhss_build_frame
+sx126x_lr_fhss_handle_hop
+sx126x_lr_fhss_handle_tx_done
+lr_fhss_get_time_on_air_in_ms
+lr_fhss_get_hop_sequence_count
+sx126x_lr_fhss_get_bit_delay_in_us

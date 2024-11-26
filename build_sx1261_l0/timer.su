@@ -1,0 +1,14 @@
+extensions/common/timer/timer.c:319:13:TimerSetTimeout	16	static
+extensions/common/timer/timer.c:153:13:TimerInsertNewHeadTimer	8	static
+extensions/common/timer/timer.c:88:6:TimerInit	0	static
+extensions/common/timer/timer.c:98:6:TimerSetContext	0	static
+extensions/common/timer/timer.c:102:6:TimerStart	24	static
+extensions/common/timer/timer.c:165:6:TimerIsStarted	0	static
+extensions/common/timer/timer.c:169:6:TimerIrqHandler	24	static
+extensions/common/timer/timer.c:213:6:TimerStop	24	static
+extensions/common/timer/timer.c:281:6:TimerReset	8	static
+extensions/common/timer/timer.c:286:6:TimerSetValue	16	static
+extensions/common/timer/timer.c:302:13:TimerGetCurrentTime	8	static
+extensions/common/timer/timer.c:307:13:TimerGetElapsedTime	16	static
+extensions/common/timer/timer.c:331:13:TimerTempCompensation	8	static
+extensions/common/timer/timer.c:335:6:TimerProcess	8	static

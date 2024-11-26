@@ -1,0 +1,2 @@
+extensions/common/radio_hal/radio_utilities.c:76:6:radio_utilities_set_tx_power_offset	0	static
+extensions/common/radio_hal/radio_utilities.c:80:8:radio_utilities_get_tx_power_offset	0	static

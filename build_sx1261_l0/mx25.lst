@@ -1,0 +1,810 @@
+ARM GAS  /tmp/cc80fjqS.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"mx25.c"
+  10              		.text
+  11              		.section	.text.mx25_wakeup,"ax",%progbits
+  12              		.align	1
+  13              		.global	mx25_wakeup
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	mx25_wakeup:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 0020     		movs	r0, #0
+  24 0002 10B5     		push	{r4, lr}
+  25 0004 094C     		ldr	r4, .L2
+  26 0006 0021     		movs	r1, #0
+  27              		@ sp needed
+  28 0008 2056     		ldrsb	r0, [r4, r0]
+  29 000a FFF7FEFF 		bl	hal_gpio_set_value
+  30 000e 0120     		movs	r0, #1
+  31 0010 FFF7FEFF 		bl	hal_mcu_delay_ms
+  32 0014 0020     		movs	r0, #0
+  33 0016 0121     		movs	r1, #1
+  34 0018 2056     		ldrsb	r0, [r4, r0]
+  35 001a FFF7FEFF 		bl	hal_gpio_set_value
+  36 001e 0120     		movs	r0, #1
+  37 0020 FFF7FEFF 		bl	hal_mcu_delay_ms
+  38 0024 0122     		movs	r2, #1
+  39 0026 024B     		ldr	r3, .L2+4
+  40 0028 1A60     		str	r2, [r3]
+  41 002a 10BD     		pop	{r4, pc}
+  42              	.L3:
+  43              		.align	2
+  44              	.L2:
+  45 002c 00000000 		.word	.LANCHOR0
+  46 0030 00000000 		.word	.LANCHOR1
+  48              		.section	.text.mx25_read_status,"ax",%progbits
+  49              		.align	1
+  50              		.global	mx25_read_status
+  51              		.syntax unified
+  52              		.code	16
+  53              		.thumb_func
+  54              		.fpu softvfp
+  56              	mx25_read_status:
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59 0000 70B5     		push	{r4, r5, r6, lr}
+  60 0002 0400     		movs	r4, r0
+ARM GAS  /tmp/cc80fjqS.s 			page 2
+
+
+  61              		@ sp needed
+  62 0004 0020     		movs	r0, #0
+  63 0006 0A4D     		ldr	r5, .L5
+  64 0008 0021     		movs	r1, #0
+  65 000a 2856     		ldrsb	r0, [r5, r0]
+  66 000c FFF7FEFF 		bl	hal_gpio_set_value
+  67 0010 0521     		movs	r1, #5
+  68 0012 0120     		movs	r0, #1
+  69 0014 FFF7FEFF 		bl	hal_spi_in_out
+  70 0018 FF21     		movs	r1, #255
+  71 001a 0120     		movs	r0, #1
+  72 001c FFF7FEFF 		bl	hal_spi_in_out
+  73 0020 2070     		strb	r0, [r4]
+  74 0022 0020     		movs	r0, #0
+  75 0024 0121     		movs	r1, #1
+  76 0026 2856     		ldrsb	r0, [r5, r0]
+  77 0028 FFF7FEFF 		bl	hal_gpio_set_value
+  78 002c 70BD     		pop	{r4, r5, r6, pc}
+  79              	.L6:
+  80 002e C046     		.align	2
+  81              	.L5:
+  82 0030 00000000 		.word	.LANCHOR0
+  84              		.section	.text.mx25_busy,"ax",%progbits
+  85              		.align	1
+  86              		.global	mx25_busy
+  87              		.syntax unified
+  88              		.code	16
+  89              		.thumb_func
+  90              		.fpu softvfp
+  92              	mx25_busy:
+  93              		@ args = 0, pretend = 0, frame = 8
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95 0000 13B5     		push	{r0, r1, r4, lr}
+  96 0002 6B46     		mov	r3, sp
+  97              		@ sp needed
+  98 0004 DC1D     		adds	r4, r3, #7
+  99 0006 2000     		movs	r0, r4
+ 100 0008 FFF7FEFF 		bl	mx25_read_status
+ 101 000c 0123     		movs	r3, #1
+ 102 000e 2078     		ldrb	r0, [r4]
+ 103 0010 1840     		ands	r0, r3
+ 104 0012 16BD     		pop	{r1, r2, r4, pc}
+ 106              		.section	.text.mx25_wait_ready,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	mx25_wait_ready
+ 109              		.syntax unified
+ 110              		.code	16
+ 111              		.thumb_func
+ 112              		.fpu softvfp
+ 114              	mx25_wait_ready:
+ 115              		@ args = 0, pretend = 0, frame = 0
+ 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117 0000 10B5     		push	{r4, lr}
+ 118 0002 FFF7FEFF 		bl	hal_rtc_get_time_ms
+ 119 0006 0400     		movs	r4, r0
+ 120              	.L9:
+ 121 0008 FFF7FEFF 		bl	mx25_busy
+ARM GAS  /tmp/cc80fjqS.s 			page 3
+
+
+ 122 000c 0028     		cmp	r0, #0
+ 123 000e 01D1     		bne	.L11
+ 124 0010 0130     		adds	r0, r0, #1
+ 125              	.L10:
+ 126              		@ sp needed
+ 127 0012 10BD     		pop	{r4, pc}
+ 128              	.L11:
+ 129 0014 FFF7FEFF 		bl	hal_rtc_get_time_ms
+ 130 0018 034B     		ldr	r3, .L13
+ 131 001a 001B     		subs	r0, r0, r4
+ 132 001c 1B68     		ldr	r3, [r3]
+ 133 001e 9842     		cmp	r0, r3
+ 134 0020 F2D3     		bcc	.L9
+ 135 0022 0020     		movs	r0, #0
+ 136 0024 F5E7     		b	.L10
+ 137              	.L14:
+ 138 0026 C046     		.align	2
+ 139              	.L13:
+ 140 0028 00000000 		.word	.LANCHOR1
+ 142              		.section	.text.mx25_sleep,"ax",%progbits
+ 143              		.align	1
+ 144              		.global	mx25_sleep
+ 145              		.syntax unified
+ 146              		.code	16
+ 147              		.thumb_func
+ 148              		.fpu softvfp
+ 150              	mx25_sleep:
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153 0000 10B5     		push	{r4, lr}
+ 154 0002 FFF7FEFF 		bl	mx25_wait_ready
+ 155 0006 0028     		cmp	r0, #0
+ 156 0008 11D0     		beq	.L15
+ 157 000a 0020     		movs	r0, #0
+ 158 000c 084C     		ldr	r4, .L20
+ 159 000e 0021     		movs	r1, #0
+ 160 0010 2056     		ldrsb	r0, [r4, r0]
+ 161 0012 FFF7FEFF 		bl	hal_gpio_set_value
+ 162 0016 B921     		movs	r1, #185
+ 163 0018 0120     		movs	r0, #1
+ 164 001a FFF7FEFF 		bl	hal_spi_in_out
+ 165 001e 0020     		movs	r0, #0
+ 166 0020 0121     		movs	r1, #1
+ 167 0022 2056     		ldrsb	r0, [r4, r0]
+ 168 0024 FFF7FEFF 		bl	hal_gpio_set_value
+ 169 0028 0122     		movs	r2, #1
+ 170 002a 024B     		ldr	r3, .L20+4
+ 171 002c 1A60     		str	r2, [r3]
+ 172              	.L15:
+ 173              		@ sp needed
+ 174 002e 10BD     		pop	{r4, pc}
+ 175              	.L21:
+ 176              		.align	2
+ 177              	.L20:
+ 178 0030 00000000 		.word	.LANCHOR0
+ 179 0034 00000000 		.word	.LANCHOR1
+ 181              		.section	.text.mx25_read_id,"ax",%progbits
+ARM GAS  /tmp/cc80fjqS.s 			page 4
+
+
+ 182              		.align	1
+ 183              		.global	mx25_read_id
+ 184              		.syntax unified
+ 185              		.code	16
+ 186              		.thumb_func
+ 187              		.fpu softvfp
+ 189              	mx25_read_id:
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192 0000 70B5     		push	{r4, r5, r6, lr}
+ 193 0002 0400     		movs	r4, r0
+ 194              		@ sp needed
+ 195 0004 0020     		movs	r0, #0
+ 196 0006 134D     		ldr	r5, .L23
+ 197 0008 0021     		movs	r1, #0
+ 198 000a 2856     		ldrsb	r0, [r5, r0]
+ 199 000c FFF7FEFF 		bl	hal_gpio_set_value
+ 200 0010 9F21     		movs	r1, #159
+ 201 0012 0120     		movs	r0, #1
+ 202 0014 FFF7FEFF 		bl	hal_spi_in_out
+ 203 0018 FF21     		movs	r1, #255
+ 204 001a 0120     		movs	r0, #1
+ 205 001c FFF7FEFF 		bl	hal_spi_in_out
+ 206 0020 0004     		lsls	r0, r0, #16
+ 207 0022 2060     		str	r0, [r4]
+ 208 0024 FF21     		movs	r1, #255
+ 209 0026 0120     		movs	r0, #1
+ 210 0028 FFF7FEFF 		bl	hal_spi_in_out
+ 211 002c 2368     		ldr	r3, [r4]
+ 212 002e 0002     		lsls	r0, r0, #8
+ 213 0030 1843     		orrs	r0, r3
+ 214 0032 2060     		str	r0, [r4]
+ 215 0034 FF21     		movs	r1, #255
+ 216 0036 0120     		movs	r0, #1
+ 217 0038 FFF7FEFF 		bl	hal_spi_in_out
+ 218 003c 2368     		ldr	r3, [r4]
+ 219 003e 0121     		movs	r1, #1
+ 220 0040 1843     		orrs	r0, r3
+ 221 0042 2060     		str	r0, [r4]
+ 222 0044 0020     		movs	r0, #0
+ 223 0046 2856     		ldrsb	r0, [r5, r0]
+ 224 0048 FFF7FEFF 		bl	hal_gpio_set_value
+ 225 004c 0122     		movs	r2, #1
+ 226 004e 024B     		ldr	r3, .L23+4
+ 227 0050 1A60     		str	r2, [r3]
+ 228 0052 70BD     		pop	{r4, r5, r6, pc}
+ 229              	.L24:
+ 230              		.align	2
+ 231              	.L23:
+ 232 0054 00000000 		.word	.LANCHOR0
+ 233 0058 00000000 		.word	.LANCHOR1
+ 235              		.section	.text.mx25_init,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	mx25_init
+ 238              		.syntax unified
+ 239              		.code	16
+ 240              		.thumb_func
+ARM GAS  /tmp/cc80fjqS.s 			page 5
+
+
+ 241              		.fpu softvfp
+ 243              	mx25_init:
+ 244              		@ args = 0, pretend = 0, frame = 8
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246 0000 07B5     		push	{r0, r1, r2, lr}
+ 247 0002 0B4B     		ldr	r3, .L28
+ 248 0004 0800     		movs	r0, r1
+ 249 0006 1970     		strb	r1, [r3]
+ 250 0008 0121     		movs	r1, #1
+ 251 000a FFF7FEFF 		bl	hal_gpio_init_out
+ 252 000e 0A20     		movs	r0, #10
+ 253 0010 FFF7FEFF 		bl	hal_mcu_delay_ms
+ 254 0014 FFF7FEFF 		bl	mx25_wakeup
+ 255 0018 01A8     		add	r0, sp, #4
+ 256 001a FFF7FEFF 		bl	mx25_read_id
+ 257 001e 054B     		ldr	r3, .L28+4
+ 258 0020 019A     		ldr	r2, [sp, #4]
+ 259 0022 0020     		movs	r0, #0
+ 260 0024 9A42     		cmp	r2, r3
+ 261 0026 02D1     		bne	.L26
+ 262 0028 FFF7FEFF 		bl	mx25_sleep
+ 263 002c 0120     		movs	r0, #1
+ 264              	.L26:
+ 265              		@ sp needed
+ 266 002e 0EBD     		pop	{r1, r2, r3, pc}
+ 267              	.L29:
+ 268              		.align	2
+ 269              	.L28:
+ 270 0030 00000000 		.word	.LANCHOR0
+ 271 0034 1328C200 		.word	12724243
+ 273              		.section	.text.mx25_enable_write,"ax",%progbits
+ 274              		.align	1
+ 275              		.global	mx25_enable_write
+ 276              		.syntax unified
+ 277              		.code	16
+ 278              		.thumb_func
+ 279              		.fpu softvfp
+ 281              	mx25_enable_write:
+ 282              		@ args = 0, pretend = 0, frame = 0
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284 0000 10B5     		push	{r4, lr}
+ 285 0002 FFF7FEFF 		bl	mx25_wait_ready
+ 286 0006 0028     		cmp	r0, #0
+ 287 0008 11D0     		beq	.L30
+ 288 000a 0020     		movs	r0, #0
+ 289 000c 084C     		ldr	r4, .L35
+ 290 000e 0021     		movs	r1, #0
+ 291 0010 2056     		ldrsb	r0, [r4, r0]
+ 292 0012 FFF7FEFF 		bl	hal_gpio_set_value
+ 293 0016 0621     		movs	r1, #6
+ 294 0018 0120     		movs	r0, #1
+ 295 001a FFF7FEFF 		bl	hal_spi_in_out
+ 296 001e 0020     		movs	r0, #0
+ 297 0020 0121     		movs	r1, #1
+ 298 0022 2056     		ldrsb	r0, [r4, r0]
+ 299 0024 FFF7FEFF 		bl	hal_gpio_set_value
+ 300 0028 0122     		movs	r2, #1
+ARM GAS  /tmp/cc80fjqS.s 			page 6
+
+
+ 301 002a 024B     		ldr	r3, .L35+4
+ 302 002c 1A60     		str	r2, [r3]
+ 303              	.L30:
+ 304              		@ sp needed
+ 305 002e 10BD     		pop	{r4, pc}
+ 306              	.L36:
+ 307              		.align	2
+ 308              	.L35:
+ 309 0030 00000000 		.word	.LANCHOR0
+ 310 0034 00000000 		.word	.LANCHOR1
+ 312              		.section	.text.mx25_read,"ax",%progbits
+ 313              		.align	1
+ 314              		.global	mx25_read
+ 315              		.syntax unified
+ 316              		.code	16
+ 317              		.thumb_func
+ 318              		.fpu softvfp
+ 320              	mx25_read:
+ 321              		@ args = 0, pretend = 0, frame = 8
+ 322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 323 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 324 0002 0400     		movs	r4, r0
+ 325 0004 1500     		movs	r5, r2
+ 326 0006 0191     		str	r1, [sp, #4]
+ 327 0008 FFF7FEFF 		bl	mx25_wait_ready
+ 328 000c 061E     		subs	r6, r0, #0
+ 329 000e 2BD0     		beq	.L38
+ 330 0010 8022     		movs	r2, #128
+ 331 0012 6319     		adds	r3, r4, r5
+ 332 0014 1203     		lsls	r2, r2, #12
+ 333 0016 9342     		cmp	r3, r2
+ 334 0018 2FD2     		bcs	.L41
+ 335 001a 0020     		movs	r0, #0
+ 336 001c FF27     		movs	r7, #255
+ 337 001e 184B     		ldr	r3, .L45
+ 338 0020 0021     		movs	r1, #0
+ 339 0022 1856     		ldrsb	r0, [r3, r0]
+ 340 0024 FFF7FEFF 		bl	hal_gpio_set_value
+ 341 0028 0321     		movs	r1, #3
+ 342 002a 0120     		movs	r0, #1
+ 343 002c FFF7FEFF 		bl	hal_spi_in_out
+ 344 0030 210C     		lsrs	r1, r4, #16
+ 345 0032 3940     		ands	r1, r7
+ 346 0034 0120     		movs	r0, #1
+ 347 0036 FFF7FEFF 		bl	hal_spi_in_out
+ 348 003a 210A     		lsrs	r1, r4, #8
+ 349 003c 3940     		ands	r1, r7
+ 350 003e 0120     		movs	r0, #1
+ 351 0040 FFF7FEFF 		bl	hal_spi_in_out
+ 352 0044 2100     		movs	r1, r4
+ 353 0046 0120     		movs	r0, #1
+ 354 0048 3940     		ands	r1, r7
+ 355 004a FFF7FEFF 		bl	hal_spi_in_out
+ 356 004e 019C     		ldr	r4, [sp, #4]
+ 357 0050 6519     		adds	r5, r4, r5
+ 358              	.L39:
+ 359 0052 AC42     		cmp	r4, r5
+ARM GAS  /tmp/cc80fjqS.s 			page 7
+
+
+ 360 0054 0AD1     		bne	.L40
+ 361 0056 0020     		movs	r0, #0
+ 362 0058 094B     		ldr	r3, .L45
+ 363 005a 0121     		movs	r1, #1
+ 364 005c 1856     		ldrsb	r0, [r3, r0]
+ 365 005e FFF7FEFF 		bl	hal_gpio_set_value
+ 366 0062 0122     		movs	r2, #1
+ 367 0064 074B     		ldr	r3, .L45+4
+ 368 0066 1A60     		str	r2, [r3]
+ 369              	.L38:
+ 370 0068 3000     		movs	r0, r6
+ 371              		@ sp needed
+ 372 006a FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 373              	.L40:
+ 374 006c FF21     		movs	r1, #255
+ 375 006e 0120     		movs	r0, #1
+ 376 0070 FFF7FEFF 		bl	hal_spi_in_out
+ 377 0074 2070     		strb	r0, [r4]
+ 378 0076 0134     		adds	r4, r4, #1
+ 379 0078 EBE7     		b	.L39
+ 380              	.L41:
+ 381 007a 0026     		movs	r6, #0
+ 382 007c F4E7     		b	.L38
+ 383              	.L46:
+ 384 007e C046     		.align	2
+ 385              	.L45:
+ 386 0080 00000000 		.word	.LANCHOR0
+ 387 0084 00000000 		.word	.LANCHOR1
+ 389              		.section	.text.mx25_page_writeable,"ax",%progbits
+ 390              		.align	1
+ 391              		.global	mx25_page_writeable
+ 392              		.syntax unified
+ 393              		.code	16
+ 394              		.thumb_func
+ 395              		.fpu softvfp
+ 397              	mx25_page_writeable:
+ 398              		@ args = 0, pretend = 0, frame = 256
+ 399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 400 0000 70B5     		push	{r4, r5, r6, lr}
+ 401 0002 8318     		adds	r3, r0, r2
+ 402 0004 1400     		movs	r4, r2
+ 403 0006 8022     		movs	r2, #128
+ 404 0008 0600     		movs	r6, r0
+ 405 000a 0D00     		movs	r5, r1
+ 406 000c 0020     		movs	r0, #0
+ 407 000e C0B0     		sub	sp, sp, #256
+ 408 0010 1203     		lsls	r2, r2, #12
+ 409 0012 9342     		cmp	r3, r2
+ 410 0014 10D2     		bcs	.L48
+ 411 0016 8022     		movs	r2, #128
+ 412 0018 5200     		lsls	r2, r2, #1
+ 413 001a 9442     		cmp	r4, r2
+ 414 001c 0CD8     		bhi	.L48
+ 415 001e 013B     		subs	r3, r3, #1
+ 416 0020 1B0A     		lsrs	r3, r3, #8
+ 417 0022 320A     		lsrs	r2, r6, #8
+ 418 0024 9342     		cmp	r3, r2
+ARM GAS  /tmp/cc80fjqS.s 			page 8
+
+
+ 419 0026 07D1     		bne	.L48
+ 420 0028 2200     		movs	r2, r4
+ 421 002a 6946     		mov	r1, sp
+ 422 002c 3000     		movs	r0, r6
+ 423 002e FFF7FEFF 		bl	mx25_read
+ 424 0032 0023     		movs	r3, #0
+ 425 0034 9842     		cmp	r0, r3
+ 426 0036 07D1     		bne	.L49
+ 427              	.L48:
+ 428 0038 40B0     		add	sp, sp, #256
+ 429              		@ sp needed
+ 430 003a 70BD     		pop	{r4, r5, r6, pc}
+ 431              	.L51:
+ 432 003c 6A46     		mov	r2, sp
+ 433 003e D15C     		ldrb	r1, [r2, r3]
+ 434 0040 EA5C     		ldrb	r2, [r5, r3]
+ 435 0042 8A43     		bics	r2, r1
+ 436 0044 03D1     		bne	.L56
+ 437 0046 0133     		adds	r3, r3, #1
+ 438              	.L49:
+ 439 0048 9C42     		cmp	r4, r3
+ 440 004a F7D1     		bne	.L51
+ 441 004c F4E7     		b	.L48
+ 442              	.L56:
+ 443 004e 0020     		movs	r0, #0
+ 444 0050 F2E7     		b	.L48
+ 446              		.section	.text.mx25_write_page,"ax",%progbits
+ 447              		.align	1
+ 448              		.global	mx25_write_page
+ 449              		.syntax unified
+ 450              		.code	16
+ 451              		.thumb_func
+ 452              		.fpu softvfp
+ 454              	mx25_write_page:
+ 455              		@ args = 0, pretend = 0, frame = 8
+ 456              		@ frame_needed = 0, uses_anonymous_args = 0
+ 457 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 458 0002 0400     		movs	r4, r0
+ 459 0004 1500     		movs	r5, r2
+ 460 0006 0091     		str	r1, [sp]
+ 461 0008 FFF7FEFF 		bl	mx25_wait_ready
+ 462 000c 0028     		cmp	r0, #0
+ 463 000e 02D1     		bne	.L59
+ 464              	.L61:
+ 465 0010 0026     		movs	r6, #0
+ 466              	.L60:
+ 467              		@ sp needed
+ 468 0012 3000     		movs	r0, r6
+ 469 0014 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 470              	.L59:
+ 471 0016 8023     		movs	r3, #128
+ 472 0018 6119     		adds	r1, r4, r5
+ 473 001a 1B03     		lsls	r3, r3, #12
+ 474 001c 9942     		cmp	r1, r3
+ 475 001e F7D2     		bcs	.L61
+ 476 0020 8023     		movs	r3, #128
+ 477 0022 5B00     		lsls	r3, r3, #1
+ARM GAS  /tmp/cc80fjqS.s 			page 9
+
+
+ 478 0024 9D42     		cmp	r5, r3
+ 479 0026 F3D8     		bhi	.L61
+ 480 0028 0139     		subs	r1, r1, #1
+ 481 002a 0A0A     		lsrs	r2, r1, #8
+ 482 002c 230A     		lsrs	r3, r4, #8
+ 483 002e 0192     		str	r2, [sp, #4]
+ 484 0030 9A42     		cmp	r2, r3
+ 485 0032 EDD1     		bne	.L61
+ 486 0034 2A00     		movs	r2, r5
+ 487 0036 2000     		movs	r0, r4
+ 488 0038 0099     		ldr	r1, [sp]
+ 489 003a FFF7FEFF 		bl	mx25_page_writeable
+ 490 003e 061E     		subs	r6, r0, #0
+ 491 0040 E6D0     		beq	.L61
+ 492 0042 FFF7FEFF 		bl	mx25_enable_write
+ 493 0046 0020     		movs	r0, #0
+ 494 0048 FF27     		movs	r7, #255
+ 495 004a 164B     		ldr	r3, .L67
+ 496 004c 0021     		movs	r1, #0
+ 497 004e 1856     		ldrsb	r0, [r3, r0]
+ 498 0050 FFF7FEFF 		bl	hal_gpio_set_value
+ 499 0054 0221     		movs	r1, #2
+ 500 0056 0120     		movs	r0, #1
+ 501 0058 FFF7FEFF 		bl	hal_spi_in_out
+ 502 005c 210C     		lsrs	r1, r4, #16
+ 503 005e 3940     		ands	r1, r7
+ 504 0060 0120     		movs	r0, #1
+ 505 0062 FFF7FEFF 		bl	hal_spi_in_out
+ 506 0066 0199     		ldr	r1, [sp, #4]
+ 507 0068 0120     		movs	r0, #1
+ 508 006a 3940     		ands	r1, r7
+ 509 006c FFF7FEFF 		bl	hal_spi_in_out
+ 510 0070 2100     		movs	r1, r4
+ 511 0072 0120     		movs	r0, #1
+ 512 0074 3940     		ands	r1, r7
+ 513 0076 FFF7FEFF 		bl	hal_spi_in_out
+ 514 007a 009C     		ldr	r4, [sp]
+ 515 007c 6519     		adds	r5, r4, r5
+ 516              	.L62:
+ 517 007e A542     		cmp	r5, r4
+ 518 0080 09D1     		bne	.L63
+ 519 0082 0020     		movs	r0, #0
+ 520 0084 074B     		ldr	r3, .L67
+ 521 0086 0121     		movs	r1, #1
+ 522 0088 1856     		ldrsb	r0, [r3, r0]
+ 523 008a FFF7FEFF 		bl	hal_gpio_set_value
+ 524 008e 0A22     		movs	r2, #10
+ 525 0090 054B     		ldr	r3, .L67+4
+ 526 0092 1A60     		str	r2, [r3]
+ 527 0094 BDE7     		b	.L60
+ 528              	.L63:
+ 529 0096 2178     		ldrb	r1, [r4]
+ 530 0098 0120     		movs	r0, #1
+ 531 009a FFF7FEFF 		bl	hal_spi_in_out
+ 532 009e 0134     		adds	r4, r4, #1
+ 533 00a0 EDE7     		b	.L62
+ 534              	.L68:
+ARM GAS  /tmp/cc80fjqS.s 			page 10
+
+
+ 535 00a2 C046     		.align	2
+ 536              	.L67:
+ 537 00a4 00000000 		.word	.LANCHOR0
+ 538 00a8 00000000 		.word	.LANCHOR1
+ 540              		.section	.text.mx25_write,"ax",%progbits
+ 541              		.align	1
+ 542              		.global	mx25_write
+ 543              		.syntax unified
+ 544              		.code	16
+ 545              		.thumb_func
+ 546              		.fpu softvfp
+ 548              	mx25_write:
+ 549              		@ args = 0, pretend = 0, frame = 24
+ 550              		@ frame_needed = 0, uses_anonymous_args = 0
+ 551 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 552 0002 87B0     		sub	sp, sp, #28
+ 553 0004 0400     		movs	r4, r0
+ 554 0006 0391     		str	r1, [sp, #12]
+ 555 0008 0492     		str	r2, [sp, #16]
+ 556 000a FFF7FEFF 		bl	mx25_wait_ready
+ 557 000e 0190     		str	r0, [sp, #4]
+ 558 0010 0028     		cmp	r0, #0
+ 559 0012 04D1     		bne	.L70
+ 560              	.L72:
+ 561 0014 0023     		movs	r3, #0
+ 562 0016 0193     		str	r3, [sp, #4]
+ 563              	.L71:
+ 564 0018 0198     		ldr	r0, [sp, #4]
+ 565 001a 07B0     		add	sp, sp, #28
+ 566              		@ sp needed
+ 567 001c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 568              	.L70:
+ 569 001e 8022     		movs	r2, #128
+ 570 0020 049B     		ldr	r3, [sp, #16]
+ 571 0022 1203     		lsls	r2, r2, #12
+ 572 0024 E318     		adds	r3, r4, r3
+ 573 0026 9342     		cmp	r3, r2
+ 574 0028 F4D2     		bcs	.L72
+ 575 002a 1B0A     		lsrs	r3, r3, #8
+ 576 002c 220A     		lsrs	r2, r4, #8
+ 577 002e 0293     		str	r3, [sp, #8]
+ 578 0030 1500     		movs	r5, r2
+ 579 0032 0592     		str	r2, [sp, #20]
+ 580 0034 029A     		ldr	r2, [sp, #8]
+ 581 0036 0026     		movs	r6, #0
+ 582 0038 9542     		cmp	r5, r2
+ 583 003a 17D1     		bne	.L73
+ 584 003c 2000     		movs	r0, r4
+ 585 003e 049A     		ldr	r2, [sp, #16]
+ 586 0040 0399     		ldr	r1, [sp, #12]
+ 587 0042 FFF7FEFF 		bl	mx25_write_page
+ 588 0046 0190     		str	r0, [sp, #4]
+ 589 0048 E6E7     		b	.L71
+ 590              	.L77:
+ 591 004a 059B     		ldr	r3, [sp, #20]
+ 592 004c 9D42     		cmp	r5, r3
+ 593 004e 11D1     		bne	.L74
+ARM GAS  /tmp/cc80fjqS.s 			page 11
+
+
+ 594 0050 FF27     		movs	r7, #255
+ 595 0052 8023     		movs	r3, #128
+ 596 0054 2740     		ands	r7, r4
+ 597 0056 5B00     		lsls	r3, r3, #1
+ 598 0058 DF1B     		subs	r7, r3, r7
+ 599 005a 3A00     		movs	r2, r7
+ 600 005c 2000     		movs	r0, r4
+ 601 005e 0399     		ldr	r1, [sp, #12]
+ 602 0060 FFF7FEFF 		bl	mx25_write_page
+ 603 0064 F619     		adds	r6, r6, r7
+ 604              	.L75:
+ 605 0066 0028     		cmp	r0, #0
+ 606 0068 D4D0     		beq	.L72
+ 607 006a 0135     		adds	r5, r5, #1
+ 608              	.L73:
+ 609 006c 029B     		ldr	r3, [sp, #8]
+ 610 006e 9D42     		cmp	r5, r3
+ 611 0070 EBD9     		bls	.L77
+ 612 0072 D1E7     		b	.L71
+ 613              	.L74:
+ 614 0074 039B     		ldr	r3, [sp, #12]
+ 615 0076 2802     		lsls	r0, r5, #8
+ 616 0078 9919     		adds	r1, r3, r6
+ 617 007a 029B     		ldr	r3, [sp, #8]
+ 618 007c 9D42     		cmp	r5, r3
+ 619 007e 04D1     		bne	.L76
+ 620 0080 049B     		ldr	r3, [sp, #16]
+ 621 0082 9A1B     		subs	r2, r3, r6
+ 622 0084 FFF7FEFF 		bl	mx25_write_page
+ 623 0088 EDE7     		b	.L75
+ 624              	.L76:
+ 625 008a 8022     		movs	r2, #128
+ 626 008c 0136     		adds	r6, r6, #1
+ 627 008e 5200     		lsls	r2, r2, #1
+ 628 0090 FFF7FEFF 		bl	mx25_write_page
+ 629 0094 FF36     		adds	r6, r6, #255
+ 630 0096 E6E7     		b	.L75
+ 632              		.section	.text.mx25_erase_page,"ax",%progbits
+ 633              		.align	1
+ 634              		.global	mx25_erase_page
+ 635              		.syntax unified
+ 636              		.code	16
+ 637              		.thumb_func
+ 638              		.fpu softvfp
+ 640              	mx25_erase_page:
+ 641              		@ args = 0, pretend = 0, frame = 0
+ 642              		@ frame_needed = 0, uses_anonymous_args = 0
+ 643 0000 70B5     		push	{r4, r5, r6, lr}
+ 644 0002 0400     		movs	r4, r0
+ 645 0004 FFF7FEFF 		bl	mx25_wait_ready
+ 646 0008 051E     		subs	r5, r0, #0
+ 647 000a 26D0     		beq	.L85
+ 648 000c 8023     		movs	r3, #128
+ 649 000e 2403     		lsls	r4, r4, #12
+ 650 0010 1B03     		lsls	r3, r3, #12
+ 651 0012 9C42     		cmp	r4, r3
+ 652 0014 23D2     		bcs	.L86
+ARM GAS  /tmp/cc80fjqS.s 			page 12
+
+
+ 653 0016 FFF7FEFF 		bl	mx25_enable_write
+ 654 001a 0020     		movs	r0, #0
+ 655 001c 114E     		ldr	r6, .L90
+ 656 001e 0021     		movs	r1, #0
+ 657 0020 3056     		ldrsb	r0, [r6, r0]
+ 658 0022 FFF7FEFF 		bl	hal_gpio_set_value
+ 659 0026 2021     		movs	r1, #32
+ 660 0028 0120     		movs	r0, #1
+ 661 002a FFF7FEFF 		bl	hal_spi_in_out
+ 662 002e 210C     		lsrs	r1, r4, #16
+ 663 0030 0120     		movs	r0, #1
+ 664 0032 FFF7FEFF 		bl	hal_spi_in_out
+ 665 0036 210A     		lsrs	r1, r4, #8
+ 666 0038 FF24     		movs	r4, #255
+ 667 003a 0120     		movs	r0, #1
+ 668 003c 2140     		ands	r1, r4
+ 669 003e FFF7FEFF 		bl	hal_spi_in_out
+ 670 0042 0021     		movs	r1, #0
+ 671 0044 0120     		movs	r0, #1
+ 672 0046 FFF7FEFF 		bl	hal_spi_in_out
+ 673 004a 0020     		movs	r0, #0
+ 674 004c 0121     		movs	r1, #1
+ 675 004e 3056     		ldrsb	r0, [r6, r0]
+ 676 0050 FFF7FEFF 		bl	hal_gpio_set_value
+ 677 0054 F022     		movs	r2, #240
+ 678 0056 044B     		ldr	r3, .L90+4
+ 679 0058 1A60     		str	r2, [r3]
+ 680              	.L85:
+ 681 005a 2800     		movs	r0, r5
+ 682              		@ sp needed
+ 683 005c 70BD     		pop	{r4, r5, r6, pc}
+ 684              	.L86:
+ 685 005e 0025     		movs	r5, #0
+ 686 0060 FBE7     		b	.L85
+ 687              	.L91:
+ 688 0062 C046     		.align	2
+ 689              	.L90:
+ 690 0064 00000000 		.word	.LANCHOR0
+ 691 0068 00000000 		.word	.LANCHOR1
+ 693              		.section	.text.mx25_erase_all,"ax",%progbits
+ 694              		.align	1
+ 695              		.global	mx25_erase_all
+ 696              		.syntax unified
+ 697              		.code	16
+ 698              		.thumb_func
+ 699              		.fpu softvfp
+ 701              	mx25_erase_all:
+ 702              		@ args = 0, pretend = 0, frame = 0
+ 703              		@ frame_needed = 0, uses_anonymous_args = 0
+ 704 0000 70B5     		push	{r4, r5, r6, lr}
+ 705 0002 FFF7FEFF 		bl	mx25_wait_ready
+ 706 0006 041E     		subs	r4, r0, #0
+ 707 0008 13D0     		beq	.L93
+ 708 000a FFF7FEFF 		bl	mx25_enable_write
+ 709 000e 0020     		movs	r0, #0
+ 710 0010 094D     		ldr	r5, .L97
+ 711 0012 0021     		movs	r1, #0
+ARM GAS  /tmp/cc80fjqS.s 			page 13
+
+
+ 712 0014 2856     		ldrsb	r0, [r5, r0]
+ 713 0016 FFF7FEFF 		bl	hal_gpio_set_value
+ 714 001a 6021     		movs	r1, #96
+ 715 001c 0120     		movs	r0, #1
+ 716 001e FFF7FEFF 		bl	hal_spi_in_out
+ 717 0022 0020     		movs	r0, #0
+ 718 0024 0121     		movs	r1, #1
+ 719 0026 2856     		ldrsb	r0, [r5, r0]
+ 720 0028 FFF7FEFF 		bl	hal_gpio_set_value
+ 721 002c 034B     		ldr	r3, .L97+4
+ 722 002e 044A     		ldr	r2, .L97+8
+ 723 0030 1A60     		str	r2, [r3]
+ 724              	.L93:
+ 725 0032 2000     		movs	r0, r4
+ 726              		@ sp needed
+ 727 0034 70BD     		pop	{r4, r5, r6, pc}
+ 728              	.L98:
+ 729 0036 C046     		.align	2
+ 730              	.L97:
+ 731 0038 00000000 		.word	.LANCHOR0
+ 732 003c 00000000 		.word	.LANCHOR1
+ 733 0040 983A0000 		.word	15000
+ 735              		.section	.bss._max_expected_busy_time,"aw",%nobits
+ 736              		.align	2
+ 737              		.set	.LANCHOR1,. + 0
+ 740              	_max_expected_busy_time:
+ 741 0000 00000000 		.space	4
+ 742              		.section	.bss.cs,"aw",%nobits
+ 743              		.set	.LANCHOR0,. + 0
+ 746              	cs:
+ 747 0000 00       		.space	1
+ 748              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/cc80fjqS.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mx25.c
+     /tmp/cc80fjqS.s:12     .text.mx25_wakeup:0000000000000000 $t
+     /tmp/cc80fjqS.s:20     .text.mx25_wakeup:0000000000000000 mx25_wakeup
+     /tmp/cc80fjqS.s:45     .text.mx25_wakeup:000000000000002c $d
+     /tmp/cc80fjqS.s:49     .text.mx25_read_status:0000000000000000 $t
+     /tmp/cc80fjqS.s:56     .text.mx25_read_status:0000000000000000 mx25_read_status
+     /tmp/cc80fjqS.s:82     .text.mx25_read_status:0000000000000030 $d
+     /tmp/cc80fjqS.s:85     .text.mx25_busy:0000000000000000 $t
+     /tmp/cc80fjqS.s:92     .text.mx25_busy:0000000000000000 mx25_busy
+     /tmp/cc80fjqS.s:107    .text.mx25_wait_ready:0000000000000000 $t
+     /tmp/cc80fjqS.s:114    .text.mx25_wait_ready:0000000000000000 mx25_wait_ready
+     /tmp/cc80fjqS.s:140    .text.mx25_wait_ready:0000000000000028 $d
+     /tmp/cc80fjqS.s:143    .text.mx25_sleep:0000000000000000 $t
+     /tmp/cc80fjqS.s:150    .text.mx25_sleep:0000000000000000 mx25_sleep
+     /tmp/cc80fjqS.s:178    .text.mx25_sleep:0000000000000030 $d
+     /tmp/cc80fjqS.s:182    .text.mx25_read_id:0000000000000000 $t
+     /tmp/cc80fjqS.s:189    .text.mx25_read_id:0000000000000000 mx25_read_id
+     /tmp/cc80fjqS.s:232    .text.mx25_read_id:0000000000000054 $d
+     /tmp/cc80fjqS.s:236    .text.mx25_init:0000000000000000 $t
+     /tmp/cc80fjqS.s:243    .text.mx25_init:0000000000000000 mx25_init
+     /tmp/cc80fjqS.s:270    .text.mx25_init:0000000000000030 $d
+     /tmp/cc80fjqS.s:274    .text.mx25_enable_write:0000000000000000 $t
+     /tmp/cc80fjqS.s:281    .text.mx25_enable_write:0000000000000000 mx25_enable_write
+     /tmp/cc80fjqS.s:309    .text.mx25_enable_write:0000000000000030 $d
+     /tmp/cc80fjqS.s:313    .text.mx25_read:0000000000000000 $t
+     /tmp/cc80fjqS.s:320    .text.mx25_read:0000000000000000 mx25_read
+     /tmp/cc80fjqS.s:386    .text.mx25_read:0000000000000080 $d
+     /tmp/cc80fjqS.s:390    .text.mx25_page_writeable:0000000000000000 $t
+     /tmp/cc80fjqS.s:397    .text.mx25_page_writeable:0000000000000000 mx25_page_writeable
+     /tmp/cc80fjqS.s:447    .text.mx25_write_page:0000000000000000 $t
+     /tmp/cc80fjqS.s:454    .text.mx25_write_page:0000000000000000 mx25_write_page
+     /tmp/cc80fjqS.s:537    .text.mx25_write_page:00000000000000a4 $d
+     /tmp/cc80fjqS.s:541    .text.mx25_write:0000000000000000 $t
+     /tmp/cc80fjqS.s:548    .text.mx25_write:0000000000000000 mx25_write
+     /tmp/cc80fjqS.s:633    .text.mx25_erase_page:0000000000000000 $t
+     /tmp/cc80fjqS.s:640    .text.mx25_erase_page:0000000000000000 mx25_erase_page
+     /tmp/cc80fjqS.s:690    .text.mx25_erase_page:0000000000000064 $d
+     /tmp/cc80fjqS.s:694    .text.mx25_erase_all:0000000000000000 $t
+     /tmp/cc80fjqS.s:701    .text.mx25_erase_all:0000000000000000 mx25_erase_all
+     /tmp/cc80fjqS.s:731    .text.mx25_erase_all:0000000000000038 $d
+     /tmp/cc80fjqS.s:736    .bss._max_expected_busy_time:0000000000000000 $d
+     /tmp/cc80fjqS.s:740    .bss._max_expected_busy_time:0000000000000000 _max_expected_busy_time
+     /tmp/cc80fjqS.s:746    .bss.cs:0000000000000000 cs
+     /tmp/cc80fjqS.s:747    .bss.cs:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+hal_gpio_set_value
+hal_mcu_delay_ms
+hal_spi_in_out
+hal_rtc_get_time_ms
+hal_gpio_init_out

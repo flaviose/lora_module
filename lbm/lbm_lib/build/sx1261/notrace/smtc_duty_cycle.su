@@ -1,0 +1,12 @@
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:532:13:smtc_duty_cycle_get_band	12	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:136:6:smtc_duty_cycle_init	8	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:147:6:smtc_duty_cycle_config	32	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:168:15:smtc_duty_cycle_enable_set	0	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:187:28:smtc_duty_cycle_enable_get	0	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:196:6:smtc_duty_cycle_sum	56	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:263:6:smtc_duty_cycle_update	40	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:312:6:smtc_duty_cycle_is_toa_accepted	24	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:346:9:smtc_duty_cycle_band_get_available_toa_ms	16	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:364:6:smtc_duty_cycle_is_channel_free	24	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:388:6:smtc_duty_cycle_is_band_free	8	static
+smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c:406:9:smtc_duty_cycle_get_next_free_time_ms	72	static

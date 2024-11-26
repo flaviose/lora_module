@@ -1,0 +1,743 @@
+ARM GAS  /tmp/ccK9IQgN.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"stm32l0xx_ll_rcc.c"
+  10              		.text
+  11              		.section	.text.LL_RCC_HSI_IsReady,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	LL_RCC_HSI_IsReady:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		@ link register save eliminated.
+  23 0000 024B     		ldr	r3, .L2
+  24              		@ sp needed
+  25 0002 1868     		ldr	r0, [r3]
+  26 0004 4007     		lsls	r0, r0, #29
+  27 0006 C00F     		lsrs	r0, r0, #31
+  28 0008 7047     		bx	lr
+  29              	.L3:
+  30 000a C046     		.align	2
+  31              	.L2:
+  32 000c 00100240 		.word	1073876992
+  34              		.section	.text.LL_RCC_LSE_IsReady,"ax",%progbits
+  35              		.align	1
+  36              		.syntax unified
+  37              		.code	16
+  38              		.thumb_func
+  39              		.fpu softvfp
+  41              	LL_RCC_LSE_IsReady:
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  44              		@ link register save eliminated.
+  45 0000 024B     		ldr	r3, .L5
+  46              		@ sp needed
+  47 0002 186D     		ldr	r0, [r3, #80]
+  48 0004 8005     		lsls	r0, r0, #22
+  49 0006 C00F     		lsrs	r0, r0, #31
+  50 0008 7047     		bx	lr
+  51              	.L6:
+  52 000a C046     		.align	2
+  53              	.L5:
+  54 000c 00100240 		.word	1073876992
+  56              		.section	.text.LL_RCC_IsActiveFlag_HSIDIV,"ax",%progbits
+  57              		.align	1
+  58              		.syntax unified
+  59              		.code	16
+  60              		.thumb_func
+  61              		.fpu softvfp
+ARM GAS  /tmp/ccK9IQgN.s 			page 2
+
+
+  63              	LL_RCC_IsActiveFlag_HSIDIV:
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67 0000 024B     		ldr	r3, .L8
+  68              		@ sp needed
+  69 0002 1868     		ldr	r0, [r3]
+  70 0004 C006     		lsls	r0, r0, #27
+  71 0006 C00F     		lsrs	r0, r0, #31
+  72 0008 7047     		bx	lr
+  73              	.L9:
+  74 000a C046     		.align	2
+  75              	.L8:
+  76 000c 00100240 		.word	1073876992
+  78              		.section	.text.RCC_GetHCLKClockFreq,"ax",%progbits
+  79              		.align	1
+  80              		.syntax unified
+  81              		.code	16
+  82              		.thumb_func
+  83              		.fpu softvfp
+  85              	RCC_GetHCLKClockFreq:
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88              		@ link register save eliminated.
+  89 0000 034B     		ldr	r3, .L11
+  90 0002 044A     		ldr	r2, .L11+4
+  91 0004 DB68     		ldr	r3, [r3, #12]
+  92              		@ sp needed
+  93 0006 1B06     		lsls	r3, r3, #24
+  94 0008 1B0F     		lsrs	r3, r3, #28
+  95 000a D35C     		ldrb	r3, [r2, r3]
+  96 000c D840     		lsrs	r0, r0, r3
+  97 000e 7047     		bx	lr
+  98              	.L12:
+  99              		.align	2
+ 100              	.L11:
+ 101 0010 00100240 		.word	1073876992
+ 102 0014 00000000 		.word	AHBPrescTable
+ 104              		.section	.text.RCC_GetPCLK1ClockFreq,"ax",%progbits
+ 105              		.align	1
+ 106              		.syntax unified
+ 107              		.code	16
+ 108              		.thumb_func
+ 109              		.fpu softvfp
+ 111              	RCC_GetPCLK1ClockFreq:
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 115 0000 034B     		ldr	r3, .L14
+ 116 0002 044A     		ldr	r2, .L14+4
+ 117 0004 DB68     		ldr	r3, [r3, #12]
+ 118              		@ sp needed
+ 119 0006 5B05     		lsls	r3, r3, #21
+ 120 0008 5B0F     		lsrs	r3, r3, #29
+ 121 000a D35C     		ldrb	r3, [r2, r3]
+ 122 000c D840     		lsrs	r0, r0, r3
+ 123 000e 7047     		bx	lr
+ARM GAS  /tmp/ccK9IQgN.s 			page 3
+
+
+ 124              	.L15:
+ 125              		.align	2
+ 126              	.L14:
+ 127 0010 00100240 		.word	1073876992
+ 128 0014 00000000 		.word	APBPrescTable
+ 130              		.global	__aeabi_uidiv
+ 131              		.section	.text.RCC_GetSystemClockFreq,"ax",%progbits
+ 132              		.align	1
+ 133              		.syntax unified
+ 134              		.code	16
+ 135              		.thumb_func
+ 136              		.fpu softvfp
+ 138              	RCC_GetSystemClockFreq:
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141 0000 0C22     		movs	r2, #12
+ 142 0002 10B5     		push	{r4, lr}
+ 143 0004 1D4C     		ldr	r4, .L28
+ 144 0006 E368     		ldr	r3, [r4, #12]
+ 145 0008 1340     		ands	r3, r2
+ 146 000a 082B     		cmp	r3, #8
+ 147 000c 33D0     		beq	.L24
+ 148 000e 0BD8     		bhi	.L18
+ 149 0010 002B     		cmp	r3, #0
+ 150 0012 01D0     		beq	.L21
+ 151 0014 042B     		cmp	r3, #4
+ 152 0016 22D0     		beq	.L20
+ 153              	.L21:
+ 154 0018 8020     		movs	r0, #128
+ 155 001a 6368     		ldr	r3, [r4, #4]
+ 156 001c 0002     		lsls	r0, r0, #8
+ 157 001e 1B04     		lsls	r3, r3, #16
+ 158 0020 5B0F     		lsrs	r3, r3, #29
+ 159 0022 0133     		adds	r3, r3, #1
+ 160 0024 9840     		lsls	r0, r0, r3
+ 161 0026 23E0     		b	.L16
+ 162              	.L18:
+ 163 0028 0C2B     		cmp	r3, #12
+ 164 002a F5D1     		bne	.L21
+ 165 002c E368     		ldr	r3, [r4, #12]
+ 166 002e DB03     		lsls	r3, r3, #15
+ 167 0030 1FD4     		bmi	.L26
+ 168 0032 FFF7FEFF 		bl	LL_RCC_IsActiveFlag_HSIDIV
+ 169 0036 431E     		subs	r3, r0, #1
+ 170 0038 9841     		sbcs	r0, r0, r3
+ 171 003a 114B     		ldr	r3, .L28+4
+ 172 003c 4042     		rsbs	r0, r0, #0
+ 173 003e 1840     		ands	r0, r3
+ 174 0040 104B     		ldr	r3, .L28+8
+ 175 0042 C018     		adds	r0, r0, r3
+ 176              	.L23:
+ 177 0044 E368     		ldr	r3, [r4, #12]
+ 178 0046 104A     		ldr	r2, .L28+12
+ 179 0048 E168     		ldr	r1, [r4, #12]
+ 180 004a 9B02     		lsls	r3, r3, #10
+ 181 004c 1B0F     		lsrs	r3, r3, #28
+ 182 004e D35C     		ldrb	r3, [r2, r3]
+ARM GAS  /tmp/ccK9IQgN.s 			page 4
+
+
+ 183 0050 0902     		lsls	r1, r1, #8
+ 184 0052 890F     		lsrs	r1, r1, #30
+ 185 0054 5843     		muls	r0, r3
+ 186 0056 0131     		adds	r1, r1, #1
+ 187 0058 FFF7FEFF 		bl	__aeabi_uidiv
+ 188 005c 08E0     		b	.L16
+ 189              	.L20:
+ 190 005e FFF7FEFF 		bl	LL_RCC_IsActiveFlag_HSIDIV
+ 191 0062 431E     		subs	r3, r0, #1
+ 192 0064 9841     		sbcs	r0, r0, r3
+ 193 0066 064B     		ldr	r3, .L28+4
+ 194 0068 4042     		rsbs	r0, r0, #0
+ 195 006a 1840     		ands	r0, r3
+ 196 006c 054B     		ldr	r3, .L28+8
+ 197 006e C018     		adds	r0, r0, r3
+ 198              	.L16:
+ 199              		@ sp needed
+ 200 0070 10BD     		pop	{r4, pc}
+ 201              	.L26:
+ 202 0072 0648     		ldr	r0, .L28+16
+ 203 0074 E6E7     		b	.L23
+ 204              	.L24:
+ 205 0076 0548     		ldr	r0, .L28+16
+ 206 0078 FAE7     		b	.L16
+ 207              	.L29:
+ 208 007a C046     		.align	2
+ 209              	.L28:
+ 210 007c 00100240 		.word	1073876992
+ 211 0080 00E548FF 		.word	-12000000
+ 212 0084 0024F400 		.word	16000000
+ 213 0088 00000000 		.word	PLLMulTable
+ 214 008c 00127A00 		.word	8000000
+ 216              		.section	.text.LL_RCC_DeInit,"ax",%progbits
+ 217              		.align	1
+ 218              		.global	LL_RCC_DeInit
+ 219              		.syntax unified
+ 220              		.code	16
+ 221              		.thumb_func
+ 222              		.fpu softvfp
+ 224              	LL_RCC_DeInit:
+ 225              		@ args = 0, pretend = 0, frame = 8
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227 0000 8022     		movs	r2, #128
+ 228 0002 264B     		ldr	r3, .L35
+ 229 0004 13B5     		push	{r0, r1, r4, lr}
+ 230 0006 1968     		ldr	r1, [r3]
+ 231 0008 5200     		lsls	r2, r2, #1
+ 232 000a 0A43     		orrs	r2, r1
+ 233 000c 1A60     		str	r2, [r3]
+ 234 000e 8022     		movs	r2, #128
+ 235 0010 9200     		lsls	r2, r2, #2
+ 236              	.L33:
+ 237 0012 1968     		ldr	r1, [r3]
+ 238 0014 1142     		tst	r1, r2
+ 239 0016 3ED0     		beq	.L31
+ 240 0018 5A68     		ldr	r2, [r3, #4]
+ 241 001a 2149     		ldr	r1, .L35+4
+ARM GAS  /tmp/ccK9IQgN.s 			page 5
+
+
+ 242 001c 2148     		ldr	r0, .L35+8
+ 243 001e 1140     		ands	r1, r2
+ 244 0020 A022     		movs	r2, #160
+ 245 0022 1202     		lsls	r2, r2, #8
+ 246 0024 0A43     		orrs	r2, r1
+ 247 0026 5A60     		str	r2, [r3, #4]
+ 248 0028 5A68     		ldr	r2, [r3, #4]
+ 249 002a 1F49     		ldr	r1, .L35+12
+ 250 002c 1202     		lsls	r2, r2, #8
+ 251 002e 120A     		lsrs	r2, r2, #8
+ 252 0030 5A60     		str	r2, [r3, #4]
+ 253 0032 5A68     		ldr	r2, [r3, #4]
+ 254 0034 1140     		ands	r1, r2
+ 255 0036 8022     		movs	r2, #128
+ 256 0038 5201     		lsls	r2, r2, #5
+ 257 003a 0A43     		orrs	r2, r1
+ 258 003c 0121     		movs	r1, #1
+ 259 003e 4942     		rsbs	r1, r1, #0
+ 260 0040 5A60     		str	r2, [r3, #4]
+ 261 0042 0191     		str	r1, [sp, #4]
+ 262 0044 019A     		ldr	r2, [sp, #4]
+ 263 0046 0240     		ands	r2, r0
+ 264 0048 0192     		str	r2, [sp, #4]
+ 265 004a 019A     		ldr	r2, [sp, #4]
+ 266 004c 1748     		ldr	r0, .L35+16
+ 267 004e DA60     		str	r2, [r3, #12]
+ 268 0050 1A68     		ldr	r2, [r3]
+ 269 0052 0192     		str	r2, [sp, #4]
+ 270 0054 019A     		ldr	r2, [sp, #4]
+ 271 0056 0240     		ands	r2, r0
+ 272 0058 0192     		str	r2, [sp, #4]
+ 273 005a 019A     		ldr	r2, [sp, #4]
+ 274 005c 1448     		ldr	r0, .L35+20
+ 275 005e 1A60     		str	r2, [r3]
+ 276 0060 1A68     		ldr	r2, [r3]
+ 277 0062 0192     		str	r2, [sp, #4]
+ 278 0064 1A68     		ldr	r2, [r3]
+ 279 0066 0240     		ands	r2, r0
+ 280 0068 1A60     		str	r2, [r3]
+ 281 006a 019A     		ldr	r2, [sp, #4]
+ 282 006c 1148     		ldr	r0, .L35+24
+ 283 006e 0240     		ands	r2, r0
+ 284 0070 0192     		str	r2, [sp, #4]
+ 285 0072 019A     		ldr	r2, [sp, #4]
+ 286 0074 1A60     		str	r2, [r3]
+ 287 0076 8022     		movs	r2, #128
+ 288 0078 9204     		lsls	r2, r2, #18
+ 289              	.L32:
+ 290 007a 1C68     		ldr	r4, [r3]
+ 291 007c 2000     		movs	r0, r4
+ 292 007e 1040     		ands	r0, r2
+ 293 0080 1442     		tst	r4, r2
+ 294 0082 FAD1     		bne	.L32
+ 295              		@ sp needed
+ 296 0084 8022     		movs	r2, #128
+ 297 0086 D860     		str	r0, [r3, #12]
+ 298 0088 1861     		str	r0, [r3, #16]
+ARM GAS  /tmp/ccK9IQgN.s 			page 6
+
+
+ 299 008a 9961     		str	r1, [r3, #24]
+ 300 008c 196D     		ldr	r1, [r3, #80]
+ 301 008e 1204     		lsls	r2, r2, #16
+ 302 0090 0A43     		orrs	r2, r1
+ 303 0092 1A65     		str	r2, [r3, #80]
+ 304 0094 16BD     		pop	{r1, r2, r4, pc}
+ 305              	.L31:
+ 306              		.syntax divided
+ 307              	@ 122 "bsp_l0/mcu_drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_rcc.c" 1
+ 308 0096 C046     		nop
+ 309              	@ 0 "" 2
+ 310              		.thumb
+ 311              		.syntax unified
+ 312 0098 BBE7     		b	.L33
+ 313              	.L36:
+ 314 009a C046     		.align	2
+ 315              	.L35:
+ 316 009c 00100240 		.word	1073876992
+ 317 00a0 FF1FFFFF 		.word	-57345
+ 318 00a4 0CC0FF80 		.word	-2130722804
+ 319 00a8 FFE0FFFF 		.word	-7937
+ 320 00ac D4FFFEFE 		.word	-16842796
+ 321 00b0 FFFFFBFF 		.word	-262145
+ 322 00b4 FFFFCFFF 		.word	-3145729
+ 324              		.section	.text.LL_RCC_GetSystemClocksFreq,"ax",%progbits
+ 325              		.align	1
+ 326              		.global	LL_RCC_GetSystemClocksFreq
+ 327              		.syntax unified
+ 328              		.code	16
+ 329              		.thumb_func
+ 330              		.fpu softvfp
+ 332              	LL_RCC_GetSystemClocksFreq:
+ 333              		@ args = 0, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335 0000 10B5     		push	{r4, lr}
+ 336 0002 0400     		movs	r4, r0
+ 337              		@ sp needed
+ 338 0004 FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 339 0008 2060     		str	r0, [r4]
+ 340 000a FFF7FEFF 		bl	RCC_GetHCLKClockFreq
+ 341 000e 6060     		str	r0, [r4, #4]
+ 342 0010 FFF7FEFF 		bl	RCC_GetPCLK1ClockFreq
+ 343 0014 054B     		ldr	r3, .L38
+ 344 0016 A060     		str	r0, [r4, #8]
+ 345 0018 DB68     		ldr	r3, [r3, #12]
+ 346 001a 054A     		ldr	r2, .L38+4
+ 347 001c 9B04     		lsls	r3, r3, #18
+ 348 001e 5B0F     		lsrs	r3, r3, #29
+ 349 0020 D35C     		ldrb	r3, [r2, r3]
+ 350 0022 6268     		ldr	r2, [r4, #4]
+ 351 0024 DA40     		lsrs	r2, r2, r3
+ 352 0026 E260     		str	r2, [r4, #12]
+ 353 0028 10BD     		pop	{r4, pc}
+ 354              	.L39:
+ 355 002a C046     		.align	2
+ 356              	.L38:
+ 357 002c 00100240 		.word	1073876992
+ARM GAS  /tmp/ccK9IQgN.s 			page 7
+
+
+ 358 0030 00000000 		.word	APBPrescTable
+ 360              		.section	.text.LL_RCC_GetUSARTClockFreq,"ax",%progbits
+ 361              		.align	1
+ 362              		.global	LL_RCC_GetUSARTClockFreq
+ 363              		.syntax unified
+ 364              		.code	16
+ 365              		.thumb_func
+ 366              		.fpu softvfp
+ 368              	LL_RCC_GetUSARTClockFreq:
+ 369              		@ args = 0, pretend = 0, frame = 0
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371 0000 10B5     		push	{r4, lr}
+ 372 0002 0328     		cmp	r0, #3
+ 373 0004 27D1     		bne	.L41
+ 374 0006 254C     		ldr	r4, .L61
+ 375 0008 E36C     		ldr	r3, [r4, #76]
+ 376 000a 0340     		ands	r3, r0
+ 377 000c C020     		movs	r0, #192
+ 378 000e 8002     		lsls	r0, r0, #10
+ 379 0010 1843     		orrs	r0, r3
+ 380 0012 234B     		ldr	r3, .L61+4
+ 381 0014 9842     		cmp	r0, r3
+ 382 0016 36D0     		beq	.L49
+ 383 0018 224B     		ldr	r3, .L61+8
+ 384 001a 9842     		cmp	r0, r3
+ 385 001c 09D0     		beq	.L43
+ 386 001e 224B     		ldr	r3, .L61+12
+ 387 0020 9842     		cmp	r0, r3
+ 388 0022 0DD1     		bne	.L44
+ 389              	.L50:
+ 390 0024 FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 391              	.L40:
+ 392              		@ sp needed
+ 393 0028 10BD     		pop	{r4, pc}
+ 394              	.L48:
+ 395 002a 0020     		movs	r0, #0
+ 396 002c FCE7     		b	.L40
+ 397              	.L47:
+ 398 002e 1F48     		ldr	r0, .L61+16
+ 399 0030 FAE7     		b	.L40
+ 400              	.L43:
+ 401 0032 FFF7FEFF 		bl	LL_RCC_LSE_IsReady
+ 402 0036 0028     		cmp	r0, #0
+ 403 0038 F7D0     		beq	.L48
+ 404 003a 8020     		movs	r0, #128
+ 405 003c 0002     		lsls	r0, r0, #8
+ 406 003e F3E7     		b	.L40
+ 407              	.L44:
+ 408 0040 FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 409 0044 FFF7FEFF 		bl	RCC_GetHCLKClockFreq
+ 410 0048 E368     		ldr	r3, [r4, #12]
+ 411 004a 194A     		ldr	r2, .L61+20
+ 412 004c 9B04     		lsls	r3, r3, #18
+ 413 004e 5B0F     		lsrs	r3, r3, #29
+ 414 0050 D35C     		ldrb	r3, [r2, r3]
+ 415 0052 D840     		lsrs	r0, r0, r3
+ 416 0054 E8E7     		b	.L40
+ARM GAS  /tmp/ccK9IQgN.s 			page 8
+
+
+ 417              	.L41:
+ 418 0056 0C28     		cmp	r0, #12
+ 419 0058 E7D1     		bne	.L48
+ 420 005a 104B     		ldr	r3, .L61
+ 421 005c DB6C     		ldr	r3, [r3, #76]
+ 422 005e 0340     		ands	r3, r0
+ 423 0060 C020     		movs	r0, #192
+ 424 0062 0003     		lsls	r0, r0, #12
+ 425 0064 1843     		orrs	r0, r3
+ 426 0066 134B     		ldr	r3, .L61+24
+ 427 0068 9842     		cmp	r0, r3
+ 428 006a 0CD0     		beq	.L49
+ 429 006c 124B     		ldr	r3, .L61+28
+ 430 006e 9842     		cmp	r0, r3
+ 431 0070 DFD0     		beq	.L43
+ 432 0072 124B     		ldr	r3, .L61+32
+ 433 0074 9842     		cmp	r0, r3
+ 434 0076 D5D0     		beq	.L50
+ 435 0078 FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 436 007c FFF7FEFF 		bl	RCC_GetHCLKClockFreq
+ 437 0080 FFF7FEFF 		bl	RCC_GetPCLK1ClockFreq
+ 438 0084 D0E7     		b	.L40
+ 439              	.L49:
+ 440 0086 FFF7FEFF 		bl	LL_RCC_HSI_IsReady
+ 441 008a 0028     		cmp	r0, #0
+ 442 008c CDD0     		beq	.L48
+ 443 008e FFF7FEFF 		bl	LL_RCC_IsActiveFlag_HSIDIV
+ 444 0092 0028     		cmp	r0, #0
+ 445 0094 CBD0     		beq	.L47
+ 446 0096 0A48     		ldr	r0, .L61+36
+ 447 0098 C6E7     		b	.L40
+ 448              	.L62:
+ 449 009a C046     		.align	2
+ 450              	.L61:
+ 451 009c 00100240 		.word	1073876992
+ 452 00a0 02000300 		.word	196610
+ 453 00a4 03000300 		.word	196611
+ 454 00a8 01000300 		.word	196609
+ 455 00ac 0024F400 		.word	16000000
+ 456 00b0 00000000 		.word	APBPrescTable
+ 457 00b4 08000C00 		.word	786440
+ 458 00b8 0C000C00 		.word	786444
+ 459 00bc 04000C00 		.word	786436
+ 460 00c0 00093D00 		.word	4000000
+ 462              		.section	.text.LL_RCC_GetI2CClockFreq,"ax",%progbits
+ 463              		.align	1
+ 464              		.global	LL_RCC_GetI2CClockFreq
+ 465              		.syntax unified
+ 466              		.code	16
+ 467              		.thumb_func
+ 468              		.fpu softvfp
+ 470              	LL_RCC_GetI2CClockFreq:
+ 471              		@ args = 0, pretend = 0, frame = 0
+ 472              		@ frame_needed = 0, uses_anonymous_args = 0
+ 473 0000 C021     		movs	r1, #192
+ 474 0002 C022     		movs	r2, #192
+ 475 0004 10B5     		push	{r4, lr}
+ARM GAS  /tmp/ccK9IQgN.s 			page 9
+
+
+ 476 0006 8901     		lsls	r1, r1, #6
+ 477 0008 9202     		lsls	r2, r2, #10
+ 478 000a 8842     		cmp	r0, r1
+ 479 000c 24D1     		bne	.L64
+ 480 000e C021     		movs	r1, #192
+ 481 0010 184B     		ldr	r3, .L81
+ 482 0012 8900     		lsls	r1, r1, #2
+ 483 0014 DB6C     		ldr	r3, [r3, #76]
+ 484 0016 1B09     		lsrs	r3, r3, #4
+ 485 0018 0B40     		ands	r3, r1
+ 486 001a 1A43     		orrs	r2, r3
+ 487 001c 164B     		ldr	r3, .L81+4
+ 488 001e 9A42     		cmp	r2, r3
+ 489 0020 0CD0     		beq	.L65
+ 490 0022 164B     		ldr	r3, .L81+8
+ 491              	.L80:
+ 492 0024 9342     		cmp	r3, r2
+ 493 0026 10D1     		bne	.L67
+ 494 0028 FFF7FEFF 		bl	LL_RCC_HSI_IsReady
+ 495 002c 0028     		cmp	r0, #0
+ 496 002e 08D0     		beq	.L71
+ 497 0030 FFF7FEFF 		bl	LL_RCC_IsActiveFlag_HSIDIV
+ 498 0034 0028     		cmp	r0, #0
+ 499 0036 06D0     		beq	.L70
+ 500 0038 1148     		ldr	r0, .L81+12
+ 501 003a 01E0     		b	.L63
+ 502              	.L65:
+ 503 003c FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 504              	.L63:
+ 505              		@ sp needed
+ 506 0040 10BD     		pop	{r4, pc}
+ 507              	.L71:
+ 508 0042 0020     		movs	r0, #0
+ 509 0044 FCE7     		b	.L63
+ 510              	.L70:
+ 511 0046 0F48     		ldr	r0, .L81+16
+ 512 0048 FAE7     		b	.L63
+ 513              	.L67:
+ 514 004a FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 515 004e FFF7FEFF 		bl	RCC_GetHCLKClockFreq
+ 516 0052 FFF7FEFF 		bl	RCC_GetPCLK1ClockFreq
+ 517 0056 F3E7     		b	.L63
+ 518              	.L64:
+ 519 0058 9042     		cmp	r0, r2
+ 520 005a F2D1     		bne	.L71
+ 521 005c C022     		movs	r2, #192
+ 522 005e 054B     		ldr	r3, .L81
+ 523 0060 9203     		lsls	r2, r2, #14
+ 524 0062 DB6C     		ldr	r3, [r3, #76]
+ 525 0064 1B09     		lsrs	r3, r3, #4
+ 526 0066 0B40     		ands	r3, r1
+ 527 0068 1343     		orrs	r3, r2
+ 528 006a 074A     		ldr	r2, .L81+20
+ 529 006c 9342     		cmp	r3, r2
+ 530 006e E5D0     		beq	.L65
+ 531 0070 064A     		ldr	r2, .L81+24
+ 532 0072 D7E7     		b	.L80
+ARM GAS  /tmp/ccK9IQgN.s 			page 10
+
+
+ 533              	.L82:
+ 534              		.align	2
+ 535              	.L81:
+ 536 0074 00100240 		.word	1073876992
+ 537 0078 00010300 		.word	196864
+ 538 007c 00020300 		.word	197120
+ 539 0080 00093D00 		.word	4000000
+ 540 0084 0024F400 		.word	16000000
+ 541 0088 00103000 		.word	3149824
+ 542 008c 00203000 		.word	3153920
+ 544              		.section	.text.LL_RCC_GetLPUARTClockFreq,"ax",%progbits
+ 545              		.align	1
+ 546              		.global	LL_RCC_GetLPUARTClockFreq
+ 547              		.syntax unified
+ 548              		.code	16
+ 549              		.thumb_func
+ 550              		.fpu softvfp
+ 552              	LL_RCC_GetLPUARTClockFreq:
+ 553              		@ args = 0, pretend = 0, frame = 0
+ 554              		@ frame_needed = 0, uses_anonymous_args = 0
+ 555 0000 184B     		ldr	r3, .L92
+ 556 0002 10B5     		push	{r4, lr}
+ 557 0004 DB6C     		ldr	r3, [r3, #76]
+ 558 0006 1840     		ands	r0, r3
+ 559 0008 8023     		movs	r3, #128
+ 560 000a 1B01     		lsls	r3, r3, #4
+ 561 000c 9842     		cmp	r0, r3
+ 562 000e 0AD0     		beq	.L84
+ 563 0010 C023     		movs	r3, #192
+ 564 0012 1B01     		lsls	r3, r3, #4
+ 565 0014 9842     		cmp	r0, r3
+ 566 0016 16D0     		beq	.L85
+ 567 0018 8023     		movs	r3, #128
+ 568 001a DB00     		lsls	r3, r3, #3
+ 569 001c 9842     		cmp	r0, r3
+ 570 001e 19D1     		bne	.L86
+ 571 0020 FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 572              	.L83:
+ 573              		@ sp needed
+ 574 0024 10BD     		pop	{r4, pc}
+ 575              	.L84:
+ 576 0026 FFF7FEFF 		bl	LL_RCC_HSI_IsReady
+ 577 002a 0028     		cmp	r0, #0
+ 578 002c 01D1     		bne	.L88
+ 579              	.L89:
+ 580 002e 0020     		movs	r0, #0
+ 581 0030 F8E7     		b	.L83
+ 582              	.L88:
+ 583 0032 FFF7FEFF 		bl	LL_RCC_IsActiveFlag_HSIDIV
+ 584 0036 431E     		subs	r3, r0, #1
+ 585 0038 9841     		sbcs	r0, r0, r3
+ 586 003a 0B4B     		ldr	r3, .L92+4
+ 587 003c 4042     		rsbs	r0, r0, #0
+ 588 003e 1840     		ands	r0, r3
+ 589 0040 0A4B     		ldr	r3, .L92+8
+ 590 0042 C018     		adds	r0, r0, r3
+ 591 0044 EEE7     		b	.L83
+ARM GAS  /tmp/ccK9IQgN.s 			page 11
+
+
+ 592              	.L85:
+ 593 0046 FFF7FEFF 		bl	LL_RCC_LSE_IsReady
+ 594 004a 0028     		cmp	r0, #0
+ 595 004c EFD0     		beq	.L89
+ 596 004e 8020     		movs	r0, #128
+ 597 0050 0002     		lsls	r0, r0, #8
+ 598 0052 E7E7     		b	.L83
+ 599              	.L86:
+ 600 0054 FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 601 0058 FFF7FEFF 		bl	RCC_GetHCLKClockFreq
+ 602 005c FFF7FEFF 		bl	RCC_GetPCLK1ClockFreq
+ 603 0060 E0E7     		b	.L83
+ 604              	.L93:
+ 605 0062 C046     		.align	2
+ 606              	.L92:
+ 607 0064 00100240 		.word	1073876992
+ 608 0068 00E548FF 		.word	-12000000
+ 609 006c 0024F400 		.word	16000000
+ 611              		.section	.text.LL_RCC_GetLPTIMClockFreq,"ax",%progbits
+ 612              		.align	1
+ 613              		.global	LL_RCC_GetLPTIMClockFreq
+ 614              		.syntax unified
+ 615              		.code	16
+ 616              		.thumb_func
+ 617              		.fpu softvfp
+ 619              	LL_RCC_GetLPTIMClockFreq:
+ 620              		@ args = 0, pretend = 0, frame = 0
+ 621              		@ frame_needed = 0, uses_anonymous_args = 0
+ 622 0000 C023     		movs	r3, #192
+ 623 0002 10B5     		push	{r4, lr}
+ 624 0004 1B03     		lsls	r3, r3, #12
+ 625 0006 9842     		cmp	r0, r3
+ 626 0008 0FD1     		bne	.L95
+ 627 000a 8021     		movs	r1, #128
+ 628 000c 174A     		ldr	r2, .L106
+ 629 000e 0903     		lsls	r1, r1, #12
+ 630 0010 D36C     		ldr	r3, [r2, #76]
+ 631 0012 0340     		ands	r3, r0
+ 632 0014 8B42     		cmp	r3, r1
+ 633 0016 0AD0     		beq	.L96
+ 634 0018 8342     		cmp	r3, r0
+ 635 001a 16D0     		beq	.L97
+ 636 001c 8021     		movs	r1, #128
+ 637 001e C902     		lsls	r1, r1, #11
+ 638 0020 8B42     		cmp	r3, r1
+ 639 0022 19D1     		bne	.L98
+ 640 0024 136D     		ldr	r3, [r2, #80]
+ 641 0026 9B07     		lsls	r3, r3, #30
+ 642 0028 1DD4     		bmi	.L100
+ 643              	.L95:
+ 644 002a 0020     		movs	r0, #0
+ 645              	.L94:
+ 646              		@ sp needed
+ 647 002c 10BD     		pop	{r4, pc}
+ 648              	.L96:
+ 649 002e FFF7FEFF 		bl	LL_RCC_HSI_IsReady
+ 650 0032 0028     		cmp	r0, #0
+ARM GAS  /tmp/ccK9IQgN.s 			page 12
+
+
+ 651 0034 F9D0     		beq	.L95
+ 652 0036 FFF7FEFF 		bl	LL_RCC_IsActiveFlag_HSIDIV
+ 653 003a 431E     		subs	r3, r0, #1
+ 654 003c 9841     		sbcs	r0, r0, r3
+ 655 003e 0C4B     		ldr	r3, .L106+4
+ 656 0040 4042     		rsbs	r0, r0, #0
+ 657 0042 1840     		ands	r0, r3
+ 658 0044 0B4B     		ldr	r3, .L106+8
+ 659 0046 C018     		adds	r0, r0, r3
+ 660 0048 F0E7     		b	.L94
+ 661              	.L97:
+ 662 004a FFF7FEFF 		bl	LL_RCC_LSE_IsReady
+ 663 004e 0028     		cmp	r0, #0
+ 664 0050 EBD0     		beq	.L95
+ 665 0052 8020     		movs	r0, #128
+ 666 0054 0002     		lsls	r0, r0, #8
+ 667 0056 E9E7     		b	.L94
+ 668              	.L98:
+ 669 0058 FFF7FEFF 		bl	RCC_GetSystemClockFreq
+ 670 005c FFF7FEFF 		bl	RCC_GetHCLKClockFreq
+ 671 0060 FFF7FEFF 		bl	RCC_GetPCLK1ClockFreq
+ 672 0064 E2E7     		b	.L94
+ 673              	.L100:
+ 674 0066 0448     		ldr	r0, .L106+12
+ 675 0068 E0E7     		b	.L94
+ 676              	.L107:
+ 677 006a C046     		.align	2
+ 678              	.L106:
+ 679 006c 00100240 		.word	1073876992
+ 680 0070 00E548FF 		.word	-12000000
+ 681 0074 0024F400 		.word	16000000
+ 682 0078 88900000 		.word	37000
+ 684              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccK9IQgN.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32l0xx_ll_rcc.c
+     /tmp/ccK9IQgN.s:12     .text.LL_RCC_HSI_IsReady:0000000000000000 $t
+     /tmp/ccK9IQgN.s:19     .text.LL_RCC_HSI_IsReady:0000000000000000 LL_RCC_HSI_IsReady
+     /tmp/ccK9IQgN.s:32     .text.LL_RCC_HSI_IsReady:000000000000000c $d
+     /tmp/ccK9IQgN.s:35     .text.LL_RCC_LSE_IsReady:0000000000000000 $t
+     /tmp/ccK9IQgN.s:41     .text.LL_RCC_LSE_IsReady:0000000000000000 LL_RCC_LSE_IsReady
+     /tmp/ccK9IQgN.s:54     .text.LL_RCC_LSE_IsReady:000000000000000c $d
+     /tmp/ccK9IQgN.s:57     .text.LL_RCC_IsActiveFlag_HSIDIV:0000000000000000 $t
+     /tmp/ccK9IQgN.s:63     .text.LL_RCC_IsActiveFlag_HSIDIV:0000000000000000 LL_RCC_IsActiveFlag_HSIDIV
+     /tmp/ccK9IQgN.s:76     .text.LL_RCC_IsActiveFlag_HSIDIV:000000000000000c $d
+     /tmp/ccK9IQgN.s:79     .text.RCC_GetHCLKClockFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:85     .text.RCC_GetHCLKClockFreq:0000000000000000 RCC_GetHCLKClockFreq
+     /tmp/ccK9IQgN.s:101    .text.RCC_GetHCLKClockFreq:0000000000000010 $d
+     /tmp/ccK9IQgN.s:105    .text.RCC_GetPCLK1ClockFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:111    .text.RCC_GetPCLK1ClockFreq:0000000000000000 RCC_GetPCLK1ClockFreq
+     /tmp/ccK9IQgN.s:127    .text.RCC_GetPCLK1ClockFreq:0000000000000010 $d
+     /tmp/ccK9IQgN.s:132    .text.RCC_GetSystemClockFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:138    .text.RCC_GetSystemClockFreq:0000000000000000 RCC_GetSystemClockFreq
+     /tmp/ccK9IQgN.s:210    .text.RCC_GetSystemClockFreq:000000000000007c $d
+     /tmp/ccK9IQgN.s:217    .text.LL_RCC_DeInit:0000000000000000 $t
+     /tmp/ccK9IQgN.s:224    .text.LL_RCC_DeInit:0000000000000000 LL_RCC_DeInit
+     /tmp/ccK9IQgN.s:316    .text.LL_RCC_DeInit:000000000000009c $d
+     /tmp/ccK9IQgN.s:325    .text.LL_RCC_GetSystemClocksFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:332    .text.LL_RCC_GetSystemClocksFreq:0000000000000000 LL_RCC_GetSystemClocksFreq
+     /tmp/ccK9IQgN.s:357    .text.LL_RCC_GetSystemClocksFreq:000000000000002c $d
+     /tmp/ccK9IQgN.s:361    .text.LL_RCC_GetUSARTClockFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:368    .text.LL_RCC_GetUSARTClockFreq:0000000000000000 LL_RCC_GetUSARTClockFreq
+     /tmp/ccK9IQgN.s:451    .text.LL_RCC_GetUSARTClockFreq:000000000000009c $d
+     /tmp/ccK9IQgN.s:463    .text.LL_RCC_GetI2CClockFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:470    .text.LL_RCC_GetI2CClockFreq:0000000000000000 LL_RCC_GetI2CClockFreq
+     /tmp/ccK9IQgN.s:536    .text.LL_RCC_GetI2CClockFreq:0000000000000074 $d
+     /tmp/ccK9IQgN.s:545    .text.LL_RCC_GetLPUARTClockFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:552    .text.LL_RCC_GetLPUARTClockFreq:0000000000000000 LL_RCC_GetLPUARTClockFreq
+     /tmp/ccK9IQgN.s:607    .text.LL_RCC_GetLPUARTClockFreq:0000000000000064 $d
+     /tmp/ccK9IQgN.s:612    .text.LL_RCC_GetLPTIMClockFreq:0000000000000000 $t
+     /tmp/ccK9IQgN.s:619    .text.LL_RCC_GetLPTIMClockFreq:0000000000000000 LL_RCC_GetLPTIMClockFreq
+     /tmp/ccK9IQgN.s:679    .text.LL_RCC_GetLPTIMClockFreq:000000000000006c $d
+
+UNDEFINED SYMBOLS
+AHBPrescTable
+APBPrescTable
+__aeabi_uidiv
+PLLMulTable

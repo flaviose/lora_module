@@ -1,0 +1,875 @@
+ARM GAS  /tmp/ccPpLflk.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"smtc_hal_mcu.c"
+  10              		.text
+  11              		.global	__aeabi_idiv
+  12              		.section	.text.hal_mcu_wait_us,"ax",%progbits
+  13              		.align	1
+  14              		.p2align 2,,3
+  15              		.weak	hal_mcu_wait_us
+  16              		.arch armv6s-m
+  17              		.syntax unified
+  18              		.code	16
+  19              		.thumb_func
+  20              		.fpu softvfp
+  22              	hal_mcu_wait_us:
+  23              		@ args = 0, pretend = 0, frame = 16
+  24              		@ frame_needed = 1, uses_anonymous_args = 0
+  25 0000 80B5     		push	{r7, lr}
+  26 0002 84B0     		sub	sp, sp, #16
+  27 0004 00AF     		add	r7, sp, #0
+  28 0006 7860     		str	r0, [r7, #4]
+  29 0008 7A68     		ldr	r2, [r7, #4]
+  30 000a 1300     		movs	r3, r2
+  31 000c 5B01     		lsls	r3, r3, #5
+  32 000e 9B1A     		subs	r3, r3, r2
+  33 0010 9B00     		lsls	r3, r3, #2
+  34 0012 9B18     		adds	r3, r3, r2
+  35 0014 DB00     		lsls	r3, r3, #3
+  36 0016 0B49     		ldr	r1, .L4
+  37 0018 1800     		movs	r0, r3
+  38 001a FFF7FEFF 		bl	__aeabi_idiv
+  39 001e 0300     		movs	r3, r0
+  40 0020 BB60     		str	r3, [r7, #8]
+  41 0022 0023     		movs	r3, #0
+  42 0024 FB60     		str	r3, [r7, #12]
+  43 0026 03E0     		b	.L2
+  44              	.L3:
+  45              		.syntax divided
+  46              	@ 197 "bsp_l0/smtc_hal/smtc_hal_mcu.c" 1
+  47 0028 C046     		nop
+  48              	@ 0 "" 2
+  49              		.thumb
+  50              		.syntax unified
+  51 002a FB68     		ldr	r3, [r7, #12]
+  52 002c 0133     		adds	r3, r3, #1
+  53 002e FB60     		str	r3, [r7, #12]
+  54              	.L2:
+  55 0030 FA68     		ldr	r2, [r7, #12]
+  56 0032 BB68     		ldr	r3, [r7, #8]
+  57 0034 9A42     		cmp	r2, r3
+  58 0036 F7D3     		bcc	.L3
+ARM GAS  /tmp/ccPpLflk.s 			page 2
+
+
+  59 0038 C046     		nop
+  60 003a C046     		nop
+  61 003c BD46     		mov	sp, r7
+  62 003e 04B0     		add	sp, sp, #16
+  63              		@ sp needed
+  64 0040 80BD     		pop	{r7, pc}
+  65              	.L5:
+  66 0042 C046     		.align	2
+  67              	.L4:
+  68 0044 31020000 		.word	561
+  70              		.section	.text.wut_cb,"ax",%progbits
+  71              		.align	1
+  72              		.syntax unified
+  73              		.code	16
+  74              		.thumb_func
+  75              		.fpu softvfp
+  77              	wut_cb:
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80              		@ link register save eliminated.
+  81 0000 0122     		movs	r2, #1
+  82              		@ sp needed
+  83 0002 014B     		ldr	r3, .L7
+  84 0004 1A70     		strb	r2, [r3]
+  85 0006 7047     		bx	lr
+  86              	.L8:
+  87              		.align	2
+  88              	.L7:
+  89 0008 00000000 		.word	.LANCHOR0
+  91              		.section	.text.hal_mcu_critical_section_begin,"ax",%progbits
+  92              		.align	1
+  93              		.weak	hal_mcu_critical_section_begin
+  94              		.syntax unified
+  95              		.code	16
+  96              		.thumb_func
+  97              		.fpu softvfp
+  99              	hal_mcu_critical_section_begin:
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103              		.syntax divided
+ 104              	@ 453 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 105 0000 EFF31083 		MRS r3, primask
+ 106              	@ 0 "" 2
+ 107              		.thumb
+ 108              		.syntax unified
+ 109 0004 0360     		str	r3, [r0]
+ 110              		.syntax divided
+ 111              	@ 209 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 112 0006 72B6     		cpsid i
+ 113              	@ 0 "" 2
+ 114              		.thumb
+ 115              		.syntax unified
+ 116              		@ sp needed
+ 117 0008 7047     		bx	lr
+ 119              		.section	.text.hal_mcu_critical_section_end,"ax",%progbits
+ 120              		.align	1
+ARM GAS  /tmp/ccPpLflk.s 			page 3
+
+
+ 121              		.weak	hal_mcu_critical_section_end
+ 122              		.syntax unified
+ 123              		.code	16
+ 124              		.thumb_func
+ 125              		.fpu softvfp
+ 127              	hal_mcu_critical_section_end:
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              		@ link register save eliminated.
+ 131 0000 0368     		ldr	r3, [r0]
+ 132              		.syntax divided
+ 133              	@ 481 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 134 0002 83F31088 		MSR primask, r3
+ 135              	@ 0 "" 2
+ 136              		.thumb
+ 137              		.syntax unified
+ 138              		@ sp needed
+ 139 0006 7047     		bx	lr
+ 141              		.section	.text.hal_mcu_disable_irq,"ax",%progbits
+ 142              		.align	1
+ 143              		.weak	hal_mcu_disable_irq
+ 144              		.syntax unified
+ 145              		.code	16
+ 146              		.thumb_func
+ 147              		.fpu softvfp
+ 149              	hal_mcu_disable_irq:
+ 150              		@ args = 0, pretend = 0, frame = 0
+ 151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152              		@ link register save eliminated.
+ 153              		.syntax divided
+ 154              	@ 209 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 155 0000 72B6     		cpsid i
+ 156              	@ 0 "" 2
+ 157              		.thumb
+ 158              		.syntax unified
+ 159              		@ sp needed
+ 160 0002 7047     		bx	lr
+ 162              		.section	.text.hal_mcu_enable_irq,"ax",%progbits
+ 163              		.align	1
+ 164              		.weak	hal_mcu_enable_irq
+ 165              		.syntax unified
+ 166              		.code	16
+ 167              		.thumb_func
+ 168              		.fpu softvfp
+ 170              	hal_mcu_enable_irq:
+ 171              		@ args = 0, pretend = 0, frame = 0
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173              		@ link register save eliminated.
+ 174              		.syntax divided
+ 175              	@ 198 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 176 0000 62B6     		cpsie i
+ 177              	@ 0 "" 2
+ 178              		.thumb
+ 179              		.syntax unified
+ 180              		@ sp needed
+ 181 0002 7047     		bx	lr
+ 183              		.section	.text.hal_mcu_reset,"ax",%progbits
+ARM GAS  /tmp/ccPpLflk.s 			page 4
+
+
+ 184              		.align	1
+ 185              		.weak	hal_mcu_reset
+ 186              		.syntax unified
+ 187              		.code	16
+ 188              		.thumb_func
+ 189              		.fpu softvfp
+ 191              	hal_mcu_reset:
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+ 195              		.syntax divided
+ 196              	@ 209 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 197 0000 72B6     		cpsid i
+ 198              	@ 0 "" 2
+ 199              	@ 946 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 200 0002 BFF34F8F 		dsb 0xF
+ 201              	@ 0 "" 2
+ 202              		.thumb
+ 203              		.syntax unified
+ 204 0006 034B     		ldr	r3, .L15
+ 205 0008 034A     		ldr	r2, .L15+4
+ 206 000a DA60     		str	r2, [r3, #12]
+ 207              		.syntax divided
+ 208              	@ 946 "bsp_l0/mcu_drivers/cmsis/Core/Include/cmsis_gcc.h" 1
+ 209 000c BFF34F8F 		dsb 0xF
+ 210              	@ 0 "" 2
+ 211              		.thumb
+ 212              		.syntax unified
+ 213              	.L14:
+ 214              		.syntax divided
+ 215              	@ 995 "bsp_l0/mcu_drivers/cmsis/Core/Include/core_cm0plus.h" 1
+ 216 0010 C046     		nop
+ 217              	@ 0 "" 2
+ 218              		.thumb
+ 219              		.syntax unified
+ 220 0012 FDE7     		b	.L14
+ 221              	.L16:
+ 222              		.align	2
+ 223              	.L15:
+ 224 0014 00ED00E0 		.word	-536810240
+ 225 0018 0400FA05 		.word	100270084
+ 227              		.section	.text.hal_mcu_init,"ax",%progbits
+ 228              		.align	1
+ 229              		.weak	hal_mcu_init
+ 230              		.syntax unified
+ 231              		.code	16
+ 232              		.thumb_func
+ 233              		.fpu softvfp
+ 235              	hal_mcu_init:
+ 236              		@ args = 0, pretend = 0, frame = 8
+ 237              		@ frame_needed = 0, uses_anonymous_args = 0
+ 238 0000 714B     		ldr	r3, .L33
+ 239 0002 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 240 0004 DA69     		ldr	r2, [r3, #28]
+ 241 0006 7149     		ldr	r1, .L33+4
+ 242 0008 1202     		lsls	r2, r2, #8
+ 243 000a 120A     		lsrs	r2, r2, #8
+ARM GAS  /tmp/ccPpLflk.s 			page 5
+
+
+ 244 000c DA61     		str	r2, [r3, #28]
+ 245 000e 1A6A     		ldr	r2, [r3, #32]
+ 246 0010 0A40     		ands	r2, r1
+ 247 0012 1A62     		str	r2, [r3, #32]
+ 248 0014 1A6A     		ldr	r2, [r3, #32]
+ 249 0016 6E49     		ldr	r1, .L33+8
+ 250 0018 1202     		lsls	r2, r2, #8
+ 251 001a 120A     		lsrs	r2, r2, #8
+ 252 001c 1A62     		str	r2, [r3, #32]
+ 253 001e 0122     		movs	r2, #1
+ 254 0020 0B68     		ldr	r3, [r1]
+ 255 0022 9343     		bics	r3, r2
+ 256 0024 1343     		orrs	r3, r2
+ 257 0026 0B60     		str	r3, [r1]
+ 258 0028 0B68     		ldr	r3, [r1]
+ 259 002a 1342     		tst	r3, r2
+ 260 002c 12D1     		bne	.L18
+ 261 002e 694C     		ldr	r4, .L33+12
+ 262 0030 6949     		ldr	r1, .L33+16
+ 263 0032 2500     		movs	r5, r4
+ 264 0034 2000     		movs	r0, r4
+ 265 0036 1535     		adds	r5, r5, #21
+ 266 0038 FFF7FEFF 		bl	hal_trace_print_var
+ 267 003c 2800     		movs	r0, r5
+ 268 003e FFF7FEFF 		bl	hal_trace_print_var
+ 269 0042 2000     		movs	r0, r4
+ 270 0044 1630     		adds	r0, r0, #22
+ 271 0046 FFF7FEFF 		bl	hal_trace_print_var
+ 272 004a 2800     		movs	r0, r5
+ 273 004c FFF7FEFF 		bl	hal_trace_print_var
+ 274 0050 FFF7FEFF 		bl	hal_mcu_reset
+ 275              	.L18:
+ 276 0054 614A     		ldr	r2, .L33+20
+ 277 0056 6249     		ldr	r1, .L33+24
+ 278 0058 1368     		ldr	r3, [r2]
+ 279 005a 624C     		ldr	r4, .L33+28
+ 280 005c 1940     		ands	r1, r3
+ 281 005e 8023     		movs	r3, #128
+ 282 0060 1B01     		lsls	r3, r3, #4
+ 283 0062 0B43     		orrs	r3, r1
+ 284 0064 1360     		str	r3, [r2]
+ 285 0066 0123     		movs	r3, #1
+ 286 0068 2168     		ldr	r1, [r4]
+ 287 006a 0B43     		orrs	r3, r1
+ 288 006c 2360     		str	r3, [r4]
+ 289 006e 0423     		movs	r3, #4
+ 290              	.L19:
+ 291 0070 2168     		ldr	r1, [r4]
+ 292 0072 1942     		tst	r1, r3
+ 293 0074 FCD0     		beq	.L19
+ 294 0076 6368     		ldr	r3, [r4, #4]
+ 295 0078 5B49     		ldr	r1, .L33+32
+ 296 007a 1940     		ands	r1, r3
+ 297 007c 8023     		movs	r3, #128
+ 298 007e 5B01     		lsls	r3, r3, #5
+ 299 0080 0B43     		orrs	r3, r1
+ 300 0082 6360     		str	r3, [r4, #4]
+ARM GAS  /tmp/ccPpLflk.s 			page 6
+
+
+ 301 0084 0123     		movs	r3, #1
+ 302 0086 216D     		ldr	r1, [r4, #80]
+ 303 0088 0B43     		orrs	r3, r1
+ 304 008a 2365     		str	r3, [r4, #80]
+ 305 008c 0223     		movs	r3, #2
+ 306              	.L20:
+ 307 008e 216D     		ldr	r1, [r4, #80]
+ 308 0090 1942     		tst	r1, r3
+ 309 0092 FCD0     		beq	.L20
+ 310 0094 8020     		movs	r0, #128
+ 311 0096 A16B     		ldr	r1, [r4, #56]
+ 312 0098 4005     		lsls	r0, r0, #21
+ 313 009a 0143     		orrs	r1, r0
+ 314 009c A163     		str	r1, [r4, #56]
+ 315 009e A36B     		ldr	r3, [r4, #56]
+ 316 00a0 0340     		ands	r3, r0
+ 317 00a2 0193     		str	r3, [sp, #4]
+ 318 00a4 019B     		ldr	r3, [sp, #4]
+ 319 00a6 8023     		movs	r3, #128
+ 320 00a8 1168     		ldr	r1, [r2]
+ 321 00aa 5B00     		lsls	r3, r3, #1
+ 322 00ac 1943     		orrs	r1, r3
+ 323 00ae 1160     		str	r1, [r2]
+ 324 00b0 8022     		movs	r2, #128
+ 325 00b2 216D     		ldr	r1, [r4, #80]
+ 326 00b4 1203     		lsls	r2, r2, #12
+ 327 00b6 0A43     		orrs	r2, r1
+ 328 00b8 2265     		str	r2, [r4, #80]
+ 329 00ba 226D     		ldr	r2, [r4, #80]
+ 330 00bc 4B49     		ldr	r1, .L33+36
+ 331 00be 0A40     		ands	r2, r1
+ 332 00c0 2265     		str	r2, [r4, #80]
+ 333 00c2 226D     		ldr	r2, [r4, #80]
+ 334 00c4 1343     		orrs	r3, r2
+ 335 00c6 2365     		str	r3, [r4, #80]
+ 336 00c8 8023     		movs	r3, #128
+ 337 00ca 9B00     		lsls	r3, r3, #2
+ 338              	.L21:
+ 339 00cc 226D     		ldr	r2, [r4, #80]
+ 340 00ce 1A42     		tst	r2, r3
+ 341 00d0 FCD0     		beq	.L21
+ 342 00d2 236D     		ldr	r3, [r4, #80]
+ 343 00d4 464A     		ldr	r2, .L33+40
+ 344 00d6 1A40     		ands	r2, r3
+ 345 00d8 8023     		movs	r3, #128
+ 346 00da 5B02     		lsls	r3, r3, #9
+ 347 00dc 1343     		orrs	r3, r2
+ 348 00de 2365     		str	r3, [r4, #80]
+ 349 00e0 E368     		ldr	r3, [r4, #12]
+ 350 00e2 444A     		ldr	r2, .L33+44
+ 351 00e4 1A40     		ands	r2, r3
+ 352 00e6 8823     		movs	r3, #136
+ 353 00e8 1B04     		lsls	r3, r3, #16
+ 354 00ea 1343     		orrs	r3, r2
+ 355 00ec E360     		str	r3, [r4, #12]
+ 356 00ee 8023     		movs	r3, #128
+ 357 00f0 2268     		ldr	r2, [r4]
+ARM GAS  /tmp/ccPpLflk.s 			page 7
+
+
+ 358 00f2 5B04     		lsls	r3, r3, #17
+ 359 00f4 1343     		orrs	r3, r2
+ 360 00f6 2360     		str	r3, [r4]
+ 361 00f8 8023     		movs	r3, #128
+ 362 00fa 9B04     		lsls	r3, r3, #18
+ 363              	.L22:
+ 364 00fc 2268     		ldr	r2, [r4]
+ 365 00fe 1A42     		tst	r2, r3
+ 366 0100 FCD0     		beq	.L22
+ 367 0102 F022     		movs	r2, #240
+ 368 0104 E368     		ldr	r3, [r4, #12]
+ 369 0106 9343     		bics	r3, r2
+ 370 0108 E360     		str	r3, [r4, #12]
+ 371 010a E368     		ldr	r3, [r4, #12]
+ 372 010c 3A4A     		ldr	r2, .L33+48
+ 373 010e 1340     		ands	r3, r2
+ 374 0110 E360     		str	r3, [r4, #12]
+ 375 0112 E368     		ldr	r3, [r4, #12]
+ 376 0114 394A     		ldr	r2, .L33+52
+ 377 0116 1340     		ands	r3, r2
+ 378 0118 0322     		movs	r2, #3
+ 379 011a E360     		str	r3, [r4, #12]
+ 380 011c E368     		ldr	r3, [r4, #12]
+ 381 011e 1343     		orrs	r3, r2
+ 382 0120 E360     		str	r3, [r4, #12]
+ 383 0122 0932     		adds	r2, r2, #9
+ 384              	.L23:
+ 385 0124 E368     		ldr	r3, [r4, #12]
+ 386 0126 1340     		ands	r3, r2
+ 387 0128 0C2B     		cmp	r3, #12
+ 388 012a FBD1     		bne	.L23
+ 389              		@ sp needed
+ 390 012c 0425     		movs	r5, #4
+ 391 012e 3448     		ldr	r0, .L33+56
+ 392 0130 FFF7FEFF 		bl	LL_Init1msTick
+ 393 0134 334A     		ldr	r2, .L33+60
+ 394 0136 3248     		ldr	r0, .L33+56
+ 395 0138 1368     		ldr	r3, [r2]
+ 396 013a 2B43     		orrs	r3, r5
+ 397 013c 1360     		str	r3, [r2]
+ 398 013e FFF7FEFF 		bl	LL_SetSystemCoreClock
+ 399 0142 0322     		movs	r2, #3
+ 400 0144 E36C     		ldr	r3, [r4, #76]
+ 401 0146 9343     		bics	r3, r2
+ 402 0148 C022     		movs	r2, #192
+ 403 014a E364     		str	r3, [r4, #76]
+ 404 014c E36C     		ldr	r3, [r4, #76]
+ 405 014e 1203     		lsls	r2, r2, #12
+ 406 0150 1343     		orrs	r3, r2
+ 407 0152 E364     		str	r3, [r4, #76]
+ 408 0154 FFF7FEFF 		bl	hal_watchdog_init
+ 409 0158 FFF7FEFF 		bl	trace_uart_init
+ 410 015c FFF7FEFF 		bl	hal_i2c_init
+ 411 0160 2800     		movs	r0, r5
+ 412 0162 0121     		movs	r1, #1
+ 413 0164 FFF7FEFF 		bl	hal_gpio_init_out
+ 414 0168 0023     		movs	r3, #0
+ARM GAS  /tmp/ccPpLflk.s 			page 8
+
+
+ 415 016a 2420     		movs	r0, #36
+ 416 016c 1A00     		movs	r2, r3
+ 417 016e 1900     		movs	r1, r3
+ 418 0170 FFF7FEFF 		bl	hal_gpio_init_in
+ 419 0174 0122     		movs	r2, #1
+ 420 0176 0023     		movs	r3, #0
+ 421 0178 1000     		movs	r0, r2
+ 422 017a 0221     		movs	r1, #2
+ 423 017c FFF7FEFF 		bl	hal_gpio_init_in
+ 424 0180 0121     		movs	r1, #1
+ 425 0182 1B20     		movs	r0, #27
+ 426 0184 FFF7FEFF 		bl	hal_gpio_init_out
+ 427 0188 0021     		movs	r1, #0
+ 428 018a 1C20     		movs	r0, #28
+ 429 018c FFF7FEFF 		bl	hal_gpio_init_out
+ 430 0190 0020     		movs	r0, #0
+ 431 0192 FFF7FEFF 		bl	hal_lp_timer_init
+ 432 0196 1A23     		movs	r3, #26
+ 433 0198 1E22     		movs	r2, #30
+ 434 019a 1F21     		movs	r1, #31
+ 435 019c 0220     		movs	r0, #2
+ 436 019e FFF7FEFF 		bl	hal_spi_init
+ 437 01a2 1323     		movs	r3, #19
+ 438 01a4 1422     		movs	r2, #20
+ 439 01a6 1521     		movs	r1, #21
+ 440 01a8 0120     		movs	r0, #1
+ 441 01aa FFF7FEFF 		bl	hal_spi_init
+ 442 01ae FFF7FEFF 		bl	hal_rtc_init
+ 443 01b2 FFF7FEFF 		bl	hal_rng_init
+ 444 01b6 1449     		ldr	r1, .L33+64
+ 445 01b8 1448     		ldr	r0, .L33+68
+ 446 01ba FFF7FEFF 		bl	TimerInit
+ 447 01be 0022     		movs	r2, #0
+ 448 01c0 134B     		ldr	r3, .L33+72
+ 449 01c2 1A70     		strb	r2, [r3]
+ 450 01c4 37BD     		pop	{r0, r1, r2, r4, r5, pc}
+ 451              	.L34:
+ 452 01c6 C046     		.align	2
+ 453              	.L33:
+ 454 01c8 00ED00E0 		.word	-536810240
+ 455 01cc FFFF00FF 		.word	-16711681
+ 456 01d0 00200240 		.word	1073881088
+ 457 01d4 00000000 		.word	.LANCHOR2
+ 458 01d8 00000000 		.word	.LANCHOR1
+ 459 01dc 00700040 		.word	1073770496
+ 460 01e0 FFE7FFFF 		.word	-6145
+ 461 01e4 00100240 		.word	1073876992
+ 462 01e8 FFE0FFFF 		.word	-7937
+ 463 01ec FFFFF7FF 		.word	-524289
+ 464 01f0 FFFFFCFF 		.word	-196609
+ 465 01f4 FFFF02FF 		.word	-16580609
+ 466 01f8 FFF8FFFF 		.word	-1793
+ 467 01fc FFC7FFFF 		.word	-14337
+ 468 0200 0048E801 		.word	32000000
+ 469 0204 10E000E0 		.word	-536813552
+ 470 0208 00000000 		.word	wut_cb
+ 471 020c 00000000 		.word	.LANCHOR3
+ARM GAS  /tmp/ccPpLflk.s 			page 9
+
+
+ 472 0210 00000000 		.word	.LANCHOR0
+ 474              		.section	.text.hal_mcu_set_sleep_for_ms,"ax",%progbits
+ 475              		.align	1
+ 476              		.weak	hal_mcu_set_sleep_for_ms
+ 477              		.syntax unified
+ 478              		.code	16
+ 479              		.thumb_func
+ 480              		.fpu softvfp
+ 482              	hal_mcu_set_sleep_for_ms:
+ 483              		@ args = 0, pretend = 0, frame = 16
+ 484              		@ frame_needed = 0, uses_anonymous_args = 0
+ 485 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 486 0002 0090     		str	r0, [sp]
+ 487 0004 FFF7FEFF 		bl	smtc_modem_is_irq_flag_pending
+ 488 0008 0028     		cmp	r0, #0
+ 489 000a 00D0     		beq	.LCB412
+ 490 000c 93E0     		b	.L37	@long jump
+ 491              	.LCB412:
+ 492 000e FFF7FEFF 		bl	hal_watchdog_reload
+ 493 0012 009B     		ldr	r3, [sp]
+ 494 0014 002B     		cmp	r3, #0
+ 495 0016 00DC     		bgt	.LCB416
+ 496 0018 8FE0     		b	.L35	@long jump
+ 497              	.LCB416:
+ 498 001a 0124     		movs	r4, #1
+ 499              	.L45:
+ 500 001c 4A49     		ldr	r1, .L57
+ 501 001e 009B     		ldr	r3, [sp]
+ 502 0020 8B42     		cmp	r3, r1
+ 503 0022 00DC     		bgt	.LCB425
+ 504 0024 8AE0     		b	.L39	@long jump
+ 505              	.LCB425:
+ 506 0026 494A     		ldr	r2, .L57+4
+ 507 0028 4948     		ldr	r0, .L57+8
+ 508 002a 9446     		mov	ip, r2
+ 509 002c 6344     		add	r3, r3, ip
+ 510 002e 0093     		str	r3, [sp]
+ 511 0030 FFF7FEFF 		bl	TimerSetValue
+ 512 0034 0023     		movs	r3, #0
+ 513 0036 0193     		str	r3, [sp, #4]
+ 514              	.L40:
+ 515 0038 0023     		movs	r3, #0
+ 516 003a 464A     		ldr	r2, .L57+12
+ 517 003c 4448     		ldr	r0, .L57+8
+ 518 003e 1370     		strb	r3, [r2]
+ 519 0040 FFF7FEFF 		bl	TimerStart
+ 520 0044 FFF7FEFF 		bl	hal_mcu_disable_irq
+ 521 0048 0222     		movs	r2, #2
+ 522 004a 434E     		ldr	r6, .L57+16
+ 523 004c 1000     		movs	r0, r2
+ 524 004e 3368     		ldr	r3, [r6]
+ 525 0050 1500     		movs	r5, r2
+ 526 0052 9343     		bics	r3, r2
+ 527 0054 3360     		str	r3, [r6]
+ 528 0056 FFF7FEFF 		bl	hal_spi_de_init
+ 529 005a 2000     		movs	r0, r4
+ 530 005c FFF7FEFF 		bl	hal_spi_de_init
+ARM GAS  /tmp/ccPpLflk.s 			page 10
+
+
+ 531 0060 FFF7FEFF 		bl	hal_i2c_deinit
+ 532 0064 FFF7FEFF 		bl	trace_uart_deinit
+ 533 0068 0421     		movs	r1, #4
+ 534 006a 3C4A     		ldr	r2, .L57+20
+ 535 006c 1368     		ldr	r3, [r2]
+ 536 006e 0B43     		orrs	r3, r1
+ 537 0070 1360     		str	r3, [r2]
+ 538 0072 8023     		movs	r3, #128
+ 539 0074 1068     		ldr	r0, [r2]
+ 540 0076 9B00     		lsls	r3, r3, #2
+ 541 0078 0343     		orrs	r3, r0
+ 542 007a 1360     		str	r3, [r2]
+ 543 007c 1368     		ldr	r3, [r2]
+ 544 007e 3848     		ldr	r0, .L57+24
+ 545 0080 A343     		bics	r3, r4
+ 546 0082 2343     		orrs	r3, r4
+ 547 0084 1360     		str	r3, [r2]
+ 548 0086 1368     		ldr	r3, [r2]
+ 549 0088 AB43     		bics	r3, r5
+ 550 008a 1360     		str	r3, [r2]
+ 551 008c 0369     		ldr	r3, [r0, #16]
+ 552 008e 0B43     		orrs	r3, r1
+ 553 0090 0361     		str	r3, [r0, #16]
+ 554              		.syntax divided
+ 555              	@ 382 "bsp_l0/smtc_hal/smtc_hal_mcu.c" 1
+ 556 0092 30BF     		wfi
+ 557              	@ 0 "" 2
+ 558              		.thumb
+ 559              		.syntax unified
+ 560 0094 8025     		movs	r5, #128
+ 561 0096 334B     		ldr	r3, .L57+28
+ 562 0098 6D05     		lsls	r5, r5, #21
+ 563 009a 986B     		ldr	r0, [r3, #56]
+ 564 009c 2843     		orrs	r0, r5
+ 565 009e 9863     		str	r0, [r3, #56]
+ 566 00a0 986B     		ldr	r0, [r3, #56]
+ 567 00a2 2840     		ands	r0, r5
+ 568 00a4 0390     		str	r0, [sp, #12]
+ 569 00a6 0398     		ldr	r0, [sp, #12]
+ 570 00a8 2F4D     		ldr	r5, .L57+32
+ 571 00aa 1068     		ldr	r0, [r2]
+ 572 00ac 0540     		ands	r5, r0
+ 573 00ae 8020     		movs	r0, #128
+ 574 00b0 0001     		lsls	r0, r0, #4
+ 575 00b2 2843     		orrs	r0, r5
+ 576 00b4 1060     		str	r0, [r2]
+ 577 00b6 1A68     		ldr	r2, [r3]
+ 578 00b8 2243     		orrs	r2, r4
+ 579 00ba 1A60     		str	r2, [r3]
+ 580              	.L41:
+ 581 00bc 1A68     		ldr	r2, [r3]
+ 582 00be 0A42     		tst	r2, r1
+ 583 00c0 FCD0     		beq	.L41
+ 584 00c2 8022     		movs	r2, #128
+ 585 00c4 1968     		ldr	r1, [r3]
+ 586 00c6 5204     		lsls	r2, r2, #17
+ 587 00c8 0A43     		orrs	r2, r1
+ARM GAS  /tmp/ccPpLflk.s 			page 11
+
+
+ 588 00ca 1A60     		str	r2, [r3]
+ 589 00cc 8022     		movs	r2, #128
+ 590 00ce 9204     		lsls	r2, r2, #18
+ 591              	.L42:
+ 592 00d0 1968     		ldr	r1, [r3]
+ 593 00d2 1142     		tst	r1, r2
+ 594 00d4 FCD0     		beq	.L42
+ 595 00d6 0321     		movs	r1, #3
+ 596 00d8 DA68     		ldr	r2, [r3, #12]
+ 597 00da 0A43     		orrs	r2, r1
+ 598 00dc DA60     		str	r2, [r3, #12]
+ 599 00de 0931     		adds	r1, r1, #9
+ 600              	.L43:
+ 601 00e0 DA68     		ldr	r2, [r3, #12]
+ 602 00e2 0A40     		ands	r2, r1
+ 603 00e4 0C2A     		cmp	r2, #12
+ 604 00e6 FBD1     		bne	.L43
+ 605 00e8 FFF7FEFF 		bl	trace_uart_init
+ 606 00ec FFF7FEFF 		bl	hal_i2c_init
+ 607 00f0 1A23     		movs	r3, #26
+ 608 00f2 1E22     		movs	r2, #30
+ 609 00f4 1F21     		movs	r1, #31
+ 610 00f6 0220     		movs	r0, #2
+ 611 00f8 FFF7FEFF 		bl	hal_spi_init
+ 612 00fc 1521     		movs	r1, #21
+ 613 00fe 2000     		movs	r0, r4
+ 614 0100 1323     		movs	r3, #19
+ 615 0102 1422     		movs	r2, #20
+ 616 0104 FFF7FEFF 		bl	hal_spi_init
+ 617 0108 0222     		movs	r2, #2
+ 618 010a 3368     		ldr	r3, [r6]
+ 619 010c 1343     		orrs	r3, r2
+ 620 010e 3360     		str	r3, [r6]
+ 621 0110 FFF7FEFF 		bl	hal_mcu_enable_irq
+ 622 0114 FFF7FEFF 		bl	hal_watchdog_reload
+ 623 0118 0E4B     		ldr	r3, .L57+12
+ 624 011a 1B78     		ldrb	r3, [r3]
+ 625 011c 002B     		cmp	r3, #0
+ 626 011e 03D0     		beq	.L44
+ 627 0120 019B     		ldr	r3, [sp, #4]
+ 628 0122 002B     		cmp	r3, #0
+ 629 0124 00D1     		bne	.LCB554
+ 630 0126 79E7     		b	.L45	@long jump
+ 631              	.LCB554:
+ 632              	.L44:
+ 633 0128 0A4B     		ldr	r3, .L57+12
+ 634 012a 1B78     		ldrb	r3, [r3]
+ 635 012c 002B     		cmp	r3, #0
+ 636 012e 02D1     		bne	.L37
+ 637 0130 0748     		ldr	r0, .L57+8
+ 638 0132 FFF7FEFF 		bl	TimerStop
+ 639              	.L37:
+ 640 0136 FFF7FEFF 		bl	hal_watchdog_reload
+ 641              	.L35:
+ 642              		@ sp needed
+ 643 013a 7FBD     		pop	{r0, r1, r2, r3, r4, r5, r6, pc}
+ 644              	.L39:
+ARM GAS  /tmp/ccPpLflk.s 			page 12
+
+
+ 645 013c 0099     		ldr	r1, [sp]
+ 646 013e 0448     		ldr	r0, .L57+8
+ 647 0140 FFF7FEFF 		bl	TimerSetValue
+ 648 0144 0194     		str	r4, [sp, #4]
+ 649 0146 77E7     		b	.L40
+ 650              	.L58:
+ 651              		.align	2
+ 652              	.L57:
+ 653 0148 204E0000 		.word	20000
+ 654 014c E0B1FFFF 		.word	-20000
+ 655 0150 00000000 		.word	.LANCHOR3
+ 656 0154 00000000 		.word	.LANCHOR0
+ 657 0158 10E000E0 		.word	-536813552
+ 658 015c 00700040 		.word	1073770496
+ 659 0160 00ED00E0 		.word	-536810240
+ 660 0164 00100240 		.word	1073876992
+ 661 0168 FFE7FFFF 		.word	-6145
+ 663              		.section	.text.SysTick_Handler,"ax",%progbits
+ 664              		.align	1
+ 665              		.global	SysTick_Handler
+ 666              		.syntax unified
+ 667              		.code	16
+ 668              		.thumb_func
+ 669              		.fpu softvfp
+ 671              	SysTick_Handler:
+ 672              		@ args = 0, pretend = 0, frame = 0
+ 673              		@ frame_needed = 0, uses_anonymous_args = 0
+ 674              		@ link register save eliminated.
+ 675              		@ sp needed
+ 676 0000 7047     		bx	lr
+ 678              		.section	.text.HardFault_Handler,"ax",%progbits
+ 679              		.align	1
+ 680              		.global	HardFault_Handler
+ 681              		.syntax unified
+ 682              		.code	16
+ 683              		.thumb_func
+ 684              		.fpu softvfp
+ 686              	HardFault_Handler:
+ 687              		@ Volatile: function does not return.
+ 688              		@ args = 0, pretend = 0, frame = 0
+ 689              		@ frame_needed = 0, uses_anonymous_args = 0
+ 690 0000 70B5     		push	{r4, r5, r6, lr}
+ 691 0002 0C4C     		ldr	r4, .L62
+ 692 0004 2000     		movs	r0, r4
+ 693 0006 2500     		movs	r5, r4
+ 694 0008 2130     		adds	r0, r0, #33
+ 695 000a 1535     		adds	r5, r5, #21
+ 696 000c FFF7FEFF 		bl	hal_trace_print_var
+ 697 0010 2800     		movs	r0, r5
+ 698 0012 FFF7FEFF 		bl	hal_trace_print_var
+ 699 0016 2000     		movs	r0, r4
+ 700 0018 3030     		adds	r0, r0, #48
+ 701 001a FFF7FEFF 		bl	hal_trace_print_var
+ 702 001e 2800     		movs	r0, r5
+ 703 0020 FFF7FEFF 		bl	hal_trace_print_var
+ 704 0024 2000     		movs	r0, r4
+ 705 0026 4A30     		adds	r0, r0, #74
+ARM GAS  /tmp/ccPpLflk.s 			page 13
+
+
+ 706 0028 FFF7FEFF 		bl	hal_trace_print_var
+ 707 002c 2800     		movs	r0, r5
+ 708 002e FFF7FEFF 		bl	hal_trace_print_var
+ 709              	.L61:
+ 710 0032 FEE7     		b	.L61
+ 711              	.L63:
+ 712              		.align	2
+ 713              	.L62:
+ 714 0034 00000000 		.word	.LANCHOR2
+ 716              		.section	.text.hal_mcu_delay_ms,"ax",%progbits
+ 717              		.align	1
+ 718              		.global	hal_mcu_delay_ms
+ 719              		.syntax unified
+ 720              		.code	16
+ 721              		.thumb_func
+ 722              		.fpu softvfp
+ 724              	hal_mcu_delay_ms:
+ 725              		@ args = 0, pretend = 0, frame = 0
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
+ 727 0000 70B5     		push	{r4, r5, r6, lr}
+ 728 0002 0400     		movs	r4, r0
+ 729 0004 FFF7FEFF 		bl	hal_rtc_get_time_ms
+ 730 0008 0500     		movs	r5, r0
+ 731              	.L65:
+ 732 000a FFF7FEFF 		bl	hal_rtc_get_time_ms
+ 733 000e 401B     		subs	r0, r0, r5
+ 734 0010 A042     		cmp	r0, r4
+ 735 0012 FAD3     		bcc	.L65
+ 736              		@ sp needed
+ 737 0014 70BD     		pop	{r4, r5, r6, pc}
+ 739              		.section	.rodata
+ 740              		.set	.LANCHOR2,. + 0
+ 741              	.LC2:
+ 742 0000 4552524F 		.ascii	"ERROR: mcu_panic:%s\012\000"
+ 742      523A206D 
+ 742      63755F70 
+ 742      616E6963 
+ 742      3A25730A 
+ 743              	.LC4:
+ 744 0015 00       		.ascii	"\000"
+ 745              	.LC5:
+ 746 0016 4552524F 		.ascii	"ERROR: -> \000"
+ 746      523A202D 
+ 746      3E2000
+ 747              	.LC13:
+ 748 0021 4552524F 		.ascii	"ERROR: \033[0;31m\000"
+ 748      523A201B 
+ 748      5B303B33 
+ 748      316D00
+ 749              	.LC15:
+ 750 0030 4552524F 		.ascii	"ERROR: HARDFAULT_Handler\012\000"
+ 750      523A2048 
+ 750      41524446 
+ 750      41554C54 
+ 750      5F48616E 
+ 751              	.LC16:
+ 752 004a 4552524F 		.ascii	"ERROR: \033[0m\000"
+ARM GAS  /tmp/ccPpLflk.s 			page 14
+
+
+ 752      523A201B 
+ 752      5B306D00 
+ 753              		.section	.bss.wut,"aw",%nobits
+ 754              		.align	2
+ 755              		.set	.LANCHOR3,. + 0
+ 758              	wut:
+ 759 0000 00000000 		.space	24
+ 759      00000000 
+ 759      00000000 
+ 759      00000000 
+ 759      00000000 
+ 760              		.section	.bss.wut_flag,"aw",%nobits
+ 761              		.set	.LANCHOR0,. + 0
+ 764              	wut_flag:
+ 765 0000 00       		.space	1
+ 766              		.section	.rodata.__func__.0,"a"
+ 767              		.set	.LANCHOR1,. + 0
+ 770              	__func__.0:
+ 771 0000 73797374 		.ascii	"system_clock_config\000"
+ 771      656D5F63 
+ 771      6C6F636B 
+ 771      5F636F6E 
+ 771      66696700 
+ 772              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccPpLflk.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 smtc_hal_mcu.c
+     /tmp/ccPpLflk.s:13     .text.hal_mcu_wait_us:0000000000000000 $t
+     /tmp/ccPpLflk.s:22     .text.hal_mcu_wait_us:0000000000000000 hal_mcu_wait_us
+     /tmp/ccPpLflk.s:68     .text.hal_mcu_wait_us:0000000000000044 $d
+     /tmp/ccPpLflk.s:71     .text.wut_cb:0000000000000000 $t
+     /tmp/ccPpLflk.s:77     .text.wut_cb:0000000000000000 wut_cb
+     /tmp/ccPpLflk.s:89     .text.wut_cb:0000000000000008 $d
+     /tmp/ccPpLflk.s:92     .text.hal_mcu_critical_section_begin:0000000000000000 $t
+     /tmp/ccPpLflk.s:99     .text.hal_mcu_critical_section_begin:0000000000000000 hal_mcu_critical_section_begin
+     /tmp/ccPpLflk.s:120    .text.hal_mcu_critical_section_end:0000000000000000 $t
+     /tmp/ccPpLflk.s:127    .text.hal_mcu_critical_section_end:0000000000000000 hal_mcu_critical_section_end
+     /tmp/ccPpLflk.s:142    .text.hal_mcu_disable_irq:0000000000000000 $t
+     /tmp/ccPpLflk.s:149    .text.hal_mcu_disable_irq:0000000000000000 hal_mcu_disable_irq
+     /tmp/ccPpLflk.s:163    .text.hal_mcu_enable_irq:0000000000000000 $t
+     /tmp/ccPpLflk.s:170    .text.hal_mcu_enable_irq:0000000000000000 hal_mcu_enable_irq
+     /tmp/ccPpLflk.s:184    .text.hal_mcu_reset:0000000000000000 $t
+     /tmp/ccPpLflk.s:191    .text.hal_mcu_reset:0000000000000000 hal_mcu_reset
+     /tmp/ccPpLflk.s:224    .text.hal_mcu_reset:0000000000000014 $d
+     /tmp/ccPpLflk.s:228    .text.hal_mcu_init:0000000000000000 $t
+     /tmp/ccPpLflk.s:235    .text.hal_mcu_init:0000000000000000 hal_mcu_init
+     /tmp/ccPpLflk.s:454    .text.hal_mcu_init:00000000000001c8 $d
+     /tmp/ccPpLflk.s:475    .text.hal_mcu_set_sleep_for_ms:0000000000000000 $t
+     /tmp/ccPpLflk.s:482    .text.hal_mcu_set_sleep_for_ms:0000000000000000 hal_mcu_set_sleep_for_ms
+     /tmp/ccPpLflk.s:653    .text.hal_mcu_set_sleep_for_ms:0000000000000148 $d
+     /tmp/ccPpLflk.s:664    .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccPpLflk.s:671    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccPpLflk.s:679    .text.HardFault_Handler:0000000000000000 $t
+     /tmp/ccPpLflk.s:686    .text.HardFault_Handler:0000000000000000 HardFault_Handler
+     /tmp/ccPpLflk.s:714    .text.HardFault_Handler:0000000000000034 $d
+     /tmp/ccPpLflk.s:717    .text.hal_mcu_delay_ms:0000000000000000 $t
+     /tmp/ccPpLflk.s:724    .text.hal_mcu_delay_ms:0000000000000000 hal_mcu_delay_ms
+     /tmp/ccPpLflk.s:754    .bss.wut:0000000000000000 $d
+     /tmp/ccPpLflk.s:758    .bss.wut:0000000000000000 wut
+     /tmp/ccPpLflk.s:764    .bss.wut_flag:0000000000000000 wut_flag
+     /tmp/ccPpLflk.s:765    .bss.wut_flag:0000000000000000 $d
+     /tmp/ccPpLflk.s:770    .rodata.__func__.0:0000000000000000 __func__.0
+
+UNDEFINED SYMBOLS
+__aeabi_idiv
+hal_trace_print_var
+LL_Init1msTick
+LL_SetSystemCoreClock
+hal_watchdog_init
+trace_uart_init
+hal_i2c_init
+hal_gpio_init_out
+hal_gpio_init_in
+hal_lp_timer_init
+hal_spi_init
+hal_rtc_init
+hal_rng_init
+TimerInit
+smtc_modem_is_irq_flag_pending
+hal_watchdog_reload
+TimerSetValue
+TimerStart
+ARM GAS  /tmp/ccPpLflk.s 			page 16
+
+
+hal_spi_de_init
+hal_i2c_deinit
+trace_uart_deinit
+TimerStop
+hal_rtc_get_time_ms

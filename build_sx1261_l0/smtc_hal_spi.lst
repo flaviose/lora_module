@@ -1,0 +1,541 @@
+ARM GAS  /tmp/ccXbkw1y.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"smtc_hal_spi.c"
+  10              		.text
+  11              		.section	.text.hal_spi_init,"ax",%progbits
+  12              		.align	1
+  13              		.weak	hal_spi_init
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	hal_spi_init:
+  21              		@ args = 0, pretend = 0, frame = 16
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  24 0002 85B0     		sub	sp, sp, #20
+  25 0004 0128     		cmp	r0, #1
+  26 0006 00D0     		beq	.LCB7
+  27 0008 84E0     		b	.L2	@long jump
+  28              	.LCB7:
+  29 000a 0225     		movs	r5, #2
+  30 000c C024     		movs	r4, #192
+  31 000e 8026     		movs	r6, #128
+  32 0010 7F4A     		ldr	r2, .L5
+  33 0012 804F     		ldr	r7, .L5+4
+  34 0014 D36A     		ldr	r3, [r2, #44]
+  35 0016 2B43     		orrs	r3, r5
+  36 0018 D362     		str	r3, [r2, #44]
+  37 001a D36A     		ldr	r3, [r2, #44]
+  38 001c 2B40     		ands	r3, r5
+  39 001e 0193     		str	r3, [sp, #4]
+  40 0020 019B     		ldr	r3, [sp, #4]
+  41 0022 7D4B     		ldr	r3, .L5+8
+  42 0024 1968     		ldr	r1, [r3]
+  43 0026 A143     		bics	r1, r4
+  44 0028 3143     		orrs	r1, r6
+  45 002a 1960     		str	r1, [r3]
+  46 002c 196A     		ldr	r1, [r3, #32]
+  47 002e 3940     		ands	r1, r7
+  48 0030 1962     		str	r1, [r3, #32]
+  49 0032 9968     		ldr	r1, [r3, #8]
+  50 0034 794F     		ldr	r7, .L5+12
+  51 0036 A143     		bics	r1, r4
+  52 0038 2143     		orrs	r1, r4
+  53 003a 9960     		str	r1, [r3, #8]
+  54 003c D968     		ldr	r1, [r3, #12]
+  55 003e A143     		bics	r1, r4
+  56 0040 D960     		str	r1, [r3, #12]
+  57 0042 1968     		ldr	r1, [r3]
+  58 0044 4134     		adds	r4, r4, #65
+ARM GAS  /tmp/ccXbkw1y.s 			page 2
+
+
+  59 0046 3940     		ands	r1, r7
+  60 0048 FF34     		adds	r4, r4, #255
+  61 004a 2143     		orrs	r1, r4
+  62 004c 1960     		str	r1, [r3]
+  63 004e 196A     		ldr	r1, [r3, #32]
+  64 0050 734C     		ldr	r4, .L5+16
+  65 0052 2140     		ands	r1, r4
+  66 0054 1962     		str	r1, [r3, #32]
+  67 0056 9968     		ldr	r1, [r3, #8]
+  68 0058 3940     		ands	r1, r7
+  69 005a 8C46     		mov	ip, r1
+  70 005c C021     		movs	r1, #192
+  71 005e 6446     		mov	r4, ip
+  72 0060 8900     		lsls	r1, r1, #2
+  73 0062 2143     		orrs	r1, r4
+  74 0064 9960     		str	r1, [r3, #8]
+  75 0066 D968     		ldr	r1, [r3, #12]
+  76 0068 0F40     		ands	r7, r1
+  77 006a DF60     		str	r7, [r3, #12]
+  78 006c 1968     		ldr	r1, [r3]
+  79 006e 6D4F     		ldr	r7, .L5+20
+  80 0070 3940     		ands	r1, r7
+  81 0072 8C46     		mov	ip, r1
+  82 0074 8021     		movs	r1, #128
+  83 0076 6446     		mov	r4, ip
+  84 0078 0901     		lsls	r1, r1, #4
+  85 007a 2143     		orrs	r1, r4
+  86 007c 1960     		str	r1, [r3]
+  87 007e 196A     		ldr	r1, [r3, #32]
+  88 0080 694C     		ldr	r4, .L5+24
+  89 0082 2140     		ands	r1, r4
+  90 0084 1962     		str	r1, [r3, #32]
+  91 0086 9968     		ldr	r1, [r3, #8]
+  92 0088 3940     		ands	r1, r7
+  93 008a 8C46     		mov	ip, r1
+  94 008c C021     		movs	r1, #192
+  95 008e 6446     		mov	r4, ip
+  96 0090 0901     		lsls	r1, r1, #4
+  97 0092 2143     		orrs	r1, r4
+  98 0094 9960     		str	r1, [r3, #8]
+  99 0096 D968     		ldr	r1, [r3, #12]
+ 100 0098 8024     		movs	r4, #128
+ 101 009a 3940     		ands	r1, r7
+ 102 009c 8027     		movs	r7, #128
+ 103 009e D960     		str	r1, [r3, #12]
+ 104 00a0 516B     		ldr	r1, [r2, #52]
+ 105 00a2 7F01     		lsls	r7, r7, #5
+ 106 00a4 3943     		orrs	r1, r7
+ 107 00a6 5163     		str	r1, [r2, #52]
+ 108 00a8 8221     		movs	r1, #130
+ 109 00aa 536B     		ldr	r3, [r2, #52]
+ 110 00ac 4900     		lsls	r1, r1, #1
+ 111 00ae 3B40     		ands	r3, r7
+ 112 00b0 0093     		str	r3, [sp]
+ 113 00b2 009B     		ldr	r3, [sp]
+ 114 00b4 5D4B     		ldr	r3, .L5+28
+ 115 00b6 A400     		lsls	r4, r4, #2
+ARM GAS  /tmp/ccXbkw1y.s 			page 3
+
+
+ 116 00b8 1A68     		ldr	r2, [r3]
+ 117 00ba 0A43     		orrs	r2, r1
+ 118 00bc 1A60     		str	r2, [r3]
+ 119 00be 1A68     		ldr	r2, [r3]
+ 120 00c0 5B49     		ldr	r1, .L5+32
+ 121 00c2 0A40     		ands	r2, r1
+ 122 00c4 1A60     		str	r2, [r3]
+ 123 00c6 1A68     		ldr	r2, [r3]
+ 124 00c8 5A49     		ldr	r1, .L5+36
+ 125 00ca 0A40     		ands	r2, r1
+ 126 00cc 1A60     		str	r2, [r3]
+ 127 00ce 1A68     		ldr	r2, [r3]
+ 128 00d0 5949     		ldr	r1, .L5+40
+ 129 00d2 AA43     		bics	r2, r5
+ 130 00d4 1A60     		str	r2, [r3]
+ 131 00d6 1A68     		ldr	r2, [r3]
+ 132 00d8 8243     		bics	r2, r0
+ 133 00da 1A60     		str	r2, [r3]
+ 134 00dc 1A68     		ldr	r2, [r3]
+ 135 00de 0A40     		ands	r2, r1
+ 136 00e0 0421     		movs	r1, #4
+ 137 00e2 1443     		orrs	r4, r2
+ 138 00e4 1C60     		str	r4, [r3]
+ 139 00e6 5A68     		ldr	r2, [r3, #4]
+ 140 00e8 8A43     		bics	r2, r1
+ 141 00ea 5A60     		str	r2, [r3, #4]
+ 142 00ec 1A68     		ldr	r2, [r3]
+ 143 00ee 3431     		adds	r1, r1, #52
+ 144 00f0 8A43     		bics	r2, r1
+ 145 00f2 1100     		movs	r1, r2
+ 146 00f4 1022     		movs	r2, #16
+ 147 00f6 0A43     		orrs	r2, r1
+ 148 00f8 1A60     		str	r2, [r3]
+ 149 00fa 1A68     		ldr	r2, [r3]
+ 150 00fc B243     		bics	r2, r6
+ 151              	.L4:
+ 152 00fe 1A60     		str	r2, [r3]
+ 153 0100 1A68     		ldr	r2, [r3]
+ 154 0102 4E49     		ldr	r1, .L5+44
+ 155 0104 0A40     		ands	r2, r1
+ 156 0106 1A60     		str	r2, [r3]
+ 157 0108 4022     		movs	r2, #64
+ 158 010a 1968     		ldr	r1, [r3]
+ 159 010c 0A43     		orrs	r2, r1
+ 160 010e 1A60     		str	r2, [r3]
+ 161              	.L1:
+ 162 0110 05B0     		add	sp, sp, #20
+ 163              		@ sp needed
+ 164 0112 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 165              	.L2:
+ 166 0114 0228     		cmp	r0, #2
+ 167 0116 FBD1     		bne	.L1
+ 168 0118 8021     		movs	r1, #128
+ 169 011a 3D4A     		ldr	r2, .L5
+ 170 011c 484C     		ldr	r4, .L5+48
+ 171 011e D36A     		ldr	r3, [r2, #44]
+ 172 0120 8903     		lsls	r1, r1, #14
+ARM GAS  /tmp/ccXbkw1y.s 			page 4
+
+
+ 173 0122 0343     		orrs	r3, r0
+ 174 0124 D362     		str	r3, [r2, #44]
+ 175 0126 D36A     		ldr	r3, [r2, #44]
+ 176 0128 0340     		ands	r3, r0
+ 177 012a 0393     		str	r3, [sp, #12]
+ 178 012c 039B     		ldr	r3, [sp, #12]
+ 179 012e 3A4B     		ldr	r3, .L5+8
+ 180 0130 1D68     		ldr	r5, [r3]
+ 181 0132 2540     		ands	r5, r4
+ 182 0134 2943     		orrs	r1, r5
+ 183 0136 1960     		str	r1, [r3]
+ 184 0138 596A     		ldr	r1, [r3, #36]
+ 185 013a 424D     		ldr	r5, .L5+52
+ 186 013c 0D40     		ands	r5, r1
+ 187 013e A021     		movs	r1, #160
+ 188 0140 C900     		lsls	r1, r1, #3
+ 189 0142 2943     		orrs	r1, r5
+ 190 0144 5962     		str	r1, [r3, #36]
+ 191 0146 C021     		movs	r1, #192
+ 192 0148 9D68     		ldr	r5, [r3, #8]
+ 193 014a 8903     		lsls	r1, r1, #14
+ 194 014c 2540     		ands	r5, r4
+ 195 014e 2943     		orrs	r1, r5
+ 196 0150 9960     		str	r1, [r3, #8]
+ 197 0152 D968     		ldr	r1, [r3, #12]
+ 198 0154 2140     		ands	r1, r4
+ 199 0156 D960     		str	r1, [r3, #12]
+ 200 0158 8021     		movs	r1, #128
+ 201 015a 1D68     		ldr	r5, [r3]
+ 202 015c 3A4C     		ldr	r4, .L5+56
+ 203 015e 8905     		lsls	r1, r1, #22
+ 204 0160 2540     		ands	r5, r4
+ 205 0162 2943     		orrs	r1, r5
+ 206 0164 1960     		str	r1, [r3]
+ 207 0166 596A     		ldr	r1, [r3, #36]
+ 208 0168 384D     		ldr	r5, .L5+60
+ 209 016a 2940     		ands	r1, r5
+ 210 016c 5962     		str	r1, [r3, #36]
+ 211 016e C021     		movs	r1, #192
+ 212 0170 9D68     		ldr	r5, [r3, #8]
+ 213 0172 8905     		lsls	r1, r1, #22
+ 214 0174 2540     		ands	r5, r4
+ 215 0176 2943     		orrs	r1, r5
+ 216 0178 9960     		str	r1, [r3, #8]
+ 217 017a D968     		ldr	r1, [r3, #12]
+ 218 017c 2140     		ands	r1, r4
+ 219 017e 8024     		movs	r4, #128
+ 220 0180 D960     		str	r1, [r3, #12]
+ 221 0182 1968     		ldr	r1, [r3]
+ 222 0184 2406     		lsls	r4, r4, #24
+ 223 0186 8900     		lsls	r1, r1, #2
+ 224 0188 8908     		lsrs	r1, r1, #2
+ 225 018a 2143     		orrs	r1, r4
+ 226 018c C024     		movs	r4, #192
+ 227 018e 1960     		str	r1, [r3]
+ 228 0190 596A     		ldr	r1, [r3, #36]
+ 229 0192 2406     		lsls	r4, r4, #24
+ARM GAS  /tmp/ccXbkw1y.s 			page 5
+
+
+ 230 0194 0901     		lsls	r1, r1, #4
+ 231 0196 0909     		lsrs	r1, r1, #4
+ 232 0198 5962     		str	r1, [r3, #36]
+ 233 019a 9968     		ldr	r1, [r3, #8]
+ 234 019c 2143     		orrs	r1, r4
+ 235 019e 8024     		movs	r4, #128
+ 236 01a0 9960     		str	r1, [r3, #8]
+ 237 01a2 D968     		ldr	r1, [r3, #12]
+ 238 01a4 E401     		lsls	r4, r4, #7
+ 239 01a6 8900     		lsls	r1, r1, #2
+ 240 01a8 8908     		lsrs	r1, r1, #2
+ 241 01aa D960     		str	r1, [r3, #12]
+ 242 01ac 916B     		ldr	r1, [r2, #56]
+ 243 01ae 2143     		orrs	r1, r4
+ 244 01b0 9163     		str	r1, [r2, #56]
+ 245 01b2 8221     		movs	r1, #130
+ 246 01b4 936B     		ldr	r3, [r2, #56]
+ 247 01b6 4900     		lsls	r1, r1, #1
+ 248 01b8 2340     		ands	r3, r4
+ 249 01ba 0293     		str	r3, [sp, #8]
+ 250 01bc 029B     		ldr	r3, [sp, #8]
+ 251 01be 244B     		ldr	r3, .L5+64
+ 252 01c0 1A68     		ldr	r2, [r3]
+ 253 01c2 0A43     		orrs	r2, r1
+ 254 01c4 1A60     		str	r2, [r3]
+ 255 01c6 1A68     		ldr	r2, [r3]
+ 256 01c8 1949     		ldr	r1, .L5+32
+ 257 01ca 0A40     		ands	r2, r1
+ 258 01cc 1A60     		str	r2, [r3]
+ 259 01ce 1A68     		ldr	r2, [r3]
+ 260 01d0 1849     		ldr	r1, .L5+36
+ 261 01d2 0A40     		ands	r2, r1
+ 262 01d4 0121     		movs	r1, #1
+ 263 01d6 1A60     		str	r2, [r3]
+ 264 01d8 1A68     		ldr	r2, [r3]
+ 265 01da 8243     		bics	r2, r0
+ 266 01dc 1A60     		str	r2, [r3]
+ 267 01de 1A68     		ldr	r2, [r3]
+ 268 01e0 8A43     		bics	r2, r1
+ 269 01e2 8021     		movs	r1, #128
+ 270 01e4 1A60     		str	r2, [r3]
+ 271 01e6 1A68     		ldr	r2, [r3]
+ 272 01e8 8900     		lsls	r1, r1, #2
+ 273 01ea 0A43     		orrs	r2, r1
+ 274 01ec 1A60     		str	r2, [r3]
+ 275 01ee 5A68     		ldr	r2, [r3, #4]
+ 276 01f0 FD39     		subs	r1, r1, #253
+ 277 01f2 FF39     		subs	r1, r1, #255
+ 278 01f4 8A43     		bics	r2, r1
+ 279 01f6 5A60     		str	r2, [r3, #4]
+ 280 01f8 1A68     		ldr	r2, [r3]
+ 281 01fa 3431     		adds	r1, r1, #52
+ 282 01fc 8A43     		bics	r2, r1
+ 283 01fe 1100     		movs	r1, r2
+ 284 0200 1022     		movs	r2, #16
+ 285 0202 0A43     		orrs	r2, r1
+ 286 0204 8021     		movs	r1, #128
+ARM GAS  /tmp/ccXbkw1y.s 			page 6
+
+
+ 287 0206 1A60     		str	r2, [r3]
+ 288 0208 1A68     		ldr	r2, [r3]
+ 289 020a 8A43     		bics	r2, r1
+ 290 020c 77E7     		b	.L4
+ 291              	.L6:
+ 292 020e C046     		.align	2
+ 293              	.L5:
+ 294 0210 00100240 		.word	1073876992
+ 295 0214 FF0FFFFF 		.word	-61441
+ 296 0218 00040050 		.word	1342178304
+ 297 021c FFFCFFFF 		.word	-769
+ 298 0220 FFFFF0FF 		.word	-983041
+ 299 0224 FFF3FFFF 		.word	-3073
+ 300 0228 FFFF0FFF 		.word	-15728641
+ 301 022c 00300140 		.word	1073819648
+ 302 0230 FF3BFFFF 		.word	-50177
+ 303 0234 FFF7FFFF 		.word	-2049
+ 304 0238 FFFDFFFF 		.word	-513
+ 305 023c FFDFFFFF 		.word	-8193
+ 306 0240 FFFFCFFF 		.word	-3145729
+ 307 0244 FFF0FFFF 		.word	-3841
+ 308 0248 FFFFFFCF 		.word	-805306369
+ 309 024c FFFFFFF0 		.word	-251658241
+ 310 0250 00380040 		.word	1073756160
+ 312              		.section	.text.hal_spi_de_init,"ax",%progbits
+ 313              		.align	1
+ 314              		.weak	hal_spi_de_init
+ 315              		.syntax unified
+ 316              		.code	16
+ 317              		.thumb_func
+ 318              		.fpu softvfp
+ 320              	hal_spi_de_init:
+ 321              		@ args = 0, pretend = 0, frame = 0
+ 322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 323              		@ link register save eliminated.
+ 324 0000 0128     		cmp	r0, #1
+ 325 0002 32D1     		bne	.L8
+ 326 0004 4021     		movs	r1, #64
+ 327 0006 334A     		ldr	r2, .L11
+ 328 0008 1368     		ldr	r3, [r2]
+ 329 000a 8B43     		bics	r3, r1
+ 330 000c 1360     		str	r3, [r2]
+ 331 000e 324A     		ldr	r2, .L11+4
+ 332 0010 3249     		ldr	r1, .L11+8
+ 333 0012 536B     		ldr	r3, [r2, #52]
+ 334 0014 0B40     		ands	r3, r1
+ 335 0016 C021     		movs	r1, #192
+ 336 0018 5363     		str	r3, [r2, #52]
+ 337 001a 314B     		ldr	r3, .L11+12
+ 338 001c 1A68     		ldr	r2, [r3]
+ 339 001e 8A43     		bics	r2, r1
+ 340 0020 1A60     		str	r2, [r3]
+ 341 0022 9A68     		ldr	r2, [r3, #8]
+ 342 0024 8A43     		bics	r2, r1
+ 343 0026 9A60     		str	r2, [r3, #8]
+ 344 0028 DA68     		ldr	r2, [r3, #12]
+ 345 002a 8A43     		bics	r2, r1
+ARM GAS  /tmp/ccXbkw1y.s 			page 7
+
+
+ 346 002c 1100     		movs	r1, r2
+ 347 002e 8022     		movs	r2, #128
+ 348 0030 0A43     		orrs	r2, r1
+ 349 0032 DA60     		str	r2, [r3, #12]
+ 350 0034 C022     		movs	r2, #192
+ 351 0036 1868     		ldr	r0, [r3]
+ 352 0038 2A49     		ldr	r1, .L11+16
+ 353 003a 9200     		lsls	r2, r2, #2
+ 354 003c 0840     		ands	r0, r1
+ 355 003e 0243     		orrs	r2, r0
+ 356 0040 1A60     		str	r2, [r3]
+ 357 0042 9A68     		ldr	r2, [r3, #8]
+ 358 0044 0A40     		ands	r2, r1
+ 359 0046 9A60     		str	r2, [r3, #8]
+ 360 0048 DA68     		ldr	r2, [r3, #12]
+ 361 004a 0A40     		ands	r2, r1
+ 362 004c DA60     		str	r2, [r3, #12]
+ 363 004e 1A68     		ldr	r2, [r3]
+ 364 0050 2549     		ldr	r1, .L11+20
+ 365 0052 0A40     		ands	r2, r1
+ 366 0054 1A60     		str	r2, [r3]
+ 367 0056 9A68     		ldr	r2, [r3, #8]
+ 368 0058 0A40     		ands	r2, r1
+ 369 005a 9A60     		str	r2, [r3, #8]
+ 370 005c DA68     		ldr	r2, [r3, #12]
+ 371 005e 1140     		ands	r1, r2
+ 372 0060 8022     		movs	r2, #128
+ 373 0062 1201     		lsls	r2, r2, #4
+ 374              	.L10:
+ 375 0064 0A43     		orrs	r2, r1
+ 376 0066 DA60     		str	r2, [r3, #12]
+ 377              	.L7:
+ 378              		@ sp needed
+ 379 0068 7047     		bx	lr
+ 380              	.L8:
+ 381 006a 0228     		cmp	r0, #2
+ 382 006c FCD1     		bne	.L7
+ 383 006e 4021     		movs	r1, #64
+ 384 0070 1E4A     		ldr	r2, .L11+24
+ 385 0072 1368     		ldr	r3, [r2]
+ 386 0074 8B43     		bics	r3, r1
+ 387 0076 1360     		str	r3, [r2]
+ 388 0078 174A     		ldr	r2, .L11+4
+ 389 007a 1D49     		ldr	r1, .L11+28
+ 390 007c 936B     		ldr	r3, [r2, #56]
+ 391 007e 0B40     		ands	r3, r1
+ 392 0080 9363     		str	r3, [r2, #56]
+ 393 0082 174B     		ldr	r3, .L11+12
+ 394 0084 1B49     		ldr	r1, .L11+32
+ 395 0086 1A68     		ldr	r2, [r3]
+ 396 0088 0A40     		ands	r2, r1
+ 397 008a 1A60     		str	r2, [r3]
+ 398 008c 9A68     		ldr	r2, [r3, #8]
+ 399 008e 0A40     		ands	r2, r1
+ 400 0090 9A60     		str	r2, [r3, #8]
+ 401 0092 DA68     		ldr	r2, [r3, #12]
+ 402 0094 1140     		ands	r1, r2
+ARM GAS  /tmp/ccXbkw1y.s 			page 8
+
+
+ 403 0096 8022     		movs	r2, #128
+ 404 0098 9203     		lsls	r2, r2, #14
+ 405 009a 0A43     		orrs	r2, r1
+ 406 009c DA60     		str	r2, [r3, #12]
+ 407 009e C022     		movs	r2, #192
+ 408 00a0 1868     		ldr	r0, [r3]
+ 409 00a2 1549     		ldr	r1, .L11+36
+ 410 00a4 9205     		lsls	r2, r2, #22
+ 411 00a6 0840     		ands	r0, r1
+ 412 00a8 0243     		orrs	r2, r0
+ 413 00aa 1A60     		str	r2, [r3]
+ 414 00ac 9A68     		ldr	r2, [r3, #8]
+ 415 00ae 0A40     		ands	r2, r1
+ 416 00b0 9A60     		str	r2, [r3, #8]
+ 417 00b2 DA68     		ldr	r2, [r3, #12]
+ 418 00b4 0A40     		ands	r2, r1
+ 419 00b6 8021     		movs	r1, #128
+ 420 00b8 DA60     		str	r2, [r3, #12]
+ 421 00ba 1A68     		ldr	r2, [r3]
+ 422 00bc 0906     		lsls	r1, r1, #24
+ 423 00be 9200     		lsls	r2, r2, #2
+ 424 00c0 9208     		lsrs	r2, r2, #2
+ 425 00c2 1A60     		str	r2, [r3]
+ 426 00c4 9A68     		ldr	r2, [r3, #8]
+ 427 00c6 9200     		lsls	r2, r2, #2
+ 428 00c8 9208     		lsrs	r2, r2, #2
+ 429 00ca 9A60     		str	r2, [r3, #8]
+ 430 00cc DA68     		ldr	r2, [r3, #12]
+ 431 00ce 9200     		lsls	r2, r2, #2
+ 432 00d0 9208     		lsrs	r2, r2, #2
+ 433 00d2 C7E7     		b	.L10
+ 434              	.L12:
+ 435              		.align	2
+ 436              	.L11:
+ 437 00d4 00300140 		.word	1073819648
+ 438 00d8 00100240 		.word	1073876992
+ 439 00dc FFEFFFFF 		.word	-4097
+ 440 00e0 00040050 		.word	1342178304
+ 441 00e4 FFFCFFFF 		.word	-769
+ 442 00e8 FFF3FFFF 		.word	-3073
+ 443 00ec 00380040 		.word	1073756160
+ 444 00f0 FFBFFFFF 		.word	-16385
+ 445 00f4 FFFFCFFF 		.word	-3145729
+ 446 00f8 FFFFFFCF 		.word	-805306369
+ 448              		.section	.text.hal_spi_in_out,"ax",%progbits
+ 449              		.align	1
+ 450              		.weak	hal_spi_in_out
+ 451              		.syntax unified
+ 452              		.code	16
+ 453              		.thumb_func
+ 454              		.fpu softvfp
+ 456              	hal_spi_in_out:
+ 457              		@ args = 0, pretend = 0, frame = 0
+ 458              		@ frame_needed = 0, uses_anonymous_args = 0
+ 459              		@ link register save eliminated.
+ 460 0000 0300     		movs	r3, r0
+ 461 0002 0128     		cmp	r0, #1
+ARM GAS  /tmp/ccXbkw1y.s 			page 9
+
+
+ 462 0004 0CD1     		bne	.L14
+ 463 0006 0222     		movs	r2, #2
+ 464 0008 0D4B     		ldr	r3, .L29
+ 465              	.L15:
+ 466 000a 9868     		ldr	r0, [r3, #8]
+ 467 000c 1042     		tst	r0, r2
+ 468 000e FCD0     		beq	.L15
+ 469 0010 0122     		movs	r2, #1
+ 470 0012 C9B2     		uxtb	r1, r1
+ 471 0014 1973     		strb	r1, [r3, #12]
+ 472              	.L16:
+ 473 0016 9968     		ldr	r1, [r3, #8]
+ 474 0018 1142     		tst	r1, r2
+ 475 001a FCD0     		beq	.L16
+ 476 001c 187B     		ldrb	r0, [r3, #12]
+ 477              	.L17:
+ 478              		@ sp needed
+ 479 001e 7047     		bx	lr
+ 480              	.L14:
+ 481 0020 0020     		movs	r0, #0
+ 482 0022 022B     		cmp	r3, #2
+ 483 0024 FBD1     		bne	.L17
+ 484 0026 074A     		ldr	r2, .L29+4
+ 485              	.L18:
+ 486 0028 9068     		ldr	r0, [r2, #8]
+ 487 002a 1842     		tst	r0, r3
+ 488 002c FCD0     		beq	.L18
+ 489 002e 0123     		movs	r3, #1
+ 490 0030 C9B2     		uxtb	r1, r1
+ 491 0032 1173     		strb	r1, [r2, #12]
+ 492              	.L19:
+ 493 0034 9168     		ldr	r1, [r2, #8]
+ 494 0036 1942     		tst	r1, r3
+ 495 0038 FCD0     		beq	.L19
+ 496 003a 107B     		ldrb	r0, [r2, #12]
+ 497 003c EFE7     		b	.L17
+ 498              	.L30:
+ 499 003e C046     		.align	2
+ 500              	.L29:
+ 501 0040 00300140 		.word	1073819648
+ 502 0044 00380040 		.word	1073756160
+ 504              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccXbkw1y.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 smtc_hal_spi.c
+     /tmp/ccXbkw1y.s:12     .text.hal_spi_init:0000000000000000 $t
+     /tmp/ccXbkw1y.s:20     .text.hal_spi_init:0000000000000000 hal_spi_init
+     /tmp/ccXbkw1y.s:294    .text.hal_spi_init:0000000000000210 $d
+     /tmp/ccXbkw1y.s:313    .text.hal_spi_de_init:0000000000000000 $t
+     /tmp/ccXbkw1y.s:320    .text.hal_spi_de_init:0000000000000000 hal_spi_de_init
+     /tmp/ccXbkw1y.s:437    .text.hal_spi_de_init:00000000000000d4 $d
+     /tmp/ccXbkw1y.s:449    .text.hal_spi_in_out:0000000000000000 $t
+     /tmp/ccXbkw1y.s:456    .text.hal_spi_in_out:0000000000000000 hal_spi_in_out
+     /tmp/ccXbkw1y.s:501    .text.hal_spi_in_out:0000000000000040 $d
+
+NO UNDEFINED SYMBOLS

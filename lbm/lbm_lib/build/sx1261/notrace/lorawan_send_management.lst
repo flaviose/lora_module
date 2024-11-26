@@ -1,0 +1,474 @@
+ARM GAS  /tmp/ccR8mXM5.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"lorawan_send_management.c"
+  10              		.text
+  11              		.section	.text.lorawan_send_management_service_on_update,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	lorawan_send_management_service_on_update:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 70B5     		push	{r4, r5, r6, lr}
+  23 0002 0500     		movs	r5, r0
+  24 0004 7035     		adds	r5, r5, #112
+  25 0006 2978     		ldrb	r1, [r5]
+  26 0008 0400     		movs	r4, r0
+  27 000a 0A01     		lsls	r2, r1, #4
+  28 000c 8218     		adds	r2, r0, r2
+  29 000e 5378     		ldrb	r3, [r2, #1]
+  30 0010 DA00     		lsls	r2, r3, #3
+  31 0012 9B1A     		subs	r3, r3, r2
+  32 0014 5B18     		adds	r3, r3, r1
+  33 0016 1B01     		lsls	r3, r3, #4
+  34 0018 C318     		adds	r3, r0, r3
+  35 001a 1B7A     		ldrb	r3, [r3, #8]
+  36 001c 022B     		cmp	r3, #2
+  37 001e 02D1     		bne	.L2
+  38 0020 0120     		movs	r0, #1
+  39 0022 FFF7FEFF 		bl	smtc_duty_cycle_enable_set
+  40              	.L2:
+  41 0026 2878     		ldrb	r0, [r5]
+  42 0028 0101     		lsls	r1, r0, #4
+  43 002a 6118     		adds	r1, r4, r1
+  44 002c 4A78     		ldrb	r2, [r1, #1]
+  45 002e D300     		lsls	r3, r2, #3
+  46 0030 D31A     		subs	r3, r2, r3
+  47 0032 1B18     		adds	r3, r3, r0
+  48 0034 1B01     		lsls	r3, r3, #4
+  49 0036 E318     		adds	r3, r4, r3
+  50 0038 9A7A     		ldrb	r2, [r3, #10]
+  51 003a 002A     		cmp	r2, #0
+  52 003c 15D0     		beq	.L1
+  53 003e 5E7A     		ldrb	r6, [r3, #9]
+  54 0040 012E     		cmp	r6, #1
+  55 0042 13D1     		bne	.L4
+  56 0044 FFF7FEFF 		bl	tx_protocol_manager_tx_is_aborted
+  57 0048 0028     		cmp	r0, #0
+  58 004a 0FD1     		bne	.L4
+ARM GAS  /tmp/ccR8mXM5.s 			page 2
+
+
+  59 004c F723     		movs	r3, #247
+  60 004e 2878     		ldrb	r0, [r5]
+  61 0050 0949     		ldr	r1, .L10
+  62 0052 0001     		lsls	r0, r0, #4
+  63 0054 2418     		adds	r4, r4, r0
+  64 0056 6278     		ldrb	r2, [r4, #1]
+  65 0058 5343     		muls	r3, r2
+  66 005a 5B5C     		ldrb	r3, [r3, r1]
+  67 005c 0221     		movs	r1, #2
+  68 005e 012B     		cmp	r3, #1
+  69 0060 00D0     		beq	.L9
+  70 0062 3100     		movs	r1, r6
+  71              	.L9:
+  72 0064 0320     		movs	r0, #3
+  73 0066 FFF7FEFF 		bl	increment_asynchronous_msgnumber
+  74              	.L1:
+  75              		@ sp needed
+  76 006a 70BD     		pop	{r4, r5, r6, pc}
+  77              	.L4:
+  78 006c 2878     		ldrb	r0, [r5]
+  79 006e 0021     		movs	r1, #0
+  80 0070 0001     		lsls	r0, r0, #4
+  81 0072 2418     		adds	r4, r4, r0
+  82 0074 6278     		ldrb	r2, [r4, #1]
+  83 0076 F5E7     		b	.L9
+  84              	.L11:
+  85              		.align	2
+  86              	.L10:
+  87 0078 00000000 		.word	lorawan_send_management_obj
+  89              		.section	.text.lorawan_send_management_service_on_launch,"ax",%progbits
+  90              		.align	1
+  91              		.syntax unified
+  92              		.code	16
+  93              		.thumb_func
+  94              		.fpu softvfp
+  96              	lorawan_send_management_service_on_launch:
+  97              		@ args = 0, pretend = 0, frame = 16
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 100 0002 0600     		movs	r6, r0
+ 101 0004 F725     		movs	r5, #247
+ 102 0006 7036     		adds	r6, r6, #112
+ 103 0008 3378     		ldrb	r3, [r6]
+ 104 000a 234A     		ldr	r2, .L18
+ 105 000c 1B01     		lsls	r3, r3, #4
+ 106 000e C318     		adds	r3, r0, r3
+ 107 0010 5B78     		ldrb	r3, [r3, #1]
+ 108 0012 89B0     		sub	sp, sp, #36
+ 109 0014 5D43     		muls	r5, r3
+ 110 0016 0023     		movs	r3, #0
+ 111 0018 AB54     		strb	r3, [r5, r2]
+ 112 001a 5319     		adds	r3, r2, r5
+ 113 001c 1900     		movs	r1, r3
+ 114 001e F431     		adds	r1, r1, #244
+ 115 0020 0978     		ldrb	r1, [r1]
+ 116 0022 0135     		adds	r5, r5, #1
+ 117 0024 0591     		str	r1, [sp, #20]
+ARM GAS  /tmp/ccR8mXM5.s 			page 3
+
+
+ 118 0026 AD18     		adds	r5, r5, r2
+ 119 0028 1900     		movs	r1, r3
+ 120 002a 1A00     		movs	r2, r3
+ 121 002c F531     		adds	r1, r1, #245
+ 122 002e F332     		adds	r2, r2, #243
+ 123 0030 F633     		adds	r3, r3, #246
+ 124 0032 0978     		ldrb	r1, [r1]
+ 125 0034 1278     		ldrb	r2, [r2]
+ 126 0036 1B78     		ldrb	r3, [r3]
+ 127 0038 0400     		movs	r4, r0
+ 128 003a 0427     		movs	r7, #4
+ 129 003c 0691     		str	r1, [sp, #24]
+ 130 003e 0792     		str	r2, [sp, #28]
+ 131 0040 002B     		cmp	r3, #0
+ 132 0042 00D1     		bne	.L13
+ 133 0044 023F     		subs	r7, r7, #2
+ 134              	.L13:
+ 135 0046 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 136 004a 3378     		ldrb	r3, [r6]
+ 137 004c 0599     		ldr	r1, [sp, #20]
+ 138 004e 1B01     		lsls	r3, r3, #4
+ 139 0050 E318     		adds	r3, r4, r3
+ 140 0052 5B78     		ldrb	r3, [r3, #1]
+ 141 0054 069A     		ldr	r2, [sp, #24]
+ 142 0056 0393     		str	r3, [sp, #12]
+ 143 0058 079B     		ldr	r3, [sp, #28]
+ 144 005a 0290     		str	r0, [sp, #8]
+ 145 005c 0093     		str	r3, [sp]
+ 146 005e 0220     		movs	r0, #2
+ 147 0060 2B00     		movs	r3, r5
+ 148 0062 0197     		str	r7, [sp, #4]
+ 149 0064 FFF7FEFF 		bl	tx_protocol_manager_request
+ 150 0068 3178     		ldrb	r1, [r6]
+ 151 006a 0B01     		lsls	r3, r1, #4
+ 152 006c E318     		adds	r3, r4, r3
+ 153 006e 0028     		cmp	r0, #0
+ 154 0070 09D1     		bne	.L14
+ 155 0072 5B78     		ldrb	r3, [r3, #1]
+ 156 0074 D800     		lsls	r0, r3, #3
+ 157 0076 1B1A     		subs	r3, r3, r0
+ 158 0078 5B18     		adds	r3, r3, r1
+ 159 007a 1B01     		lsls	r3, r3, #4
+ 160 007c E418     		adds	r4, r4, r3
+ 161 007e 0123     		movs	r3, #1
+ 162              	.L17:
+ 163 0080 6372     		strb	r3, [r4, #9]
+ 164 0082 09B0     		add	sp, sp, #36
+ 165              		@ sp needed
+ 166 0084 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 167              	.L14:
+ 168 0086 5A78     		ldrb	r2, [r3, #1]
+ 169 0088 0023     		movs	r3, #0
+ 170 008a D000     		lsls	r0, r2, #3
+ 171 008c 101A     		subs	r0, r2, r0
+ 172 008e 4018     		adds	r0, r0, r1
+ 173 0090 0001     		lsls	r0, r0, #4
+ 174 0092 2418     		adds	r4, r4, r0
+ARM GAS  /tmp/ccR8mXM5.s 			page 4
+
+
+ 175 0094 F4E7     		b	.L17
+ 176              	.L19:
+ 177 0096 C046     		.align	2
+ 178              	.L18:
+ 179 0098 00000000 		.word	lorawan_send_management_obj
+ 181              		.section	.text.lorawan_send_management_service_downlink_handler,"ax",%progbits
+ 182              		.align	1
+ 183              		.syntax unified
+ 184              		.code	16
+ 185              		.thumb_func
+ 186              		.fpu softvfp
+ 188              	lorawan_send_management_service_downlink_handler:
+ 189              		@ args = 0, pretend = 0, frame = 0
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191              		@ link register save eliminated.
+ 192 0000 FF30     		adds	r0, r0, #255
+ 193 0002 C37A     		ldrb	r3, [r0, #11]
+ 194 0004 013B     		subs	r3, r3, #1
+ 195 0006 012B     		cmp	r3, #1
+ 196 0008 08D8     		bhi	.L21
+ 197 000a F723     		movs	r3, #247
+ 198 000c 417D     		ldrb	r1, [r0, #21]
+ 199 000e 044A     		ldr	r2, .L25
+ 200 0010 4B43     		muls	r3, r1
+ 201 0012 995C     		ldrb	r1, [r3, r2]
+ 202 0014 0129     		cmp	r1, #1
+ 203 0016 01D0     		beq	.L21
+ 204 0018 817C     		ldrb	r1, [r0, #18]
+ 205 001a 9954     		strb	r1, [r3, r2]
+ 206              	.L21:
+ 207 001c 0020     		movs	r0, #0
+ 208              		@ sp needed
+ 209 001e 7047     		bx	lr
+ 210              	.L26:
+ 211              		.align	2
+ 212              	.L25:
+ 213 0020 00000000 		.word	lorawan_send_management_obj
+ 215              		.section	.text.lorawan_send_management_services_init,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	lorawan_send_management_services_init
+ 218              		.syntax unified
+ 219              		.code	16
+ 220              		.thumb_func
+ 221              		.fpu softvfp
+ 223              	lorawan_send_management_services_init:
+ 224              		@ args = 8, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226 0000 0649     		ldr	r1, .L28
+ 227 0002 10B5     		push	{r4, lr}
+ 228 0004 1160     		str	r1, [r2]
+ 229 0006 064A     		ldr	r2, .L28+4
+ 230              		@ sp needed
+ 231 0008 1A60     		str	r2, [r3]
+ 232 000a 029B     		ldr	r3, [sp, #8]
+ 233 000c 054A     		ldr	r2, .L28+8
+ 234 000e 1A60     		str	r2, [r3]
+ 235 0010 FFF7FEFF 		bl	modem_supervisor_get_task
+ARM GAS  /tmp/ccR8mXM5.s 			page 5
+
+
+ 236 0014 039B     		ldr	r3, [sp, #12]
+ 237 0016 1860     		str	r0, [r3]
+ 238 0018 10BD     		pop	{r4, pc}
+ 239              	.L29:
+ 240 001a C046     		.align	2
+ 241              	.L28:
+ 242 001c 00000000 		.word	lorawan_send_management_service_downlink_handler
+ 243 0020 00000000 		.word	lorawan_send_management_service_on_launch
+ 244 0024 00000000 		.word	lorawan_send_management_service_on_update
+ 246              		.section	.rodata.lorawan_send_add_task.str1.1,"aMS",%progbits,1
+ 247              	.LC6:
+ 248 0000 73746163 		.ascii	"stack_id < NUMBER_OF_STACKS\000"
+ 248      6B5F6964 
+ 248      203C204E 
+ 248      554D4245 
+ 248      525F4F46 
+ 249              	.LC10:
+ 250 001c 6D6F6465 		.ascii	"modem_supervisor_add_task( &task_send ) == TASK_VAL"
+ 250      6D5F7375 
+ 250      70657276 
+ 250      69736F72 
+ 250      5F616464 
+ 251 004f 494400   		.ascii	"ID\000"
+ 252              		.section	.text.lorawan_send_add_task,"ax",%progbits
+ 253              		.align	1
+ 254              		.global	lorawan_send_add_task
+ 255              		.syntax unified
+ 256              		.code	16
+ 257              		.thumb_func
+ 258              		.fpu softvfp
+ 260              	lorawan_send_add_task:
+ 261              		@ args = 16, pretend = 0, frame = 32
+ 262              		@ frame_needed = 0, uses_anonymous_args = 0
+ 263 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 264 0002 89B0     		sub	sp, sp, #36
+ 265 0004 0393     		str	r3, [sp, #12]
+ 266 0006 0EAB     		add	r3, sp, #56
+ 267 0008 40CB     		ldmia	r3!, {r6}
+ 268 000a 0500     		movs	r5, r0
+ 269 000c 1F78     		ldrb	r7, [r3]
+ 270 000e 10AB     		add	r3, sp, #64
+ 271 0010 1C78     		ldrb	r4, [r3]
+ 272 0012 0191     		str	r1, [sp, #4]
+ 273 0014 0292     		str	r2, [sp, #8]
+ 274 0016 0028     		cmp	r0, #0
+ 275 0018 04D0     		beq	.L31
+ 276 001a 9621     		movs	r1, #150
+ 277 001c 244A     		ldr	r2, .L43
+ 278 001e 2548     		ldr	r0, .L43+4
+ 279 0020 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 280              	.L31:
+ 281 0024 1022     		movs	r2, #16
+ 282 0026 0021     		movs	r1, #0
+ 283 0028 04A8     		add	r0, sp, #16
+ 284 002a FFF7FEFF 		bl	memset
+ 285 002e 002C     		cmp	r4, #0
+ 286 0030 36D0     		beq	.L32
+ARM GAS  /tmp/ccR8mXM5.s 			page 6
+
+
+ 287 0032 0223     		movs	r3, #2
+ 288 0034 04AA     		add	r2, sp, #16
+ 289 0036 0020     		movs	r0, #0
+ 290 0038 1372     		strb	r3, [r2, #8]
+ 291 003a FFF7FEFF 		bl	smtc_duty_cycle_enable_set
+ 292              	.L33:
+ 293 003e F720     		movs	r0, #247
+ 294 0040 1D4C     		ldr	r4, .L43+8
+ 295 0042 6843     		muls	r0, r5
+ 296 0044 002E     		cmp	r6, #0
+ 297 0046 2FD0     		beq	.L34
+ 298 0048 2318     		adds	r3, r4, r0
+ 299 004a F333     		adds	r3, r3, #243
+ 300 004c 0130     		adds	r0, r0, #1
+ 301 004e 3A00     		movs	r2, r7
+ 302 0050 3100     		movs	r1, r6
+ 303 0052 1F70     		strb	r7, [r3]
+ 304 0054 2018     		adds	r0, r4, r0
+ 305 0056 FFF7FEFF 		bl	memcpy
+ 306              	.L35:
+ 307 005a F723     		movs	r3, #247
+ 308 005c 6B43     		muls	r3, r5
+ 309 005e E418     		adds	r4, r4, r3
+ 310 0060 2300     		movs	r3, r4
+ 311 0062 019A     		ldr	r2, [sp, #4]
+ 312 0064 F433     		adds	r3, r3, #244
+ 313 0066 1A70     		strb	r2, [r3]
+ 314 0068 029A     		ldr	r2, [sp, #8]
+ 315 006a F634     		adds	r4, r4, #246
+ 316 006c 5A70     		strb	r2, [r3, #1]
+ 317 006e 039B     		ldr	r3, [sp, #12]
+ 318 0070 2370     		strb	r3, [r4]
+ 319 0072 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 320 0076 119B     		ldr	r3, [sp, #68]
+ 321 0078 C018     		adds	r0, r0, r3
+ 322 007a 0590     		str	r0, [sp, #20]
+ 323 007c 0720     		movs	r0, #7
+ 324 007e 04AB     		add	r3, sp, #16
+ 325 0080 5D70     		strb	r5, [r3, #1]
+ 326 0082 4543     		muls	r5, r0
+ 327 0084 1800     		movs	r0, r3
+ 328 0086 0135     		adds	r5, r5, #1
+ 329 0088 1D70     		strb	r5, [r3]
+ 330 008a FFF7FEFF 		bl	modem_supervisor_add_task
+ 331 008e 0028     		cmp	r0, #0
+ 332 0090 04D0     		beq	.L30
+ 333 0092 B321     		movs	r1, #179
+ 334 0094 094A     		ldr	r2, .L43+12
+ 335 0096 0748     		ldr	r0, .L43+4
+ 336 0098 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 337              	.L30:
+ 338 009c 09B0     		add	sp, sp, #36
+ 339              		@ sp needed
+ 340 009e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 341              	.L32:
+ 342 00a0 0323     		movs	r3, #3
+ 343 00a2 04AA     		add	r2, sp, #16
+ARM GAS  /tmp/ccR8mXM5.s 			page 7
+
+
+ 344 00a4 1372     		strb	r3, [r2, #8]
+ 345 00a6 CAE7     		b	.L33
+ 346              	.L34:
+ 347 00a8 2018     		adds	r0, r4, r0
+ 348 00aa F330     		adds	r0, r0, #243
+ 349 00ac 0670     		strb	r6, [r0]
+ 350 00ae D4E7     		b	.L35
+ 351              	.L44:
+ 352              		.align	2
+ 353              	.L43:
+ 354 00b0 00000000 		.word	.LC6
+ 355 00b4 00000000 		.word	.LANCHOR0
+ 356 00b8 00000000 		.word	lorawan_send_management_obj
+ 357 00bc 1C000000 		.word	.LC10
+ 359              		.section	.text.lorawan_send_remove_task,"ax",%progbits
+ 360              		.align	1
+ 361              		.global	lorawan_send_remove_task
+ 362              		.syntax unified
+ 363              		.code	16
+ 364              		.thumb_func
+ 365              		.fpu softvfp
+ 367              	lorawan_send_remove_task:
+ 368              		@ args = 0, pretend = 0, frame = 0
+ 369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 370 0000 10B5     		push	{r4, lr}
+ 371 0002 041E     		subs	r4, r0, #0
+ 372 0004 04D0     		beq	.L46
+ 373 0006 B821     		movs	r1, #184
+ 374 0008 044A     		ldr	r2, .L50
+ 375 000a 0548     		ldr	r0, .L50+4
+ 376 000c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 377              	.L46:
+ 378              		@ sp needed
+ 379 0010 0720     		movs	r0, #7
+ 380 0012 6043     		muls	r0, r4
+ 381 0014 0130     		adds	r0, r0, #1
+ 382 0016 FFF7FEFF 		bl	modem_supervisor_remove_task
+ 383 001a 10BD     		pop	{r4, pc}
+ 384              	.L51:
+ 385              		.align	2
+ 386              	.L50:
+ 387 001c 00000000 		.word	.LC6
+ 388 0020 00000000 		.word	.LANCHOR1
+ 390              		.section	.bss.lorawan_send_management_obj,"aw",%nobits
+ 393              	lorawan_send_management_obj:
+ 394 0000 00000000 		.space	247
+ 394      00000000 
+ 394      00000000 
+ 394      00000000 
+ 394      00000000 
+ 395              		.section	.rodata.__func__.0,"a"
+ 396              		.set	.LANCHOR1,. + 0
+ 399              	__func__.0:
+ 400 0000 6C6F7261 		.ascii	"lorawan_send_remove_task\000"
+ 400      77616E5F 
+ 400      73656E64 
+ 400      5F72656D 
+ARM GAS  /tmp/ccR8mXM5.s 			page 8
+
+
+ 400      6F76655F 
+ 401              		.section	.rodata.__func__.1,"a"
+ 402              		.set	.LANCHOR0,. + 0
+ 405              	__func__.1:
+ 406 0000 6C6F7261 		.ascii	"lorawan_send_add_task\000"
+ 406      77616E5F 
+ 406      73656E64 
+ 406      5F616464 
+ 406      5F746173 
+ 407              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccR8mXM5.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 lorawan_send_management.c
+     /tmp/ccR8mXM5.s:12     .text.lorawan_send_management_service_on_update:0000000000000000 $t
+     /tmp/ccR8mXM5.s:19     .text.lorawan_send_management_service_on_update:0000000000000000 lorawan_send_management_service_on_update
+     /tmp/ccR8mXM5.s:87     .text.lorawan_send_management_service_on_update:0000000000000078 $d
+     /tmp/ccR8mXM5.s:393    .bss.lorawan_send_management_obj:0000000000000000 lorawan_send_management_obj
+     /tmp/ccR8mXM5.s:90     .text.lorawan_send_management_service_on_launch:0000000000000000 $t
+     /tmp/ccR8mXM5.s:96     .text.lorawan_send_management_service_on_launch:0000000000000000 lorawan_send_management_service_on_launch
+     /tmp/ccR8mXM5.s:179    .text.lorawan_send_management_service_on_launch:0000000000000098 $d
+     /tmp/ccR8mXM5.s:182    .text.lorawan_send_management_service_downlink_handler:0000000000000000 $t
+     /tmp/ccR8mXM5.s:188    .text.lorawan_send_management_service_downlink_handler:0000000000000000 lorawan_send_management_service_downlink_handler
+     /tmp/ccR8mXM5.s:213    .text.lorawan_send_management_service_downlink_handler:0000000000000020 $d
+     /tmp/ccR8mXM5.s:216    .text.lorawan_send_management_services_init:0000000000000000 $t
+     /tmp/ccR8mXM5.s:223    .text.lorawan_send_management_services_init:0000000000000000 lorawan_send_management_services_init
+     /tmp/ccR8mXM5.s:242    .text.lorawan_send_management_services_init:000000000000001c $d
+     /tmp/ccR8mXM5.s:253    .text.lorawan_send_add_task:0000000000000000 $t
+     /tmp/ccR8mXM5.s:260    .text.lorawan_send_add_task:0000000000000000 lorawan_send_add_task
+     /tmp/ccR8mXM5.s:354    .text.lorawan_send_add_task:00000000000000b0 $d
+     /tmp/ccR8mXM5.s:360    .text.lorawan_send_remove_task:0000000000000000 $t
+     /tmp/ccR8mXM5.s:367    .text.lorawan_send_remove_task:0000000000000000 lorawan_send_remove_task
+     /tmp/ccR8mXM5.s:387    .text.lorawan_send_remove_task:000000000000001c $d
+     /tmp/ccR8mXM5.s:394    .bss.lorawan_send_management_obj:0000000000000000 $d
+     /tmp/ccR8mXM5.s:399    .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccR8mXM5.s:405    .rodata.__func__.1:0000000000000000 __func__.1
+
+UNDEFINED SYMBOLS
+smtc_duty_cycle_enable_set
+tx_protocol_manager_tx_is_aborted
+increment_asynchronous_msgnumber
+smtc_modem_hal_get_time_in_ms
+tx_protocol_manager_request
+modem_supervisor_get_task
+smtc_modem_hal_on_panic
+memset
+memcpy
+smtc_modem_hal_get_time_in_s
+modem_supervisor_add_task
+modem_supervisor_remove_task

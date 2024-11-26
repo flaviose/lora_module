@@ -1,0 +1,5 @@
+extensions/common/sha256/sha256.c:29:13:sha256_do	328	static
+extensions/common/sha256/sha256.c:99:6:sha256	128	static
+extensions/common/sha256/sha256.c:149:6:sha256i_init	0	static
+extensions/common/sha256/sha256.c:163:6:sha256i_update	88	static
+extensions/common/sha256/sha256.c:204:6:sha256i_digest	8	static

@@ -1,0 +1,372 @@
+ARM GAS  /tmp/ccZZu68j.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"modem_event_utilities.c"
+  10              		.text
+  11              		.section	.rodata.get_modem_event_count.str1.1,"aMS",%progbits,1
+  12              	.LC0:
+  13 0000 00       		.ascii	"\000"
+  14              		.section	.text.get_modem_event_count,"ax",%progbits
+  15              		.align	1
+  16              		.global	get_modem_event_count
+  17              		.arch armv6s-m
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	get_modem_event_count:
+  24              		@ args = 0, pretend = 0, frame = 0
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 10B5     		push	{r4, lr}
+  27 0002 0400     		movs	r4, r0
+  28 0004 1C28     		cmp	r0, #28
+  29 0006 04D9     		bls	.L2
+  30 0008 6021     		movs	r1, #96
+  31 000a 044A     		ldr	r2, .L3
+  32 000c 0448     		ldr	r0, .L3+4
+  33 000e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+  34              	.L2:
+  35              		@ sp needed
+  36 0012 0448     		ldr	r0, .L3+8
+  37 0014 0419     		adds	r4, r0, r4
+  38 0016 A07F     		ldrb	r0, [r4, #30]
+  39 0018 10BD     		pop	{r4, pc}
+  40              	.L4:
+  41 001a C046     		.align	2
+  42              	.L3:
+  43 001c 00000000 		.word	.LC0
+  44 0020 00000000 		.word	.LANCHOR0
+  45 0024 00000000 		.word	.LANCHOR1
+  47              		.section	.text.get_modem_event_status,"ax",%progbits
+  48              		.align	1
+  49              		.global	get_modem_event_status
+  50              		.syntax unified
+  51              		.code	16
+  52              		.thumb_func
+  53              		.fpu softvfp
+  55              	get_modem_event_status:
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58 0000 10B5     		push	{r4, lr}
+  59 0002 0400     		movs	r4, r0
+  60 0004 1C28     		cmp	r0, #28
+ARM GAS  /tmp/ccZZu68j.s 			page 2
+
+
+  61 0006 04D9     		bls	.L6
+  62 0008 6A21     		movs	r1, #106
+  63 000a 044A     		ldr	r2, .L7
+  64 000c 0448     		ldr	r0, .L7+4
+  65 000e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+  66              	.L6:
+  67              		@ sp needed
+  68 0012 0448     		ldr	r0, .L7+8
+  69 0014 0019     		adds	r0, r0, r4
+  70 0016 3B30     		adds	r0, r0, #59
+  71 0018 0078     		ldrb	r0, [r0]
+  72 001a 10BD     		pop	{r4, pc}
+  73              	.L8:
+  74              		.align	2
+  75              	.L7:
+  76 001c 00000000 		.word	.LC0
+  77 0020 00000000 		.word	.LANCHOR2
+  78 0024 00000000 		.word	.LANCHOR1
+  80              		.section	.text.set_modem_event_count_and_status,"ax",%progbits
+  81              		.align	1
+  82              		.global	set_modem_event_count_and_status
+  83              		.syntax unified
+  84              		.code	16
+  85              		.thumb_func
+  86              		.fpu softvfp
+  88              	set_modem_event_count_and_status:
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92 0000 0300     		movs	r3, r0
+  93 0002 1C28     		cmp	r0, #28
+  94 0004 04D8     		bhi	.L9
+  95 0006 0348     		ldr	r0, .L11
+  96 0008 C018     		adds	r0, r0, r3
+  97 000a 8177     		strb	r1, [r0, #30]
+  98 000c 3B30     		adds	r0, r0, #59
+  99 000e 0270     		strb	r2, [r0]
+ 100              	.L9:
+ 101              		@ sp needed
+ 102 0010 7047     		bx	lr
+ 103              	.L12:
+ 104 0012 C046     		.align	2
+ 105              	.L11:
+ 106 0014 00000000 		.word	.LANCHOR1
+ 108              		.section	.text.modem_event_init,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	modem_event_init
+ 111              		.syntax unified
+ 112              		.code	16
+ 113              		.thumb_func
+ 114              		.fpu softvfp
+ 116              	modem_event_init:
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119 0000 70B5     		push	{r4, r5, r6, lr}
+ 120 0002 0500     		movs	r5, r0
+ 121 0004 0024     		movs	r4, #0
+ARM GAS  /tmp/ccZZu68j.s 			page 3
+
+
+ 122              	.L14:
+ 123 0006 0022     		movs	r2, #0
+ 124 0008 E0B2     		uxtb	r0, r4
+ 125 000a 1100     		movs	r1, r2
+ 126 000c 0134     		adds	r4, r4, #1
+ 127 000e FFF7FEFF 		bl	set_modem_event_count_and_status
+ 128 0012 1D2C     		cmp	r4, #29
+ 129 0014 F7D1     		bne	.L14
+ 130 0016 0022     		movs	r2, #0
+ 131              		@ sp needed
+ 132 0018 014B     		ldr	r3, .L16
+ 133 001a 9D67     		str	r5, [r3, #120]
+ 134 001c 1A70     		strb	r2, [r3]
+ 135 001e 70BD     		pop	{r4, r5, r6, pc}
+ 136              	.L17:
+ 137              		.align	2
+ 138              	.L16:
+ 139 0020 00000000 		.word	.LANCHOR1
+ 141              		.section	.text.increment_modem_event_count_and_status,"ax",%progbits
+ 142              		.align	1
+ 143              		.global	increment_modem_event_count_and_status
+ 144              		.syntax unified
+ 145              		.code	16
+ 146              		.thumb_func
+ 147              		.fpu softvfp
+ 149              	increment_modem_event_count_and_status:
+ 150              		@ args = 0, pretend = 0, frame = 0
+ 151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152 0000 10B5     		push	{r4, lr}
+ 153 0002 1C28     		cmp	r0, #28
+ 154 0004 09D8     		bhi	.L18
+ 155 0006 054B     		ldr	r3, .L24
+ 156 0008 1C18     		adds	r4, r3, r0
+ 157 000a A27F     		ldrb	r2, [r4, #30]
+ 158 000c FF2A     		cmp	r2, #255
+ 159 000e 01D0     		beq	.L20
+ 160 0010 0132     		adds	r2, r2, #1
+ 161 0012 A277     		strb	r2, [r4, #30]
+ 162              	.L20:
+ 163 0014 1B18     		adds	r3, r3, r0
+ 164 0016 3B33     		adds	r3, r3, #59
+ 165 0018 1970     		strb	r1, [r3]
+ 166              	.L18:
+ 167              		@ sp needed
+ 168 001a 10BD     		pop	{r4, pc}
+ 169              	.L25:
+ 170              		.align	2
+ 171              	.L24:
+ 172 001c 00000000 		.word	.LANCHOR1
+ 174              		.section	.text.decrement_asynchronous_msgnumber,"ax",%progbits
+ 175              		.align	1
+ 176              		.global	decrement_asynchronous_msgnumber
+ 177              		.syntax unified
+ 178              		.code	16
+ 179              		.thumb_func
+ 180              		.fpu softvfp
+ 182              	decrement_asynchronous_msgnumber:
+ARM GAS  /tmp/ccZZu68j.s 			page 4
+
+
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185              		@ link register save eliminated.
+ 186 0000 034A     		ldr	r2, .L31
+ 187 0002 1378     		ldrb	r3, [r2]
+ 188 0004 002B     		cmp	r3, #0
+ 189 0006 01D0     		beq	.L27
+ 190 0008 013B     		subs	r3, r3, #1
+ 191 000a DBB2     		uxtb	r3, r3
+ 192              	.L27:
+ 193 000c 1370     		strb	r3, [r2]
+ 194              		@ sp needed
+ 195 000e 7047     		bx	lr
+ 196              	.L32:
+ 197              		.align	2
+ 198              	.L31:
+ 199 0010 00000000 		.word	.LANCHOR1
+ 201              		.section	.text.get_asynchronous_msgnumber,"ax",%progbits
+ 202              		.align	1
+ 203              		.global	get_asynchronous_msgnumber
+ 204              		.syntax unified
+ 205              		.code	16
+ 206              		.thumb_func
+ 207              		.fpu softvfp
+ 209              	get_asynchronous_msgnumber:
+ 210              		@ args = 0, pretend = 0, frame = 0
+ 211              		@ frame_needed = 0, uses_anonymous_args = 0
+ 212              		@ link register save eliminated.
+ 213 0000 014B     		ldr	r3, .L34
+ 214              		@ sp needed
+ 215 0002 1878     		ldrb	r0, [r3]
+ 216 0004 7047     		bx	lr
+ 217              	.L35:
+ 218 0006 C046     		.align	2
+ 219              	.L34:
+ 220 0008 00000000 		.word	.LANCHOR1
+ 222              		.section	.text.increment_asynchronous_msgnumber,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	increment_asynchronous_msgnumber
+ 225              		.syntax unified
+ 226              		.code	16
+ 227              		.thumb_func
+ 228              		.fpu softvfp
+ 230              	increment_asynchronous_msgnumber:
+ 231              		@ args = 0, pretend = 0, frame = 0
+ 232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 233 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 234 0002 0E4D     		ldr	r5, .L44
+ 235 0004 0400     		movs	r4, r0
+ 236 0006 2B78     		ldrb	r3, [r5]
+ 237 0008 0F00     		movs	r7, r1
+ 238 000a 1600     		movs	r6, r2
+ 239 000c 1C2B     		cmp	r3, #28
+ 240 000e 13D8     		bhi	.L36
+ 241 0010 FFF7FEFF 		bl	get_modem_event_count
+ 242 0014 0028     		cmp	r0, #0
+ 243 0016 05D1     		bne	.L39
+ARM GAS  /tmp/ccZZu68j.s 			page 5
+
+
+ 244 0018 2B78     		ldrb	r3, [r5]
+ 245 001a EA18     		adds	r2, r5, r3
+ 246 001c 5832     		adds	r2, r2, #88
+ 247 001e 0133     		adds	r3, r3, #1
+ 248 0020 1470     		strb	r4, [r2]
+ 249 0022 2B70     		strb	r3, [r5]
+ 250              	.L39:
+ 251 0024 2000     		movs	r0, r4
+ 252 0026 3900     		movs	r1, r7
+ 253 0028 FFF7FEFF 		bl	increment_modem_event_count_and_status
+ 254 002c AB6F     		ldr	r3, [r5, #120]
+ 255 002e 2C19     		adds	r4, r5, r4
+ 256 0030 6670     		strb	r6, [r4, #1]
+ 257 0032 002B     		cmp	r3, #0
+ 258 0034 00D0     		beq	.L36
+ 259 0036 9847     		blx	r3
+ 260              	.L36:
+ 261              		@ sp needed
+ 262 0038 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 263              	.L45:
+ 264 003a C046     		.align	2
+ 265              	.L44:
+ 266 003c 00000000 		.word	.LANCHOR1
+ 268              		.section	.text.get_last_msg_event,"ax",%progbits
+ 269              		.align	1
+ 270              		.global	get_last_msg_event
+ 271              		.syntax unified
+ 272              		.code	16
+ 273              		.thumb_func
+ 274              		.fpu softvfp
+ 276              	get_last_msg_event:
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279              		@ link register save eliminated.
+ 280 0000 094B     		ldr	r3, .L49
+ 281 0002 0100     		movs	r1, r0
+ 282 0004 1A78     		ldrb	r2, [r3]
+ 283 0006 002A     		cmp	r2, #0
+ 284 0008 0AD0     		beq	.L47
+ 285 000a 9A18     		adds	r2, r3, r2
+ 286 000c 5732     		adds	r2, r2, #87
+ 287 000e 1278     		ldrb	r2, [r2]
+ 288 0010 9A18     		adds	r2, r3, r2
+ 289 0012 5278     		ldrb	r2, [r2, #1]
+ 290 0014 0270     		strb	r2, [r0]
+ 291 0016 1A78     		ldrb	r2, [r3]
+ 292 0018 9B18     		adds	r3, r3, r2
+ 293 001a 5733     		adds	r3, r3, #87
+ 294 001c 1878     		ldrb	r0, [r3]
+ 295              	.L48:
+ 296              		@ sp needed
+ 297 001e 7047     		bx	lr
+ 298              	.L47:
+ 299 0020 FF20     		movs	r0, #255
+ 300 0022 0870     		strb	r0, [r1]
+ 301 0024 FBE7     		b	.L48
+ 302              	.L50:
+ARM GAS  /tmp/ccZZu68j.s 			page 6
+
+
+ 303 0026 C046     		.align	2
+ 304              	.L49:
+ 305 0028 00000000 		.word	.LANCHOR1
+ 307              		.global	modem_event_ctx
+ 308              		.section	.bss.modem_event_ctx,"aw",%nobits
+ 309              		.align	2
+ 310              		.set	.LANCHOR1,. + 0
+ 313              	modem_event_ctx:
+ 314 0000 00000000 		.space	124
+ 314      00000000 
+ 314      00000000 
+ 314      00000000 
+ 314      00000000 
+ 315              		.section	.rodata.__func__.0,"a"
+ 316              		.set	.LANCHOR2,. + 0
+ 319              	__func__.0:
+ 320 0000 6765745F 		.ascii	"get_modem_event_status\000"
+ 320      6D6F6465 
+ 320      6D5F6576 
+ 320      656E745F 
+ 320      73746174 
+ 321              		.section	.rodata.__func__.1,"a"
+ 322              		.set	.LANCHOR0,. + 0
+ 325              	__func__.1:
+ 326 0000 6765745F 		.ascii	"get_modem_event_count\000"
+ 326      6D6F6465 
+ 326      6D5F6576 
+ 326      656E745F 
+ 326      636F756E 
+ 327              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccZZu68j.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 modem_event_utilities.c
+     /tmp/ccZZu68j.s:15     .text.get_modem_event_count:0000000000000000 $t
+     /tmp/ccZZu68j.s:23     .text.get_modem_event_count:0000000000000000 get_modem_event_count
+     /tmp/ccZZu68j.s:43     .text.get_modem_event_count:000000000000001c $d
+     /tmp/ccZZu68j.s:48     .text.get_modem_event_status:0000000000000000 $t
+     /tmp/ccZZu68j.s:55     .text.get_modem_event_status:0000000000000000 get_modem_event_status
+     /tmp/ccZZu68j.s:76     .text.get_modem_event_status:000000000000001c $d
+     /tmp/ccZZu68j.s:81     .text.set_modem_event_count_and_status:0000000000000000 $t
+     /tmp/ccZZu68j.s:88     .text.set_modem_event_count_and_status:0000000000000000 set_modem_event_count_and_status
+     /tmp/ccZZu68j.s:106    .text.set_modem_event_count_and_status:0000000000000014 $d
+     /tmp/ccZZu68j.s:109    .text.modem_event_init:0000000000000000 $t
+     /tmp/ccZZu68j.s:116    .text.modem_event_init:0000000000000000 modem_event_init
+     /tmp/ccZZu68j.s:139    .text.modem_event_init:0000000000000020 $d
+     /tmp/ccZZu68j.s:142    .text.increment_modem_event_count_and_status:0000000000000000 $t
+     /tmp/ccZZu68j.s:149    .text.increment_modem_event_count_and_status:0000000000000000 increment_modem_event_count_and_status
+     /tmp/ccZZu68j.s:172    .text.increment_modem_event_count_and_status:000000000000001c $d
+     /tmp/ccZZu68j.s:175    .text.decrement_asynchronous_msgnumber:0000000000000000 $t
+     /tmp/ccZZu68j.s:182    .text.decrement_asynchronous_msgnumber:0000000000000000 decrement_asynchronous_msgnumber
+     /tmp/ccZZu68j.s:199    .text.decrement_asynchronous_msgnumber:0000000000000010 $d
+     /tmp/ccZZu68j.s:202    .text.get_asynchronous_msgnumber:0000000000000000 $t
+     /tmp/ccZZu68j.s:209    .text.get_asynchronous_msgnumber:0000000000000000 get_asynchronous_msgnumber
+     /tmp/ccZZu68j.s:220    .text.get_asynchronous_msgnumber:0000000000000008 $d
+     /tmp/ccZZu68j.s:223    .text.increment_asynchronous_msgnumber:0000000000000000 $t
+     /tmp/ccZZu68j.s:230    .text.increment_asynchronous_msgnumber:0000000000000000 increment_asynchronous_msgnumber
+     /tmp/ccZZu68j.s:266    .text.increment_asynchronous_msgnumber:000000000000003c $d
+     /tmp/ccZZu68j.s:269    .text.get_last_msg_event:0000000000000000 $t
+     /tmp/ccZZu68j.s:276    .text.get_last_msg_event:0000000000000000 get_last_msg_event
+     /tmp/ccZZu68j.s:305    .text.get_last_msg_event:0000000000000028 $d
+     /tmp/ccZZu68j.s:313    .bss.modem_event_ctx:0000000000000000 modem_event_ctx
+     /tmp/ccZZu68j.s:309    .bss.modem_event_ctx:0000000000000000 $d
+     /tmp/ccZZu68j.s:319    .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccZZu68j.s:325    .rodata.__func__.1:0000000000000000 __func__.1
+
+UNDEFINED SYMBOLS
+smtc_modem_hal_on_panic

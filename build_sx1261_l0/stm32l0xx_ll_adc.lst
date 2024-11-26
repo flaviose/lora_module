@@ -1,0 +1,397 @@
+ARM GAS  /tmp/ccpOhY5R.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"stm32l0xx_ll_adc.c"
+  10              		.text
+  11              		.section	.text.LL_ADC_CommonDeInit,"ax",%progbits
+  12              		.align	1
+  13              		.global	LL_ADC_CommonDeInit
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	LL_ADC_CommonDeInit:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23              		@ link register save eliminated.
+  24 0000 8022     		movs	r2, #128
+  25              		@ sp needed
+  26 0002 054B     		ldr	r3, .L2
+  27 0004 9200     		lsls	r2, r2, #2
+  28 0006 596A     		ldr	r1, [r3, #36]
+  29 0008 0020     		movs	r0, #0
+  30 000a 0A43     		orrs	r2, r1
+  31 000c 5A62     		str	r2, [r3, #36]
+  32 000e 5A6A     		ldr	r2, [r3, #36]
+  33 0010 0249     		ldr	r1, .L2+4
+  34 0012 0A40     		ands	r2, r1
+  35 0014 5A62     		str	r2, [r3, #36]
+  36 0016 7047     		bx	lr
+  37              	.L3:
+  38              		.align	2
+  39              	.L2:
+  40 0018 00100240 		.word	1073876992
+  41 001c FFFDFFFF 		.word	-513
+  43              		.section	.text.LL_ADC_CommonInit,"ax",%progbits
+  44              		.align	1
+  45              		.global	LL_ADC_CommonInit
+  46              		.syntax unified
+  47              		.code	16
+  48              		.thumb_func
+  49              		.fpu softvfp
+  51              	LL_ADC_CommonInit:
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54 0000 084B     		ldr	r3, .L7
+  55 0002 0200     		movs	r2, r0
+  56 0004 9B68     		ldr	r3, [r3, #8]
+  57 0006 0120     		movs	r0, #1
+  58 0008 10B5     		push	{r4, lr}
+  59 000a 1C00     		movs	r4, r3
+  60 000c 0440     		ands	r4, r0
+ARM GAS  /tmp/ccpOhY5R.s 			page 2
+
+
+  61 000e 0342     		tst	r3, r0
+  62 0010 06D1     		bne	.L5
+  63 0012 1368     		ldr	r3, [r2]
+  64 0014 0448     		ldr	r0, .L7+4
+  65 0016 0968     		ldr	r1, [r1]
+  66 0018 0340     		ands	r3, r0
+  67 001a 2000     		movs	r0, r4
+  68 001c 0B43     		orrs	r3, r1
+  69 001e 1360     		str	r3, [r2]
+  70              	.L5:
+  71              		@ sp needed
+  72 0020 10BD     		pop	{r4, pc}
+  73              	.L8:
+  74 0022 C046     		.align	2
+  75              	.L7:
+  76 0024 00240140 		.word	1073816576
+  77 0028 FFFFC3FF 		.word	-3932161
+  79              		.section	.text.LL_ADC_CommonStructInit,"ax",%progbits
+  80              		.align	1
+  81              		.global	LL_ADC_CommonStructInit
+  82              		.syntax unified
+  83              		.code	16
+  84              		.thumb_func
+  85              		.fpu softvfp
+  87              	LL_ADC_CommonStructInit:
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91 0000 8023     		movs	r3, #128
+  92              		@ sp needed
+  93 0002 DB02     		lsls	r3, r3, #11
+  94 0004 0360     		str	r3, [r0]
+  95 0006 7047     		bx	lr
+  97              		.section	.text.LL_ADC_DeInit,"ax",%progbits
+  98              		.align	1
+  99              		.global	LL_ADC_DeInit
+ 100              		.syntax unified
+ 101              		.code	16
+ 102              		.thumb_func
+ 103              		.fpu softvfp
+ 105              	LL_ADC_DeInit:
+ 106              		@ args = 0, pretend = 0, frame = 8
+ 107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 108 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 109 0002 0300     		movs	r3, r0
+ 110 0004 0020     		movs	r0, #0
+ 111 0006 0190     		str	r0, [sp, #4]
+ 112 0008 9A68     		ldr	r2, [r3, #8]
+ 113 000a D207     		lsls	r2, r2, #31
+ 114 000c 25D5     		bpl	.L11
+ 115 000e DA68     		ldr	r2, [r3, #12]
+ 116 0010 2F49     		ldr	r1, .L26
+ 117 0012 0A40     		ands	r2, r1
+ 118 0014 DA60     		str	r2, [r3, #12]
+ 119 0016 9A68     		ldr	r2, [r3, #8]
+ 120 0018 5207     		lsls	r2, r2, #29
+ 121 001a 08D5     		bpl	.L12
+ARM GAS  /tmp/ccpOhY5R.s 			page 3
+
+
+ 122 001c 1022     		movs	r2, #16
+ 123 001e 9968     		ldr	r1, [r3, #8]
+ 124 0020 1142     		tst	r1, r2
+ 125 0022 04D1     		bne	.L12
+ 126 0024 9968     		ldr	r1, [r3, #8]
+ 127 0026 2B48     		ldr	r0, .L26+4
+ 128 0028 0140     		ands	r1, r0
+ 129 002a 0A43     		orrs	r2, r1
+ 130 002c 9A60     		str	r2, [r3, #8]
+ 131              	.L12:
+ 132 002e 8022     		movs	r2, #128
+ 133 0030 0020     		movs	r0, #0
+ 134 0032 1021     		movs	r1, #16
+ 135 0034 0124     		movs	r4, #1
+ 136 0036 1202     		lsls	r2, r2, #8
+ 137 0038 0192     		str	r2, [sp, #4]
+ 138              	.L13:
+ 139 003a 9A68     		ldr	r2, [r3, #8]
+ 140 003c 0A42     		tst	r2, r1
+ 141 003e 37D1     		bne	.L15
+ 142 0040 9A68     		ldr	r2, [r3, #8]
+ 143 0042 2449     		ldr	r1, .L26+4
+ 144 0044 0124     		movs	r4, #1
+ 145 0046 0A40     		ands	r2, r1
+ 146 0048 0221     		movs	r1, #2
+ 147 004a 0A43     		orrs	r2, r1
+ 148 004c 9A60     		str	r2, [r3, #8]
+ 149 004e 8022     		movs	r2, #128
+ 150 0050 1202     		lsls	r2, r2, #8
+ 151 0052 0192     		str	r2, [sp, #4]
+ 152              	.L16:
+ 153 0054 9A68     		ldr	r2, [r3, #8]
+ 154 0056 0A42     		tst	r2, r1
+ 155 0058 31D1     		bne	.L18
+ 156              	.L11:
+ 157 005a 1722     		movs	r2, #23
+ 158 005c 9968     		ldr	r1, [r3, #8]
+ 159 005e 1142     		tst	r1, r2
+ 160 0060 34D1     		bne	.L21
+ 161 0062 5968     		ldr	r1, [r3, #4]
+ 162 0064 8832     		adds	r2, r2, #136
+ 163 0066 9143     		bics	r1, r2
+ 164 0068 5960     		str	r1, [r3, #4]
+ 165 006a 1968     		ldr	r1, [r3]
+ 166 006c 0A43     		orrs	r2, r1
+ 167 006e 1A60     		str	r2, [r3]
+ 168 0070 9A68     		ldr	r2, [r3, #8]
+ 169 0072 1949     		ldr	r1, .L26+8
+ 170 0074 0A40     		ands	r2, r1
+ 171 0076 9A60     		str	r2, [r3, #8]
+ 172 0078 DA68     		ldr	r2, [r3, #12]
+ 173 007a 1849     		ldr	r1, .L26+12
+ 174 007c 0A40     		ands	r2, r1
+ 175 007e DA60     		str	r2, [r3, #12]
+ 176 0080 1A69     		ldr	r2, [r3, #16]
+ 177 0082 1749     		ldr	r1, .L26+16
+ 178 0084 0A40     		ands	r2, r1
+ARM GAS  /tmp/ccpOhY5R.s 			page 4
+
+
+ 179 0086 0721     		movs	r1, #7
+ 180 0088 1A61     		str	r2, [r3, #16]
+ 181 008a 5A69     		ldr	r2, [r3, #20]
+ 182 008c 8A43     		bics	r2, r1
+ 183 008e 5A61     		str	r2, [r3, #20]
+ 184 0090 1A6A     		ldr	r2, [r3, #32]
+ 185 0092 1449     		ldr	r1, .L26+20
+ 186 0094 1140     		ands	r1, r2
+ 187 0096 144A     		ldr	r2, .L26+24
+ 188 0098 0A43     		orrs	r2, r1
+ 189 009a 1A62     		str	r2, [r3, #32]
+ 190 009c 9A6A     		ldr	r2, [r3, #40]
+ 191 009e 1349     		ldr	r1, .L26+28
+ 192 00a0 0A40     		ands	r2, r1
+ 193 00a2 7F21     		movs	r1, #127
+ 194 00a4 9A62     		str	r2, [r3, #40]
+ 195 00a6 B433     		adds	r3, r3, #180
+ 196 00a8 1A68     		ldr	r2, [r3]
+ 197 00aa 8A43     		bics	r2, r1
+ 198 00ac 1A60     		str	r2, [r3]
+ 199              	.L19:
+ 200              		@ sp needed
+ 201 00ae 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 202              	.L15:
+ 203 00b0 019A     		ldr	r2, [sp, #4]
+ 204 00b2 551E     		subs	r5, r2, #1
+ 205 00b4 0195     		str	r5, [sp, #4]
+ 206 00b6 002A     		cmp	r2, #0
+ 207 00b8 BFD1     		bne	.L13
+ 208 00ba 2000     		movs	r0, r4
+ 209 00bc BDE7     		b	.L13
+ 210              	.L18:
+ 211 00be 019A     		ldr	r2, [sp, #4]
+ 212 00c0 551E     		subs	r5, r2, #1
+ 213 00c2 0195     		str	r5, [sp, #4]
+ 214 00c4 002A     		cmp	r2, #0
+ 215 00c6 C5D1     		bne	.L16
+ 216 00c8 2000     		movs	r0, r4
+ 217 00ca C3E7     		b	.L16
+ 218              	.L21:
+ 219 00cc 0120     		movs	r0, #1
+ 220 00ce EEE7     		b	.L19
+ 221              	.L27:
+ 222              		.align	2
+ 223              	.L26:
+ 224 00d0 3FF2FFFF 		.word	-3521
+ 225 00d4 E8FFFF7F 		.word	2147483624
+ 226 00d8 FFFFFFEF 		.word	-268435457
+ 227 00dc 00023E83 		.word	-2093088256
+ 228 00e0 02FCFF3F 		.word	1073740802
+ 229 00e4 00F000F0 		.word	-268374016
+ 230 00e8 0000FF0F 		.word	268369920
+ 231 00ec 0000F9FF 		.word	-458752
+ 233              		.section	.text.LL_ADC_Init,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	LL_ADC_Init
+ 236              		.syntax unified
+ARM GAS  /tmp/ccpOhY5R.s 			page 5
+
+
+ 237              		.code	16
+ 238              		.thumb_func
+ 239              		.fpu softvfp
+ 241              	LL_ADC_Init:
+ 242              		@ args = 0, pretend = 0, frame = 0
+ 243              		@ frame_needed = 0, uses_anonymous_args = 0
+ 244 0000 8268     		ldr	r2, [r0, #8]
+ 245 0002 0300     		movs	r3, r0
+ 246 0004 30B5     		push	{r4, r5, lr}
+ 247 0006 0120     		movs	r0, #1
+ 248 0008 1400     		movs	r4, r2
+ 249 000a 0440     		ands	r4, r0
+ 250 000c 0242     		tst	r2, r0
+ 251 000e 10D1     		bne	.L29
+ 252 0010 8D68     		ldr	r5, [r1, #8]
+ 253 0012 4A68     		ldr	r2, [r1, #4]
+ 254 0014 D868     		ldr	r0, [r3, #12]
+ 255 0016 2A43     		orrs	r2, r5
+ 256 0018 CD68     		ldr	r5, [r1, #12]
+ 257 001a 0968     		ldr	r1, [r1]
+ 258 001c 2A43     		orrs	r2, r5
+ 259 001e 054D     		ldr	r5, .L31
+ 260 0020 2840     		ands	r0, r5
+ 261 0022 0243     		orrs	r2, r0
+ 262 0024 2000     		movs	r0, r4
+ 263 0026 DA60     		str	r2, [r3, #12]
+ 264 0028 1A69     		ldr	r2, [r3, #16]
+ 265 002a 9200     		lsls	r2, r2, #2
+ 266 002c 9208     		lsrs	r2, r2, #2
+ 267 002e 0A43     		orrs	r2, r1
+ 268 0030 1A61     		str	r2, [r3, #16]
+ 269              	.L29:
+ 270              		@ sp needed
+ 271 0032 30BD     		pop	{r4, r5, pc}
+ 272              	.L32:
+ 273              		.align	2
+ 274              	.L31:
+ 275 0034 C73FFFFF 		.word	-49209
+ 277              		.section	.text.LL_ADC_StructInit,"ax",%progbits
+ 278              		.align	1
+ 279              		.global	LL_ADC_StructInit
+ 280              		.syntax unified
+ 281              		.code	16
+ 282              		.thumb_func
+ 283              		.fpu softvfp
+ 285              	LL_ADC_StructInit:
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              		@ link register save eliminated.
+ 289 0000 8023     		movs	r3, #128
+ 290              		@ sp needed
+ 291 0002 DB05     		lsls	r3, r3, #23
+ 292 0004 0360     		str	r3, [r0]
+ 293 0006 0023     		movs	r3, #0
+ 294 0008 4360     		str	r3, [r0, #4]
+ 295 000a 8360     		str	r3, [r0, #8]
+ 296 000c C360     		str	r3, [r0, #12]
+ARM GAS  /tmp/ccpOhY5R.s 			page 6
+
+
+ 297 000e 7047     		bx	lr
+ 299              		.section	.text.LL_ADC_REG_Init,"ax",%progbits
+ 300              		.align	1
+ 301              		.global	LL_ADC_REG_Init
+ 302              		.syntax unified
+ 303              		.code	16
+ 304              		.thumb_func
+ 305              		.fpu softvfp
+ 307              	LL_ADC_REG_Init:
+ 308              		@ args = 0, pretend = 0, frame = 0
+ 309              		@ frame_needed = 0, uses_anonymous_args = 0
+ 310 0000 8368     		ldr	r3, [r0, #8]
+ 311 0002 0200     		movs	r2, r0
+ 312 0004 30B5     		push	{r4, r5, lr}
+ 313 0006 0120     		movs	r0, #1
+ 314 0008 1C00     		movs	r4, r3
+ 315 000a 0440     		ands	r4, r0
+ 316 000c 0342     		tst	r3, r0
+ 317 000e 0ED1     		bne	.L35
+ 318 0010 4D68     		ldr	r5, [r1, #4]
+ 319 0012 0B68     		ldr	r3, [r1]
+ 320 0014 D068     		ldr	r0, [r2, #12]
+ 321 0016 2B43     		orrs	r3, r5
+ 322 0018 8D68     		ldr	r5, [r1, #8]
+ 323 001a 2B43     		orrs	r3, r5
+ 324 001c CD68     		ldr	r5, [r1, #12]
+ 325 001e 0969     		ldr	r1, [r1, #16]
+ 326 0020 2B43     		orrs	r3, r5
+ 327 0022 0B43     		orrs	r3, r1
+ 328 0024 0249     		ldr	r1, .L37
+ 329 0026 0140     		ands	r1, r0
+ 330 0028 2000     		movs	r0, r4
+ 331 002a 0B43     		orrs	r3, r1
+ 332 002c D360     		str	r3, [r2, #12]
+ 333              	.L35:
+ 334              		@ sp needed
+ 335 002e 30BD     		pop	{r4, r5, pc}
+ 336              	.L38:
+ 337              		.align	2
+ 338              	.L37:
+ 339 0030 3CC2FEFF 		.word	-81348
+ 341              		.section	.text.LL_ADC_REG_StructInit,"ax",%progbits
+ 342              		.align	1
+ 343              		.global	LL_ADC_REG_StructInit
+ 344              		.syntax unified
+ 345              		.code	16
+ 346              		.thumb_func
+ 347              		.fpu softvfp
+ 349              	LL_ADC_REG_StructInit:
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+ 353 0000 0023     		movs	r3, #0
+ 354              		@ sp needed
+ 355 0002 0360     		str	r3, [r0]
+ 356 0004 4360     		str	r3, [r0, #4]
+ 357 0006 8360     		str	r3, [r0, #8]
+ARM GAS  /tmp/ccpOhY5R.s 			page 7
+
+
+ 358 0008 C360     		str	r3, [r0, #12]
+ 359 000a 8023     		movs	r3, #128
+ 360 000c 5B01     		lsls	r3, r3, #5
+ 361 000e 0361     		str	r3, [r0, #16]
+ 362 0010 7047     		bx	lr
+ 364              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccpOhY5R.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32l0xx_ll_adc.c
+     /tmp/ccpOhY5R.s:12     .text.LL_ADC_CommonDeInit:0000000000000000 $t
+     /tmp/ccpOhY5R.s:20     .text.LL_ADC_CommonDeInit:0000000000000000 LL_ADC_CommonDeInit
+     /tmp/ccpOhY5R.s:40     .text.LL_ADC_CommonDeInit:0000000000000018 $d
+     /tmp/ccpOhY5R.s:44     .text.LL_ADC_CommonInit:0000000000000000 $t
+     /tmp/ccpOhY5R.s:51     .text.LL_ADC_CommonInit:0000000000000000 LL_ADC_CommonInit
+     /tmp/ccpOhY5R.s:76     .text.LL_ADC_CommonInit:0000000000000024 $d
+     /tmp/ccpOhY5R.s:80     .text.LL_ADC_CommonStructInit:0000000000000000 $t
+     /tmp/ccpOhY5R.s:87     .text.LL_ADC_CommonStructInit:0000000000000000 LL_ADC_CommonStructInit
+     /tmp/ccpOhY5R.s:98     .text.LL_ADC_DeInit:0000000000000000 $t
+     /tmp/ccpOhY5R.s:105    .text.LL_ADC_DeInit:0000000000000000 LL_ADC_DeInit
+     /tmp/ccpOhY5R.s:224    .text.LL_ADC_DeInit:00000000000000d0 $d
+     /tmp/ccpOhY5R.s:234    .text.LL_ADC_Init:0000000000000000 $t
+     /tmp/ccpOhY5R.s:241    .text.LL_ADC_Init:0000000000000000 LL_ADC_Init
+     /tmp/ccpOhY5R.s:275    .text.LL_ADC_Init:0000000000000034 $d
+     /tmp/ccpOhY5R.s:278    .text.LL_ADC_StructInit:0000000000000000 $t
+     /tmp/ccpOhY5R.s:285    .text.LL_ADC_StructInit:0000000000000000 LL_ADC_StructInit
+     /tmp/ccpOhY5R.s:300    .text.LL_ADC_REG_Init:0000000000000000 $t
+     /tmp/ccpOhY5R.s:307    .text.LL_ADC_REG_Init:0000000000000000 LL_ADC_REG_Init
+     /tmp/ccpOhY5R.s:339    .text.LL_ADC_REG_Init:0000000000000030 $d
+     /tmp/ccpOhY5R.s:342    .text.LL_ADC_REG_StructInit:0000000000000000 $t
+     /tmp/ccpOhY5R.s:349    .text.LL_ADC_REG_StructInit:0000000000000000 LL_ADC_REG_StructInit
+
+NO UNDEFINED SYMBOLS

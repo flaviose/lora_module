@@ -1,0 +1,12 @@
+extensions/common/timer/timer_rtc.c:9:10:RtcGetTimerValue	8	static
+extensions/common/timer/timer_rtc.c:13:10:RtcSetTimerContext	8	static
+extensions/common/timer/timer_rtc.c:18:10:RtcGetTimerContext	0	static
+extensions/common/timer/timer_rtc.c:22:10:RtcGetTimerElapsedTime	8	static
+extensions/common/timer/timer_rtc.c:26:6:RtcSetAlarm	16	static
+extensions/common/timer/timer_rtc.c:39:6:RtcStopAlarm	8	static
+extensions/common/timer/timer_rtc.c:44:10:RtcMs2Tick	8	static
+extensions/common/timer/timer_rtc.c:48:13:RtcTick2Ms	8	static
+extensions/common/timer/timer_rtc.c:52:10:RtcGetMinimumTimeout	0	static
+extensions/common/timer/timer_rtc.c:56:13:RtcTempCompensation	0	static
+extensions/common/timer/timer_rtc.c:60:6:RtcProcess	0	static
+extensions/common/timer/timer_rtc.c:62:6:RtcIrq	8	static

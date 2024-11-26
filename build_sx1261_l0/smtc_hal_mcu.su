@@ -1,0 +1,12 @@
+bsp_l0/smtc_hal/smtc_hal_mcu.c:192:70:hal_mcu_wait_us	24	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:239:13:wut_cb	0	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:127:32:hal_mcu_critical_section_begin	0	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:132:32:hal_mcu_critical_section_end	0	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:136:32:hal_mcu_disable_irq	0	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:140:32:hal_mcu_enable_irq	0	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:187:32:hal_mcu_reset	0	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:144:32:hal_mcu_init	24	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:201:32:hal_mcu_set_sleep_for_ms	32	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:266:6:SysTick_Handler	0	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:484:6:HardFault_Handler	16	static
+bsp_l0/smtc_hal/smtc_hal_mcu.c:493:6:hal_mcu_delay_ms	16	static

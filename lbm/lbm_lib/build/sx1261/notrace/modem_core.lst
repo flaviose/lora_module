@@ -1,0 +1,916 @@
+ARM GAS  /tmp/cc0051Wn.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"modem_core.c"
+  10              		.text
+  11              		.section	.text.modem_empty_callback,"ax",%progbits
+  12              		.align	1
+  13              		.global	modem_empty_callback
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	modem_empty_callback:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23              		@ link register save eliminated.
+  24              		@ sp needed
+  25 0000 7047     		bx	lr
+  27              		.section	.text.modem_downlink_callback,"ax",%progbits
+  28              		.align	1
+  29              		.syntax unified
+  30              		.code	16
+  31              		.thumb_func
+  32              		.fpu softvfp
+  34              	modem_downlink_callback:
+  35              		@ args = 0, pretend = 0, frame = 24
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  38 0002 0500     		movs	r5, r0
+  39 0004 89B0     		sub	sp, sp, #36
+  40 0006 2E00     		movs	r6, r5
+  41 0008 04AC     		add	r4, sp, #16
+  42 000a 1022     		movs	r2, #16
+  43 000c 0021     		movs	r1, #0
+  44 000e 2000     		movs	r0, r4
+  45 0010 FFF7FEFF 		bl	memset
+  46 0014 2A00     		movs	r2, r5
+  47 0016 FF36     		adds	r6, r6, #255
+  48 0018 737D     		ldrb	r3, [r6, #21]
+  49 001a FE32     		adds	r2, r2, #254
+  50 001c 2370     		strb	r3, [r4]
+  51 001e 0621     		movs	r1, #6
+  52 0020 535E     		ldrsh	r3, [r2, r1]
+  53 0022 9B00     		lsls	r3, r3, #2
+  54 0024 A370     		strb	r3, [r4, #2]
+  55 0026 F37A     		ldrb	r3, [r6, #11]
+  56 0028 E370     		strb	r3, [r4, #3]
+  57 002a 737A     		ldrb	r3, [r6, #9]
+  58 002c 2371     		strb	r3, [r4, #4]
+  59 002e 337B     		ldrb	r3, [r6, #12]
+  60 0030 6371     		strb	r3, [r4, #5]
+ARM GAS  /tmp/cc0051Wn.s 			page 2
+
+
+  61 0032 2B00     		movs	r3, r5
+  62 0034 FC33     		adds	r3, r3, #252
+  63 0036 1B69     		ldr	r3, [r3, #16]
+  64 0038 A360     		str	r3, [r4, #8]
+  65 003a 737C     		ldrb	r3, [r6, #17]
+  66 003c 2373     		strb	r3, [r4, #12]
+  67 003e 0823     		movs	r3, #8
+  68 0040 D35E     		ldrsh	r3, [r2, r3]
+  69 0042 3F2B     		cmp	r3, #63
+  70 0044 2DDD     		ble	.L3
+  71 0046 7F23     		movs	r3, #127
+  72              	.L16:
+  73 0048 6370     		strb	r3, [r4, #1]
+  74 004a 0023     		movs	r3, #0
+  75 004c 1F00     		movs	r7, r3
+  76 004e 0393     		str	r3, [sp, #12]
+  77              	.L6:
+  78 0050 174B     		ldr	r3, .L17
+  79 0052 039A     		ldr	r2, [sp, #12]
+  80 0054 2800     		movs	r0, r5
+  81 0056 9B58     		ldr	r3, [r3, r2]
+  82 0058 9847     		blx	r3
+  83 005a 039B     		ldr	r3, [sp, #12]
+  84 005c C719     		adds	r7, r0, r7
+  85 005e 0433     		adds	r3, r3, #4
+  86 0060 FFB2     		uxtb	r7, r7
+  87 0062 0393     		str	r3, [sp, #12]
+  88 0064 142B     		cmp	r3, #20
+  89 0066 F3D1     		bne	.L6
+  90 0068 F37A     		ldrb	r3, [r6, #11]
+  91 006a 002B     		cmp	r3, #0
+  92 006c 17D0     		beq	.L2
+  93 006e 002F     		cmp	r7, #0
+  94 0070 15D1     		bne	.L2
+  95 0072 737A     		ldrb	r3, [r6, #9]
+  96 0074 002B     		cmp	r3, #0
+  97 0076 12D0     		beq	.L2
+  98 0078 1023     		movs	r3, #16
+  99 007a 2A78     		ldrb	r2, [r5]
+ 100 007c 691C     		adds	r1, r5, #1
+ 101 007e 0D4D     		ldr	r5, .L17+4
+ 102 0080 0093     		str	r3, [sp]
+ 103 0082 2800     		movs	r0, r5
+ 104 0084 2300     		movs	r3, r4
+ 105 0086 FFF7FEFF 		bl	fifo_ctrl_set
+ 106 008a 0028     		cmp	r0, #0
+ 107 008c 07D1     		bne	.L2
+ 108 008e 0430     		adds	r0, r0, #4
+ 109 0090 3900     		movs	r1, r7
+ 110 0092 727D     		ldrb	r2, [r6, #21]
+ 111 0094 FFF7FEFF 		bl	increment_asynchronous_msgnumber
+ 112 0098 2800     		movs	r0, r5
+ 113 009a FFF7FEFF 		bl	fifo_ctrl_print_stat
+ 114              	.L2:
+ 115 009e 09B0     		add	sp, sp, #36
+ 116              		@ sp needed
+ 117 00a0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ARM GAS  /tmp/cc0051Wn.s 			page 3
+
+
+ 118              	.L3:
+ 119 00a2 1A00     		movs	r2, r3
+ 120 00a4 4033     		adds	r3, r3, #64
+ 121 00a6 8032     		adds	r2, r2, #128
+ 122 00a8 CEDA     		bge	.L16
+ 123 00aa 8023     		movs	r3, #128
+ 124 00ac CCE7     		b	.L16
+ 125              	.L18:
+ 126 00ae C046     		.align	2
+ 127              	.L17:
+ 128 00b0 34030000 		.word	modem_ctx_light+820
+ 129 00b4 18010000 		.word	modem_ctx_light+280
+ 131              		.section	.text.modem_context_get_fifo_obj,"ax",%progbits
+ 132              		.align	1
+ 133              		.global	modem_context_get_fifo_obj
+ 134              		.syntax unified
+ 135              		.code	16
+ 136              		.thumb_func
+ 137              		.fpu softvfp
+ 139              	modem_context_get_fifo_obj:
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 143 0000 0048     		ldr	r0, .L20
+ 144              		@ sp needed
+ 145 0002 7047     		bx	lr
+ 146              	.L21:
+ 147              		.align	2
+ 148              	.L20:
+ 149 0004 18010000 		.word	modem_ctx_light+280
+ 151              		.section	.text.modem_set_test_mode_status,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	modem_set_test_mode_status
+ 154              		.syntax unified
+ 155              		.code	16
+ 156              		.thumb_func
+ 157              		.fpu softvfp
+ 159              	modem_set_test_mode_status:
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162              		@ link register save eliminated.
+ 163 0000 014B     		ldr	r3, .L23
+ 164              		@ sp needed
+ 165 0002 FF33     		adds	r3, r3, #255
+ 166 0004 5874     		strb	r0, [r3, #17]
+ 167 0006 7047     		bx	lr
+ 168              	.L24:
+ 169              		.align	2
+ 170              	.L23:
+ 171 0008 00000000 		.word	modem_ctx_light
+ 173              		.section	.text.modem_get_test_mode_status,"ax",%progbits
+ 174              		.align	1
+ 175              		.global	modem_get_test_mode_status
+ 176              		.syntax unified
+ 177              		.code	16
+ 178              		.thumb_func
+ 179              		.fpu softvfp
+ARM GAS  /tmp/cc0051Wn.s 			page 4
+
+
+ 181              	modem_get_test_mode_status:
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184              		@ link register save eliminated.
+ 185 0000 014B     		ldr	r3, .L26
+ 186              		@ sp needed
+ 187 0002 FF33     		adds	r3, r3, #255
+ 188 0004 587C     		ldrb	r0, [r3, #17]
+ 189 0006 7047     		bx	lr
+ 190              	.L27:
+ 191              		.align	2
+ 192              	.L26:
+ 193 0008 00000000 		.word	modem_ctx_light
+ 195              		.section	.text.modem_get_user_alarm,"ax",%progbits
+ 196              		.align	1
+ 197              		.global	modem_get_user_alarm
+ 198              		.syntax unified
+ 199              		.code	16
+ 200              		.thumb_func
+ 201              		.fpu softvfp
+ 203              	modem_get_user_alarm:
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206              		@ link register save eliminated.
+ 207 0000 014B     		ldr	r3, .L29
+ 208              		@ sp needed
+ 209 0002 FC33     		adds	r3, r3, #252
+ 210 0004 9869     		ldr	r0, [r3, #24]
+ 211 0006 7047     		bx	lr
+ 212              	.L30:
+ 213              		.align	2
+ 214              	.L29:
+ 215 0008 00000000 		.word	modem_ctx_light
+ 217              		.section	.text.modem_set_user_alarm,"ax",%progbits
+ 218              		.align	1
+ 219              		.global	modem_set_user_alarm
+ 220              		.syntax unified
+ 221              		.code	16
+ 222              		.thumb_func
+ 223              		.fpu softvfp
+ 225              	modem_set_user_alarm:
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228              		@ link register save eliminated.
+ 229 0000 014B     		ldr	r3, .L32
+ 230              		@ sp needed
+ 231 0002 FC33     		adds	r3, r3, #252
+ 232 0004 9861     		str	r0, [r3, #24]
+ 233 0006 7047     		bx	lr
+ 234              	.L33:
+ 235              		.align	2
+ 236              	.L32:
+ 237 0008 00000000 		.word	modem_ctx_light
+ 239              		.section	.text.modem_set_radio_ctx,"ax",%progbits
+ 240              		.align	1
+ 241              		.global	modem_set_radio_ctx
+ 242              		.syntax unified
+ARM GAS  /tmp/cc0051Wn.s 			page 5
+
+
+ 243              		.code	16
+ 244              		.thumb_func
+ 245              		.fpu softvfp
+ 247              	modem_set_radio_ctx:
+ 248              		@ args = 0, pretend = 0, frame = 0
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250              		@ link register save eliminated.
+ 251 0000 014B     		ldr	r3, .L35
+ 252              		@ sp needed
+ 253 0002 FC33     		adds	r3, r3, #252
+ 254 0004 1861     		str	r0, [r3, #16]
+ 255 0006 7047     		bx	lr
+ 256              	.L36:
+ 257              		.align	2
+ 258              	.L35:
+ 259 0008 00000000 		.word	modem_ctx_light
+ 261              		.section	.text.modem_get_radio_ctx,"ax",%progbits
+ 262              		.align	1
+ 263              		.global	modem_get_radio_ctx
+ 264              		.syntax unified
+ 265              		.code	16
+ 266              		.thumb_func
+ 267              		.fpu softvfp
+ 269              	modem_get_radio_ctx:
+ 270              		@ args = 0, pretend = 0, frame = 0
+ 271              		@ frame_needed = 0, uses_anonymous_args = 0
+ 272              		@ link register save eliminated.
+ 273 0000 014B     		ldr	r3, .L38
+ 274              		@ sp needed
+ 275 0002 FC33     		adds	r3, r3, #252
+ 276 0004 1869     		ldr	r0, [r3, #16]
+ 277 0006 7047     		bx	lr
+ 278              	.L39:
+ 279              		.align	2
+ 280              	.L38:
+ 281 0008 00000000 		.word	modem_ctx_light
+ 283              		.section	.text.modem_get_rp,"ax",%progbits
+ 284              		.align	1
+ 285              		.global	modem_get_rp
+ 286              		.syntax unified
+ 287              		.code	16
+ 288              		.thumb_func
+ 289              		.fpu softvfp
+ 291              	modem_get_rp:
+ 292              		@ args = 0, pretend = 0, frame = 0
+ 293              		@ frame_needed = 0, uses_anonymous_args = 0
+ 294              		@ link register save eliminated.
+ 295 0000 014B     		ldr	r3, .L41
+ 296              		@ sp needed
+ 297 0002 FC33     		adds	r3, r3, #252
+ 298 0004 D868     		ldr	r0, [r3, #12]
+ 299 0006 7047     		bx	lr
+ 300              	.L42:
+ 301              		.align	2
+ 302              	.L41:
+ 303 0008 00000000 		.word	modem_ctx_light
+ 305              		.section	.text.modem_suspend_radio_access,"ax",%progbits
+ARM GAS  /tmp/cc0051Wn.s 			page 6
+
+
+ 306              		.align	1
+ 307              		.global	modem_suspend_radio_access
+ 308              		.syntax unified
+ 309              		.code	16
+ 310              		.thumb_func
+ 311              		.fpu softvfp
+ 313              	modem_suspend_radio_access:
+ 314              		@ args = 0, pretend = 0, frame = 168
+ 315              		@ frame_needed = 0, uses_anonymous_args = 0
+ 316 0000 30B5     		push	{r4, r5, lr}
+ 317 0002 ADB0     		sub	sp, sp, #180
+ 318 0004 09AD     		add	r5, sp, #36
+ 319 0006 03AC     		add	r4, sp, #12
+ 320 0008 8C22     		movs	r2, #140
+ 321 000a 0021     		movs	r1, #0
+ 322 000c 2800     		movs	r0, r5
+ 323 000e FFF7FEFF 		bl	memset
+ 324 0012 1822     		movs	r2, #24
+ 325 0014 0021     		movs	r1, #0
+ 326 0016 2000     		movs	r0, r4
+ 327 0018 FFF7FEFF 		bl	memset
+ 328 001c 1123     		movs	r3, #17
+ 329 001e 6370     		strb	r3, [r4, #1]
+ 330 0020 0A4B     		ldr	r3, .L44
+ 331 0022 0493     		str	r3, [sp, #16]
+ 332 0024 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 333 0028 094B     		ldr	r3, .L44+4
+ 334 002a 0430     		adds	r0, r0, #4
+ 335 002c 0893     		str	r3, [sp, #32]
+ 336 002e 0023     		movs	r3, #0
+ 337 0030 0690     		str	r0, [sp, #24]
+ 338 0032 0848     		ldr	r0, .L44+8
+ 339 0034 0095     		str	r5, [sp]
+ 340 0036 FC30     		adds	r0, r0, #252
+ 341 0038 1A00     		movs	r2, r3
+ 342 003a 2100     		movs	r1, r4
+ 343 003c C068     		ldr	r0, [r0, #12]
+ 344 003e FFF7FEFF 		bl	rp_task_enqueue
+ 345 0042 4342     		rsbs	r3, r0, #0
+ 346 0044 5841     		adcs	r0, r0, r3
+ 347 0046 C0B2     		uxtb	r0, r0
+ 348 0048 2DB0     		add	sp, sp, #180
+ 349              		@ sp needed
+ 350 004a 30BD     		pop	{r4, r5, pc}
+ 351              	.L45:
+ 352              		.align	2
+ 353              	.L44:
+ 354 004c 00000000 		.word	modem_empty_callback
+ 355 0050 204E0000 		.word	20000
+ 356 0054 00000000 		.word	modem_ctx_light
+ 358              		.section	.text.modem_resume_radio_access,"ax",%progbits
+ 359              		.align	1
+ 360              		.global	modem_resume_radio_access
+ 361              		.syntax unified
+ 362              		.code	16
+ 363              		.thumb_func
+ 364              		.fpu softvfp
+ARM GAS  /tmp/cc0051Wn.s 			page 7
+
+
+ 366              	modem_resume_radio_access:
+ 367              		@ args = 0, pretend = 0, frame = 0
+ 368              		@ frame_needed = 0, uses_anonymous_args = 0
+ 369 0000 10B5     		push	{r4, lr}
+ 370 0002 074C     		ldr	r4, .L49
+ 371 0004 0021     		movs	r1, #0
+ 372 0006 FC34     		adds	r4, r4, #252
+ 373 0008 E068     		ldr	r0, [r4, #12]
+ 374 000a FFF7FEFF 		bl	rp_task_abort
+ 375 000e 0023     		movs	r3, #0
+ 376 0010 9842     		cmp	r0, r3
+ 377 0012 03D1     		bne	.L47
+ 378 0014 E068     		ldr	r0, [r4, #12]
+ 379 0016 FFF7FEFF 		bl	rp_callback
+ 380 001a 0123     		movs	r3, #1
+ 381              	.L47:
+ 382              		@ sp needed
+ 383 001c 1800     		movs	r0, r3
+ 384 001e 10BD     		pop	{r4, pc}
+ 385              	.L50:
+ 386              		.align	2
+ 387              	.L49:
+ 388 0020 00000000 		.word	modem_ctx_light
+ 390              		.section	.text.crc,"ax",%progbits
+ 391              		.align	1
+ 392              		.global	crc
+ 393              		.syntax unified
+ 394              		.code	16
+ 395              		.thumb_func
+ 396              		.fpu softvfp
+ 398              	crc:
+ 399              		@ args = 0, pretend = 0, frame = 0
+ 400              		@ frame_needed = 0, uses_anonymous_args = 0
+ 401 0000 0123     		movs	r3, #1
+ 402 0002 70B5     		push	{r4, r5, r6, lr}
+ 403 0004 0124     		movs	r4, #1
+ 404 0006 0A4D     		ldr	r5, .L56
+ 405 0008 5B42     		rsbs	r3, r3, #0
+ 406 000a 4118     		adds	r1, r0, r1
+ 407              	.L52:
+ 408 000c 0A1A     		subs	r2, r1, r0
+ 409 000e 002A     		cmp	r2, #0
+ 410 0010 01DC     		bgt	.L54
+ 411              		@ sp needed
+ 412 0012 D843     		mvns	r0, r3
+ 413 0014 70BD     		pop	{r4, r5, r6, pc}
+ 414              	.L54:
+ 415 0016 0278     		ldrb	r2, [r0]
+ 416 0018 5340     		eors	r3, r2
+ 417 001a 0822     		movs	r2, #8
+ 418              	.L53:
+ 419 001c 5E08     		lsrs	r6, r3, #1
+ 420 001e 2340     		ands	r3, r4
+ 421 0020 5B42     		rsbs	r3, r3, #0
+ 422 0022 2B40     		ands	r3, r5
+ 423 0024 013A     		subs	r2, r2, #1
+ 424 0026 7340     		eors	r3, r6
+ARM GAS  /tmp/cc0051Wn.s 			page 8
+
+
+ 425 0028 002A     		cmp	r2, #0
+ 426 002a F7D1     		bne	.L53
+ 427 002c 0130     		adds	r0, r0, #1
+ 428 002e EDE7     		b	.L52
+ 429              	.L57:
+ 430              		.align	2
+ 431              	.L56:
+ 432 0030 2083B8ED 		.word	-306674912
+ 434              		.section	.text.modem_duty_cycle_get_status,"ax",%progbits
+ 435              		.align	1
+ 436              		.global	modem_duty_cycle_get_status
+ 437              		.syntax unified
+ 438              		.code	16
+ 439              		.thumb_func
+ 440              		.fpu softvfp
+ 442              	modem_duty_cycle_get_status:
+ 443              		@ args = 0, pretend = 0, frame = 72
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445 0000 70B5     		push	{r4, r5, r6, lr}
+ 446 0002 92B0     		sub	sp, sp, #72
+ 447 0004 0600     		movs	r6, r0
+ 448 0006 FFF7FEFF 		bl	lorawan_api_next_network_free_duty_cycle_ms_get
+ 449 000a 0500     		movs	r5, r0
+ 450 000c FFF7FEFF 		bl	smtc_duty_cycle_enable_get
+ 451 0010 0128     		cmp	r0, #1
+ 452 0012 1CD1     		bne	.L58
+ 453 0014 0024     		movs	r4, #0
+ 454 0016 6B46     		mov	r3, sp
+ 455 0018 4022     		movs	r2, #64
+ 456 001a 2100     		movs	r1, r4
+ 457 001c 02A8     		add	r0, sp, #8
+ 458 001e DC71     		strb	r4, [r3, #7]
+ 459 0020 FFF7FEFF 		bl	memset
+ 460 0024 6846     		mov	r0, sp
+ 461 0026 3300     		movs	r3, r6
+ 462 0028 1022     		movs	r2, #16
+ 463 002a 02A9     		add	r1, sp, #8
+ 464 002c 0730     		adds	r0, r0, #7
+ 465 002e FFF7FEFF 		bl	lorawan_api_get_current_enabled_frequencies_list
+ 466 0032 A042     		cmp	r0, r4
+ 467 0034 05D0     		beq	.L60
+ 468 0036 6B46     		mov	r3, sp
+ 469 0038 02A9     		add	r1, sp, #8
+ 470 003a D879     		ldrb	r0, [r3, #7]
+ 471 003c FFF7FEFF 		bl	smtc_duty_cycle_get_next_free_time_ms
+ 472 0040 0400     		movs	r4, r0
+ 473              	.L60:
+ 474 0042 002D     		cmp	r5, #0
+ 475 0044 02D0     		beq	.L61
+ 476 0046 AC42     		cmp	r4, r5
+ 477 0048 00DA     		bge	.L61
+ 478 004a 2C00     		movs	r4, r5
+ 479              	.L61:
+ 480 004c 2500     		movs	r5, r4
+ 481              	.L58:
+ 482 004e 2800     		movs	r0, r5
+ 483 0050 12B0     		add	sp, sp, #72
+ARM GAS  /tmp/cc0051Wn.s 			page 9
+
+
+ 484              		@ sp needed
+ 485 0052 70BD     		pop	{r4, r5, r6, pc}
+ 487              		.section	.text.modem_get_status,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	modem_get_status
+ 490              		.syntax unified
+ 491              		.code	16
+ 492              		.thumb_func
+ 493              		.fpu softvfp
+ 495              	modem_get_status:
+ 496              		@ args = 0, pretend = 0, frame = 0
+ 497              		@ frame_needed = 0, uses_anonymous_args = 0
+ 498 0000 70B5     		push	{r4, r5, r6, lr}
+ 499 0002 0500     		movs	r5, r0
+ 500 0004 FFF7FEFF 		bl	smtc_modem_hal_crashlog_get_status
+ 501 0008 431E     		subs	r3, r0, #1
+ 502 000a 9841     		sbcs	r0, r0, r3
+ 503 000c 4400     		lsls	r4, r0, #1
+ 504 000e 2800     		movs	r0, r5
+ 505 0010 FFF7FEFF 		bl	lorawan_api_isjoined
+ 506 0014 0228     		cmp	r0, #2
+ 507 0016 01D1     		bne	.L70
+ 508 0018 0823     		movs	r3, #8
+ 509 001a 1C43     		orrs	r4, r3
+ 510              	.L70:
+ 511 001c 2800     		movs	r0, r5
+ 512 001e FFF7FEFF 		bl	modem_supervisor_get_modem_is_suspended
+ 513 0022 0028     		cmp	r0, #0
+ 514 0024 01D0     		beq	.L71
+ 515 0026 1023     		movs	r3, #16
+ 516 0028 1C43     		orrs	r4, r3
+ 517              	.L71:
+ 518 002a 2800     		movs	r0, r5
+ 519 002c FFF7FEFF 		bl	lorawan_api_isjoined
+ 520 0030 0128     		cmp	r0, #1
+ 521 0032 01D1     		bne	.L72
+ 522 0034 4023     		movs	r3, #64
+ 523 0036 1C43     		orrs	r4, r3
+ 524              	.L72:
+ 525 0038 2000     		movs	r0, r4
+ 526              		@ sp needed
+ 527 003a 70BD     		pop	{r4, r5, r6, pc}
+ 529              		.section	.text.modem_store_modem_context,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	modem_store_modem_context
+ 532              		.syntax unified
+ 533              		.code	16
+ 534              		.thumb_func
+ 535              		.fpu softvfp
+ 537              	modem_store_modem_context:
+ 538              		@ args = 0, pretend = 0, frame = 16
+ 539              		@ frame_needed = 0, uses_anonymous_args = 0
+ 540 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 541 0002 1022     		movs	r2, #16
+ 542 0004 0021     		movs	r1, #0
+ 543 0006 6846     		mov	r0, sp
+ 544 0008 FFF7FEFF 		bl	memset
+ARM GAS  /tmp/cc0051Wn.s 			page 10
+
+
+ 545 000c 0021     		movs	r1, #0
+ 546 000e 1023     		movs	r3, #16
+ 547 0010 6A46     		mov	r2, sp
+ 548 0012 0800     		movs	r0, r1
+ 549 0014 FFF7FEFF 		bl	smtc_modem_hal_context_restore
+ 550 0018 D223     		movs	r3, #210
+ 551 001a 0D4A     		ldr	r2, .L79
+ 552 001c 9B00     		lsls	r3, r3, #2
+ 553 001e D358     		ldr	r3, [r2, r3]
+ 554 0020 009A     		ldr	r2, [sp]
+ 555 0022 9A42     		cmp	r2, r3
+ 556 0024 11D0     		beq	.L77
+ 557 0026 0C21     		movs	r1, #12
+ 558 0028 6846     		mov	r0, sp
+ 559 002a 0093     		str	r3, [sp]
+ 560 002c FFF7FEFF 		bl	crc
+ 561 0030 0021     		movs	r1, #0
+ 562 0032 1023     		movs	r3, #16
+ 563 0034 6A46     		mov	r2, sp
+ 564 0036 0390     		str	r0, [sp, #12]
+ 565 0038 0800     		movs	r0, r1
+ 566 003a FFF7FEFF 		bl	smtc_modem_hal_context_store
+ 567 003e 0021     		movs	r1, #0
+ 568 0040 1023     		movs	r3, #16
+ 569 0042 6A46     		mov	r2, sp
+ 570 0044 0800     		movs	r0, r1
+ 571 0046 FFF7FEFF 		bl	smtc_modem_hal_context_restore
+ 572              	.L77:
+ 573 004a 05B0     		add	sp, sp, #20
+ 574              		@ sp needed
+ 575 004c 00BD     		pop	{pc}
+ 576              	.L80:
+ 577 004e C046     		.align	2
+ 578              	.L79:
+ 579 0050 00000000 		.word	modem_ctx_light
+ 581              		.section	.text.modem_load_modem_context,"ax",%progbits
+ 582              		.align	1
+ 583              		.global	modem_load_modem_context
+ 584              		.syntax unified
+ 585              		.code	16
+ 586              		.thumb_func
+ 587              		.fpu softvfp
+ 589              	modem_load_modem_context:
+ 590              		@ args = 0, pretend = 0, frame = 24
+ 591              		@ frame_needed = 0, uses_anonymous_args = 0
+ 592 0000 10B5     		push	{r4, lr}
+ 593 0002 86B0     		sub	sp, sp, #24
+ 594 0004 1022     		movs	r2, #16
+ 595 0006 0021     		movs	r1, #0
+ 596 0008 02A8     		add	r0, sp, #8
+ 597 000a FFF7FEFF 		bl	memset
+ 598 000e 0021     		movs	r1, #0
+ 599 0010 1023     		movs	r3, #16
+ 600 0012 0800     		movs	r0, r1
+ 601 0014 02AA     		add	r2, sp, #8
+ 602 0016 FFF7FEFF 		bl	smtc_modem_hal_context_restore
+ 603 001a 0C21     		movs	r1, #12
+ARM GAS  /tmp/cc0051Wn.s 			page 11
+
+
+ 604 001c 02A8     		add	r0, sp, #8
+ 605 001e FFF7FEFF 		bl	crc
+ 606 0022 059B     		ldr	r3, [sp, #20]
+ 607 0024 0193     		str	r3, [sp, #4]
+ 608 0026 9842     		cmp	r0, r3
+ 609 0028 06D1     		bne	.L82
+ 610 002a D223     		movs	r3, #210
+ 611 002c 0A4A     		ldr	r2, .L84
+ 612 002e 0299     		ldr	r1, [sp, #8]
+ 613 0030 9B00     		lsls	r3, r3, #2
+ 614 0032 D150     		str	r1, [r2, r3]
+ 615              	.L81:
+ 616 0034 06B0     		add	sp, sp, #24
+ 617              		@ sp needed
+ 618 0036 10BD     		pop	{r4, pc}
+ 619              	.L82:
+ 620 0038 0024     		movs	r4, #0
+ 621 003a 02AA     		add	r2, sp, #8
+ 622 003c 2100     		movs	r1, r4
+ 623 003e 2000     		movs	r0, r4
+ 624 0040 1023     		movs	r3, #16
+ 625 0042 0294     		str	r4, [sp, #8]
+ 626 0044 FFF7FEFF 		bl	smtc_modem_hal_context_store
+ 627 0048 1023     		movs	r3, #16
+ 628 004a 2100     		movs	r1, r4
+ 629 004c 2000     		movs	r0, r4
+ 630 004e 02AA     		add	r2, sp, #8
+ 631 0050 FFF7FEFF 		bl	smtc_modem_hal_context_restore
+ 632 0054 EEE7     		b	.L81
+ 633              	.L85:
+ 634 0056 C046     		.align	2
+ 635              	.L84:
+ 636 0058 00000000 		.word	modem_ctx_light
+ 638              		.section	.text.modem_context_init_light,"ax",%progbits
+ 639              		.align	1
+ 640              		.global	modem_context_init_light
+ 641              		.syntax unified
+ 642              		.code	16
+ 643              		.thumb_func
+ 644              		.fpu softvfp
+ 646              	modem_context_init_light:
+ 647              		@ args = 0, pretend = 0, frame = 16
+ 648              		@ frame_needed = 0, uses_anonymous_args = 0
+ 649 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 650 0002 3E4E     		ldr	r6, .L87
+ 651 0004 0C00     		movs	r4, r1
+ 652 0006 3700     		movs	r7, r6
+ 653 0008 87B0     		sub	sp, sp, #28
+ 654 000a FC37     		adds	r7, r7, #252
+ 655 000c F960     		str	r1, [r7, #12]
+ 656 000e FFF7FEFF 		bl	modem_event_init
+ 657 0012 FFF7FEFF 		bl	smtc_duty_cycle_init
+ 658 0016 3A4A     		ldr	r2, .L87+4
+ 659 0018 2000     		movs	r0, r4
+ 660 001a 0021     		movs	r1, #0
+ 661 001c FFF7FEFF 		bl	lorawan_api_init
+ 662 0020 0021     		movs	r1, #0
+ARM GAS  /tmp/cc0051Wn.s 			page 12
+
+
+ 663 0022 0800     		movs	r0, r1
+ 664 0024 FFF7FEFF 		bl	lorawan_api_dr_strategy_set
+ 665 0028 0020     		movs	r0, #0
+ 666 002a FFF7FEFF 		bl	lorawan_api_join_status_clear
+ 667 002e 0020     		movs	r0, #0
+ 668 0030 FFF7FEFF 		bl	lorawan_api_get_region
+ 669 0034 0021     		movs	r1, #0
+ 670 0036 FFF7FEFF 		bl	lorawan_api_set_region
+ 671 003a FF21     		movs	r1, #255
+ 672 003c 04AC     		add	r4, sp, #16
+ 673 003e 05AD     		add	r5, sp, #20
+ 674 0040 0800     		movs	r0, r1
+ 675 0042 0094     		str	r4, [sp]
+ 676 0044 03AB     		add	r3, sp, #12
+ 677 0046 2F4A     		ldr	r2, .L87+8
+ 678 0048 0195     		str	r5, [sp, #4]
+ 679 004a FFF7FEFF 		bl	lorawan_send_management_services_init
+ 680 004e 059B     		ldr	r3, [sp, #20]
+ 681 0050 049A     		ldr	r2, [sp, #16]
+ 682 0052 0399     		ldr	r1, [sp, #12]
+ 683 0054 0120     		movs	r0, #1
+ 684 0056 FFF7FEFF 		bl	modem_supervisor_init_callback
+ 685 005a FF21     		movs	r1, #255
+ 686 005c 0094     		str	r4, [sp]
+ 687 005e 0800     		movs	r0, r1
+ 688 0060 03AB     		add	r3, sp, #12
+ 689 0062 294A     		ldr	r2, .L87+12
+ 690 0064 0195     		str	r5, [sp, #4]
+ 691 0066 FFF7FEFF 		bl	lorawan_join_management_services_init
+ 692 006a 059B     		ldr	r3, [sp, #20]
+ 693 006c 049A     		ldr	r2, [sp, #16]
+ 694 006e 0399     		ldr	r1, [sp, #12]
+ 695 0070 0220     		movs	r0, #2
+ 696 0072 FFF7FEFF 		bl	modem_supervisor_init_callback
+ 697 0076 FF21     		movs	r1, #255
+ 698 0078 0094     		str	r4, [sp]
+ 699 007a 0800     		movs	r0, r1
+ 700 007c 03AB     		add	r3, sp, #12
+ 701 007e 234A     		ldr	r2, .L87+16
+ 702 0080 0195     		str	r5, [sp, #4]
+ 703 0082 FFF7FEFF 		bl	lorawan_dwn_ack_management_init
+ 704 0086 059B     		ldr	r3, [sp, #20]
+ 705 0088 049A     		ldr	r2, [sp, #16]
+ 706 008a 0399     		ldr	r1, [sp, #12]
+ 707 008c 0320     		movs	r0, #3
+ 708 008e FFF7FEFF 		bl	modem_supervisor_init_callback
+ 709 0092 FF21     		movs	r1, #255
+ 710 0094 0094     		str	r4, [sp]
+ 711 0096 0800     		movs	r0, r1
+ 712 0098 03AB     		add	r3, sp, #12
+ 713 009a 1D4A     		ldr	r2, .L87+20
+ 714 009c 0195     		str	r5, [sp, #4]
+ 715 009e FFF7FEFF 		bl	lorawan_cid_request_management_init
+ 716 00a2 059B     		ldr	r3, [sp, #20]
+ 717 00a4 049A     		ldr	r2, [sp, #16]
+ 718 00a6 0399     		ldr	r1, [sp, #12]
+ 719 00a8 0420     		movs	r0, #4
+ARM GAS  /tmp/cc0051Wn.s 			page 13
+
+
+ 720 00aa FFF7FEFF 		bl	modem_supervisor_init_callback
+ 721 00ae 0721     		movs	r1, #7
+ 722 00b0 1848     		ldr	r0, .L87+24
+ 723 00b2 194A     		ldr	r2, .L87+28
+ 724 00b4 4378     		ldrb	r3, [r0, #1]
+ 725 00b6 0195     		str	r5, [sp, #4]
+ 726 00b8 5943     		muls	r1, r3
+ 727 00ba 0094     		str	r4, [sp]
+ 728 00bc 0631     		adds	r1, r1, #6
+ 729 00be 4468     		ldr	r4, [r0, #4]
+ 730 00c0 03AB     		add	r3, sp, #12
+ 731 00c2 C9B2     		uxtb	r1, r1
+ 732 00c4 A047     		blx	r4
+ 733 00c6 059B     		ldr	r3, [sp, #20]
+ 734 00c8 049A     		ldr	r2, [sp, #16]
+ 735 00ca 0399     		ldr	r1, [sp, #12]
+ 736 00cc 0620     		movs	r0, #6
+ 737 00ce FFF7FEFF 		bl	modem_supervisor_init_callback
+ 738 00d2 3300     		movs	r3, r6
+ 739 00d4 0022     		movs	r2, #0
+ 740 00d6 FF33     		adds	r3, r3, #255
+ 741 00d8 5A74     		strb	r2, [r3, #17]
+ 742 00da 104B     		ldr	r3, .L87+32
+ 743 00dc 8032     		adds	r2, r2, #128
+ 744 00de 1049     		ldr	r1, .L87+36
+ 745 00e0 1048     		ldr	r0, .L87+40
+ 746 00e2 9200     		lsls	r2, r2, #2
+ 747 00e4 BB61     		str	r3, [r7, #24]
+ 748 00e6 FFF7FEFF 		bl	fifo_ctrl_init
+ 749 00ea FFF7FEFF 		bl	modem_load_modem_context
+ 750 00ee D222     		movs	r2, #210
+ 751 00f0 9200     		lsls	r2, r2, #2
+ 752 00f2 B358     		ldr	r3, [r6, r2]
+ 753 00f4 0133     		adds	r3, r3, #1
+ 754 00f6 B350     		str	r3, [r6, r2]
+ 755 00f8 07B0     		add	sp, sp, #28
+ 756              		@ sp needed
+ 757 00fa F0BD     		pop	{r4, r5, r6, r7, pc}
+ 758              	.L88:
+ 759              		.align	2
+ 760              	.L87:
+ 761 00fc 00000000 		.word	modem_ctx_light
+ 762 0100 00000000 		.word	modem_downlink_callback
+ 763 0104 34030000 		.word	modem_ctx_light+820
+ 764 0108 38030000 		.word	modem_ctx_light+824
+ 765 010c 3C030000 		.word	modem_ctx_light+828
+ 766 0110 40030000 		.word	modem_ctx_light+832
+ 767 0114 00000000 		.word	.LANCHOR0
+ 768 0118 44030000 		.word	modem_ctx_light+836
+ 769 011c FFFFFF7F 		.word	2147483647
+ 770 0120 34010000 		.word	modem_ctx_light+308
+ 771 0124 18010000 		.word	modem_ctx_light+280
+ 773              		.section	.text.modem_get_reset_counter,"ax",%progbits
+ 774              		.align	1
+ 775              		.global	modem_get_reset_counter
+ 776              		.syntax unified
+ 777              		.code	16
+ARM GAS  /tmp/cc0051Wn.s 			page 14
+
+
+ 778              		.thumb_func
+ 779              		.fpu softvfp
+ 781              	modem_get_reset_counter:
+ 782              		@ args = 0, pretend = 0, frame = 0
+ 783              		@ frame_needed = 0, uses_anonymous_args = 0
+ 784              		@ link register save eliminated.
+ 785 0000 D223     		movs	r3, #210
+ 786              		@ sp needed
+ 787 0002 024A     		ldr	r2, .L90
+ 788 0004 9B00     		lsls	r3, r3, #2
+ 789 0006 D058     		ldr	r0, [r2, r3]
+ 790 0008 7047     		bx	lr
+ 791              	.L91:
+ 792 000a C046     		.align	2
+ 793              	.L90:
+ 794 000c 00000000 		.word	modem_ctx_light
+ 796              		.global	modem_ctx_light
+ 797              		.section	.bss.modem_ctx_light,"aw",%nobits
+ 798              		.align	2
+ 801              	modem_ctx_light:
+ 802 0000 00000000 		.space	844
+ 802      00000000 
+ 802      00000000 
+ 802      00000000 
+ 802      00000000 
+ 803              		.section	.data.modem_service_config,"aw"
+ 804              		.align	2
+ 805              		.set	.LANCHOR0,. + 0
+ 808              	modem_service_config:
+ 809 0000 00       		.byte	0
+ 810 0001 00       		.byte	0
+ 811 0002 0000     		.space	2
+ 812 0004 00000000 		.word	lorawan_certification_services_init
+ 813              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/cc0051Wn.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 modem_core.c
+     /tmp/cc0051Wn.s:12     .text.modem_empty_callback:0000000000000000 $t
+     /tmp/cc0051Wn.s:20     .text.modem_empty_callback:0000000000000000 modem_empty_callback
+     /tmp/cc0051Wn.s:28     .text.modem_downlink_callback:0000000000000000 $t
+     /tmp/cc0051Wn.s:34     .text.modem_downlink_callback:0000000000000000 modem_downlink_callback
+     /tmp/cc0051Wn.s:128    .text.modem_downlink_callback:00000000000000b0 $d
+     /tmp/cc0051Wn.s:801    .bss.modem_ctx_light:0000000000000000 modem_ctx_light
+     /tmp/cc0051Wn.s:132    .text.modem_context_get_fifo_obj:0000000000000000 $t
+     /tmp/cc0051Wn.s:139    .text.modem_context_get_fifo_obj:0000000000000000 modem_context_get_fifo_obj
+     /tmp/cc0051Wn.s:149    .text.modem_context_get_fifo_obj:0000000000000004 $d
+     /tmp/cc0051Wn.s:152    .text.modem_set_test_mode_status:0000000000000000 $t
+     /tmp/cc0051Wn.s:159    .text.modem_set_test_mode_status:0000000000000000 modem_set_test_mode_status
+     /tmp/cc0051Wn.s:171    .text.modem_set_test_mode_status:0000000000000008 $d
+     /tmp/cc0051Wn.s:174    .text.modem_get_test_mode_status:0000000000000000 $t
+     /tmp/cc0051Wn.s:181    .text.modem_get_test_mode_status:0000000000000000 modem_get_test_mode_status
+     /tmp/cc0051Wn.s:193    .text.modem_get_test_mode_status:0000000000000008 $d
+     /tmp/cc0051Wn.s:196    .text.modem_get_user_alarm:0000000000000000 $t
+     /tmp/cc0051Wn.s:203    .text.modem_get_user_alarm:0000000000000000 modem_get_user_alarm
+     /tmp/cc0051Wn.s:215    .text.modem_get_user_alarm:0000000000000008 $d
+     /tmp/cc0051Wn.s:218    .text.modem_set_user_alarm:0000000000000000 $t
+     /tmp/cc0051Wn.s:225    .text.modem_set_user_alarm:0000000000000000 modem_set_user_alarm
+     /tmp/cc0051Wn.s:237    .text.modem_set_user_alarm:0000000000000008 $d
+     /tmp/cc0051Wn.s:240    .text.modem_set_radio_ctx:0000000000000000 $t
+     /tmp/cc0051Wn.s:247    .text.modem_set_radio_ctx:0000000000000000 modem_set_radio_ctx
+     /tmp/cc0051Wn.s:259    .text.modem_set_radio_ctx:0000000000000008 $d
+     /tmp/cc0051Wn.s:262    .text.modem_get_radio_ctx:0000000000000000 $t
+     /tmp/cc0051Wn.s:269    .text.modem_get_radio_ctx:0000000000000000 modem_get_radio_ctx
+     /tmp/cc0051Wn.s:281    .text.modem_get_radio_ctx:0000000000000008 $d
+     /tmp/cc0051Wn.s:284    .text.modem_get_rp:0000000000000000 $t
+     /tmp/cc0051Wn.s:291    .text.modem_get_rp:0000000000000000 modem_get_rp
+     /tmp/cc0051Wn.s:303    .text.modem_get_rp:0000000000000008 $d
+     /tmp/cc0051Wn.s:306    .text.modem_suspend_radio_access:0000000000000000 $t
+     /tmp/cc0051Wn.s:313    .text.modem_suspend_radio_access:0000000000000000 modem_suspend_radio_access
+     /tmp/cc0051Wn.s:354    .text.modem_suspend_radio_access:000000000000004c $d
+     /tmp/cc0051Wn.s:359    .text.modem_resume_radio_access:0000000000000000 $t
+     /tmp/cc0051Wn.s:366    .text.modem_resume_radio_access:0000000000000000 modem_resume_radio_access
+     /tmp/cc0051Wn.s:388    .text.modem_resume_radio_access:0000000000000020 $d
+     /tmp/cc0051Wn.s:391    .text.crc:0000000000000000 $t
+     /tmp/cc0051Wn.s:398    .text.crc:0000000000000000 crc
+     /tmp/cc0051Wn.s:432    .text.crc:0000000000000030 $d
+     /tmp/cc0051Wn.s:435    .text.modem_duty_cycle_get_status:0000000000000000 $t
+     /tmp/cc0051Wn.s:442    .text.modem_duty_cycle_get_status:0000000000000000 modem_duty_cycle_get_status
+     /tmp/cc0051Wn.s:488    .text.modem_get_status:0000000000000000 $t
+     /tmp/cc0051Wn.s:495    .text.modem_get_status:0000000000000000 modem_get_status
+     /tmp/cc0051Wn.s:530    .text.modem_store_modem_context:0000000000000000 $t
+     /tmp/cc0051Wn.s:537    .text.modem_store_modem_context:0000000000000000 modem_store_modem_context
+     /tmp/cc0051Wn.s:579    .text.modem_store_modem_context:0000000000000050 $d
+     /tmp/cc0051Wn.s:582    .text.modem_load_modem_context:0000000000000000 $t
+     /tmp/cc0051Wn.s:589    .text.modem_load_modem_context:0000000000000000 modem_load_modem_context
+     /tmp/cc0051Wn.s:636    .text.modem_load_modem_context:0000000000000058 $d
+     /tmp/cc0051Wn.s:639    .text.modem_context_init_light:0000000000000000 $t
+     /tmp/cc0051Wn.s:646    .text.modem_context_init_light:0000000000000000 modem_context_init_light
+     /tmp/cc0051Wn.s:761    .text.modem_context_init_light:00000000000000fc $d
+     /tmp/cc0051Wn.s:774    .text.modem_get_reset_counter:0000000000000000 $t
+     /tmp/cc0051Wn.s:781    .text.modem_get_reset_counter:0000000000000000 modem_get_reset_counter
+     /tmp/cc0051Wn.s:794    .text.modem_get_reset_counter:000000000000000c $d
+ARM GAS  /tmp/cc0051Wn.s 			page 16
+
+
+     /tmp/cc0051Wn.s:798    .bss.modem_ctx_light:0000000000000000 $d
+     /tmp/cc0051Wn.s:804    .data.modem_service_config:0000000000000000 $d
+     /tmp/cc0051Wn.s:808    .data.modem_service_config:0000000000000000 modem_service_config
+
+UNDEFINED SYMBOLS
+memset
+fifo_ctrl_set
+increment_asynchronous_msgnumber
+fifo_ctrl_print_stat
+smtc_modem_hal_get_time_in_ms
+rp_task_enqueue
+rp_task_abort
+rp_callback
+lorawan_api_next_network_free_duty_cycle_ms_get
+smtc_duty_cycle_enable_get
+lorawan_api_get_current_enabled_frequencies_list
+smtc_duty_cycle_get_next_free_time_ms
+smtc_modem_hal_crashlog_get_status
+lorawan_api_isjoined
+modem_supervisor_get_modem_is_suspended
+smtc_modem_hal_context_restore
+smtc_modem_hal_context_store
+modem_event_init
+smtc_duty_cycle_init
+lorawan_api_init
+lorawan_api_dr_strategy_set
+lorawan_api_join_status_clear
+lorawan_api_get_region
+lorawan_api_set_region
+lorawan_send_management_services_init
+modem_supervisor_init_callback
+lorawan_join_management_services_init
+lorawan_dwn_ack_management_init
+lorawan_cid_request_management_init
+fifo_ctrl_init
+lorawan_certification_services_init

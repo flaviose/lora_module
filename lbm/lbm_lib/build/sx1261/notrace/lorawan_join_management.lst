@@ -1,0 +1,402 @@
+ARM GAS  /tmp/ccmVda6j.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"lorawan_join_management.c"
+  10              		.text
+  11              		.section	.text.lorawan_join_management_service_downlink_handler,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	lorawan_join_management_service_downlink_handler:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		@ link register save eliminated.
+  23 0000 0020     		movs	r0, #0
+  24              		@ sp needed
+  25 0002 7047     		bx	lr
+  27              		.section	.rodata.lorawan_join_internal_add_task.str1.1,"aMS",%progbits,1
+  28              	.LC0:
+  29 0000 6D6F6465 		.ascii	"modem_supervisor_add_task( &task_join ) == TASK_VAL"
+  29      6D5F7375 
+  29      70657276 
+  29      69736F72 
+  29      5F616464 
+  30 0033 494400   		.ascii	"ID\000"
+  31              		.section	.text.lorawan_join_internal_add_task,"ax",%progbits
+  32              		.align	1
+  33              		.syntax unified
+  34              		.code	16
+  35              		.thumb_func
+  36              		.fpu softvfp
+  38              	lorawan_join_internal_add_task:
+  39              		@ args = 0, pretend = 0, frame = 24
+  40              		@ frame_needed = 0, uses_anonymous_args = 0
+  41 0000 30B5     		push	{r4, r5, lr}
+  42 0002 87B0     		sub	sp, sp, #28
+  43 0004 0400     		movs	r4, r0
+  44 0006 0021     		movs	r1, #0
+  45 0008 1022     		movs	r2, #16
+  46 000a 02A8     		add	r0, sp, #8
+  47 000c FFF7FEFF 		bl	memset
+  48 0010 0723     		movs	r3, #7
+  49 0012 6343     		muls	r3, r4
+  50 0014 02AA     		add	r2, sp, #8
+  51 0016 0233     		adds	r3, r3, #2
+  52 0018 1370     		strb	r3, [r2]
+  53 001a 0323     		movs	r3, #3
+  54 001c 5470     		strb	r4, [r2, #1]
+  55 001e 1372     		strb	r3, [r2, #8]
+  56 0020 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ARM GAS  /tmp/ccmVda6j.s 			page 2
+
+
+  57 0024 0521     		movs	r1, #5
+  58 0026 0500     		movs	r5, r0
+  59 0028 0020     		movs	r0, #0
+  60 002a FFF7FEFF 		bl	smtc_modem_hal_get_random_nb_in_range
+  61 002e 0390     		str	r0, [sp, #12]
+  62 0030 2000     		movs	r0, r4
+  63 0032 FFF7FEFF 		bl	lorawan_api_modem_certification_is_enabled
+  64 0036 0128     		cmp	r0, #1
+  65 0038 0FD1     		bne	.L3
+  66              	.L5:
+  67 003a 039B     		ldr	r3, [sp, #12]
+  68 003c 5D19     		adds	r5, r3, r5
+  69 003e 0193     		str	r3, [sp, #4]
+  70 0040 0395     		str	r5, [sp, #12]
+  71              	.L4:
+  72 0042 02A8     		add	r0, sp, #8
+  73 0044 FFF7FEFF 		bl	modem_supervisor_add_task
+  74 0048 0028     		cmp	r0, #0
+  75 004a 04D0     		beq	.L2
+  76 004c E721     		movs	r1, #231
+  77 004e 094A     		ldr	r2, .L10
+  78 0050 0948     		ldr	r0, .L10+4
+  79 0052 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+  80              	.L2:
+  81 0056 07B0     		add	sp, sp, #28
+  82              		@ sp needed
+  83 0058 30BD     		pop	{r4, r5, pc}
+  84              	.L3:
+  85 005a 2000     		movs	r0, r4
+  86 005c FFF7FEFF 		bl	lorawan_api_join_duty_cycle_backoff_bypass_get
+  87 0060 0028     		cmp	r0, #0
+  88 0062 EAD1     		bne	.L5
+  89 0064 2000     		movs	r0, r4
+  90 0066 FFF7FEFF 		bl	lorawan_api_next_join_time_second_get
+  91 006a 039B     		ldr	r3, [sp, #12]
+  92 006c 1818     		adds	r0, r3, r0
+  93 006e 0193     		str	r3, [sp, #4]
+  94 0070 0390     		str	r0, [sp, #12]
+  95 0072 E6E7     		b	.L4
+  96              	.L11:
+  97              		.align	2
+  98              	.L10:
+  99 0074 00000000 		.word	.LC0
+ 100 0078 00000000 		.word	.LANCHOR0
+ 102              		.section	.text.lorawan_join_management_service_on_update,"ax",%progbits
+ 103              		.align	1
+ 104              		.syntax unified
+ 105              		.code	16
+ 106              		.thumb_func
+ 107              		.fpu softvfp
+ 109              	lorawan_join_management_service_on_update:
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112 0000 70B5     		push	{r4, r5, r6, lr}
+ 113 0002 0500     		movs	r5, r0
+ 114 0004 7035     		adds	r5, r5, #112
+ 115 0006 2B78     		ldrb	r3, [r5]
+ARM GAS  /tmp/ccmVda6j.s 			page 3
+
+
+ 116 0008 0400     		movs	r4, r0
+ 117 000a 1B01     		lsls	r3, r3, #4
+ 118 000c C318     		adds	r3, r0, r3
+ 119 000e 5878     		ldrb	r0, [r3, #1]
+ 120 0010 FFF7FEFF 		bl	lorawan_api_isjoined
+ 121 0014 2B78     		ldrb	r3, [r5]
+ 122 0016 1B01     		lsls	r3, r3, #4
+ 123 0018 0228     		cmp	r0, #2
+ 124 001a 07D1     		bne	.L13
+ 125 001c 0021     		movs	r1, #0
+ 126 001e E418     		adds	r4, r4, r3
+ 127 0020 6278     		ldrb	r2, [r4, #1]
+ 128              	.L18:
+ 129 0022 FFF7FEFF 		bl	increment_asynchronous_msgnumber
+ 130              	.L14:
+ 131              		@ sp needed
+ 132 0026 FFF7FEFF 		bl	modem_store_modem_context
+ 133 002a 70BD     		pop	{r4, r5, r6, pc}
+ 134              	.L13:
+ 135 002c E318     		adds	r3, r4, r3
+ 136 002e 5878     		ldrb	r0, [r3, #1]
+ 137 0030 0121     		movs	r1, #1
+ 138 0032 FFF7FEFF 		bl	lorawan_api_set_join_status
+ 139 0036 2978     		ldrb	r1, [r5]
+ 140 0038 0A01     		lsls	r2, r1, #4
+ 141 003a A218     		adds	r2, r4, r2
+ 142 003c 5078     		ldrb	r0, [r2, #1]
+ 143 003e C300     		lsls	r3, r0, #3
+ 144 0040 C31A     		subs	r3, r0, r3
+ 145 0042 5B18     		adds	r3, r3, r1
+ 146 0044 1B01     		lsls	r3, r3, #4
+ 147 0046 E318     		adds	r3, r4, r3
+ 148 0048 9B7A     		ldrb	r3, [r3, #10]
+ 149 004a 002B     		cmp	r3, #0
+ 150 004c EBD0     		beq	.L14
+ 151 004e FFF7FEFF 		bl	lorawan_join_internal_add_task
+ 152 0052 2878     		ldrb	r0, [r5]
+ 153 0054 0021     		movs	r1, #0
+ 154 0056 0001     		lsls	r0, r0, #4
+ 155 0058 2418     		adds	r4, r4, r0
+ 156 005a 6278     		ldrb	r2, [r4, #1]
+ 157 005c 0520     		movs	r0, #5
+ 158 005e E0E7     		b	.L18
+ 160              		.section	.text.lorawan_join_management_service_on_launch,"ax",%progbits
+ 161              		.align	1
+ 162              		.syntax unified
+ 163              		.code	16
+ 164              		.thumb_func
+ 165              		.fpu softvfp
+ 167              	lorawan_join_management_service_on_launch:
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170 0000 30B5     		push	{r4, r5, lr}
+ 171 0002 0500     		movs	r5, r0
+ 172 0004 7035     		adds	r5, r5, #112
+ 173 0006 2B78     		ldrb	r3, [r5]
+ 174 0008 0400     		movs	r4, r0
+ARM GAS  /tmp/ccmVda6j.s 			page 4
+
+
+ 175 000a 1B01     		lsls	r3, r3, #4
+ 176 000c C318     		adds	r3, r0, r3
+ 177 000e 85B0     		sub	sp, sp, #20
+ 178 0010 5878     		ldrb	r0, [r3, #1]
+ 179 0012 FFF7FEFF 		bl	lorawan_api_isjoined
+ 180 0016 0228     		cmp	r0, #2
+ 181 0018 16D0     		beq	.L19
+ 182 001a 2B78     		ldrb	r3, [r5]
+ 183 001c 0121     		movs	r1, #1
+ 184 001e 1B01     		lsls	r3, r3, #4
+ 185 0020 E318     		adds	r3, r4, r3
+ 186 0022 5878     		ldrb	r0, [r3, #1]
+ 187 0024 FFF7FEFF 		bl	lorawan_api_set_join_status
+ 188 0028 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 189 002c 0021     		movs	r1, #0
+ 190 002e 2B78     		ldrb	r3, [r5]
+ 191 0030 0A00     		movs	r2, r1
+ 192 0032 1B01     		lsls	r3, r3, #4
+ 193 0034 E418     		adds	r4, r4, r3
+ 194 0036 6378     		ldrb	r3, [r4, #1]
+ 195 0038 0290     		str	r0, [sp, #8]
+ 196 003a 0393     		str	r3, [sp, #12]
+ 197 003c 0120     		movs	r0, #1
+ 198 003e 034B     		ldr	r3, .L24
+ 199 0040 0191     		str	r1, [sp, #4]
+ 200 0042 0091     		str	r1, [sp]
+ 201 0044 FFF7FEFF 		bl	tx_protocol_manager_request
+ 202              	.L19:
+ 203 0048 05B0     		add	sp, sp, #20
+ 204              		@ sp needed
+ 205 004a 30BD     		pop	{r4, r5, pc}
+ 206              	.L25:
+ 207              		.align	2
+ 208              	.L24:
+ 209 004c 00000000 		.word	.LANCHOR1
+ 211              		.section	.text.lorawan_join_management_services_init,"ax",%progbits
+ 212              		.align	1
+ 213              		.global	lorawan_join_management_services_init
+ 214              		.syntax unified
+ 215              		.code	16
+ 216              		.thumb_func
+ 217              		.fpu softvfp
+ 219              	lorawan_join_management_services_init:
+ 220              		@ args = 8, pretend = 0, frame = 0
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222 0000 0649     		ldr	r1, .L27
+ 223 0002 10B5     		push	{r4, lr}
+ 224 0004 1160     		str	r1, [r2]
+ 225 0006 064A     		ldr	r2, .L27+4
+ 226              		@ sp needed
+ 227 0008 1A60     		str	r2, [r3]
+ 228 000a 029B     		ldr	r3, [sp, #8]
+ 229 000c 054A     		ldr	r2, .L27+8
+ 230 000e 1A60     		str	r2, [r3]
+ 231 0010 FFF7FEFF 		bl	modem_supervisor_get_task
+ 232 0014 039B     		ldr	r3, [sp, #12]
+ 233 0016 1860     		str	r0, [r3]
+ARM GAS  /tmp/ccmVda6j.s 			page 5
+
+
+ 234 0018 10BD     		pop	{r4, pc}
+ 235              	.L28:
+ 236 001a C046     		.align	2
+ 237              	.L27:
+ 238 001c 00000000 		.word	lorawan_join_management_service_downlink_handler
+ 239 0020 00000000 		.word	lorawan_join_management_service_on_launch
+ 240 0024 00000000 		.word	lorawan_join_management_service_on_update
+ 242              		.section	.rodata.lorawan_join_add_task.str1.1,"aMS",%progbits,1
+ 243              	.LC7:
+ 244 0000 73746163 		.ascii	"stack_id < NUMBER_OF_STACKS\000"
+ 244      6B5F6964 
+ 244      203C204E 
+ 244      554D4245 
+ 244      525F4F46 
+ 245              		.section	.text.lorawan_join_add_task,"ax",%progbits
+ 246              		.align	1
+ 247              		.global	lorawan_join_add_task
+ 248              		.syntax unified
+ 249              		.code	16
+ 250              		.thumb_func
+ 251              		.fpu softvfp
+ 253              	lorawan_join_add_task:
+ 254              		@ args = 0, pretend = 0, frame = 0
+ 255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256 0000 10B5     		push	{r4, lr}
+ 257 0002 041E     		subs	r4, r0, #0
+ 258 0004 04D0     		beq	.L30
+ 259 0006 8621     		movs	r1, #134
+ 260 0008 084A     		ldr	r2, .L35
+ 261 000a 0948     		ldr	r0, .L35+4
+ 262 000c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 263              	.L30:
+ 264 0010 FFF7FEFF 		bl	modem_supervisor_get_task
+ 265 0014 0723     		movs	r3, #7
+ 266 0016 6343     		muls	r3, r4
+ 267 0018 0233     		adds	r3, r3, #2
+ 268 001a 1B01     		lsls	r3, r3, #4
+ 269 001c C318     		adds	r3, r0, r3
+ 270 001e 1B7A     		ldrb	r3, [r3, #8]
+ 271 0020 052B     		cmp	r3, #5
+ 272 0022 02D1     		bne	.L29
+ 273 0024 2000     		movs	r0, r4
+ 274 0026 FFF7FEFF 		bl	lorawan_join_internal_add_task
+ 275              	.L29:
+ 276              		@ sp needed
+ 277 002a 10BD     		pop	{r4, pc}
+ 278              	.L36:
+ 279              		.align	2
+ 280              	.L35:
+ 281 002c 00000000 		.word	.LC7
+ 282 0030 00000000 		.word	.LANCHOR2
+ 284              		.section	.text.lorawan_join_remove_task,"ax",%progbits
+ 285              		.align	1
+ 286              		.global	lorawan_join_remove_task
+ 287              		.syntax unified
+ 288              		.code	16
+ 289              		.thumb_func
+ARM GAS  /tmp/ccmVda6j.s 			page 6
+
+
+ 290              		.fpu softvfp
+ 292              	lorawan_join_remove_task:
+ 293              		@ args = 0, pretend = 0, frame = 0
+ 294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 295 0000 10B5     		push	{r4, lr}
+ 296 0002 041E     		subs	r4, r0, #0
+ 297 0004 04D0     		beq	.L38
+ 298 0006 9121     		movs	r1, #145
+ 299 0008 044A     		ldr	r2, .L42
+ 300 000a 0548     		ldr	r0, .L42+4
+ 301 000c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 302              	.L38:
+ 303              		@ sp needed
+ 304 0010 0720     		movs	r0, #7
+ 305 0012 6043     		muls	r0, r4
+ 306 0014 0230     		adds	r0, r0, #2
+ 307 0016 FFF7FEFF 		bl	modem_supervisor_remove_task
+ 308 001a 10BD     		pop	{r4, pc}
+ 309              	.L43:
+ 310              		.align	2
+ 311              	.L42:
+ 312 001c 00000000 		.word	.LC7
+ 313 0020 00000000 		.word	.LANCHOR3
+ 315              		.section	.bss.nap,"aw",%nobits
+ 316              		.set	.LANCHOR1,. + 0
+ 319              	nap:
+ 320 0000 00       		.space	1
+ 321              		.section	.rodata.__func__.0,"a"
+ 322              		.set	.LANCHOR3,. + 0
+ 325              	__func__.0:
+ 326 0000 6C6F7261 		.ascii	"lorawan_join_remove_task\000"
+ 326      77616E5F 
+ 326      6A6F696E 
+ 326      5F72656D 
+ 326      6F76655F 
+ 327              		.section	.rodata.__func__.1,"a"
+ 328              		.set	.LANCHOR2,. + 0
+ 331              	__func__.1:
+ 332 0000 6C6F7261 		.ascii	"lorawan_join_add_task\000"
+ 332      77616E5F 
+ 332      6A6F696E 
+ 332      5F616464 
+ 332      5F746173 
+ 333              		.section	.rodata.__func__.2,"a"
+ 334              		.set	.LANCHOR0,. + 0
+ 337              	__func__.2:
+ 338 0000 6C6F7261 		.ascii	"lorawan_join_internal_add_task\000"
+ 338      77616E5F 
+ 338      6A6F696E 
+ 338      5F696E74 
+ 338      65726E61 
+ 339              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccmVda6j.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 lorawan_join_management.c
+     /tmp/ccmVda6j.s:12     .text.lorawan_join_management_service_downlink_handler:0000000000000000 $t
+     /tmp/ccmVda6j.s:19     .text.lorawan_join_management_service_downlink_handler:0000000000000000 lorawan_join_management_service_downlink_handler
+     /tmp/ccmVda6j.s:32     .text.lorawan_join_internal_add_task:0000000000000000 $t
+     /tmp/ccmVda6j.s:38     .text.lorawan_join_internal_add_task:0000000000000000 lorawan_join_internal_add_task
+     /tmp/ccmVda6j.s:99     .text.lorawan_join_internal_add_task:0000000000000074 $d
+     /tmp/ccmVda6j.s:103    .text.lorawan_join_management_service_on_update:0000000000000000 $t
+     /tmp/ccmVda6j.s:109    .text.lorawan_join_management_service_on_update:0000000000000000 lorawan_join_management_service_on_update
+     /tmp/ccmVda6j.s:161    .text.lorawan_join_management_service_on_launch:0000000000000000 $t
+     /tmp/ccmVda6j.s:167    .text.lorawan_join_management_service_on_launch:0000000000000000 lorawan_join_management_service_on_launch
+     /tmp/ccmVda6j.s:209    .text.lorawan_join_management_service_on_launch:000000000000004c $d
+     /tmp/ccmVda6j.s:212    .text.lorawan_join_management_services_init:0000000000000000 $t
+     /tmp/ccmVda6j.s:219    .text.lorawan_join_management_services_init:0000000000000000 lorawan_join_management_services_init
+     /tmp/ccmVda6j.s:238    .text.lorawan_join_management_services_init:000000000000001c $d
+     /tmp/ccmVda6j.s:246    .text.lorawan_join_add_task:0000000000000000 $t
+     /tmp/ccmVda6j.s:253    .text.lorawan_join_add_task:0000000000000000 lorawan_join_add_task
+     /tmp/ccmVda6j.s:281    .text.lorawan_join_add_task:000000000000002c $d
+     /tmp/ccmVda6j.s:285    .text.lorawan_join_remove_task:0000000000000000 $t
+     /tmp/ccmVda6j.s:292    .text.lorawan_join_remove_task:0000000000000000 lorawan_join_remove_task
+     /tmp/ccmVda6j.s:312    .text.lorawan_join_remove_task:000000000000001c $d
+     /tmp/ccmVda6j.s:319    .bss.nap:0000000000000000 nap
+     /tmp/ccmVda6j.s:320    .bss.nap:0000000000000000 $d
+     /tmp/ccmVda6j.s:325    .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccmVda6j.s:331    .rodata.__func__.1:0000000000000000 __func__.1
+     /tmp/ccmVda6j.s:337    .rodata.__func__.2:0000000000000000 __func__.2
+
+UNDEFINED SYMBOLS
+memset
+smtc_modem_hal_get_time_in_s
+smtc_modem_hal_get_random_nb_in_range
+lorawan_api_modem_certification_is_enabled
+modem_supervisor_add_task
+smtc_modem_hal_on_panic
+lorawan_api_join_duty_cycle_backoff_bypass_get
+lorawan_api_next_join_time_second_get
+lorawan_api_isjoined
+increment_asynchronous_msgnumber
+modem_store_modem_context
+lorawan_api_set_join_status
+smtc_modem_hal_get_time_in_ms
+tx_protocol_manager_request
+modem_supervisor_get_task
+modem_supervisor_remove_task

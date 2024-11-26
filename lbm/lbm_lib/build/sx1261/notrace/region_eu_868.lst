@@ -1,0 +1,917 @@
+ARM GAS  /tmp/ccKp8dA8.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"region_eu_868.c"
+  10              		.text
+  11              		.section	.text.region_eu_868_init,"ax",%progbits
+  12              		.align	1
+  13              		.global	region_eu_868_init
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	region_eu_868_init:
+  21              		@ args = 0, pretend = 0, frame = 8
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 424B     		ldr	r3, .L2
+  24 0002 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  25 0004 4360     		str	r3, [r0, #4]
+  26 0006 424B     		ldr	r3, .L2+4
+  27 0008 0100     		movs	r1, r0
+  28              		@ sp needed
+  29 000a 8360     		str	r3, [r0, #8]
+  30 000c 8123     		movs	r3, #129
+  31 000e 9B01     		lsls	r3, r3, #6
+  32 0010 8381     		strh	r3, [r0, #12]
+  33 0012 404B     		ldr	r3, .L2+8
+  34 0014 0400     		movs	r4, r0
+  35 0016 0361     		str	r3, [r0, #16]
+  36 0018 3F4B     		ldr	r3, .L2+12
+  37 001a 0200     		movs	r2, r0
+  38 001c 4361     		str	r3, [r0, #20]
+  39 001e 0223     		movs	r3, #2
+  40 0020 0376     		strb	r3, [r0, #24]
+  41 0022 3E4B     		ldr	r3, .L2+16
+  42 0024 2831     		adds	r1, r1, #40
+  43 0026 C361     		str	r3, [r0, #28]
+  44 0028 3D4B     		ldr	r3, .L2+20
+  45 002a 2600     		movs	r6, r4
+  46 002c 0362     		str	r3, [r0, #32]
+  47 002e 3D4B     		ldr	r3, .L2+24
+  48 0030 2700     		movs	r7, r4
+  49 0032 4362     		str	r3, [r0, #36]
+  50 0034 6420     		movs	r0, #100
+  51 0036 0870     		strb	r0, [r1]
+  52 0038 9021     		movs	r1, #144
+  53 003a 4901     		lsls	r1, r1, #5
+  54 003c 2186     		strh	r1, [r4, #48]
+  55 003e 2100     		movs	r1, r4
+  56 0040 3038     		subs	r0, r0, #48
+  57 0042 3231     		adds	r1, r1, #50
+  58 0044 0870     		strb	r0, [r1]
+ARM GAS  /tmp/ccKp8dA8.s 			page 2
+
+
+  59 0046 3849     		ldr	r1, .L2+28
+  60 0048 0220     		movs	r0, #2
+  61 004a 6163     		str	r1, [r4, #52]
+  62 004c 3749     		ldr	r1, .L2+32
+  63 004e FF30     		adds	r0, r0, #255
+  64 0050 A163     		str	r1, [r4, #56]
+  65 0052 3749     		ldr	r1, .L2+36
+  66 0054 2500     		movs	r5, r4
+  67 0056 2166     		str	r1, [r4, #96]
+  68 0058 3649     		ldr	r1, .L2+40
+  69 005a 0832     		adds	r2, r2, #8
+  70 005c 6166     		str	r1, [r4, #100]
+  71 005e B021     		movs	r1, #176
+  72 0060 0905     		lsls	r1, r1, #20
+  73 0062 E163     		str	r1, [r4, #60]
+  74 0064 3449     		ldr	r1, .L2+44
+  75 0066 5536     		adds	r6, r6, #85
+  76 0068 2164     		str	r1, [r4, #64]
+  77 006a 3449     		ldr	r1, .L2+48
+  78 006c FF36     		adds	r6, r6, #255
+  79 006e 6164     		str	r1, [r4, #68]
+  80 0070 2100     		movs	r1, r4
+  81 0072 4831     		adds	r1, r1, #72
+  82 0074 0880     		strh	r0, [r1]
+  83 0076 0020     		movs	r0, #0
+  84 0078 8870     		strb	r0, [r1, #2]
+  85 007a 0521     		movs	r1, #5
+  86 007c E164     		str	r1, [r4, #76]
+  87 007e 2100     		movs	r1, r4
+  88 0080 5038     		subs	r0, r0, #80
+  89 0082 5031     		adds	r1, r1, #80
+  90 0084 0880     		strh	r0, [r1]
+  91 0086 2E49     		ldr	r1, .L2+52
+  92 0088 2E48     		ldr	r0, .L2+56
+  93 008a 6165     		str	r1, [r4, #84]
+  94 008c 2E49     		ldr	r1, .L2+60
+  95 008e 7937     		adds	r7, r7, #121
+  96 0090 A165     		str	r1, [r4, #88]
+  97 0092 2100     		movs	r1, r4
+  98 0094 5C31     		adds	r1, r1, #92
+  99 0096 0880     		strh	r0, [r1]
+ 100 0098 2C49     		ldr	r1, .L2+64
+ 101 009a C020     		movs	r0, #192
+ 102 009c A166     		str	r1, [r4, #104]
+ 103 009e 2C49     		ldr	r1, .L2+68
+ 104 00a0 8000     		lsls	r0, r0, #2
+ 105 00a2 E166     		str	r1, [r4, #108]
+ 106 00a4 2B49     		ldr	r1, .L2+72
+ 107 00a6 FF37     		adds	r7, r7, #255
+ 108 00a8 2167     		str	r1, [r4, #112]
+ 109 00aa 2100     		movs	r1, r4
+ 110 00ac 7431     		adds	r1, r1, #116
+ 111 00ae 0880     		strh	r0, [r1]
+ 112 00b0 A367     		str	r3, [r4, #120]
+ 113 00b2 E367     		str	r3, [r4, #124]
+ 114 00b4 2300     		movs	r3, r4
+ 115 00b6 2000     		movs	r0, r4
+ARM GAS  /tmp/ccKp8dA8.s 			page 3
+
+
+ 116 00b8 B433     		adds	r3, r3, #180
+ 117 00ba D367     		str	r3, [r2, #124]
+ 118 00bc 2C3B     		subs	r3, r3, #44
+ 119 00be EC32     		adds	r2, r2, #236
+ 120 00c0 1A60     		str	r2, [r3]
+ 121 00c2 9032     		adds	r2, r2, #144
+ 122 00c4 5A60     		str	r2, [r3, #4]
+ 123 00c6 0232     		adds	r2, r2, #2
+ 124 00c8 9A60     		str	r2, [r3, #8]
+ 125 00ca 523A     		subs	r2, r2, #82
+ 126 00cc 9E61     		str	r6, [r3, #24]
+ 127 00ce 5A61     		str	r2, [r3, #20]
+ 128 00d0 D833     		adds	r3, r3, #216
+ 129 00d2 0193     		str	r3, [sp, #4]
+ 130 00d4 019A     		ldr	r2, [sp, #4]
+ 131 00d6 6D30     		adds	r0, r0, #109
+ 132 00d8 BC3B     		subs	r3, r3, #188
+ 133 00da FF30     		adds	r0, r0, #255
+ 134 00dc 1A60     		str	r2, [r3]
+ 135 00de 9F60     		str	r7, [r3, #8]
+ 136 00e0 5860     		str	r0, [r3, #4]
+ 137 00e2 4635     		adds	r5, r5, #70
+ 138 00e4 0C22     		movs	r2, #12
+ 139 00e6 1C49     		ldr	r1, .L2+76
+ 140 00e8 FFF7FEFF 		bl	memcpy
+ 141 00ec 2A78     		ldrb	r2, [r5]
+ 142 00ee 3800     		movs	r0, r7
+ 143 00f0 216F     		ldr	r1, [r4, #112]
+ 144 00f2 FFF7FEFF 		bl	memcpy
+ 145 00f6 2A78     		ldrb	r2, [r5]
+ 146 00f8 3000     		movs	r0, r6
+ 147 00fa 0121     		movs	r1, #1
+ 148 00fc FFF7FEFF 		bl	memset
+ 149 0100 2A78     		ldrb	r2, [r5]
+ 150 0102 0021     		movs	r1, #0
+ 151 0104 0198     		ldr	r0, [sp, #4]
+ 152 0106 FFF7FEFF 		bl	memset
+ 153 010a F7BD     		pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+ 154              	.L3:
+ 155              		.align	2
+ 156              	.L2:
+ 157 010c 10100302 		.word	33755152
+ 158 0110 05010E07 		.word	118358277
+ 159 0114 00000000 		.word	.LANCHOR0
+ 160 0118 00000000 		.word	.LANCHOR1
+ 161 011c C0557033 		.word	863000000
+ 162 0120 8025DB33 		.word	870000000
+ 163 0124 08E6D333 		.word	869525000
+ 164 0128 00000000 		.word	.LANCHOR2
+ 165 012c 00000000 		.word	.LANCHOR3
+ 166 0130 00000000 		.word	.LANCHOR4
+ 167 0134 00000000 		.word	.LANCHOR5
+ 168 0138 0706FF0F 		.word	268371463
+ 169 013c 3F000C00 		.word	786495
+ 170 0140 400D0300 		.word	200000
+ 171 0144 01060000 		.word	1537
+ 172 0148 00000000 		.word	.LANCHOR6
+ARM GAS  /tmp/ccKp8dA8.s 			page 4
+
+
+ 173 014c 00000000 		.word	.LANCHOR7
+ 174 0150 00000000 		.word	.LANCHOR8
+ 175 0154 00000000 		.word	.LANCHOR9
+ 176 0158 00000000 		.word	.LANCHOR10
+ 178              		.section	.text.region_eu_868_config,"ax",%progbits
+ 179              		.align	1
+ 180              		.global	region_eu_868_config
+ 181              		.syntax unified
+ 182              		.code	16
+ 183              		.thumb_func
+ 184              		.fpu softvfp
+ 186              	region_eu_868_config:
+ 187              		@ args = 0, pretend = 0, frame = 0
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189 0000 70B5     		push	{r4, r5, r6, lr}
+ 190 0002 0500     		movs	r5, r0
+ 191 0004 0400     		movs	r4, r0
+ 192 0006 0026     		movs	r6, #0
+ 193 0008 B435     		adds	r5, r5, #180
+ 194              	.L5:
+ 195 000a 2379     		ldrb	r3, [r4, #4]
+ 196 000c 0022     		movs	r2, #0
+ 197 000e B342     		cmp	r3, r6
+ 198 0010 0BDC     		bgt	.L6
+ 199 0012 1500     		movs	r5, r2
+ 200              	.L7:
+ 201 0014 A379     		ldrb	r3, [r4, #6]
+ 202 0016 AB42     		cmp	r3, r5
+ 203 0018 18D8     		bhi	.L8
+ 204              		@ sp needed
+ 205 001a 2000     		movs	r0, r4
+ 206 001c 8730     		adds	r0, r0, #135
+ 207 001e 0222     		movs	r2, #2
+ 208 0020 FF21     		movs	r1, #255
+ 209 0022 FF30     		adds	r0, r0, #255
+ 210 0024 FFF7FEFF 		bl	memset
+ 211 0028 70BD     		pop	{r4, r5, r6, pc}
+ 212              	.L6:
+ 213 002a 2000     		movs	r0, r4
+ 214 002c 8530     		adds	r0, r0, #133
+ 215 002e 2A60     		str	r2, [r5]
+ 216 0030 2A64     		str	r2, [r5, #64]
+ 217 0032 F1B2     		uxtb	r1, r6
+ 218 0034 FF30     		adds	r0, r0, #255
+ 219 0036 FFF7FEFF 		bl	SMTC_PUT_BIT8
+ 220 003a A31D     		adds	r3, r4, #6
+ 221 003c D98F     		ldrh	r1, [r3, #62]
+ 222 003e 2F33     		adds	r3, r3, #47
+ 223 0040 7200     		lsls	r2, r6, #1
+ 224 0042 FF33     		adds	r3, r3, #255
+ 225 0044 9952     		strh	r1, [r3, r2]
+ 226 0046 0136     		adds	r6, r6, #1
+ 227 0048 0435     		adds	r5, r5, #4
+ 228 004a DEE7     		b	.L5
+ 229              	.L8:
+ 230 004c 094A     		ldr	r2, .L9
+ 231 004e AB00     		lsls	r3, r5, #2
+ARM GAS  /tmp/ccKp8dA8.s 			page 5
+
+
+ 232 0050 9A58     		ldr	r2, [r3, r2]
+ 233 0052 E318     		adds	r3, r4, r3
+ 234 0054 1900     		movs	r1, r3
+ 235 0056 2000     		movs	r0, r4
+ 236 0058 B431     		adds	r1, r1, #180
+ 237 005a F433     		adds	r3, r3, #244
+ 238 005c 8530     		adds	r0, r0, #133
+ 239 005e 0A60     		str	r2, [r1]
+ 240 0060 FF30     		adds	r0, r0, #255
+ 241 0062 2900     		movs	r1, r5
+ 242 0064 1A60     		str	r2, [r3]
+ 243 0066 0135     		adds	r5, r5, #1
+ 244 0068 0122     		movs	r2, #1
+ 245 006a FFF7FEFF 		bl	SMTC_PUT_BIT8
+ 246 006e EDB2     		uxtb	r5, r5
+ 247 0070 D0E7     		b	.L7
+ 248              	.L10:
+ 249 0072 C046     		.align	2
+ 250              	.L9:
+ 251 0074 00000000 		.word	.LANCHOR11
+ 253              		.global	__aeabi_uidivmod
+ 254              		.section	.text.region_eu_868_get_next_channel,"ax",%progbits
+ 255              		.align	1
+ 256              		.global	region_eu_868_get_next_channel
+ 257              		.syntax unified
+ 258              		.code	16
+ 259              		.thumb_func
+ 260              		.fpu softvfp
+ 262              	region_eu_868_get_next_channel:
+ 263              		@ args = 4, pretend = 0, frame = 24
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 266 0002 0025     		movs	r5, #0
+ 267 0004 87B0     		sub	sp, sp, #28
+ 268 0006 0C9E     		ldr	r6, [sp, #48]
+ 269 0008 0400     		movs	r4, r0
+ 270 000a 3570     		strb	r5, [r6]
+ 271 000c 1700     		movs	r7, r2
+ 272 000e 0091     		str	r1, [sp]
+ 273 0010 0193     		str	r3, [sp, #4]
+ 274 0012 FFF7FEFF 		bl	smtc_duty_cycle_update
+ 275              	.L12:
+ 276 0016 2379     		ldrb	r3, [r4, #4]
+ 277 0018 AB42     		cmp	r3, r5
+ 278 001a 06D8     		bhi	.L16
+ 279 001c 3178     		ldrb	r1, [r6]
+ 280 001e 0029     		cmp	r1, #0
+ 281 0020 25D1     		bne	.L17
+ 282              	.L19:
+ 283 0022 0120     		movs	r0, #1
+ 284 0024 4042     		rsbs	r0, r0, #0
+ 285              	.L18:
+ 286 0026 07B0     		add	sp, sp, #28
+ 287              		@ sp needed
+ 288 0028 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 289              	.L16:
+ 290 002a 2000     		movs	r0, r4
+ARM GAS  /tmp/ccKp8dA8.s 			page 6
+
+
+ 291 002c 8530     		adds	r0, r0, #133
+ 292 002e 2900     		movs	r1, r5
+ 293 0030 FF30     		adds	r0, r0, #255
+ 294 0032 FFF7FEFF 		bl	SMTC_GET_BIT8
+ 295 0036 0128     		cmp	r0, #1
+ 296 0038 16D1     		bne	.L14
+ 297 003a 2B00     		movs	r3, r5
+ 298 003c 2C33     		adds	r3, r3, #44
+ 299 003e 9B00     		lsls	r3, r3, #2
+ 300 0040 E318     		adds	r3, r4, r3
+ 301 0042 5868     		ldr	r0, [r3, #4]
+ 302 0044 FFF7FEFF 		bl	smtc_duty_cycle_is_channel_free
+ 303 0048 0028     		cmp	r0, #0
+ 304 004a 0DD0     		beq	.L14
+ 305 004c 2800     		movs	r0, r5
+ 306 004e 9A30     		adds	r0, r0, #154
+ 307 0050 4000     		lsls	r0, r0, #1
+ 308 0052 0099     		ldr	r1, [sp]
+ 309 0054 2018     		adds	r0, r4, r0
+ 310 0056 FFF7FEFF 		bl	SMTC_GET_BIT16
+ 311 005a 0128     		cmp	r0, #1
+ 312 005c 04D1     		bne	.L14
+ 313 005e 3378     		ldrb	r3, [r6]
+ 314 0060 02AA     		add	r2, sp, #8
+ 315 0062 D554     		strb	r5, [r2, r3]
+ 316 0064 0133     		adds	r3, r3, #1
+ 317 0066 3370     		strb	r3, [r6]
+ 318              	.L14:
+ 319 0068 0135     		adds	r5, r5, #1
+ 320 006a EDB2     		uxtb	r5, r5
+ 321 006c D3E7     		b	.L12
+ 322              	.L17:
+ 323 006e 0139     		subs	r1, r1, #1
+ 324 0070 0020     		movs	r0, #0
+ 325 0072 FFF7FEFF 		bl	smtc_modem_hal_get_random_nb_in_range
+ 326 0076 3178     		ldrb	r1, [r6]
+ 327 0078 FFF7FEFF 		bl	__aeabi_uidivmod
+ 328 007c 02AB     		add	r3, sp, #8
+ 329 007e 585C     		ldrb	r0, [r3, r1]
+ 330 0080 2379     		ldrb	r3, [r4, #4]
+ 331 0082 8342     		cmp	r3, r0
+ 332 0084 CDD9     		bls	.L19
+ 333 0086 8000     		lsls	r0, r0, #2
+ 334 0088 2418     		adds	r4, r4, r0
+ 335 008a 2300     		movs	r3, r4
+ 336 008c B433     		adds	r3, r3, #180
+ 337 008e 1B68     		ldr	r3, [r3]
+ 338 0090 F434     		adds	r4, r4, #244
+ 339 0092 3B60     		str	r3, [r7]
+ 340 0094 2368     		ldr	r3, [r4]
+ 341 0096 0020     		movs	r0, #0
+ 342 0098 0093     		str	r3, [sp]
+ 343 009a 009A     		ldr	r2, [sp]
+ 344 009c 019B     		ldr	r3, [sp, #4]
+ 345 009e 1A60     		str	r2, [r3]
+ 346 00a0 C1E7     		b	.L18
+ 348              		.section	.text.region_eu_868_get_join_next_channel,"ax",%progbits
+ARM GAS  /tmp/ccKp8dA8.s 			page 7
+
+
+ 349              		.align	1
+ 350              		.global	region_eu_868_get_join_next_channel
+ 351              		.syntax unified
+ 352              		.code	16
+ 353              		.thumb_func
+ 354              		.fpu softvfp
+ 356              	region_eu_868_get_join_next_channel:
+ 357              		@ args = 4, pretend = 0, frame = 0
+ 358              		@ frame_needed = 0, uses_anonymous_args = 0
+ 359 0000 13B5     		push	{r0, r1, r4, lr}
+ 360 0002 049C     		ldr	r4, [sp, #16]
+ 361              		@ sp needed
+ 362 0004 0094     		str	r4, [sp]
+ 363 0006 FFF7FEFF 		bl	region_eu_868_get_next_channel
+ 364 000a 16BD     		pop	{r1, r2, r4, pc}
+ 366              		.section	.text.region_eu_868_build_channel_mask,"ax",%progbits
+ 367              		.align	1
+ 368              		.global	region_eu_868_build_channel_mask
+ 369              		.syntax unified
+ 370              		.code	16
+ 371              		.thumb_func
+ 372              		.fpu softvfp
+ 374              	region_eu_868_build_channel_mask:
+ 375              		@ args = 0, pretend = 0, frame = 8
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 378 0002 0600     		movs	r6, r0
+ 379 0004 6B46     		mov	r3, sp
+ 380 0006 0C00     		movs	r4, r1
+ 381 0008 8736     		adds	r6, r6, #135
+ 382 000a 991D     		adds	r1, r3, #6
+ 383 000c 0500     		movs	r5, r0
+ 384 000e FF36     		adds	r6, r6, #255
+ 385 0010 0A80     		strh	r2, [r1]
+ 386 0012 002C     		cmp	r4, #0
+ 387 0014 04D0     		beq	.L25
+ 388 0016 062C     		cmp	r4, #6
+ 389 0018 24D0     		beq	.L26
+ 390 001a 0224     		movs	r4, #2
+ 391              	.L40:
+ 392 001c 6442     		rsbs	r4, r4, #0
+ 393 001e 07E0     		b	.L27
+ 394              	.L25:
+ 395 0020 0222     		movs	r2, #2
+ 396 0022 3000     		movs	r0, r6
+ 397 0024 FFF7FEFF 		bl	memcpy
+ 398              	.L28:
+ 399 0028 2B79     		ldrb	r3, [r5, #4]
+ 400 002a A342     		cmp	r3, r4
+ 401 002c 0AD8     		bhi	.L30
+ 402              	.L34:
+ 403 002e 0024     		movs	r4, #0
+ 404              	.L27:
+ 405 0030 0221     		movs	r1, #2
+ 406 0032 3000     		movs	r0, r6
+ 407 0034 FFF7FEFF 		bl	SMTC_ARE_CLR_BYTE8
+ 408 0038 0128     		cmp	r0, #1
+ARM GAS  /tmp/ccKp8dA8.s 			page 8
+
+
+ 409 003a 01D1     		bne	.L35
+ 410 003c 0124     		movs	r4, #1
+ 411 003e 6442     		rsbs	r4, r4, #0
+ 412              	.L35:
+ 413 0040 2000     		movs	r0, r4
+ 414              		@ sp needed
+ 415 0042 76BD     		pop	{r1, r2, r4, r5, r6, pc}
+ 416              	.L30:
+ 417 0044 2100     		movs	r1, r4
+ 418 0046 3000     		movs	r0, r6
+ 419 0048 FFF7FEFF 		bl	SMTC_GET_BIT8
+ 420 004c 0128     		cmp	r0, #1
+ 421 004e 06D1     		bne	.L29
+ 422 0050 2300     		movs	r3, r4
+ 423 0052 2C33     		adds	r3, r3, #44
+ 424 0054 9B00     		lsls	r3, r3, #2
+ 425 0056 EB18     		adds	r3, r5, r3
+ 426 0058 5B68     		ldr	r3, [r3, #4]
+ 427 005a 002B     		cmp	r3, #0
+ 428 005c 1AD0     		beq	.L36
+ 429              	.L29:
+ 430 005e 0134     		adds	r4, r4, #1
+ 431 0060 E4B2     		uxtb	r4, r4
+ 432 0062 E1E7     		b	.L28
+ 433              	.L26:
+ 434 0064 0222     		movs	r2, #2
+ 435 0066 0021     		movs	r1, #0
+ 436 0068 3000     		movs	r0, r6
+ 437 006a FFF7FEFF 		bl	memset
+ 438 006e 0024     		movs	r4, #0
+ 439              	.L31:
+ 440 0070 2B79     		ldrb	r3, [r5, #4]
+ 441 0072 A342     		cmp	r3, r4
+ 442 0074 DBD9     		bls	.L34
+ 443 0076 2300     		movs	r3, r4
+ 444 0078 2C33     		adds	r3, r3, #44
+ 445 007a 9B00     		lsls	r3, r3, #2
+ 446 007c EB18     		adds	r3, r5, r3
+ 447 007e 5B68     		ldr	r3, [r3, #4]
+ 448 0080 002B     		cmp	r3, #0
+ 449 0082 04D0     		beq	.L32
+ 450 0084 0122     		movs	r2, #1
+ 451 0086 2100     		movs	r1, r4
+ 452 0088 3000     		movs	r0, r6
+ 453 008a FFF7FEFF 		bl	SMTC_PUT_BIT8
+ 454              	.L32:
+ 455 008e 0134     		adds	r4, r4, #1
+ 456 0090 E4B2     		uxtb	r4, r4
+ 457 0092 EDE7     		b	.L31
+ 458              	.L36:
+ 459 0094 0124     		movs	r4, #1
+ 460 0096 C1E7     		b	.L40
+ 462              		.section	.rodata.region_eu_868_get_modulation_type_from_datarate.str1.1,"aMS",%progbits,1
+ 463              	.LC12:
+ 464 0000 64723A25 		.ascii	"dr:%d\000"
+ 464      6400
+ 465              		.section	.text.region_eu_868_get_modulation_type_from_datarate,"ax",%progbits
+ARM GAS  /tmp/ccKp8dA8.s 			page 9
+
+
+ 466              		.align	1
+ 467              		.global	region_eu_868_get_modulation_type_from_datarate
+ 468              		.syntax unified
+ 469              		.code	16
+ 470              		.thumb_func
+ 471              		.fpu softvfp
+ 473              	region_eu_868_get_modulation_type_from_datarate:
+ 474              		@ args = 0, pretend = 0, frame = 0
+ 475              		@ frame_needed = 0, uses_anonymous_args = 0
+ 476 0000 0300     		movs	r3, r0
+ 477 0002 10B5     		push	{r4, lr}
+ 478 0004 0020     		movs	r0, #0
+ 479 0006 062B     		cmp	r3, #6
+ 480 0008 0ED9     		bls	.L42
+ 481 000a 0130     		adds	r0, r0, #1
+ 482 000c 072B     		cmp	r3, #7
+ 483 000e 0BD0     		beq	.L42
+ 484 0010 1A00     		movs	r2, r3
+ 485 0012 083A     		subs	r2, r2, #8
+ 486 0014 0130     		adds	r0, r0, #1
+ 487 0016 032A     		cmp	r2, #3
+ 488 0018 06D9     		bls	.L42
+ 489 001a 2A21     		movs	r1, #42
+ 490 001c 0348     		ldr	r0, .L46
+ 491 001e 044A     		ldr	r2, .L46+4
+ 492 0020 FF31     		adds	r1, r1, #255
+ 493 0022 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 494 0026 0020     		movs	r0, #0
+ 495              	.L42:
+ 496              		@ sp needed
+ 497 0028 10BD     		pop	{r4, pc}
+ 498              	.L47:
+ 499 002a C046     		.align	2
+ 500              	.L46:
+ 501 002c 00000000 		.word	.LANCHOR12
+ 502 0030 00000000 		.word	.LC12
+ 504              		.section	.rodata.region_eu_868_lora_dr_to_sf_bw.str1.1,"aMS",%progbits,1
+ 505              	.LC17:
+ 506 0000 00       		.ascii	"\000"
+ 507              		.section	.text.region_eu_868_lora_dr_to_sf_bw,"ax",%progbits
+ 508              		.align	1
+ 509              		.global	region_eu_868_lora_dr_to_sf_bw
+ 510              		.syntax unified
+ 511              		.code	16
+ 512              		.thumb_func
+ 513              		.fpu softvfp
+ 515              	region_eu_868_lora_dr_to_sf_bw:
+ 516              		@ args = 0, pretend = 0, frame = 0
+ 517              		@ frame_needed = 0, uses_anonymous_args = 0
+ 518 0000 10B5     		push	{r4, lr}
+ 519 0002 0628     		cmp	r0, #6
+ 520 0004 07D8     		bhi	.L49
+ 521 0006 074B     		ldr	r3, .L51
+ 522 0008 1B5C     		ldrb	r3, [r3, r0]
+ 523 000a 8000     		lsls	r0, r0, #2
+ 524 000c 0B70     		strb	r3, [r1]
+ 525 000e 064B     		ldr	r3, .L51+4
+ARM GAS  /tmp/ccKp8dA8.s 			page 10
+
+
+ 526 0010 C358     		ldr	r3, [r0, r3]
+ 527 0012 1370     		strb	r3, [r2]
+ 528              	.L48:
+ 529              		@ sp needed
+ 530 0014 10BD     		pop	{r4, pc}
+ 531              	.L49:
+ 532 0016 3821     		movs	r1, #56
+ 533 0018 044A     		ldr	r2, .L51+8
+ 534 001a 0548     		ldr	r0, .L51+12
+ 535 001c FF31     		adds	r1, r1, #255
+ 536 001e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 537 0022 F7E7     		b	.L48
+ 538              	.L52:
+ 539              		.align	2
+ 540              	.L51:
+ 541 0024 00000000 		.word	.LANCHOR13
+ 542 0028 00000000 		.word	.LANCHOR14
+ 543 002c 00000000 		.word	.LC17
+ 544 0030 00000000 		.word	.LANCHOR15
+ 546              		.section	.text.region_eu_868_fsk_dr_to_bitrate,"ax",%progbits
+ 547              		.align	1
+ 548              		.global	region_eu_868_fsk_dr_to_bitrate
+ 549              		.syntax unified
+ 550              		.code	16
+ 551              		.thumb_func
+ 552              		.fpu softvfp
+ 554              	region_eu_868_fsk_dr_to_bitrate:
+ 555              		@ args = 0, pretend = 0, frame = 0
+ 556              		@ frame_needed = 0, uses_anonymous_args = 0
+ 557 0000 10B5     		push	{r4, lr}
+ 558 0002 0728     		cmp	r0, #7
+ 559 0004 02D1     		bne	.L54
+ 560 0006 3223     		movs	r3, #50
+ 561 0008 0B70     		strb	r3, [r1]
+ 562              	.L53:
+ 563              		@ sp needed
+ 564 000a 10BD     		pop	{r4, pc}
+ 565              	.L54:
+ 566 000c 4421     		movs	r1, #68
+ 567 000e 034A     		ldr	r2, .L56
+ 568 0010 0348     		ldr	r0, .L56+4
+ 569 0012 FF31     		adds	r1, r1, #255
+ 570 0014 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 571 0018 F7E7     		b	.L53
+ 572              	.L57:
+ 573 001a C046     		.align	2
+ 574              	.L56:
+ 575 001c 00000000 		.word	.LC17
+ 576 0020 00000000 		.word	.LANCHOR16
+ 578              		.section	.text.region_eu_868_lr_fhss_dr_to_cr_bw,"ax",%progbits
+ 579              		.align	1
+ 580              		.global	region_eu_868_lr_fhss_dr_to_cr_bw
+ 581              		.syntax unified
+ 582              		.code	16
+ 583              		.thumb_func
+ 584              		.fpu softvfp
+ 586              	region_eu_868_lr_fhss_dr_to_cr_bw:
+ARM GAS  /tmp/ccKp8dA8.s 			page 11
+
+
+ 587              		@ args = 0, pretend = 0, frame = 0
+ 588              		@ frame_needed = 0, uses_anonymous_args = 0
+ 589 0000 0300     		movs	r3, r0
+ 590 0002 083B     		subs	r3, r3, #8
+ 591 0004 10B5     		push	{r4, lr}
+ 592 0006 032B     		cmp	r3, #3
+ 593 0008 07D8     		bhi	.L59
+ 594 000a 074B     		ldr	r3, .L61
+ 595 000c 8000     		lsls	r0, r0, #2
+ 596 000e C358     		ldr	r3, [r0, r3]
+ 597 0010 0B70     		strb	r3, [r1]
+ 598 0012 064B     		ldr	r3, .L61+4
+ 599 0014 C358     		ldr	r3, [r0, r3]
+ 600 0016 1370     		strb	r3, [r2]
+ 601              	.L58:
+ 602              		@ sp needed
+ 603 0018 10BD     		pop	{r4, pc}
+ 604              	.L59:
+ 605 001a A821     		movs	r1, #168
+ 606 001c 044A     		ldr	r2, .L61+8
+ 607 001e 0548     		ldr	r0, .L61+12
+ 608 0020 4900     		lsls	r1, r1, #1
+ 609 0022 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 610 0026 F7E7     		b	.L58
+ 611              	.L62:
+ 612              		.align	2
+ 613              	.L61:
+ 614 0028 00000000 		.word	.LANCHOR17
+ 615 002c 00000000 		.word	.LANCHOR18
+ 616 0030 00000000 		.word	.LC17
+ 617 0034 00000000 		.word	.LANCHOR19
+ 619              		.section	.rodata.DEFAULT_DR_DISTRIBUTION_EU_868,"a"
+ 620              		.align	2
+ 621              		.set	.LANCHOR9,. + 0
+ 624              	DEFAULT_DR_DISTRIBUTION_EU_868:
+ 625 0000 01000000 		.ascii	"\001\000\000\000\000\000\000\000\000\000\000\000"
+ 625      00000000 
+ 625      00000000 
+ 626              		.section	.rodata.JOIN_DR_DISTRIBUTION_EU_868,"a"
+ 627              		.align	2
+ 628              		.set	.LANCHOR10,. + 0
+ 631              	JOIN_DR_DISTRIBUTION_EU_868:
+ 632 0000 01020304 		.ascii	"\001\002\003\004\004\006\000\000\000\000\000\000"
+ 632      04060000 
+ 632      00000000 
+ 633              		.section	.rodata.MOBILE_LONGRANGE_DR_DISTRIBUTION_EU_868,"a"
+ 634              		.align	2
+ 635              		.set	.LANCHOR7,. + 0
+ 638              	MOBILE_LONGRANGE_DR_DISTRIBUTION_EU_868:
+ 639 0000 02020303 		.ascii	"\002\002\003\003\000\000\000\000\000\000\000\000"
+ 639      00000000 
+ 639      00000000 
+ 640              		.section	.rodata.MOBILE_LOWPER_DR_DISTRIBUTION_EU_868,"a"
+ 641              		.align	2
+ 642              		.set	.LANCHOR8,. + 0
+ 645              	MOBILE_LOWPER_DR_DISTRIBUTION_EU_868:
+ 646 0000 00000103 		.ascii	"\000\000\001\003\003\003\000\000\000\000\000\000"
+ARM GAS  /tmp/ccKp8dA8.s 			page 12
+
+
+ 646      03030000 
+ 646      00000000 
+ 647              		.section	.rodata.M_eu_868,"a"
+ 648              		.align	2
+ 649              		.set	.LANCHOR6,. + 0
+ 652              	M_eu_868:
+ 653 0000 3B3B3B7B 		.ascii	";;;{\372\372\372\372:{:{"
+ 653      FAFAFAFA 
+ 653      3A7B3A7B 
+ 654              		.section	.rodata.SYNC_WORD_GFSK_EU_868,"a"
+ 655              		.set	.LANCHOR2,. + 0
+ 658              	SYNC_WORD_GFSK_EU_868:
+ 659 0000 C194C1   		.ascii	"\301\224\301"
+ 660              		.section	.rodata.SYNC_WORD_LR_FHSS_EU_868,"a"
+ 661              		.align	2
+ 662              		.set	.LANCHOR3,. + 0
+ 665              	SYNC_WORD_LR_FHSS_EU_868:
+ 666 0000 2C0F7995 		.ascii	",\017y\225"
+ 667              		.section	.rodata.__func__.0,"a"
+ 668              		.set	.LANCHOR19,. + 0
+ 671              	__func__.0:
+ 672 0000 72656769 		.ascii	"region_eu_868_lr_fhss_dr_to_cr_bw\000"
+ 672      6F6E5F65 
+ 672      755F3836 
+ 672      385F6C72 
+ 672      5F666873 
+ 673              		.section	.rodata.__func__.1,"a"
+ 674              		.set	.LANCHOR16,. + 0
+ 677              	__func__.1:
+ 678 0000 72656769 		.ascii	"region_eu_868_fsk_dr_to_bitrate\000"
+ 678      6F6E5F65 
+ 678      755F3836 
+ 678      385F6673 
+ 678      6B5F6472 
+ 679              		.section	.rodata.__func__.2,"a"
+ 680              		.set	.LANCHOR15,. + 0
+ 683              	__func__.2:
+ 684 0000 72656769 		.ascii	"region_eu_868_lora_dr_to_sf_bw\000"
+ 684      6F6E5F65 
+ 684      755F3836 
+ 684      385F6C6F 
+ 684      72615F64 
+ 685              		.section	.rodata.__func__.3,"a"
+ 686              		.set	.LANCHOR12,. + 0
+ 689              	__func__.3:
+ 690 0000 72656769 		.ascii	"region_eu_868_get_modulation_type_from_datarate\000"
+ 690      6F6E5F65 
+ 690      755F3836 
+ 690      385F6765 
+ 690      745F6D6F 
+ 691              		.section	.rodata.datarate_backoff_eu_868,"a"
+ 692              		.align	2
+ 693              		.set	.LANCHOR1,. + 0
+ 696              	datarate_backoff_eu_868:
+ 697 0000 00000102 		.ascii	"\000\000\001\002\003\004\005\006\000\010\000\012"
+ 697      03040506 
+ 697      0008000A 
+ARM GAS  /tmp/ccKp8dA8.s 			page 13
+
+
+ 698              		.section	.rodata.datarate_offsets_eu_868,"a"
+ 699              		.align	2
+ 700              		.set	.LANCHOR0,. + 0
+ 703              	datarate_offsets_eu_868:
+ 704 0000 00000000 		.ascii	"\000\000\000\000\000\000"
+ 704      0000
+ 705 0006 01000000 		.ascii	"\001\000\000\000\000\000"
+ 705      0000
+ 706 000c 02010000 		.ascii	"\002\001\000\000\000\000"
+ 706      0000
+ 707 0012 03020100 		.ascii	"\003\002\001\000\000\000"
+ 707      0000
+ 708 0018 04030201 		.ascii	"\004\003\002\001\000\000"
+ 708      0000
+ 709 001e 05040302 		.ascii	"\005\004\003\002\001\000"
+ 709      0100
+ 710 0024 06050403 		.ascii	"\006\005\004\003\002\001"
+ 710      0201
+ 711 002a 07060504 		.ascii	"\007\006\005\004\003\002"
+ 711      0302
+ 712 0030 01000000 		.ascii	"\001\000\000\000\000\000"
+ 712      0000
+ 713 0036 02010000 		.ascii	"\002\001\000\000\000\000"
+ 713      0000
+ 714 003c 01000000 		.ascii	"\001\000\000\000\000\000"
+ 714      0000
+ 715 0042 02010000 		.ascii	"\002\001\000\000\000\000"
+ 715      0000
+ 716              		.section	.rodata.datarates_to_bandwidths_eu_868,"a"
+ 717              		.align	2
+ 718              		.set	.LANCHOR14,. + 0
+ 721              	datarates_to_bandwidths_eu_868:
+ 722 0000 07000000 		.word	7
+ 723 0004 07000000 		.word	7
+ 724 0008 07000000 		.word	7
+ 725 000c 07000000 		.word	7
+ 726 0010 07000000 		.word	7
+ 727 0014 07000000 		.word	7
+ 728 0018 09000000 		.word	9
+ 729              		.section	.rodata.datarates_to_lr_fhss_bw_eu_868,"a"
+ 730              		.align	2
+ 731              		.set	.LANCHOR18,. + 0
+ 734              	datarates_to_lr_fhss_bw_eu_868:
+ 735 0000 FFFFFFFF 		.word	-1
+ 736 0004 FFFFFFFF 		.word	-1
+ 737 0008 FFFFFFFF 		.word	-1
+ 738 000c FFFFFFFF 		.word	-1
+ 739 0010 FFFFFFFF 		.word	-1
+ 740 0014 FFFFFFFF 		.word	-1
+ 741 0018 FFFFFFFF 		.word	-1
+ 742 001c FFFFFFFF 		.word	-1
+ 743 0020 02000000 		.word	2
+ 744 0024 02000000 		.word	2
+ 745 0028 04000000 		.word	4
+ 746 002c 04000000 		.word	4
+ 747              		.section	.rodata.datarates_to_lr_fhss_cr_eu_868,"a"
+ 748              		.align	2
+ARM GAS  /tmp/ccKp8dA8.s 			page 14
+
+
+ 749              		.set	.LANCHOR17,. + 0
+ 752              	datarates_to_lr_fhss_cr_eu_868:
+ 753 0000 FFFFFFFF 		.word	-1
+ 754 0004 FFFFFFFF 		.word	-1
+ 755 0008 FFFFFFFF 		.word	-1
+ 756 000c FFFFFFFF 		.word	-1
+ 757 0010 FFFFFFFF 		.word	-1
+ 758 0014 FFFFFFFF 		.word	-1
+ 759 0018 FFFFFFFF 		.word	-1
+ 760 001c FFFFFFFF 		.word	-1
+ 761 0020 03000000 		.word	3
+ 762 0024 01000000 		.word	1
+ 763 0028 03000000 		.word	3
+ 764 002c 01000000 		.word	1
+ 765              		.section	.rodata.datarates_to_sf_eu_868,"a"
+ 766              		.align	2
+ 767              		.set	.LANCHOR13,. + 0
+ 770              	datarates_to_sf_eu_868:
+ 771 0000 0C0B0A09 		.ascii	"\014\013\012\011\010\007\007"
+ 771      080707
+ 772              		.section	.rodata.default_freq_eu_868,"a"
+ 773              		.align	2
+ 774              		.set	.LANCHOR11,. + 0
+ 777              	default_freq_eu_868:
+ 778 0000 A027BE33 		.word	868100000
+ 779 0004 E034C133 		.word	868300000
+ 780 0008 2042C433 		.word	868500000
+ 781              		.section	.rodata.duty_cycle_by_band_eu_868,"a"
+ 782              		.align	2
+ 783              		.set	.LANCHOR4,. + 0
+ 786              	duty_cycle_by_band_eu_868:
+ 787 0000 E803     		.short	1000
+ 788 0002 6400     		.short	100
+ 789 0004 6400     		.short	100
+ 790 0006 E803     		.short	1000
+ 791 0008 0A00     		.short	10
+ 792 000a 6400     		.short	100
+ 793              		.section	.rodata.frequency_range_by_band_eu_868,"a"
+ 794              		.align	2
+ 795              		.set	.LANCHOR5,. + 0
+ 798              	frequency_range_by_band_eu_868:
+ 799 0000 C0557033 		.word	863000000
+ 800 0004 40DA8E33 		.word	865000000
+ 801 0008 40DA8E33 		.word	865000000
+ 802 000c 01A1BC33 		.word	868000001
+ 803 0010 01A1BC33 		.word	868000001
+ 804 0014 C1C8C533 		.word	868600001
+ 805 0018 604FC733 		.word	868700000
+ 806 001c 81F0CE33 		.word	869200001
+ 807 0020 C0FDD133 		.word	869400000
+ 808 0024 51CED533 		.word	869650001
+ 809 0028 A091D633 		.word	869700000
+ 810 002c 8125DB33 		.word	870000001
+ 811              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccKp8dA8.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 region_eu_868.c
+     /tmp/ccKp8dA8.s:12     .text.region_eu_868_init:0000000000000000 $t
+     /tmp/ccKp8dA8.s:20     .text.region_eu_868_init:0000000000000000 region_eu_868_init
+     /tmp/ccKp8dA8.s:157    .text.region_eu_868_init:000000000000010c $d
+     /tmp/ccKp8dA8.s:179    .text.region_eu_868_config:0000000000000000 $t
+     /tmp/ccKp8dA8.s:186    .text.region_eu_868_config:0000000000000000 region_eu_868_config
+     /tmp/ccKp8dA8.s:251    .text.region_eu_868_config:0000000000000074 $d
+     /tmp/ccKp8dA8.s:255    .text.region_eu_868_get_next_channel:0000000000000000 $t
+     /tmp/ccKp8dA8.s:262    .text.region_eu_868_get_next_channel:0000000000000000 region_eu_868_get_next_channel
+     /tmp/ccKp8dA8.s:349    .text.region_eu_868_get_join_next_channel:0000000000000000 $t
+     /tmp/ccKp8dA8.s:356    .text.region_eu_868_get_join_next_channel:0000000000000000 region_eu_868_get_join_next_channel
+     /tmp/ccKp8dA8.s:367    .text.region_eu_868_build_channel_mask:0000000000000000 $t
+     /tmp/ccKp8dA8.s:374    .text.region_eu_868_build_channel_mask:0000000000000000 region_eu_868_build_channel_mask
+     /tmp/ccKp8dA8.s:466    .text.region_eu_868_get_modulation_type_from_datarate:0000000000000000 $t
+     /tmp/ccKp8dA8.s:473    .text.region_eu_868_get_modulation_type_from_datarate:0000000000000000 region_eu_868_get_modulation_type_from_datarate
+     /tmp/ccKp8dA8.s:501    .text.region_eu_868_get_modulation_type_from_datarate:000000000000002c $d
+     /tmp/ccKp8dA8.s:508    .text.region_eu_868_lora_dr_to_sf_bw:0000000000000000 $t
+     /tmp/ccKp8dA8.s:515    .text.region_eu_868_lora_dr_to_sf_bw:0000000000000000 region_eu_868_lora_dr_to_sf_bw
+     /tmp/ccKp8dA8.s:541    .text.region_eu_868_lora_dr_to_sf_bw:0000000000000024 $d
+     /tmp/ccKp8dA8.s:547    .text.region_eu_868_fsk_dr_to_bitrate:0000000000000000 $t
+     /tmp/ccKp8dA8.s:554    .text.region_eu_868_fsk_dr_to_bitrate:0000000000000000 region_eu_868_fsk_dr_to_bitrate
+     /tmp/ccKp8dA8.s:575    .text.region_eu_868_fsk_dr_to_bitrate:000000000000001c $d
+     /tmp/ccKp8dA8.s:579    .text.region_eu_868_lr_fhss_dr_to_cr_bw:0000000000000000 $t
+     /tmp/ccKp8dA8.s:586    .text.region_eu_868_lr_fhss_dr_to_cr_bw:0000000000000000 region_eu_868_lr_fhss_dr_to_cr_bw
+     /tmp/ccKp8dA8.s:614    .text.region_eu_868_lr_fhss_dr_to_cr_bw:0000000000000028 $d
+     /tmp/ccKp8dA8.s:620    .rodata.DEFAULT_DR_DISTRIBUTION_EU_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:624    .rodata.DEFAULT_DR_DISTRIBUTION_EU_868:0000000000000000 DEFAULT_DR_DISTRIBUTION_EU_868
+     /tmp/ccKp8dA8.s:627    .rodata.JOIN_DR_DISTRIBUTION_EU_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:631    .rodata.JOIN_DR_DISTRIBUTION_EU_868:0000000000000000 JOIN_DR_DISTRIBUTION_EU_868
+     /tmp/ccKp8dA8.s:634    .rodata.MOBILE_LONGRANGE_DR_DISTRIBUTION_EU_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:638    .rodata.MOBILE_LONGRANGE_DR_DISTRIBUTION_EU_868:0000000000000000 MOBILE_LONGRANGE_DR_DISTRIBUTION_EU_868
+     /tmp/ccKp8dA8.s:641    .rodata.MOBILE_LOWPER_DR_DISTRIBUTION_EU_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:645    .rodata.MOBILE_LOWPER_DR_DISTRIBUTION_EU_868:0000000000000000 MOBILE_LOWPER_DR_DISTRIBUTION_EU_868
+     /tmp/ccKp8dA8.s:648    .rodata.M_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:652    .rodata.M_eu_868:0000000000000000 M_eu_868
+     /tmp/ccKp8dA8.s:658    .rodata.SYNC_WORD_GFSK_EU_868:0000000000000000 SYNC_WORD_GFSK_EU_868
+     /tmp/ccKp8dA8.s:661    .rodata.SYNC_WORD_LR_FHSS_EU_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:665    .rodata.SYNC_WORD_LR_FHSS_EU_868:0000000000000000 SYNC_WORD_LR_FHSS_EU_868
+     /tmp/ccKp8dA8.s:671    .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccKp8dA8.s:677    .rodata.__func__.1:0000000000000000 __func__.1
+     /tmp/ccKp8dA8.s:683    .rodata.__func__.2:0000000000000000 __func__.2
+     /tmp/ccKp8dA8.s:689    .rodata.__func__.3:0000000000000000 __func__.3
+     /tmp/ccKp8dA8.s:692    .rodata.datarate_backoff_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:696    .rodata.datarate_backoff_eu_868:0000000000000000 datarate_backoff_eu_868
+     /tmp/ccKp8dA8.s:699    .rodata.datarate_offsets_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:703    .rodata.datarate_offsets_eu_868:0000000000000000 datarate_offsets_eu_868
+     /tmp/ccKp8dA8.s:717    .rodata.datarates_to_bandwidths_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:721    .rodata.datarates_to_bandwidths_eu_868:0000000000000000 datarates_to_bandwidths_eu_868
+     /tmp/ccKp8dA8.s:730    .rodata.datarates_to_lr_fhss_bw_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:734    .rodata.datarates_to_lr_fhss_bw_eu_868:0000000000000000 datarates_to_lr_fhss_bw_eu_868
+     /tmp/ccKp8dA8.s:748    .rodata.datarates_to_lr_fhss_cr_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:752    .rodata.datarates_to_lr_fhss_cr_eu_868:0000000000000000 datarates_to_lr_fhss_cr_eu_868
+     /tmp/ccKp8dA8.s:766    .rodata.datarates_to_sf_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:770    .rodata.datarates_to_sf_eu_868:0000000000000000 datarates_to_sf_eu_868
+     /tmp/ccKp8dA8.s:773    .rodata.default_freq_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:777    .rodata.default_freq_eu_868:0000000000000000 default_freq_eu_868
+ARM GAS  /tmp/ccKp8dA8.s 			page 16
+
+
+     /tmp/ccKp8dA8.s:782    .rodata.duty_cycle_by_band_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:786    .rodata.duty_cycle_by_band_eu_868:0000000000000000 duty_cycle_by_band_eu_868
+     /tmp/ccKp8dA8.s:794    .rodata.frequency_range_by_band_eu_868:0000000000000000 $d
+     /tmp/ccKp8dA8.s:798    .rodata.frequency_range_by_band_eu_868:0000000000000000 frequency_range_by_band_eu_868
+
+UNDEFINED SYMBOLS
+memcpy
+memset
+SMTC_PUT_BIT8
+__aeabi_uidivmod
+smtc_duty_cycle_update
+SMTC_GET_BIT8
+smtc_duty_cycle_is_channel_free
+SMTC_GET_BIT16
+smtc_modem_hal_get_random_nb_in_range
+SMTC_ARE_CLR_BYTE8
+smtc_modem_hal_on_panic

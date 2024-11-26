@@ -1,0 +1,4 @@
+application/main.c:311:13:transmission_timer_cb	8	static
+application/main.c:299:13:send_uplink_counter_on_port.constprop	24	static
+application/main.c:147:13:modem_event_callback	48	static
+application/main.c:96:5:main	24	static

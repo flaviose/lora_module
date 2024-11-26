@@ -1,0 +1,8 @@
+bsp_l0/smtc_hal/smtc_hal_uart.c:83:32:trace_uart_init	56	static
+bsp_l0/smtc_hal/smtc_hal_uart.c:120:32:trace_uart_deinit	8	static
+bsp_l0/smtc_hal/smtc_hal_uart.c:135:32:trace_uart_tx	20	static
+bsp_l0/smtc_hal/smtc_hal_uart.c:159:32:hw_modem_uart_init	56	static
+bsp_l0/smtc_hal/smtc_hal_uart.c:215:32:hw_modem_uart_deinit	8	static
+bsp_l0/smtc_hal/smtc_hal_uart.c:233:32:hw_modem_uart_dma_start_rx	12	static
+bsp_l0/smtc_hal/smtc_hal_uart.c:248:32:hw_modem_uart_dma_stop_rx	0	static
+bsp_l0/smtc_hal/smtc_hal_uart.c:252:32:hw_modem_uart_tx	20	static

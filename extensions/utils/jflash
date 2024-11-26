@@ -1,0 +1,72 @@
+#!/bin/bash -e
+
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+    prgdir="/mnt/c/Program Files"
+    jcmd="JLink.exe"
+    gdbcmd="JLinkGDBServerCL.exe"
+    PATH=${PATH}:${prgdir}/SEGGER/JLink_V810g/:
+else
+    jcmd="JLinkExe"
+    gdbcmd="JLinkGDBServerCLExe"
+fi
+
+dev=${JLINKDEV:-STM32L071RB}
+
+while getopts "f:d:ge" opt; do
+  case ${opt} in
+    d )# get he chosen device
+    dev=$OPTARG
+    ;;
+
+    e )# erase the whole flash
+    erase=1
+    ;;
+
+    g )# the jlink cmd
+    echo -e gdb
+    gdb=1
+    ;;
+
+    f )# the hex file to load
+    hex=$OPTARG
+    ;;
+
+    \? )
+    #print option error
+    echo "Invalid option: $OPTARG" 1>&2
+    ;;
+
+    : )
+    #print argument error
+    echo "Invalid option: $OPTARG requires an argument" 1>&2
+    ;;
+  esac
+done
+
+if [[ -n "${choose}" ]]; then
+  dev=$(cat $devfile | fzf)
+fi
+
+mkdir -p build
+tmpfile="build/flash.jlink"
+
+if [[ -z "${erase}" ]]; then
+  echo -e "device $dev\nspeed 10\nr\nh\nspeed auto\nloadfile $hex\nr\nh\ngo\nexit" >| $tmpfile
+  msg="flashed $hex to"
+else
+  echo -e "device $dev\nspeed 10\nr\nh\nspeed auto\nerase\nexit" >| $tmpfile
+  msg="erased flash of"
+fi
+
+# cmd="JLinkExe -If SWD -JLinkScriptfile $tmpfile"
+cmd="$jcmd -If SWD -ExitOnError -JLinkScriptfile $tmpfile"
+echo $cmd
+$cmd && echo "Successfully $msg $dev"
+
+# start gdb server
+if [[ -n "${gdb}" ]]; then
+  $gdbcmd -If SWD -ExitOnError -Device $dev &
+  sleep 1
+fi
+
+rm $tmpfile

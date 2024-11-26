@@ -1,0 +1,10 @@
+bsp_l0/mcu_drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_i2c.h:1605:26:LL_I2C_IsActiveFlag_NACK.constprop	0	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:128:16:i2c_write_buffer.constprop	40	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:207:16:i2c_read_buffer.constprop	48	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:49:32:hal_i2c_init	56	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:88:32:hal_i2c_deinit	8	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:104:32:hal_i2c_set_addr_size	0	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:107:35:hal_i2c_write	16	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:111:35:hal_i2c_read	8	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:115:35:hal_i2c_write_buffer	8	static
+bsp_l0/smtc_hal/smtc_hal_i2c.c:119:35:hal_i2c_read_buffer	8	static

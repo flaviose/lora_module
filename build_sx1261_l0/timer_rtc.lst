@@ -1,0 +1,322 @@
+ARM GAS  /tmp/ccl7PQ16.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"timer_rtc.c"
+  10              		.text
+  11              		.section	.text.RtcGetTimerValue,"ax",%progbits
+  12              		.align	1
+  13              		.global	RtcGetTimerValue
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	RtcGetTimerValue:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 10B5     		push	{r4, lr}
+  24 0002 FFF7FEFF 		bl	rtc_get_timestamp_in_ticks
+  25              		@ sp needed
+  26 0006 10BD     		pop	{r4, pc}
+  28              		.section	.text.RtcSetTimerContext,"ax",%progbits
+  29              		.align	1
+  30              		.global	RtcSetTimerContext
+  31              		.syntax unified
+  32              		.code	16
+  33              		.thumb_func
+  34              		.fpu softvfp
+  36              	RtcSetTimerContext:
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 0, uses_anonymous_args = 0
+  39 0000 10B5     		push	{r4, lr}
+  40 0002 FFF7FEFF 		bl	RtcGetTimerValue
+  41              		@ sp needed
+  42 0006 014B     		ldr	r3, .L3
+  43 0008 1860     		str	r0, [r3]
+  44 000a 10BD     		pop	{r4, pc}
+  45              	.L4:
+  46              		.align	2
+  47              	.L3:
+  48 000c 00000000 		.word	.LANCHOR0
+  50              		.section	.text.RtcGetTimerContext,"ax",%progbits
+  51              		.align	1
+  52              		.global	RtcGetTimerContext
+  53              		.syntax unified
+  54              		.code	16
+  55              		.thumb_func
+  56              		.fpu softvfp
+  58              	RtcGetTimerContext:
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61              		@ link register save eliminated.
+  62 0000 014B     		ldr	r3, .L6
+ARM GAS  /tmp/ccl7PQ16.s 			page 2
+
+
+  63              		@ sp needed
+  64 0002 1868     		ldr	r0, [r3]
+  65 0004 7047     		bx	lr
+  66              	.L7:
+  67 0006 C046     		.align	2
+  68              	.L6:
+  69 0008 00000000 		.word	.LANCHOR0
+  71              		.section	.text.RtcGetTimerElapsedTime,"ax",%progbits
+  72              		.align	1
+  73              		.global	RtcGetTimerElapsedTime
+  74              		.syntax unified
+  75              		.code	16
+  76              		.thumb_func
+  77              		.fpu softvfp
+  79              	RtcGetTimerElapsedTime:
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82 0000 10B5     		push	{r4, lr}
+  83 0002 FFF7FEFF 		bl	RtcGetTimerValue
+  84              		@ sp needed
+  85 0006 024B     		ldr	r3, .L9
+  86 0008 1B68     		ldr	r3, [r3]
+  87 000a C01A     		subs	r0, r0, r3
+  88 000c 10BD     		pop	{r4, pc}
+  89              	.L10:
+  90 000e C046     		.align	2
+  91              	.L9:
+  92 0010 00000000 		.word	.LANCHOR0
+  94              		.global	__aeabi_uidiv
+  95              		.global	__aeabi_uidivmod
+  96              		.section	.text.RtcSetAlarm,"ax",%progbits
+  97              		.align	1
+  98              		.global	RtcSetAlarm
+  99              		.syntax unified
+ 100              		.code	16
+ 101              		.thumb_func
+ 102              		.fpu softvfp
+ 104              	RtcSetAlarm:
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107 0000 70B5     		push	{r4, r5, r6, lr}
+ 108 0002 0400     		movs	r4, r0
+ 109 0004 FFF7FEFF 		bl	RtcGetTimerElapsedTime
+ 110 0008 0B4D     		ldr	r5, .L14
+ 111 000a 0026     		movs	r6, #0
+ 112 000c 241A     		subs	r4, r4, r0
+ 113 000e AC42     		cmp	r4, r5
+ 114 0010 09D9     		bls	.L12
+ 115 0012 2900     		movs	r1, r5
+ 116 0014 2000     		movs	r0, r4
+ 117 0016 FFF7FEFF 		bl	__aeabi_uidiv
+ 118 001a 2900     		movs	r1, r5
+ 119 001c 0600     		movs	r6, r0
+ 120 001e 2000     		movs	r0, r4
+ 121 0020 FFF7FEFF 		bl	__aeabi_uidivmod
+ 122 0024 0C00     		movs	r4, r1
+ 123              	.L12:
+ARM GAS  /tmp/ccl7PQ16.s 			page 3
+
+
+ 124              		@ sp needed
+ 125 0026 054B     		ldr	r3, .L14+4
+ 126 0028 2000     		movs	r0, r4
+ 127 002a 1E60     		str	r6, [r3]
+ 128 002c FFF7FEFF 		bl	rtc_tick_2_ms
+ 129 0030 FFF7FEFF 		bl	hal_rtc_wakeup_timer_set_ms
+ 130 0034 70BD     		pop	{r4, r5, r6, pc}
+ 131              	.L15:
+ 132 0036 C046     		.align	2
+ 133              	.L14:
+ 134 0038 30750000 		.word	30000
+ 135 003c 00000000 		.word	.LANCHOR1
+ 137              		.section	.text.RtcStopAlarm,"ax",%progbits
+ 138              		.align	1
+ 139              		.global	RtcStopAlarm
+ 140              		.syntax unified
+ 141              		.code	16
+ 142              		.thumb_func
+ 143              		.fpu softvfp
+ 145              	RtcStopAlarm:
+ 146              		@ args = 0, pretend = 0, frame = 0
+ 147              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148 0000 10B5     		push	{r4, lr}
+ 149 0002 FFF7FEFF 		bl	hal_rtc_wakeup_timer_stop
+ 150              		@ sp needed
+ 151 0006 0022     		movs	r2, #0
+ 152 0008 014B     		ldr	r3, .L17
+ 153 000a 1A60     		str	r2, [r3]
+ 154 000c 10BD     		pop	{r4, pc}
+ 155              	.L18:
+ 156 000e C046     		.align	2
+ 157              	.L17:
+ 158 0010 00000000 		.word	.LANCHOR1
+ 160              		.section	.text.RtcMs2Tick,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	RtcMs2Tick
+ 163              		.syntax unified
+ 164              		.code	16
+ 165              		.thumb_func
+ 166              		.fpu softvfp
+ 168              	RtcMs2Tick:
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171 0000 10B5     		push	{r4, lr}
+ 172 0002 FFF7FEFF 		bl	rtc_ms_2_tick
+ 173              		@ sp needed
+ 174 0006 10BD     		pop	{r4, pc}
+ 176              		.section	.text.RtcTick2Ms,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	RtcTick2Ms
+ 179              		.syntax unified
+ 180              		.code	16
+ 181              		.thumb_func
+ 182              		.fpu softvfp
+ 184              	RtcTick2Ms:
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccl7PQ16.s 			page 4
+
+
+ 187 0000 10B5     		push	{r4, lr}
+ 188 0002 FFF7FEFF 		bl	rtc_tick_2_ms
+ 189              		@ sp needed
+ 190 0006 10BD     		pop	{r4, pc}
+ 192              		.section	.text.RtcGetMinimumTimeout,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	RtcGetMinimumTimeout
+ 195              		.syntax unified
+ 196              		.code	16
+ 197              		.thumb_func
+ 198              		.fpu softvfp
+ 200              	RtcGetMinimumTimeout:
+ 201              		@ args = 0, pretend = 0, frame = 0
+ 202              		@ frame_needed = 0, uses_anonymous_args = 0
+ 203              		@ link register save eliminated.
+ 204 0000 0320     		movs	r0, #3
+ 205              		@ sp needed
+ 206 0002 7047     		bx	lr
+ 208              		.section	.text.RtcTempCompensation,"ax",%progbits
+ 209              		.align	1
+ 210              		.global	RtcTempCompensation
+ 211              		.syntax unified
+ 212              		.code	16
+ 213              		.thumb_func
+ 214              		.fpu softvfp
+ 216              	RtcTempCompensation:
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 220 0000 0020     		movs	r0, #0
+ 221              		@ sp needed
+ 222 0002 7047     		bx	lr
+ 224              		.section	.text.RtcProcess,"ax",%progbits
+ 225              		.align	1
+ 226              		.global	RtcProcess
+ 227              		.syntax unified
+ 228              		.code	16
+ 229              		.thumb_func
+ 230              		.fpu softvfp
+ 232              	RtcProcess:
+ 233              		@ args = 0, pretend = 0, frame = 0
+ 234              		@ frame_needed = 0, uses_anonymous_args = 0
+ 235              		@ link register save eliminated.
+ 236              		@ sp needed
+ 237 0000 7047     		bx	lr
+ 239              		.section	.text.RtcIrq,"ax",%progbits
+ 240              		.align	1
+ 241              		.global	RtcIrq
+ 242              		.syntax unified
+ 243              		.code	16
+ 244              		.thumb_func
+ 245              		.fpu softvfp
+ 247              	RtcIrq:
+ 248              		@ args = 0, pretend = 0, frame = 0
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250 0000 074A     		ldr	r2, .L27
+ 251 0002 10B5     		push	{r4, lr}
+ARM GAS  /tmp/ccl7PQ16.s 			page 5
+
+
+ 252 0004 1368     		ldr	r3, [r2]
+ 253 0006 002B     		cmp	r3, #0
+ 254 0008 02D1     		bne	.L25
+ 255 000a FFF7FEFF 		bl	TimerIrqHandler
+ 256              	.L24:
+ 257              		@ sp needed
+ 258 000e 10BD     		pop	{r4, pc}
+ 259              	.L25:
+ 260 0010 013B     		subs	r3, r3, #1
+ 261 0012 0448     		ldr	r0, .L27+4
+ 262 0014 1360     		str	r3, [r2]
+ 263 0016 FFF7FEFF 		bl	rtc_tick_2_ms
+ 264 001a FFF7FEFF 		bl	hal_rtc_wakeup_timer_set_ms
+ 265 001e F6E7     		b	.L24
+ 266              	.L28:
+ 267              		.align	2
+ 268              	.L27:
+ 269 0020 00000000 		.word	.LANCHOR1
+ 270 0024 30750000 		.word	30000
+ 272              		.section	.bss.context,"aw",%nobits
+ 273              		.align	2
+ 274              		.set	.LANCHOR0,. + 0
+ 277              	context:
+ 278 0000 00000000 		.space	4
+ 279              		.section	.bss.wakeup_timer_rounds,"aw",%nobits
+ 280              		.align	2
+ 281              		.set	.LANCHOR1,. + 0
+ 284              	wakeup_timer_rounds:
+ 285 0000 00000000 		.space	4
+ 286              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccl7PQ16.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 timer_rtc.c
+     /tmp/ccl7PQ16.s:12     .text.RtcGetTimerValue:0000000000000000 $t
+     /tmp/ccl7PQ16.s:20     .text.RtcGetTimerValue:0000000000000000 RtcGetTimerValue
+     /tmp/ccl7PQ16.s:29     .text.RtcSetTimerContext:0000000000000000 $t
+     /tmp/ccl7PQ16.s:36     .text.RtcSetTimerContext:0000000000000000 RtcSetTimerContext
+     /tmp/ccl7PQ16.s:48     .text.RtcSetTimerContext:000000000000000c $d
+     /tmp/ccl7PQ16.s:51     .text.RtcGetTimerContext:0000000000000000 $t
+     /tmp/ccl7PQ16.s:58     .text.RtcGetTimerContext:0000000000000000 RtcGetTimerContext
+     /tmp/ccl7PQ16.s:69     .text.RtcGetTimerContext:0000000000000008 $d
+     /tmp/ccl7PQ16.s:72     .text.RtcGetTimerElapsedTime:0000000000000000 $t
+     /tmp/ccl7PQ16.s:79     .text.RtcGetTimerElapsedTime:0000000000000000 RtcGetTimerElapsedTime
+     /tmp/ccl7PQ16.s:92     .text.RtcGetTimerElapsedTime:0000000000000010 $d
+     /tmp/ccl7PQ16.s:97     .text.RtcSetAlarm:0000000000000000 $t
+     /tmp/ccl7PQ16.s:104    .text.RtcSetAlarm:0000000000000000 RtcSetAlarm
+     /tmp/ccl7PQ16.s:134    .text.RtcSetAlarm:0000000000000038 $d
+     /tmp/ccl7PQ16.s:138    .text.RtcStopAlarm:0000000000000000 $t
+     /tmp/ccl7PQ16.s:145    .text.RtcStopAlarm:0000000000000000 RtcStopAlarm
+     /tmp/ccl7PQ16.s:158    .text.RtcStopAlarm:0000000000000010 $d
+     /tmp/ccl7PQ16.s:161    .text.RtcMs2Tick:0000000000000000 $t
+     /tmp/ccl7PQ16.s:168    .text.RtcMs2Tick:0000000000000000 RtcMs2Tick
+     /tmp/ccl7PQ16.s:177    .text.RtcTick2Ms:0000000000000000 $t
+     /tmp/ccl7PQ16.s:184    .text.RtcTick2Ms:0000000000000000 RtcTick2Ms
+     /tmp/ccl7PQ16.s:193    .text.RtcGetMinimumTimeout:0000000000000000 $t
+     /tmp/ccl7PQ16.s:200    .text.RtcGetMinimumTimeout:0000000000000000 RtcGetMinimumTimeout
+     /tmp/ccl7PQ16.s:209    .text.RtcTempCompensation:0000000000000000 $t
+     /tmp/ccl7PQ16.s:216    .text.RtcTempCompensation:0000000000000000 RtcTempCompensation
+     /tmp/ccl7PQ16.s:225    .text.RtcProcess:0000000000000000 $t
+     /tmp/ccl7PQ16.s:232    .text.RtcProcess:0000000000000000 RtcProcess
+     /tmp/ccl7PQ16.s:240    .text.RtcIrq:0000000000000000 $t
+     /tmp/ccl7PQ16.s:247    .text.RtcIrq:0000000000000000 RtcIrq
+     /tmp/ccl7PQ16.s:269    .text.RtcIrq:0000000000000020 $d
+     /tmp/ccl7PQ16.s:273    .bss.context:0000000000000000 $d
+     /tmp/ccl7PQ16.s:277    .bss.context:0000000000000000 context
+     /tmp/ccl7PQ16.s:280    .bss.wakeup_timer_rounds:0000000000000000 $d
+     /tmp/ccl7PQ16.s:284    .bss.wakeup_timer_rounds:0000000000000000 wakeup_timer_rounds
+
+UNDEFINED SYMBOLS
+rtc_get_timestamp_in_ticks
+__aeabi_uidiv
+__aeabi_uidivmod
+rtc_tick_2_ms
+hal_rtc_wakeup_timer_set_ms
+hal_rtc_wakeup_timer_stop
+rtc_ms_2_tick
+TimerIrqHandler

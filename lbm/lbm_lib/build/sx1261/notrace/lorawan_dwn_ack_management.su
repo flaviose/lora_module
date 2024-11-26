@@ -1,0 +1,6 @@
+smtc_modem_core/lorawan_manager/lorawan_dwn_ack_management.c:164:13:lorawan_dwn_ack_management_on_update	0	static
+smtc_modem_core/lorawan_manager/lorawan_dwn_ack_management.c:151:13:lorawan_dwn_ack_management_on_launch	32	static
+smtc_modem_core/lorawan_manager/lorawan_dwn_ack_management.c:115:6:lorawan_dwn_ack_management_init	8	static
+smtc_modem_core/lorawan_manager/lorawan_dwn_ack_management.c:126:6:lorawan_dwn_ack_add_task	32	static
+smtc_modem_core/lorawan_manager/lorawan_dwn_ack_management.c:168:16:lorawan_dwn_ack_management_downlink_handler	8	static
+smtc_modem_core/lorawan_manager/lorawan_dwn_ack_management.c:140:6:lorawan_dwn_ack_remove_task	8	static

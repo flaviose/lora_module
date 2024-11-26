@@ -1,0 +1,14 @@
+bsp_l0/mcu_drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_system.h:650:22:LL_SYSCFG_SetEXTISource	8	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:269:13:call_gpio_irq_cb	8	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:165:32:hal_gpio_init_out	32	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:184:32:hal_gpio_irq_attach	0	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:93:32:hal_gpio_init_in	72	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:190:32:hal_gpio_irq_deatach	0	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:196:32:hal_gpio_irq_enable	0	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:202:32:hal_gpio_irq_disable	0	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:212:32:hal_gpio_set_value	0	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:221:36:hal_gpio_get_value	0	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:226:32:hal_gpio_clear_pending_irq	8	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:285:6:EXTI0_1_IRQHandler	8	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:300:6:EXTI2_3_IRQHandler	8	static
+bsp_l0/smtc_hal/smtc_hal_gpio.c:315:6:EXTI4_15_IRQHandler	16	static

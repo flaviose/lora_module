@@ -1,0 +1,1056 @@
+ARM GAS  /tmp/ccL0MzOe.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"aes.c"
+  10              		.text
+  11              		.section	.text.xor_block,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	xor_block:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		@ link register save eliminated.
+  23 0000 0A78     		ldrb	r2, [r1]
+  24 0002 0378     		ldrb	r3, [r0]
+  25              		@ sp needed
+  26 0004 5340     		eors	r3, r2
+  27 0006 0370     		strb	r3, [r0]
+  28 0008 4A78     		ldrb	r2, [r1, #1]
+  29 000a 4378     		ldrb	r3, [r0, #1]
+  30 000c 5340     		eors	r3, r2
+  31 000e 4370     		strb	r3, [r0, #1]
+  32 0010 8A78     		ldrb	r2, [r1, #2]
+  33 0012 8378     		ldrb	r3, [r0, #2]
+  34 0014 5340     		eors	r3, r2
+  35 0016 8370     		strb	r3, [r0, #2]
+  36 0018 CA78     		ldrb	r2, [r1, #3]
+  37 001a C378     		ldrb	r3, [r0, #3]
+  38 001c 5340     		eors	r3, r2
+  39 001e C370     		strb	r3, [r0, #3]
+  40 0020 0A79     		ldrb	r2, [r1, #4]
+  41 0022 0379     		ldrb	r3, [r0, #4]
+  42 0024 5340     		eors	r3, r2
+  43 0026 0371     		strb	r3, [r0, #4]
+  44 0028 4A79     		ldrb	r2, [r1, #5]
+  45 002a 4379     		ldrb	r3, [r0, #5]
+  46 002c 5340     		eors	r3, r2
+  47 002e 4371     		strb	r3, [r0, #5]
+  48 0030 8A79     		ldrb	r2, [r1, #6]
+  49 0032 8379     		ldrb	r3, [r0, #6]
+  50 0034 5340     		eors	r3, r2
+  51 0036 8371     		strb	r3, [r0, #6]
+  52 0038 CA79     		ldrb	r2, [r1, #7]
+  53 003a C379     		ldrb	r3, [r0, #7]
+  54 003c 5340     		eors	r3, r2
+  55 003e C371     		strb	r3, [r0, #7]
+  56 0040 0A7A     		ldrb	r2, [r1, #8]
+  57 0042 037A     		ldrb	r3, [r0, #8]
+  58 0044 5340     		eors	r3, r2
+ARM GAS  /tmp/ccL0MzOe.s 			page 2
+
+
+  59 0046 0372     		strb	r3, [r0, #8]
+  60 0048 4A7A     		ldrb	r2, [r1, #9]
+  61 004a 437A     		ldrb	r3, [r0, #9]
+  62 004c 5340     		eors	r3, r2
+  63 004e 4372     		strb	r3, [r0, #9]
+  64 0050 8A7A     		ldrb	r2, [r1, #10]
+  65 0052 837A     		ldrb	r3, [r0, #10]
+  66 0054 5340     		eors	r3, r2
+  67 0056 8372     		strb	r3, [r0, #10]
+  68 0058 CA7A     		ldrb	r2, [r1, #11]
+  69 005a C37A     		ldrb	r3, [r0, #11]
+  70 005c 5340     		eors	r3, r2
+  71 005e C372     		strb	r3, [r0, #11]
+  72 0060 0A7B     		ldrb	r2, [r1, #12]
+  73 0062 037B     		ldrb	r3, [r0, #12]
+  74 0064 5340     		eors	r3, r2
+  75 0066 0373     		strb	r3, [r0, #12]
+  76 0068 4A7B     		ldrb	r2, [r1, #13]
+  77 006a 437B     		ldrb	r3, [r0, #13]
+  78 006c 5340     		eors	r3, r2
+  79 006e 4373     		strb	r3, [r0, #13]
+  80 0070 8A7B     		ldrb	r2, [r1, #14]
+  81 0072 837B     		ldrb	r3, [r0, #14]
+  82 0074 5340     		eors	r3, r2
+  83 0076 8373     		strb	r3, [r0, #14]
+  84 0078 CA7B     		ldrb	r2, [r1, #15]
+  85 007a C37B     		ldrb	r3, [r0, #15]
+  86 007c 5340     		eors	r3, r2
+  87 007e C373     		strb	r3, [r0, #15]
+  88 0080 7047     		bx	lr
+  90              		.section	.text.copy_and_key,"ax",%progbits
+  91              		.align	1
+  92              		.syntax unified
+  93              		.code	16
+  94              		.thumb_func
+  95              		.fpu softvfp
+  97              	copy_and_key:
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100 0000 10B5     		push	{r4, lr}
+ 101 0002 0B78     		ldrb	r3, [r1]
+ 102 0004 1478     		ldrb	r4, [r2]
+ 103              		@ sp needed
+ 104 0006 6340     		eors	r3, r4
+ 105 0008 0370     		strb	r3, [r0]
+ 106 000a 5478     		ldrb	r4, [r2, #1]
+ 107 000c 4B78     		ldrb	r3, [r1, #1]
+ 108 000e 6340     		eors	r3, r4
+ 109 0010 4370     		strb	r3, [r0, #1]
+ 110 0012 9478     		ldrb	r4, [r2, #2]
+ 111 0014 8B78     		ldrb	r3, [r1, #2]
+ 112 0016 6340     		eors	r3, r4
+ 113 0018 8370     		strb	r3, [r0, #2]
+ 114 001a D478     		ldrb	r4, [r2, #3]
+ 115 001c CB78     		ldrb	r3, [r1, #3]
+ 116 001e 6340     		eors	r3, r4
+ 117 0020 C370     		strb	r3, [r0, #3]
+ARM GAS  /tmp/ccL0MzOe.s 			page 3
+
+
+ 118 0022 1479     		ldrb	r4, [r2, #4]
+ 119 0024 0B79     		ldrb	r3, [r1, #4]
+ 120 0026 6340     		eors	r3, r4
+ 121 0028 0371     		strb	r3, [r0, #4]
+ 122 002a 5479     		ldrb	r4, [r2, #5]
+ 123 002c 4B79     		ldrb	r3, [r1, #5]
+ 124 002e 6340     		eors	r3, r4
+ 125 0030 4371     		strb	r3, [r0, #5]
+ 126 0032 9479     		ldrb	r4, [r2, #6]
+ 127 0034 8B79     		ldrb	r3, [r1, #6]
+ 128 0036 6340     		eors	r3, r4
+ 129 0038 8371     		strb	r3, [r0, #6]
+ 130 003a D479     		ldrb	r4, [r2, #7]
+ 131 003c CB79     		ldrb	r3, [r1, #7]
+ 132 003e 6340     		eors	r3, r4
+ 133 0040 C371     		strb	r3, [r0, #7]
+ 134 0042 147A     		ldrb	r4, [r2, #8]
+ 135 0044 0B7A     		ldrb	r3, [r1, #8]
+ 136 0046 6340     		eors	r3, r4
+ 137 0048 0372     		strb	r3, [r0, #8]
+ 138 004a 4B7A     		ldrb	r3, [r1, #9]
+ 139 004c 547A     		ldrb	r4, [r2, #9]
+ 140 004e 6340     		eors	r3, r4
+ 141 0050 4372     		strb	r3, [r0, #9]
+ 142 0052 8B7A     		ldrb	r3, [r1, #10]
+ 143 0054 947A     		ldrb	r4, [r2, #10]
+ 144 0056 6340     		eors	r3, r4
+ 145 0058 8372     		strb	r3, [r0, #10]
+ 146 005a D47A     		ldrb	r4, [r2, #11]
+ 147 005c CB7A     		ldrb	r3, [r1, #11]
+ 148 005e 6340     		eors	r3, r4
+ 149 0060 C372     		strb	r3, [r0, #11]
+ 150 0062 147B     		ldrb	r4, [r2, #12]
+ 151 0064 0B7B     		ldrb	r3, [r1, #12]
+ 152 0066 6340     		eors	r3, r4
+ 153 0068 0373     		strb	r3, [r0, #12]
+ 154 006a 547B     		ldrb	r4, [r2, #13]
+ 155 006c 4B7B     		ldrb	r3, [r1, #13]
+ 156 006e 6340     		eors	r3, r4
+ 157 0070 4373     		strb	r3, [r0, #13]
+ 158 0072 947B     		ldrb	r4, [r2, #14]
+ 159 0074 8B7B     		ldrb	r3, [r1, #14]
+ 160 0076 6340     		eors	r3, r4
+ 161 0078 8373     		strb	r3, [r0, #14]
+ 162 007a CB7B     		ldrb	r3, [r1, #15]
+ 163 007c D27B     		ldrb	r2, [r2, #15]
+ 164 007e 5340     		eors	r3, r2
+ 165 0080 C373     		strb	r3, [r0, #15]
+ 166 0082 10BD     		pop	{r4, pc}
+ 168              		.global	__aeabi_uidivmod
+ 169              		.section	.text.aes_set_key,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	aes_set_key
+ 172              		.syntax unified
+ 173              		.code	16
+ 174              		.thumb_func
+ 175              		.fpu softvfp
+ARM GAS  /tmp/ccL0MzOe.s 			page 4
+
+
+ 177              	aes_set_key:
+ 178              		@ args = 0, pretend = 0, frame = 24
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180 0000 0B00     		movs	r3, r1
+ 181 0002 F0B5     		push	{r4, r5, r6, r7, lr}
+ 182 0004 103B     		subs	r3, r3, #16
+ 183 0006 DBB2     		uxtb	r3, r3
+ 184 0008 0F00     		movs	r7, r1
+ 185 000a 1400     		movs	r4, r2
+ 186 000c 87B0     		sub	sp, sp, #28
+ 187 000e 102B     		cmp	r3, #16
+ 188 0010 05D8     		bhi	.L4
+ 189 0012 0122     		movs	r2, #1
+ 190 0014 9A40     		lsls	r2, r2, r3
+ 191 0016 1300     		movs	r3, r2
+ 192 0018 3B4A     		ldr	r2, .L13
+ 193 001a 1342     		tst	r3, r2
+ 194 001c 05D1     		bne	.L5
+ 195              	.L4:
+ 196 001e 0023     		movs	r3, #0
+ 197 0020 FF20     		movs	r0, #255
+ 198 0022 F034     		adds	r4, r4, #240
+ 199 0024 2370     		strb	r3, [r4]
+ 200              	.L6:
+ 201 0026 07B0     		add	sp, sp, #28
+ 202              		@ sp needed
+ 203 0028 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 204              	.L5:
+ 205 002a 0023     		movs	r3, #0
+ 206              	.L7:
+ 207 002c BB42     		cmp	r3, r7
+ 208 002e 55D1     		bne	.L8
+ 209 0030 3B00     		movs	r3, r7
+ 210 0032 2200     		movs	r2, r4
+ 211 0034 1C33     		adds	r3, r3, #28
+ 212 0036 9B00     		lsls	r3, r3, #2
+ 213 0038 DBB2     		uxtb	r3, r3
+ 214 003a 0593     		str	r3, [sp, #20]
+ 215 003c 1B09     		lsrs	r3, r3, #4
+ 216 003e 013B     		subs	r3, r3, #1
+ 217 0040 F032     		adds	r2, r2, #240
+ 218 0042 1370     		strb	r3, [r2]
+ 219 0044 0123     		movs	r3, #1
+ 220 0046 3D00     		movs	r5, r7
+ 221 0048 304E     		ldr	r6, .L13+4
+ 222 004a 0493     		str	r3, [sp, #16]
+ 223              	.L11:
+ 224 004c 6319     		adds	r3, r4, r5
+ 225 004e 1A1F     		subs	r2, r3, #4
+ 226 0050 1278     		ldrb	r2, [r2]
+ 227 0052 3900     		movs	r1, r7
+ 228 0054 0092     		str	r2, [sp]
+ 229 0056 DA1E     		subs	r2, r3, #3
+ 230 0058 1278     		ldrb	r2, [r2]
+ 231 005a 2800     		movs	r0, r5
+ 232 005c 0192     		str	r2, [sp, #4]
+ 233 005e 9A1E     		subs	r2, r3, #2
+ARM GAS  /tmp/ccL0MzOe.s 			page 5
+
+
+ 234 0060 013B     		subs	r3, r3, #1
+ 235 0062 1278     		ldrb	r2, [r2]
+ 236 0064 1B78     		ldrb	r3, [r3]
+ 237 0066 0292     		str	r2, [sp, #8]
+ 238 0068 0393     		str	r3, [sp, #12]
+ 239 006a FFF7FEFF 		bl	__aeabi_uidivmod
+ 240 006e C9B2     		uxtb	r1, r1
+ 241 0070 0029     		cmp	r1, #0
+ 242 0072 37D1     		bne	.L9
+ 243 0074 019B     		ldr	r3, [sp, #4]
+ 244 0076 1B31     		adds	r1, r1, #27
+ 245 0078 F25C     		ldrb	r2, [r6, r3]
+ 246 007a 049B     		ldr	r3, [sp, #16]
+ 247 007c 5A40     		eors	r2, r3
+ 248 007e 029B     		ldr	r3, [sp, #8]
+ 249 0080 F35C     		ldrb	r3, [r6, r3]
+ 250 0082 0193     		str	r3, [sp, #4]
+ 251 0084 039B     		ldr	r3, [sp, #12]
+ 252 0086 F35C     		ldrb	r3, [r6, r3]
+ 253 0088 0293     		str	r3, [sp, #8]
+ 254 008a 009B     		ldr	r3, [sp]
+ 255 008c 0092     		str	r2, [sp]
+ 256 008e F35C     		ldrb	r3, [r6, r3]
+ 257 0090 0393     		str	r3, [sp, #12]
+ 258 0092 049B     		ldr	r3, [sp, #16]
+ 259 0094 DB09     		lsrs	r3, r3, #7
+ 260 0096 4B43     		muls	r3, r1
+ 261 0098 0499     		ldr	r1, [sp, #16]
+ 262 009a 4900     		lsls	r1, r1, #1
+ 263 009c 4B40     		eors	r3, r1
+ 264 009e DBB2     		uxtb	r3, r3
+ 265 00a0 0493     		str	r3, [sp, #16]
+ 266              	.L10:
+ 267 00a2 EB1B     		subs	r3, r5, r7
+ 268 00a4 DBB2     		uxtb	r3, r3
+ 269 00a6 E25C     		ldrb	r2, [r4, r3]
+ 270 00a8 0099     		ldr	r1, [sp]
+ 271 00aa E318     		adds	r3, r4, r3
+ 272 00ac 5140     		eors	r1, r2
+ 273 00ae 6155     		strb	r1, [r4, r5]
+ 274 00b0 5A78     		ldrb	r2, [r3, #1]
+ 275 00b2 0198     		ldr	r0, [sp, #4]
+ 276 00b4 691C     		adds	r1, r5, #1
+ 277 00b6 5040     		eors	r0, r2
+ 278 00b8 C9B2     		uxtb	r1, r1
+ 279 00ba 6054     		strb	r0, [r4, r1]
+ 280 00bc 9A78     		ldrb	r2, [r3, #2]
+ 281 00be 0298     		ldr	r0, [sp, #8]
+ 282 00c0 6119     		adds	r1, r4, r5
+ 283 00c2 5040     		eors	r0, r2
+ 284 00c4 8870     		strb	r0, [r1, #2]
+ 285 00c6 DB78     		ldrb	r3, [r3, #3]
+ 286 00c8 039A     		ldr	r2, [sp, #12]
+ 287 00ca 0435     		adds	r5, r5, #4
+ 288 00cc 5A40     		eors	r2, r3
+ 289 00ce 059B     		ldr	r3, [sp, #20]
+ 290 00d0 EDB2     		uxtb	r5, r5
+ARM GAS  /tmp/ccL0MzOe.s 			page 6
+
+
+ 291 00d2 CA70     		strb	r2, [r1, #3]
+ 292 00d4 AB42     		cmp	r3, r5
+ 293 00d6 B9D8     		bhi	.L11
+ 294 00d8 0020     		movs	r0, #0
+ 295 00da A4E7     		b	.L6
+ 296              	.L8:
+ 297 00dc C25C     		ldrb	r2, [r0, r3]
+ 298 00de E254     		strb	r2, [r4, r3]
+ 299 00e0 0133     		adds	r3, r3, #1
+ 300 00e2 A3E7     		b	.L7
+ 301              	.L9:
+ 302 00e4 182F     		cmp	r7, #24
+ 303 00e6 DCD9     		bls	.L10
+ 304 00e8 1029     		cmp	r1, #16
+ 305 00ea DAD1     		bne	.L10
+ 306 00ec 009B     		ldr	r3, [sp]
+ 307 00ee F35C     		ldrb	r3, [r6, r3]
+ 308 00f0 0093     		str	r3, [sp]
+ 309 00f2 019B     		ldr	r3, [sp, #4]
+ 310 00f4 F35C     		ldrb	r3, [r6, r3]
+ 311 00f6 0193     		str	r3, [sp, #4]
+ 312 00f8 029B     		ldr	r3, [sp, #8]
+ 313 00fa F35C     		ldrb	r3, [r6, r3]
+ 314 00fc 0293     		str	r3, [sp, #8]
+ 315 00fe 039B     		ldr	r3, [sp, #12]
+ 316 0100 F35C     		ldrb	r3, [r6, r3]
+ 317 0102 0393     		str	r3, [sp, #12]
+ 318 0104 CDE7     		b	.L10
+ 319              	.L14:
+ 320 0106 C046     		.align	2
+ 321              	.L13:
+ 322 0108 01010100 		.word	65793
+ 323 010c 00000000 		.word	sbox
+ 325              		.section	.text.aes_encrypt,"ax",%progbits
+ 326              		.align	1
+ 327              		.global	aes_encrypt
+ 328              		.syntax unified
+ 329              		.code	16
+ 330              		.thumb_func
+ 331              		.fpu softvfp
+ 333              	aes_encrypt:
+ 334              		@ args = 0, pretend = 0, frame = 144
+ 335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 336 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 337 0002 A5B0     		sub	sp, sp, #148
+ 338 0004 1092     		str	r2, [sp, #64]
+ 339 0006 1F91     		str	r1, [sp, #124]
+ 340 0008 F032     		adds	r2, r2, #240
+ 341 000a 1278     		ldrb	r2, [r2]
+ 342 000c 0300     		movs	r3, r0
+ 343 000e FF20     		movs	r0, #255
+ 344 0010 002A     		cmp	r2, #0
+ 345 0012 7ED0     		beq	.L16
+ 346 0014 1900     		movs	r1, r3
+ 347 0016 109A     		ldr	r2, [sp, #64]
+ 348 0018 20A8     		add	r0, sp, #128
+ 349 001a FFF7FEFF 		bl	copy_and_key
+ARM GAS  /tmp/ccL0MzOe.s 			page 7
+
+
+ 350 001e 0123     		movs	r3, #1
+ 351              	.L20:
+ 352 0020 0193     		str	r3, [sp, #4]
+ 353 0022 019B     		ldr	r3, [sp, #4]
+ 354 0024 1A01     		lsls	r2, r3, #4
+ 355 0026 109B     		ldr	r3, [sp, #64]
+ 356 0028 9C46     		mov	ip, r3
+ 357 002a 20AB     		add	r3, sp, #128
+ 358 002c 1B78     		ldrb	r3, [r3]
+ 359 002e 9444     		add	ip, ip, r2
+ 360 0030 0293     		str	r3, [sp, #8]
+ 361 0032 20AB     		add	r3, sp, #128
+ 362 0034 5878     		ldrb	r0, [r3, #1]
+ 363 0036 9B78     		ldrb	r3, [r3, #2]
+ 364 0038 0393     		str	r3, [sp, #12]
+ 365 003a 20AB     		add	r3, sp, #128
+ 366 003c DB78     		ldrb	r3, [r3, #3]
+ 367 003e 0493     		str	r3, [sp, #16]
+ 368 0040 20AB     		add	r3, sp, #128
+ 369 0042 1B79     		ldrb	r3, [r3, #4]
+ 370 0044 0593     		str	r3, [sp, #20]
+ 371 0046 20AB     		add	r3, sp, #128
+ 372 0048 5B79     		ldrb	r3, [r3, #5]
+ 373 004a 0693     		str	r3, [sp, #24]
+ 374 004c 20AB     		add	r3, sp, #128
+ 375 004e 9F79     		ldrb	r7, [r3, #6]
+ 376 0050 DB79     		ldrb	r3, [r3, #7]
+ 377 0052 0793     		str	r3, [sp, #28]
+ 378 0054 20AB     		add	r3, sp, #128
+ 379 0056 1B7A     		ldrb	r3, [r3, #8]
+ 380 0058 0893     		str	r3, [sp, #32]
+ 381 005a 20AB     		add	r3, sp, #128
+ 382 005c 5B7A     		ldrb	r3, [r3, #9]
+ 383 005e 0993     		str	r3, [sp, #36]
+ 384 0060 20AB     		add	r3, sp, #128
+ 385 0062 9B7A     		ldrb	r3, [r3, #10]
+ 386 0064 0A93     		str	r3, [sp, #40]
+ 387 0066 20AB     		add	r3, sp, #128
+ 388 0068 DB7A     		ldrb	r3, [r3, #11]
+ 389 006a 0B93     		str	r3, [sp, #44]
+ 390 006c 20AB     		add	r3, sp, #128
+ 391 006e 1B7B     		ldrb	r3, [r3, #12]
+ 392 0070 0C93     		str	r3, [sp, #48]
+ 393 0072 20AB     		add	r3, sp, #128
+ 394 0074 5B7B     		ldrb	r3, [r3, #13]
+ 395 0076 0D93     		str	r3, [sp, #52]
+ 396 0078 20AB     		add	r3, sp, #128
+ 397 007a 9B7B     		ldrb	r3, [r3, #14]
+ 398 007c 0E93     		str	r3, [sp, #56]
+ 399 007e 20AB     		add	r3, sp, #128
+ 400 0080 DB7B     		ldrb	r3, [r3, #15]
+ 401 0082 0F93     		str	r3, [sp, #60]
+ 402 0084 109B     		ldr	r3, [sp, #64]
+ 403 0086 0199     		ldr	r1, [sp, #4]
+ 404 0088 F033     		adds	r3, r3, #240
+ 405 008a 1A78     		ldrb	r2, [r3]
+ 406 008c 8E4B     		ldr	r3, .L21
+ARM GAS  /tmp/ccL0MzOe.s 			page 8
+
+
+ 407 008e 8A42     		cmp	r2, r1
+ 408 0090 41D8     		bhi	.L18
+ 409 0092 0C9A     		ldr	r2, [sp, #48]
+ 410 0094 195C     		ldrb	r1, [r3, r0]
+ 411 0096 9A5C     		ldrb	r2, [r3, r2]
+ 412 0098 0B98     		ldr	r0, [sp, #44]
+ 413 009a 0902     		lsls	r1, r1, #8
+ 414 009c 1143     		orrs	r1, r2
+ 415 009e DA5D     		ldrb	r2, [r3, r7]
+ 416 00a0 185C     		ldrb	r0, [r3, r0]
+ 417 00a2 1204     		lsls	r2, r2, #16
+ 418 00a4 0006     		lsls	r0, r0, #24
+ 419 00a6 1143     		orrs	r1, r2
+ 420 00a8 0143     		orrs	r1, r0
+ 421 00aa 0D98     		ldr	r0, [sp, #52]
+ 422 00ac 089A     		ldr	r2, [sp, #32]
+ 423 00ae 185C     		ldrb	r0, [r3, r0]
+ 424 00b0 9A5C     		ldrb	r2, [r3, r2]
+ 425 00b2 0002     		lsls	r0, r0, #8
+ 426 00b4 1043     		orrs	r0, r2
+ 427 00b6 039A     		ldr	r2, [sp, #12]
+ 428 00b8 079C     		ldr	r4, [sp, #28]
+ 429 00ba 9A5C     		ldrb	r2, [r3, r2]
+ 430 00bc 1C5D     		ldrb	r4, [r3, r4]
+ 431 00be 1204     		lsls	r2, r2, #16
+ 432 00c0 2406     		lsls	r4, r4, #24
+ 433 00c2 1043     		orrs	r0, r2
+ 434 00c4 2043     		orrs	r0, r4
+ 435 00c6 099C     		ldr	r4, [sp, #36]
+ 436 00c8 059A     		ldr	r2, [sp, #20]
+ 437 00ca 1C5D     		ldrb	r4, [r3, r4]
+ 438 00cc 9A5C     		ldrb	r2, [r3, r2]
+ 439 00ce 2402     		lsls	r4, r4, #8
+ 440 00d0 1443     		orrs	r4, r2
+ 441 00d2 0E9A     		ldr	r2, [sp, #56]
+ 442 00d4 049D     		ldr	r5, [sp, #16]
+ 443 00d6 9A5C     		ldrb	r2, [r3, r2]
+ 444 00d8 5D5D     		ldrb	r5, [r3, r5]
+ 445 00da 1204     		lsls	r2, r2, #16
+ 446 00dc 2D06     		lsls	r5, r5, #24
+ 447 00de 1443     		orrs	r4, r2
+ 448 00e0 2C43     		orrs	r4, r5
+ 449 00e2 069D     		ldr	r5, [sp, #24]
+ 450 00e4 029A     		ldr	r2, [sp, #8]
+ 451 00e6 5D5D     		ldrb	r5, [r3, r5]
+ 452 00e8 9A5C     		ldrb	r2, [r3, r2]
+ 453 00ea 2D02     		lsls	r5, r5, #8
+ 454 00ec 1543     		orrs	r5, r2
+ 455 00ee 0A9A     		ldr	r2, [sp, #40]
+ 456 00f0 0F9E     		ldr	r6, [sp, #60]
+ 457 00f2 9A5C     		ldrb	r2, [r3, r2]
+ 458 00f4 9B5D     		ldrb	r3, [r3, r6]
+ 459 00f6 1204     		lsls	r2, r2, #16
+ 460 00f8 1B06     		lsls	r3, r3, #24
+ 461 00fa 1543     		orrs	r5, r2
+ 462 00fc 1D43     		orrs	r5, r3
+ 463 00fe 6246     		mov	r2, ip
+ARM GAS  /tmp/ccL0MzOe.s 			page 9
+
+
+ 464 0100 2095     		str	r5, [sp, #128]
+ 465 0102 2194     		str	r4, [sp, #132]
+ 466 0104 2290     		str	r0, [sp, #136]
+ 467 0106 1F98     		ldr	r0, [sp, #124]
+ 468 0108 2391     		str	r1, [sp, #140]
+ 469 010a 20A9     		add	r1, sp, #128
+ 470 010c FFF7FEFF 		bl	copy_and_key
+ 471 0110 0020     		movs	r0, #0
+ 472              	.L16:
+ 473 0112 25B0     		add	sp, sp, #148
+ 474              		@ sp needed
+ 475 0114 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 476              	.L18:
+ 477 0116 0A9A     		ldr	r2, [sp, #40]
+ 478 0118 9A5C     		ldrb	r2, [r3, r2]
+ 479 011a 1192     		str	r2, [sp, #68]
+ 480 011c 0F9A     		ldr	r2, [sp, #60]
+ 481 011e 9A5C     		ldrb	r2, [r3, r2]
+ 482 0120 1292     		str	r2, [sp, #72]
+ 483 0122 029A     		ldr	r2, [sp, #8]
+ 484 0124 9A5C     		ldrb	r2, [r3, r2]
+ 485 0126 1392     		str	r2, [sp, #76]
+ 486 0128 069A     		ldr	r2, [sp, #24]
+ 487 012a 9A5C     		ldrb	r2, [r3, r2]
+ 488 012c 1492     		str	r2, [sp, #80]
+ 489 012e 0E9A     		ldr	r2, [sp, #56]
+ 490 0130 9A5C     		ldrb	r2, [r3, r2]
+ 491 0132 1592     		str	r2, [sp, #84]
+ 492 0134 049A     		ldr	r2, [sp, #16]
+ 493 0136 9A5C     		ldrb	r2, [r3, r2]
+ 494 0138 1692     		str	r2, [sp, #88]
+ 495 013a 059A     		ldr	r2, [sp, #20]
+ 496 013c 9A5C     		ldrb	r2, [r3, r2]
+ 497 013e 1792     		str	r2, [sp, #92]
+ 498 0140 099A     		ldr	r2, [sp, #36]
+ 499 0142 9A5C     		ldrb	r2, [r3, r2]
+ 500 0144 1892     		str	r2, [sp, #96]
+ 501 0146 039A     		ldr	r2, [sp, #12]
+ 502 0148 9A5C     		ldrb	r2, [r3, r2]
+ 503 014a 1992     		str	r2, [sp, #100]
+ 504 014c 079A     		ldr	r2, [sp, #28]
+ 505 014e 9A5C     		ldrb	r2, [r3, r2]
+ 506 0150 1A92     		str	r2, [sp, #104]
+ 507 0152 089A     		ldr	r2, [sp, #32]
+ 508 0154 9A5C     		ldrb	r2, [r3, r2]
+ 509 0156 1B92     		str	r2, [sp, #108]
+ 510 0158 0D9A     		ldr	r2, [sp, #52]
+ 511 015a 0C99     		ldr	r1, [sp, #48]
+ 512 015c 9A5C     		ldrb	r2, [r3, r2]
+ 513 015e 1C92     		str	r2, [sp, #112]
+ 514 0160 DA5D     		ldrb	r2, [r3, r7]
+ 515 0162 1D92     		str	r2, [sp, #116]
+ 516 0164 0B9A     		ldr	r2, [sp, #44]
+ 517 0166 9E5C     		ldrb	r6, [r3, r2]
+ 518 0168 0C9A     		ldr	r2, [sp, #48]
+ 519 016a 9D5C     		ldrb	r5, [r3, r2]
+ 520 016c 1B5C     		ldrb	r3, [r3, r0]
+ARM GAS  /tmp/ccL0MzOe.s 			page 10
+
+
+ 521 016e 574A     		ldr	r2, .L21+4
+ 522 0170 1E93     		str	r3, [sp, #120]
+ 523 0172 574B     		ldr	r3, .L21+8
+ 524 0174 145C     		ldrb	r4, [r2, r0]
+ 525 0176 595C     		ldrb	r1, [r3, r1]
+ 526 0178 185C     		ldrb	r0, [r3, r0]
+ 527 017a 6140     		eors	r1, r4
+ 528 017c 1D9C     		ldr	r4, [sp, #116]
+ 529 017e 6140     		eors	r1, r4
+ 530 0180 7140     		eors	r1, r6
+ 531 0182 6E40     		eors	r6, r5
+ 532 0184 4640     		eors	r6, r0
+ 533 0186 D05D     		ldrb	r0, [r2, r7]
+ 534 0188 4640     		eors	r6, r0
+ 535 018a 2000     		movs	r0, r4
+ 536 018c 3602     		lsls	r6, r6, #8
+ 537 018e 0E43     		orrs	r6, r1
+ 538 0190 1E99     		ldr	r1, [sp, #120]
+ 539 0192 1E9C     		ldr	r4, [sp, #120]
+ 540 0194 4D40     		eors	r5, r1
+ 541 0196 D95D     		ldrb	r1, [r3, r7]
+ 542 0198 4440     		eors	r4, r0
+ 543 019a 0C98     		ldr	r0, [sp, #48]
+ 544 019c 4D40     		eors	r5, r1
+ 545 019e 0B99     		ldr	r1, [sp, #44]
+ 546 01a0 175C     		ldrb	r7, [r2, r0]
+ 547 01a2 0B98     		ldr	r0, [sp, #44]
+ 548 01a4 515C     		ldrb	r1, [r2, r1]
+ 549 01a6 6740     		eors	r7, r4
+ 550 01a8 1C5C     		ldrb	r4, [r3, r0]
+ 551 01aa 6940     		eors	r1, r5
+ 552 01ac 6740     		eors	r7, r4
+ 553 01ae 0904     		lsls	r1, r1, #16
+ 554 01b0 3F06     		lsls	r7, r7, #24
+ 555 01b2 3143     		orrs	r1, r6
+ 556 01b4 3943     		orrs	r1, r7
+ 557 01b6 0B91     		str	r1, [sp, #44]
+ 558 01b8 0D98     		ldr	r0, [sp, #52]
+ 559 01ba 0899     		ldr	r1, [sp, #32]
+ 560 01bc 595C     		ldrb	r1, [r3, r1]
+ 561 01be 105C     		ldrb	r0, [r2, r0]
+ 562 01c0 1B9C     		ldr	r4, [sp, #108]
+ 563 01c2 4140     		eors	r1, r0
+ 564 01c4 1998     		ldr	r0, [sp, #100]
+ 565 01c6 1C9D     		ldr	r5, [sp, #112]
+ 566 01c8 4140     		eors	r1, r0
+ 567 01ca 1A98     		ldr	r0, [sp, #104]
+ 568 01cc 4140     		eors	r1, r0
+ 569 01ce 6040     		eors	r0, r4
+ 570 01d0 0D9C     		ldr	r4, [sp, #52]
+ 571 01d2 1C5D     		ldrb	r4, [r3, r4]
+ 572 01d4 6040     		eors	r0, r4
+ 573 01d6 039C     		ldr	r4, [sp, #12]
+ 574 01d8 145D     		ldrb	r4, [r2, r4]
+ 575 01da 6040     		eors	r0, r4
+ 576 01dc 0002     		lsls	r0, r0, #8
+ 577 01de 1C9C     		ldr	r4, [sp, #112]
+ARM GAS  /tmp/ccL0MzOe.s 			page 11
+
+
+ 578 01e0 0843     		orrs	r0, r1
+ 579 01e2 1B99     		ldr	r1, [sp, #108]
+ 580 01e4 6140     		eors	r1, r4
+ 581 01e6 039C     		ldr	r4, [sp, #12]
+ 582 01e8 1C5D     		ldrb	r4, [r3, r4]
+ 583 01ea 6140     		eors	r1, r4
+ 584 01ec 079C     		ldr	r4, [sp, #28]
+ 585 01ee 145D     		ldrb	r4, [r2, r4]
+ 586 01f0 6140     		eors	r1, r4
+ 587 01f2 199C     		ldr	r4, [sp, #100]
+ 588 01f4 0904     		lsls	r1, r1, #16
+ 589 01f6 6C40     		eors	r4, r5
+ 590 01f8 089D     		ldr	r5, [sp, #32]
+ 591 01fa 0143     		orrs	r1, r0
+ 592 01fc 555D     		ldrb	r5, [r2, r5]
+ 593 01fe 0998     		ldr	r0, [sp, #36]
+ 594 0200 6540     		eors	r5, r4
+ 595 0202 079C     		ldr	r4, [sp, #28]
+ 596 0204 105C     		ldrb	r0, [r2, r0]
+ 597 0206 1C5D     		ldrb	r4, [r3, r4]
+ 598 0208 6540     		eors	r5, r4
+ 599 020a 2D06     		lsls	r5, r5, #24
+ 600 020c 0D43     		orrs	r5, r1
+ 601 020e 0599     		ldr	r1, [sp, #20]
+ 602 0210 179C     		ldr	r4, [sp, #92]
+ 603 0212 595C     		ldrb	r1, [r3, r1]
+ 604 0214 4140     		eors	r1, r0
+ 605 0216 1598     		ldr	r0, [sp, #84]
+ 606 0218 4140     		eors	r1, r0
+ 607 021a 1698     		ldr	r0, [sp, #88]
+ 608 021c 4140     		eors	r1, r0
+ 609 021e 6040     		eors	r0, r4
+ 610 0220 099C     		ldr	r4, [sp, #36]
+ 611 0222 1C5D     		ldrb	r4, [r3, r4]
+ 612 0224 6040     		eors	r0, r4
+ 613 0226 0E9C     		ldr	r4, [sp, #56]
+ 614 0228 145D     		ldrb	r4, [r2, r4]
+ 615 022a 6040     		eors	r0, r4
+ 616 022c 0002     		lsls	r0, r0, #8
+ 617 022e 0843     		orrs	r0, r1
+ 618 0230 1799     		ldr	r1, [sp, #92]
+ 619 0232 189C     		ldr	r4, [sp, #96]
+ 620 0234 189E     		ldr	r6, [sp, #96]
+ 621 0236 6140     		eors	r1, r4
+ 622 0238 0E9C     		ldr	r4, [sp, #56]
+ 623 023a 1C5D     		ldrb	r4, [r3, r4]
+ 624 023c 6140     		eors	r1, r4
+ 625 023e 049C     		ldr	r4, [sp, #16]
+ 626 0240 145D     		ldrb	r4, [r2, r4]
+ 627 0242 6140     		eors	r1, r4
+ 628 0244 159C     		ldr	r4, [sp, #84]
+ 629 0246 0904     		lsls	r1, r1, #16
+ 630 0248 7440     		eors	r4, r6
+ 631 024a 0843     		orrs	r0, r1
+ 632 024c 059E     		ldr	r6, [sp, #20]
+ 633 024e 0299     		ldr	r1, [sp, #8]
+ 634 0250 965D     		ldrb	r6, [r2, r6]
+ARM GAS  /tmp/ccL0MzOe.s 			page 12
+
+
+ 635 0252 5F5C     		ldrb	r7, [r3, r1]
+ 636 0254 0699     		ldr	r1, [sp, #24]
+ 637 0256 6640     		eors	r6, r4
+ 638 0258 515C     		ldrb	r1, [r2, r1]
+ 639 025a 049C     		ldr	r4, [sp, #16]
+ 640 025c 4F40     		eors	r7, r1
+ 641 025e 1C5D     		ldrb	r4, [r3, r4]
+ 642 0260 1199     		ldr	r1, [sp, #68]
+ 643 0262 6640     		eors	r6, r4
+ 644 0264 4F40     		eors	r7, r1
+ 645 0266 139C     		ldr	r4, [sp, #76]
+ 646 0268 1299     		ldr	r1, [sp, #72]
+ 647 026a 3606     		lsls	r6, r6, #24
+ 648 026c 4F40     		eors	r7, r1
+ 649 026e 6140     		eors	r1, r4
+ 650 0270 069C     		ldr	r4, [sp, #24]
+ 651 0272 3043     		orrs	r0, r6
+ 652 0274 1C5D     		ldrb	r4, [r3, r4]
+ 653 0276 6140     		eors	r1, r4
+ 654 0278 0A9C     		ldr	r4, [sp, #40]
+ 655 027a 145D     		ldrb	r4, [r2, r4]
+ 656 027c 6140     		eors	r1, r4
+ 657 027e 0902     		lsls	r1, r1, #8
+ 658 0280 149C     		ldr	r4, [sp, #80]
+ 659 0282 0F43     		orrs	r7, r1
+ 660 0284 1399     		ldr	r1, [sp, #76]
+ 661 0286 6140     		eors	r1, r4
+ 662 0288 0A9C     		ldr	r4, [sp, #40]
+ 663 028a 1E5D     		ldrb	r6, [r3, r4]
+ 664 028c 149C     		ldr	r4, [sp, #80]
+ 665 028e 4E40     		eors	r6, r1
+ 666 0290 0F99     		ldr	r1, [sp, #60]
+ 667 0292 515C     		ldrb	r1, [r2, r1]
+ 668 0294 4E40     		eors	r6, r1
+ 669 0296 1199     		ldr	r1, [sp, #68]
+ 670 0298 3604     		lsls	r6, r6, #16
+ 671 029a 6140     		eors	r1, r4
+ 672 029c 029C     		ldr	r4, [sp, #8]
+ 673 029e 3E43     		orrs	r6, r7
+ 674 02a0 125D     		ldrb	r2, [r2, r4]
+ 675 02a2 4A40     		eors	r2, r1
+ 676 02a4 0F99     		ldr	r1, [sp, #60]
+ 677 02a6 2190     		str	r0, [sp, #132]
+ 678 02a8 595C     		ldrb	r1, [r3, r1]
+ 679 02aa 0B9B     		ldr	r3, [sp, #44]
+ 680 02ac 4A40     		eors	r2, r1
+ 681 02ae 1206     		lsls	r2, r2, #24
+ 682 02b0 3243     		orrs	r2, r6
+ 683 02b2 6146     		mov	r1, ip
+ 684 02b4 20A8     		add	r0, sp, #128
+ 685 02b6 2393     		str	r3, [sp, #140]
+ 686 02b8 2092     		str	r2, [sp, #128]
+ 687 02ba 2295     		str	r5, [sp, #136]
+ 688 02bc FFF7FEFF 		bl	xor_block
+ 689 02c0 019B     		ldr	r3, [sp, #4]
+ 690 02c2 0133     		adds	r3, r3, #1
+ 691 02c4 DBB2     		uxtb	r3, r3
+ARM GAS  /tmp/ccL0MzOe.s 			page 13
+
+
+ 692 02c6 ABE6     		b	.L20
+ 693              	.L22:
+ 694              		.align	2
+ 695              	.L21:
+ 696 02c8 00000000 		.word	sbox
+ 697 02cc 00000000 		.word	gfm3_sbox
+ 698 02d0 00000000 		.word	gfm2_sbox
+ 700              		.section	.text.aes_cbc_encrypt,"ax",%progbits
+ 701              		.align	1
+ 702              		.global	aes_cbc_encrypt
+ 703              		.syntax unified
+ 704              		.code	16
+ 705              		.thumb_func
+ 706              		.fpu softvfp
+ 708              	aes_cbc_encrypt:
+ 709              		@ args = 4, pretend = 0, frame = 0
+ 710              		@ frame_needed = 0, uses_anonymous_args = 0
+ 711 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 712 0002 0700     		movs	r7, r0
+ 713 0004 0D00     		movs	r5, r1
+ 714 0006 1C00     		movs	r4, r3
+ 715 0008 1600     		movs	r6, r2
+ 716              	.L24:
+ 717 000a 002E     		cmp	r6, #0
+ 718 000c 01D1     		bne	.L26
+ 719 000e 3000     		movs	r0, r6
+ 720              	.L25:
+ 721              		@ sp needed
+ 722 0010 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 723              	.L26:
+ 724 0012 3900     		movs	r1, r7
+ 725 0014 2000     		movs	r0, r4
+ 726 0016 FFF7FEFF 		bl	xor_block
+ 727 001a 2100     		movs	r1, r4
+ 728 001c 2000     		movs	r0, r4
+ 729 001e 069A     		ldr	r2, [sp, #24]
+ 730 0020 FFF7FEFF 		bl	aes_encrypt
+ 731 0024 013E     		subs	r6, r6, #1
+ 732 0026 0028     		cmp	r0, #0
+ 733 0028 22D1     		bne	.L27
+ 734 002a 2378     		ldrb	r3, [r4]
+ 735 002c 1037     		adds	r7, r7, #16
+ 736 002e 2B70     		strb	r3, [r5]
+ 737 0030 6378     		ldrb	r3, [r4, #1]
+ 738 0032 6B70     		strb	r3, [r5, #1]
+ 739 0034 A378     		ldrb	r3, [r4, #2]
+ 740 0036 AB70     		strb	r3, [r5, #2]
+ 741 0038 E378     		ldrb	r3, [r4, #3]
+ 742 003a EB70     		strb	r3, [r5, #3]
+ 743 003c 2379     		ldrb	r3, [r4, #4]
+ 744 003e 2B71     		strb	r3, [r5, #4]
+ 745 0040 6379     		ldrb	r3, [r4, #5]
+ 746 0042 6B71     		strb	r3, [r5, #5]
+ 747 0044 A379     		ldrb	r3, [r4, #6]
+ 748 0046 AB71     		strb	r3, [r5, #6]
+ 749 0048 E379     		ldrb	r3, [r4, #7]
+ 750 004a EB71     		strb	r3, [r5, #7]
+ARM GAS  /tmp/ccL0MzOe.s 			page 14
+
+
+ 751 004c 237A     		ldrb	r3, [r4, #8]
+ 752 004e 2B72     		strb	r3, [r5, #8]
+ 753 0050 637A     		ldrb	r3, [r4, #9]
+ 754 0052 6B72     		strb	r3, [r5, #9]
+ 755 0054 A37A     		ldrb	r3, [r4, #10]
+ 756 0056 AB72     		strb	r3, [r5, #10]
+ 757 0058 E37A     		ldrb	r3, [r4, #11]
+ 758 005a EB72     		strb	r3, [r5, #11]
+ 759 005c 237B     		ldrb	r3, [r4, #12]
+ 760 005e 2B73     		strb	r3, [r5, #12]
+ 761 0060 637B     		ldrb	r3, [r4, #13]
+ 762 0062 6B73     		strb	r3, [r5, #13]
+ 763 0064 A37B     		ldrb	r3, [r4, #14]
+ 764 0066 AB73     		strb	r3, [r5, #14]
+ 765 0068 E37B     		ldrb	r3, [r4, #15]
+ 766 006a EB73     		strb	r3, [r5, #15]
+ 767 006c 1035     		adds	r5, r5, #16
+ 768 006e CCE7     		b	.L24
+ 769              	.L27:
+ 770 0070 0120     		movs	r0, #1
+ 771 0072 CDE7     		b	.L25
+ 773              		.section	.rodata.gfm2_sbox,"a"
+ 774              		.align	2
+ 777              	gfm2_sbox:
+ 778 0000 C6F8EEF6 		.ascii	"\306\370\356\366\377\326\336\221`\002\316V\347\265M"
+ 778      FFD6DE91 
+ 778      6002CE56 
+ 778      E7B54D
+ 779 000f EC8F1F89 		.ascii	"\354\217\037\211\372\357\262\216\373A\263_E#S\344\233"
+ 779      FAEFB28E 
+ 779      FB41B35F 
+ 779      452353E4 
+ 779      9B
+ 780 0020 75E13D4C 		.ascii	"u\341=Ll~\365\203hQ\321\371\342\253b*\010\225F\2350"
+ 780      6C7EF583 
+ 780      6851D1F9 
+ 780      E2AB622A 
+ 780      0895469D 
+ 781 0035 370A2F0E 		.ascii	"7\012/\016$\033\337\315N\177\352\022\035X46\334\264"
+ 781      241BDFCD 
+ 781      4E7FEA12 
+ 781      1D583436 
+ 781      DCB4
+ 782 0047 5BA476B7 		.ascii	"[\244v\267}R\335^\023\246\271\000\301@\343y\266\324"
+ 782      7D52DD5E 
+ 782      13A6B900 
+ 782      C140E379 
+ 782      B6D4
+ 783 0059 8D677294 		.ascii	"\215gr\224\230\260\205\273\305O\355\206\232f\021\212"
+ 783      98B085BB 
+ 783      C54FED86 
+ 783      9A66118A 
+ 784 0069 E904FEA0 		.ascii	"\351\004\376\240x%K\242]\200\005?!p\361cw\257B \345"
+ 784      78254BA2 
+ 784      5D80053F 
+ 784      2170F163 
+ 784      77AF4220 
+ARM GAS  /tmp/ccL0MzOe.s 			page 15
+
+
+ 785 007e FDBF8118 		.ascii	"\375\277\201\030&\303\2765\210.\223U\374z\310\2722\346"
+ 785      26C3BE35 
+ 785      882E9355 
+ 785      FC7AC8BA 
+ 785      32E6
+ 786 0090 C0199EA3 		.ascii	"\300\031\236\243DT;\013\214\307k(\247\274\026\255\333"
+ 786      44543B0B 
+ 786      8CC76B28 
+ 786      A7BC16AD 
+ 786      DB
+ 787 00a1 64741492 		.ascii	"dt\024\222\014H\270\237\275C\30491\323\362\325\213n"
+ 787      0C48B89F 
+ 787      BD43C439 
+ 787      31D3F2D5 
+ 787      8B6E
+ 788 00b3 DA01B19C 		.ascii	"\332\001\261\234I\330\254\363\317\312\364G\020o\360"
+ 788      49D8ACF3 
+ 788      CFCAF447 
+ 788      106FF0
+ 789 00c2 4A5C3857 		.ascii	"J\\8Ws\227\313\241\350>\226a\015\017\340|q\314\220\006"
+ 789      7397CBA1 
+ 789      E83E9661 
+ 789      0D0FE07C 
+ 789      71CC9006 
+ 790 00d6 F71CC26A 		.ascii	"\367\034\302j\256i\027\231:'\331\353+\"\322\251\007"
+ 790      AE691799 
+ 790      3A27D9EB 
+ 790      2B22D2A9 
+ 790      07
+ 791 00e7 332D3C15 		.ascii	"3-<\025\311\207\252P\245\003Y\011\032e\327\204\320\202"
+ 791      C987AA50 
+ 791      A5035909 
+ 791      1A65D784 
+ 791      D082
+ 792 00f9 295A1E7B 		.ascii	")Z\036{\250m,"
+ 792      A86D2C
+ 793              		.section	.rodata.gfm3_sbox,"a"
+ 794              		.align	2
+ 797              	gfm3_sbox:
+ 798 0000 A584998D 		.ascii	"\245\204\231\215\015\275\261TP\003\251}\031b\346\232"
+ 798      0DBDB154 
+ 798      5003A97D 
+ 798      1962E69A 
+ 799 0010 459D4087 		.ascii	"E\235@\207\025\353\311\013\354g\375\352\277\367\226"
+ 799      15EBC90B 
+ 799      EC67FDEA 
+ 799      BFF796
+ 800 001f 5BC21CAE 		.ascii	"[\302\034\256jZA\002O\\\3644\010\223sS?\014Re^(\241"
+ 800      6A5A4102 
+ 800      4F5CF434 
+ 800      08937353 
+ 800      3F0C5265 
+ 801 0036 0FB50936 		.ascii	"\017\265\0116\233=&i\315\237\033\236t.-\262\356\373"
+ 801      9B3D2669 
+ 801      CD9F1B9E 
+ 801      742E2DB2 
+ 801      EEFB
+ARM GAS  /tmp/ccL0MzOe.s 			page 16
+
+
+ 802 0048 F64D61CE 		.ascii	"\366Ma\316{>q\227\365h\000,`\037\310\355\276F\331K\336"
+ 802      7B3E7197 
+ 802      F568002C 
+ 802      601FC8ED 
+ 802      BE46D94B 
+ 803 005d D4E84A6B 		.ascii	"\324\350Jk*\345\026\305\327U\224\317\020\006\201\360"
+ 803      2AE516C5 
+ 803      D75594CF 
+ 803      100681F0 
+ 804 006d 44BAE3F3 		.ascii	"D\272\343\363\376\300\212\255\274H\004\337\301uc0\032"
+ 804      FEC08AAD 
+ 804      BC4804DF 
+ 804      C1756330 
+ 804      1A
+ 805 007e 0E6D4C14 		.ascii	"\016mL\0245/\341\242\3149W\362\202G\254\347+\225\240"
+ 805      352FE1A2 
+ 805      CC3957F2 
+ 805      8247ACE7 
+ 805      2B95A0
+ 806 0091 98D17F66 		.ascii	"\230\321\177f~\253\203\312)\323<y\342\035v;VN\036\333"
+ 806      7EAB83CA 
+ 806      29D33C79 
+ 806      E21D763B 
+ 806      564E1EDB 
+ 807 00a5 0A6CE45D 		.ascii	"\012l\344]n\357\246\250\2447\2132CY\267\214d\322\340"
+ 807      6EEFA6A8 
+ 807      A4378B32 
+ 807      4359B78C 
+ 807      64D2E0
+ 808 00b8 B4FA0725 		.ascii	"\264\372\007%\257\216\351\030\325\210or$\361\307Q#|"
+ 808      AF8EE918 
+ 808      D5886F72 
+ 808      24F1C751 
+ 808      237C
+ 809 00ca 9C21DDDC 		.ascii	"\234!\335\334\206\205\220B\304\252\330\005\001\022\243"
+ 809      86859042 
+ 809      C4AAD805 
+ 809      0112A3
+ 810 00d9 5FF9D091 		.ascii	"_\371\320\221X'\2718\023\2633\273p\211\247\266\"\222"
+ 810      5827B938 
+ 810      13B333BB 
+ 810      7089A7B6 
+ 810      2292
+ 811 00eb 2049FF78 		.ascii	" I\377xz\217\370\200\027\3321\306\270\303\260w\021\313"
+ 811      7A8FF880 
+ 811      17DA31C6 
+ 811      B8C3B077 
+ 811      11CB
+ 812 00fd FCD63A   		.ascii	"\374\326:"
+ 813              		.section	.rodata.sbox,"a"
+ 814              		.align	2
+ 817              	sbox:
+ 818 0000 637C777B 		.ascii	"c|w{\362ko\3050\001g+\376\327\253v\312\202\311}\372"
+ 818      F26B6FC5 
+ 818      3001672B 
+ 818      FED7AB76 
+ 818      CA82C97D 
+ARM GAS  /tmp/ccL0MzOe.s 			page 17
+
+
+ 819 0015 5947F0AD 		.ascii	"YG\360\255\324\242\257\234\244r\300\267\375\223&6?\367"
+ 819      D4A2AF9C 
+ 819      A472C0B7 
+ 819      FD932636 
+ 819      3FF7
+ 820 0027 CC34A5E5 		.ascii	"\3144\245\345\361q\3301\025\004\307#\303\030\226\005"
+ 820      F171D831 
+ 820      1504C723 
+ 820      C3189605 
+ 821 0037 9A071280 		.ascii	"\232\007\022\200\342\353'\262u\011\203,\032\033nZ\240"
+ 821      E2EB27B2 
+ 821      7509832C 
+ 821      1A1B6E5A 
+ 821      A0
+ 822 0048 523BD6B3 		.ascii	"R;\326\263)\343/\204S\321\000\355 \374\261[j\313\276"
+ 822      29E32F84 
+ 822      53D100ED 
+ 822      20FCB15B 
+ 822      6ACBBE
+ 823 005b 394A4C58 		.ascii	"9JLX\317\320\357\252\373CM3\205E\371\002\177P<\237\250"
+ 823      CFD0EFAA 
+ 823      FB434D33 
+ 823      8545F902 
+ 823      7F503C9F 
+ 824 0070 51A3408F 		.ascii	"Q\243@\217\222\2358\365\274\266\332!\020\377\363\322"
+ 824      929D38F5 
+ 824      BCB6DA21 
+ 824      10FFF3D2 
+ 825 0080 CD0C13EC 		.ascii	"\315\014\023\354_\227D\027\304\247~=d]\031s`\201O\334"
+ 825      5F974417 
+ 825      C4A77E3D 
+ 825      645D1973 
+ 825      60814FDC 
+ 826 0094 222A9088 		.ascii	"\"*\220\210F\356\270\024\336^\013\333\3402:\012I\006"
+ 826      46EEB814 
+ 826      DE5E0BDB 
+ 826      E0323A0A 
+ 826      4906
+ 827 00a6 245CC2D3 		.ascii	"$\\\302\323\254b\221\225\344y\347\3107m\215\325N\251"
+ 827      AC629195 
+ 827      E479E7C8 
+ 827      376D8DD5 
+ 827      4EA9
+ 828 00b8 6C56F4EA 		.ascii	"lV\364\352ez\256\010\272x%.\034\246\264\306\350\335"
+ 828      657AAE08 
+ 828      BA78252E 
+ 828      1CA6B4C6 
+ 828      E8DD
+ 829 00ca 741F4BBD 		.ascii	"t\037K\275\213\212p>\265fH\003\366\016a5W\271\206\301"
+ 829      8B8A703E 
+ 829      B5664803 
+ 829      F60E6135 
+ 829      57B986C1 
+ 830 00de 1D9EE1F8 		.ascii	"\035\236\341\370\230\021i\331\216\224\233\036\207\351"
+ 830      981169D9 
+ 830      8E949B1E 
+ 830      87E9
+ARM GAS  /tmp/ccL0MzOe.s 			page 18
+
+
+ 831 00ec CE5528DF 		.ascii	"\316U(\337\214\241\211\015\277\346BhA\231-\017\260T"
+ 831      8CA1890D 
+ 831      BFE64268 
+ 831      41992D0F 
+ 831      B054
+ 832 00fe BB16     		.ascii	"\273\026"
+ 833              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccL0MzOe.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 aes.c
+     /tmp/ccL0MzOe.s:12     .text.xor_block:0000000000000000 $t
+     /tmp/ccL0MzOe.s:19     .text.xor_block:0000000000000000 xor_block
+     /tmp/ccL0MzOe.s:91     .text.copy_and_key:0000000000000000 $t
+     /tmp/ccL0MzOe.s:97     .text.copy_and_key:0000000000000000 copy_and_key
+     /tmp/ccL0MzOe.s:170    .text.aes_set_key:0000000000000000 $t
+     /tmp/ccL0MzOe.s:177    .text.aes_set_key:0000000000000000 aes_set_key
+     /tmp/ccL0MzOe.s:322    .text.aes_set_key:0000000000000108 $d
+     /tmp/ccL0MzOe.s:817    .rodata.sbox:0000000000000000 sbox
+     /tmp/ccL0MzOe.s:326    .text.aes_encrypt:0000000000000000 $t
+     /tmp/ccL0MzOe.s:333    .text.aes_encrypt:0000000000000000 aes_encrypt
+     /tmp/ccL0MzOe.s:696    .text.aes_encrypt:00000000000002c8 $d
+     /tmp/ccL0MzOe.s:797    .rodata.gfm3_sbox:0000000000000000 gfm3_sbox
+     /tmp/ccL0MzOe.s:777    .rodata.gfm2_sbox:0000000000000000 gfm2_sbox
+     /tmp/ccL0MzOe.s:701    .text.aes_cbc_encrypt:0000000000000000 $t
+     /tmp/ccL0MzOe.s:708    .text.aes_cbc_encrypt:0000000000000000 aes_cbc_encrypt
+     /tmp/ccL0MzOe.s:774    .rodata.gfm2_sbox:0000000000000000 $d
+     /tmp/ccL0MzOe.s:794    .rodata.gfm3_sbox:0000000000000000 $d
+     /tmp/ccL0MzOe.s:814    .rodata.sbox:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_uidivmod

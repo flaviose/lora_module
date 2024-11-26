@@ -1,0 +1,5 @@
+extensions/common/radio_hal/sx126x_hal.c:172:13:sx126x_hal_check_device_ready	8	static
+extensions/common/radio_hal/sx126x_hal.c:99:21:sx126x_hal_write	32	static
+extensions/common/radio_hal/sx126x_hal.c:127:21:sx126x_hal_read	24	static
+extensions/common/radio_hal/sx126x_hal.c:148:21:sx126x_hal_reset	8	static
+extensions/common/radio_hal/sx126x_hal.c:157:21:sx126x_hal_wakeup	8	static

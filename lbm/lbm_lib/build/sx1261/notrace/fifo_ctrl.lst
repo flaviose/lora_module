@@ -1,0 +1,535 @@
+ARM GAS  /tmp/ccCOBeoT.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"fifo_ctrl.c"
+  10              		.text
+  11              		.section	.text.fifo_ctrl_clear,"ax",%progbits
+  12              		.align	1
+  13              		.global	fifo_ctrl_clear
+  14              		.arch armv6s-m
+  15              		.syntax unified
+  16              		.code	16
+  17              		.thumb_func
+  18              		.fpu softvfp
+  20              	fifo_ctrl_clear:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23              		@ link register save eliminated.
+  24 0000 0023     		movs	r3, #0
+  25              		@ sp needed
+  26 0002 C380     		strh	r3, [r0, #6]
+  27 0004 0381     		strh	r3, [r0, #8]
+  28 0006 8381     		strh	r3, [r0, #12]
+  29 0008 0361     		str	r3, [r0, #16]
+  30 000a 4361     		str	r3, [r0, #20]
+  31 000c 8361     		str	r3, [r0, #24]
+  32 000e 8388     		ldrh	r3, [r0, #4]
+  33 0010 4381     		strh	r3, [r0, #10]
+  34 0012 7047     		bx	lr
+  36              		.section	.text.fifo_ctrl_init,"ax",%progbits
+  37              		.align	1
+  38              		.global	fifo_ctrl_init
+  39              		.syntax unified
+  40              		.code	16
+  41              		.thumb_func
+  42              		.fpu softvfp
+  44              	fifo_ctrl_init:
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47 0000 10B5     		push	{r4, lr}
+  48 0002 0160     		str	r1, [r0]
+  49 0004 8280     		strh	r2, [r0, #4]
+  50 0006 FFF7FEFF 		bl	fifo_ctrl_clear
+  51              		@ sp needed
+  52 000a 10BD     		pop	{r4, pc}
+  54              		.section	.text.fifo_ctrl_print_stat,"ax",%progbits
+  55              		.align	1
+  56              		.global	fifo_ctrl_print_stat
+  57              		.syntax unified
+  58              		.code	16
+  59              		.thumb_func
+  60              		.fpu softvfp
+  62              	fifo_ctrl_print_stat:
+ARM GAS  /tmp/ccCOBeoT.s 			page 2
+
+
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  66              		@ sp needed
+  67 0000 7047     		bx	lr
+  69              		.section	.text.fifo_ctrl_get_nb_elt,"ax",%progbits
+  70              		.align	1
+  71              		.global	fifo_ctrl_get_nb_elt
+  72              		.syntax unified
+  73              		.code	16
+  74              		.thumb_func
+  75              		.fpu softvfp
+  77              	fifo_ctrl_get_nb_elt:
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80              		@ link register save eliminated.
+  81 0000 8089     		ldrh	r0, [r0, #12]
+  82              		@ sp needed
+  83 0002 7047     		bx	lr
+  85              		.section	.text.fifo_ctrl_get_free_space,"ax",%progbits
+  86              		.align	1
+  87              		.global	fifo_ctrl_get_free_space
+  88              		.syntax unified
+  89              		.code	16
+  90              		.thumb_func
+  91              		.fpu softvfp
+  93              	fifo_ctrl_get_free_space:
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96              		@ link register save eliminated.
+  97 0000 4089     		ldrh	r0, [r0, #10]
+  98              		@ sp needed
+  99 0002 7047     		bx	lr
+ 101              		.global	__aeabi_uidivmod
+ 102              		.global	__aeabi_idivmod
+ 103              		.section	.text.fifo_ctrl_get,"ax",%progbits
+ 104              		.align	1
+ 105              		.global	fifo_ctrl_get
+ 106              		.syntax unified
+ 107              		.code	16
+ 108              		.thumb_func
+ 109              		.fpu softvfp
+ 111              	fifo_ctrl_get:
+ 112              		@ args = 12, pretend = 0, frame = 24
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 115 0002 0400     		movs	r4, r0
+ 116 0004 87B0     		sub	sp, sp, #28
+ 117 0006 0493     		str	r3, [sp, #16]
+ 118 0008 0EAB     		add	r3, sp, #56
+ 119 000a 1B78     		ldrb	r3, [r3]
+ 120 000c 0191     		str	r1, [sp, #4]
+ 121 000e 0593     		str	r3, [sp, #20]
+ 122 0010 0392     		str	r2, [sp, #12]
+ 123 0012 FFF7FEFF 		bl	smtc_modem_hal_disable_modem_irq
+ 124 0016 A389     		ldrh	r3, [r4, #12]
+ 125 0018 0226     		movs	r6, #2
+ARM GAS  /tmp/ccCOBeoT.s 			page 3
+
+
+ 126 001a 002B     		cmp	r3, #0
+ 127 001c 6ED0     		beq	.L7
+ 128 001e E688     		ldrh	r6, [r4, #6]
+ 129 0020 A588     		ldrh	r5, [r4, #4]
+ 130 0022 2368     		ldr	r3, [r4]
+ 131 0024 2900     		movs	r1, r5
+ 132 0026 701C     		adds	r0, r6, #1
+ 133 0028 9F5D     		ldrb	r7, [r3, r6]
+ 134 002a 0293     		str	r3, [sp, #8]
+ 135 002c FFF7FEFF 		bl	__aeabi_idivmod
+ 136 0030 029B     		ldr	r3, [sp, #8]
+ 137 0032 3F02     		lsls	r7, r7, #8
+ 138 0034 5B5C     		ldrb	r3, [r3, r1]
+ 139 0036 B01C     		adds	r0, r6, #2
+ 140 0038 FB18     		adds	r3, r7, r3
+ 141 003a 2900     		movs	r1, r5
+ 142 003c 9FB2     		uxth	r7, r3
+ 143 003e FFF7FEFF 		bl	__aeabi_idivmod
+ 144 0042 029B     		ldr	r3, [sp, #8]
+ 145 0044 5D5C     		ldrb	r5, [r3, r1]
+ 146 0046 019B     		ldr	r3, [sp, #4]
+ 147 0048 002B     		cmp	r3, #0
+ 148 004a 42D1     		bne	.L8
+ 149              	.L11:
+ 150 004c E088     		ldrh	r0, [r4, #6]
+ 151 004e A688     		ldrh	r6, [r4, #4]
+ 152 0050 0330     		adds	r0, r0, #3
+ 153 0052 3100     		movs	r1, r6
+ 154 0054 80B2     		uxth	r0, r0
+ 155 0056 FFF7FEFF 		bl	__aeabi_uidivmod
+ 156 005a 0C9B     		ldr	r3, [sp, #48]
+ 157 005c 8AB2     		uxth	r2, r1
+ 158 005e E280     		strh	r2, [r4, #6]
+ 159 0060 002B     		cmp	r3, #0
+ 160 0062 50D1     		bne	.L9
+ 161              	.L10:
+ 162 0064 E088     		ldrh	r0, [r4, #6]
+ 163 0066 A688     		ldrh	r6, [r4, #4]
+ 164 0068 2818     		adds	r0, r5, r0
+ 165 006a ABB2     		uxth	r3, r5
+ 166 006c 3100     		movs	r1, r6
+ 167 006e 80B2     		uxth	r0, r0
+ 168 0070 0293     		str	r3, [sp, #8]
+ 169 0072 FFF7FEFF 		bl	__aeabi_uidivmod
+ 170 0076 019B     		ldr	r3, [sp, #4]
+ 171 0078 8AB2     		uxth	r2, r1
+ 172 007a E280     		strh	r2, [r4, #6]
+ 173 007c 002B     		cmp	r3, #0
+ 174 007e 13D0     		beq	.L13
+ 175 0080 002F     		cmp	r7, #0
+ 176 0082 11D0     		beq	.L13
+ 177 0084 2368     		ldr	r3, [r4]
+ 178 0086 9918     		adds	r1, r3, r2
+ 179 0088 D319     		adds	r3, r2, r7
+ 180 008a B342     		cmp	r3, r6
+ 181 008c 53DD     		ble	.L14
+ 182 008e B21A     		subs	r2, r6, r2
+ARM GAS  /tmp/ccCOBeoT.s 			page 4
+
+
+ 183 0090 0198     		ldr	r0, [sp, #4]
+ 184 0092 FFF7FEFF 		bl	memcpy
+ 185 0096 E188     		ldrh	r1, [r4, #6]
+ 186 0098 A088     		ldrh	r0, [r4, #4]
+ 187 009a 019B     		ldr	r3, [sp, #4]
+ 188 009c 401A     		subs	r0, r0, r1
+ 189 009e 2168     		ldr	r1, [r4]
+ 190 00a0 3A1A     		subs	r2, r7, r0
+ 191 00a2 1818     		adds	r0, r3, r0
+ 192              	.L33:
+ 193 00a4 FFF7FEFF 		bl	memcpy
+ 194              	.L13:
+ 195 00a8 E088     		ldrh	r0, [r4, #6]
+ 196 00aa A188     		ldrh	r1, [r4, #4]
+ 197 00ac 3818     		adds	r0, r7, r0
+ 198 00ae 80B2     		uxth	r0, r0
+ 199 00b0 FFF7FEFF 		bl	__aeabi_uidivmod
+ 200 00b4 6389     		ldrh	r3, [r4, #10]
+ 201 00b6 029A     		ldr	r2, [sp, #8]
+ 202 00b8 0333     		adds	r3, r3, #3
+ 203 00ba D318     		adds	r3, r2, r3
+ 204 00bc FF18     		adds	r7, r7, r3
+ 205 00be A389     		ldrh	r3, [r4, #12]
+ 206 00c0 0026     		movs	r6, #0
+ 207 00c2 013B     		subs	r3, r3, #1
+ 208 00c4 A381     		strh	r3, [r4, #12]
+ 209 00c6 6369     		ldr	r3, [r4, #20]
+ 210 00c8 E180     		strh	r1, [r4, #6]
+ 211 00ca 0133     		adds	r3, r3, #1
+ 212 00cc 6781     		strh	r7, [r4, #10]
+ 213 00ce 6361     		str	r3, [r4, #20]
+ 214 00d0 14E0     		b	.L7
+ 215              	.L8:
+ 216 00d2 0C9B     		ldr	r3, [sp, #48]
+ 217 00d4 002B     		cmp	r3, #0
+ 218 00d6 B9D0     		beq	.L11
+ 219 00d8 039B     		ldr	r3, [sp, #12]
+ 220 00da 0126     		movs	r6, #1
+ 221 00dc 002B     		cmp	r3, #0
+ 222 00de 0DD0     		beq	.L7
+ 223 00e0 0D9B     		ldr	r3, [sp, #52]
+ 224 00e2 002B     		cmp	r3, #0
+ 225 00e4 0AD0     		beq	.L7
+ 226 00e6 039B     		ldr	r3, [sp, #12]
+ 227 00e8 0236     		adds	r6, r6, #2
+ 228 00ea 1F80     		strh	r7, [r3]
+ 229 00ec 0D9B     		ldr	r3, [sp, #52]
+ 230 00ee 1D70     		strb	r5, [r3]
+ 231 00f0 049B     		ldr	r3, [sp, #16]
+ 232 00f2 BB42     		cmp	r3, r7
+ 233 00f4 02D3     		bcc	.L7
+ 234 00f6 059B     		ldr	r3, [sp, #20]
+ 235 00f8 AB42     		cmp	r3, r5
+ 236 00fa A7D2     		bcs	.L11
+ 237              	.L7:
+ 238 00fc FFF7FEFF 		bl	smtc_modem_hal_enable_modem_irq
+ 239 0100 3000     		movs	r0, r6
+ARM GAS  /tmp/ccCOBeoT.s 			page 5
+
+
+ 240 0102 07B0     		add	sp, sp, #28
+ 241              		@ sp needed
+ 242 0104 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 243              	.L9:
+ 244 0106 002D     		cmp	r5, #0
+ 245 0108 ACD0     		beq	.L10
+ 246 010a 2368     		ldr	r3, [r4]
+ 247 010c 9918     		adds	r1, r3, r2
+ 248 010e 5319     		adds	r3, r2, r5
+ 249 0110 B342     		cmp	r3, r6
+ 250 0112 0DDD     		ble	.L12
+ 251 0114 B21A     		subs	r2, r6, r2
+ 252 0116 0C98     		ldr	r0, [sp, #48]
+ 253 0118 FFF7FEFF 		bl	memcpy
+ 254 011c E388     		ldrh	r3, [r4, #6]
+ 255 011e A088     		ldrh	r0, [r4, #4]
+ 256 0120 2168     		ldr	r1, [r4]
+ 257 0122 C01A     		subs	r0, r0, r3
+ 258 0124 0C9B     		ldr	r3, [sp, #48]
+ 259 0126 2A1A     		subs	r2, r5, r0
+ 260 0128 1818     		adds	r0, r3, r0
+ 261              	.L32:
+ 262 012a FFF7FEFF 		bl	memcpy
+ 263 012e 99E7     		b	.L10
+ 264              	.L12:
+ 265 0130 2A00     		movs	r2, r5
+ 266 0132 0C98     		ldr	r0, [sp, #48]
+ 267 0134 F9E7     		b	.L32
+ 268              	.L14:
+ 269 0136 3A00     		movs	r2, r7
+ 270 0138 0198     		ldr	r0, [sp, #4]
+ 271 013a B3E7     		b	.L33
+ 273              		.section	.text.fifo_ctrl_set,"ax",%progbits
+ 274              		.align	1
+ 275              		.global	fifo_ctrl_set
+ 276              		.syntax unified
+ 277              		.code	16
+ 278              		.thumb_func
+ 279              		.fpu softvfp
+ 281              	fifo_ctrl_set:
+ 282              		@ args = 4, pretend = 0, frame = 40
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 285 0002 8BB0     		sub	sp, sp, #44
+ 286 0004 0593     		str	r3, [sp, #20]
+ 287 0006 10AB     		add	r3, sp, #64
+ 288 0008 1B78     		ldrb	r3, [r3]
+ 289 000a 0400     		movs	r4, r0
+ 290 000c 0092     		str	r2, [sp]
+ 291 000e 0193     		str	r3, [sp, #4]
+ 292 0010 0491     		str	r1, [sp, #16]
+ 293 0012 FFF7FEFF 		bl	smtc_modem_hal_disable_modem_irq
+ 294 0016 6B46     		mov	r3, sp
+ 295 0018 9B88     		ldrh	r3, [r3, #4]
+ 296 001a 009A     		ldr	r2, [sp]
+ 297 001c 0993     		str	r3, [sp, #36]
+ 298 001e 019B     		ldr	r3, [sp, #4]
+ARM GAS  /tmp/ccCOBeoT.s 			page 6
+
+
+ 299 0020 A688     		ldrh	r6, [r4, #4]
+ 300 0022 0333     		adds	r3, r3, #3
+ 301 0024 D318     		adds	r3, r2, r3
+ 302 0026 9BB2     		uxth	r3, r3
+ 303 0028 0325     		movs	r5, #3
+ 304 002a 0393     		str	r3, [sp, #12]
+ 305 002c B342     		cmp	r3, r6
+ 306 002e 00D9     		bls	.LCB291
+ 307 0030 78E0     		b	.L35	@long jump
+ 308              	.LCB291:
+ 309 0032 2368     		ldr	r3, [r4]
+ 310 0034 0293     		str	r3, [sp, #8]
+ 311              	.L36:
+ 312 0036 6389     		ldrh	r3, [r4, #10]
+ 313 0038 0693     		str	r3, [sp, #24]
+ 314 003a 069A     		ldr	r2, [sp, #24]
+ 315 003c 039B     		ldr	r3, [sp, #12]
+ 316 003e 9342     		cmp	r3, r2
+ 317 0040 00D9     		bls	.LCB301
+ 318 0042 74E0     		b	.L38	@long jump
+ 319              	.LCB301:
+ 320 0044 009A     		ldr	r2, [sp]
+ 321 0046 2389     		ldrh	r3, [r4, #8]
+ 322 0048 0299     		ldr	r1, [sp, #8]
+ 323 004a 120A     		lsrs	r2, r2, #8
+ 324 004c CA54     		strb	r2, [r1, r3]
+ 325 004e 2089     		ldrh	r0, [r4, #8]
+ 326 0050 A188     		ldrh	r1, [r4, #4]
+ 327 0052 0130     		adds	r0, r0, #1
+ 328 0054 80B2     		uxth	r0, r0
+ 329 0056 FFF7FEFF 		bl	__aeabi_uidivmod
+ 330 005a 2368     		ldr	r3, [r4]
+ 331 005c 009A     		ldr	r2, [sp]
+ 332 005e 89B2     		uxth	r1, r1
+ 333 0060 2181     		strh	r1, [r4, #8]
+ 334 0062 5A54     		strb	r2, [r3, r1]
+ 335 0064 2089     		ldrh	r0, [r4, #8]
+ 336 0066 A188     		ldrh	r1, [r4, #4]
+ 337 0068 0130     		adds	r0, r0, #1
+ 338 006a 80B2     		uxth	r0, r0
+ 339 006c FFF7FEFF 		bl	__aeabi_uidivmod
+ 340 0070 2368     		ldr	r3, [r4]
+ 341 0072 019A     		ldr	r2, [sp, #4]
+ 342 0074 89B2     		uxth	r1, r1
+ 343 0076 2181     		strh	r1, [r4, #8]
+ 344 0078 5A54     		strb	r2, [r3, r1]
+ 345 007a 2089     		ldrh	r0, [r4, #8]
+ 346 007c A588     		ldrh	r5, [r4, #4]
+ 347 007e 0130     		adds	r0, r0, #1
+ 348 0080 2900     		movs	r1, r5
+ 349 0082 80B2     		uxth	r0, r0
+ 350 0084 FFF7FEFF 		bl	__aeabi_uidivmod
+ 351 0088 019B     		ldr	r3, [sp, #4]
+ 352 008a 8AB2     		uxth	r2, r1
+ 353 008c 2281     		strh	r2, [r4, #8]
+ 354 008e 002B     		cmp	r3, #0
+ 355 0090 1CD0     		beq	.L39
+ARM GAS  /tmp/ccCOBeoT.s 			page 7
+
+
+ 356 0092 2368     		ldr	r3, [r4]
+ 357 0094 9818     		adds	r0, r3, r2
+ 358 0096 019B     		ldr	r3, [sp, #4]
+ 359 0098 D318     		adds	r3, r2, r3
+ 360 009a AB42     		cmp	r3, r5
+ 361 009c 00DC     		bgt	.LCB349
+ 362 009e 7EE0     		b	.L40	@long jump
+ 363              	.LCB349:
+ 364 00a0 0599     		ldr	r1, [sp, #20]
+ 365 00a2 AA1A     		subs	r2, r5, r2
+ 366 00a4 FFF7FEFF 		bl	memcpy
+ 367 00a8 2389     		ldrh	r3, [r4, #8]
+ 368 00aa A188     		ldrh	r1, [r4, #4]
+ 369 00ac 2068     		ldr	r0, [r4]
+ 370 00ae C91A     		subs	r1, r1, r3
+ 371 00b0 019B     		ldr	r3, [sp, #4]
+ 372 00b2 5A1A     		subs	r2, r3, r1
+ 373 00b4 059B     		ldr	r3, [sp, #20]
+ 374 00b6 5918     		adds	r1, r3, r1
+ 375              	.L55:
+ 376 00b8 FFF7FEFF 		bl	memcpy
+ 377 00bc 2089     		ldrh	r0, [r4, #8]
+ 378 00be 099B     		ldr	r3, [sp, #36]
+ 379 00c0 A188     		ldrh	r1, [r4, #4]
+ 380 00c2 1818     		adds	r0, r3, r0
+ 381 00c4 80B2     		uxth	r0, r0
+ 382 00c6 FFF7FEFF 		bl	__aeabi_uidivmod
+ 383 00ca 2181     		strh	r1, [r4, #8]
+ 384              	.L39:
+ 385 00cc 009B     		ldr	r3, [sp]
+ 386 00ce 002B     		cmp	r3, #0
+ 387 00d0 1DD0     		beq	.L42
+ 388 00d2 2389     		ldrh	r3, [r4, #8]
+ 389 00d4 2168     		ldr	r1, [r4]
+ 390 00d6 A288     		ldrh	r2, [r4, #4]
+ 391 00d8 C818     		adds	r0, r1, r3
+ 392 00da 0099     		ldr	r1, [sp]
+ 393 00dc 5918     		adds	r1, r3, r1
+ 394 00de 9142     		cmp	r1, r2
+ 395 00e0 60DD     		ble	.L43
+ 396 00e2 D21A     		subs	r2, r2, r3
+ 397 00e4 0499     		ldr	r1, [sp, #16]
+ 398 00e6 FFF7FEFF 		bl	memcpy
+ 399 00ea 2389     		ldrh	r3, [r4, #8]
+ 400 00ec A188     		ldrh	r1, [r4, #4]
+ 401 00ee 2068     		ldr	r0, [r4]
+ 402 00f0 C91A     		subs	r1, r1, r3
+ 403 00f2 009B     		ldr	r3, [sp]
+ 404 00f4 5A1A     		subs	r2, r3, r1
+ 405 00f6 049B     		ldr	r3, [sp, #16]
+ 406 00f8 5918     		adds	r1, r3, r1
+ 407              	.L56:
+ 408 00fa FFF7FEFF 		bl	memcpy
+ 409 00fe 2089     		ldrh	r0, [r4, #8]
+ 410 0100 009B     		ldr	r3, [sp]
+ 411 0102 A188     		ldrh	r1, [r4, #4]
+ 412 0104 1818     		adds	r0, r3, r0
+ARM GAS  /tmp/ccCOBeoT.s 			page 8
+
+
+ 413 0106 80B2     		uxth	r0, r0
+ 414 0108 FFF7FEFF 		bl	__aeabi_uidivmod
+ 415 010c 2181     		strh	r1, [r4, #8]
+ 416              	.L42:
+ 417 010e 0025     		movs	r5, #0
+ 418 0110 6389     		ldrh	r3, [r4, #10]
+ 419 0112 039A     		ldr	r2, [sp, #12]
+ 420 0114 9B1A     		subs	r3, r3, r2
+ 421 0116 6381     		strh	r3, [r4, #10]
+ 422 0118 A389     		ldrh	r3, [r4, #12]
+ 423 011a 0133     		adds	r3, r3, #1
+ 424 011c A381     		strh	r3, [r4, #12]
+ 425 011e 2369     		ldr	r3, [r4, #16]
+ 426 0120 0133     		adds	r3, r3, #1
+ 427 0122 2361     		str	r3, [r4, #16]
+ 428              	.L35:
+ 429 0124 FFF7FEFF 		bl	smtc_modem_hal_enable_modem_irq
+ 430 0128 2800     		movs	r0, r5
+ 431 012a 0BB0     		add	sp, sp, #44
+ 432              		@ sp needed
+ 433 012c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 434              	.L38:
+ 435 012e A389     		ldrh	r3, [r4, #12]
+ 436 0130 0793     		str	r3, [sp, #28]
+ 437 0132 002B     		cmp	r3, #0
+ 438 0134 2FD0     		beq	.L37
+ 439 0136 E588     		ldrh	r5, [r4, #6]
+ 440 0138 029B     		ldr	r3, [sp, #8]
+ 441 013a 681C     		adds	r0, r5, #1
+ 442 013c 3100     		movs	r1, r6
+ 443 013e 5F5D     		ldrb	r7, [r3, r5]
+ 444 0140 FFF7FEFF 		bl	__aeabi_idivmod
+ 445 0144 029B     		ldr	r3, [sp, #8]
+ 446 0146 3F02     		lsls	r7, r7, #8
+ 447 0148 5B5C     		ldrb	r3, [r3, r1]
+ 448 014a A81C     		adds	r0, r5, #2
+ 449 014c FF18     		adds	r7, r7, r3
+ 450 014e BBB2     		uxth	r3, r7
+ 451 0150 3100     		movs	r1, r6
+ 452 0152 0893     		str	r3, [sp, #32]
+ 453 0154 FFF7FEFF 		bl	__aeabi_idivmod
+ 454 0158 029B     		ldr	r3, [sp, #8]
+ 455 015a 0335     		adds	r5, r5, #3
+ 456 015c 5F5C     		ldrb	r7, [r3, r1]
+ 457 015e A8B2     		uxth	r0, r5
+ 458 0160 3100     		movs	r1, r6
+ 459 0162 FFF7FEFF 		bl	__aeabi_uidivmod
+ 460 0166 7918     		adds	r1, r7, r1
+ 461 0168 88B2     		uxth	r0, r1
+ 462 016a 3100     		movs	r1, r6
+ 463 016c FFF7FEFF 		bl	__aeabi_uidivmod
+ 464 0170 089B     		ldr	r3, [sp, #32]
+ 465 0172 5918     		adds	r1, r3, r1
+ 466 0174 88B2     		uxth	r0, r1
+ 467 0176 3100     		movs	r1, r6
+ 468 0178 FFF7FEFF 		bl	__aeabi_uidivmod
+ 469 017c 069B     		ldr	r3, [sp, #24]
+ARM GAS  /tmp/ccCOBeoT.s 			page 9
+
+
+ 470 017e E180     		strh	r1, [r4, #6]
+ 471 0180 0333     		adds	r3, r3, #3
+ 472 0182 FF18     		adds	r7, r7, r3
+ 473 0184 089B     		ldr	r3, [sp, #32]
+ 474 0186 DF19     		adds	r7, r3, r7
+ 475 0188 079B     		ldr	r3, [sp, #28]
+ 476 018a 6781     		strh	r7, [r4, #10]
+ 477 018c 013B     		subs	r3, r3, #1
+ 478 018e A381     		strh	r3, [r4, #12]
+ 479 0190 6369     		ldr	r3, [r4, #20]
+ 480 0192 0133     		adds	r3, r3, #1
+ 481 0194 6361     		str	r3, [r4, #20]
+ 482              	.L37:
+ 483 0196 A369     		ldr	r3, [r4, #24]
+ 484 0198 0133     		adds	r3, r3, #1
+ 485 019a A361     		str	r3, [r4, #24]
+ 486 019c 4BE7     		b	.L36
+ 487              	.L40:
+ 488 019e 019A     		ldr	r2, [sp, #4]
+ 489 01a0 0599     		ldr	r1, [sp, #20]
+ 490 01a2 89E7     		b	.L55
+ 491              	.L43:
+ 492 01a4 009A     		ldr	r2, [sp]
+ 493 01a6 0499     		ldr	r1, [sp, #16]
+ 494 01a8 A7E7     		b	.L56
+ 496              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccCOBeoT.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 fifo_ctrl.c
+     /tmp/ccCOBeoT.s:12     .text.fifo_ctrl_clear:0000000000000000 $t
+     /tmp/ccCOBeoT.s:20     .text.fifo_ctrl_clear:0000000000000000 fifo_ctrl_clear
+     /tmp/ccCOBeoT.s:37     .text.fifo_ctrl_init:0000000000000000 $t
+     /tmp/ccCOBeoT.s:44     .text.fifo_ctrl_init:0000000000000000 fifo_ctrl_init
+     /tmp/ccCOBeoT.s:55     .text.fifo_ctrl_print_stat:0000000000000000 $t
+     /tmp/ccCOBeoT.s:62     .text.fifo_ctrl_print_stat:0000000000000000 fifo_ctrl_print_stat
+     /tmp/ccCOBeoT.s:70     .text.fifo_ctrl_get_nb_elt:0000000000000000 $t
+     /tmp/ccCOBeoT.s:77     .text.fifo_ctrl_get_nb_elt:0000000000000000 fifo_ctrl_get_nb_elt
+     /tmp/ccCOBeoT.s:86     .text.fifo_ctrl_get_free_space:0000000000000000 $t
+     /tmp/ccCOBeoT.s:93     .text.fifo_ctrl_get_free_space:0000000000000000 fifo_ctrl_get_free_space
+     /tmp/ccCOBeoT.s:104    .text.fifo_ctrl_get:0000000000000000 $t
+     /tmp/ccCOBeoT.s:111    .text.fifo_ctrl_get:0000000000000000 fifo_ctrl_get
+     /tmp/ccCOBeoT.s:274    .text.fifo_ctrl_set:0000000000000000 $t
+     /tmp/ccCOBeoT.s:281    .text.fifo_ctrl_set:0000000000000000 fifo_ctrl_set
+
+UNDEFINED SYMBOLS
+__aeabi_uidivmod
+__aeabi_idivmod
+smtc_modem_hal_disable_modem_irq
+memcpy
+smtc_modem_hal_enable_modem_irq

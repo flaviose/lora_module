@@ -1,0 +1,9 @@
+smtc_modem_core/modem_utilities/modem_event_utilities.c:92:9:get_modem_event_count	8	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:102:9:get_modem_event_status	8	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:111:6:set_modem_event_count_and_status	0	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:83:6:modem_event_init	16	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:120:6:increment_modem_event_count_and_status	8	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:133:6:decrement_asynchronous_msgnumber	0	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:145:9:get_asynchronous_msgnumber	0	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:150:6:increment_asynchronous_msgnumber	24	static
+smtc_modem_core/modem_utilities/modem_event_utilities.c:175:9:get_last_msg_event	0	static

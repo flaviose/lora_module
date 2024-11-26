@@ -1,0 +1,251 @@
+ARM GAS  /tmp/ccevIWwK.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"sx126x_hal.c"
+  10              		.text
+  11              		.section	.text.sx126x_hal_check_device_ready,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	sx126x_hal_check_device_ready:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 10B5     		push	{r4, lr}
+  23 0002 0C4C     		ldr	r4, .L10
+  24 0004 2178     		ldrb	r1, [r4]
+  25 0006 0029     		cmp	r1, #0
+  26 0008 05D0     		beq	.L2
+  27              	.L3:
+  28 000a 2420     		movs	r0, #36
+  29 000c FFF7FEFF 		bl	hal_gpio_get_value
+  30 0010 0128     		cmp	r0, #1
+  31 0012 FAD0     		beq	.L3
+  32              	.L1:
+  33              		@ sp needed
+  34 0014 10BD     		pop	{r4, pc}
+  35              	.L2:
+  36 0016 0420     		movs	r0, #4
+  37 0018 FFF7FEFF 		bl	hal_gpio_set_value
+  38              	.L5:
+  39 001c 2420     		movs	r0, #36
+  40 001e FFF7FEFF 		bl	hal_gpio_get_value
+  41 0022 0128     		cmp	r0, #1
+  42 0024 FAD0     		beq	.L5
+  43 0026 0121     		movs	r1, #1
+  44 0028 0420     		movs	r0, #4
+  45 002a FFF7FEFF 		bl	hal_gpio_set_value
+  46 002e 0123     		movs	r3, #1
+  47 0030 2370     		strb	r3, [r4]
+  48 0032 EFE7     		b	.L1
+  49              	.L11:
+  50              		.align	2
+  51              	.L10:
+  52 0034 00000000 		.word	.LANCHOR0
+  54              		.section	.text.sx126x_hal_write,"ax",%progbits
+  55              		.align	1
+  56              		.global	sx126x_hal_write
+  57              		.syntax unified
+  58              		.code	16
+  59              		.thumb_func
+ARM GAS  /tmp/ccevIWwK.s 			page 2
+
+
+  60              		.fpu softvfp
+  62              	sx126x_hal_write:
+  63              		@ args = 4, pretend = 0, frame = 8
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  66 0002 0D00     		movs	r5, r1
+  67 0004 1C00     		movs	r4, r3
+  68 0006 08AB     		add	r3, sp, #32
+  69 0008 1B88     		ldrh	r3, [r3]
+  70 000a 1600     		movs	r6, r2
+  71 000c 0193     		str	r3, [sp, #4]
+  72 000e FFF7FEFF 		bl	sx126x_hal_check_device_ready
+  73 0012 0021     		movs	r1, #0
+  74 0014 0420     		movs	r0, #4
+  75 0016 FFF7FEFF 		bl	hal_gpio_set_value
+  76 001a 2F00     		movs	r7, r5
+  77 001c 7619     		adds	r6, r6, r5
+  78              	.L13:
+  79 001e B742     		cmp	r7, r6
+  80 0020 0ED1     		bne	.L14
+  81 0022 019B     		ldr	r3, [sp, #4]
+  82 0024 E618     		adds	r6, r4, r3
+  83              	.L15:
+  84 0026 B442     		cmp	r4, r6
+  85 0028 10D1     		bne	.L16
+  86 002a 0121     		movs	r1, #1
+  87 002c 0420     		movs	r0, #4
+  88 002e FFF7FEFF 		bl	hal_gpio_set_value
+  89 0032 2B78     		ldrb	r3, [r5]
+  90 0034 842B     		cmp	r3, #132
+  91 0036 0FD0     		beq	.L17
+  92 0038 FFF7FEFF 		bl	sx126x_hal_check_device_ready
+  93              	.L18:
+  94              		@ sp needed
+  95 003c 0020     		movs	r0, #0
+  96 003e FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+  97              	.L14:
+  98 0040 3978     		ldrb	r1, [r7]
+  99 0042 0220     		movs	r0, #2
+ 100 0044 FFF7FEFF 		bl	hal_spi_in_out
+ 101 0048 0137     		adds	r7, r7, #1
+ 102 004a E8E7     		b	.L13
+ 103              	.L16:
+ 104 004c 2178     		ldrb	r1, [r4]
+ 105 004e 0220     		movs	r0, #2
+ 106 0050 FFF7FEFF 		bl	hal_spi_in_out
+ 107 0054 0134     		adds	r4, r4, #1
+ 108 0056 E6E7     		b	.L15
+ 109              	.L17:
+ 110 0058 0022     		movs	r2, #0
+ 111 005a 014B     		ldr	r3, .L19
+ 112 005c 1A70     		strb	r2, [r3]
+ 113 005e EDE7     		b	.L18
+ 114              	.L20:
+ 115              		.align	2
+ 116              	.L19:
+ 117 0060 00000000 		.word	.LANCHOR0
+ARM GAS  /tmp/ccevIWwK.s 			page 3
+
+
+ 119              		.section	.text.sx126x_hal_read,"ax",%progbits
+ 120              		.align	1
+ 121              		.global	sx126x_hal_read
+ 122              		.syntax unified
+ 123              		.code	16
+ 124              		.thumb_func
+ 125              		.fpu softvfp
+ 127              	sx126x_hal_read:
+ 128              		@ args = 4, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 131 0002 1D00     		movs	r5, r3
+ 132 0004 06AB     		add	r3, sp, #24
+ 133 0006 0C00     		movs	r4, r1
+ 134 0008 1700     		movs	r7, r2
+ 135 000a 1E88     		ldrh	r6, [r3]
+ 136 000c FFF7FEFF 		bl	sx126x_hal_check_device_ready
+ 137 0010 0021     		movs	r1, #0
+ 138 0012 0420     		movs	r0, #4
+ 139 0014 FFF7FEFF 		bl	hal_gpio_set_value
+ 140 0018 E719     		adds	r7, r4, r7
+ 141              	.L22:
+ 142 001a BC42     		cmp	r4, r7
+ 143 001c 08D1     		bne	.L23
+ 144 001e AE19     		adds	r6, r5, r6
+ 145              	.L24:
+ 146 0020 B542     		cmp	r5, r6
+ 147 0022 0BD1     		bne	.L25
+ 148              		@ sp needed
+ 149 0024 0121     		movs	r1, #1
+ 150 0026 0420     		movs	r0, #4
+ 151 0028 FFF7FEFF 		bl	hal_gpio_set_value
+ 152 002c 0020     		movs	r0, #0
+ 153 002e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 154              	.L23:
+ 155 0030 2178     		ldrb	r1, [r4]
+ 156 0032 0220     		movs	r0, #2
+ 157 0034 FFF7FEFF 		bl	hal_spi_in_out
+ 158 0038 0134     		adds	r4, r4, #1
+ 159 003a EEE7     		b	.L22
+ 160              	.L25:
+ 161 003c 0021     		movs	r1, #0
+ 162 003e 0220     		movs	r0, #2
+ 163 0040 FFF7FEFF 		bl	hal_spi_in_out
+ 164 0044 2870     		strb	r0, [r5]
+ 165 0046 0135     		adds	r5, r5, #1
+ 166 0048 EAE7     		b	.L24
+ 168              		.section	.text.sx126x_hal_reset,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	sx126x_hal_reset
+ 171              		.syntax unified
+ 172              		.code	16
+ 173              		.thumb_func
+ 174              		.fpu softvfp
+ 176              	sx126x_hal_reset:
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccevIWwK.s 			page 4
+
+
+ 179 0000 10B5     		push	{r4, lr}
+ 180 0002 0A4C     		ldr	r4, .L27
+ 181 0004 0021     		movs	r1, #0
+ 182              		@ sp needed
+ 183 0006 1B20     		movs	r0, #27
+ 184 0008 FFF7FEFF 		bl	hal_gpio_set_value
+ 185 000c 2000     		movs	r0, r4
+ 186 000e FFF7FEFF 		bl	hal_mcu_wait_us
+ 187 0012 0121     		movs	r1, #1
+ 188 0014 1B20     		movs	r0, #27
+ 189 0016 FFF7FEFF 		bl	hal_gpio_set_value
+ 190 001a 2000     		movs	r0, r4
+ 191 001c FFF7FEFF 		bl	hal_mcu_wait_us
+ 192 0020 0122     		movs	r2, #1
+ 193 0022 034B     		ldr	r3, .L27+4
+ 194 0024 0020     		movs	r0, #0
+ 195 0026 1A70     		strb	r2, [r3]
+ 196 0028 10BD     		pop	{r4, pc}
+ 197              	.L28:
+ 198 002a C046     		.align	2
+ 199              	.L27:
+ 200 002c 88130000 		.word	5000
+ 201 0030 00000000 		.word	.LANCHOR0
+ 203              		.section	.text.sx126x_hal_wakeup,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	sx126x_hal_wakeup
+ 206              		.syntax unified
+ 207              		.code	16
+ 208              		.thumb_func
+ 209              		.fpu softvfp
+ 211              	sx126x_hal_wakeup:
+ 212              		@ args = 0, pretend = 0, frame = 0
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214 0000 10B5     		push	{r4, lr}
+ 215 0002 FFF7FEFF 		bl	sx126x_hal_check_device_ready
+ 216              		@ sp needed
+ 217 0006 0020     		movs	r0, #0
+ 218 0008 10BD     		pop	{r4, pc}
+ 220              		.section	.data.radio_mode,"aw"
+ 221              		.set	.LANCHOR0,. + 0
+ 224              	radio_mode:
+ 225 0000 01       		.byte	1
+ 226              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccevIWwK.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 sx126x_hal.c
+     /tmp/ccevIWwK.s:12     .text.sx126x_hal_check_device_ready:0000000000000000 $t
+     /tmp/ccevIWwK.s:19     .text.sx126x_hal_check_device_ready:0000000000000000 sx126x_hal_check_device_ready
+     /tmp/ccevIWwK.s:52     .text.sx126x_hal_check_device_ready:0000000000000034 $d
+     /tmp/ccevIWwK.s:55     .text.sx126x_hal_write:0000000000000000 $t
+     /tmp/ccevIWwK.s:62     .text.sx126x_hal_write:0000000000000000 sx126x_hal_write
+     /tmp/ccevIWwK.s:117    .text.sx126x_hal_write:0000000000000060 $d
+     /tmp/ccevIWwK.s:120    .text.sx126x_hal_read:0000000000000000 $t
+     /tmp/ccevIWwK.s:127    .text.sx126x_hal_read:0000000000000000 sx126x_hal_read
+     /tmp/ccevIWwK.s:169    .text.sx126x_hal_reset:0000000000000000 $t
+     /tmp/ccevIWwK.s:176    .text.sx126x_hal_reset:0000000000000000 sx126x_hal_reset
+     /tmp/ccevIWwK.s:200    .text.sx126x_hal_reset:000000000000002c $d
+     /tmp/ccevIWwK.s:204    .text.sx126x_hal_wakeup:0000000000000000 $t
+     /tmp/ccevIWwK.s:211    .text.sx126x_hal_wakeup:0000000000000000 sx126x_hal_wakeup
+     /tmp/ccevIWwK.s:224    .data.radio_mode:0000000000000000 radio_mode
+
+UNDEFINED SYMBOLS
+hal_gpio_get_value
+hal_gpio_set_value
+hal_spi_in_out
+hal_mcu_wait_us

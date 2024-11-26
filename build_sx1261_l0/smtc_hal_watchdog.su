@@ -1,0 +1,2 @@
+bsp_l0/smtc_hal/smtc_hal_watchdog.c:76:32:hal_watchdog_init	0	static
+bsp_l0/smtc_hal/smtc_hal_watchdog.c:100:32:hal_watchdog_reload	0	static

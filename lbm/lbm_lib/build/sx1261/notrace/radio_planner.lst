@@ -1,0 +1,2973 @@
+ARM GAS  /tmp/cc0MlWbE.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"radio_planner.c"
+  10              		.text
+  11              		.section	.text.rp_task_launch_current,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	rp_task_launch_current:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 9323     		movs	r3, #147
+  23 0002 1822     		movs	r2, #24
+  24 0004 B621     		movs	r1, #182
+  25 0006 DB00     		lsls	r3, r3, #3
+  26 0008 C35C     		ldrb	r3, [r0, r3]
+  27 000a 8900     		lsls	r1, r1, #2
+  28 000c 5A43     		muls	r2, r3
+  29 000e 8218     		adds	r2, r0, r2
+  30 0010 5218     		adds	r2, r2, r1
+  31 0012 1268     		ldr	r2, [r2]
+  32 0014 10B5     		push	{r4, lr}
+  33 0016 002A     		cmp	r2, #0
+  34 0018 08D0     		beq	.L1
+  35 001a 3133     		adds	r3, r3, #49
+  36 001c FF33     		adds	r3, r3, #255
+  37 001e 9B00     		lsls	r3, r3, #2
+  38 0020 C318     		adds	r3, r0, r3
+  39 0022 5968     		ldr	r1, [r3, #4]
+  40 0024 9823     		movs	r3, #152
+  41 0026 DB00     		lsls	r3, r3, #3
+  42 0028 C150     		str	r1, [r0, r3]
+  43 002a 9047     		blx	r2
+  44              	.L1:
+  45              		@ sp needed
+  46 002c 10BD     		pop	{r4, pc}
+  48              		.section	.text.rp_timer_irq_callback,"ax",%progbits
+  49              		.align	1
+  50              		.syntax unified
+  51              		.code	16
+  52              		.thumb_func
+  53              		.fpu softvfp
+  55              	rp_timer_irq_callback:
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58 0000 0122     		movs	r2, #1
+  59 0002 10B5     		push	{r4, lr}
+  60 0004 024B     		ldr	r3, .L7
+ARM GAS  /tmp/cc0MlWbE.s 			page 2
+
+
+  61              		@ sp needed
+  62 0006 C254     		strb	r2, [r0, r3]
+  63 0008 FFF7FEFF 		bl	smtc_modem_hal_user_lbm_irq
+  64 000c 10BD     		pop	{r4, pc}
+  65              	.L8:
+  66 000e C046     		.align	2
+  67              	.L7:
+  68 0010 A2040000 		.word	1186
+  70              		.section	.rodata.rp_hook_callback.str1.1,"aMS",%progbits,1
+  71              	.LC0:
+  72 0000 00       		.ascii	"\000"
+  73              		.section	.text.rp_hook_callback,"ax",%progbits
+  74              		.align	1
+  75              		.syntax unified
+  76              		.code	16
+  77              		.thumb_func
+  78              		.fpu softvfp
+  80              	rp_hook_callback:
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83 0000 10B5     		push	{r4, lr}
+  84 0002 0429     		cmp	r1, #4
+  85 0004 05D9     		bls	.L10
+  86 0006 0A4A     		ldr	r2, .L14
+  87 0008 0A49     		ldr	r1, .L14+4
+  88              	.L13:
+  89 000a 0B48     		ldr	r0, .L14+8
+  90 000c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+  91              	.L9:
+  92              		@ sp needed
+  93 0010 10BD     		pop	{r4, pc}
+  94              	.L10:
+  95 0012 9523     		movs	r3, #149
+  96 0014 8900     		lsls	r1, r1, #2
+  97 0016 4018     		adds	r0, r0, r1
+  98 0018 DB00     		lsls	r3, r3, #3
+  99 001a C358     		ldr	r3, [r0, r3]
+ 100 001c 002B     		cmp	r3, #0
+ 101 001e 02D1     		bne	.L12
+ 102 0020 034A     		ldr	r2, .L14
+ 103 0022 0649     		ldr	r1, .L14+12
+ 104 0024 F1E7     		b	.L13
+ 105              	.L12:
+ 106 0026 DF22     		movs	r2, #223
+ 107 0028 9200     		lsls	r2, r2, #2
+ 108 002a 8058     		ldr	r0, [r0, r2]
+ 109 002c 9847     		blx	r3
+ 110 002e EFE7     		b	.L9
+ 111              	.L15:
+ 112              		.align	2
+ 113              	.L14:
+ 114 0030 00000000 		.word	.LC0
+ 115 0034 CC040000 		.word	1228
+ 116 0038 00000000 		.word	.LANCHOR0
+ 117 003c D1040000 		.word	1233
+ 119              		.section	.text.rp_task_call_aborted,"ax",%progbits
+ 120              		.align	1
+ARM GAS  /tmp/cc0MlWbE.s 			page 3
+
+
+ 121              		.syntax unified
+ 122              		.code	16
+ 123              		.thumb_func
+ 124              		.fpu softvfp
+ 126              	rp_task_call_aborted:
+ 127              		@ args = 0, pretend = 0, frame = 8
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129 0000 B523     		movs	r3, #181
+ 130 0002 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 131 0004 0500     		movs	r5, r0
+ 132 0006 9B00     		lsls	r3, r3, #2
+ 133 0008 C418     		adds	r4, r0, r3
+ 134 000a A533     		adds	r3, r3, #165
+ 135 000c FF33     		adds	r3, r3, #255
+ 136 000e C718     		adds	r7, r0, r3
+ 137 0010 E83B     		subs	r3, r3, #232
+ 138 0012 C318     		adds	r3, r0, r3
+ 139 0014 0093     		str	r3, [sp]
+ 140 0016 134B     		ldr	r3, .L20
+ 141 0018 009E     		ldr	r6, [sp]
+ 142 001a C318     		adds	r3, r0, r3
+ 143 001c 0193     		str	r3, [sp, #4]
+ 144              	.L18:
+ 145 001e A37A     		ldrb	r3, [r4, #10]
+ 146 0020 032B     		cmp	r3, #3
+ 147 0022 17D1     		bne	.L17
+ 148 0024 3B68     		ldr	r3, [r7]
+ 149 0026 0422     		movs	r2, #4
+ 150 0028 0133     		adds	r3, r3, #1
+ 151 002a 3B60     		str	r3, [r7]
+ 152 002c 0523     		movs	r3, #5
+ 153 002e 2370     		strb	r3, [r4]
+ 154 0030 0023     		movs	r3, #0
+ 155 0032 E360     		str	r3, [r4, #12]
+ 156 0034 2361     		str	r3, [r4, #16]
+ 157 0036 6361     		str	r3, [r4, #20]
+ 158 0038 6372     		strb	r3, [r4, #9]
+ 159 003a 0A33     		adds	r3, r3, #10
+ 160 003c A272     		strb	r2, [r4, #10]
+ 161 003e 3370     		strb	r3, [r6]
+ 162 0040 9823     		movs	r3, #152
+ 163 0042 FA6C     		ldr	r2, [r7, #76]
+ 164 0044 DB00     		lsls	r3, r3, #3
+ 165 0046 EA50     		str	r2, [r5, r3]
+ 166 0048 009B     		ldr	r3, [sp]
+ 167 004a 2800     		movs	r0, r5
+ 168 004c F11A     		subs	r1, r6, r3
+ 169 004e C9B2     		uxtb	r1, r1
+ 170 0050 FFF7FEFF 		bl	rp_hook_callback
+ 171              	.L17:
+ 172 0054 019B     		ldr	r3, [sp, #4]
+ 173 0056 0136     		adds	r6, r6, #1
+ 174 0058 1834     		adds	r4, r4, #24
+ 175 005a 0437     		adds	r7, r7, #4
+ 176 005c 9E42     		cmp	r6, r3
+ 177 005e DED1     		bne	.L18
+ 178              		@ sp needed
+ARM GAS  /tmp/cc0MlWbE.s 			page 4
+
+
+ 179 0060 F7BD     		pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+ 180              	.L21:
+ 181 0062 C046     		.align	2
+ 182              	.L20:
+ 183 0064 95030000 		.word	917
+ 185              		.section	.text.rp_task_compute_ranking,"ax",%progbits
+ 186              		.align	1
+ 187              		.syntax unified
+ 188              		.code	16
+ 189              		.thumb_func
+ 190              		.fpu softvfp
+ 192              	rp_task_compute_ranking:
+ 193              		@ args = 0, pretend = 0, frame = 8
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 196 0002 B723     		movs	r3, #183
+ 197 0004 6A46     		mov	r2, sp
+ 198 0006 9B00     		lsls	r3, r3, #2
+ 199 0008 C35C     		ldrb	r3, [r0, r3]
+ 200 000a FF24     		movs	r4, #255
+ 201 000c 1370     		strb	r3, [r2]
+ 202 000e BD23     		movs	r3, #189
+ 203 0010 9B00     		lsls	r3, r3, #2
+ 204 0012 C35C     		ldrb	r3, [r0, r3]
+ 205 0014 5370     		strb	r3, [r2, #1]
+ 206 0016 C323     		movs	r3, #195
+ 207 0018 9B00     		lsls	r3, r3, #2
+ 208 001a C35C     		ldrb	r3, [r0, r3]
+ 209 001c 9370     		strb	r3, [r2, #2]
+ 210 001e C923     		movs	r3, #201
+ 211 0020 9B00     		lsls	r3, r3, #2
+ 212 0022 C35C     		ldrb	r3, [r0, r3]
+ 213 0024 D370     		strb	r3, [r2, #3]
+ 214 0026 CF23     		movs	r3, #207
+ 215 0028 9B00     		lsls	r3, r3, #2
+ 216 002a C35C     		ldrb	r3, [r0, r3]
+ 217 002c 1371     		strb	r3, [r2, #4]
+ 218 002e DD23     		movs	r3, #221
+ 219 0030 9B00     		lsls	r3, r3, #2
+ 220 0032 C218     		adds	r2, r0, r3
+ 221 0034 0A4B     		ldr	r3, .L28
+ 222 0036 C018     		adds	r0, r0, r3
+ 223              	.L25:
+ 224 0038 0021     		movs	r1, #0
+ 225 003a 2500     		movs	r5, r4
+ 226 003c 0B00     		movs	r3, r1
+ 227              	.L24:
+ 228 003e 6E46     		mov	r6, sp
+ 229 0040 F65C     		ldrb	r6, [r6, r3]
+ 230 0042 B542     		cmp	r5, r6
+ 231 0044 01D3     		bcc	.L23
+ 232 0046 3500     		movs	r5, r6
+ 233 0048 D9B2     		uxtb	r1, r3
+ 234              	.L23:
+ 235 004a 0133     		adds	r3, r3, #1
+ 236 004c 052B     		cmp	r3, #5
+ 237 004e F6D1     		bne	.L24
+ARM GAS  /tmp/cc0MlWbE.s 			page 5
+
+
+ 238 0050 6B46     		mov	r3, sp
+ 239 0052 1170     		strb	r1, [r2]
+ 240 0054 0132     		adds	r2, r2, #1
+ 241 0056 5C54     		strb	r4, [r3, r1]
+ 242 0058 9042     		cmp	r0, r2
+ 243 005a EDD1     		bne	.L25
+ 244              		@ sp needed
+ 245 005c 73BD     		pop	{r0, r1, r4, r5, r6, pc}
+ 246              	.L29:
+ 247 005e C046     		.align	2
+ 248              	.L28:
+ 249 0060 79030000 		.word	889
+ 251              		.global	__aeabi_uidiv
+ 252              		.section	.text.rp_consumption_statistics_updated,"ax",%progbits
+ 253              		.align	1
+ 254              		.syntax unified
+ 255              		.code	16
+ 256              		.thumb_func
+ 257              		.fpu softvfp
+ 259              	rp_consumption_statistics_updated:
+ 260              		@ args = 0, pretend = 0, frame = 24
+ 261              		@ frame_needed = 0, uses_anonymous_args = 0
+ 262 0000 1823     		movs	r3, #24
+ 263 0002 F0B5     		push	{r4, r5, r6, r7, lr}
+ 264 0004 0026     		movs	r6, #0
+ 265 0006 4B43     		muls	r3, r1
+ 266 0008 89B0     		sub	sp, sp, #36
+ 267 000a 0392     		str	r2, [sp, #12]
+ 268 000c 884A     		ldr	r2, .L55
+ 269 000e C318     		adds	r3, r0, r3
+ 270 0010 9B18     		adds	r3, r3, r2
+ 271 0012 1F78     		ldrb	r7, [r3]
+ 272 0014 0400     		movs	r4, r0
+ 273 0016 0D00     		movs	r5, r1
+ 274 0018 0796     		str	r6, [sp, #28]
+ 275 001a B742     		cmp	r7, r6
+ 276 001c 37D1     		bne	.L31
+ 277 001e 0B00     		movs	r3, r1
+ 278 0020 3133     		adds	r3, r3, #49
+ 279 0022 FF33     		adds	r3, r3, #255
+ 280 0024 9B00     		lsls	r3, r3, #2
+ 281 0026 C318     		adds	r3, r0, r3
+ 282 0028 5868     		ldr	r0, [r3, #4]
+ 283 002a 8C23     		movs	r3, #140
+ 284 002c 4B43     		muls	r3, r1
+ 285 002e E318     		adds	r3, r4, r3
+ 286 0030 4933     		adds	r3, r3, #73
+ 287 0032 1978     		ldrb	r1, [r3]
+ 288 0034 0300     		movs	r3, r0
+ 289 0036 EC33     		adds	r3, r3, #236
+ 290 0038 1E68     		ldr	r6, [r3]
+ 291 003a 3A00     		movs	r2, r7
+ 292 003c 0068     		ldr	r0, [r0]
+ 293 003e 07AB     		add	r3, sp, #28
+ 294 0040 B047     		blx	r6
+ 295 0042 3E00     		movs	r6, r7
+ 296              	.L32:
+ARM GAS  /tmp/cc0MlWbE.s 			page 6
+
+
+ 297 0044 1823     		movs	r3, #24
+ 298 0046 6B43     		muls	r3, r5
+ 299 0048 794A     		ldr	r2, .L55
+ 300 004a E318     		adds	r3, r4, r3
+ 301 004c 9B18     		adds	r3, r3, r2
+ 302 004e 1B78     		ldrb	r3, [r3]
+ 303 0050 1A00     		movs	r2, r3
+ 304 0052 083A     		subs	r2, r2, #8
+ 305 0054 032A     		cmp	r2, #3
+ 306 0056 5CD8     		bhi	.L35
+ 307 0058 764B     		ldr	r3, .L55+4
+ 308 005a 7748     		ldr	r0, .L55+8
+ 309 005c E118     		adds	r1, r4, r3
+ 310 005e 0A68     		ldr	r2, [r1]
+ 311 0060 039B     		ldr	r3, [sp, #12]
+ 312 0062 AD00     		lsls	r5, r5, #2
+ 313 0064 6519     		adds	r5, r4, r5
+ 314 0066 9A1A     		subs	r2, r3, r2
+ 315 0068 2B58     		ldr	r3, [r5, r0]
+ 316 006a 9B18     		adds	r3, r3, r2
+ 317 006c 2B50     		str	r3, [r5, r0]
+ 318 006e 734B     		ldr	r3, .L55+12
+ 319 0070 E318     		adds	r3, r4, r3
+ 320 0072 1868     		ldr	r0, [r3]
+ 321 0074 8218     		adds	r2, r0, r2
+ 322 0076 1A60     		str	r2, [r3]
+ 323 0078 714B     		ldr	r3, .L55+16
+ 324 007a E218     		adds	r2, r4, r3
+ 325 007c 0023     		movs	r3, #0
+ 326 007e 1360     		str	r3, [r2]
+ 327 0080 8E22     		movs	r2, #142
+ 328 0082 D200     		lsls	r2, r2, #3
+ 329 0084 A418     		adds	r4, r4, r2
+ 330 0086 2360     		str	r3, [r4]
+ 331 0088 0B60     		str	r3, [r1]
+ 332              	.L30:
+ 333 008a 09B0     		add	sp, sp, #36
+ 334              		@ sp needed
+ 335 008c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 336              	.L31:
+ 337 008e 012F     		cmp	r7, #1
+ 338 0090 13D1     		bne	.L33
+ 339 0092 0B00     		movs	r3, r1
+ 340 0094 3133     		adds	r3, r3, #49
+ 341 0096 FF33     		adds	r3, r3, #255
+ 342 0098 8C21     		movs	r1, #140
+ 343 009a 9B00     		lsls	r3, r3, #2
+ 344 009c C318     		adds	r3, r0, r3
+ 345 009e 5868     		ldr	r0, [r3, #4]
+ 346 00a0 6943     		muls	r1, r5
+ 347 00a2 0300     		movs	r3, r0
+ 348 00a4 07AA     		add	r2, sp, #28
+ 349 00a6 0092     		str	r2, [sp]
+ 350 00a8 6118     		adds	r1, r4, r1
+ 351 00aa E833     		adds	r3, r3, #232
+ 352 00ac 1F68     		ldr	r7, [r3]
+ 353 00ae 0A6D     		ldr	r2, [r1, #80]
+ARM GAS  /tmp/cc0MlWbE.s 			page 7
+
+
+ 354 00b0 3300     		movs	r3, r6
+ 355 00b2 896C     		ldr	r1, [r1, #72]
+ 356 00b4 0068     		ldr	r0, [r0]
+ 357 00b6 B847     		blx	r7
+ 358 00b8 C4E7     		b	.L32
+ 359              	.L33:
+ 360 00ba 022F     		cmp	r7, #2
+ 361 00bc 13D1     		bne	.L34
+ 362 00be 0B00     		movs	r3, r1
+ 363 00c0 8C26     		movs	r6, #140
+ 364 00c2 3133     		adds	r3, r3, #49
+ 365 00c4 FF33     		adds	r3, r3, #255
+ 366 00c6 9B00     		lsls	r3, r3, #2
+ 367 00c8 C318     		adds	r3, r0, r3
+ 368 00ca 5868     		ldr	r0, [r3, #4]
+ 369 00cc 4E43     		muls	r6, r1
+ 370 00ce 0300     		movs	r3, r0
+ 371 00d0 2C21     		movs	r1, #44
+ 372 00d2 A619     		adds	r6, r4, r6
+ 373 00d4 E433     		adds	r3, r3, #228
+ 374 00d6 7156     		ldrsb	r1, [r6, r1]
+ 375 00d8 1F68     		ldr	r7, [r3]
+ 376 00da B26A     		ldr	r2, [r6, #40]
+ 377 00dc 0068     		ldr	r0, [r0]
+ 378 00de 07AB     		add	r3, sp, #28
+ 379 00e0 B847     		blx	r7
+ 380 00e2 B66A     		ldr	r6, [r6, #40]
+ 381 00e4 AEE7     		b	.L32
+ 382              	.L34:
+ 383 00e6 032F     		cmp	r7, #3
+ 384 00e8 ACD1     		bne	.L32
+ 385 00ea 0B00     		movs	r3, r1
+ 386 00ec 8C26     		movs	r6, #140
+ 387 00ee 3133     		adds	r3, r3, #49
+ 388 00f0 FF33     		adds	r3, r3, #255
+ 389 00f2 9B00     		lsls	r3, r3, #2
+ 390 00f4 C318     		adds	r3, r0, r3
+ 391 00f6 5868     		ldr	r0, [r3, #4]
+ 392 00f8 4E43     		muls	r6, r1
+ 393 00fa 0300     		movs	r3, r0
+ 394 00fc 4621     		movs	r1, #70
+ 395 00fe A619     		adds	r6, r4, r6
+ 396 0100 E433     		adds	r3, r3, #228
+ 397 0102 7156     		ldrsb	r1, [r6, r1]
+ 398 0104 1F68     		ldr	r7, [r3]
+ 399 0106 F26B     		ldr	r2, [r6, #60]
+ 400 0108 0068     		ldr	r0, [r0]
+ 401 010a 07AB     		add	r3, sp, #28
+ 402 010c B847     		blx	r7
+ 403 010e F66B     		ldr	r6, [r6, #60]
+ 404 0110 98E7     		b	.L32
+ 405              	.L35:
+ 406 0112 0E3B     		subs	r3, r3, #14
+ 407 0114 022B     		cmp	r3, #2
+ 408 0116 B8D9     		bls	.L30
+ 409 0118 494B     		ldr	r3, .L55+16
+ 410 011a E358     		ldr	r3, [r4, r3]
+ARM GAS  /tmp/cc0MlWbE.s 			page 8
+
+
+ 411 011c 0593     		str	r3, [sp, #20]
+ 412 011e 079B     		ldr	r3, [sp, #28]
+ 413 0120 0493     		str	r3, [sp, #16]
+ 414 0122 059B     		ldr	r3, [sp, #20]
+ 415 0124 002B     		cmp	r3, #0
+ 416 0126 22D0     		beq	.L38
+ 417 0128 039B     		ldr	r3, [sp, #12]
+ 418 012a 059A     		ldr	r2, [sp, #20]
+ 419 012c FA21     		movs	r1, #250
+ 420 012e 981A     		subs	r0, r3, r2
+ 421 0130 ED23     		movs	r3, #237
+ 422 0132 F722     		movs	r2, #247
+ 423 0134 AF00     		lsls	r7, r5, #2
+ 424 0136 E719     		adds	r7, r4, r7
+ 425 0138 9B00     		lsls	r3, r3, #2
+ 426 013a F850     		str	r0, [r7, r3]
+ 427 013c 9200     		lsls	r2, r2, #2
+ 428 013e BB58     		ldr	r3, [r7, r2]
+ 429 0140 8900     		lsls	r1, r1, #2
+ 430 0142 1B18     		adds	r3, r3, r0
+ 431 0144 BB50     		str	r3, [r7, r2]
+ 432 0146 3F4B     		ldr	r3, .L55+20
+ 433 0148 E218     		adds	r2, r4, r3
+ 434 014a 1368     		ldr	r3, [r2]
+ 435 014c 1B18     		adds	r3, r3, r0
+ 436 014e 1360     		str	r3, [r2]
+ 437 0150 049B     		ldr	r3, [sp, #16]
+ 438 0152 5843     		muls	r0, r3
+ 439 0154 FFF7FEFF 		bl	__aeabi_uidiv
+ 440 0158 8322     		movs	r2, #131
+ 441 015a D200     		lsls	r2, r2, #3
+ 442 015c BB58     		ldr	r3, [r7, r2]
+ 443 015e 1B18     		adds	r3, r3, r0
+ 444 0160 BB50     		str	r3, [r7, r2]
+ 445 0162 8C23     		movs	r3, #140
+ 446 0164 DB00     		lsls	r3, r3, #3
+ 447 0166 E318     		adds	r3, r4, r3
+ 448 0168 1A68     		ldr	r2, [r3]
+ 449 016a 1018     		adds	r0, r2, r0
+ 450 016c 1860     		str	r0, [r3]
+ 451              	.L38:
+ 452 016e 8E23     		movs	r3, #142
+ 453 0170 DB00     		lsls	r3, r3, #3
+ 454 0172 E318     		adds	r3, r4, r3
+ 455 0174 1868     		ldr	r0, [r3]
+ 456 0176 0028     		cmp	r0, #0
+ 457 0178 20D0     		beq	.L39
+ 458 017a 039B     		ldr	r3, [sp, #12]
+ 459 017c FC22     		movs	r2, #252
+ 460 017e 181A     		subs	r0, r3, r0
+ 461 0180 F223     		movs	r3, #242
+ 462 0182 AF00     		lsls	r7, r5, #2
+ 463 0184 E719     		adds	r7, r4, r7
+ 464 0186 9B00     		lsls	r3, r3, #2
+ 465 0188 F850     		str	r0, [r7, r3]
+ 466 018a 9200     		lsls	r2, r2, #2
+ 467 018c BB58     		ldr	r3, [r7, r2]
+ARM GAS  /tmp/cc0MlWbE.s 			page 9
+
+
+ 468 018e FA21     		movs	r1, #250
+ 469 0190 1B18     		adds	r3, r3, r0
+ 470 0192 BB50     		str	r3, [r7, r2]
+ 471 0194 8B23     		movs	r3, #139
+ 472 0196 DB00     		lsls	r3, r3, #3
+ 473 0198 E218     		adds	r2, r4, r3
+ 474 019a 1368     		ldr	r3, [r2]
+ 475 019c 8900     		lsls	r1, r1, #2
+ 476 019e 1B18     		adds	r3, r3, r0
+ 477 01a0 1360     		str	r3, [r2]
+ 478 01a2 049B     		ldr	r3, [sp, #16]
+ 479 01a4 5843     		muls	r0, r3
+ 480 01a6 FFF7FEFF 		bl	__aeabi_uidiv
+ 481 01aa 274A     		ldr	r2, .L55+24
+ 482 01ac BB58     		ldr	r3, [r7, r2]
+ 483 01ae 1B18     		adds	r3, r3, r0
+ 484 01b0 BB50     		str	r3, [r7, r2]
+ 485 01b2 264B     		ldr	r3, .L55+28
+ 486 01b4 E318     		adds	r3, r4, r3
+ 487 01b6 1A68     		ldr	r2, [r3]
+ 488 01b8 1018     		adds	r0, r2, r0
+ 489 01ba 1860     		str	r0, [r3]
+ 490              	.L39:
+ 491 01bc 1D4B     		ldr	r3, .L55+4
+ 492 01be E318     		adds	r3, r4, r3
+ 493 01c0 1868     		ldr	r0, [r3]
+ 494 01c2 0028     		cmp	r0, #0
+ 495 01c4 1DD0     		beq	.L40
+ 496 01c6 1C49     		ldr	r1, .L55+8
+ 497 01c8 039B     		ldr	r3, [sp, #12]
+ 498 01ca AF00     		lsls	r7, r5, #2
+ 499 01cc E719     		adds	r7, r4, r7
+ 500 01ce 181A     		subs	r0, r3, r0
+ 501 01d0 7B58     		ldr	r3, [r7, r1]
+ 502 01d2 1B18     		adds	r3, r3, r0
+ 503 01d4 7B50     		str	r3, [r7, r1]
+ 504 01d6 194B     		ldr	r3, .L55+12
+ 505 01d8 E118     		adds	r1, r4, r3
+ 506 01da 0B68     		ldr	r3, [r1]
+ 507 01dc 1B18     		adds	r3, r3, r0
+ 508 01de 0B60     		str	r3, [r1]
+ 509 01e0 FA21     		movs	r1, #250
+ 510 01e2 049B     		ldr	r3, [sp, #16]
+ 511 01e4 8900     		lsls	r1, r1, #2
+ 512 01e6 5843     		muls	r0, r3
+ 513 01e8 FFF7FEFF 		bl	__aeabi_uidiv
+ 514 01ec 8822     		movs	r2, #136
+ 515 01ee D200     		lsls	r2, r2, #3
+ 516 01f0 BB58     		ldr	r3, [r7, r2]
+ 517 01f2 1B18     		adds	r3, r3, r0
+ 518 01f4 BB50     		str	r3, [r7, r2]
+ 519 01f6 8D23     		movs	r3, #141
+ 520 01f8 DB00     		lsls	r3, r3, #3
+ 521 01fa E318     		adds	r3, r4, r3
+ 522 01fc 1A68     		ldr	r2, [r3]
+ 523 01fe 1018     		adds	r0, r2, r0
+ 524 0200 1860     		str	r0, [r3]
+ARM GAS  /tmp/cc0MlWbE.s 			page 10
+
+
+ 525              	.L40:
+ 526 0202 0023     		movs	r3, #0
+ 527 0204 0E4A     		ldr	r2, .L55+16
+ 528 0206 A218     		adds	r2, r4, r2
+ 529 0208 1360     		str	r3, [r2]
+ 530 020a 8E22     		movs	r2, #142
+ 531 020c D200     		lsls	r2, r2, #3
+ 532 020e A218     		adds	r2, r4, r2
+ 533 0210 1360     		str	r3, [r2]
+ 534 0212 084A     		ldr	r2, .L55+4
+ 535 0214 A218     		adds	r2, r4, r2
+ 536 0216 1360     		str	r3, [r2]
+ 537 0218 059B     		ldr	r3, [sp, #20]
+ 538 021a 002B     		cmp	r3, #0
+ 539 021c 00D1     		bne	.LCB567
+ 540 021e 34E7     		b	.L30	@long jump
+ 541              	.LCB567:
+ 542 0220 EC35     		adds	r5, r5, #236
+ 543 0222 AD00     		lsls	r5, r5, #2
+ 544 0224 6419     		adds	r4, r4, r5
+ 545 0226 3000     		movs	r0, r6
+ 546 0228 6168     		ldr	r1, [r4, #4]
+ 547 022a FFF7FEFF 		bl	smtc_duty_cycle_sum
+ 548 022e 2CE7     		b	.L30
+ 549              	.L56:
+ 550              		.align	2
+ 551              	.L55:
+ 552 0230 D5020000 		.word	725
+ 553 0234 74040000 		.word	1140
+ 554 0238 04040000 		.word	1028
+ 555 023c 5C040000 		.word	1116
+ 556 0240 6C040000 		.word	1132
+ 557 0244 54040000 		.word	1108
+ 558 0248 2C040000 		.word	1068
+ 559 024c 64040000 		.word	1124
+ 561              		.section	.rodata.rp_task_arbiter.constprop.0.str1.1,"aMS",%progbits,1
+ 562              	.LC3:
+ 563 0000 72616C5F 		.ascii	"ral_set_standby( TARGET_RAL, RAL_STANDBY_CFG_RC ) ="
+ 563      7365745F 
+ 563      7374616E 
+ 563      64627928 
+ 563      20544152 
+ 564 0033 3D205241 		.ascii	"= RAL_STATUS_OK\000"
+ 564      4C5F5354 
+ 564      41545553 
+ 564      5F4F4B00 
+ 565              	.LC6:
+ 566 0043 72616C5F 		.ascii	"ral_clear_irq_status( TARGET_RAL, RAL_IRQ_ALL ) == "
+ 566      636C6561 
+ 566      725F6972 
+ 566      715F7374 
+ 566      61747573 
+ 567 0076 52414C5F 		.ascii	"RAL_STATUS_OK\000"
+ 567      53544154 
+ 567      55535F4F 
+ 567      4B00
+ 568              	.LC8:
+ARM GAS  /tmp/cc0MlWbE.s 			page 11
+
+
+ 569 0084 72616C5F 		.ascii	"ral_set_sleep( TARGET_RAL, true ) == RAL_STATUS_OK\000"
+ 569      7365745F 
+ 569      736C6565 
+ 569      70282054 
+ 569      41524745 
+ 570              		.section	.text.rp_task_arbiter.constprop.0,"ax",%progbits
+ 571              		.align	1
+ 572              		.syntax unified
+ 573              		.code	16
+ 574              		.thumb_func
+ 575              		.fpu softvfp
+ 577              	rp_task_arbiter.constprop.0:
+ 578              		@ args = 0, pretend = 0, frame = 40
+ 579              		@ frame_needed = 0, uses_anonymous_args = 0
+ 580 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 581 0002 8BB0     		sub	sp, sp, #44
+ 582 0004 0400     		movs	r4, r0
+ 583 0006 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 584 000a B723     		movs	r3, #183
+ 585 000c 0700     		movs	r7, r0
+ 586 000e 0026     		movs	r6, #0
+ 587 0010 9B00     		lsls	r3, r3, #2
+ 588 0012 E518     		adds	r5, r4, r3
+ 589              	.L62:
+ 590 0014 AB78     		ldrb	r3, [r5, #2]
+ 591 0016 012B     		cmp	r3, #1
+ 592 0018 15D1     		bne	.L59
+ 593 001a 6B68     		ldr	r3, [r5, #4]
+ 594 001c FB1A     		subs	r3, r7, r3
+ 595 001e 002B     		cmp	r3, #0
+ 596 0020 02DD     		ble	.L60
+ 597 0022 3B00     		movs	r3, r7
+ 598 0024 0A33     		adds	r3, r3, #10
+ 599 0026 6B60     		str	r3, [r5, #4]
+ 600              	.L60:
+ 601 0028 AB68     		ldr	r3, [r5, #8]
+ 602 002a A94A     		ldr	r2, .L130
+ 603 002c FB1A     		subs	r3, r7, r3
+ 604 002e 9342     		cmp	r3, r2
+ 605 0030 09DD     		ble	.L59
+ 606 0032 0023     		movs	r3, #0
+ 607 0034 AB70     		strb	r3, [r5, #2]
+ 608 0036 FA23     		movs	r3, #250
+ 609 0038 DB00     		lsls	r3, r3, #3
+ 610 003a FB18     		adds	r3, r7, r3
+ 611 003c 2000     		movs	r0, r4
+ 612 003e 6B60     		str	r3, [r5, #4]
+ 613 0040 2E70     		strb	r6, [r5]
+ 614 0042 FFF7FEFF 		bl	rp_task_compute_ranking
+ 615              	.L59:
+ 616 0046 0136     		adds	r6, r6, #1
+ 617 0048 1835     		adds	r5, r5, #24
+ 618 004a 052E     		cmp	r6, #5
+ 619 004c E2D1     		bne	.L62
+ 620 004e 9323     		movs	r3, #147
+ 621 0050 DB00     		lsls	r3, r3, #3
+ 622 0052 E15C     		ldrb	r1, [r4, r3]
+ARM GAS  /tmp/cc0MlWbE.s 			page 12
+
+
+ 623 0054 1823     		movs	r3, #24
+ 624 0056 1A00     		movs	r2, r3
+ 625 0058 4A43     		muls	r2, r1
+ 626 005a 9E48     		ldr	r0, .L130+4
+ 627 005c A218     		adds	r2, r4, r2
+ 628 005e 1018     		adds	r0, r2, r0
+ 629 0060 0078     		ldrb	r0, [r0]
+ 630 0062 0228     		cmp	r0, #2
+ 631 0064 25D1     		bne	.L64
+ 632 0066 9C48     		ldr	r0, .L130+8
+ 633 0068 1218     		adds	r2, r2, r0
+ 634 006a 1278     		ldrb	r2, [r2]
+ 635 006c 012A     		cmp	r2, #1
+ 636 006e 02D9     		bls	.L65
+ 637 0070 0F3A     		subs	r2, r2, #15
+ 638 0072 012A     		cmp	r2, #1
+ 639 0074 1DD8     		bhi	.L64
+ 640              	.L65:
+ 641 0076 BA22     		movs	r2, #186
+ 642 0078 B825     		movs	r5, #184
+ 643 007a 4B43     		muls	r3, r1
+ 644 007c 9200     		lsls	r2, r2, #2
+ 645 007e E318     		adds	r3, r4, r3
+ 646 0080 9818     		adds	r0, r3, r2
+ 647 0082 F132     		adds	r2, r2, #241
+ 648 0084 FF32     		adds	r2, r2, #255
+ 649 0086 AD00     		lsls	r5, r5, #2
+ 650 0088 A258     		ldr	r2, [r4, r2]
+ 651 008a 5D19     		adds	r5, r3, r5
+ 652 008c 2D68     		ldr	r5, [r5]
+ 653 008e 0232     		adds	r2, r2, #2
+ 654 0090 521B     		subs	r2, r2, r5
+ 655 0092 D219     		adds	r2, r2, r7
+ 656 0094 0260     		str	r2, [r0]
+ 657 0096 914A     		ldr	r2, .L130+12
+ 658 0098 9A18     		adds	r2, r3, r2
+ 659 009a 1078     		ldrb	r0, [r2]
+ 660 009c 0028     		cmp	r0, #0
+ 661 009e 08D0     		beq	.L64
+ 662 00a0 0020     		movs	r0, #0
+ 663 00a2 1070     		strb	r0, [r2]
+ 664 00a4 B722     		movs	r2, #183
+ 665 00a6 9200     		lsls	r2, r2, #2
+ 666 00a8 9B18     		adds	r3, r3, r2
+ 667 00aa 2000     		movs	r0, r4
+ 668 00ac 1970     		strb	r1, [r3]
+ 669 00ae FFF7FEFF 		bl	rp_task_compute_ranking
+ 670              	.L64:
+ 671 00b2 884B     		ldr	r3, .L130+4
+ 672 00b4 0320     		movs	r0, #3
+ 673 00b6 E318     		adds	r3, r4, r3
+ 674 00b8 0193     		str	r3, [sp, #4]
+ 675 00ba 0093     		str	r3, [sp]
+ 676 00bc B823     		movs	r3, #184
+ 677 00be 9B00     		lsls	r3, r3, #2
+ 678 00c0 E318     		adds	r3, r4, r3
+ 679 00c2 0293     		str	r3, [sp, #8]
+ARM GAS  /tmp/cc0MlWbE.s 			page 13
+
+
+ 680 00c4 0393     		str	r3, [sp, #12]
+ 681 00c6 864B     		ldr	r3, .L130+16
+ 682 00c8 029A     		ldr	r2, [sp, #8]
+ 683 00ca E318     		adds	r3, r4, r3
+ 684 00cc 0693     		str	r3, [sp, #24]
+ 685 00ce 019B     		ldr	r3, [sp, #4]
+ 686              	.L68:
+ 687 00d0 1978     		ldrb	r1, [r3]
+ 688 00d2 0029     		cmp	r1, #0
+ 689 00d4 03D1     		bne	.L67
+ 690 00d6 1168     		ldr	r1, [r2]
+ 691 00d8 C91B     		subs	r1, r1, r7
+ 692 00da 00D5     		bpl	.L67
+ 693 00dc 1870     		strb	r0, [r3]
+ 694              	.L67:
+ 695 00de 0699     		ldr	r1, [sp, #24]
+ 696 00e0 1833     		adds	r3, r3, #24
+ 697 00e2 1832     		adds	r2, r2, #24
+ 698 00e4 9942     		cmp	r1, r3
+ 699 00e6 F3D1     		bne	.L68
+ 700 00e8 DD23     		movs	r3, #221
+ 701 00ea 0020     		movs	r0, #0
+ 702 00ec 1826     		movs	r6, #24
+ 703 00ee 9B00     		lsls	r3, r3, #2
+ 704 00f0 E318     		adds	r3, r4, r3
+ 705 00f2 0993     		str	r3, [sp, #36]
+ 706              	.L73:
+ 707 00f4 099B     		ldr	r3, [sp, #36]
+ 708 00f6 774D     		ldr	r5, .L130+4
+ 709 00f8 1A5C     		ldrb	r2, [r3, r0]
+ 710 00fa 3300     		movs	r3, r6
+ 711 00fc 5343     		muls	r3, r2
+ 712 00fe E318     		adds	r3, r4, r3
+ 713 0100 5D19     		adds	r5, r3, r5
+ 714 0102 2D78     		ldrb	r5, [r5]
+ 715 0104 C1B2     		uxtb	r1, r0
+ 716 0106 012D     		cmp	r5, #1
+ 717 0108 00D9     		bls	.LCB743
+ 718 010a 96E0     		b	.L69	@long jump
+ 719              	.LCB743:
+ 720 010c B825     		movs	r5, #184
+ 721 010e AD00     		lsls	r5, r5, #2
+ 722 0110 5B19     		adds	r3, r3, r5
+ 723 0112 1B68     		ldr	r3, [r3]
+ 724 0114 DB1B     		subs	r3, r3, r7
+ 725 0116 00D5     		bpl	.LCB750
+ 726 0118 92E0     		b	.L71	@long jump
+ 727              	.LCB750:
+ 728              	.L70:
+ 729 011a 1823     		movs	r3, #24
+ 730 011c B520     		movs	r0, #181
+ 731 011e 5A43     		muls	r2, r3
+ 732 0120 8000     		lsls	r0, r0, #2
+ 733 0122 A218     		adds	r2, r4, r2
+ 734 0124 1018     		adds	r0, r2, r0
+ 735 0126 0078     		ldrb	r0, [r0]
+ 736 0128 0131     		adds	r1, r1, #1
+ARM GAS  /tmp/cc0MlWbE.s 			page 14
+
+
+ 737 012a 0890     		str	r0, [sp, #32]
+ 738 012c B820     		movs	r0, #184
+ 739 012e 8000     		lsls	r0, r0, #2
+ 740 0130 1018     		adds	r0, r2, r0
+ 741 0132 0068     		ldr	r0, [r0]
+ 742 0134 CDB2     		uxtb	r5, r1
+ 743 0136 0490     		str	r0, [sp, #16]
+ 744 0138 BA20     		movs	r0, #186
+ 745 013a 8000     		lsls	r0, r0, #2
+ 746 013c 1218     		adds	r2, r2, r0
+ 747 013e 1268     		ldr	r2, [r2]
+ 748 0140 0592     		str	r2, [sp, #20]
+ 749              	.L72:
+ 750 0142 042D     		cmp	r5, #4
+ 751 0144 00DC     		bgt	.LCB776
+ 752 0146 83E0     		b	.L79	@long jump
+ 753              	.LCB776:
+ 754 0148 1823     		movs	r3, #24
+ 755 014a 089A     		ldr	r2, [sp, #32]
+ 756 014c 2100     		movs	r1, r4
+ 757 014e 5A43     		muls	r2, r3
+ 758 0150 B523     		movs	r3, #181
+ 759 0152 A218     		adds	r2, r4, r2
+ 760 0154 9B00     		lsls	r3, r3, #2
+ 761 0156 D218     		adds	r2, r2, r3
+ 762 0158 29CA     		ldmia	r2!, {r0, r3, r5}
+ 763 015a 29C1     		stmia	r1!, {r0, r3, r5}
+ 764 015c 29CA     		ldmia	r2!, {r0, r3, r5}
+ 765 015e 29C1     		stmia	r1!, {r0, r3, r5}
+ 766 0160 E368     		ldr	r3, [r4, #12]
+ 767 0162 DA1B     		subs	r2, r3, r7
+ 768 0164 00D4     		bmi	.LCB791
+ 769 0166 C1E0     		b	.L80	@long jump
+ 770              	.LCB791:
+ 771 0168 A27A     		ldrb	r2, [r4, #10]
+ 772 016a 022A     		cmp	r2, #2
+ 773 016c 0BD0     		beq	.L81
+ 774 016e 5D49     		ldr	r1, .L130+20
+ 775 0170 6358     		ldr	r3, [r4, r1]
+ 776 0172 5A1C     		adds	r2, r3, #1
+ 777 0174 1823     		movs	r3, #24
+ 778 0176 6250     		str	r2, [r4, r1]
+ 779 0178 2278     		ldrb	r2, [r4]
+ 780 017a 5343     		muls	r3, r2
+ 781 017c 554A     		ldr	r2, .L130+4
+ 782 017e E318     		adds	r3, r4, r3
+ 783 0180 9B18     		adds	r3, r3, r2
+ 784 0182 0322     		movs	r2, #3
+ 785 0184 1A70     		strb	r2, [r3]
+ 786              	.L81:
+ 787 0186 9423     		movs	r3, #148
+ 788 0188 DB00     		lsls	r3, r3, #3
+ 789 018a E25C     		ldrb	r2, [r4, r3]
+ 790 018c 1823     		movs	r3, #24
+ 791 018e B821     		movs	r1, #184
+ 792 0190 5343     		muls	r3, r2
+ 793 0192 8900     		lsls	r1, r1, #2
+ARM GAS  /tmp/cc0MlWbE.s 			page 15
+
+
+ 794 0194 E318     		adds	r3, r4, r3
+ 795 0196 5918     		adds	r1, r3, r1
+ 796 0198 0868     		ldr	r0, [r1]
+ 797 019a C01B     		subs	r0, r0, r7
+ 798 019c 0028     		cmp	r0, #0
+ 799 019e 12DD     		ble	.L86
+ 800 01a0 9B21     		movs	r1, #155
+ 801 01a2 C900     		lsls	r1, r1, #3
+ 802 01a4 6158     		ldr	r1, [r4, r1]
+ 803 01a6 8842     		cmp	r0, r1
+ 804 01a8 0DD2     		bcs	.L86
+ 805 01aa 4F49     		ldr	r1, .L130+24
+ 806 01ac 615C     		ldrb	r1, [r4, r1]
+ 807 01ae 0129     		cmp	r1, #1
+ 808 01b0 09D1     		bne	.L86
+ 809 01b2 2178     		ldrb	r1, [r4]
+ 810 01b4 9142     		cmp	r1, r2
+ 811 01b6 06D0     		beq	.L86
+ 812 01b8 464A     		ldr	r2, .L130+4
+ 813 01ba 9B18     		adds	r3, r3, r2
+ 814 01bc 1A78     		ldrb	r2, [r3]
+ 815 01be 002A     		cmp	r2, #0
+ 816 01c0 01D1     		bne	.L86
+ 817 01c2 0332     		adds	r2, r2, #3
+ 818 01c4 1A70     		strb	r2, [r3]
+ 819              	.L86:
+ 820 01c6 9323     		movs	r3, #147
+ 821 01c8 DB00     		lsls	r3, r3, #3
+ 822 01ca E25C     		ldrb	r2, [r4, r3]
+ 823 01cc 1823     		movs	r3, #24
+ 824 01ce 5343     		muls	r3, r2
+ 825 01d0 404A     		ldr	r2, .L130+4
+ 826 01d2 E318     		adds	r3, r4, r3
+ 827 01d4 9B18     		adds	r3, r3, r2
+ 828 01d6 1B78     		ldrb	r3, [r3]
+ 829 01d8 022B     		cmp	r3, #2
+ 830 01da 02D0     		beq	.L87
+ 831 01dc 2000     		movs	r0, r4
+ 832 01de FFF7FEFF 		bl	rp_task_call_aborted
+ 833              	.L87:
+ 834 01e2 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 835 01e6 0322     		movs	r2, #3
+ 836              	.L89:
+ 837 01e8 009B     		ldr	r3, [sp]
+ 838 01ea 1B78     		ldrb	r3, [r3]
+ 839 01ec 002B     		cmp	r3, #0
+ 840 01ee 06D1     		bne	.L88
+ 841 01f0 039B     		ldr	r3, [sp, #12]
+ 842 01f2 1B68     		ldr	r3, [r3]
+ 843 01f4 0493     		str	r3, [sp, #16]
+ 844 01f6 1B1A     		subs	r3, r3, r0
+ 845 01f8 01D5     		bpl	.L88
+ 846 01fa 009B     		ldr	r3, [sp]
+ 847 01fc 1A70     		strb	r2, [r3]
+ 848              	.L88:
+ 849 01fe 009B     		ldr	r3, [sp]
+ 850 0200 1833     		adds	r3, r3, #24
+ARM GAS  /tmp/cc0MlWbE.s 			page 16
+
+
+ 851 0202 0093     		str	r3, [sp]
+ 852 0204 039B     		ldr	r3, [sp, #12]
+ 853 0206 0099     		ldr	r1, [sp]
+ 854 0208 1833     		adds	r3, r3, #24
+ 855 020a 0393     		str	r3, [sp, #12]
+ 856 020c 069B     		ldr	r3, [sp, #24]
+ 857 020e 8B42     		cmp	r3, r1
+ 858 0210 EAD1     		bne	.L89
+ 859 0212 0022     		movs	r2, #0
+ 860 0214 1821     		movs	r1, #24
+ 861              	.L92:
+ 862 0216 0B00     		movs	r3, r1
+ 863 0218 5343     		muls	r3, r2
+ 864 021a 019E     		ldr	r6, [sp, #4]
+ 865 021c D5B2     		uxtb	r5, r2
+ 866 021e F65C     		ldrb	r6, [r6, r3]
+ 867 0220 012E     		cmp	r6, #1
+ 868 0222 04D8     		bhi	.L90
+ 869 0224 029E     		ldr	r6, [sp, #8]
+ 870 0226 F358     		ldr	r3, [r6, r3]
+ 871 0228 1E1A     		subs	r6, r3, r0
+ 872 022a 00D4     		bmi	.LCB902
+ 873 022c D2E0     		b	.L91	@long jump
+ 874              	.LCB902:
+ 875              	.L90:
+ 876 022e 0132     		adds	r2, r2, #1
+ 877 0230 052A     		cmp	r2, #5
+ 878 0232 F0D1     		bne	.L92
+ 879 0234 0022     		movs	r2, #0
+ 880 0236 2C4B     		ldr	r3, .L130+24
+ 881 0238 F7E0     		b	.L129
+ 882              	.L69:
+ 883 023a 022D     		cmp	r5, #2
+ 884 023c 00D1     		bne	.LCB914
+ 885 023e 6CE7     		b	.L70	@long jump
+ 886              	.LCB914:
+ 887              	.L71:
+ 888 0240 0130     		adds	r0, r0, #1
+ 889 0242 0528     		cmp	r0, #5
+ 890 0244 00D0     		beq	.LCB918
+ 891 0246 55E7     		b	.L73	@long jump
+ 892              	.LCB918:
+ 893 0248 2000     		movs	r0, r4
+ 894 024a FFF7FEFF 		bl	rp_task_call_aborted
+ 895 024e E9E0     		b	.L57
+ 896              	.L79:
+ 897 0250 1821     		movs	r1, #24
+ 898 0252 099A     		ldr	r2, [sp, #36]
+ 899 0254 1F48     		ldr	r0, .L130+4
+ 900 0256 525D     		ldrb	r2, [r2, r5]
+ 901 0258 5143     		muls	r1, r2
+ 902 025a 6118     		adds	r1, r4, r1
+ 903 025c 0818     		adds	r0, r1, r0
+ 904 025e 0078     		ldrb	r0, [r0]
+ 905 0260 0128     		cmp	r0, #1
+ 906 0262 07D8     		bhi	.L75
+ 907 0264 B826     		movs	r6, #184
+ARM GAS  /tmp/cc0MlWbE.s 			page 17
+
+
+ 908 0266 B600     		lsls	r6, r6, #2
+ 909 0268 8919     		adds	r1, r1, r6
+ 910 026a 0968     		ldr	r1, [r1]
+ 911 026c C91B     		subs	r1, r1, r7
+ 912 026e 03D5     		bpl	.L76
+ 913              	.L77:
+ 914 0270 0135     		adds	r5, r5, #1
+ 915 0272 66E7     		b	.L72
+ 916              	.L75:
+ 917 0274 0228     		cmp	r0, #2
+ 918 0276 FBD1     		bne	.L77
+ 919              	.L76:
+ 920 0278 1823     		movs	r3, #24
+ 921 027a B821     		movs	r1, #184
+ 922 027c 5A43     		muls	r2, r3
+ 923 027e 8900     		lsls	r1, r1, #2
+ 924 0280 A218     		adds	r2, r4, r2
+ 925 0282 5618     		adds	r6, r2, r1
+ 926 0284 3168     		ldr	r1, [r6]
+ 927 0286 0791     		str	r1, [sp, #28]
+ 928 0288 BA21     		movs	r1, #186
+ 929 028a 8900     		lsls	r1, r1, #2
+ 930 028c 5118     		adds	r1, r2, r1
+ 931 028e 0968     		ldr	r1, [r1]
+ 932 0290 8C46     		mov	ip, r1
+ 933 0292 0799     		ldr	r1, [sp, #28]
+ 934 0294 6144     		add	r1, r1, ip
+ 935 0296 0B00     		movs	r3, r1
+ 936 0298 0499     		ldr	r1, [sp, #16]
+ 937 029a 591A     		subs	r1, r3, r1
+ 938 029c 0BD5     		bpl	.L78
+ 939 029e D91B     		subs	r1, r3, r7
+ 940 02a0 E6D4     		bmi	.L77
+ 941 02a2 B523     		movs	r3, #181
+ 942 02a4 9B00     		lsls	r3, r3, #2
+ 943 02a6 D218     		adds	r2, r2, r3
+ 944 02a8 1378     		ldrb	r3, [r2]
+ 945 02aa 0893     		str	r3, [sp, #32]
+ 946 02ac 6346     		mov	r3, ip
+ 947 02ae 0593     		str	r3, [sp, #20]
+ 948 02b0 079B     		ldr	r3, [sp, #28]
+ 949 02b2 0493     		str	r3, [sp, #16]
+ 950 02b4 DCE7     		b	.L77
+ 951              	.L78:
+ 952 02b6 0029     		cmp	r1, #0
+ 953 02b8 DAD0     		beq	.L77
+ 954 02ba 059B     		ldr	r3, [sp, #20]
+ 955 02bc 9942     		cmp	r1, r3
+ 956 02be D7DA     		bge	.L77
+ 957 02c0 0128     		cmp	r0, #1
+ 958 02c2 D5D1     		bne	.L77
+ 959 02c4 1A00     		movs	r2, r3
+ 960 02c6 049B     		ldr	r3, [sp, #16]
+ 961 02c8 D218     		adds	r2, r2, r3
+ 962 02ca 0A32     		adds	r2, r2, #10
+ 963 02cc 3260     		str	r2, [r6]
+ 964 02ce CFE7     		b	.L77
+ARM GAS  /tmp/cc0MlWbE.s 			page 18
+
+
+ 965              	.L131:
+ 966              		.align	2
+ 967              	.L130:
+ 968 02d0 C0D40100 		.word	120000
+ 969 02d4 DE020000 		.word	734
+ 970 02d8 D5020000 		.word	725
+ 971 02dc DD020000 		.word	733
+ 972 02e0 56030000 		.word	854
+ 973 02e4 8C040000 		.word	1164
+ 974 02e8 BC040000 		.word	1212
+ 975              	.L80:
+ 976 02ec 9B21     		movs	r1, #155
+ 977 02ee C900     		lsls	r1, r1, #3
+ 978 02f0 6158     		ldr	r1, [r4, r1]
+ 979 02f2 8A42     		cmp	r2, r1
+ 980 02f4 00D9     		bls	.LCB1019
+ 981 02f6 46E7     		b	.L81	@long jump
+ 982              	.LCB1019:
+ 983 02f8 9325     		movs	r5, #147
+ 984 02fa 1821     		movs	r1, #24
+ 985 02fc ED00     		lsls	r5, r5, #3
+ 986 02fe 625D     		ldrb	r2, [r4, r5]
+ 987 0300 4B4B     		ldr	r3, .L132
+ 988 0302 5143     		muls	r1, r2
+ 989 0304 6118     		adds	r1, r4, r1
+ 990 0306 CE18     		adds	r6, r1, r3
+ 991 0308 3378     		ldrb	r3, [r6]
+ 992 030a 2078     		ldrb	r0, [r4]
+ 993 030c 022B     		cmp	r3, #2
+ 994 030e 5DD1     		bne	.L82
+ 995 0310 B523     		movs	r3, #181
+ 996 0312 9B00     		lsls	r3, r3, #2
+ 997 0314 C918     		adds	r1, r1, r3
+ 998 0316 0B78     		ldrb	r3, [r1]
+ 999 0318 8342     		cmp	r3, r0
+ 1000 031a 00D1     		bne	.LCB1037
+ 1001 031c 33E7     		b	.L81	@long jump
+ 1002              	.LCB1037:
+ 1003 031e 0323     		movs	r3, #3
+ 1004 0320 3132     		adds	r2, r2, #49
+ 1005 0322 FF32     		adds	r2, r2, #255
+ 1006 0324 9200     		lsls	r2, r2, #2
+ 1007 0326 3370     		strb	r3, [r6]
+ 1008 0328 A218     		adds	r2, r4, r2
+ 1009 032a 5368     		ldr	r3, [r2, #4]
+ 1010 032c 0021     		movs	r1, #0
+ 1011 032e 9A69     		ldr	r2, [r3, #24]
+ 1012 0330 1868     		ldr	r0, [r3]
+ 1013 0332 9047     		blx	r2
+ 1014 0334 0028     		cmp	r0, #0
+ 1015 0336 05D0     		beq	.L83
+ 1016 0338 A721     		movs	r1, #167
+ 1017 033a 3E4A     		ldr	r2, .L132+4
+ 1018 033c 3E48     		ldr	r0, .L132+8
+ 1019 033e 8900     		lsls	r1, r1, #2
+ 1020 0340 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1021              	.L83:
+ARM GAS  /tmp/cc0MlWbE.s 			page 19
+
+
+ 1022 0344 9325     		movs	r5, #147
+ 1023 0346 ED00     		lsls	r5, r5, #3
+ 1024 0348 635D     		ldrb	r3, [r4, r5]
+ 1025 034a 3C49     		ldr	r1, .L132+12
+ 1026 034c 3133     		adds	r3, r3, #49
+ 1027 034e FF33     		adds	r3, r3, #255
+ 1028 0350 9B00     		lsls	r3, r3, #2
+ 1029 0352 E318     		adds	r3, r4, r3
+ 1030 0354 5B68     		ldr	r3, [r3, #4]
+ 1031 0356 9A6D     		ldr	r2, [r3, #88]
+ 1032 0358 1868     		ldr	r0, [r3]
+ 1033 035a 9047     		blx	r2
+ 1034 035c 0028     		cmp	r0, #0
+ 1035 035e 04D0     		beq	.L84
+ 1036 0360 374A     		ldr	r2, .L132+16
+ 1037 0362 3849     		ldr	r1, .L132+20
+ 1038 0364 3448     		ldr	r0, .L132+8
+ 1039 0366 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1040              	.L84:
+ 1041 036a FFF7FEFF 		bl	smtc_modem_hal_radio_irq_clear_pending
+ 1042 036e 635D     		ldrb	r3, [r4, r5]
+ 1043 0370 0121     		movs	r1, #1
+ 1044 0372 3133     		adds	r3, r3, #49
+ 1045 0374 FF33     		adds	r3, r3, #255
+ 1046 0376 9B00     		lsls	r3, r3, #2
+ 1047 0378 E318     		adds	r3, r4, r3
+ 1048 037a 5B68     		ldr	r3, [r3, #4]
+ 1049 037c 5A69     		ldr	r2, [r3, #20]
+ 1050 037e 1868     		ldr	r0, [r3]
+ 1051 0380 9047     		blx	r2
+ 1052 0382 0028     		cmp	r0, #0
+ 1053 0384 04D0     		beq	.L85
+ 1054 0386 304A     		ldr	r2, .L132+24
+ 1055 0388 3049     		ldr	r1, .L132+28
+ 1056 038a 2B48     		ldr	r0, .L132+8
+ 1057 038c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1058              	.L85:
+ 1059 0390 0020     		movs	r0, #0
+ 1060 0392 9325     		movs	r5, #147
+ 1061 0394 2E4B     		ldr	r3, .L132+32
+ 1062 0396 ED00     		lsls	r5, r5, #3
+ 1063 0398 E054     		strb	r0, [r4, r3]
+ 1064 039a FFF7FEFF 		bl	smtc_modem_hal_set_ant_switch
+ 1065 039e FFF7FEFF 		bl	smtc_modem_hal_stop_radio_tcxo
+ 1066 03a2 665D     		ldrb	r6, [r4, r5]
+ 1067 03a4 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 1068 03a8 3100     		movs	r1, r6
+ 1069 03aa 0200     		movs	r2, r0
+ 1070 03ac 2000     		movs	r0, r4
+ 1071 03ae FFF7FEFF 		bl	rp_consumption_statistics_updated
+ 1072 03b2 1823     		movs	r3, #24
+ 1073 03b4 2278     		ldrb	r2, [r4]
+ 1074 03b6 5343     		muls	r3, r2
+ 1075 03b8 6255     		strb	r2, [r4, r5]
+ 1076              	.L128:
+ 1077 03ba 1D4A     		ldr	r2, .L132
+ 1078 03bc E318     		adds	r3, r4, r3
+ARM GAS  /tmp/cc0MlWbE.s 			page 20
+
+
+ 1079 03be 9B18     		adds	r3, r3, r2
+ 1080 03c0 0222     		movs	r2, #2
+ 1081 03c2 2000     		movs	r0, r4
+ 1082 03c4 1A70     		strb	r2, [r3]
+ 1083 03c6 FFF7FEFF 		bl	rp_task_launch_current
+ 1084 03ca DCE6     		b	.L81
+ 1085              	.L82:
+ 1086 03cc 1823     		movs	r3, #24
+ 1087 03ce 6055     		strb	r0, [r4, r5]
+ 1088 03d0 4343     		muls	r3, r0
+ 1089 03d2 F2E7     		b	.L128
+ 1090              	.L91:
+ 1091 03d4 1821     		movs	r1, #24
+ 1092 03d6 5143     		muls	r1, r2
+ 1093 03d8 019E     		ldr	r6, [sp, #4]
+ 1094 03da D7B2     		uxtb	r7, r2
+ 1095 03dc 765C     		ldrb	r6, [r6, r1]
+ 1096 03de 012E     		cmp	r6, #1
+ 1097 03e0 07D8     		bhi	.L94
+ 1098 03e2 029E     		ldr	r6, [sp, #8]
+ 1099 03e4 7158     		ldr	r1, [r6, r1]
+ 1100 03e6 CE1A     		subs	r6, r1, r3
+ 1101 03e8 03D5     		bpl	.L94
+ 1102 03ea 0E1A     		subs	r6, r1, r0
+ 1103 03ec 01D4     		bmi	.L94
+ 1104 03ee 0B00     		movs	r3, r1
+ 1105 03f0 3D00     		movs	r5, r7
+ 1106              	.L94:
+ 1107 03f2 0132     		adds	r2, r2, #1
+ 1108 03f4 D1B2     		uxtb	r1, r2
+ 1109 03f6 0429     		cmp	r1, #4
+ 1110 03f8 ECD9     		bls	.L91
+ 1111 03fa 9422     		movs	r2, #148
+ 1112 03fc D200     		lsls	r2, r2, #3
+ 1113 03fe A554     		strb	r5, [r4, r2]
+ 1114 0400 0122     		movs	r2, #1
+ 1115 0402 181A     		subs	r0, r3, r0
+ 1116 0404 134B     		ldr	r3, .L132+36
+ 1117 0406 E050     		str	r0, [r4, r3]
+ 1118 0408 134B     		ldr	r3, .L132+40
+ 1119 040a E254     		strb	r2, [r4, r3]
+ 1120 040c 1C33     		adds	r3, r3, #28
+ 1121 040e E558     		ldr	r5, [r4, r3]
+ 1122 0410 8542     		cmp	r5, r0
+ 1123 0412 09D2     		bcs	.L95
+ 1124 0414 451B     		subs	r5, r0, r5
+ 1125 0416 FFF7FEFF 		bl	smtc_modem_hal_stop_timer
+ 1126 041a 2200     		movs	r2, r4
+ 1127 041c 2800     		movs	r0, r5
+ 1128 041e 0F49     		ldr	r1, .L132+44
+ 1129 0420 FFF7FEFF 		bl	smtc_modem_hal_start_timer
+ 1130              	.L57:
+ 1131 0424 0BB0     		add	sp, sp, #44
+ 1132              		@ sp needed
+ 1133 0426 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1134              	.L95:
+ 1135 0428 0D4B     		ldr	r3, .L132+48
+ARM GAS  /tmp/cc0MlWbE.s 			page 21
+
+
+ 1136              	.L129:
+ 1137 042a E254     		strb	r2, [r4, r3]
+ 1138 042c FAE7     		b	.L57
+ 1139              	.L133:
+ 1140 042e C046     		.align	2
+ 1141              	.L132:
+ 1142 0430 DE020000 		.word	734
+ 1143 0434 00000000 		.word	.LC3
+ 1144 0438 00000000 		.word	.LANCHOR1
+ 1145 043c FE1F0000 		.word	8190
+ 1146 0440 43000000 		.word	.LC6
+ 1147 0444 9E020000 		.word	670
+ 1148 0448 84000000 		.word	.LC8
+ 1149 044c A2020000 		.word	674
+ 1150 0450 A1040000 		.word	1185
+ 1151 0454 9C040000 		.word	1180
+ 1152 0458 BC040000 		.word	1212
+ 1153 045c 00000000 		.word	rp_timer_irq_callback
+ 1154 0460 A2040000 		.word	1186
+ 1156              		.section	.text.rp_init,"ax",%progbits
+ 1157              		.align	1
+ 1158              		.global	rp_init
+ 1159              		.syntax unified
+ 1160              		.code	16
+ 1161              		.thumb_func
+ 1162              		.fpu softvfp
+ 1164              	rp_init:
+ 1165              		@ args = 0, pretend = 0, frame = 0
+ 1166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1167 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1168 0002 1D4A     		ldr	r2, .L137
+ 1169 0004 0E00     		movs	r6, r1
+ 1170 0006 0021     		movs	r1, #0
+ 1171 0008 0400     		movs	r4, r0
+ 1172 000a FFF7FEFF 		bl	memset
+ 1173 000e 9522     		movs	r2, #149
+ 1174 0010 D200     		lsls	r2, r2, #3
+ 1175 0012 A118     		adds	r1, r4, r2
+ 1176 0014 0022     		movs	r2, #0
+ 1177 0016 9823     		movs	r3, #152
+ 1178 0018 1500     		movs	r5, r2
+ 1179 001a DB00     		lsls	r3, r3, #3
+ 1180 001c E650     		str	r6, [r4, r3]
+ 1181 001e ED3B     		subs	r3, r3, #237
+ 1182 0020 FF3B     		subs	r3, r3, #255
+ 1183 0022 E318     		adds	r3, r4, r3
+ 1184              	.L135:
+ 1185 0024 1120     		movs	r0, #17
+ 1186 0026 5870     		strb	r0, [r3, #1]
+ 1187 0028 0D38     		subs	r0, r0, #13
+ 1188 002a 9872     		strb	r0, [r3, #10]
+ 1189 002c 1348     		ldr	r0, .L137+4
+ 1190 002e 1A70     		strb	r2, [r3]
+ 1191 0030 5D60     		str	r5, [r3, #4]
+ 1192 0032 5D72     		strb	r5, [r3, #9]
+ 1193 0034 CE61     		str	r6, [r1, #28]
+ 1194 0036 0D50     		str	r5, [r1, r0]
+ARM GAS  /tmp/cc0MlWbE.s 			page 22
+
+
+ 1195 0038 E420     		movs	r0, #228
+ 1196 003a 8000     		lsls	r0, r0, #2
+ 1197 003c 8446     		mov	ip, r0
+ 1198 003e A444     		add	ip, ip, r4
+ 1199 0040 6046     		mov	r0, ip
+ 1200 0042 0B27     		movs	r7, #11
+ 1201 0044 20C1     		stmia	r1!, {r5}
+ 1202 0046 8754     		strb	r7, [r0, r2]
+ 1203 0048 0132     		adds	r2, r2, #1
+ 1204 004a 1833     		adds	r3, r3, #24
+ 1205 004c 052A     		cmp	r2, #5
+ 1206 004e E9D1     		bne	.L135
+ 1207              		@ sp needed
+ 1208 0050 1123     		movs	r3, #17
+ 1209 0052 6370     		strb	r3, [r4, #1]
+ 1210 0054 0D3B     		subs	r3, r3, #13
+ 1211 0056 A372     		strb	r3, [r4, #10]
+ 1212 0058 ED23     		movs	r3, #237
+ 1213 005a 9B00     		lsls	r3, r3, #2
+ 1214 005c E018     		adds	r0, r4, r3
+ 1215 005e 0021     		movs	r1, #0
+ 1216 0060 D732     		adds	r2, r2, #215
+ 1217 0062 FFF7FEFF 		bl	memset
+ 1218 0066 0A22     		movs	r2, #10
+ 1219 0068 054B     		ldr	r3, .L137+8
+ 1220 006a E554     		strb	r5, [r4, r3]
+ 1221 006c 1C33     		adds	r3, r3, #28
+ 1222 006e E250     		str	r2, [r4, r3]
+ 1223 0070 044B     		ldr	r3, .L137+12
+ 1224 0072 E550     		str	r5, [r4, r3]
+ 1225 0074 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1226              	.L138:
+ 1227 0076 C046     		.align	2
+ 1228              	.L137:
+ 1229 0078 DC040000 		.word	1244
+ 1230 007c D4FEFFFF 		.word	-300
+ 1231 0080 BC040000 		.word	1212
+ 1232 0084 A4040000 		.word	1188
+ 1234              		.section	.text.rp_attach_new_radio,"ax",%progbits
+ 1235              		.align	1
+ 1236              		.global	rp_attach_new_radio
+ 1237              		.syntax unified
+ 1238              		.code	16
+ 1239              		.thumb_func
+ 1240              		.fpu softvfp
+ 1242              	rp_attach_new_radio:
+ 1243              		@ args = 0, pretend = 0, frame = 0
+ 1244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1245 0000 10B5     		push	{r4, lr}
+ 1246 0002 042A     		cmp	r2, #4
+ 1247 0004 06D9     		bls	.L140
+ 1248 0006 EE21     		movs	r1, #238
+ 1249 0008 084A     		ldr	r2, .L144
+ 1250              	.L143:
+ 1251 000a 0948     		ldr	r0, .L144+4
+ 1252 000c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1253 0010 0120     		movs	r0, #1
+ARM GAS  /tmp/cc0MlWbE.s 			page 23
+
+
+ 1254              	.L141:
+ 1255              		@ sp needed
+ 1256 0012 10BD     		pop	{r4, pc}
+ 1257              	.L140:
+ 1258 0014 9200     		lsls	r2, r2, #2
+ 1259 0016 074B     		ldr	r3, .L144+8
+ 1260 0018 8018     		adds	r0, r0, r2
+ 1261 001a C258     		ldr	r2, [r0, r3]
+ 1262 001c 8A42     		cmp	r2, r1
+ 1263 001e 02D1     		bne	.L142
+ 1264 0020 F421     		movs	r1, #244
+ 1265 0022 024A     		ldr	r2, .L144
+ 1266 0024 F1E7     		b	.L143
+ 1267              	.L142:
+ 1268 0026 C150     		str	r1, [r0, r3]
+ 1269 0028 0020     		movs	r0, #0
+ 1270 002a F2E7     		b	.L141
+ 1271              	.L145:
+ 1272              		.align	2
+ 1273              	.L144:
+ 1274 002c 00000000 		.word	.LC0
+ 1275 0030 00000000 		.word	.LANCHOR2
+ 1276 0034 C4040000 		.word	1220
+ 1278              		.section	.text.rp_hook_init,"ax",%progbits
+ 1279              		.align	1
+ 1280              		.global	rp_hook_init
+ 1281              		.syntax unified
+ 1282              		.code	16
+ 1283              		.thumb_func
+ 1284              		.fpu softvfp
+ 1286              	rp_hook_init:
+ 1287              		@ args = 0, pretend = 0, frame = 0
+ 1288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1289 0000 70B5     		push	{r4, r5, r6, lr}
+ 1290 0002 0429     		cmp	r1, #4
+ 1291 0004 06D9     		bls	.L147
+ 1292 0006 FE21     		movs	r1, #254
+ 1293 0008 0F4A     		ldr	r2, .L152
+ 1294              	.L151:
+ 1295 000a 1048     		ldr	r0, .L152+4
+ 1296 000c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1297 0010 0120     		movs	r0, #1
+ 1298              	.L148:
+ 1299              		@ sp needed
+ 1300 0012 70BD     		pop	{r4, r5, r6, pc}
+ 1301              	.L147:
+ 1302 0014 9526     		movs	r6, #149
+ 1303 0016 8D00     		lsls	r5, r1, #2
+ 1304 0018 4519     		adds	r5, r0, r5
+ 1305 001a F600     		lsls	r6, r6, #3
+ 1306 001c AC59     		ldr	r4, [r5, r6]
+ 1307 001e 002C     		cmp	r4, #0
+ 1308 0020 01D1     		bne	.L149
+ 1309 0022 002A     		cmp	r2, #0
+ 1310 0024 03D1     		bne	.L150
+ 1311              	.L149:
+ 1312 0026 0421     		movs	r1, #4
+ARM GAS  /tmp/cc0MlWbE.s 			page 24
+
+
+ 1313 0028 074A     		ldr	r2, .L152
+ 1314 002a FF31     		adds	r1, r1, #255
+ 1315 002c EDE7     		b	.L151
+ 1316              	.L150:
+ 1317 002e 4018     		adds	r0, r0, r1
+ 1318 0030 E421     		movs	r1, #228
+ 1319 0032 8900     		lsls	r1, r1, #2
+ 1320 0034 4018     		adds	r0, r0, r1
+ 1321 0036 0B21     		movs	r1, #11
+ 1322 0038 0170     		strb	r1, [r0]
+ 1323 003a AA51     		str	r2, [r5, r6]
+ 1324 003c DF22     		movs	r2, #223
+ 1325 003e 9200     		lsls	r2, r2, #2
+ 1326 0040 2000     		movs	r0, r4
+ 1327 0042 AB50     		str	r3, [r5, r2]
+ 1328 0044 E5E7     		b	.L148
+ 1329              	.L153:
+ 1330 0046 C046     		.align	2
+ 1331              	.L152:
+ 1332 0048 00000000 		.word	.LC0
+ 1333 004c 00000000 		.word	.LANCHOR3
+ 1335              		.section	.text.rp_release_hook,"ax",%progbits
+ 1336              		.align	1
+ 1337              		.global	rp_release_hook
+ 1338              		.syntax unified
+ 1339              		.code	16
+ 1340              		.thumb_func
+ 1341              		.fpu softvfp
+ 1343              	rp_release_hook:
+ 1344              		@ args = 0, pretend = 0, frame = 0
+ 1345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1346 0000 10B5     		push	{r4, lr}
+ 1347 0002 0429     		cmp	r1, #4
+ 1348 0004 07D9     		bls	.L155
+ 1349 0006 8821     		movs	r1, #136
+ 1350 0008 0A48     		ldr	r0, .L157
+ 1351 000a 0B4A     		ldr	r2, .L157+4
+ 1352 000c 4900     		lsls	r1, r1, #1
+ 1353 000e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1354 0012 0120     		movs	r0, #1
+ 1355              	.L156:
+ 1356              		@ sp needed
+ 1357 0014 10BD     		pop	{r4, pc}
+ 1358              	.L155:
+ 1359 0016 0A00     		movs	r2, r1
+ 1360 0018 0023     		movs	r3, #0
+ 1361 001a 2B32     		adds	r2, r2, #43
+ 1362 001c FF32     		adds	r2, r2, #255
+ 1363 001e 9200     		lsls	r2, r2, #2
+ 1364 0020 1350     		str	r3, [r2, r0]
+ 1365 0022 1822     		movs	r2, #24
+ 1366 0024 5143     		muls	r1, r2
+ 1367 0026 054A     		ldr	r2, .L157+8
+ 1368 0028 4018     		adds	r0, r0, r1
+ 1369 002a 8018     		adds	r0, r0, r2
+ 1370 002c 0370     		strb	r3, [r0]
+ 1371 002e 1800     		movs	r0, r3
+ARM GAS  /tmp/cc0MlWbE.s 			page 25
+
+
+ 1372 0030 F0E7     		b	.L156
+ 1373              	.L158:
+ 1374 0032 C046     		.align	2
+ 1375              	.L157:
+ 1376 0034 00000000 		.word	.LANCHOR4
+ 1377 0038 00000000 		.word	.LC0
+ 1378 003c DD020000 		.word	733
+ 1380              		.section	.text.rp_hook_get_id,"ax",%progbits
+ 1381              		.align	1
+ 1382              		.global	rp_hook_get_id
+ 1383              		.syntax unified
+ 1384              		.code	16
+ 1385              		.thumb_func
+ 1386              		.fpu softvfp
+ 1388              	rp_hook_get_id:
+ 1389              		@ args = 0, pretend = 0, frame = 0
+ 1390              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1391 0000 10B5     		push	{r4, lr}
+ 1392 0002 DF24     		movs	r4, #223
+ 1393 0004 0023     		movs	r3, #0
+ 1394 0006 A400     		lsls	r4, r4, #2
+ 1395 0008 0019     		adds	r0, r0, r4
+ 1396              	.L162:
+ 1397 000a 9C00     		lsls	r4, r3, #2
+ 1398 000c 0459     		ldr	r4, [r0, r4]
+ 1399 000e 8C42     		cmp	r4, r1
+ 1400 0010 02D1     		bne	.L160
+ 1401 0012 0020     		movs	r0, #0
+ 1402 0014 1370     		strb	r3, [r2]
+ 1403              	.L161:
+ 1404              		@ sp needed
+ 1405 0016 10BD     		pop	{r4, pc}
+ 1406              	.L160:
+ 1407 0018 0133     		adds	r3, r3, #1
+ 1408 001a 052B     		cmp	r3, #5
+ 1409 001c F5D1     		bne	.L162
+ 1410 001e 2421     		movs	r1, #36
+ 1411 0020 0348     		ldr	r0, .L164
+ 1412 0022 044A     		ldr	r2, .L164+4
+ 1413 0024 FF31     		adds	r1, r1, #255
+ 1414 0026 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1415 002a 0120     		movs	r0, #1
+ 1416 002c F3E7     		b	.L161
+ 1417              	.L165:
+ 1418 002e C046     		.align	2
+ 1419              	.L164:
+ 1420 0030 00000000 		.word	.LANCHOR5
+ 1421 0034 00000000 		.word	.LC0
+ 1423              		.section	.rodata.rp_task_enqueue.str1.1,"aMS",%progbits,1
+ 1424              	.LC21:
+ 1425 0000 20746173 		.ascii	" task invalid\012\000"
+ 1425      6B20696E 
+ 1425      76616C69 
+ 1425      640A00
+ 1426              		.section	.text.rp_task_enqueue,"ax",%progbits
+ 1427              		.align	1
+ 1428              		.global	rp_task_enqueue
+ARM GAS  /tmp/cc0MlWbE.s 			page 26
+
+
+ 1429              		.syntax unified
+ 1430              		.code	16
+ 1431              		.thumb_func
+ 1432              		.fpu softvfp
+ 1434              	rp_task_enqueue:
+ 1435              		@ args = 4, pretend = 0, frame = 24
+ 1436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1437 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1438 0002 0E78     		ldrb	r6, [r1]
+ 1439 0004 87B0     		sub	sp, sp, #28
+ 1440 0006 0500     		movs	r5, r0
+ 1441 0008 0C00     		movs	r4, r1
+ 1442 000a 0492     		str	r2, [sp, #16]
+ 1443 000c 0593     		str	r3, [sp, #20]
+ 1444 000e 042E     		cmp	r6, #4
+ 1445 0010 03D9     		bls	.L167
+ 1446 0012 2E21     		movs	r1, #46
+ 1447 0014 434A     		ldr	r2, .L188
+ 1448              	.L187:
+ 1449 0016 FF31     		adds	r1, r1, #255
+ 1450 0018 0EE0     		b	.L186
+ 1451              	.L167:
+ 1452 001a 4B68     		ldr	r3, [r1, #4]
+ 1453 001c 002B     		cmp	r3, #0
+ 1454 001e 08D0     		beq	.L169
+ 1455 0020 B300     		lsls	r3, r6, #2
+ 1456 0022 C318     		adds	r3, r0, r3
+ 1457 0024 0293     		str	r3, [sp, #8]
+ 1458 0026 9523     		movs	r3, #149
+ 1459 0028 029A     		ldr	r2, [sp, #8]
+ 1460 002a DB00     		lsls	r3, r3, #3
+ 1461 002c D358     		ldr	r3, [r2, r3]
+ 1462 002e 002B     		cmp	r3, #0
+ 1463 0030 09D1     		bne	.L170
+ 1464              	.L169:
+ 1465 0032 9921     		movs	r1, #153
+ 1466 0034 3B4A     		ldr	r2, .L188
+ 1467 0036 4900     		lsls	r1, r1, #1
+ 1468              	.L186:
+ 1469 0038 3B48     		ldr	r0, .L188+4
+ 1470 003a FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1471 003e 0127     		movs	r7, #1
+ 1472              	.L168:
+ 1473 0040 3800     		movs	r0, r7
+ 1474 0042 07B0     		add	sp, sp, #28
+ 1475              		@ sp needed
+ 1476 0044 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1477              	.L170:
+ 1478 0046 8B7A     		ldrb	r3, [r1, #10]
+ 1479 0048 012B     		cmp	r3, #1
+ 1480 004a 02D9     		bls	.L171
+ 1481 004c 3821     		movs	r1, #56
+ 1482 004e 374A     		ldr	r2, .L188+8
+ 1483 0050 E1E7     		b	.L187
+ 1484              	.L171:
+ 1485 0052 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 1486 0056 A27A     		ldrb	r2, [r4, #10]
+ARM GAS  /tmp/cc0MlWbE.s 			page 27
+
+
+ 1487 0058 E368     		ldr	r3, [r4, #12]
+ 1488 005a 002A     		cmp	r2, #0
+ 1489 005c 03D1     		bne	.L172
+ 1490 005e 0327     		movs	r7, #3
+ 1491 0060 1A1A     		subs	r2, r3, r0
+ 1492 0062 002A     		cmp	r2, #0
+ 1493 0064 ECDD     		ble	.L168
+ 1494              	.L172:
+ 1495 0066 3249     		ldr	r1, .L188+12
+ 1496 0068 1A1A     		subs	r2, r3, r0
+ 1497 006a 8A42     		cmp	r2, r1
+ 1498 006c 02D9     		bls	.L173
+ 1499 006e 0427     		movs	r7, #4
+ 1500 0070 8342     		cmp	r3, r0
+ 1501 0072 E5D8     		bhi	.L168
+ 1502              	.L173:
+ 1503 0074 1823     		movs	r3, #24
+ 1504 0076 7343     		muls	r3, r6
+ 1505 0078 EB18     		adds	r3, r5, r3
+ 1506 007a 0193     		str	r3, [sp, #4]
+ 1507 007c 019A     		ldr	r2, [sp, #4]
+ 1508 007e 2D4B     		ldr	r3, .L188+16
+ 1509 0080 9446     		mov	ip, r2
+ 1510 0082 6344     		add	r3, r3, ip
+ 1511 0084 1F78     		ldrb	r7, [r3]
+ 1512 0086 0393     		str	r3, [sp, #12]
+ 1513 0088 022F     		cmp	r7, #2
+ 1514 008a D9D0     		beq	.L168
+ 1515 008c E422     		movs	r2, #228
+ 1516 008e AB19     		adds	r3, r5, r6
+ 1517 0090 9200     		lsls	r2, r2, #2
+ 1518 0092 9B18     		adds	r3, r3, r2
+ 1519 0094 0B22     		movs	r2, #11
+ 1520 0096 1A70     		strb	r2, [r3]
+ 1521 0098 B522     		movs	r2, #181
+ 1522 009a 6346     		mov	r3, ip
+ 1523 009c 9200     		lsls	r2, r2, #2
+ 1524 009e 9B18     		adds	r3, r3, r2
+ 1525 00a0 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1526 00a2 07C3     		stmia	r3!, {r0, r1, r2}
+ 1527 00a4 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1528 00a6 07C3     		stmia	r3!, {r0, r1, r2}
+ 1529 00a8 8C22     		movs	r2, #140
+ 1530 00aa 1000     		movs	r0, r2
+ 1531 00ac 7043     		muls	r0, r6
+ 1532 00ae 2818     		adds	r0, r5, r0
+ 1533 00b0 0C99     		ldr	r1, [sp, #48]
+ 1534 00b2 1830     		adds	r0, r0, #24
+ 1535 00b4 FFF7FEFF 		bl	memcpy
+ 1536 00b8 D323     		movs	r3, #211
+ 1537 00ba 029A     		ldr	r2, [sp, #8]
+ 1538 00bc 0499     		ldr	r1, [sp, #16]
+ 1539 00be 9B00     		lsls	r3, r3, #2
+ 1540 00c0 D150     		str	r1, [r2, r3]
+ 1541 00c2 3300     		movs	r3, r6
+ 1542 00c4 B533     		adds	r3, r3, #181
+ 1543 00c6 FF33     		adds	r3, r3, #255
+ARM GAS  /tmp/cc0MlWbE.s 			page 28
+
+
+ 1544 00c8 059A     		ldr	r2, [sp, #20]
+ 1545 00ca 5B00     		lsls	r3, r3, #1
+ 1546 00cc EB18     		adds	r3, r5, r3
+ 1547 00ce 5A80     		strh	r2, [r3, #2]
+ 1548 00d0 194A     		ldr	r2, .L188+20
+ 1549 00d2 019B     		ldr	r3, [sp, #4]
+ 1550 00d4 9446     		mov	ip, r2
+ 1551 00d6 6344     		add	r3, r3, ip
+ 1552 00d8 1B78     		ldrb	r3, [r3]
+ 1553 00da 002B     		cmp	r3, #0
+ 1554 00dc 1CD0     		beq	.L174
+ 1555 00de 731D     		adds	r3, r6, #5
+ 1556              	.L185:
+ 1557 00e0 1822     		movs	r2, #24
+ 1558 00e2 5643     		muls	r6, r2
+ 1559 00e4 B722     		movs	r2, #183
+ 1560 00e6 AE19     		adds	r6, r5, r6
+ 1561 00e8 9200     		lsls	r2, r2, #2
+ 1562 00ea B218     		adds	r2, r6, r2
+ 1563 00ec DBB2     		uxtb	r3, r3
+ 1564 00ee 1370     		strb	r3, [r2]
+ 1565 00f0 B923     		movs	r3, #185
+ 1566 00f2 B822     		movs	r2, #184
+ 1567 00f4 0027     		movs	r7, #0
+ 1568 00f6 9200     		lsls	r2, r2, #2
+ 1569 00f8 9B00     		lsls	r3, r3, #2
+ 1570 00fa F318     		adds	r3, r6, r3
+ 1571 00fc B618     		adds	r6, r6, r2
+ 1572 00fe 3268     		ldr	r2, [r6]
+ 1573 0100 2800     		movs	r0, r5
+ 1574 0102 1A60     		str	r2, [r3]
+ 1575 0104 FFF7FEFF 		bl	rp_task_compute_ranking
+ 1576 0108 0C4B     		ldr	r3, .L188+24
+ 1577 010a EB5C     		ldrb	r3, [r5, r3]
+ 1578 010c BB42     		cmp	r3, r7
+ 1579 010e 97D1     		bne	.L168
+ 1580 0110 2800     		movs	r0, r5
+ 1581 0112 FFF7FEFF 		bl	rp_task_arbiter.constprop.0
+ 1582 0116 93E7     		b	.L168
+ 1583              	.L174:
+ 1584 0118 039B     		ldr	r3, [sp, #12]
+ 1585 011a 1A78     		ldrb	r2, [r3]
+ 1586 011c 0523     		movs	r3, #5
+ 1587 011e 5343     		muls	r3, r2
+ 1588 0120 F318     		adds	r3, r6, r3
+ 1589 0122 DDE7     		b	.L185
+ 1590              	.L189:
+ 1591              		.align	2
+ 1592              	.L188:
+ 1593 0124 00000000 		.word	.LC0
+ 1594 0128 00000000 		.word	.LANCHOR6
+ 1595 012c 00000000 		.word	.LC21
+ 1596 0130 00512502 		.word	36000000
+ 1597 0134 DE020000 		.word	734
+ 1598 0138 DD020000 		.word	733
+ 1599 013c A1040000 		.word	1185
+ 1601              		.section	.text.rp_task_abort,"ax",%progbits
+ARM GAS  /tmp/cc0MlWbE.s 			page 29
+
+
+ 1602              		.align	1
+ 1603              		.global	rp_task_abort
+ 1604              		.syntax unified
+ 1605              		.code	16
+ 1606              		.thumb_func
+ 1607              		.fpu softvfp
+ 1609              	rp_task_abort:
+ 1610              		@ args = 0, pretend = 0, frame = 0
+ 1611              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1612 0000 70B5     		push	{r4, r5, r6, lr}
+ 1613 0002 0B00     		movs	r3, r1
+ 1614 0004 0400     		movs	r4, r0
+ 1615 0006 0429     		cmp	r1, #4
+ 1616 0008 07D9     		bls	.L191
+ 1617 000a 7221     		movs	r1, #114
+ 1618 000c 1448     		ldr	r0, .L197
+ 1619 000e 154A     		ldr	r2, .L197+4
+ 1620 0010 FF31     		adds	r1, r1, #255
+ 1621 0012 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1622 0016 0120     		movs	r0, #1
+ 1623              	.L192:
+ 1624              		@ sp needed
+ 1625 0018 70BD     		pop	{r4, r5, r6, pc}
+ 1626              	.L191:
+ 1627 001a 1821     		movs	r1, #24
+ 1628 001c 5943     		muls	r1, r3
+ 1629 001e 124B     		ldr	r3, .L197+8
+ 1630 0020 4118     		adds	r1, r0, r1
+ 1631 0022 C918     		adds	r1, r1, r3
+ 1632 0024 0A78     		ldrb	r2, [r1]
+ 1633 0026 032A     		cmp	r2, #3
+ 1634 0028 01D9     		bls	.L193
+ 1635              	.L196:
+ 1636 002a 0020     		movs	r0, #0
+ 1637 002c F4E7     		b	.L192
+ 1638              	.L193:
+ 1639 002e 0F4B     		ldr	r3, .L197+12
+ 1640 0030 022A     		cmp	r2, #2
+ 1641 0032 0BD1     		bne	.L194
+ 1642 0034 013A     		subs	r2, r2, #1
+ 1643 0036 C254     		strb	r2, [r0, r3]
+ 1644 0038 093B     		subs	r3, r3, #9
+ 1645 003a C55C     		ldrb	r5, [r0, r3]
+ 1646 003c FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 1647 0040 E835     		adds	r5, r5, #232
+ 1648 0042 AD00     		lsls	r5, r5, #2
+ 1649 0044 6051     		str	r0, [r4, r5]
+ 1650 0046 FFF7FEFF 		bl	smtc_modem_hal_user_lbm_irq
+ 1651 004a EEE7     		b	.L196
+ 1652              	.L194:
+ 1653 004c 0322     		movs	r2, #3
+ 1654 004e 0A70     		strb	r2, [r1]
+ 1655 0050 C55C     		ldrb	r5, [r0, r3]
+ 1656 0052 002D     		cmp	r5, #0
+ 1657 0054 E9D1     		bne	.L196
+ 1658 0056 FFF7FEFF 		bl	rp_task_arbiter.constprop.0
+ 1659 005a 2800     		movs	r0, r5
+ARM GAS  /tmp/cc0MlWbE.s 			page 30
+
+
+ 1660 005c DCE7     		b	.L192
+ 1661              	.L198:
+ 1662 005e C046     		.align	2
+ 1663              	.L197:
+ 1664 0060 00000000 		.word	.LANCHOR7
+ 1665 0064 00000000 		.word	.LC0
+ 1666 0068 DE020000 		.word	734
+ 1667 006c A1040000 		.word	1185
+ 1669              		.section	.text.rp_get_status,"ax",%progbits
+ 1670              		.align	1
+ 1671              		.global	rp_get_status
+ 1672              		.syntax unified
+ 1673              		.code	16
+ 1674              		.thumb_func
+ 1675              		.fpu softvfp
+ 1677              	rp_get_status:
+ 1678              		@ args = 0, pretend = 0, frame = 0
+ 1679              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1680 0000 10B5     		push	{r4, lr}
+ 1681 0002 0429     		cmp	r1, #4
+ 1682 0004 06D9     		bls	.L200
+ 1683 0006 CD21     		movs	r1, #205
+ 1684 0008 084A     		ldr	r2, .L202
+ 1685 000a 0948     		ldr	r0, .L202+4
+ 1686 000c 4900     		lsls	r1, r1, #1
+ 1687 000e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1688              	.L199:
+ 1689              		@ sp needed
+ 1690 0012 10BD     		pop	{r4, pc}
+ 1691              	.L200:
+ 1692 0014 0C00     		movs	r4, r1
+ 1693 0016 E834     		adds	r4, r4, #232
+ 1694 0018 A400     		lsls	r4, r4, #2
+ 1695 001a 2458     		ldr	r4, [r4, r0]
+ 1696 001c 4018     		adds	r0, r0, r1
+ 1697 001e 1460     		str	r4, [r2]
+ 1698 0020 E422     		movs	r2, #228
+ 1699 0022 9200     		lsls	r2, r2, #2
+ 1700 0024 8018     		adds	r0, r0, r2
+ 1701 0026 0278     		ldrb	r2, [r0]
+ 1702 0028 1A70     		strb	r2, [r3]
+ 1703 002a F2E7     		b	.L199
+ 1704              	.L203:
+ 1705              		.align	2
+ 1706              	.L202:
+ 1707 002c 00000000 		.word	.LC0
+ 1708 0030 00000000 		.word	.LANCHOR8
+ 1710              		.section	.text.rp_get_and_clear_raw_radio_irq,"ax",%progbits
+ 1711              		.align	1
+ 1712              		.global	rp_get_and_clear_raw_radio_irq
+ 1713              		.syntax unified
+ 1714              		.code	16
+ 1715              		.thumb_func
+ 1716              		.fpu softvfp
+ 1718              	rp_get_and_clear_raw_radio_irq:
+ 1719              		@ args = 0, pretend = 0, frame = 0
+ 1720              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc0MlWbE.s 			page 31
+
+
+ 1721 0000 10B5     		push	{r4, lr}
+ 1722 0002 0429     		cmp	r1, #4
+ 1723 0004 06D9     		bls	.L205
+ 1724 0006 A621     		movs	r1, #166
+ 1725 0008 064A     		ldr	r2, .L207
+ 1726 000a 0748     		ldr	r0, .L207+4
+ 1727 000c FF31     		adds	r1, r1, #255
+ 1728 000e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1729              	.L204:
+ 1730              		@ sp needed
+ 1731 0012 10BD     		pop	{r4, pc}
+ 1732              	.L205:
+ 1733 0014 054B     		ldr	r3, .L207+8
+ 1734 0016 4900     		lsls	r1, r1, #1
+ 1735 0018 4018     		adds	r0, r0, r1
+ 1736 001a C15A     		ldrh	r1, [r0, r3]
+ 1737 001c 1180     		strh	r1, [r2]
+ 1738 001e 0022     		movs	r2, #0
+ 1739 0020 C252     		strh	r2, [r0, r3]
+ 1740 0022 F6E7     		b	.L204
+ 1741              	.L208:
+ 1742              		.align	2
+ 1743              	.L207:
+ 1744 0024 00000000 		.word	.LC0
+ 1745 0028 00000000 		.word	.LANCHOR9
+ 1746 002c 96030000 		.word	918
+ 1748              		.section	.text.rp_get_stats,"ax",%progbits
+ 1749              		.align	1
+ 1750              		.global	rp_get_stats
+ 1751              		.syntax unified
+ 1752              		.code	16
+ 1753              		.thumb_func
+ 1754              		.fpu softvfp
+ 1756              	rp_get_stats:
+ 1757              		@ args = 0, pretend = 0, frame = 0
+ 1758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1759 0000 ED23     		movs	r3, #237
+ 1760 0002 10B5     		push	{r4, lr}
+ 1761 0004 0400     		movs	r4, r0
+ 1762              		@ sp needed
+ 1763 0006 9B00     		lsls	r3, r3, #2
+ 1764 0008 DC22     		movs	r2, #220
+ 1765 000a C918     		adds	r1, r1, r3
+ 1766 000c FFF7FEFF 		bl	memcpy
+ 1767 0010 2000     		movs	r0, r4
+ 1768 0012 10BD     		pop	{r4, pc}
+ 1770              		.section	.text.rp_get_irq_flag,"ax",%progbits
+ 1771              		.align	1
+ 1772              		.global	rp_get_irq_flag
+ 1773              		.syntax unified
+ 1774              		.code	16
+ 1775              		.thumb_func
+ 1776              		.fpu softvfp
+ 1778              	rp_get_irq_flag:
+ 1779              		@ args = 0, pretend = 0, frame = 0
+ 1780              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1781              		@ link register save eliminated.
+ARM GAS  /tmp/cc0MlWbE.s 			page 32
+
+
+ 1782 0000 034A     		ldr	r2, .L212
+ 1783 0002 0300     		movs	r3, r0
+ 1784 0004 805C     		ldrb	r0, [r0, r2]
+ 1785 0006 0028     		cmp	r0, #0
+ 1786 0008 01D1     		bne	.L211
+ 1787 000a 024A     		ldr	r2, .L212+4
+ 1788 000c 985C     		ldrb	r0, [r3, r2]
+ 1789              	.L211:
+ 1790              		@ sp needed
+ 1791 000e 7047     		bx	lr
+ 1792              	.L213:
+ 1793              		.align	2
+ 1794              	.L212:
+ 1795 0010 A2040000 		.word	1186
+ 1796 0014 A1040000 		.word	1185
+ 1798              		.section	.text.rp_disable_failsafe,"ax",%progbits
+ 1799              		.align	1
+ 1800              		.global	rp_disable_failsafe
+ 1801              		.syntax unified
+ 1802              		.code	16
+ 1803              		.thumb_func
+ 1804              		.fpu softvfp
+ 1806              	rp_disable_failsafe:
+ 1807              		@ args = 0, pretend = 0, frame = 0
+ 1808              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1809              		@ link register save eliminated.
+ 1810 0000 4B1E     		subs	r3, r1, #1
+ 1811 0002 9941     		sbcs	r1, r1, r3
+ 1812              		@ sp needed
+ 1813 0004 024B     		ldr	r3, .L217
+ 1814 0006 4942     		rsbs	r1, r1, #0
+ 1815 0008 1940     		ands	r1, r3
+ 1816 000a 024B     		ldr	r3, .L217+4
+ 1817 000c C150     		str	r1, [r0, r3]
+ 1818 000e 7047     		bx	lr
+ 1819              	.L218:
+ 1820              		.align	2
+ 1821              	.L217:
+ 1822 0010 EE4B0DF0 		.word	-267564050
+ 1823 0014 A4040000 		.word	1188
+ 1825              		.section	.rodata.rp_get_pkt_payload.str1.1,"aMS",%progbits,1
+ 1826              	.LC29:
+ 1827 0000 72616C5F 		.ascii	"ral_get_pkt_payload( &( rp->radio_target_attached_t"
+ 1827      6765745F 
+ 1827      706B745F 
+ 1827      7061796C 
+ 1827      6F616428 
+ 1828 0033 6F5F7468 		.ascii	"o_this_hook[id]->ral ), rp->payload_buffer_size[id]"
+ 1828      69735F68 
+ 1828      6F6F6B5B 
+ 1828      69645D2D 
+ 1828      3E72616C 
+ 1829 0066 2C207270 		.ascii	", rp->payload[id], &rp->rx_payload_size[id] ) == RA"
+ 1829      2D3E7061 
+ 1829      796C6F61 
+ 1829      645B6964 
+ 1829      5D2C2026 
+ARM GAS  /tmp/cc0MlWbE.s 			page 33
+
+
+ 1830 0099 4C5F5354 		.ascii	"L_STATUS_OK\000"
+ 1830      41545553 
+ 1830      5F4F4B00 
+ 1831              	.LC32:
+ 1832 00a5 72616C5F 		.ascii	"ral_get_lora_rx_pkt_status( &( rp->radio_target_att"
+ 1832      6765745F 
+ 1832      6C6F7261 
+ 1832      5F72785F 
+ 1832      706B745F 
+ 1833 00d8 61636865 		.ascii	"ached_to_this_hook[id]->ral ), &rp->radio_params[id"
+ 1833      645F746F 
+ 1833      5F746869 
+ 1833      735F686F 
+ 1833      6F6B5B69 
+ 1834 010b 5D2E7278 		.ascii	"].rx.lora_pkt_status ) == RAL_STATUS_OK\000"
+ 1834      2E6C6F72 
+ 1834      615F706B 
+ 1834      745F7374 
+ 1834      61747573 
+ 1835              	.LC34:
+ 1836 0133 72616C5F 		.ascii	"ral_get_gfsk_rx_pkt_status( &( rp->radio_target_att"
+ 1836      6765745F 
+ 1836      6766736B 
+ 1836      5F72785F 
+ 1836      706B745F 
+ 1837 0166 61636865 		.ascii	"ached_to_this_hook[id]->ral ), &rp->radio_params[id"
+ 1837      645F746F 
+ 1837      5F746869 
+ 1837      735F686F 
+ 1837      6F6B5B69 
+ 1838 0199 5D2E7278 		.ascii	"].rx.gfsk_pkt_status ) == RAL_STATUS_OK\000"
+ 1838      2E676673 
+ 1838      6B5F706B 
+ 1838      745F7374 
+ 1838      61747573 
+ 1839              		.section	.text.rp_get_pkt_payload,"ax",%progbits
+ 1840              		.align	1
+ 1841              		.global	rp_get_pkt_payload
+ 1842              		.syntax unified
+ 1843              		.code	16
+ 1844              		.thumb_func
+ 1845              		.fpu softvfp
+ 1847              	rp_get_pkt_payload:
+ 1848              		@ args = 0, pretend = 0, frame = 8
+ 1849              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1850 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 1851 0002 FB22     		movs	r2, #251
+ 1852 0004 0191     		str	r1, [sp, #4]
+ 1853 0006 4B78     		ldrb	r3, [r1, #1]
+ 1854 0008 0400     		movs	r4, r0
+ 1855 000a 0D3B     		subs	r3, r3, #13
+ 1856 000c 1342     		tst	r3, r2
+ 1857 000e 01D1     		bne	.L220
+ 1858              	.L244:
+ 1859 0010 0020     		movs	r0, #0
+ 1860              	.L221:
+ 1861              		@ sp needed
+ARM GAS  /tmp/cc0MlWbE.s 			page 34
+
+
+ 1862 0012 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 1863              	.L220:
+ 1864 0014 019B     		ldr	r3, [sp, #4]
+ 1865 0016 1E78     		ldrb	r6, [r3]
+ 1866 0018 344B     		ldr	r3, .L245
+ 1867 001a 3200     		movs	r2, r6
+ 1868 001c B500     		lsls	r5, r6, #2
+ 1869 001e B532     		adds	r2, r2, #181
+ 1870 0020 4519     		adds	r5, r0, r5
+ 1871 0022 FF32     		adds	r2, r2, #255
+ 1872 0024 E858     		ldr	r0, [r5, r3]
+ 1873 0026 5200     		lsls	r2, r2, #1
+ 1874 0028 A218     		adds	r2, r4, r2
+ 1875 002a 3300     		movs	r3, r6
+ 1876 002c 5188     		ldrh	r1, [r2, #2]
+ 1877 002e 026D     		ldr	r2, [r0, #80]
+ 1878 0030 B133     		adds	r3, r3, #177
+ 1879 0032 1700     		movs	r7, r2
+ 1880 0034 D322     		movs	r2, #211
+ 1881 0036 FF33     		adds	r3, r3, #255
+ 1882 0038 5B00     		lsls	r3, r3, #1
+ 1883 003a 9200     		lsls	r2, r2, #2
+ 1884 003c AA58     		ldr	r2, [r5, r2]
+ 1885 003e 0068     		ldr	r0, [r0]
+ 1886 0040 E318     		adds	r3, r4, r3
+ 1887 0042 B847     		blx	r7
+ 1888 0044 0028     		cmp	r0, #0
+ 1889 0046 04D0     		beq	.L222
+ 1890 0048 294A     		ldr	r2, .L245+4
+ 1891 004a 2A49     		ldr	r1, .L245+8
+ 1892 004c 2A48     		ldr	r0, .L245+12
+ 1893 004e FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1894              	.L222:
+ 1895 0052 019B     		ldr	r3, [sp, #4]
+ 1896 0054 5B78     		ldrb	r3, [r3, #1]
+ 1897 0056 002B     		cmp	r3, #0
+ 1898 0058 01D0     		beq	.L223
+ 1899 005a 072B     		cmp	r3, #7
+ 1900 005c 16D1     		bne	.L224
+ 1901              	.L223:
+ 1902 005e 8C21     		movs	r1, #140
+ 1903 0060 0122     		movs	r2, #1
+ 1904 0062 7143     		muls	r1, r6
+ 1905 0064 6318     		adds	r3, r4, r1
+ 1906 0066 1A76     		strb	r2, [r3, #24]
+ 1907 0068 204B     		ldr	r3, .L245
+ 1908 006a 8031     		adds	r1, r1, #128
+ 1909 006c EB58     		ldr	r3, [r5, r3]
+ 1910 006e 6118     		adds	r1, r4, r1
+ 1911 0070 1A00     		movs	r2, r3
+ 1912 0072 9432     		adds	r2, r2, #148
+ 1913 0074 1268     		ldr	r2, [r2]
+ 1914 0076 1868     		ldr	r0, [r3]
+ 1915 0078 9047     		blx	r2
+ 1916 007a 0028     		cmp	r0, #0
+ 1917 007c C8D0     		beq	.L244
+ 1918 007e 8121     		movs	r1, #129
+ARM GAS  /tmp/cc0MlWbE.s 			page 35
+
+
+ 1919 0080 1E4A     		ldr	r2, .L245+16
+ 1920 0082 C900     		lsls	r1, r1, #3
+ 1921              	.L243:
+ 1922 0084 1C48     		ldr	r0, .L245+12
+ 1923 0086 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1924 008a C1E7     		b	.L244
+ 1925              	.L224:
+ 1926 008c 012B     		cmp	r3, #1
+ 1927 008e 12D1     		bne	.L226
+ 1928 0090 8C21     		movs	r1, #140
+ 1929 0092 7143     		muls	r1, r6
+ 1930 0094 0026     		movs	r6, #0
+ 1931 0096 6318     		adds	r3, r4, r1
+ 1932 0098 1E76     		strb	r6, [r3, #24]
+ 1933 009a 144B     		ldr	r3, .L245
+ 1934 009c 8031     		adds	r1, r1, #128
+ 1935 009e EB58     		ldr	r3, [r5, r3]
+ 1936 00a0 6118     		adds	r1, r4, r1
+ 1937 00a2 1A00     		movs	r2, r3
+ 1938 00a4 9032     		adds	r2, r2, #144
+ 1939 00a6 1268     		ldr	r2, [r2]
+ 1940 00a8 1868     		ldr	r0, [r3]
+ 1941 00aa 9047     		blx	r2
+ 1942 00ac B042     		cmp	r0, r6
+ 1943 00ae AFD0     		beq	.L244
+ 1944 00b0 134A     		ldr	r2, .L245+20
+ 1945 00b2 1449     		ldr	r1, .L245+24
+ 1946 00b4 E6E7     		b	.L243
+ 1947              	.L226:
+ 1948 00b6 0120     		movs	r0, #1
+ 1949 00b8 0F3B     		subs	r3, r3, #15
+ 1950 00ba 8342     		cmp	r3, r0
+ 1951 00bc A9D8     		bhi	.L221
+ 1952 00be 8C21     		movs	r1, #140
+ 1953 00c0 7143     		muls	r1, r6
+ 1954 00c2 0026     		movs	r6, #0
+ 1955 00c4 6318     		adds	r3, r4, r1
+ 1956 00c6 1E76     		strb	r6, [r3, #24]
+ 1957 00c8 084B     		ldr	r3, .L245
+ 1958 00ca 8031     		adds	r1, r1, #128
+ 1959 00cc EB58     		ldr	r3, [r5, r3]
+ 1960 00ce 6118     		adds	r1, r4, r1
+ 1961 00d0 1A00     		movs	r2, r3
+ 1962 00d2 9032     		adds	r2, r2, #144
+ 1963 00d4 1268     		ldr	r2, [r2]
+ 1964 00d6 1868     		ldr	r0, [r3]
+ 1965 00d8 9047     		blx	r2
+ 1966 00da B042     		cmp	r0, r6
+ 1967 00dc 98D0     		beq	.L244
+ 1968 00de 0648     		ldr	r0, .L245+12
+ 1969 00e0 074A     		ldr	r2, .L245+20
+ 1970 00e2 0949     		ldr	r1, .L245+28
+ 1971 00e4 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 1972 00e8 3000     		movs	r0, r6
+ 1973 00ea 92E7     		b	.L221
+ 1974              	.L246:
+ 1975              		.align	2
+ARM GAS  /tmp/cc0MlWbE.s 			page 36
+
+
+ 1976              	.L245:
+ 1977 00ec C4040000 		.word	1220
+ 1978 00f0 00000000 		.word	.LC29
+ 1979 00f4 FF030000 		.word	1023
+ 1980 00f8 00000000 		.word	.LANCHOR10
+ 1981 00fc A5000000 		.word	.LC32
+ 1982 0100 33010000 		.word	.LC34
+ 1983 0104 11040000 		.word	1041
+ 1984 0108 1B040000 		.word	1051
+ 1986              		.section	.rodata.rp_callback.str1.1,"aMS",%progbits,1
+ 1987              	.LC36:
+ 1988 0000 52505F46 		.ascii	"RP_FAILSAFE - #%d\012\000"
+ 1988      41494C53 
+ 1988      41464520 
+ 1988      2D202325 
+ 1988      640A00
+ 1989              	.LC41:
+ 1990 0013 72616C5F 		.ascii	"ral_lr_fhss_handle_tx_done( TARGET_RAL_FOR_HOOK_ID,"
+ 1990      6C725F66 
+ 1990      6873735F 
+ 1990      68616E64 
+ 1990      6C655F74 
+ 1991 0046 20267270 		.ascii	" &rp->radio_params[hook_id].tx.lr_fhss.ral_lr_fhss_"
+ 1991      2D3E7261 
+ 1991      64696F5F 
+ 1991      70617261 
+ 1991      6D735B68 
+ 1992 0079 70617261 		.ascii	"params, NULL ) == RAL_STATUS_OK\000"
+ 1992      6D732C20 
+ 1992      4E554C4C 
+ 1992      2029203D 
+ 1992      3D205241 
+ 1993              	.LC43:
+ 1994 0099 72616C5F 		.ascii	"ral_lr_fhss_get_bit_delay_in_us( TARGET_RAL_FOR_HOO"
+ 1994      6C725F66 
+ 1994      6873735F 
+ 1994      6765745F 
+ 1994      6269745F 
+ 1995 00cc 4B5F4944 		.ascii	"K_ID, &rp->radio_params[hook_id].tx.lr_fhss.ral_lr_"
+ 1995      2C202672 
+ 1995      702D3E72 
+ 1995      6164696F 
+ 1995      5F706172 
+ 1996 00ff 66687373 		.ascii	"fhss_params, rp->payload_buffer_size[hook_id], &bit"
+ 1996      5F706172 
+ 1996      616D732C 
+ 1996      2072702D 
+ 1996      3E706179 
+ 1997 0132 5F64656C 		.ascii	"_delay_us ) == RAL_STATUS_OK\000"
+ 1997      61795F75 
+ 1997      73202920 
+ 1997      3D3D2052 
+ 1997      414C5F53 
+ 1998              	.LC45:
+ 1999 014f 72616C5F 		.ascii	"ral_lr_fhss_handle_hop( TARGET_RAL_FOR_HOOK_ID, &rp"
+ 1999      6C725F66 
+ 1999      6873735F 
+ARM GAS  /tmp/cc0MlWbE.s 			page 37
+
+
+ 1999      68616E64 
+ 1999      6C655F68 
+ 2000 0182 2D3E7261 		.ascii	"->radio_params[hook_id].tx.lr_fhss.ral_lr_fhss_para"
+ 2000      64696F5F 
+ 2000      70617261 
+ 2000      6D735B68 
+ 2000      6F6F6B5F 
+ 2001 01b5 6D732C20 		.ascii	"ms, ( ral_lr_fhss_memory_state_t ) rp->radio_params"
+ 2001      28207261 
+ 2001      6C5F6C72 
+ 2001      5F666873 
+ 2001      735F6D65 
+ 2002 01e8 5B686F6F 		.ascii	"[hook_id].lr_fhss_state ) == RAL_STATUS_OK\000"
+ 2002      6B5F6964 
+ 2002      5D2E6C72 
+ 2002      5F666873 
+ 2002      735F7374 
+ 2003              	.LC48:
+ 2004 0213 72616C5F 		.ascii	"ral_set_sleep( &( rp->radio_target_attached_to_this"
+ 2004      7365745F 
+ 2004      736C6565 
+ 2004      70282026 
+ 2004      28207270 
+ 2005 0246 5F686F6F 		.ascii	"_hook[i]->ral ), true ) == RAL_STATUS_OK\000"
+ 2005      6B5B695D 
+ 2005      2D3E7261 
+ 2005      6C20292C 
+ 2005      20747275 
+ 2006              		.section	.text.rp_callback,"ax",%progbits
+ 2007              		.align	1
+ 2008              		.global	rp_callback
+ 2009              		.syntax unified
+ 2010              		.code	16
+ 2011              		.thumb_func
+ 2012              		.fpu softvfp
+ 2014              	rp_callback:
+ 2015              		@ args = 0, pretend = 0, frame = 16
+ 2016              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2017 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 2018 0002 9325     		movs	r5, #147
+ 2019 0004 0400     		movs	r4, r0
+ 2020 0006 85B0     		sub	sp, sp, #20
+ 2021 0008 FFF7FEFF 		bl	smtc_modem_hal_disable_modem_irq
+ 2022 000c 1823     		movs	r3, #24
+ 2023 000e ED00     		lsls	r5, r5, #3
+ 2024 0010 625D     		ldrb	r2, [r4, r5]
+ 2025 0012 5343     		muls	r3, r2
+ 2026 0014 AD4A     		ldr	r2, .L312
+ 2027 0016 E318     		adds	r3, r4, r3
+ 2028 0018 9A18     		adds	r2, r3, r2
+ 2029 001a 1278     		ldrb	r2, [r2]
+ 2030 001c 022A     		cmp	r2, #2
+ 2031 001e 16D1     		bne	.L249
+ 2032 0020 AB49     		ldr	r1, .L312+4
+ 2033 0022 AC4A     		ldr	r2, .L312+8
+ 2034 0024 6158     		ldr	r1, [r4, r1]
+ 2035 0026 9142     		cmp	r1, r2
+ARM GAS  /tmp/cc0MlWbE.s 			page 38
+
+
+ 2036 0028 11D0     		beq	.L249
+ 2037 002a B822     		movs	r2, #184
+ 2038 002c 9200     		lsls	r2, r2, #2
+ 2039 002e 9B18     		adds	r3, r3, r2
+ 2040 0030 1E68     		ldr	r6, [r3]
+ 2041 0032 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 2042 0036 FA23     		movs	r3, #250
+ 2043 0038 361A     		subs	r6, r6, r0
+ 2044 003a 5B02     		lsls	r3, r3, #9
+ 2045 003c DE42     		cmn	r6, r3
+ 2046 003e 06D5     		bpl	.L249
+ 2047 0040 DC21     		movs	r1, #220
+ 2048 0042 635D     		ldrb	r3, [r4, r5]
+ 2049 0044 A44A     		ldr	r2, .L312+12
+ 2050 0046 A548     		ldr	r0, .L312+16
+ 2051 0048 4900     		lsls	r1, r1, #1
+ 2052 004a FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 2053              	.L249:
+ 2054 004e A44B     		ldr	r3, .L312+20
+ 2055 0050 E25C     		ldrb	r2, [r4, r3]
+ 2056 0052 002A     		cmp	r2, #0
+ 2057 0054 0CD1     		bne	.L251
+ 2058 0056 A34B     		ldr	r3, .L312+24
+ 2059 0058 E15C     		ldrb	r1, [r4, r3]
+ 2060 005a 0029     		cmp	r1, #0
+ 2061 005c 03D1     		bne	.L252
+ 2062              	.L309:
+ 2063 005e FFF7FEFF 		bl	smtc_modem_hal_enable_modem_irq
+ 2064 0062 05B0     		add	sp, sp, #20
+ 2065              		@ sp needed
+ 2066 0064 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 2067              	.L252:
+ 2068 0066 2000     		movs	r0, r4
+ 2069 0068 E254     		strb	r2, [r4, r3]
+ 2070 006a FFF7FEFF 		bl	rp_task_arbiter.constprop.0
+ 2071 006e F6E7     		b	.L309
+ 2072              	.L251:
+ 2073 0070 0022     		movs	r2, #0
+ 2074 0072 E254     		strb	r2, [r4, r3]
+ 2075 0074 9323     		movs	r3, #147
+ 2076 0076 DB00     		lsls	r3, r3, #3
+ 2077 0078 E65C     		ldrb	r6, [r4, r3]
+ 2078 007a 1823     		movs	r3, #24
+ 2079 007c 7343     		muls	r3, r6
+ 2080 007e 9349     		ldr	r1, .L312
+ 2081 0080 E318     		adds	r3, r4, r3
+ 2082 0082 5918     		adds	r1, r3, r1
+ 2083 0084 0978     		ldrb	r1, [r1]
+ 2084 0086 0229     		cmp	r1, #2
+ 2085 0088 00D9     		bls	.LCB2177
+ 2086 008a 96E1     		b	.L254	@long jump
+ 2087              	.LCB2177:
+ 2088 008c 02A9     		add	r1, sp, #8
+ 2089 008e 8A80     		strh	r2, [r1, #4]
+ 2090 0090 954A     		ldr	r2, .L312+28
+ 2091 0092 9B18     		adds	r3, r3, r2
+ 2092 0094 1B78     		ldrb	r3, [r3]
+ARM GAS  /tmp/cc0MlWbE.s 			page 39
+
+
+ 2093 0096 0C2B     		cmp	r3, #12
+ 2094 0098 2BD0     		beq	.L259
+ 2095 009a 944F     		ldr	r7, .L312+32
+ 2096 009c B500     		lsls	r5, r6, #2
+ 2097 009e 6519     		adds	r5, r4, r5
+ 2098 00a0 EB59     		ldr	r3, [r5, r7]
+ 2099 00a2 03A9     		add	r1, sp, #12
+ 2100 00a4 DA6D     		ldr	r2, [r3, #92]
+ 2101 00a6 1868     		ldr	r0, [r3]
+ 2102 00a8 9047     		blx	r2
+ 2103 00aa 0028     		cmp	r0, #0
+ 2104 00ac 04D0     		beq	.L256
+ 2105 00ae 904A     		ldr	r2, .L312+36
+ 2106 00b0 9049     		ldr	r1, .L312+40
+ 2107 00b2 9148     		ldr	r0, .L312+44
+ 2108 00b4 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 2109              	.L256:
+ 2110 00b8 1821     		movs	r1, #24
+ 2111 00ba 7143     		muls	r1, r6
+ 2112 00bc 8A48     		ldr	r0, .L312+28
+ 2113 00be 02AB     		add	r3, sp, #8
+ 2114 00c0 9A88     		ldrh	r2, [r3, #4]
+ 2115 00c2 6318     		adds	r3, r4, r1
+ 2116 00c4 1B18     		adds	r3, r3, r0
+ 2117 00c6 1878     		ldrb	r0, [r3]
+ 2118 00c8 0091     		str	r1, [sp]
+ 2119 00ca A319     		adds	r3, r4, r6
+ 2120 00cc 1028     		cmp	r0, #16
+ 2121 00ce 53D1     		bne	.L257
+ 2122 00d0 1500     		movs	r5, r2
+ 2123 00d2 0838     		subs	r0, r0, #8
+ 2124 00d4 0540     		ands	r5, r0
+ 2125 00d6 0242     		tst	r2, r0
+ 2126 00d8 04D0     		beq	.L258
+ 2127              	.L310:
+ 2128 00da E422     		movs	r2, #228
+ 2129 00dc 9200     		lsls	r2, r2, #2
+ 2130 00de 9B18     		adds	r3, r3, r2
+ 2131 00e0 0522     		movs	r2, #5
+ 2132 00e2 9CE0     		b	.L307
+ 2133              	.L258:
+ 2134 00e4 C020     		movs	r0, #192
+ 2135 00e6 0242     		tst	r2, r0
+ 2136 00e8 2ED0     		beq	.L260
+ 2137 00ea E422     		movs	r2, #228
+ 2138 00ec 9200     		lsls	r2, r2, #2
+ 2139 00ee 9B18     		adds	r3, r3, r2
+ 2140 00f0 1D70     		strb	r5, [r3]
+ 2141              	.L259:
+ 2142 00f2 9325     		movs	r5, #147
+ 2143 00f4 ED00     		lsls	r5, r5, #3
+ 2144 00f6 615D     		ldrb	r1, [r4, r5]
+ 2145 00f8 2000     		movs	r0, r4
+ 2146 00fa 0B00     		movs	r3, r1
+ 2147 00fc E833     		adds	r3, r3, #232
+ 2148 00fe 9B00     		lsls	r3, r3, #2
+ 2149 0100 1A59     		ldr	r2, [r3, r4]
+ARM GAS  /tmp/cc0MlWbE.s 			page 40
+
+
+ 2150 0102 FFF7FEFF 		bl	rp_consumption_statistics_updated
+ 2151 0106 E422     		movs	r2, #228
+ 2152 0108 615D     		ldrb	r1, [r4, r5]
+ 2153 010a 9200     		lsls	r2, r2, #2
+ 2154 010c 6318     		adds	r3, r4, r1
+ 2155 010e 9B18     		adds	r3, r3, r2
+ 2156 0110 1A78     		ldrb	r2, [r3]
+ 2157 0112 0C2A     		cmp	r2, #12
+ 2158 0114 A3D0     		beq	.L309
+ 2159 0116 1823     		movs	r3, #24
+ 2160 0118 4B43     		muls	r3, r1
+ 2161 011a 7348     		ldr	r0, .L312+28
+ 2162 011c E318     		adds	r3, r4, r3
+ 2163 011e 1B18     		adds	r3, r3, r0
+ 2164 0120 1D78     		ldrb	r5, [r3]
+ 2165 0122 0B00     		movs	r3, r1
+ 2166 0124 3133     		adds	r3, r3, #49
+ 2167 0126 FF33     		adds	r3, r3, #255
+ 2168 0128 9B00     		lsls	r3, r3, #2
+ 2169 012a E318     		adds	r3, r4, r3
+ 2170 012c 5868     		ldr	r0, [r3, #4]
+ 2171 012e 9823     		movs	r3, #152
+ 2172 0130 DB00     		lsls	r3, r3, #3
+ 2173 0132 022A     		cmp	r2, #2
+ 2174 0134 00D0     		beq	.LCB2273
+ 2175 0136 F1E0     		b	.L275	@long jump
+ 2176              	.LCB2273:
+ 2177 0138 062D     		cmp	r5, #6
+ 2178 013a 00D0     		beq	.LCB2275
+ 2179 013c F3E0     		b	.L276	@long jump
+ 2180              	.LCB2275:
+ 2181              	.L311:
+ 2182 013e E050     		str	r0, [r4, r3]
+ 2183 0140 2000     		movs	r0, r4
+ 2184 0142 FFF7FEFF 		bl	rp_hook_callback
+ 2185 0146 8AE7     		b	.L309
+ 2186              	.L260:
+ 2187 0148 0420     		movs	r0, #4
+ 2188 014a 0242     		tst	r2, r0
+ 2189 014c 00D1     		bne	.LCB2288
+ 2190 014e B7E0     		b	.L272	@long jump
+ 2191              	.LCB2288:
+ 2192 0150 E422     		movs	r2, #228
+ 2193 0152 9200     		lsls	r2, r2, #2
+ 2194 0154 9B18     		adds	r3, r3, r2
+ 2195 0156 1870     		strb	r0, [r3]
+ 2196 0158 B523     		movs	r3, #181
+ 2197 015a 009A     		ldr	r2, [sp]
+ 2198 015c 9B00     		lsls	r3, r3, #2
+ 2199 015e D118     		adds	r1, r2, r3
+ 2200 0160 2000     		movs	r0, r4
+ 2201 0162 6118     		adds	r1, r4, r1
+ 2202 0164 FFF7FEFF 		bl	rp_get_pkt_payload
+ 2203 0168 0128     		cmp	r0, #1
+ 2204 016a C2D1     		bne	.L259
+ 2205 016c 604A     		ldr	r2, .L312+36
+ 2206 016e 6349     		ldr	r1, .L312+48
+ARM GAS  /tmp/cc0MlWbE.s 			page 41
+
+
+ 2207              	.L308:
+ 2208 0170 6148     		ldr	r0, .L312+44
+ 2209 0172 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 2210 0176 BCE7     		b	.L259
+ 2211              	.L257:
+ 2212 0178 7000     		lsls	r0, r6, #1
+ 2213 017a 2018     		adds	r0, r4, r0
+ 2214 017c 0190     		str	r0, [sp, #4]
+ 2215 017e 0199     		ldr	r1, [sp, #4]
+ 2216 0180 5F48     		ldr	r0, .L312+52
+ 2217 0182 0A52     		strh	r2, [r1, r0]
+ 2218 0184 0220     		movs	r0, #2
+ 2219 0186 0221     		movs	r1, #2
+ 2220 0188 1040     		ands	r0, r2
+ 2221 018a 8446     		mov	ip, r0
+ 2222 018c 0A42     		tst	r2, r1
+ 2223 018e 3FD0     		beq	.L262
+ 2224 0190 E422     		movs	r2, #228
+ 2225 0192 9200     		lsls	r2, r2, #2
+ 2226 0194 9B18     		adds	r3, r3, r2
+ 2227 0196 0322     		movs	r2, #3
+ 2228 0198 1A70     		strb	r2, [r3]
+ 2229 019a 6378     		ldrb	r3, [r4, #1]
+ 2230 019c 042B     		cmp	r3, #4
+ 2231 019e A8D1     		bne	.L259
+ 2232 01a0 E859     		ldr	r0, [r5, r7]
+ 2233 01a2 8A31     		adds	r1, r1, #138
+ 2234 01a4 0300     		movs	r3, r0
+ 2235 01a6 4E43     		muls	r6, r1
+ 2236 01a8 1C36     		adds	r6, r6, #28
+ 2237 01aa A619     		adds	r6, r4, r6
+ 2238 01ac D033     		adds	r3, r3, #208
+ 2239 01ae 0022     		movs	r2, #0
+ 2240 01b0 3100     		movs	r1, r6
+ 2241 01b2 1B68     		ldr	r3, [r3]
+ 2242 01b4 0068     		ldr	r0, [r0]
+ 2243 01b6 9847     		blx	r3
+ 2244 01b8 0028     		cmp	r0, #0
+ 2245 01ba 05D0     		beq	.L263
+ 2246 01bc C521     		movs	r1, #197
+ 2247 01be 514A     		ldr	r2, .L312+56
+ 2248 01c0 4D48     		ldr	r0, .L312+44
+ 2249 01c2 8900     		lsls	r1, r1, #2
+ 2250 01c4 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 2251              	.L263:
+ 2252 01c8 0023     		movs	r3, #0
+ 2253 01ca 02AA     		add	r2, sp, #8
+ 2254 01cc E859     		ldr	r0, [r5, r7]
+ 2255 01ce D380     		strh	r3, [r2, #6]
+ 2256 01d0 4D4B     		ldr	r3, .L312+60
+ 2257 01d2 019A     		ldr	r2, [sp, #4]
+ 2258 01d4 3100     		movs	r1, r6
+ 2259 01d6 D25A     		ldrh	r2, [r2, r3]
+ 2260 01d8 0300     		movs	r3, r0
+ 2261 01da DC33     		adds	r3, r3, #220
+ 2262 01dc 1F68     		ldr	r7, [r3]
+ 2263 01de 02AB     		add	r3, sp, #8
+ARM GAS  /tmp/cc0MlWbE.s 			page 42
+
+
+ 2264 01e0 0068     		ldr	r0, [r0]
+ 2265 01e2 0633     		adds	r3, r3, #6
+ 2266 01e4 B847     		blx	r7
+ 2267 01e6 0028     		cmp	r0, #0
+ 2268 01e8 05D0     		beq	.L264
+ 2269 01ea C721     		movs	r1, #199
+ 2270 01ec 474A     		ldr	r2, .L312+64
+ 2271 01ee 4248     		ldr	r0, .L312+44
+ 2272 01f0 8900     		lsls	r1, r1, #2
+ 2273 01f2 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 2274              	.L264:
+ 2275 01f6 FA21     		movs	r1, #250
+ 2276 01f8 02AB     		add	r3, sp, #8
+ 2277 01fa E826     		movs	r6, #232
+ 2278 01fc D888     		ldrh	r0, [r3, #6]
+ 2279 01fe 8900     		lsls	r1, r1, #2
+ 2280 0200 FFF7FEFF 		bl	__aeabi_uidiv
+ 2281 0204 B600     		lsls	r6, r6, #2
+ 2282 0206 AB59     		ldr	r3, [r5, r6]
+ 2283 0208 80B2     		uxth	r0, r0
+ 2284 020a 181A     		subs	r0, r3, r0
+ 2285 020c A851     		str	r0, [r5, r6]
+ 2286 020e 70E7     		b	.L259
+ 2287              	.L262:
+ 2288 0210 C020     		movs	r0, #192
+ 2289 0212 0242     		tst	r2, r0
+ 2290 0214 05D0     		beq	.L265
+ 2291 0216 E422     		movs	r2, #228
+ 2292 0218 9200     		lsls	r2, r2, #2
+ 2293 021a 9B18     		adds	r3, r3, r2
+ 2294 021c 6246     		mov	r2, ip
+ 2295              	.L307:
+ 2296 021e 1A70     		strb	r2, [r3]
+ 2297 0220 67E7     		b	.L259
+ 2298              	.L265:
+ 2299 0222 0820     		movs	r0, #8
+ 2300 0224 0242     		tst	r2, r0
+ 2301 0226 00D0     		beq	.LCB2420
+ 2302 0228 57E7     		b	.L310	@long jump
+ 2303              	.LCB2420:
+ 2304 022a 0421     		movs	r1, #4
+ 2305 022c 0A42     		tst	r2, r1
+ 2306 022e 11D0     		beq	.L267
+ 2307 0230 E422     		movs	r2, #228
+ 2308 0232 9200     		lsls	r2, r2, #2
+ 2309 0234 9B18     		adds	r3, r3, r2
+ 2310 0236 1970     		strb	r1, [r3]
+ 2311 0238 B523     		movs	r3, #181
+ 2312 023a 009A     		ldr	r2, [sp]
+ 2313 023c 9B00     		lsls	r3, r3, #2
+ 2314 023e D118     		adds	r1, r2, r3
+ 2315 0240 2000     		movs	r0, r4
+ 2316 0242 6118     		adds	r1, r4, r1
+ 2317 0244 FFF7FEFF 		bl	rp_get_pkt_payload
+ 2318 0248 0128     		cmp	r0, #1
+ 2319 024a 00D0     		beq	.LCB2439
+ 2320 024c 51E7     		b	.L259	@long jump
+ARM GAS  /tmp/cc0MlWbE.s 			page 43
+
+
+ 2321              	.LCB2439:
+ 2322 024e 284A     		ldr	r2, .L312+36
+ 2323 0250 2F49     		ldr	r1, .L312+68
+ 2324 0252 8DE7     		b	.L308
+ 2325              	.L267:
+ 2326 0254 9105     		lsls	r1, r2, #22
+ 2327 0256 04D5     		bpl	.L268
+ 2328 0258 E422     		movs	r2, #228
+ 2329 025a 9200     		lsls	r2, r2, #2
+ 2330 025c 9B18     		adds	r3, r3, r2
+ 2331 025e 0122     		movs	r2, #1
+ 2332 0260 DDE7     		b	.L307
+ 2333              	.L268:
+ 2334 0262 D105     		lsls	r1, r2, #23
+ 2335 0264 04D5     		bpl	.L269
+ 2336 0266 E422     		movs	r2, #228
+ 2337 0268 9200     		lsls	r2, r2, #2
+ 2338 026a 9B18     		adds	r3, r3, r2
+ 2339 026c 0222     		movs	r2, #2
+ 2340 026e D6E7     		b	.L307
+ 2341              	.L269:
+ 2342 0270 5105     		lsls	r1, r2, #21
+ 2343 0272 17D5     		bpl	.L270
+ 2344 0274 E422     		movs	r2, #228
+ 2345 0276 8C21     		movs	r1, #140
+ 2346 0278 9200     		lsls	r2, r2, #2
+ 2347 027a 9B18     		adds	r3, r3, r2
+ 2348 027c 0C22     		movs	r2, #12
+ 2349 027e 7143     		muls	r1, r6
+ 2350 0280 1A70     		strb	r2, [r3]
+ 2351 0282 EB59     		ldr	r3, [r5, r7]
+ 2352 0284 0A00     		movs	r2, r1
+ 2353 0286 1800     		movs	r0, r3
+ 2354 0288 8A32     		adds	r2, r2, #138
+ 2355 028a CC30     		adds	r0, r0, #204
+ 2356 028c 1C31     		adds	r1, r1, #28
+ 2357 028e 0568     		ldr	r5, [r0]
+ 2358 0290 A218     		adds	r2, r4, r2
+ 2359 0292 1868     		ldr	r0, [r3]
+ 2360 0294 6118     		adds	r1, r4, r1
+ 2361 0296 A847     		blx	r5
+ 2362 0298 0028     		cmp	r0, #0
+ 2363 029a 00D1     		bne	.LCB2497
+ 2364 029c 29E7     		b	.L259	@long jump
+ 2365              	.LCB2497:
+ 2366 029e 1D4A     		ldr	r2, .L312+72
+ 2367 02a0 1D49     		ldr	r1, .L312+76
+ 2368 02a2 65E7     		b	.L308
+ 2369              	.L270:
+ 2370 02a4 1105     		lsls	r1, r2, #20
+ 2371 02a6 04D5     		bpl	.L271
+ 2372 02a8 E422     		movs	r2, #228
+ 2373 02aa 9200     		lsls	r2, r2, #2
+ 2374 02ac 9B18     		adds	r3, r3, r2
+ 2375 02ae 1870     		strb	r0, [r3]
+ 2376 02b0 1FE7     		b	.L259
+ 2377              	.L271:
+ARM GAS  /tmp/cc0MlWbE.s 			page 44
+
+
+ 2378 02b2 D204     		lsls	r2, r2, #19
+ 2379 02b4 04D5     		bpl	.L272
+ 2380 02b6 E422     		movs	r2, #228
+ 2381 02b8 9200     		lsls	r2, r2, #2
+ 2382 02ba 9B18     		adds	r3, r3, r2
+ 2383 02bc 0922     		movs	r2, #9
+ 2384 02be AEE7     		b	.L307
+ 2385              	.L272:
+ 2386 02c0 E422     		movs	r2, #228
+ 2387 02c2 9200     		lsls	r2, r2, #2
+ 2388 02c4 9B18     		adds	r3, r3, r2
+ 2389 02c6 0A22     		movs	r2, #10
+ 2390 02c8 A9E7     		b	.L307
+ 2391              	.L313:
+ 2392 02ca C046     		.align	2
+ 2393              	.L312:
+ 2394 02cc DE020000 		.word	734
+ 2395 02d0 A4040000 		.word	1188
+ 2396 02d4 EE4B0DF0 		.word	-267564050
+ 2397 02d8 00000000 		.word	.LC36
+ 2398 02dc 00000000 		.word	.LANCHOR11
+ 2399 02e0 A1040000 		.word	1185
+ 2400 02e4 A2040000 		.word	1186
+ 2401 02e8 D5020000 		.word	725
+ 2402 02ec C4040000 		.word	1220
+ 2403 02f0 00000000 		.word	.LC0
+ 2404 02f4 ED020000 		.word	749
+ 2405 02f8 00000000 		.word	.LANCHOR12
+ 2406 02fc 01030000 		.word	769
+ 2407 0300 96030000 		.word	918
+ 2408 0304 13000000 		.word	.LC41
+ 2409 0308 6A030000 		.word	874
+ 2410 030c 99000000 		.word	.LC43
+ 2411 0310 32030000 		.word	818
+ 2412 0314 4F010000 		.word	.LC45
+ 2413 0318 41030000 		.word	833
+ 2414              	.L275:
+ 2415 031c 012A     		cmp	r2, #1
+ 2416 031e 45D1     		bne	.L277
+ 2417 0320 072D     		cmp	r5, #7
+ 2418 0322 00D1     		bne	.LCB2566
+ 2419 0324 0BE7     		b	.L311	@long jump
+ 2420              	.LCB2566:
+ 2421              	.L276:
+ 2422 0326 1823     		movs	r3, #24
+ 2423 0328 5943     		muls	r1, r3
+ 2424 032a B523     		movs	r3, #181
+ 2425 032c 0522     		movs	r2, #5
+ 2426 032e 6118     		adds	r1, r4, r1
+ 2427 0330 9B00     		lsls	r3, r3, #2
+ 2428 0332 CB18     		adds	r3, r1, r3
+ 2429 0334 1A70     		strb	r2, [r3]
+ 2430 0336 B823     		movs	r3, #184
+ 2431 0338 9B00     		lsls	r3, r3, #2
+ 2432 033a CA18     		adds	r2, r1, r3
+ 2433 033c 0023     		movs	r3, #0
+ 2434 033e 1360     		str	r3, [r2]
+ARM GAS  /tmp/cc0MlWbE.s 			page 45
+
+
+ 2435 0340 B922     		movs	r2, #185
+ 2436 0342 9200     		lsls	r2, r2, #2
+ 2437 0344 8A18     		adds	r2, r1, r2
+ 2438 0346 1360     		str	r3, [r2]
+ 2439 0348 BA22     		movs	r2, #186
+ 2440 034a 0425     		movs	r5, #4
+ 2441 034c 9200     		lsls	r2, r2, #2
+ 2442 034e 8A18     		adds	r2, r1, r2
+ 2443 0350 1360     		str	r3, [r2]
+ 2444 0352 254A     		ldr	r2, .L314
+ 2445 0354 8A18     		adds	r2, r1, r2
+ 2446 0356 1570     		strb	r5, [r2]
+ 2447 0358 244A     		ldr	r2, .L314+4
+ 2448 035a 8918     		adds	r1, r1, r2
+ 2449 035c 0B70     		strb	r3, [r1]
+ 2450 035e 4369     		ldr	r3, [r0, #20]
+ 2451 0360 0121     		movs	r1, #1
+ 2452 0362 0068     		ldr	r0, [r0]
+ 2453 0364 9847     		blx	r3
+ 2454 0366 0028     		cmp	r0, #0
+ 2455 0368 05D0     		beq	.L278
+ 2456 036a FD21     		movs	r1, #253
+ 2457 036c 204A     		ldr	r2, .L314+8
+ 2458 036e 2148     		ldr	r0, .L314+12
+ 2459 0370 4900     		lsls	r1, r1, #1
+ 2460 0372 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 2461              	.L278:
+ 2462 0376 9323     		movs	r3, #147
+ 2463 0378 DB00     		lsls	r3, r3, #3
+ 2464 037a E15C     		ldrb	r1, [r4, r3]
+ 2465 037c 2000     		movs	r0, r4
+ 2466 037e 0B00     		movs	r3, r1
+ 2467 0380 3133     		adds	r3, r3, #49
+ 2468 0382 FF33     		adds	r3, r3, #255
+ 2469 0384 9B00     		lsls	r3, r3, #2
+ 2470 0386 E318     		adds	r3, r4, r3
+ 2471 0388 5A68     		ldr	r2, [r3, #4]
+ 2472 038a 9823     		movs	r3, #152
+ 2473 038c DB00     		lsls	r3, r3, #3
+ 2474 038e E250     		str	r2, [r4, r3]
+ 2475 0390 FFF7FEFF 		bl	rp_hook_callback
+ 2476 0394 2000     		movs	r0, r4
+ 2477 0396 FFF7FEFF 		bl	rp_task_call_aborted
+ 2478 039a 2000     		movs	r0, r4
+ 2479 039c FFF7FEFF 		bl	rp_task_arbiter.constprop.0
+ 2480              	.L279:
+ 2481 03a0 0020     		movs	r0, #0
+ 2482 03a2 FFF7FEFF 		bl	smtc_modem_hal_set_ant_switch
+ 2483 03a6 FFF7FEFF 		bl	smtc_modem_hal_stop_radio_tcxo
+ 2484 03aa 58E6     		b	.L309
+ 2485              	.L277:
+ 2486 03ac 102D     		cmp	r5, #16
+ 2487 03ae BAD1     		bne	.L276
+ 2488 03b0 0C3D     		subs	r5, r5, #12
+ 2489 03b2 AA43     		bics	r2, r5
+ 2490 03b4 00D1     		bne	.LCB2643
+ 2491 03b6 C2E6     		b	.L311	@long jump
+ARM GAS  /tmp/cc0MlWbE.s 			page 46
+
+
+ 2492              	.LCB2643:
+ 2493 03b8 B5E7     		b	.L276
+ 2494              	.L254:
+ 2495 03ba 8226     		movs	r6, #130
+ 2496 03bc 0E4B     		ldr	r3, .L314+16
+ 2497 03be B600     		lsls	r6, r6, #2
+ 2498 03c0 E518     		adds	r5, r4, r3
+ 2499 03c2 1433     		adds	r3, r3, #20
+ 2500 03c4 E418     		adds	r4, r4, r3
+ 2501              	.L281:
+ 2502 03c6 2B68     		ldr	r3, [r5]
+ 2503 03c8 0121     		movs	r1, #1
+ 2504 03ca 5A69     		ldr	r2, [r3, #20]
+ 2505 03cc 1868     		ldr	r0, [r3]
+ 2506 03ce 9047     		blx	r2
+ 2507 03d0 0028     		cmp	r0, #0
+ 2508 03d2 04D0     		beq	.L280
+ 2509 03d4 3100     		movs	r1, r6
+ 2510 03d6 094A     		ldr	r2, .L314+20
+ 2511 03d8 0648     		ldr	r0, .L314+12
+ 2512 03da FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 2513              	.L280:
+ 2514 03de 0435     		adds	r5, r5, #4
+ 2515 03e0 AC42     		cmp	r4, r5
+ 2516 03e2 F0D1     		bne	.L281
+ 2517 03e4 DCE7     		b	.L279
+ 2518              	.L315:
+ 2519 03e6 C046     		.align	2
+ 2520              	.L314:
+ 2521 03e8 DE020000 		.word	734
+ 2522 03ec DD020000 		.word	733
+ 2523 03f0 84000000 		.word	.LC8
+ 2524 03f4 00000000 		.word	.LANCHOR11
+ 2525 03f8 C4040000 		.word	1220
+ 2526 03fc 13020000 		.word	.LC48
+ 2528              		.section	.text.rp_radio_irq_callback,"ax",%progbits
+ 2529              		.align	1
+ 2530              		.global	rp_radio_irq_callback
+ 2531              		.syntax unified
+ 2532              		.code	16
+ 2533              		.thumb_func
+ 2534              		.fpu softvfp
+ 2536              	rp_radio_irq_callback:
+ 2537              		@ args = 0, pretend = 0, frame = 0
+ 2538              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2539 0000 0122     		movs	r2, #1
+ 2540 0002 70B5     		push	{r4, r5, r6, lr}
+ 2541 0004 064B     		ldr	r3, .L317
+ 2542 0006 0500     		movs	r5, r0
+ 2543              		@ sp needed
+ 2544 0008 C254     		strb	r2, [r0, r3]
+ 2545 000a 093B     		subs	r3, r3, #9
+ 2546 000c C45C     		ldrb	r4, [r0, r3]
+ 2547 000e FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 2548 0012 E834     		adds	r4, r4, #232
+ 2549 0014 A400     		lsls	r4, r4, #2
+ 2550 0016 2851     		str	r0, [r5, r4]
+ARM GAS  /tmp/cc0MlWbE.s 			page 47
+
+
+ 2551 0018 FFF7FEFF 		bl	smtc_modem_hal_user_lbm_irq
+ 2552 001c 70BD     		pop	{r4, r5, r6, pc}
+ 2553              	.L318:
+ 2554 001e C046     		.align	2
+ 2555              	.L317:
+ 2556 0020 A1040000 		.word	1185
+ 2558              		.section	.rodata.__func__.0,"a"
+ 2559              		.set	.LANCHOR10,. + 0
+ 2562              	__func__.0:
+ 2563 0000 72705F67 		.ascii	"rp_get_pkt_payload\000"
+ 2563      65745F70 
+ 2563      6B745F70 
+ 2563      61796C6F 
+ 2563      616400
+ 2564              		.section	.rodata.__func__.1,"a"
+ 2565              		.set	.LANCHOR12,. + 0
+ 2568              	__func__.1:
+ 2569 0000 72705F69 		.ascii	"rp_irq_get_status\000"
+ 2569      72715F67 
+ 2569      65745F73 
+ 2569      74617475 
+ 2569      7300
+ 2570              		.section	.rodata.__func__.10,"a"
+ 2571              		.set	.LANCHOR5,. + 0
+ 2574              	__func__.10:
+ 2575 0000 72705F68 		.ascii	"rp_hook_get_id\000"
+ 2575      6F6F6B5F 
+ 2575      6765745F 
+ 2575      696400
+ 2576              		.section	.rodata.__func__.11,"a"
+ 2577              		.set	.LANCHOR4,. + 0
+ 2580              	__func__.11:
+ 2581 0000 72705F72 		.ascii	"rp_release_hook\000"
+ 2581      656C6561 
+ 2581      73655F68 
+ 2581      6F6F6B00 
+ 2582              		.section	.rodata.__func__.12,"a"
+ 2583              		.set	.LANCHOR3,. + 0
+ 2586              	__func__.12:
+ 2587 0000 72705F68 		.ascii	"rp_hook_init\000"
+ 2587      6F6F6B5F 
+ 2587      696E6974 
+ 2587      00
+ 2588              		.section	.rodata.__func__.13,"a"
+ 2589              		.set	.LANCHOR2,. + 0
+ 2592              	__func__.13:
+ 2593 0000 72705F61 		.ascii	"rp_attach_new_radio\000"
+ 2593      74746163 
+ 2593      685F6E65 
+ 2593      775F7261 
+ 2593      64696F00 
+ 2594              		.section	.rodata.__func__.3,"a"
+ 2595              		.set	.LANCHOR11,. + 0
+ 2598              	__func__.3:
+ 2599 0000 72705F63 		.ascii	"rp_callback\000"
+ 2599      616C6C62 
+ 2599      61636B00 
+ARM GAS  /tmp/cc0MlWbE.s 			page 48
+
+
+ 2600              		.section	.rodata.__func__.4,"a"
+ 2601              		.set	.LANCHOR9,. + 0
+ 2604              	__func__.4:
+ 2605 0000 72705F67 		.ascii	"rp_get_and_clear_raw_radio_irq\000"
+ 2605      65745F61 
+ 2605      6E645F63 
+ 2605      6C656172 
+ 2605      5F726177 
+ 2606              		.section	.rodata.__func__.5,"a"
+ 2607              		.set	.LANCHOR8,. + 0
+ 2610              	__func__.5:
+ 2611 0000 72705F67 		.ascii	"rp_get_status\000"
+ 2611      65745F73 
+ 2611      74617475 
+ 2611      7300
+ 2612              		.section	.rodata.__func__.6,"a"
+ 2613              		.set	.LANCHOR7,. + 0
+ 2616              	__func__.6:
+ 2617 0000 72705F74 		.ascii	"rp_task_abort\000"
+ 2617      61736B5F 
+ 2617      61626F72 
+ 2617      7400
+ 2618              		.section	.rodata.__func__.7,"a"
+ 2619              		.set	.LANCHOR0,. + 0
+ 2622              	__func__.7:
+ 2623 0000 72705F68 		.ascii	"rp_hook_callback\000"
+ 2623      6F6F6B5F 
+ 2623      63616C6C 
+ 2623      6261636B 
+ 2623      00
+ 2624              		.section	.rodata.__func__.8,"a"
+ 2625              		.set	.LANCHOR1,. + 0
+ 2628              	__func__.8:
+ 2629 0000 72705F74 		.ascii	"rp_task_arbiter\000"
+ 2629      61736B5F 
+ 2629      61726269 
+ 2629      74657200 
+ 2630              		.section	.rodata.__func__.9,"a"
+ 2631              		.set	.LANCHOR6,. + 0
+ 2634              	__func__.9:
+ 2635 0000 72705F74 		.ascii	"rp_task_enqueue\000"
+ 2635      61736B5F 
+ 2635      656E7175 
+ 2635      65756500 
+ 2636              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/cc0MlWbE.s 			page 49
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 radio_planner.c
+     /tmp/cc0MlWbE.s:12     .text.rp_task_launch_current:0000000000000000 $t
+     /tmp/cc0MlWbE.s:19     .text.rp_task_launch_current:0000000000000000 rp_task_launch_current
+     /tmp/cc0MlWbE.s:49     .text.rp_timer_irq_callback:0000000000000000 $t
+     /tmp/cc0MlWbE.s:55     .text.rp_timer_irq_callback:0000000000000000 rp_timer_irq_callback
+     /tmp/cc0MlWbE.s:68     .text.rp_timer_irq_callback:0000000000000010 $d
+     /tmp/cc0MlWbE.s:74     .text.rp_hook_callback:0000000000000000 $t
+     /tmp/cc0MlWbE.s:80     .text.rp_hook_callback:0000000000000000 rp_hook_callback
+     /tmp/cc0MlWbE.s:114    .text.rp_hook_callback:0000000000000030 $d
+     /tmp/cc0MlWbE.s:120    .text.rp_task_call_aborted:0000000000000000 $t
+     /tmp/cc0MlWbE.s:126    .text.rp_task_call_aborted:0000000000000000 rp_task_call_aborted
+     /tmp/cc0MlWbE.s:183    .text.rp_task_call_aborted:0000000000000064 $d
+     /tmp/cc0MlWbE.s:186    .text.rp_task_compute_ranking:0000000000000000 $t
+     /tmp/cc0MlWbE.s:192    .text.rp_task_compute_ranking:0000000000000000 rp_task_compute_ranking
+     /tmp/cc0MlWbE.s:249    .text.rp_task_compute_ranking:0000000000000060 $d
+     /tmp/cc0MlWbE.s:253    .text.rp_consumption_statistics_updated:0000000000000000 $t
+     /tmp/cc0MlWbE.s:259    .text.rp_consumption_statistics_updated:0000000000000000 rp_consumption_statistics_updated
+     /tmp/cc0MlWbE.s:552    .text.rp_consumption_statistics_updated:0000000000000230 $d
+     /tmp/cc0MlWbE.s:571    .text.rp_task_arbiter.constprop.0:0000000000000000 $t
+     /tmp/cc0MlWbE.s:577    .text.rp_task_arbiter.constprop.0:0000000000000000 rp_task_arbiter.constprop.0
+     /tmp/cc0MlWbE.s:968    .text.rp_task_arbiter.constprop.0:00000000000002d0 $d
+     /tmp/cc0MlWbE.s:976    .text.rp_task_arbiter.constprop.0:00000000000002ec $t
+     /tmp/cc0MlWbE.s:1142   .text.rp_task_arbiter.constprop.0:0000000000000430 $d
+     /tmp/cc0MlWbE.s:1157   .text.rp_init:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1164   .text.rp_init:0000000000000000 rp_init
+     /tmp/cc0MlWbE.s:1229   .text.rp_init:0000000000000078 $d
+     /tmp/cc0MlWbE.s:1235   .text.rp_attach_new_radio:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1242   .text.rp_attach_new_radio:0000000000000000 rp_attach_new_radio
+     /tmp/cc0MlWbE.s:1274   .text.rp_attach_new_radio:000000000000002c $d
+     /tmp/cc0MlWbE.s:1279   .text.rp_hook_init:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1286   .text.rp_hook_init:0000000000000000 rp_hook_init
+     /tmp/cc0MlWbE.s:1332   .text.rp_hook_init:0000000000000048 $d
+     /tmp/cc0MlWbE.s:1336   .text.rp_release_hook:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1343   .text.rp_release_hook:0000000000000000 rp_release_hook
+     /tmp/cc0MlWbE.s:1376   .text.rp_release_hook:0000000000000034 $d
+     /tmp/cc0MlWbE.s:1381   .text.rp_hook_get_id:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1388   .text.rp_hook_get_id:0000000000000000 rp_hook_get_id
+     /tmp/cc0MlWbE.s:1420   .text.rp_hook_get_id:0000000000000030 $d
+     /tmp/cc0MlWbE.s:1427   .text.rp_task_enqueue:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1434   .text.rp_task_enqueue:0000000000000000 rp_task_enqueue
+     /tmp/cc0MlWbE.s:1593   .text.rp_task_enqueue:0000000000000124 $d
+     /tmp/cc0MlWbE.s:1602   .text.rp_task_abort:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1609   .text.rp_task_abort:0000000000000000 rp_task_abort
+     /tmp/cc0MlWbE.s:1664   .text.rp_task_abort:0000000000000060 $d
+     /tmp/cc0MlWbE.s:1670   .text.rp_get_status:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1677   .text.rp_get_status:0000000000000000 rp_get_status
+     /tmp/cc0MlWbE.s:1707   .text.rp_get_status:000000000000002c $d
+     /tmp/cc0MlWbE.s:1711   .text.rp_get_and_clear_raw_radio_irq:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1718   .text.rp_get_and_clear_raw_radio_irq:0000000000000000 rp_get_and_clear_raw_radio_irq
+     /tmp/cc0MlWbE.s:1744   .text.rp_get_and_clear_raw_radio_irq:0000000000000024 $d
+     /tmp/cc0MlWbE.s:1749   .text.rp_get_stats:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1756   .text.rp_get_stats:0000000000000000 rp_get_stats
+     /tmp/cc0MlWbE.s:1771   .text.rp_get_irq_flag:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1778   .text.rp_get_irq_flag:0000000000000000 rp_get_irq_flag
+     /tmp/cc0MlWbE.s:1795   .text.rp_get_irq_flag:0000000000000010 $d
+     /tmp/cc0MlWbE.s:1799   .text.rp_disable_failsafe:0000000000000000 $t
+ARM GAS  /tmp/cc0MlWbE.s 			page 50
+
+
+     /tmp/cc0MlWbE.s:1806   .text.rp_disable_failsafe:0000000000000000 rp_disable_failsafe
+     /tmp/cc0MlWbE.s:1822   .text.rp_disable_failsafe:0000000000000010 $d
+     /tmp/cc0MlWbE.s:1840   .text.rp_get_pkt_payload:0000000000000000 $t
+     /tmp/cc0MlWbE.s:1847   .text.rp_get_pkt_payload:0000000000000000 rp_get_pkt_payload
+     /tmp/cc0MlWbE.s:1977   .text.rp_get_pkt_payload:00000000000000ec $d
+     /tmp/cc0MlWbE.s:2007   .text.rp_callback:0000000000000000 $t
+     /tmp/cc0MlWbE.s:2014   .text.rp_callback:0000000000000000 rp_callback
+     /tmp/cc0MlWbE.s:2394   .text.rp_callback:00000000000002cc $d
+     /tmp/cc0MlWbE.s:2415   .text.rp_callback:000000000000031c $t
+     /tmp/cc0MlWbE.s:2521   .text.rp_callback:00000000000003e8 $d
+     /tmp/cc0MlWbE.s:2529   .text.rp_radio_irq_callback:0000000000000000 $t
+     /tmp/cc0MlWbE.s:2536   .text.rp_radio_irq_callback:0000000000000000 rp_radio_irq_callback
+     /tmp/cc0MlWbE.s:2556   .text.rp_radio_irq_callback:0000000000000020 $d
+     /tmp/cc0MlWbE.s:2562   .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/cc0MlWbE.s:2568   .rodata.__func__.1:0000000000000000 __func__.1
+     /tmp/cc0MlWbE.s:2574   .rodata.__func__.10:0000000000000000 __func__.10
+     /tmp/cc0MlWbE.s:2580   .rodata.__func__.11:0000000000000000 __func__.11
+     /tmp/cc0MlWbE.s:2586   .rodata.__func__.12:0000000000000000 __func__.12
+     /tmp/cc0MlWbE.s:2592   .rodata.__func__.13:0000000000000000 __func__.13
+     /tmp/cc0MlWbE.s:2598   .rodata.__func__.3:0000000000000000 __func__.3
+     /tmp/cc0MlWbE.s:2604   .rodata.__func__.4:0000000000000000 __func__.4
+     /tmp/cc0MlWbE.s:2610   .rodata.__func__.5:0000000000000000 __func__.5
+     /tmp/cc0MlWbE.s:2616   .rodata.__func__.6:0000000000000000 __func__.6
+     /tmp/cc0MlWbE.s:2622   .rodata.__func__.7:0000000000000000 __func__.7
+     /tmp/cc0MlWbE.s:2628   .rodata.__func__.8:0000000000000000 __func__.8
+     /tmp/cc0MlWbE.s:2634   .rodata.__func__.9:0000000000000000 __func__.9
+
+UNDEFINED SYMBOLS
+smtc_modem_hal_user_lbm_irq
+smtc_modem_hal_on_panic
+__aeabi_uidiv
+smtc_duty_cycle_sum
+smtc_modem_hal_get_time_in_ms
+smtc_modem_hal_radio_irq_clear_pending
+smtc_modem_hal_set_ant_switch
+smtc_modem_hal_stop_radio_tcxo
+smtc_modem_hal_stop_timer
+smtc_modem_hal_start_timer
+memset
+memcpy
+smtc_modem_hal_disable_modem_irq
+smtc_modem_hal_enable_modem_irq

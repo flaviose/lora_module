@@ -1,0 +1,641 @@
+ARM GAS  /tmp/cc4SB95j.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"sha256.c"
+  10              		.text
+  11              		.section	.text.sha256_do,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	sha256_do:
+  20              		@ args = 0, pretend = 0, frame = 304
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  23 0002 CDB0     		sub	sp, sp, #308
+  24 0004 0D00     		movs	r5, r1
+  25 0006 0CAA     		add	r2, sp, #48
+  26 0008 1400     		movs	r4, r2
+  27 000a 4035     		adds	r5, r5, #64
+  28              	.L2:
+  29 000c 0B78     		ldrb	r3, [r1]
+  30 000e 4E78     		ldrb	r6, [r1, #1]
+  31 0010 1B06     		lsls	r3, r3, #24
+  32 0012 3604     		lsls	r6, r6, #16
+  33 0014 3343     		orrs	r3, r6
+  34 0016 CE78     		ldrb	r6, [r1, #3]
+  35 0018 3343     		orrs	r3, r6
+  36 001a 8E78     		ldrb	r6, [r1, #2]
+  37 001c 0431     		adds	r1, r1, #4
+  38 001e 3602     		lsls	r6, r6, #8
+  39 0020 3343     		orrs	r3, r6
+  40 0022 08C4     		stmia	r4!, {r3}
+  41 0024 8D42     		cmp	r5, r1
+  42 0026 F1D1     		bne	.L2
+  43 0028 1025     		movs	r5, #16
+  44 002a 1127     		movs	r7, #17
+  45              	.L3:
+  46 002c 936B     		ldr	r3, [r2, #56]
+  47 002e 1326     		movs	r6, #19
+  48 0030 1900     		movs	r1, r3
+  49 0032 F941     		rors	r1, r1, r7
+  50 0034 8C46     		mov	ip, r1
+  51 0036 1900     		movs	r1, r3
+  52 0038 F141     		rors	r1, r1, r6
+  53 003a 6646     		mov	r6, ip
+  54 003c 9B0A     		lsrs	r3, r3, #10
+  55 003e 7140     		eors	r1, r6
+  56 0040 4B40     		eors	r3, r1
+  57 0042 1668     		ldr	r6, [r2]
+  58 0044 516A     		ldr	r1, [r2, #36]
+ARM GAS  /tmp/cc4SB95j.s 			page 2
+
+
+  59 0046 5468     		ldr	r4, [r2, #4]
+  60 0048 8919     		adds	r1, r1, r6
+  61 004a 5B18     		adds	r3, r3, r1
+  62 004c 0726     		movs	r6, #7
+  63 004e 2100     		movs	r1, r4
+  64 0050 F141     		rors	r1, r1, r6
+  65 0052 8C46     		mov	ip, r1
+  66 0054 2100     		movs	r1, r4
+  67 0056 0B36     		adds	r6, r6, #11
+  68 0058 F141     		rors	r1, r1, r6
+  69 005a 6646     		mov	r6, ip
+  70 005c E408     		lsrs	r4, r4, #3
+  71 005e 7140     		eors	r1, r6
+  72 0060 6140     		eors	r1, r4
+  73 0062 5B18     		adds	r3, r3, r1
+  74 0064 0135     		adds	r5, r5, #1
+  75 0066 1364     		str	r3, [r2, #64]
+  76 0068 0432     		adds	r2, r2, #4
+  77 006a 402D     		cmp	r5, #64
+  78 006c DED1     		bne	.L3
+  79 006e 0368     		ldr	r3, [r0]
+  80 0070 0027     		movs	r7, #0
+  81 0072 0293     		str	r3, [sp, #8]
+  82 0074 4368     		ldr	r3, [r0, #4]
+  83 0076 029C     		ldr	r4, [sp, #8]
+  84 0078 0393     		str	r3, [sp, #12]
+  85 007a 8368     		ldr	r3, [r0, #8]
+  86 007c 039E     		ldr	r6, [sp, #12]
+  87 007e 0493     		str	r3, [sp, #16]
+  88 0080 C368     		ldr	r3, [r0, #12]
+  89 0082 0593     		str	r3, [sp, #20]
+  90 0084 0369     		ldr	r3, [r0, #16]
+  91 0086 0693     		str	r3, [sp, #24]
+  92 0088 4369     		ldr	r3, [r0, #20]
+  93 008a 0699     		ldr	r1, [sp, #24]
+  94 008c 0793     		str	r3, [sp, #28]
+  95 008e 8369     		ldr	r3, [r0, #24]
+  96 0090 0893     		str	r3, [sp, #32]
+  97 0092 C369     		ldr	r3, [r0, #28]
+  98 0094 0993     		str	r3, [sp, #36]
+  99 0096 0A93     		str	r3, [sp, #40]
+ 100 0098 089B     		ldr	r3, [sp, #32]
+ 101 009a 0193     		str	r3, [sp, #4]
+ 102 009c 079B     		ldr	r3, [sp, #28]
+ 103 009e 0093     		str	r3, [sp]
+ 104 00a0 059B     		ldr	r3, [sp, #20]
+ 105 00a2 0B93     		str	r3, [sp, #44]
+ 106 00a4 049B     		ldr	r3, [sp, #16]
+ 107 00a6 9C46     		mov	ip, r3
+ 108              	.L4:
+ 109 00a8 0B23     		movs	r3, #11
+ 110 00aa 0D00     		movs	r5, r1
+ 111 00ac 0A00     		movs	r2, r1
+ 112 00ae DD41     		rors	r5, r5, r3
+ 113 00b0 053B     		subs	r3, r3, #5
+ 114 00b2 DA41     		rors	r2, r2, r3
+ 115 00b4 6A40     		eors	r2, r5
+ARM GAS  /tmp/cc4SB95j.s 			page 3
+
+
+ 116 00b6 0D00     		movs	r5, r1
+ 117 00b8 1333     		adds	r3, r3, #19
+ 118 00ba DD41     		rors	r5, r5, r3
+ 119 00bc 2A4B     		ldr	r3, .L8
+ 120 00be 5540     		eors	r5, r2
+ 121 00c0 0CAA     		add	r2, sp, #48
+ 122 00c2 DB59     		ldr	r3, [r3, r7]
+ 123 00c4 BA58     		ldr	r2, [r7, r2]
+ 124 00c6 0437     		adds	r7, r7, #4
+ 125 00c8 9A18     		adds	r2, r3, r2
+ 126 00ca AA18     		adds	r2, r5, r2
+ 127 00cc 019B     		ldr	r3, [sp, #4]
+ 128 00ce 009D     		ldr	r5, [sp]
+ 129 00d0 8B43     		bics	r3, r1
+ 130 00d2 0D40     		ands	r5, r1
+ 131 00d4 6B40     		eors	r3, r5
+ 132 00d6 D218     		adds	r2, r2, r3
+ 133 00d8 0A9B     		ldr	r3, [sp, #40]
+ 134 00da 2500     		movs	r5, r4
+ 135 00dc D318     		adds	r3, r2, r3
+ 136 00de 0A93     		str	r3, [sp, #40]
+ 137 00e0 0D23     		movs	r3, #13
+ 138 00e2 DD41     		rors	r5, r5, r3
+ 139 00e4 0222     		movs	r2, #2
+ 140 00e6 2B00     		movs	r3, r5
+ 141 00e8 2500     		movs	r5, r4
+ 142 00ea D541     		rors	r5, r5, r2
+ 143 00ec 2200     		movs	r2, r4
+ 144 00ee 5D40     		eors	r5, r3
+ 145 00f0 1623     		movs	r3, #22
+ 146 00f2 DA41     		rors	r2, r2, r3
+ 147 00f4 6346     		mov	r3, ip
+ 148 00f6 5540     		eors	r5, r2
+ 149 00f8 6246     		mov	r2, ip
+ 150 00fa 7340     		eors	r3, r6
+ 151 00fc 3240     		ands	r2, r6
+ 152 00fe 2340     		ands	r3, r4
+ 153 0100 5340     		eors	r3, r2
+ 154 0102 ED18     		adds	r5, r5, r3
+ 155 0104 0A9A     		ldr	r2, [sp, #40]
+ 156 0106 0B9B     		ldr	r3, [sp, #44]
+ 157 0108 D318     		adds	r3, r2, r3
+ 158 010a 5219     		adds	r2, r2, r5
+ 159 010c 6546     		mov	r5, ip
+ 160 010e 0B95     		str	r5, [sp, #44]
+ 161 0110 019D     		ldr	r5, [sp, #4]
+ 162 0112 0A95     		str	r5, [sp, #40]
+ 163 0114 8025     		movs	r5, #128
+ 164 0116 6D00     		lsls	r5, r5, #1
+ 165 0118 AF42     		cmp	r7, r5
+ 166 011a 1DD1     		bne	.L5
+ 167 011c 029D     		ldr	r5, [sp, #8]
+ 168 011e AA18     		adds	r2, r5, r2
+ 169 0120 0260     		str	r2, [r0]
+ 170 0122 039A     		ldr	r2, [sp, #12]
+ 171 0124 1419     		adds	r4, r2, r4
+ 172 0126 049A     		ldr	r2, [sp, #16]
+ARM GAS  /tmp/cc4SB95j.s 			page 4
+
+
+ 173 0128 4460     		str	r4, [r0, #4]
+ 174 012a 9619     		adds	r6, r2, r6
+ 175 012c 059A     		ldr	r2, [sp, #20]
+ 176 012e 8660     		str	r6, [r0, #8]
+ 177 0130 6244     		add	r2, r2, ip
+ 178 0132 C260     		str	r2, [r0, #12]
+ 179 0134 069A     		ldr	r2, [sp, #24]
+ 180 0136 D318     		adds	r3, r2, r3
+ 181 0138 009A     		ldr	r2, [sp]
+ 182 013a 0361     		str	r3, [r0, #16]
+ 183 013c 9446     		mov	ip, r2
+ 184 013e 079B     		ldr	r3, [sp, #28]
+ 185 0140 019A     		ldr	r2, [sp, #4]
+ 186 0142 5918     		adds	r1, r3, r1
+ 187 0144 089B     		ldr	r3, [sp, #32]
+ 188 0146 4161     		str	r1, [r0, #20]
+ 189 0148 6344     		add	r3, r3, ip
+ 190 014a 9446     		mov	ip, r2
+ 191 014c 8361     		str	r3, [r0, #24]
+ 192 014e 099B     		ldr	r3, [sp, #36]
+ 193 0150 6344     		add	r3, r3, ip
+ 194 0152 C361     		str	r3, [r0, #28]
+ 195 0154 4DB0     		add	sp, sp, #308
+ 196              		@ sp needed
+ 197 0156 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 198              	.L5:
+ 199 0158 009D     		ldr	r5, [sp]
+ 200 015a B446     		mov	ip, r6
+ 201 015c 0091     		str	r1, [sp]
+ 202 015e 2600     		movs	r6, r4
+ 203 0160 1900     		movs	r1, r3
+ 204 0162 1400     		movs	r4, r2
+ 205 0164 0195     		str	r5, [sp, #4]
+ 206 0166 9FE7     		b	.L4
+ 207              	.L9:
+ 208              		.align	2
+ 209              	.L8:
+ 210 0168 00000000 		.word	K.0
+ 212              		.section	.text.sha256,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	sha256
+ 215              		.syntax unified
+ 216              		.code	16
+ 217              		.thumb_func
+ 218              		.fpu softvfp
+ 220              	sha256:
+ 221              		@ args = 0, pretend = 0, frame = 104
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 224 0002 9BB0     		sub	sp, sp, #108
+ 225 0004 02AC     		add	r4, sp, #8
+ 226 0006 1600     		movs	r6, r2
+ 227 0008 2200     		movs	r2, r4
+ 228 000a 254B     		ldr	r3, .L18
+ 229 000c 0190     		str	r0, [sp, #4]
+ 230 000e 0F00     		movs	r7, r1
+ 231 0010 23CB     		ldmia	r3!, {r0, r1, r5}
+ARM GAS  /tmp/cc4SB95j.s 			page 5
+
+
+ 232 0012 23C2     		stmia	r2!, {r0, r1, r5}
+ 233 0014 23CB     		ldmia	r3!, {r0, r1, r5}
+ 234 0016 23C2     		stmia	r2!, {r0, r1, r5}
+ 235 0018 3500     		movs	r5, r6
+ 236 001a 03CB     		ldmia	r3!, {r0, r1}
+ 237 001c 03C2     		stmia	r2!, {r0, r1}
+ 238 001e F300     		lsls	r3, r6, #3
+ 239 0020 0093     		str	r3, [sp]
+ 240              	.L15:
+ 241 0022 B919     		adds	r1, r7, r6
+ 242 0024 491B     		subs	r1, r1, r5
+ 243 0026 3F2D     		cmp	r5, #63
+ 244 0028 34D8     		bhi	.L11
+ 245 002a B509     		lsrs	r5, r6, #6
+ 246 002c AD01     		lsls	r5, r5, #6
+ 247 002e 7F19     		adds	r7, r7, r5
+ 248 0030 751B     		subs	r5, r6, r5
+ 249 0032 0AAE     		add	r6, sp, #40
+ 250 0034 4022     		movs	r2, #64
+ 251 0036 0021     		movs	r1, #0
+ 252 0038 3000     		movs	r0, r6
+ 253 003a FFF7FEFF 		bl	memset
+ 254 003e 2A00     		movs	r2, r5
+ 255 0040 3900     		movs	r1, r7
+ 256 0042 3000     		movs	r0, r6
+ 257 0044 FFF7FEFF 		bl	memcpy
+ 258 0048 8023     		movs	r3, #128
+ 259 004a 7355     		strb	r3, [r6, r5]
+ 260 004c 372D     		cmp	r5, #55
+ 261 004e 17D8     		bhi	.L12
+ 262              	.L13:
+ 263 0050 009B     		ldr	r3, [sp]
+ 264 0052 2000     		movs	r0, r4
+ 265 0054 1BBA     		rev	r3, r3
+ 266 0056 3100     		movs	r1, r6
+ 267 0058 F363     		str	r3, [r6, #60]
+ 268 005a FFF7FEFF 		bl	sha256_do
+ 269 005e 0198     		ldr	r0, [sp, #4]
+ 270 0060 0200     		movs	r2, r0
+ 271 0062 2032     		adds	r2, r2, #32
+ 272              	.L14:
+ 273 0064 08CC     		ldmia	r4!, {r3}
+ 274 0066 1BBA     		rev	r3, r3
+ 275 0068 190A     		lsrs	r1, r3, #8
+ 276 006a 0370     		strb	r3, [r0]
+ 277 006c 4170     		strb	r1, [r0, #1]
+ 278 006e 190C     		lsrs	r1, r3, #16
+ 279 0070 1B0E     		lsrs	r3, r3, #24
+ 280 0072 8170     		strb	r1, [r0, #2]
+ 281 0074 C370     		strb	r3, [r0, #3]
+ 282 0076 0430     		adds	r0, r0, #4
+ 283 0078 8242     		cmp	r2, r0
+ 284 007a F3D1     		bne	.L14
+ 285 007c 1BB0     		add	sp, sp, #108
+ 286              		@ sp needed
+ 287 007e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 288              	.L12:
+ARM GAS  /tmp/cc4SB95j.s 			page 6
+
+
+ 289 0080 3100     		movs	r1, r6
+ 290 0082 2000     		movs	r0, r4
+ 291 0084 FFF7FEFF 		bl	sha256_do
+ 292 0088 4022     		movs	r2, #64
+ 293 008a 0021     		movs	r1, #0
+ 294 008c 3000     		movs	r0, r6
+ 295 008e FFF7FEFF 		bl	memset
+ 296 0092 DDE7     		b	.L13
+ 297              	.L11:
+ 298 0094 2000     		movs	r0, r4
+ 299 0096 FFF7FEFF 		bl	sha256_do
+ 300 009a 403D     		subs	r5, r5, #64
+ 301 009c C1E7     		b	.L15
+ 302              	.L19:
+ 303 009e C046     		.align	2
+ 304              	.L18:
+ 305 00a0 00000000 		.word	.LANCHOR0
+ 307              		.section	.text.sha256i_init,"ax",%progbits
+ 308              		.align	1
+ 309              		.global	sha256i_init
+ 310              		.syntax unified
+ 311              		.code	16
+ 312              		.thumb_func
+ 313              		.fpu softvfp
+ 315              	sha256i_init:
+ 316              		@ args = 0, pretend = 0, frame = 0
+ 317              		@ frame_needed = 0, uses_anonymous_args = 0
+ 318              		@ link register save eliminated.
+ 319 0000 0B4B     		ldr	r3, .L21
+ 320 0002 0C48     		ldr	r0, .L21+4
+ 321 0004 0C49     		ldr	r1, .L21+8
+ 322 0006 0D4A     		ldr	r2, .L21+12
+ 323 0008 1860     		str	r0, [r3]
+ 324 000a 5960     		str	r1, [r3, #4]
+ 325              		@ sp needed
+ 326 000c 0C48     		ldr	r0, .L21+16
+ 327 000e 0D49     		ldr	r1, .L21+20
+ 328 0010 9860     		str	r0, [r3, #8]
+ 329 0012 D960     		str	r1, [r3, #12]
+ 330 0014 0C48     		ldr	r0, .L21+24
+ 331 0016 0D49     		ldr	r1, .L21+28
+ 332 0018 1861     		str	r0, [r3, #16]
+ 333 001a 5961     		str	r1, [r3, #20]
+ 334 001c 0C48     		ldr	r0, .L21+32
+ 335 001e 0D49     		ldr	r1, .L21+36
+ 336 0020 9861     		str	r0, [r3, #24]
+ 337 0022 D961     		str	r1, [r3, #28]
+ 338 0024 0023     		movs	r3, #0
+ 339 0026 1370     		strb	r3, [r2]
+ 340 0028 0B4A     		ldr	r2, .L21+40
+ 341 002a 1360     		str	r3, [r2]
+ 342 002c 7047     		bx	lr
+ 343              	.L22:
+ 344 002e C046     		.align	2
+ 345              	.L21:
+ 346 0030 00000000 		.word	.LANCHOR1
+ 347 0034 67E6096A 		.word	1779033703
+ARM GAS  /tmp/cc4SB95j.s 			page 7
+
+
+ 348 0038 85AE67BB 		.word	-1150833019
+ 349 003c 00000000 		.word	.LANCHOR2
+ 350 0040 72F36E3C 		.word	1013904242
+ 351 0044 3AF54FA5 		.word	-1521486534
+ 352 0048 7F520E51 		.word	1359893119
+ 353 004c 8C68059B 		.word	-1694144372
+ 354 0050 ABD9831F 		.word	528734635
+ 355 0054 19CDE05B 		.word	1541459225
+ 356 0058 00000000 		.word	.LANCHOR3
+ 358              		.section	.text.sha256i_update,"ax",%progbits
+ 359              		.align	1
+ 360              		.global	sha256i_update
+ 361              		.syntax unified
+ 362              		.code	16
+ 363              		.thumb_func
+ 364              		.fpu softvfp
+ 366              	sha256i_update:
+ 367              		@ args = 0, pretend = 0, frame = 64
+ 368              		@ frame_needed = 0, uses_anonymous_args = 0
+ 369 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 370 0002 214B     		ldr	r3, .L30
+ 371 0004 0600     		movs	r6, r0
+ 372 0006 1A68     		ldr	r2, [r3]
+ 373 0008 0F00     		movs	r7, r1
+ 374 000a 8C18     		adds	r4, r1, r2
+ 375 000c 1F4D     		ldr	r5, .L30+4
+ 376 000e 91B0     		sub	sp, sp, #68
+ 377 0010 1C60     		str	r4, [r3]
+ 378 0012 3F29     		cmp	r1, #63
+ 379 0014 33D8     		bhi	.L24
+ 380 0016 4022     		movs	r2, #64
+ 381 0018 0021     		movs	r1, #0
+ 382 001a 6846     		mov	r0, sp
+ 383 001c FFF7FEFF 		bl	memset
+ 384 0020 3A00     		movs	r2, r7
+ 385 0022 3100     		movs	r1, r6
+ 386 0024 6846     		mov	r0, sp
+ 387 0026 FFF7FEFF 		bl	memcpy
+ 388 002a 8023     		movs	r3, #128
+ 389 002c 6A46     		mov	r2, sp
+ 390 002e D355     		strb	r3, [r2, r7]
+ 391 0030 372F     		cmp	r7, #55
+ 392 0032 1AD8     		bhi	.L25
+ 393              	.L26:
+ 394 0034 E400     		lsls	r4, r4, #3
+ 395 0036 6946     		mov	r1, sp
+ 396 0038 2800     		movs	r0, r5
+ 397 003a 24BA     		rev	r4, r4
+ 398 003c 0F94     		str	r4, [sp, #60]
+ 399 003e FFF7FEFF 		bl	sha256_do
+ 400 0042 0021     		movs	r1, #0
+ 401 0044 124A     		ldr	r2, .L30+8
+ 402              	.L27:
+ 403 0046 6B58     		ldr	r3, [r5, r1]
+ 404 0048 0431     		adds	r1, r1, #4
+ 405 004a 1BBA     		rev	r3, r3
+ 406 004c 180A     		lsrs	r0, r3, #8
+ARM GAS  /tmp/cc4SB95j.s 			page 8
+
+
+ 407 004e 1370     		strb	r3, [r2]
+ 408 0050 5070     		strb	r0, [r2, #1]
+ 409 0052 180C     		lsrs	r0, r3, #16
+ 410 0054 1B0E     		lsrs	r3, r3, #24
+ 411 0056 9070     		strb	r0, [r2, #2]
+ 412 0058 D370     		strb	r3, [r2, #3]
+ 413 005a 0432     		adds	r2, r2, #4
+ 414 005c 2029     		cmp	r1, #32
+ 415 005e F2D1     		bne	.L27
+ 416 0060 0122     		movs	r2, #1
+ 417 0062 0C4B     		ldr	r3, .L30+12
+ 418 0064 1A70     		strb	r2, [r3]
+ 419              	.L23:
+ 420 0066 11B0     		add	sp, sp, #68
+ 421              		@ sp needed
+ 422 0068 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 423              	.L25:
+ 424 006a 6946     		mov	r1, sp
+ 425 006c 2800     		movs	r0, r5
+ 426 006e FFF7FEFF 		bl	sha256_do
+ 427 0072 4022     		movs	r2, #64
+ 428 0074 0021     		movs	r1, #0
+ 429 0076 6846     		mov	r0, sp
+ 430 0078 FFF7FEFF 		bl	memset
+ 431 007c DAE7     		b	.L26
+ 432              	.L24:
+ 433 007e 0100     		movs	r1, r0
+ 434 0080 2800     		movs	r0, r5
+ 435 0082 FFF7FEFF 		bl	sha256_do
+ 436 0086 EEE7     		b	.L23
+ 437              	.L31:
+ 438              		.align	2
+ 439              	.L30:
+ 440 0088 00000000 		.word	.LANCHOR3
+ 441 008c 00000000 		.word	.LANCHOR1
+ 442 0090 00000000 		.word	.LANCHOR4
+ 443 0094 00000000 		.word	.LANCHOR2
+ 445              		.section	.text.sha256i_digest,"ax",%progbits
+ 446              		.align	1
+ 447              		.global	sha256i_digest
+ 448              		.syntax unified
+ 449              		.code	16
+ 450              		.thumb_func
+ 451              		.fpu softvfp
+ 453              	sha256i_digest:
+ 454              		@ args = 0, pretend = 0, frame = 0
+ 455              		@ frame_needed = 0, uses_anonymous_args = 0
+ 456 0000 074B     		ldr	r3, .L34
+ 457 0002 10B5     		push	{r4, lr}
+ 458 0004 0400     		movs	r4, r0
+ 459 0006 1878     		ldrb	r0, [r3]
+ 460 0008 0028     		cmp	r0, #0
+ 461 000a 02D1     		bne	.L33
+ 462 000c 0100     		movs	r1, r0
+ 463 000e FFF7FEFF 		bl	sha256i_update
+ 464              	.L33:
+ 465              		@ sp needed
+ARM GAS  /tmp/cc4SB95j.s 			page 9
+
+
+ 466 0012 2022     		movs	r2, #32
+ 467 0014 2000     		movs	r0, r4
+ 468 0016 0349     		ldr	r1, .L34+4
+ 469 0018 FFF7FEFF 		bl	memcpy
+ 470 001c 10BD     		pop	{r4, pc}
+ 471              	.L35:
+ 472 001e C046     		.align	2
+ 473              	.L34:
+ 474 0020 00000000 		.word	.LANCHOR2
+ 475 0024 00000000 		.word	.LANCHOR4
+ 477              		.section	.rodata
+ 478              		.align	2
+ 479              		.set	.LANCHOR0,. + 0
+ 480              	.LC0:
+ 481 0000 67E6096A 		.word	1779033703
+ 482 0004 85AE67BB 		.word	-1150833019
+ 483 0008 72F36E3C 		.word	1013904242
+ 484 000c 3AF54FA5 		.word	-1521486534
+ 485 0010 7F520E51 		.word	1359893119
+ 486 0014 8C68059B 		.word	-1694144372
+ 487 0018 ABD9831F 		.word	528734635
+ 488 001c 19CDE05B 		.word	1541459225
+ 489              		.section	.bss.hash_i,"aw",%nobits
+ 490              		.align	2
+ 491              		.set	.LANCHOR4,. + 0
+ 494              	hash_i:
+ 495 0000 00000000 		.space	32
+ 495      00000000 
+ 495      00000000 
+ 495      00000000 
+ 495      00000000 
+ 496              		.section	.bss.hash_set,"aw",%nobits
+ 497              		.set	.LANCHOR2,. + 0
+ 500              	hash_set:
+ 501 0000 00       		.space	1
+ 502              		.section	.bss.length_i,"aw",%nobits
+ 503              		.align	2
+ 504              		.set	.LANCHOR3,. + 0
+ 507              	length_i:
+ 508 0000 00000000 		.space	4
+ 509              		.section	.bss.state_i,"aw",%nobits
+ 510              		.align	3
+ 511              		.set	.LANCHOR1,. + 0
+ 514              	state_i:
+ 515 0000 00000000 		.space	32
+ 515      00000000 
+ 515      00000000 
+ 515      00000000 
+ 515      00000000 
+ 516              		.section	.rodata.K.0,"a"
+ 517              		.align	2
+ 520              	K.0:
+ 521 0000 982F8A42 		.word	1116352408
+ 522 0004 91443771 		.word	1899447441
+ 523 0008 CFFBC0B5 		.word	-1245643825
+ 524 000c A5DBB5E9 		.word	-373957723
+ 525 0010 5BC25639 		.word	961987163
+ARM GAS  /tmp/cc4SB95j.s 			page 10
+
+
+ 526 0014 F111F159 		.word	1508970993
+ 527 0018 A4823F92 		.word	-1841331548
+ 528 001c D55E1CAB 		.word	-1424204075
+ 529 0020 98AA07D8 		.word	-670586216
+ 530 0024 015B8312 		.word	310598401
+ 531 0028 BE853124 		.word	607225278
+ 532 002c C37D0C55 		.word	1426881987
+ 533 0030 745DBE72 		.word	1925078388
+ 534 0034 FEB1DE80 		.word	-2132889090
+ 535 0038 A706DC9B 		.word	-1680079193
+ 536 003c 74F19BC1 		.word	-1046744716
+ 537 0040 C1699BE4 		.word	-459576895
+ 538 0044 8647BEEF 		.word	-272742522
+ 539 0048 C69DC10F 		.word	264347078
+ 540 004c CCA10C24 		.word	604807628
+ 541 0050 6F2CE92D 		.word	770255983
+ 542 0054 AA84744A 		.word	1249150122
+ 543 0058 DCA9B05C 		.word	1555081692
+ 544 005c DA88F976 		.word	1996064986
+ 545 0060 52513E98 		.word	-1740746414
+ 546 0064 6DC631A8 		.word	-1473132947
+ 547 0068 C82703B0 		.word	-1341970488
+ 548 006c C77F59BF 		.word	-1084653625
+ 549 0070 F30BE0C6 		.word	-958395405
+ 550 0074 4791A7D5 		.word	-710438585
+ 551 0078 5163CA06 		.word	113926993
+ 552 007c 67292914 		.word	338241895
+ 553 0080 850AB727 		.word	666307205
+ 554 0084 38211B2E 		.word	773529912
+ 555 0088 FC6D2C4D 		.word	1294757372
+ 556 008c 130D3853 		.word	1396182291
+ 557 0090 54730A65 		.word	1695183700
+ 558 0094 BB0A6A76 		.word	1986661051
+ 559 0098 2EC9C281 		.word	-2117940946
+ 560 009c 852C7292 		.word	-1838011259
+ 561 00a0 A1E8BFA2 		.word	-1564481375
+ 562 00a4 4B661AA8 		.word	-1474664885
+ 563 00a8 708B4BC2 		.word	-1035236496
+ 564 00ac A3516CC7 		.word	-949202525
+ 565 00b0 19E892D1 		.word	-778901479
+ 566 00b4 240699D6 		.word	-694614492
+ 567 00b8 85350EF4 		.word	-200395387
+ 568 00bc 70A06A10 		.word	275423344
+ 569 00c0 16C1A419 		.word	430227734
+ 570 00c4 086C371E 		.word	506948616
+ 571 00c8 4C774827 		.word	659060556
+ 572 00cc B5BCB034 		.word	883997877
+ 573 00d0 B30C1C39 		.word	958139571
+ 574 00d4 4AAAD84E 		.word	1322822218
+ 575 00d8 4FCA9C5B 		.word	1537002063
+ 576 00dc F36F2E68 		.word	1747873779
+ 577 00e0 EE828F74 		.word	1955562222
+ 578 00e4 6F63A578 		.word	2024104815
+ 579 00e8 1478C884 		.word	-2067236844
+ 580 00ec 0802C78C 		.word	-1933114872
+ 581 00f0 FAFFBE90 		.word	-1866530822
+ 582 00f4 EB6C50A4 		.word	-1538233109
+ARM GAS  /tmp/cc4SB95j.s 			page 11
+
+
+ 583 00f8 F7A3F9BE 		.word	-1090935817
+ 584 00fc F27871C6 		.word	-965641998
+ 585              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/cc4SB95j.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 sha256.c
+     /tmp/cc4SB95j.s:12     .text.sha256_do:0000000000000000 $t
+     /tmp/cc4SB95j.s:19     .text.sha256_do:0000000000000000 sha256_do
+     /tmp/cc4SB95j.s:210    .text.sha256_do:0000000000000168 $d
+     /tmp/cc4SB95j.s:520    .rodata.K.0:0000000000000000 K.0
+     /tmp/cc4SB95j.s:213    .text.sha256:0000000000000000 $t
+     /tmp/cc4SB95j.s:220    .text.sha256:0000000000000000 sha256
+     /tmp/cc4SB95j.s:305    .text.sha256:00000000000000a0 $d
+     /tmp/cc4SB95j.s:308    .text.sha256i_init:0000000000000000 $t
+     /tmp/cc4SB95j.s:315    .text.sha256i_init:0000000000000000 sha256i_init
+     /tmp/cc4SB95j.s:346    .text.sha256i_init:0000000000000030 $d
+     /tmp/cc4SB95j.s:359    .text.sha256i_update:0000000000000000 $t
+     /tmp/cc4SB95j.s:366    .text.sha256i_update:0000000000000000 sha256i_update
+     /tmp/cc4SB95j.s:440    .text.sha256i_update:0000000000000088 $d
+     /tmp/cc4SB95j.s:446    .text.sha256i_digest:0000000000000000 $t
+     /tmp/cc4SB95j.s:453    .text.sha256i_digest:0000000000000000 sha256i_digest
+     /tmp/cc4SB95j.s:474    .text.sha256i_digest:0000000000000020 $d
+     /tmp/cc4SB95j.s:478    .rodata:0000000000000000 $d
+     /tmp/cc4SB95j.s:490    .bss.hash_i:0000000000000000 $d
+     /tmp/cc4SB95j.s:494    .bss.hash_i:0000000000000000 hash_i
+     /tmp/cc4SB95j.s:500    .bss.hash_set:0000000000000000 hash_set
+     /tmp/cc4SB95j.s:501    .bss.hash_set:0000000000000000 $d
+     /tmp/cc4SB95j.s:503    .bss.length_i:0000000000000000 $d
+     /tmp/cc4SB95j.s:507    .bss.length_i:0000000000000000 length_i
+     /tmp/cc4SB95j.s:510    .bss.state_i:0000000000000000 $d
+     /tmp/cc4SB95j.s:514    .bss.state_i:0000000000000000 state_i
+     /tmp/cc4SB95j.s:517    .rodata.K.0:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+memset
+memcpy

@@ -1,0 +1,283 @@
+ARM GAS  /tmp/ccr2SaQ3.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"lorawan_dwn_ack_management.c"
+  10              		.text
+  11              		.section	.text.lorawan_dwn_ack_management_on_update,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	lorawan_dwn_ack_management_on_update:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		@ link register save eliminated.
+  23              		@ sp needed
+  24 0000 7047     		bx	lr
+  26              		.section	.text.lorawan_dwn_ack_management_on_launch,"ax",%progbits
+  27              		.align	1
+  28              		.syntax unified
+  29              		.code	16
+  30              		.thumb_func
+  31              		.fpu softvfp
+  33              	lorawan_dwn_ack_management_on_launch:
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  36 0000 30B5     		push	{r4, r5, lr}
+  37 0002 0400     		movs	r4, r0
+  38 0004 2500     		movs	r5, r4
+  39 0006 85B0     		sub	sp, sp, #20
+  40 0008 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+  41 000c 7035     		adds	r5, r5, #112
+  42 000e 2B78     		ldrb	r3, [r5]
+  43 0010 1B01     		lsls	r3, r3, #4
+  44 0012 E318     		adds	r3, r4, r3
+  45 0014 5A68     		ldr	r2, [r3, #4]
+  46 0016 0232     		adds	r2, r2, #2
+  47 0018 9042     		cmp	r0, r2
+  48 001a 13D8     		bhi	.L3
+  49 001c 5878     		ldrb	r0, [r3, #1]
+  50 001e FFF7FEFF 		bl	lorawan_api_tx_ack_bit_get
+  51 0022 0028     		cmp	r0, #0
+  52 0024 0ED0     		beq	.L3
+  53 0026 0022     		movs	r2, #0
+  54 0028 2878     		ldrb	r0, [r5]
+  55 002a 1300     		movs	r3, r2
+  56 002c 0001     		lsls	r0, r0, #4
+  57 002e 2418     		adds	r4, r4, r0
+  58 0030 6078     		ldrb	r0, [r4, #1]
+  59 0032 0121     		movs	r1, #1
+  60 0034 0392     		str	r2, [sp, #12]
+ARM GAS  /tmp/ccr2SaQ3.s 			page 2
+
+
+  61 0036 0292     		str	r2, [sp, #8]
+  62 0038 0192     		str	r2, [sp, #4]
+  63 003a 0092     		str	r2, [sp]
+  64 003c FFF7FEFF 		bl	lorawan_send_add_task
+  65              	.L2:
+  66 0040 05B0     		add	sp, sp, #20
+  67              		@ sp needed
+  68 0042 30BD     		pop	{r4, r5, pc}
+  69              	.L3:
+  70 0044 2878     		ldrb	r0, [r5]
+  71 0046 0021     		movs	r1, #0
+  72 0048 0001     		lsls	r0, r0, #4
+  73 004a 2418     		adds	r4, r4, r0
+  74 004c 6078     		ldrb	r0, [r4, #1]
+  75 004e FFF7FEFF 		bl	lorawan_api_tx_ack_bit_set
+  76 0052 F5E7     		b	.L2
+  78              		.section	.text.lorawan_dwn_ack_management_init,"ax",%progbits
+  79              		.align	1
+  80              		.global	lorawan_dwn_ack_management_init
+  81              		.syntax unified
+  82              		.code	16
+  83              		.thumb_func
+  84              		.fpu softvfp
+  86              	lorawan_dwn_ack_management_init:
+  87              		@ args = 8, pretend = 0, frame = 0
+  88              		@ frame_needed = 0, uses_anonymous_args = 0
+  89 0000 0649     		ldr	r1, .L9
+  90 0002 10B5     		push	{r4, lr}
+  91 0004 1160     		str	r1, [r2]
+  92 0006 064A     		ldr	r2, .L9+4
+  93              		@ sp needed
+  94 0008 1A60     		str	r2, [r3]
+  95 000a 029B     		ldr	r3, [sp, #8]
+  96 000c 054A     		ldr	r2, .L9+8
+  97 000e 1A60     		str	r2, [r3]
+  98 0010 FFF7FEFF 		bl	modem_supervisor_get_task
+  99 0014 039B     		ldr	r3, [sp, #12]
+ 100 0016 1860     		str	r0, [r3]
+ 101 0018 10BD     		pop	{r4, pc}
+ 102              	.L10:
+ 103 001a C046     		.align	2
+ 104              	.L9:
+ 105 001c 00000000 		.word	lorawan_dwn_ack_management_downlink_handler
+ 106 0020 00000000 		.word	lorawan_dwn_ack_management_on_launch
+ 107 0024 00000000 		.word	lorawan_dwn_ack_management_on_update
+ 109              		.section	.rodata.lorawan_dwn_ack_add_task.str1.1,"aMS",%progbits,1
+ 110              	.LC3:
+ 111 0000 73746163 		.ascii	"stack_id < NUMBER_OF_STACKS\000"
+ 111      6B5F6964 
+ 111      203C204E 
+ 111      554D4245 
+ 111      525F4F46 
+ 112              		.section	.text.lorawan_dwn_ack_add_task,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	lorawan_dwn_ack_add_task
+ 115              		.syntax unified
+ 116              		.code	16
+ARM GAS  /tmp/ccr2SaQ3.s 			page 3
+
+
+ 117              		.thumb_func
+ 118              		.fpu softvfp
+ 120              	lorawan_dwn_ack_add_task:
+ 121              		@ args = 0, pretend = 0, frame = 16
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123 0000 30B5     		push	{r4, r5, lr}
+ 124 0002 0400     		movs	r4, r0
+ 125 0004 0D00     		movs	r5, r1
+ 126 0006 85B0     		sub	sp, sp, #20
+ 127 0008 0028     		cmp	r0, #0
+ 128 000a 04D0     		beq	.L12
+ 129 000c 8021     		movs	r1, #128
+ 130 000e 0E4A     		ldr	r2, .L17
+ 131 0010 0E48     		ldr	r0, .L17+4
+ 132 0012 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 133              	.L12:
+ 134 0016 1022     		movs	r2, #16
+ 135 0018 0021     		movs	r1, #0
+ 136 001a 6846     		mov	r0, sp
+ 137 001c FFF7FEFF 		bl	memset
+ 138 0020 0723     		movs	r3, #7
+ 139 0022 6A46     		mov	r2, sp
+ 140 0024 6343     		muls	r3, r4
+ 141 0026 0333     		adds	r3, r3, #3
+ 142 0028 1370     		strb	r3, [r2]
+ 143 002a 0323     		movs	r3, #3
+ 144 002c 2000     		movs	r0, r4
+ 145 002e 5470     		strb	r4, [r2, #1]
+ 146 0030 1372     		strb	r3, [r2, #8]
+ 147 0032 0195     		str	r5, [sp, #4]
+ 148 0034 FFF7FEFF 		bl	lorawan_api_isjoined
+ 149 0038 0228     		cmp	r0, #2
+ 150 003a 02D1     		bne	.L11
+ 151 003c 6846     		mov	r0, sp
+ 152 003e FFF7FEFF 		bl	modem_supervisor_add_task
+ 153              	.L11:
+ 154 0042 05B0     		add	sp, sp, #20
+ 155              		@ sp needed
+ 156 0044 30BD     		pop	{r4, r5, pc}
+ 157              	.L18:
+ 158 0046 C046     		.align	2
+ 159              	.L17:
+ 160 0048 00000000 		.word	.LC3
+ 161 004c 00000000 		.word	.LANCHOR0
+ 163              		.section	.text.lorawan_dwn_ack_management_downlink_handler,"ax",%progbits
+ 164              		.align	1
+ 165              		.syntax unified
+ 166              		.code	16
+ 167              		.thumb_func
+ 168              		.fpu softvfp
+ 170              	lorawan_dwn_ack_management_downlink_handler:
+ 171              		@ args = 0, pretend = 0, frame = 0
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173 0000 10B5     		push	{r4, lr}
+ 174 0002 FF30     		adds	r0, r0, #255
+ 175 0004 C37A     		ldrb	r3, [r0, #11]
+ 176 0006 5A1E     		subs	r2, r3, #1
+ARM GAS  /tmp/ccr2SaQ3.s 			page 4
+
+
+ 177 0008 022A     		cmp	r2, #2
+ 178 000a 01D9     		bls	.L20
+ 179 000c 082B     		cmp	r3, #8
+ 180 000e 09D1     		bne	.L21
+ 181              	.L20:
+ 182 0010 C37C     		ldrb	r3, [r0, #19]
+ 183 0012 002B     		cmp	r3, #0
+ 184 0014 06D0     		beq	.L21
+ 185 0016 447D     		ldrb	r4, [r0, #21]
+ 186 0018 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_s
+ 187 001c 0100     		movs	r1, r0
+ 188 001e 2000     		movs	r0, r4
+ 189 0020 FFF7FEFF 		bl	lorawan_dwn_ack_add_task
+ 190              	.L21:
+ 191              		@ sp needed
+ 192 0024 0020     		movs	r0, #0
+ 193 0026 10BD     		pop	{r4, pc}
+ 195              		.section	.text.lorawan_dwn_ack_remove_task,"ax",%progbits
+ 196              		.align	1
+ 197              		.global	lorawan_dwn_ack_remove_task
+ 198              		.syntax unified
+ 199              		.code	16
+ 200              		.thumb_func
+ 201              		.fpu softvfp
+ 203              	lorawan_dwn_ack_remove_task:
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206 0000 10B5     		push	{r4, lr}
+ 207 0002 041E     		subs	r4, r0, #0
+ 208 0004 04D0     		beq	.L26
+ 209 0006 8E21     		movs	r1, #142
+ 210 0008 044A     		ldr	r2, .L30
+ 211 000a 0548     		ldr	r0, .L30+4
+ 212 000c FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 213              	.L26:
+ 214              		@ sp needed
+ 215 0010 0720     		movs	r0, #7
+ 216 0012 6043     		muls	r0, r4
+ 217 0014 0330     		adds	r0, r0, #3
+ 218 0016 FFF7FEFF 		bl	modem_supervisor_remove_task
+ 219 001a 10BD     		pop	{r4, pc}
+ 220              	.L31:
+ 221              		.align	2
+ 222              	.L30:
+ 223 001c 00000000 		.word	.LC3
+ 224 0020 00000000 		.word	.LANCHOR1
+ 226              		.section	.rodata.__func__.0,"a"
+ 227              		.set	.LANCHOR1,. + 0
+ 230              	__func__.0:
+ 231 0000 6C6F7261 		.ascii	"lorawan_dwn_ack_remove_task\000"
+ 231      77616E5F 
+ 231      64776E5F 
+ 231      61636B5F 
+ 231      72656D6F 
+ 232              		.section	.rodata.__func__.1,"a"
+ 233              		.set	.LANCHOR0,. + 0
+ 236              	__func__.1:
+ARM GAS  /tmp/ccr2SaQ3.s 			page 5
+
+
+ 237 0000 6C6F7261 		.ascii	"lorawan_dwn_ack_add_task\000"
+ 237      77616E5F 
+ 237      64776E5F 
+ 237      61636B5F 
+ 237      6164645F 
+ 238              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccr2SaQ3.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 lorawan_dwn_ack_management.c
+     /tmp/ccr2SaQ3.s:12     .text.lorawan_dwn_ack_management_on_update:0000000000000000 $t
+     /tmp/ccr2SaQ3.s:19     .text.lorawan_dwn_ack_management_on_update:0000000000000000 lorawan_dwn_ack_management_on_update
+     /tmp/ccr2SaQ3.s:27     .text.lorawan_dwn_ack_management_on_launch:0000000000000000 $t
+     /tmp/ccr2SaQ3.s:33     .text.lorawan_dwn_ack_management_on_launch:0000000000000000 lorawan_dwn_ack_management_on_launch
+     /tmp/ccr2SaQ3.s:79     .text.lorawan_dwn_ack_management_init:0000000000000000 $t
+     /tmp/ccr2SaQ3.s:86     .text.lorawan_dwn_ack_management_init:0000000000000000 lorawan_dwn_ack_management_init
+     /tmp/ccr2SaQ3.s:105    .text.lorawan_dwn_ack_management_init:000000000000001c $d
+     /tmp/ccr2SaQ3.s:170    .text.lorawan_dwn_ack_management_downlink_handler:0000000000000000 lorawan_dwn_ack_management_downlink_handler
+     /tmp/ccr2SaQ3.s:113    .text.lorawan_dwn_ack_add_task:0000000000000000 $t
+     /tmp/ccr2SaQ3.s:120    .text.lorawan_dwn_ack_add_task:0000000000000000 lorawan_dwn_ack_add_task
+     /tmp/ccr2SaQ3.s:160    .text.lorawan_dwn_ack_add_task:0000000000000048 $d
+     /tmp/ccr2SaQ3.s:164    .text.lorawan_dwn_ack_management_downlink_handler:0000000000000000 $t
+     /tmp/ccr2SaQ3.s:196    .text.lorawan_dwn_ack_remove_task:0000000000000000 $t
+     /tmp/ccr2SaQ3.s:203    .text.lorawan_dwn_ack_remove_task:0000000000000000 lorawan_dwn_ack_remove_task
+     /tmp/ccr2SaQ3.s:223    .text.lorawan_dwn_ack_remove_task:000000000000001c $d
+     /tmp/ccr2SaQ3.s:230    .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccr2SaQ3.s:236    .rodata.__func__.1:0000000000000000 __func__.1
+
+UNDEFINED SYMBOLS
+smtc_modem_hal_get_time_in_s
+lorawan_api_tx_ack_bit_get
+lorawan_send_add_task
+lorawan_api_tx_ack_bit_set
+modem_supervisor_get_task
+smtc_modem_hal_on_panic
+memset
+lorawan_api_isjoined
+modem_supervisor_add_task
+modem_supervisor_remove_task

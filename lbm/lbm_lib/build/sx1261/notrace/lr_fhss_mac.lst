@@ -1,0 +1,1565 @@
+ARM GAS  /tmp/ccPiDyN8.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"lr_fhss_mac.c"
+  10              		.text
+  11              		.section	.text.lr_fhss_extract_bit_in_byte_vector,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	lr_fhss_extract_bit_in_byte_vector:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		@ link register save eliminated.
+  23 0000 CB08     		lsrs	r3, r1, #3
+  24 0002 C05C     		ldrb	r0, [r0, r3]
+  25 0004 0723     		movs	r3, #7
+  26              		@ sp needed
+  27 0006 8B43     		bics	r3, r1
+  28 0008 1841     		asrs	r0, r0, r3
+  29 000a 0123     		movs	r3, #1
+  30 000c 1840     		ands	r0, r3
+  31 000e 7047     		bx	lr
+  33              		.section	.text.lr_fhss_set_bit_in_byte_vector,"ax",%progbits
+  34              		.align	1
+  35              		.syntax unified
+  36              		.code	16
+  37              		.thumb_func
+  38              		.fpu softvfp
+  40              	lr_fhss_set_bit_in_byte_vector:
+  41              		@ args = 0, pretend = 0, frame = 0
+  42              		@ frame_needed = 0, uses_anonymous_args = 0
+  43 0000 30B5     		push	{r4, r5, lr}
+  44 0002 CD08     		lsrs	r5, r1, #3
+  45 0004 0C00     		movs	r4, r1
+  46              		@ sp needed
+  47 0006 0721     		movs	r1, #7
+  48 0008 A143     		bics	r1, r4
+  49 000a 0124     		movs	r4, #1
+  50 000c 8C40     		lsls	r4, r4, r1
+  51 000e 8A40     		lsls	r2, r2, r1
+  52 0010 435D     		ldrb	r3, [r0, r5]
+  53 0012 A343     		bics	r3, r4
+  54 0014 1343     		orrs	r3, r2
+  55 0016 4355     		strb	r3, [r0, r5]
+  56 0018 30BD     		pop	{r4, r5, pc}
+  58              		.section	.text.lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0,"ax",%progbits
+  59              		.align	1
+  60              		.syntax unified
+  61              		.code	16
+ARM GAS  /tmp/ccPiDyN8.s 			page 2
+
+
+  62              		.thumb_func
+  63              		.fpu softvfp
+  65              	lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0:
+  66              		@ args = 0, pretend = 0, frame = 8
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  69 0002 0024     		movs	r4, #0
+  70 0004 0700     		movs	r7, r0
+  71 0006 1600     		movs	r6, r2
+  72 0008 2500     		movs	r5, r4
+  73 000a 0191     		str	r1, [sp, #4]
+  74              	.L5:
+  75 000c 2100     		movs	r1, r4
+  76 000e 0198     		ldr	r0, [sp, #4]
+  77 0010 FFF7FEFF 		bl	lr_fhss_extract_bit_in_byte_vector
+  78 0014 3B78     		ldrb	r3, [r7]
+  79 0016 0F21     		movs	r1, #15
+  80 0018 0E4A     		ldr	r2, .L7
+  81 001a 5B00     		lsls	r3, r3, #1
+  82 001c D218     		adds	r2, r2, r3
+  83 001e 125C     		ldrb	r2, [r2, r0]
+  84 0020 1B18     		adds	r3, r3, r0
+  85 0022 0E20     		movs	r0, #14
+  86 0024 0B40     		ands	r3, r1
+  87 0026 611C     		adds	r1, r4, #1
+  88 0028 3B70     		strb	r3, [r7]
+  89 002a 4B00     		lsls	r3, r1, #1
+  90 002c 5B42     		rsbs	r3, r3, #0
+  91 002e 0340     		ands	r3, r0
+  92 0030 9A40     		lsls	r2, r2, r3
+  93 0032 1543     		orrs	r5, r2
+  94 0034 0722     		movs	r2, #7
+  95 0036 2BB2     		sxth	r3, r5
+  96 0038 1440     		ands	r4, r2
+  97 003a ADB2     		uxth	r5, r5
+  98 003c 9442     		cmp	r4, r2
+  99 003e 04D1     		bne	.L4
+ 100 0040 2D0A     		lsrs	r5, r5, #8
+ 101 0042 3570     		strb	r5, [r6]
+ 102 0044 0025     		movs	r5, #0
+ 103 0046 7370     		strb	r3, [r6, #1]
+ 104 0048 0236     		adds	r6, r6, #2
+ 105              	.L4:
+ 106 004a 0C00     		movs	r4, r1
+ 107 004c 2829     		cmp	r1, #40
+ 108 004e DDD1     		bne	.L5
+ 109              		@ sp needed
+ 110 0050 F7BD     		pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+ 111              	.L8:
+ 112 0052 C046     		.align	2
+ 113              	.L7:
+ 114 0054 00000000 		.word	.LANCHOR0
+ 116              		.section	.text.lr_fhss_get_hop_sequence_count,"ax",%progbits
+ 117              		.align	1
+ 118              		.global	lr_fhss_get_hop_sequence_count
+ 119              		.syntax unified
+ 120              		.code	16
+ARM GAS  /tmp/ccPiDyN8.s 			page 3
+
+
+ 121              		.thumb_func
+ 122              		.fpu softvfp
+ 124              	lr_fhss_get_hop_sequence_count:
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              		@ link register save eliminated.
+ 128 0000 8379     		ldrb	r3, [r0, #6]
+ 129 0002 002B     		cmp	r3, #0
+ 130 0004 04D0     		beq	.L11
+ 131 0006 012B     		cmp	r3, #1
+ 132 0008 05D1     		bne	.L13
+ 133 000a C379     		ldrb	r3, [r0, #7]
+ 134 000c 032B     		cmp	r3, #3
+ 135 000e 02D8     		bhi	.L13
+ 136              	.L11:
+ 137 0010 C020     		movs	r0, #192
+ 138 0012 4000     		lsls	r0, r0, #1
+ 139              	.L9:
+ 140              		@ sp needed
+ 141 0014 7047     		bx	lr
+ 142              	.L13:
+ 143 0016 8020     		movs	r0, #128
+ 144 0018 8000     		lsls	r0, r0, #2
+ 145 001a FBE7     		b	.L9
+ 147              		.global	__aeabi_uidiv
+ 148              		.global	__aeabi_idiv
+ 149              		.global	__aeabi_uidivmod
+ 150              		.section	.text.lr_fhss_process_parameters,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	lr_fhss_process_parameters
+ 153              		.syntax unified
+ 154              		.code	16
+ 155              		.thumb_func
+ 156              		.fpu softvfp
+ 158              	lr_fhss_process_parameters:
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 162 0002 C900     		lsls	r1, r1, #3
+ 163 0004 0700     		movs	r7, r0
+ 164 0006 4079     		ldrb	r0, [r0, #5]
+ 165 0008 1631     		adds	r1, r1, #22
+ 166 000a 1600     		movs	r6, r2
+ 167 000c 8CB2     		uxth	r4, r1
+ 168 000e 0328     		cmp	r0, #3
+ 169 0010 0AD8     		bhi	.L15
+ 170 0012 FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+ 171              	.L17:
+ 172 0016 02       		.byte	(.L20-.L17)/2
+ 173 0017 31       		.byte	(.L19-.L17)/2
+ 174 0018 36       		.byte	(.L18-.L17)/2
+ 175 0019 38       		.byte	(.L16-.L17)/2
+ 176              		.p2align 1
+ 177              	.L20:
+ 178 001a 0620     		movs	r0, #6
+ 179 001c 6043     		muls	r0, r4
+ 180 001e 0521     		movs	r1, #5
+ARM GAS  /tmp/ccPiDyN8.s 			page 4
+
+
+ 181 0020 0430     		adds	r0, r0, #4
+ 182 0022 FFF7FEFF 		bl	__aeabi_idiv
+ 183 0026 84B2     		uxth	r4, r0
+ 184              	.L15:
+ 185 0028 2000     		movs	r0, r4
+ 186 002a 3021     		movs	r1, #48
+ 187 002c 2F30     		adds	r0, r0, #47
+ 188 002e FFF7FEFF 		bl	__aeabi_idiv
+ 189 0032 7B7A     		ldrb	r3, [r7, #9]
+ 190 0034 3021     		movs	r1, #48
+ 191 0036 C018     		adds	r0, r0, r3
+ 192 0038 3071     		strb	r0, [r6, #4]
+ 193 003a 2000     		movs	r0, r4
+ 194 003c FFF7FEFF 		bl	__aeabi_uidiv
+ 195 0040 3225     		movs	r5, #50
+ 196 0042 3021     		movs	r1, #48
+ 197 0044 4543     		muls	r5, r0
+ 198 0046 2000     		movs	r0, r4
+ 199 0048 FFF7FEFF 		bl	__aeabi_uidivmod
+ 200 004c 89B2     		uxth	r1, r1
+ 201 004e ADB2     		uxth	r5, r5
+ 202 0050 0029     		cmp	r1, #0
+ 203 0052 02D0     		beq	.L21
+ 204 0054 0231     		adds	r1, r1, #2
+ 205 0056 6D18     		adds	r5, r5, r1
+ 206 0058 ADB2     		uxth	r5, r5
+ 207              	.L21:
+ 208 005a 7223     		movs	r3, #114
+ 209 005c 787A     		ldrb	r0, [r7, #9]
+ 210 005e 5843     		muls	r0, r3
+ 211 0060 2D18     		adds	r5, r5, r0
+ 212 0062 ADB2     		uxth	r5, r5
+ 213 0064 7580     		strh	r5, [r6, #2]
+ 214 0066 0735     		adds	r5, r5, #7
+ 215 0068 ED10     		asrs	r5, r5, #3
+ 216 006a 3580     		strh	r5, [r6]
+ 217 006c 3B7A     		ldrb	r3, [r7, #8]
+ 218 006e 002B     		cmp	r3, #0
+ 219 0070 01D1     		bne	.L14
+ 220 0072 0133     		adds	r3, r3, #1
+ 221 0074 3371     		strb	r3, [r6, #4]
+ 222              	.L14:
+ 223              		@ sp needed
+ 224 0076 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 225              	.L19:
+ 226 0078 0320     		movs	r0, #3
+ 227 007a 4443     		muls	r4, r0
+ 228 007c 6410     		asrs	r4, r4, #1
+ 229              	.L26:
+ 230 007e A4B2     		uxth	r4, r4
+ 231 0080 D2E7     		b	.L15
+ 232              	.L18:
+ 233 0082 6400     		lsls	r4, r4, #1
+ 234 0084 FBE7     		b	.L26
+ 235              	.L16:
+ 236 0086 0320     		movs	r0, #3
+ 237 0088 4443     		muls	r4, r0
+ARM GAS  /tmp/ccPiDyN8.s 			page 5
+
+
+ 238 008a F8E7     		b	.L26
+ 240              		.section	.text.lr_fhss_get_hop_params,"ax",%progbits
+ 241              		.align	1
+ 242              		.global	lr_fhss_get_hop_params
+ 243              		.syntax unified
+ 244              		.code	16
+ 245              		.thumb_func
+ 246              		.fpu softvfp
+ 248              	lr_fhss_get_hop_params:
+ 249              		@ args = 0, pretend = 0, frame = 0
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 252 0002 0400     		movs	r4, r0
+ 253 0004 1E00     		movs	r6, r3
+ 254 0006 C379     		ldrb	r3, [r0, #7]
+ 255 0008 1700     		movs	r7, r2
+ 256 000a 2F4A     		ldr	r2, .L72
+ 257 000c 5B00     		lsls	r3, r3, #1
+ 258 000e 985A     		ldrh	r0, [r3, r2]
+ 259 0010 A379     		ldrb	r3, [r4, #6]
+ 260 0012 0D00     		movs	r5, r1
+ 261 0014 C408     		lsrs	r4, r0, #3
+ 262 0016 012B     		cmp	r3, #1
+ 263 0018 03D0     		beq	.L29
+ 264 001a 3421     		movs	r1, #52
+ 265 001c FFF7FEFF 		bl	__aeabi_uidiv
+ 266 0020 84B2     		uxth	r4, r0
+ 267              	.L29:
+ 268 0022 2C80     		strh	r4, [r5]
+ 269 0024 632C     		cmp	r4, #99
+ 270 0026 27D0     		beq	.L30
+ 271 0028 30D8     		bhi	.L31
+ 272 002a 3C2C     		cmp	r4, #60
+ 273 002c 4AD0     		beq	.L32
+ 274 002e 1FD8     		bhi	.L33
+ 275 0030 1E2C     		cmp	r4, #30
+ 276 0032 17D8     		bhi	.L34
+ 277 0034 0320     		movs	r0, #3
+ 278 0036 092C     		cmp	r4, #9
+ 279 0038 19D9     		bls	.L35
+ 280 003a 0123     		movs	r3, #1
+ 281 003c A340     		lsls	r3, r3, r4
+ 282 003e 234A     		ldr	r2, .L72+4
+ 283 0040 1342     		tst	r3, r2
+ 284 0042 14D0     		beq	.L35
+ 285              	.L36:
+ 286 0044 0623     		movs	r3, #6
+ 287              	.L69:
+ 288 0046 224A     		ldr	r2, .L72+8
+ 289 0048 3B80     		strh	r3, [r7]
+ 290 004a B309     		lsrs	r3, r6, #6
+ 291 004c D35C     		ldrb	r3, [r2, r3]
+ 292 004e 6B80     		strh	r3, [r5, #2]
+ 293 0050 3F23     		movs	r3, #63
+ 294 0052 3340     		ands	r3, r6
+ 295 0054 AB80     		strh	r3, [r5, #4]
+ 296 0056 C023     		movs	r3, #192
+ARM GAS  /tmp/ccPiDyN8.s 			page 6
+
+
+ 297 0058 5B00     		lsls	r3, r3, #1
+ 298 005a 9E42     		cmp	r6, r3
+ 299 005c 06D2     		bcs	.L40
+ 300              	.L41:
+ 301 005e 0020     		movs	r0, #0
+ 302 0060 EE80     		strh	r6, [r5, #6]
+ 303 0062 04E0     		b	.L35
+ 304              	.L34:
+ 305 0064 232C     		cmp	r4, #35
+ 306 0066 EDD0     		beq	.L36
+ 307 0068 2F2C     		cmp	r4, #47
+ 308 006a EBD0     		beq	.L36
+ 309              	.L40:
+ 310 006c 0320     		movs	r0, #3
+ 311              	.L35:
+ 312              		@ sp needed
+ 313 006e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 314              	.L33:
+ 315 0070 3E2C     		cmp	r4, #62
+ 316 0072 27D0     		beq	.L32
+ 317 0074 562C     		cmp	r4, #86
+ 318 0076 F9D1     		bne	.L40
+ 319              	.L30:
+ 320 0078 0623     		movs	r3, #6
+ 321 007a 164A     		ldr	r2, .L72+12
+ 322 007c 3B80     		strh	r3, [r7]
+ 323 007e F309     		lsrs	r3, r6, #7
+ 324 0080 D35C     		ldrb	r3, [r2, r3]
+ 325 0082 6B80     		strh	r3, [r5, #2]
+ 326 0084 7F23     		movs	r3, #127
+ 327 0086 3340     		ands	r3, r6
+ 328              	.L70:
+ 329 0088 AB80     		strh	r3, [r5, #4]
+ 330 008a E8E7     		b	.L41
+ 331              	.L31:
+ 332 008c C323     		movs	r3, #195
+ 333 008e 5B00     		lsls	r3, r3, #1
+ 334 0090 9C42     		cmp	r4, r3
+ 335 0092 10D0     		beq	.L37
+ 336 0094 0BD8     		bhi	.L38
+ 337 0096 B92C     		cmp	r4, #185
+ 338 0098 01D0     		beq	.L39
+ 339 009a C62C     		cmp	r4, #198
+ 340 009c E6D1     		bne	.L40
+ 341              	.L39:
+ 342 009e 0623     		movs	r3, #6
+ 343 00a0 0D4A     		ldr	r2, .L72+16
+ 344 00a2 3B80     		strh	r3, [r7]
+ 345 00a4 330A     		lsrs	r3, r6, #8
+ 346 00a6 D35C     		ldrb	r3, [r2, r3]
+ 347 00a8 6B80     		strh	r3, [r5, #2]
+ 348 00aa F3B2     		uxtb	r3, r6
+ 349 00ac ECE7     		b	.L70
+ 350              	.L38:
+ 351 00ae 9423     		movs	r3, #148
+ 352 00b0 FF33     		adds	r3, r3, #255
+ 353 00b2 9C42     		cmp	r4, r3
+ARM GAS  /tmp/ccPiDyN8.s 			page 7
+
+
+ 354 00b4 DAD1     		bne	.L40
+ 355              	.L37:
+ 356 00b6 0623     		movs	r3, #6
+ 357 00b8 3B80     		strh	r3, [r7]
+ 358 00ba 0333     		adds	r3, r3, #3
+ 359 00bc FF33     		adds	r3, r3, #255
+ 360 00be 6B80     		strh	r3, [r5, #2]
+ 361 00c0 AE80     		strh	r6, [r5, #4]
+ 362 00c2 CCE7     		b	.L41
+ 363              	.L32:
+ 364 00c4 3823     		movs	r3, #56
+ 365 00c6 BEE7     		b	.L69
+ 366              	.L73:
+ 367              		.align	2
+ 368              	.L72:
+ 369 00c8 00000000 		.word	.LANCHOR1
+ 370 00cc 00044050 		.word	1346372608
+ 371 00d0 00000000 		.word	.LANCHOR2
+ 372 00d4 00000000 		.word	.LANCHOR3
+ 373 00d8 00000000 		.word	.LANCHOR4
+ 375              		.section	.text.lr_fhss_get_next_state,"ax",%progbits
+ 376              		.align	1
+ 377              		.global	lr_fhss_get_next_state
+ 378              		.syntax unified
+ 379              		.code	16
+ 380              		.thumb_func
+ 381              		.fpu softvfp
+ 383              	lr_fhss_get_next_state:
+ 384              		@ args = 0, pretend = 0, frame = 0
+ 385              		@ frame_needed = 0, uses_anonymous_args = 0
+ 386 0000 10B5     		push	{r4, lr}
+ 387 0002 0124     		movs	r4, #1
+ 388              	.L77:
+ 389 0004 0288     		ldrh	r2, [r0]
+ 390 0006 5308     		lsrs	r3, r2, #1
+ 391 0008 0380     		strh	r3, [r0]
+ 392 000a 2242     		tst	r2, r4
+ 393 000c 02D0     		beq	.L75
+ 394 000e 4A88     		ldrh	r2, [r1, #2]
+ 395 0010 5340     		eors	r3, r2
+ 396 0012 0380     		strh	r3, [r0]
+ 397              	.L75:
+ 398 0014 8B88     		ldrh	r3, [r1, #4]
+ 399 0016 0288     		ldrh	r2, [r0]
+ 400 0018 9342     		cmp	r3, r2
+ 401 001a 00D0     		beq	.L76
+ 402 001c 5340     		eors	r3, r2
+ 403              	.L76:
+ 404 001e 0A88     		ldrh	r2, [r1]
+ 405 0020 9A42     		cmp	r2, r3
+ 406 0022 EFD3     		bcc	.L77
+ 407              		@ sp needed
+ 408 0024 013B     		subs	r3, r3, #1
+ 409 0026 98B2     		uxth	r0, r3
+ 410 0028 10BD     		pop	{r4, pc}
+ 412              		.section	.text.lr_fhss_get_next_freq_in_grid,"ax",%progbits
+ 413              		.align	1
+ARM GAS  /tmp/ccPiDyN8.s 			page 8
+
+
+ 414              		.global	lr_fhss_get_next_freq_in_grid
+ 415              		.syntax unified
+ 416              		.code	16
+ 417              		.thumb_func
+ 418              		.fpu softvfp
+ 420              	lr_fhss_get_next_freq_in_grid:
+ 421              		@ args = 0, pretend = 0, frame = 0
+ 422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 423 0000 10B5     		push	{r4, lr}
+ 424 0002 137A     		ldrb	r3, [r2, #8]
+ 425 0004 0C00     		movs	r4, r1
+ 426 0006 002B     		cmp	r3, #0
+ 427 0008 07D0     		beq	.L83
+ 428 000a FFF7FEFF 		bl	lr_fhss_get_next_state
+ 429              	.L84:
+ 430 000e 2188     		ldrh	r1, [r4]
+ 431 0010 4B08     		lsrs	r3, r1, #1
+ 432 0012 8342     		cmp	r3, r0
+ 433 0014 07D9     		bls	.L85
+ 434              	.L87:
+ 435              		@ sp needed
+ 436 0016 00B2     		sxth	r0, r0
+ 437 0018 10BD     		pop	{r4, pc}
+ 438              	.L83:
+ 439 001a C888     		ldrh	r0, [r1, #6]
+ 440 001c 0988     		ldrh	r1, [r1]
+ 441 001e FFF7FEFF 		bl	__aeabi_uidivmod
+ 442 0022 88B2     		uxth	r0, r1
+ 443 0024 F3E7     		b	.L84
+ 444              	.L85:
+ 445 0026 401A     		subs	r0, r0, r1
+ 446 0028 F5E7     		b	.L87
+ 448              		.section	.text.lr_fhss_build_frame,"ax",%progbits
+ 449              		.align	1
+ 450              		.global	lr_fhss_build_frame
+ 451              		.syntax unified
+ 452              		.code	16
+ 453              		.thumb_func
+ 454              		.fpu softvfp
+ 456              	lr_fhss_build_frame:
+ 457              		@ args = 4, pretend = 0, frame = 688
+ 458              		@ frame_needed = 0, uses_anonymous_args = 0
+ 459 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 460 0002 AE4C     		ldr	r4, .L135
+ 461 0004 1500     		movs	r5, r2
+ 462 0006 A544     		add	sp, sp, r4
+ 463 0008 9722     		movs	r2, #151
+ 464 000a 0024     		movs	r4, #0
+ 465 000c 0090     		str	r0, [sp]
+ 466 000e 0991     		str	r1, [sp, #36]
+ 467 0010 9200     		lsls	r2, r2, #2
+ 468 0012 2100     		movs	r1, r4
+ 469 0014 15A8     		add	r0, sp, #84
+ 470 0016 B29F     		ldr	r7, [sp, #712]
+ 471 0018 0193     		str	r3, [sp, #4]
+ 472 001a 1494     		str	r4, [sp, #80]
+ 473 001c FFF7FEFF 		bl	memset
+ARM GAS  /tmp/ccPiDyN8.s 			page 9
+
+
+ 474 0020 FF21     		movs	r1, #255
+ 475 0022 0122     		movs	r2, #1
+ 476              	.L89:
+ 477 0024 0198     		ldr	r0, [sp, #4]
+ 478 0026 A3B2     		uxth	r3, r4
+ 479 0028 9842     		cmp	r0, r3
+ 480 002a 00D9     		bls	.LCB523
+ 481 002c ADE0     		b	.L90	@long jump
+ 482              	.LCB523:
+ 483 002e 0021     		movs	r1, #0
+ 484 0030 A34B     		ldr	r3, .L135+4
+ 485 0032 A448     		ldr	r0, .L135+8
+ 486              	.L91:
+ 487 0034 019D     		ldr	r5, [sp, #4]
+ 488 0036 8AB2     		uxth	r2, r1
+ 489 0038 1C0A     		lsrs	r4, r3, #8
+ 490 003a 9542     		cmp	r5, r2
+ 491 003c 00D9     		bls	.LCB534
+ 492 003e B7E0     		b	.L92	@long jump
+ 493              	.LCB534:
+ 494 0040 7C55     		strb	r4, [r7, r5]
+ 495 0042 0024     		movs	r4, #0
+ 496 0044 7A19     		adds	r2, r7, r5
+ 497 0046 5370     		strb	r3, [r2, #1]
+ 498 0048 2B00     		movs	r3, r5
+ 499 004a 2500     		movs	r5, r4
+ 500 004c 0233     		adds	r3, r3, #2
+ 501 004e 9BB2     		uxth	r3, r3
+ 502 0050 0293     		str	r3, [sp, #8]
+ 503 0052 DB00     		lsls	r3, r3, #3
+ 504 0054 0633     		adds	r3, r3, #6
+ 505 0056 9BB2     		uxth	r3, r3
+ 506 0058 9470     		strb	r4, [r2, #2]
+ 507 005a 0593     		str	r3, [sp, #20]
+ 508 005c 0394     		str	r4, [sp, #12]
+ 509 005e 14AE     		add	r6, sp, #80
+ 510              	.L93:
+ 511 0060 0722     		movs	r2, #7
+ 512 0062 2240     		ands	r2, r4
+ 513 0064 0492     		str	r2, [sp, #16]
+ 514 0066 059A     		ldr	r2, [sp, #20]
+ 515 0068 A3B2     		uxth	r3, r4
+ 516 006a 9A42     		cmp	r2, r3
+ 517 006c 00D9     		bls	.LCB564
+ 518 006e A8E0     		b	.L95	@long jump
+ 519              	.LCB564:
+ 520 0070 1823     		movs	r3, #24
+ 521 0072 029A     		ldr	r2, [sp, #8]
+ 522 0074 5343     		muls	r3, r2
+ 523 0076 1233     		adds	r3, r3, #18
+ 524 0078 9BB2     		uxth	r3, r3
+ 525 007a 0293     		str	r3, [sp, #8]
+ 526 007c 049B     		ldr	r3, [sp, #16]
+ 527 007e 002B     		cmp	r3, #0
+ 528 0080 04D0     		beq	.L96
+ 529 0082 2B0C     		lsrs	r3, r5, #16
+ 530 0084 3370     		strb	r3, [r6]
+ARM GAS  /tmp/ccPiDyN8.s 			page 10
+
+
+ 531 0086 2B0A     		lsrs	r3, r5, #8
+ 532 0088 7370     		strb	r3, [r6, #1]
+ 533 008a B570     		strb	r5, [r6, #2]
+ 534              	.L96:
+ 535 008c FF22     		movs	r2, #255
+ 536 008e 0021     		movs	r1, #0
+ 537 0090 3800     		movs	r0, r7
+ 538 0092 FFF7FEFF 		bl	memset
+ 539 0096 009B     		ldr	r3, [sp]
+ 540 0098 5C79     		ldrb	r4, [r3, #5]
+ 541 009a 032C     		cmp	r4, #3
+ 542 009c 1BD0     		beq	.L97
+ 543 009e 0F22     		movs	r2, #15
+ 544 00a0 8949     		ldr	r1, .L135+12
+ 545 00a2 10A8     		add	r0, sp, #64
+ 546 00a4 FFF7FEFF 		bl	memcpy
+ 547 00a8 0023     		movs	r3, #0
+ 548 00aa 0393     		str	r3, [sp, #12]
+ 549 00ac 022C     		cmp	r4, #2
+ 550 00ae 02D8     		bhi	.L98
+ 551 00b0 864B     		ldr	r3, .L135+16
+ 552 00b2 1B5D     		ldrb	r3, [r3, r4]
+ 553 00b4 0393     		str	r3, [sp, #12]
+ 554              	.L98:
+ 555 00b6 0025     		movs	r5, #0
+ 556 00b8 2C00     		movs	r4, r5
+ 557 00ba 2E00     		movs	r6, r5
+ 558              	.L99:
+ 559 00bc 029B     		ldr	r3, [sp, #8]
+ 560 00be AB42     		cmp	r3, r5
+ 561 00c0 00D9     		bls	.LCB609
+ 562 00c2 9DE0     		b	.L102	@long jump
+ 563              	.LCB609:
+ 564 00c4 A3B2     		uxth	r3, r4
+ 565 00c6 1A00     		movs	r2, r3
+ 566 00c8 0732     		adds	r2, r2, #7
+ 567 00ca 3900     		movs	r1, r7
+ 568 00cc D210     		asrs	r2, r2, #3
+ 569 00ce 14A8     		add	r0, sp, #80
+ 570 00d0 0293     		str	r3, [sp, #8]
+ 571 00d2 FFF7FEFF 		bl	memcpy
+ 572              	.L97:
+ 573 00d6 7222     		movs	r2, #114
+ 574 00d8 009B     		ldr	r3, [sp]
+ 575 00da 5B7A     		ldrb	r3, [r3, #9]
+ 576 00dc 5A43     		muls	r2, r3
+ 577 00de 0023     		movs	r3, #0
+ 578              	.L103:
+ 579 00e0 1900     		movs	r1, r3
+ 580 00e2 5943     		muls	r1, r3
+ 581 00e4 0298     		ldr	r0, [sp, #8]
+ 582 00e6 8142     		cmp	r1, r0
+ 583 00e8 00DA     		bge	.LCB632
+ 584 00ea A0E0     		b	.L104	@long jump
+ 585              	.LCB632:
+ 586 00ec 5908     		lsrs	r1, r3, #1
+ 587 00ee 5B00     		lsls	r3, r3, #1
+ARM GAS  /tmp/ccPiDyN8.s 			page 11
+
+
+ 588 00f0 9BB2     		uxth	r3, r3
+ 589 00f2 0693     		str	r3, [sp, #24]
+ 590 00f4 6B46     		mov	r3, sp
+ 591 00f6 0026     		movs	r6, #0
+ 592 00f8 0A91     		str	r1, [sp, #40]
+ 593 00fa 0821     		movs	r1, #8
+ 594 00fc 5B5E     		ldrsh	r3, [r3, r1]
+ 595 00fe 3400     		movs	r4, r6
+ 596 0100 0393     		str	r3, [sp, #12]
+ 597 0102 93B2     		uxth	r3, r2
+ 598 0104 1D00     		movs	r5, r3
+ 599 0106 0793     		str	r3, [sp, #28]
+ 600 0108 0596     		str	r6, [sp, #20]
+ 601              	.L105:
+ 602 010a 039B     		ldr	r3, [sp, #12]
+ 603 010c 002B     		cmp	r3, #0
+ 604 010e 00DD     		ble	.LCB653
+ 605 0110 90E0     		b	.L109	@long jump
+ 606              	.LCB653:
+ 607 0112 079B     		ldr	r3, [sp, #28]
+ 608 0114 0EAA     		add	r2, sp, #56
+ 609 0116 ED1A     		subs	r5, r5, r3
+ 610 0118 ABB2     		uxth	r3, r5
+ 611 011a 0393     		str	r3, [sp, #12]
+ 612 011c 019B     		ldr	r3, [sp, #4]
+ 613 011e 0099     		ldr	r1, [sp]
+ 614 0120 1370     		strb	r3, [r2]
+ 615 0122 009B     		ldr	r3, [sp]
+ 616 0124 4979     		ldrb	r1, [r1, #5]
+ 617 0126 1B79     		ldrb	r3, [r3, #4]
+ 618 0128 C900     		lsls	r1, r1, #3
+ 619 012a 5B01     		lsls	r3, r3, #5
+ 620 012c 5B18     		adds	r3, r3, r1
+ 621 012e 0099     		ldr	r1, [sp]
+ 622 0130 8979     		ldrb	r1, [r1, #6]
+ 623 0132 8900     		lsls	r1, r1, #2
+ 624 0134 5B18     		adds	r3, r3, r1
+ 625 0136 0099     		ldr	r1, [sp]
+ 626 0138 DBB2     		uxtb	r3, r3
+ 627 013a 097A     		ldrb	r1, [r1, #8]
+ 628 013c 481E     		subs	r0, r1, #1
+ 629 013e 8141     		sbcs	r1, r1, r0
+ 630 0140 0098     		ldr	r0, [sp]
+ 631 0142 4900     		lsls	r1, r1, #1
+ 632 0144 C079     		ldrb	r0, [r0, #7]
+ 633 0146 C408     		lsrs	r4, r0, #3
+ 634 0148 1B19     		adds	r3, r3, r4
+ 635 014a C918     		adds	r1, r1, r3
+ 636 014c 5170     		strb	r1, [r2, #1]
+ 637 014e 0999     		ldr	r1, [sp, #36]
+ 638 0150 4301     		lsls	r3, r0, #5
+ 639 0152 0909     		lsrs	r1, r1, #4
+ 640 0154 CB18     		adds	r3, r1, r3
+ 641 0156 9370     		strb	r3, [r2, #2]
+ 642 0158 099B     		ldr	r3, [sp, #36]
+ 643 015a 1901     		lsls	r1, r3, #4
+ 644 015c 0023     		movs	r3, #0
+ARM GAS  /tmp/ccPiDyN8.s 			page 12
+
+
+ 645 015e D170     		strb	r1, [r2, #3]
+ 646              	.L134:
+ 647 0160 0293     		str	r3, [sp, #8]
+ 648 0162 7223     		movs	r3, #114
+ 649 0164 029A     		ldr	r2, [sp, #8]
+ 650 0166 5343     		muls	r3, r2
+ 651 0168 9BB2     		uxth	r3, r3
+ 652 016a 0193     		str	r3, [sp, #4]
+ 653 016c 009B     		ldr	r3, [sp]
+ 654 016e 5B7A     		ldrb	r3, [r3, #9]
+ 655 0170 9342     		cmp	r3, r2
+ 656 0172 00D9     		bls	.LCB703
+ 657 0174 AEE0     		b	.L116	@long jump
+ 658              	.LCB703:
+ 659 0176 039B     		ldr	r3, [sp, #12]
+ 660 0178 019F     		ldr	r7, [sp, #4]
+ 661 017a 9C46     		mov	ip, r3
+ 662 017c 6744     		add	r7, r7, ip
+ 663 017e 0737     		adds	r7, r7, #7
+ 664 0180 F808     		lsrs	r0, r7, #3
+ 665 0182 AD23     		movs	r3, #173
+ 666 0184 9B00     		lsls	r3, r3, #2
+ 667 0186 9D44     		add	sp, sp, r3
+ 668              		@ sp needed
+ 669 0188 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 670              	.L90:
+ 671 018a 2B5D     		ldrb	r3, [r5, r4]
+ 672 018c 4B40     		eors	r3, r1
+ 673 018e 1801     		lsls	r0, r3, #4
+ 674 0190 1B09     		lsrs	r3, r3, #4
+ 675 0192 0343     		orrs	r3, r0
+ 676 0194 3B55     		strb	r3, [r7, r4]
+ 677 0196 0811     		asrs	r0, r1, #4
+ 678 0198 4B11     		asrs	r3, r1, #5
+ 679 019a 4340     		eors	r3, r0
+ 680 019c C810     		asrs	r0, r1, #3
+ 681 019e 4340     		eors	r3, r0
+ 682 01a0 1340     		ands	r3, r2
+ 683 01a2 C809     		lsrs	r0, r1, #7
+ 684 01a4 4340     		eors	r3, r0
+ 685 01a6 4900     		lsls	r1, r1, #1
+ 686 01a8 1943     		orrs	r1, r3
+ 687 01aa C9B2     		uxtb	r1, r1
+ 688 01ac 0134     		adds	r4, r4, #1
+ 689 01ae 39E7     		b	.L89
+ 690              	.L92:
+ 691 01b0 7A5C     		ldrb	r2, [r7, r1]
+ 692 01b2 0131     		adds	r1, r1, #1
+ 693 01b4 6240     		eors	r2, r4
+ 694 01b6 5200     		lsls	r2, r2, #1
+ 695 01b8 1C02     		lsls	r4, r3, #8
+ 696 01ba 135A     		ldrh	r3, [r2, r0]
+ 697 01bc 6340     		eors	r3, r4
+ 698 01be 9BB2     		uxth	r3, r3
+ 699 01c0 38E7     		b	.L91
+ 700              	.L95:
+ 701 01c2 2100     		movs	r1, r4
+ARM GAS  /tmp/ccPiDyN8.s 			page 13
+
+
+ 702 01c4 3800     		movs	r0, r7
+ 703 01c6 FFF7FEFF 		bl	lr_fhss_extract_bit_in_byte_vector
+ 704 01ca 3F21     		movs	r1, #63
+ 705 01cc 039B     		ldr	r3, [sp, #12]
+ 706 01ce 5B00     		lsls	r3, r3, #1
+ 707 01d0 1A18     		adds	r2, r3, r0
+ 708 01d2 1140     		ands	r1, r2
+ 709 01d4 3E4A     		ldr	r2, .L135+20
+ 710 01d6 0391     		str	r1, [sp, #12]
+ 711 01d8 D318     		adds	r3, r2, r3
+ 712 01da 0722     		movs	r2, #7
+ 713 01dc 0321     		movs	r1, #3
+ 714 01de A243     		bics	r2, r4
+ 715 01e0 4A43     		muls	r2, r1
+ 716 01e2 1B5C     		ldrb	r3, [r3, r0]
+ 717 01e4 9340     		lsls	r3, r3, r2
+ 718 01e6 1D43     		orrs	r5, r3
+ 719 01e8 049B     		ldr	r3, [sp, #16]
+ 720 01ea 072B     		cmp	r3, #7
+ 721 01ec 06D1     		bne	.L94
+ 722 01ee 2B0C     		lsrs	r3, r5, #16
+ 723 01f0 3370     		strb	r3, [r6]
+ 724 01f2 B570     		strb	r5, [r6, #2]
+ 725 01f4 2B0A     		lsrs	r3, r5, #8
+ 726 01f6 0025     		movs	r5, #0
+ 727 01f8 7370     		strb	r3, [r6, #1]
+ 728 01fa 7618     		adds	r6, r6, r1
+ 729              	.L94:
+ 730 01fc 0134     		adds	r4, r4, #1
+ 731 01fe 2FE7     		b	.L93
+ 732              	.L102:
+ 733 0200 10AB     		add	r3, sp, #64
+ 734 0202 9B5D     		ldrb	r3, [r3, r6]
+ 735 0204 002B     		cmp	r3, #0
+ 736 0206 0BD0     		beq	.L100
+ 737 0208 631C     		adds	r3, r4, #1
+ 738 020a 2900     		movs	r1, r5
+ 739 020c 14A8     		add	r0, sp, #80
+ 740 020e 0493     		str	r3, [sp, #16]
+ 741 0210 FFF7FEFF 		bl	lr_fhss_extract_bit_in_byte_vector
+ 742 0214 2100     		movs	r1, r4
+ 743 0216 0200     		movs	r2, r0
+ 744 0218 3800     		movs	r0, r7
+ 745 021a FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 746 021e 049C     		ldr	r4, [sp, #16]
+ 747              	.L100:
+ 748 0220 039B     		ldr	r3, [sp, #12]
+ 749 0222 0136     		adds	r6, r6, #1
+ 750 0224 B342     		cmp	r3, r6
+ 751 0226 00D1     		bne	.L101
+ 752 0228 0026     		movs	r6, #0
+ 753              	.L101:
+ 754 022a 0135     		adds	r5, r5, #1
+ 755 022c 46E7     		b	.L99
+ 756              	.L104:
+ 757 022e 0133     		adds	r3, r3, #1
+ 758 0230 9BB2     		uxth	r3, r3
+ARM GAS  /tmp/ccPiDyN8.s 			page 14
+
+
+ 759 0232 55E7     		b	.L103
+ 760              	.L109:
+ 761 0234 6B46     		mov	r3, sp
+ 762 0236 039A     		ldr	r2, [sp, #12]
+ 763 0238 9B89     		ldrh	r3, [r3, #12]
+ 764 023a 302A     		cmp	r2, #48
+ 765 023c 00DD     		ble	.L106
+ 766 023e 3023     		movs	r3, #48
+ 767              	.L106:
+ 768 0240 1BB2     		sxth	r3, r3
+ 769 0242 0022     		movs	r2, #0
+ 770 0244 2900     		movs	r1, r5
+ 771 0246 3800     		movs	r0, r7
+ 772 0248 0893     		str	r3, [sp, #32]
+ 773 024a FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 774 024e 0022     		movs	r2, #0
+ 775 0250 3800     		movs	r0, r7
+ 776 0252 691C     		adds	r1, r5, #1
+ 777 0254 FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 778 0258 0023     		movs	r3, #0
+ 779 025a 0493     		str	r3, [sp, #16]
+ 780              	.L108:
+ 781 025c 049A     		ldr	r2, [sp, #16]
+ 782 025e AB1C     		adds	r3, r5, #2
+ 783 0260 9B18     		adds	r3, r3, r2
+ 784 0262 2100     		movs	r1, r4
+ 785 0264 14A8     		add	r0, sp, #80
+ 786 0266 0B93     		str	r3, [sp, #44]
+ 787 0268 FFF7FEFF 		bl	lr_fhss_extract_bit_in_byte_vector
+ 788 026c 0B99     		ldr	r1, [sp, #44]
+ 789 026e 0200     		movs	r2, r0
+ 790 0270 3800     		movs	r0, r7
+ 791 0272 FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 792 0276 069B     		ldr	r3, [sp, #24]
+ 793 0278 E418     		adds	r4, r4, r3
+ 794 027a 029B     		ldr	r3, [sp, #8]
+ 795 027c A4B2     		uxth	r4, r4
+ 796 027e A342     		cmp	r3, r4
+ 797 0280 0CD8     		bhi	.L107
+ 798 0282 0A9B     		ldr	r3, [sp, #40]
+ 799 0284 059C     		ldr	r4, [sp, #20]
+ 800 0286 9C46     		mov	ip, r3
+ 801 0288 069B     		ldr	r3, [sp, #24]
+ 802 028a 6444     		add	r4, r4, ip
+ 803 028c A4B2     		uxth	r4, r4
+ 804 028e 0594     		str	r4, [sp, #20]
+ 805 0290 A342     		cmp	r3, r4
+ 806 0292 03D8     		bhi	.L107
+ 807 0294 0136     		adds	r6, r6, #1
+ 808 0296 B6B2     		uxth	r6, r6
+ 809 0298 3400     		movs	r4, r6
+ 810 029a 0596     		str	r6, [sp, #20]
+ 811              	.L107:
+ 812 029c 049B     		ldr	r3, [sp, #16]
+ 813 029e 089A     		ldr	r2, [sp, #32]
+ 814 02a0 0133     		adds	r3, r3, #1
+ 815 02a2 0493     		str	r3, [sp, #16]
+ARM GAS  /tmp/ccPiDyN8.s 			page 15
+
+
+ 816 02a4 9342     		cmp	r3, r2
+ 817 02a6 D9DB     		blt	.L108
+ 818 02a8 039B     		ldr	r3, [sp, #12]
+ 819 02aa 303B     		subs	r3, r3, #48
+ 820 02ac 1BB2     		sxth	r3, r3
+ 821 02ae 0393     		str	r3, [sp, #12]
+ 822 02b0 1300     		movs	r3, r2
+ 823 02b2 0233     		adds	r3, r3, #2
+ 824 02b4 ED18     		adds	r5, r5, r3
+ 825 02b6 ADB2     		uxth	r5, r5
+ 826 02b8 27E7     		b	.L105
+ 827              	.L136:
+ 828 02ba C046     		.align	2
+ 829              	.L135:
+ 830 02bc 4CFDFFFF 		.word	-692
+ 831 02c0 FFFF0000 		.word	65535
+ 832 02c4 00000000 		.word	lr_fhss_payload_crc16_lut
+ 833 02c8 00000000 		.word	.LANCHOR5
+ 834 02cc 00000000 		.word	.LANCHOR6
+ 835 02d0 00000000 		.word	lr_fhss_viterbi_1_3_table
+ 836              	.L116:
+ 837 02d4 0C20     		movs	r0, #12
+ 838 02d6 0299     		ldr	r1, [sp, #8]
+ 839 02d8 0EAA     		add	r2, sp, #56
+ 840 02da 013B     		subs	r3, r3, #1
+ 841 02dc 5B1A     		subs	r3, r3, r1
+ 842 02de D178     		ldrb	r1, [r2, #3]
+ 843 02e0 DBB2     		uxtb	r3, r3
+ 844 02e2 8143     		bics	r1, r0
+ 845 02e4 9B00     		lsls	r3, r3, #2
+ 846 02e6 0B43     		orrs	r3, r1
+ 847 02e8 D370     		strb	r3, [r2, #3]
+ 848 02ea 0021     		movs	r1, #0
+ 849 02ec FF23     		movs	r3, #255
+ 850 02ee 1600     		movs	r6, r2
+ 851 02f0 2D48     		ldr	r0, .L137
+ 852              	.L112:
+ 853 02f2 8C5D     		ldrb	r4, [r1, r6]
+ 854 02f4 0131     		adds	r1, r1, #1
+ 855 02f6 6340     		eors	r3, r4
+ 856 02f8 C35C     		ldrb	r3, [r0, r3]
+ 857 02fa 0429     		cmp	r1, #4
+ 858 02fc F9D1     		bne	.L112
+ 859 02fe 0024     		movs	r4, #0
+ 860 0300 1371     		strb	r3, [r2, #4]
+ 861 0302 2100     		movs	r1, r4
+ 862 0304 0622     		movs	r2, #6
+ 863 0306 11A8     		add	r0, sp, #68
+ 864 0308 1094     		str	r4, [sp, #64]
+ 865 030a FFF7FEFF 		bl	memset
+ 866 030e 0CAB     		add	r3, sp, #48
+ 867 0310 DD1D     		adds	r5, r3, #7
+ 868 0312 3100     		movs	r1, r6
+ 869 0314 2800     		movs	r0, r5
+ 870 0316 10AA     		add	r2, sp, #64
+ 871 0318 DC71     		strb	r4, [r3, #7]
+ 872 031a FFF7FEFF 		bl	lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0
+ARM GAS  /tmp/ccPiDyN8.s 			page 16
+
+
+ 873 031e 3100     		movs	r1, r6
+ 874 0320 2800     		movs	r0, r5
+ 875 0322 10AA     		add	r2, sp, #64
+ 876 0324 FFF7FEFF 		bl	lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0
+ 877 0328 2200     		movs	r2, r4
+ 878 032a 3800     		movs	r0, r7
+ 879 032c 0199     		ldr	r1, [sp, #4]
+ 880 032e FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 881 0332 019B     		ldr	r3, [sp, #4]
+ 882 0334 2200     		movs	r2, r4
+ 883 0336 3800     		movs	r0, r7
+ 884 0338 591C     		adds	r1, r3, #1
+ 885 033a FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 886              	.L113:
+ 887 033e 1B4D     		ldr	r5, .L137+4
+ 888 0340 019B     		ldr	r3, [sp, #4]
+ 889 0342 615D     		ldrb	r1, [r4, r5]
+ 890 0344 10A8     		add	r0, sp, #64
+ 891 0346 9E1C     		adds	r6, r3, #2
+ 892 0348 FFF7FEFF 		bl	lr_fhss_extract_bit_in_byte_vector
+ 893 034c 3619     		adds	r6, r6, r4
+ 894 034e 0200     		movs	r2, r0
+ 895 0350 3100     		movs	r1, r6
+ 896 0352 3800     		movs	r0, r7
+ 897 0354 0134     		adds	r4, r4, #1
+ 898 0356 FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 899 035a 282C     		cmp	r4, #40
+ 900 035c EFD1     		bne	.L113
+ 901 035e 0024     		movs	r4, #0
+ 902 0360 2835     		adds	r5, r5, #40
+ 903              	.L114:
+ 904 0362 295D     		ldrb	r1, [r5, r4]
+ 905 0364 10A8     		add	r0, sp, #64
+ 906 0366 FFF7FEFF 		bl	lr_fhss_extract_bit_in_byte_vector
+ 907 036a 019E     		ldr	r6, [sp, #4]
+ 908 036c 0200     		movs	r2, r0
+ 909 036e 4A36     		adds	r6, r6, #74
+ 910 0370 3619     		adds	r6, r6, r4
+ 911 0372 3100     		movs	r1, r6
+ 912 0374 3800     		movs	r0, r7
+ 913 0376 0134     		adds	r4, r4, #1
+ 914 0378 FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 915 037c 282C     		cmp	r4, #40
+ 916 037e F0D1     		bne	.L114
+ 917 0380 0024     		movs	r4, #0
+ 918              	.L115:
+ 919 0382 009B     		ldr	r3, [sp]
+ 920 0384 2100     		movs	r1, r4
+ 921 0386 1868     		ldr	r0, [r3]
+ 922 0388 FFF7FEFF 		bl	lr_fhss_extract_bit_in_byte_vector
+ 923 038c 019D     		ldr	r5, [sp, #4]
+ 924 038e 0200     		movs	r2, r0
+ 925 0390 2A35     		adds	r5, r5, #42
+ 926 0392 2D19     		adds	r5, r5, r4
+ 927 0394 2900     		movs	r1, r5
+ 928 0396 3800     		movs	r0, r7
+ 929 0398 0134     		adds	r4, r4, #1
+ARM GAS  /tmp/ccPiDyN8.s 			page 17
+
+
+ 930 039a FFF7FEFF 		bl	lr_fhss_set_bit_in_byte_vector
+ 931 039e 202C     		cmp	r4, #32
+ 932 03a0 EFD1     		bne	.L115
+ 933 03a2 029B     		ldr	r3, [sp, #8]
+ 934 03a4 0133     		adds	r3, r3, #1
+ 935 03a6 DBE6     		b	.L134
+ 936              	.L138:
+ 937              		.align	2
+ 938              	.L137:
+ 939 03a8 00000000 		.word	lr_fhss_header_crc8_lut
+ 940 03ac 00000000 		.word	.LANCHOR7
+ 942              		.section	.text.lr_fhss_get_time_on_air_in_ms,"ax",%progbits
+ 943              		.align	1
+ 944              		.global	lr_fhss_get_time_on_air_in_ms
+ 945              		.syntax unified
+ 946              		.code	16
+ 947              		.thumb_func
+ 948              		.fpu softvfp
+ 950              	lr_fhss_get_time_on_air_in_ms:
+ 951              		@ args = 0, pretend = 0, frame = 8
+ 952              		@ frame_needed = 0, uses_anonymous_args = 0
+ 953 0000 07B5     		push	{r0, r1, r2, lr}
+ 954 0002 6A46     		mov	r2, sp
+ 955              		@ sp needed
+ 956 0004 FFF7FEFF 		bl	lr_fhss_process_parameters
+ 957 0008 6B46     		mov	r3, sp
+ 958 000a 5888     		ldrh	r0, [r3, #2]
+ 959 000c 7D21     		movs	r1, #125
+ 960 000e 0002     		lsls	r0, r0, #8
+ 961 0010 7C30     		adds	r0, r0, #124
+ 962 0012 FFF7FEFF 		bl	__aeabi_uidiv
+ 963 0016 0EBD     		pop	{r1, r2, r3, pc}
+ 965              		.global	lr_fhss_payload_crc16_lut
+ 966              		.global	lr_fhss_header_crc8_lut
+ 967              		.section	.rodata
+ 968              		.set	.LANCHOR5,. + 0
+ 969              	.LC7:
+ 970 0000 01010000 		.ascii	"\001\001\000\000\001\000\001\000\000\000\001\000\001"
+ 970      01000100 
+ 970      00000100 
+ 970      01
+ 971 000d 0000     		.ascii	"\000\000"
+ 972              		.section	.rodata.CSWTCH.42,"a"
+ 973              		.set	.LANCHOR6,. + 0
+ 976              	CSWTCH.42:
+ 977 0000 0F       		.byte	15
+ 978 0001 06       		.byte	6
+ 979 0002 03       		.byte	3
+ 980              		.section	.rodata.lr_fhss_channel_count,"a"
+ 981              		.align	2
+ 982              		.set	.LANCHOR1,. + 0
+ 985              	lr_fhss_channel_count:
+ 986 0000 5000     		.short	80
+ 987 0002 B000     		.short	176
+ 988 0004 1801     		.short	280
+ 989 0006 7801     		.short	376
+ 990 0008 B002     		.short	688
+ARM GAS  /tmp/ccPiDyN8.s 			page 18
+
+
+ 991 000a 1803     		.short	792
+ 992 000c C805     		.short	1480
+ 993 000e 3006     		.short	1584
+ 994 0010 300C     		.short	3120
+ 995 0012 980C     		.short	3224
+ 996              		.section	.rodata.lr_fhss_header_crc8_lut,"a"
+ 997              		.align	2
+ 1000              	lr_fhss_header_crc8_lut:
+ 1001 0000 002F5E71 		.ascii	"\000/^q\274\223\342\315Wx\011&\353\304\265\232\256\201"
+ 1001      BC93E2CD 
+ 1001      57780926 
+ 1001      EBC4B59A 
+ 1001      AE81
+ 1002 0012 F0DF123D 		.ascii	"\360\337\022=Lc\371\326\247\210Ej\0334s\\-\002\317\340"
+ 1002      4C63F9D6 
+ 1002      A788456A 
+ 1002      1B34735C 
+ 1002      2D02CFE0 
+ 1003 0026 91BE240B 		.ascii	"\221\276$\013zU\230\267\306\351\335\362\203\254aN?\020"
+ 1003      7A5598B7 
+ 1003      C6E9DDF2 
+ 1003      83AC614E 
+ 1003      3F10
+ 1004 0038 8AA5D4FB 		.ascii	"\212\245\324\3736\031hG\346\311\270\227Zu\004+\261\236"
+ 1004      36196847 
+ 1004      E6C9B897 
+ 1004      5A75042B 
+ 1004      B19E
+ 1005 004a EFC00D22 		.ascii	"\357\300\015\"S|Hg\0269\364\333\252\205\0370An\243\214"
+ 1005      537C4867 
+ 1005      1639F4DB 
+ 1005      AA851F30 
+ 1005      416EA38C 
+ 1006 005e FDD295BA 		.ascii	"\375\322\225\272\313\344)\006wX\302\355\234\263~Q \017"
+ 1006      CBE42906 
+ 1006      7758C2ED 
+ 1006      9CB37E51 
+ 1006      200F
+ 1007 0070 3B14654A 		.ascii	";\024eJ\207\250\331\366lC2\035\320\377\216\241\343\314"
+ 1007      87A8D9F6 
+ 1007      6C43321D 
+ 1007      D0FF8EA1 
+ 1007      E3CC
+ 1008 0082 BD925F70 		.ascii	"\275\222_p\001.\264\233\352\305\010'VyMb\023<\361\336"
+ 1008      012EB49B 
+ 1008      EAC50827 
+ 1008      56794D62 
+ 1008      133CF1DE 
+ 1009 0096 AF801A35 		.ascii	"\257\200\0325Dk\246\211\370\327\220\277\316\341,\003"
+ 1009      446BA689 
+ 1009      F8D790BF 
+ 1009      CEE12C03 
+ 1010 00a6 725DC7E8 		.ascii	"r]\307\350\231\266{T%\012>\021`O\202\255\334\363iF7"
+ 1010      99B67B54 
+ 1010      250A3E11 
+ 1010      604F82AD 
+ 1010      DCF36946 
+ARM GAS  /tmp/ccPiDyN8.s 			page 19
+
+
+ 1011 00bb 18D5FA8B 		.ascii	"\030\325\372\213\244\005*[t\271\226\347\310R}\014#\356"
+ 1011      A4052A5B 
+ 1011      74B996E7 
+ 1011      C8527D0C 
+ 1011      23EE
+ 1012 00cd C1B09FAB 		.ascii	"\301\260\237\253\204\365\332\0278If\374\323\242\215"
+ 1012      84F5DA17 
+ 1012      384966FC 
+ 1012      D3A28D
+ 1013 00dc 406F1E31 		.ascii	"@o\0361vY(\007\312\345\224\273!\016\177P\235\262\303"
+ 1013      76592807 
+ 1013      CAE594BB 
+ 1013      210E7F50 
+ 1013      9DB2C3
+ 1014 00ef ECD8F786 		.ascii	"\354\330\367\206\251dK:\025\217\240\321\3763\034mB"
+ 1014      A9644B3A 
+ 1014      158FA0D1 
+ 1014      FE331C6D 
+ 1014      42
+ 1015              		.section	.rodata.lr_fhss_header_interleaver_minus_one,"a"
+ 1016              		.align	2
+ 1017              		.set	.LANCHOR7,. + 0
+ 1020              	lr_fhss_header_interleaver_minus_one:
+ 1021 0000 00122436 		.ascii	"\000\022$6H\004\026(:L\010\032,>\014\0360B\020\"4F\001"
+ 1021      48041628 
+ 1021      3A4C081A 
+ 1021      2C3E0C1E 
+ 1021      30421022 
+ 1022 0017 13253749 		.ascii	"\023%7I\005\027);M\011\033-?\015\0371C\021#5G\002\024"
+ 1022      0517293B 
+ 1022      4D091B2D 
+ 1022      3F0D1F31 
+ 1022      43112335 
+ 1023 002e 26384A06 		.ascii	"&8J\006\030*<N\012\034.@\016 2D\003\025'9K\007\031+"
+ 1023      182A3C4E 
+ 1023      0A1C2E40 
+ 1023      0E203244 
+ 1023      03152739 
+ 1024 0046 3D4F0B1D 		.ascii	"=O\013\035/A\017!3E"
+ 1024      2F410F21 
+ 1024      3345
+ 1025              		.section	.rodata.lr_fhss_lfsr_poly1,"a"
+ 1026              		.align	2
+ 1027              		.set	.LANCHOR2,. + 0
+ 1030              	lr_fhss_lfsr_poly1:
+ 1031 0000 212D3033 		.ascii	"!-0369"
+ 1031      3639
+ 1032              		.section	.rodata.lr_fhss_lfsr_poly2,"a"
+ 1033              		.align	2
+ 1034              		.set	.LANCHOR3,. + 0
+ 1037              	lr_fhss_lfsr_poly2:
+ 1038 0000 41444748 		.ascii	"ADGH"
+ 1039              		.section	.rodata.lr_fhss_lfsr_poly3,"a"
+ 1040              		.set	.LANCHOR4,. + 0
+ 1043              	lr_fhss_lfsr_poly3:
+ 1044 0000 8E95     		.ascii	"\216\225"
+ 1045              		.section	.rodata.lr_fhss_payload_crc16_lut,"a"
+ARM GAS  /tmp/ccPiDyN8.s 			page 20
+
+
+ 1046              		.align	2
+ 1049              	lr_fhss_payload_crc16_lut:
+ 1050 0000 0000     		.short	0
+ 1051 0002 5B75     		.short	30043
+ 1052 0004 B6EA     		.short	-5450
+ 1053 0006 ED9F     		.short	-24595
+ 1054 0008 37A0     		.short	-24521
+ 1055 000a 6CD5     		.short	-10900
+ 1056 000c 814A     		.short	19073
+ 1057 000e DA3F     		.short	16346
+ 1058 0010 3535     		.short	13621
+ 1059 0012 6E40     		.short	16494
+ 1060 0014 83DF     		.short	-8317
+ 1061 0016 D8AA     		.short	-21800
+ 1062 0018 0295     		.short	-27390
+ 1063 001a 59E0     		.short	-8103
+ 1064 001c B47F     		.short	32692
+ 1065 001e EF0A     		.short	2799
+ 1066 0020 6A6A     		.short	27242
+ 1067 0022 311F     		.short	7985
+ 1068 0024 DC80     		.short	-32548
+ 1069 0026 87F5     		.short	-2681
+ 1070 0028 5DCA     		.short	-13731
+ 1071 002a 06BF     		.short	-16634
+ 1072 002c EB20     		.short	8427
+ 1073 002e B055     		.short	21936
+ 1074 0030 5F5F     		.short	24415
+ 1075 0032 042A     		.short	10756
+ 1076 0034 E9B5     		.short	-18967
+ 1077 0036 B2C0     		.short	-16206
+ 1078 0038 68FF     		.short	-152
+ 1079 003a 338A     		.short	-30157
+ 1080 003c DE15     		.short	5598
+ 1081 003e 8560     		.short	24709
+ 1082 0040 D4D4     		.short	-11052
+ 1083 0042 8FA1     		.short	-24177
+ 1084 0044 623E     		.short	15970
+ 1085 0046 394B     		.short	19257
+ 1086 0048 E374     		.short	29923
+ 1087 004a B801     		.short	440
+ 1088 004c 559E     		.short	-25003
+ 1089 004e 0EEB     		.short	-5362
+ 1090 0050 E1E1     		.short	-7711
+ 1091 0052 BA94     		.short	-27462
+ 1092 0054 570B     		.short	2903
+ 1093 0056 0C7E     		.short	32268
+ 1094 0058 D641     		.short	16854
+ 1095 005a 8D34     		.short	13453
+ 1096 005c 60AB     		.short	-21664
+ 1097 005e 3BDE     		.short	-8645
+ 1098 0060 BEBE     		.short	-16706
+ 1099 0062 E5CB     		.short	-13339
+ 1100 0064 0854     		.short	21512
+ 1101 0066 5321     		.short	8531
+ 1102 0068 891E     		.short	7817
+ 1103 006a D26B     		.short	27602
+ 1104 006c 3FF4     		.short	-3009
+ARM GAS  /tmp/ccPiDyN8.s 			page 21
+
+
+ 1105 006e 6481     		.short	-32412
+ 1106 0070 8B8B     		.short	-29813
+ 1107 0072 D0FE     		.short	-304
+ 1108 0074 3D61     		.short	24893
+ 1109 0076 6614     		.short	5222
+ 1110 0078 BC2B     		.short	11196
+ 1111 007a E75E     		.short	24295
+ 1112 007c 0AC1     		.short	-16118
+ 1113 007e 51B4     		.short	-19375
+ 1114 0080 F3DC     		.short	-8973
+ 1115 0082 A8A9     		.short	-22104
+ 1116 0084 4536     		.short	13893
+ 1117 0086 1E43     		.short	17182
+ 1118 0088 C47C     		.short	31940
+ 1119 008a 9F09     		.short	2463
+ 1120 008c 7296     		.short	-27022
+ 1121 008e 29E3     		.short	-7383
+ 1122 0090 C6E9     		.short	-5690
+ 1123 0092 9D9C     		.short	-25443
+ 1124 0094 7003     		.short	880
+ 1125 0096 2B76     		.short	30251
+ 1126 0098 F149     		.short	18929
+ 1127 009a AA3C     		.short	15530
+ 1128 009c 47A3     		.short	-23737
+ 1129 009e 1CD6     		.short	-10724
+ 1130 00a0 99B6     		.short	-18791
+ 1131 00a2 C2C3     		.short	-15422
+ 1132 00a4 2F5C     		.short	23599
+ 1133 00a6 7429     		.short	10612
+ 1134 00a8 AE16     		.short	5806
+ 1135 00aa F563     		.short	25589
+ 1136 00ac 18FC     		.short	-1000
+ 1137 00ae 4389     		.short	-30397
+ 1138 00b0 AC83     		.short	-31828
+ 1139 00b2 F7F6     		.short	-2313
+ 1140 00b4 1A69     		.short	26906
+ 1141 00b6 411C     		.short	7233
+ 1142 00b8 9B23     		.short	9115
+ 1143 00ba C056     		.short	22208
+ 1144 00bc 2DC9     		.short	-14035
+ 1145 00be 76BC     		.short	-17290
+ 1146 00c0 2708     		.short	2087
+ 1147 00c2 7C7D     		.short	32124
+ 1148 00c4 91E2     		.short	-7535
+ 1149 00c6 CA97     		.short	-26678
+ 1150 00c8 10A8     		.short	-22512
+ 1151 00ca 4BDD     		.short	-8885
+ 1152 00cc A642     		.short	17062
+ 1153 00ce FD37     		.short	14333
+ 1154 00d0 123D     		.short	15634
+ 1155 00d2 4948     		.short	18505
+ 1156 00d4 A4D7     		.short	-10332
+ 1157 00d6 FFA2     		.short	-23809
+ 1158 00d8 259D     		.short	-25307
+ 1159 00da 7EE8     		.short	-6018
+ 1160 00dc 9377     		.short	30611
+ 1161 00de C802     		.short	712
+ARM GAS  /tmp/ccPiDyN8.s 			page 22
+
+
+ 1162 00e0 4D62     		.short	25165
+ 1163 00e2 1617     		.short	5910
+ 1164 00e4 FB88     		.short	-30469
+ 1165 00e6 A0FD     		.short	-608
+ 1166 00e8 7AC2     		.short	-15750
+ 1167 00ea 21B7     		.short	-18655
+ 1168 00ec CC28     		.short	10444
+ 1169 00ee 975D     		.short	23959
+ 1170 00f0 7857     		.short	22392
+ 1171 00f2 2322     		.short	8739
+ 1172 00f4 CEBD     		.short	-16946
+ 1173 00f6 95C8     		.short	-14187
+ 1174 00f8 4FF7     		.short	-2225
+ 1175 00fa 1482     		.short	-32236
+ 1176 00fc F91D     		.short	7673
+ 1177 00fe A268     		.short	26786
+ 1178 0100 BDCC     		.short	-13123
+ 1179 0102 E6B9     		.short	-17946
+ 1180 0104 0B26     		.short	9739
+ 1181 0106 5053     		.short	21328
+ 1182 0108 8A6C     		.short	27786
+ 1183 010a D119     		.short	6609
+ 1184 010c 3C86     		.short	-31172
+ 1185 010e 67F3     		.short	-3225
+ 1186 0110 88F9     		.short	-1656
+ 1187 0112 D38C     		.short	-29485
+ 1188 0114 3E13     		.short	4926
+ 1189 0116 6566     		.short	26213
+ 1190 0118 BF59     		.short	22975
+ 1191 011a E42C     		.short	11492
+ 1192 011c 09B3     		.short	-19703
+ 1193 011e 52C6     		.short	-14766
+ 1194 0120 D7A6     		.short	-22825
+ 1195 0122 8CD3     		.short	-11380
+ 1196 0124 614C     		.short	19553
+ 1197 0126 3A39     		.short	14650
+ 1198 0128 E006     		.short	1760
+ 1199 012a BB73     		.short	29627
+ 1200 012c 56EC     		.short	-5034
+ 1201 012e 0D99     		.short	-26355
+ 1202 0130 E293     		.short	-27678
+ 1203 0132 B9E6     		.short	-6471
+ 1204 0134 5479     		.short	31060
+ 1205 0136 0F0C     		.short	3087
+ 1206 0138 D533     		.short	13269
+ 1207 013a 8E46     		.short	18062
+ 1208 013c 63D9     		.short	-9885
+ 1209 013e 38AC     		.short	-21448
+ 1210 0140 6918     		.short	6249
+ 1211 0142 326D     		.short	27954
+ 1212 0144 DFF2     		.short	-3361
+ 1213 0146 8487     		.short	-30844
+ 1214 0148 5EB8     		.short	-18338
+ 1215 014a 05CD     		.short	-13051
+ 1216 014c E852     		.short	21224
+ 1217 014e B327     		.short	10163
+ 1218 0150 5C2D     		.short	11612
+ARM GAS  /tmp/ccPiDyN8.s 			page 23
+
+
+ 1219 0152 0758     		.short	22535
+ 1220 0154 EAC7     		.short	-14358
+ 1221 0156 B1B2     		.short	-19791
+ 1222 0158 6B8D     		.short	-29333
+ 1223 015a 30F8     		.short	-2000
+ 1224 015c DD67     		.short	26589
+ 1225 015e 8612     		.short	4742
+ 1226 0160 0372     		.short	29187
+ 1227 0162 5807     		.short	1880
+ 1228 0164 B598     		.short	-26443
+ 1229 0166 EEED     		.short	-4626
+ 1230 0168 34D2     		.short	-11724
+ 1231 016a 6FA7     		.short	-22673
+ 1232 016c 8238     		.short	14466
+ 1233 016e D94D     		.short	19929
+ 1234 0170 3647     		.short	18230
+ 1235 0172 6D32     		.short	12909
+ 1236 0174 80AD     		.short	-21120
+ 1237 0176 DBD8     		.short	-10021
+ 1238 0178 01E7     		.short	-6399
+ 1239 017a 5A92     		.short	-28070
+ 1240 017c B70D     		.short	3511
+ 1241 017e EC78     		.short	30956
+ 1242 0180 4E10     		.short	4174
+ 1243 0182 1565     		.short	25877
+ 1244 0184 F8FA     		.short	-1288
+ 1245 0186 A38F     		.short	-28765
+ 1246 0188 79B0     		.short	-20359
+ 1247 018a 22C5     		.short	-15070
+ 1248 018c CF5A     		.short	23247
+ 1249 018e 942F     		.short	12180
+ 1250 0190 7B25     		.short	9595
+ 1251 0192 2050     		.short	20512
+ 1252 0194 CDCF     		.short	-12339
+ 1253 0196 96BA     		.short	-17770
+ 1254 0198 4C85     		.short	-31412
+ 1255 019a 17F0     		.short	-4073
+ 1256 019c FA6F     		.short	28666
+ 1257 019e A11A     		.short	6817
+ 1258 01a0 247A     		.short	31268
+ 1259 01a2 7F0F     		.short	3967
+ 1260 01a4 9290     		.short	-28526
+ 1261 01a6 C9E5     		.short	-6711
+ 1262 01a8 13DA     		.short	-9709
+ 1263 01aa 48AF     		.short	-20664
+ 1264 01ac A530     		.short	12453
+ 1265 01ae FE45     		.short	17918
+ 1266 01b0 114F     		.short	20241
+ 1267 01b2 4A3A     		.short	14922
+ 1268 01b4 A7A5     		.short	-23129
+ 1269 01b6 FCD0     		.short	-12036
+ 1270 01b8 26EF     		.short	-4314
+ 1271 01ba 7D9A     		.short	-25987
+ 1272 01bc 9005     		.short	1424
+ 1273 01be CB70     		.short	28875
+ 1274 01c0 9AC4     		.short	-15206
+ 1275 01c2 C1B1     		.short	-20031
+ARM GAS  /tmp/ccPiDyN8.s 			page 24
+
+
+ 1276 01c4 2C2E     		.short	11820
+ 1277 01c6 775B     		.short	23415
+ 1278 01c8 AD64     		.short	25773
+ 1279 01ca F611     		.short	4598
+ 1280 01cc 1B8E     		.short	-29157
+ 1281 01ce 40FB     		.short	-1216
+ 1282 01d0 AFF1     		.short	-3665
+ 1283 01d2 F484     		.short	-31500
+ 1284 01d4 191B     		.short	6937
+ 1285 01d6 426E     		.short	28226
+ 1286 01d8 9851     		.short	20888
+ 1287 01da C324     		.short	9411
+ 1288 01dc 2EBB     		.short	-17618
+ 1289 01de 75CE     		.short	-12683
+ 1290 01e0 F0AE     		.short	-20752
+ 1291 01e2 ABDB     		.short	-9301
+ 1292 01e4 4644     		.short	17478
+ 1293 01e6 1D31     		.short	12573
+ 1294 01e8 C70E     		.short	3783
+ 1295 01ea 9C7B     		.short	31644
+ 1296 01ec 71E4     		.short	-7055
+ 1297 01ee 2A91     		.short	-28374
+ 1298 01f0 C59B     		.short	-25659
+ 1299 01f2 9EEE     		.short	-4450
+ 1300 01f4 7371     		.short	29043
+ 1301 01f6 2804     		.short	1064
+ 1302 01f8 F23B     		.short	15346
+ 1303 01fa A94E     		.short	20137
+ 1304 01fc 44D1     		.short	-11964
+ 1305 01fe 1FA4     		.short	-23521
+ 1306              		.section	.rodata.lr_fhss_viterbi_1_2_table,"a"
+ 1307              		.align	2
+ 1308              		.set	.LANCHOR0,. + 0
+ 1311              	lr_fhss_viterbi_1_2_table:
+ 1312 0000 0003     		.ascii	"\000\003"
+ 1313 0002 0102     		.ascii	"\001\002"
+ 1314 0004 0201     		.ascii	"\002\001"
+ 1315 0006 0300     		.ascii	"\003\000"
+ 1316 0008 0201     		.ascii	"\002\001"
+ 1317 000a 0300     		.ascii	"\003\000"
+ 1318 000c 0003     		.ascii	"\000\003"
+ 1319 000e 0102     		.ascii	"\001\002"
+ 1320 0010 0300     		.ascii	"\003\000"
+ 1321 0012 0201     		.ascii	"\002\001"
+ 1322 0014 0102     		.ascii	"\001\002"
+ 1323 0016 0003     		.ascii	"\000\003"
+ 1324 0018 0102     		.ascii	"\001\002"
+ 1325 001a 0003     		.ascii	"\000\003"
+ 1326 001c 0300     		.ascii	"\003\000"
+ 1327 001e 0201     		.ascii	"\002\001"
+ 1328              		.section	.rodata.lr_fhss_viterbi_1_3_table,"a"
+ 1329              		.align	2
+ 1332              	lr_fhss_viterbi_1_3_table:
+ 1333 0000 0007     		.ascii	"\000\007"
+ 1334 0002 0304     		.ascii	"\003\004"
+ 1335 0004 0700     		.ascii	"\007\000"
+ 1336 0006 0403     		.ascii	"\004\003"
+ARM GAS  /tmp/ccPiDyN8.s 			page 25
+
+
+ 1337 0008 0601     		.ascii	"\006\001"
+ 1338 000a 0502     		.ascii	"\005\002"
+ 1339 000c 0106     		.ascii	"\001\006"
+ 1340 000e 0205     		.ascii	"\002\005"
+ 1341 0010 0106     		.ascii	"\001\006"
+ 1342 0012 0205     		.ascii	"\002\005"
+ 1343 0014 0601     		.ascii	"\006\001"
+ 1344 0016 0502     		.ascii	"\005\002"
+ 1345 0018 0700     		.ascii	"\007\000"
+ 1346 001a 0403     		.ascii	"\004\003"
+ 1347 001c 0007     		.ascii	"\000\007"
+ 1348 001e 0304     		.ascii	"\003\004"
+ 1349 0020 0403     		.ascii	"\004\003"
+ 1350 0022 0700     		.ascii	"\007\000"
+ 1351 0024 0304     		.ascii	"\003\004"
+ 1352 0026 0007     		.ascii	"\000\007"
+ 1353 0028 0205     		.ascii	"\002\005"
+ 1354 002a 0106     		.ascii	"\001\006"
+ 1355 002c 0502     		.ascii	"\005\002"
+ 1356 002e 0601     		.ascii	"\006\001"
+ 1357 0030 0502     		.ascii	"\005\002"
+ 1358 0032 0601     		.ascii	"\006\001"
+ 1359 0034 0205     		.ascii	"\002\005"
+ 1360 0036 0106     		.ascii	"\001\006"
+ 1361 0038 0304     		.ascii	"\003\004"
+ 1362 003a 0007     		.ascii	"\000\007"
+ 1363 003c 0403     		.ascii	"\004\003"
+ 1364 003e 0700     		.ascii	"\007\000"
+ 1365 0040 0700     		.ascii	"\007\000"
+ 1366 0042 0403     		.ascii	"\004\003"
+ 1367 0044 0007     		.ascii	"\000\007"
+ 1368 0046 0304     		.ascii	"\003\004"
+ 1369 0048 0106     		.ascii	"\001\006"
+ 1370 004a 0205     		.ascii	"\002\005"
+ 1371 004c 0601     		.ascii	"\006\001"
+ 1372 004e 0502     		.ascii	"\005\002"
+ 1373 0050 0601     		.ascii	"\006\001"
+ 1374 0052 0502     		.ascii	"\005\002"
+ 1375 0054 0106     		.ascii	"\001\006"
+ 1376 0056 0205     		.ascii	"\002\005"
+ 1377 0058 0007     		.ascii	"\000\007"
+ 1378 005a 0304     		.ascii	"\003\004"
+ 1379 005c 0700     		.ascii	"\007\000"
+ 1380 005e 0403     		.ascii	"\004\003"
+ 1381 0060 0304     		.ascii	"\003\004"
+ 1382 0062 0007     		.ascii	"\000\007"
+ 1383 0064 0403     		.ascii	"\004\003"
+ 1384 0066 0700     		.ascii	"\007\000"
+ 1385 0068 0502     		.ascii	"\005\002"
+ 1386 006a 0601     		.ascii	"\006\001"
+ 1387 006c 0205     		.ascii	"\002\005"
+ 1388 006e 0106     		.ascii	"\001\006"
+ 1389 0070 0205     		.ascii	"\002\005"
+ 1390 0072 0106     		.ascii	"\001\006"
+ 1391 0074 0502     		.ascii	"\005\002"
+ 1392 0076 0601     		.ascii	"\006\001"
+ 1393 0078 0403     		.ascii	"\004\003"
+ARM GAS  /tmp/ccPiDyN8.s 			page 26
+
+
+ 1394 007a 0700     		.ascii	"\007\000"
+ 1395 007c 0304     		.ascii	"\003\004"
+ 1396 007e 0007     		.ascii	"\000\007"
+ 1397              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccPiDyN8.s 			page 27
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 lr_fhss_mac.c
+     /tmp/ccPiDyN8.s:12     .text.lr_fhss_extract_bit_in_byte_vector:0000000000000000 $t
+     /tmp/ccPiDyN8.s:19     .text.lr_fhss_extract_bit_in_byte_vector:0000000000000000 lr_fhss_extract_bit_in_byte_vector
+     /tmp/ccPiDyN8.s:34     .text.lr_fhss_set_bit_in_byte_vector:0000000000000000 $t
+     /tmp/ccPiDyN8.s:40     .text.lr_fhss_set_bit_in_byte_vector:0000000000000000 lr_fhss_set_bit_in_byte_vector
+     /tmp/ccPiDyN8.s:59     .text.lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0:0000000000000000 $t
+     /tmp/ccPiDyN8.s:65     .text.lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0:0000000000000000 lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0
+     /tmp/ccPiDyN8.s:114    .text.lr_fhss_convolution_encode_viterbi_1_2_base.constprop.0.isra.0:0000000000000054 $d
+     /tmp/ccPiDyN8.s:117    .text.lr_fhss_get_hop_sequence_count:0000000000000000 $t
+     /tmp/ccPiDyN8.s:124    .text.lr_fhss_get_hop_sequence_count:0000000000000000 lr_fhss_get_hop_sequence_count
+     /tmp/ccPiDyN8.s:151    .text.lr_fhss_process_parameters:0000000000000000 $t
+     /tmp/ccPiDyN8.s:158    .text.lr_fhss_process_parameters:0000000000000000 lr_fhss_process_parameters
+     /tmp/ccPiDyN8.s:172    .text.lr_fhss_process_parameters:0000000000000016 $d
+     /tmp/ccPiDyN8.s:176    .text.lr_fhss_process_parameters:000000000000001a $t
+     /tmp/ccPiDyN8.s:241    .text.lr_fhss_get_hop_params:0000000000000000 $t
+     /tmp/ccPiDyN8.s:248    .text.lr_fhss_get_hop_params:0000000000000000 lr_fhss_get_hop_params
+     /tmp/ccPiDyN8.s:369    .text.lr_fhss_get_hop_params:00000000000000c8 $d
+     /tmp/ccPiDyN8.s:376    .text.lr_fhss_get_next_state:0000000000000000 $t
+     /tmp/ccPiDyN8.s:383    .text.lr_fhss_get_next_state:0000000000000000 lr_fhss_get_next_state
+     /tmp/ccPiDyN8.s:413    .text.lr_fhss_get_next_freq_in_grid:0000000000000000 $t
+     /tmp/ccPiDyN8.s:420    .text.lr_fhss_get_next_freq_in_grid:0000000000000000 lr_fhss_get_next_freq_in_grid
+     /tmp/ccPiDyN8.s:449    .text.lr_fhss_build_frame:0000000000000000 $t
+     /tmp/ccPiDyN8.s:456    .text.lr_fhss_build_frame:0000000000000000 lr_fhss_build_frame
+     /tmp/ccPiDyN8.s:830    .text.lr_fhss_build_frame:00000000000002bc $d
+     /tmp/ccPiDyN8.s:1049   .rodata.lr_fhss_payload_crc16_lut:0000000000000000 lr_fhss_payload_crc16_lut
+     /tmp/ccPiDyN8.s:1332   .rodata.lr_fhss_viterbi_1_3_table:0000000000000000 lr_fhss_viterbi_1_3_table
+     /tmp/ccPiDyN8.s:837    .text.lr_fhss_build_frame:00000000000002d4 $t
+     /tmp/ccPiDyN8.s:939    .text.lr_fhss_build_frame:00000000000003a8 $d
+     /tmp/ccPiDyN8.s:1000   .rodata.lr_fhss_header_crc8_lut:0000000000000000 lr_fhss_header_crc8_lut
+     /tmp/ccPiDyN8.s:943    .text.lr_fhss_get_time_on_air_in_ms:0000000000000000 $t
+     /tmp/ccPiDyN8.s:950    .text.lr_fhss_get_time_on_air_in_ms:0000000000000000 lr_fhss_get_time_on_air_in_ms
+     /tmp/ccPiDyN8.s:976    .rodata.CSWTCH.42:0000000000000000 CSWTCH.42
+     /tmp/ccPiDyN8.s:981    .rodata.lr_fhss_channel_count:0000000000000000 $d
+     /tmp/ccPiDyN8.s:985    .rodata.lr_fhss_channel_count:0000000000000000 lr_fhss_channel_count
+     /tmp/ccPiDyN8.s:997    .rodata.lr_fhss_header_crc8_lut:0000000000000000 $d
+     /tmp/ccPiDyN8.s:1016   .rodata.lr_fhss_header_interleaver_minus_one:0000000000000000 $d
+     /tmp/ccPiDyN8.s:1020   .rodata.lr_fhss_header_interleaver_minus_one:0000000000000000 lr_fhss_header_interleaver_minus_one
+     /tmp/ccPiDyN8.s:1026   .rodata.lr_fhss_lfsr_poly1:0000000000000000 $d
+     /tmp/ccPiDyN8.s:1030   .rodata.lr_fhss_lfsr_poly1:0000000000000000 lr_fhss_lfsr_poly1
+     /tmp/ccPiDyN8.s:1033   .rodata.lr_fhss_lfsr_poly2:0000000000000000 $d
+     /tmp/ccPiDyN8.s:1037   .rodata.lr_fhss_lfsr_poly2:0000000000000000 lr_fhss_lfsr_poly2
+     /tmp/ccPiDyN8.s:1043   .rodata.lr_fhss_lfsr_poly3:0000000000000000 lr_fhss_lfsr_poly3
+     /tmp/ccPiDyN8.s:1046   .rodata.lr_fhss_payload_crc16_lut:0000000000000000 $d
+     /tmp/ccPiDyN8.s:1307   .rodata.lr_fhss_viterbi_1_2_table:0000000000000000 $d
+     /tmp/ccPiDyN8.s:1311   .rodata.lr_fhss_viterbi_1_2_table:0000000000000000 lr_fhss_viterbi_1_2_table
+     /tmp/ccPiDyN8.s:1329   .rodata.lr_fhss_viterbi_1_3_table:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv
+__aeabi_idiv
+__aeabi_uidivmod
+__gnu_thumb1_case_uqi
+memset
+memcpy

@@ -1,0 +1,14 @@
+extensions/drivers/mx25/mx25.c:47:6:mx25_wakeup	8	static
+extensions/drivers/mx25/mx25.c:79:6:mx25_read_status	16	static
+extensions/drivers/mx25/mx25.c:56:6:mx25_busy	16	static
+extensions/drivers/mx25/mx25.c:67:6:mx25_wait_ready	8	static
+extensions/drivers/mx25/mx25.c:33:6:mx25_sleep	8	static
+extensions/drivers/mx25/mx25.c:88:6:mx25_read_id	16	static
+extensions/drivers/mx25/mx25.c:12:6:mx25_init	16	static
+extensions/drivers/mx25/mx25.c:101:6:mx25_enable_write	8	static
+extensions/drivers/mx25/mx25.c:115:6:mx25_read	32	static
+extensions/drivers/mx25/mx25.c:226:6:mx25_page_writeable	272	static
+extensions/drivers/mx25/mx25.c:185:6:mx25_write_page	32	static
+extensions/drivers/mx25/mx25.c:142:6:mx25_write	48	static
+extensions/drivers/mx25/mx25.c:254:6:mx25_erase_page	16	static
+extensions/drivers/mx25/mx25.c:281:6:mx25_erase_all	16	static

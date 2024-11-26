@@ -1,0 +1,1737 @@
+ARM GAS  /tmp/ccGMlE7J.s 			page 1
+
+
+   1              		.cpu cortex-m0plus
+   2              		.eabi_attribute 23, 1
+   3              		.eabi_attribute 24, 1
+   4              		.eabi_attribute 25, 1
+   5              		.eabi_attribute 26, 1
+   6              		.eabi_attribute 30, 4
+   7              		.eabi_attribute 34, 0
+   8              		.eabi_attribute 18, 4
+   9              		.file	"smtc_modem_test.c"
+  10              		.text
+  11              		.section	.text.ral_compute_lora_ldro,"ax",%progbits
+  12              		.align	1
+  13              		.arch armv6s-m
+  14              		.syntax unified
+  15              		.code	16
+  16              		.thumb_func
+  17              		.fpu softvfp
+  19              	ral_compute_lora_ldro:
+  20              		@ args = 0, pretend = 0, frame = 0
+  21              		@ frame_needed = 0, uses_anonymous_args = 0
+  22 0000 0300     		movs	r3, r0
+  23 0002 00B5     		push	{lr}
+  24 0004 0800     		movs	r0, r1
+  25 0006 0C29     		cmp	r1, #12
+  26 0008 21D8     		bhi	.L9
+  27 000a FFF7FEFF 		bl	__gnu_thumb1_case_uqi
+  28              	.L4:
+  29 000e 07       		.byte	(.L8-.L4)/2
+  30 000f 07       		.byte	(.L8-.L4)/2
+  31 0010 07       		.byte	(.L8-.L4)/2
+  32 0011 07       		.byte	(.L8-.L4)/2
+  33 0012 07       		.byte	(.L8-.L4)/2
+  34 0013 1B       		.byte	(.L7-.L4)/2
+  35 0014 16       		.byte	(.L6-.L4)/2
+  36 0015 0E       		.byte	(.L3-.L4)/2
+  37 0016 0E       		.byte	(.L3-.L4)/2
+  38 0017 09       		.byte	(.L5-.L4)/2
+  39 0018 0E       		.byte	(.L3-.L4)/2
+  40 0019 20       		.byte	(.L9-.L4)/2
+  41 001a 0E       		.byte	(.L3-.L4)/2
+  42 001b 00       		.p2align 1
+  43              	.L8:
+  44 001c 0120     		movs	r0, #1
+  45              	.L2:
+  46              		@ sp needed
+  47 001e 00BD     		pop	{pc}
+  48              	.L5:
+  49 0020 0C3B     		subs	r3, r3, #12
+  50 0022 5A42     		rsbs	r2, r3, #0
+  51 0024 5341     		adcs	r3, r3, r2
+  52 0026 D8B2     		uxtb	r0, r3
+  53 0028 F9E7     		b	.L2
+  54              	.L3:
+  55 002a 0020     		movs	r0, #0
+  56 002c 0122     		movs	r2, #1
+  57 002e 0B3B     		subs	r3, r3, #11
+  58 0030 DBB2     		uxtb	r3, r3
+ARM GAS  /tmp/ccGMlE7J.s 			page 2
+
+
+  59              	.L10:
+  60 0032 9A42     		cmp	r2, r3
+  61 0034 4041     		adcs	r0, r0, r0
+  62 0036 C0B2     		uxtb	r0, r0
+  63 0038 F1E7     		b	.L2
+  64              	.L6:
+  65 003a 0A3B     		subs	r3, r3, #10
+  66 003c 0020     		movs	r0, #0
+  67 003e 0222     		movs	r2, #2
+  68 0040 DBB2     		uxtb	r3, r3
+  69 0042 F6E7     		b	.L10
+  70              	.L7:
+  71 0044 093B     		subs	r3, r3, #9
+  72 0046 0020     		movs	r0, #0
+  73 0048 0322     		movs	r2, #3
+  74 004a DBB2     		uxtb	r3, r3
+  75 004c F1E7     		b	.L10
+  76              	.L9:
+  77 004e 0020     		movs	r0, #0
+  78 0050 E5E7     		b	.L2
+  80              		.section	.text.modem_test_empty_callback,"ax",%progbits
+  81              		.align	1
+  82              		.global	modem_test_empty_callback
+  83              		.syntax unified
+  84              		.code	16
+  85              		.thumb_func
+  86              		.fpu softvfp
+  88              	modem_test_empty_callback:
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92              		@ sp needed
+  93 0000 7047     		bx	lr
+  95              		.global	__aeabi_i2f
+  96              		.global	__aeabi_ui2f
+  97              		.global	__aeabi_fdiv
+  98              		.global	__aeabi_f2iz
+  99              		.section	.text.modem_test_compute_rssi_callback,"ax",%progbits
+ 100              		.align	1
+ 101              		.global	modem_test_compute_rssi_callback
+ 102              		.syntax unified
+ 103              		.code	16
+ 104              		.thumb_func
+ 105              		.fpu softvfp
+ 107              	modem_test_compute_rssi_callback:
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 111 0002 0500     		movs	r5, r0
+ 112              		@ sp needed
+ 113 0004 FC35     		adds	r5, r5, #252
+ 114 0006 0400     		movs	r4, r0
+ 115 0008 E86C     		ldr	r0, [r5, #76]
+ 116 000a FFF7FEFF 		bl	__aeabi_i2f
+ 117 000e 2E6D     		ldr	r6, [r5, #80]
+ 118 0010 071C     		adds	r7, r0, #0
+ 119 0012 3000     		movs	r0, r6
+ARM GAS  /tmp/ccGMlE7J.s 			page 3
+
+
+ 120 0014 FFF7FEFF 		bl	__aeabi_ui2f
+ 121 0018 011C     		adds	r1, r0, #0
+ 122 001a 381C     		adds	r0, r7, #0
+ 123 001c FFF7FEFF 		bl	__aeabi_fdiv
+ 124 0020 FFF7FEFF 		bl	__aeabi_f2iz
+ 125 0024 2300     		movs	r3, r4
+ 126 0026 FE33     		adds	r3, r3, #254
+ 127 0028 5881     		strh	r0, [r3, #10]
+ 128 002a 0123     		movs	r3, #1
+ 129 002c FF34     		adds	r4, r4, #255
+ 130 002e 2E61     		str	r6, [r5, #16]
+ 131 0030 E372     		strb	r3, [r4, #11]
+ 132 0032 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 134              		.section	.text.modem_test_rx_callback,"ax",%progbits
+ 135              		.align	1
+ 136              		.global	modem_test_rx_callback
+ 137              		.syntax unified
+ 138              		.code	16
+ 139              		.thumb_func
+ 140              		.fpu softvfp
+ 142              	modem_test_rx_callback:
+ 143              		@ args = 0, pretend = 0, frame = 168
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 146 0002 0500     		movs	r5, r0
+ 147 0004 ADB0     		sub	sp, sp, #180
+ 148 0006 FFF7FEFF 		bl	smtc_modem_hal_reload_wdog
+ 149 000a E422     		movs	r2, #228
+ 150 000c 2E7A     		ldrb	r6, [r5, #8]
+ 151 000e 2B68     		ldr	r3, [r5]
+ 152 0010 9200     		lsls	r2, r2, #2
+ 153 0012 9B19     		adds	r3, r3, r6
+ 154 0014 9B18     		adds	r3, r3, r2
+ 155 0016 1B78     		ldrb	r3, [r3]
+ 156 0018 042B     		cmp	r3, #4
+ 157 001a 30D1     		bne	.L14
+ 158 001c 2A00     		movs	r2, r5
+ 159 001e FC32     		adds	r2, r2, #252
+ 160 0020 1369     		ldr	r3, [r2, #16]
+ 161 0022 0133     		adds	r3, r3, #1
+ 162 0024 1361     		str	r3, [r2, #16]
+ 163              	.L15:
+ 164 0026 03AC     		add	r4, sp, #12
+ 165 0028 1822     		movs	r2, #24
+ 166 002a 0021     		movs	r1, #0
+ 167 002c 2000     		movs	r0, r4
+ 168 002e FFF7FEFF 		bl	memset
+ 169 0032 0123     		movs	r3, #1
+ 170 0034 2670     		strb	r6, [r4]
+ 171 0036 A372     		strb	r3, [r4, #10]
+ 172 0038 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 173 003c 8C22     		movs	r2, #140
+ 174 003e FA23     		movs	r3, #250
+ 175 0040 297A     		ldrb	r1, [r5, #8]
+ 176 0042 2F68     		ldr	r7, [r5]
+ 177 0044 5143     		muls	r1, r2
+ 178 0046 1430     		adds	r0, r0, #20
+ARM GAS  /tmp/ccGMlE7J.s 			page 4
+
+
+ 179 0048 09AE     		add	r6, sp, #36
+ 180 004a 7918     		adds	r1, r7, r1
+ 181 004c DB00     		lsls	r3, r3, #3
+ 182 004e E060     		str	r0, [r4, #12]
+ 183 0050 1831     		adds	r1, r1, #24
+ 184 0052 3000     		movs	r0, r6
+ 185 0054 6361     		str	r3, [r4, #20]
+ 186 0056 FFF7FEFF 		bl	memcpy
+ 187 005a 2A00     		movs	r2, r5
+ 188 005c 3378     		ldrb	r3, [r6]
+ 189 005e 0932     		adds	r2, r2, #9
+ 190 0060 012B     		cmp	r3, #1
+ 191 0062 10D1     		bne	.L16
+ 192 0064 0023     		movs	r3, #0
+ 193 0066 6370     		strb	r3, [r4, #1]
+ 194 0068 0A4B     		ldr	r3, .L19
+ 195 006a 6360     		str	r3, [r4, #4]
+ 196 006c 5B23     		movs	r3, #91
+ 197 006e 6B44     		add	r3, r3, sp
+ 198 0070 1B78     		ldrb	r3, [r3]
+ 199              	.L18:
+ 200 0072 2100     		movs	r1, r4
+ 201 0074 3800     		movs	r0, r7
+ 202 0076 0096     		str	r6, [sp]
+ 203 0078 FFF7FEFF 		bl	rp_task_enqueue
+ 204 007c 01E0     		b	.L13
+ 205              	.L14:
+ 206 007e 0A2B     		cmp	r3, #10
+ 207 0080 D1D1     		bne	.L15
+ 208              	.L13:
+ 209 0082 2DB0     		add	sp, sp, #180
+ 210              		@ sp needed
+ 211 0084 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 212              	.L16:
+ 213 0086 0123     		movs	r3, #1
+ 214 0088 6370     		strb	r3, [r4, #1]
+ 215 008a 034B     		ldr	r3, .L19+4
+ 216 008c 6360     		str	r3, [r4, #4]
+ 217 008e 0BAB     		add	r3, sp, #44
+ 218 0090 DB8F     		ldrh	r3, [r3, #62]
+ 219 0092 EEE7     		b	.L18
+ 220              	.L20:
+ 221              		.align	2
+ 222              	.L19:
+ 223 0094 00000000 		.word	lr1_stack_mac_rx_lora_launch_callback_for_rp
+ 224 0098 00000000 		.word	lr1_stack_mac_rx_gfsk_launch_callback_for_rp
+ 226              		.section	.rodata.test_mode_cw_callback_for_rp.str1.1,"aMS",%progbits,1
+ 227              	.LC2:
+ 228 0000 72616C5F 		.ascii	"ral_init( &( rp->radio->ral ) ) == RAL_STATUS_OK\000"
+ 228      696E6974 
+ 228      28202628 
+ 228      2072702D 
+ 228      3E726164 
+ 229              	.LC5:
+ 230 0031 72616C66 		.ascii	"ralf_setup_lora( rp->radio, &rp->radio_params[id].t"
+ 230      5F736574 
+ 230      75705F6C 
+ARM GAS  /tmp/ccGMlE7J.s 			page 5
+
+
+ 230      6F726128 
+ 230      2072702D 
+ 231 0064 782E6C6F 		.ascii	"x.lora ) == RAL_STATUS_OK\000"
+ 231      72612029 
+ 231      203D3D20 
+ 231      52414C5F 
+ 231      53544154 
+ 232              	.LC7:
+ 233 007e 72616C5F 		.ascii	"ral_set_tx_cw( &( rp->radio->ral ) ) == RAL_STATUS_"
+ 233      7365745F 
+ 233      74785F63 
+ 233      77282026 
+ 233      28207270 
+ 234 00b1 4F4B00   		.ascii	"OK\000"
+ 235              		.section	.text.test_mode_cw_callback_for_rp,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	test_mode_cw_callback_for_rp
+ 238              		.syntax unified
+ 239              		.code	16
+ 240              		.thumb_func
+ 241              		.fpu softvfp
+ 243              	test_mode_cw_callback_for_rp:
+ 244              		@ args = 0, pretend = 0, frame = 0
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246 0000 70B5     		push	{r4, r5, r6, lr}
+ 247 0002 9323     		movs	r3, #147
+ 248 0004 9826     		movs	r6, #152
+ 249 0006 DB00     		lsls	r3, r3, #3
+ 250 0008 F600     		lsls	r6, r6, #3
+ 251 000a C55C     		ldrb	r5, [r0, r3]
+ 252 000c 8359     		ldr	r3, [r0, r6]
+ 253 000e 0400     		movs	r4, r0
+ 254 0010 DA68     		ldr	r2, [r3, #12]
+ 255 0012 1868     		ldr	r0, [r3]
+ 256 0014 9047     		blx	r2
+ 257 0016 0028     		cmp	r0, #0
+ 258 0018 04D0     		beq	.L22
+ 259 001a 134A     		ldr	r2, .L34
+ 260 001c 1349     		ldr	r1, .L34+4
+ 261 001e 1448     		ldr	r0, .L34+8
+ 262 0020 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 263              	.L22:
+ 264 0024 8C21     		movs	r1, #140
+ 265 0026 A059     		ldr	r0, [r4, r6]
+ 266 0028 6943     		muls	r1, r5
+ 267 002a 0300     		movs	r3, r0
+ 268 002c 1C31     		adds	r1, r1, #28
+ 269 002e FC33     		adds	r3, r3, #252
+ 270 0030 9B68     		ldr	r3, [r3, #8]
+ 271 0032 6118     		adds	r1, r4, r1
+ 272 0034 9847     		blx	r3
+ 273 0036 0028     		cmp	r0, #0
+ 274 0038 04D0     		beq	.L23
+ 275 003a 0E4A     		ldr	r2, .L34+12
+ 276 003c 0E49     		ldr	r1, .L34+16
+ 277 003e 0C48     		ldr	r0, .L34+8
+ 278 0040 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ARM GAS  /tmp/ccGMlE7J.s 			page 6
+
+
+ 279              	.L23:
+ 280 0044 0120     		movs	r0, #1
+ 281 0046 FFF7FEFF 		bl	smtc_modem_hal_set_ant_switch
+ 282 004a 9823     		movs	r3, #152
+ 283 004c DB00     		lsls	r3, r3, #3
+ 284 004e E358     		ldr	r3, [r4, r3]
+ 285 0050 DA6B     		ldr	r2, [r3, #60]
+ 286 0052 1868     		ldr	r0, [r3]
+ 287 0054 9047     		blx	r2
+ 288 0056 0028     		cmp	r0, #0
+ 289 0058 04D0     		beq	.L21
+ 290 005a 084A     		ldr	r2, .L34+20
+ 291 005c 0849     		ldr	r1, .L34+24
+ 292 005e 0448     		ldr	r0, .L34+8
+ 293 0060 FFF7FEFF 		bl	smtc_modem_hal_on_panic
+ 294              	.L21:
+ 295              		@ sp needed
+ 296 0064 70BD     		pop	{r4, r5, r6, pc}
+ 297              	.L35:
+ 298 0066 C046     		.align	2
+ 299              	.L34:
+ 300 0068 00000000 		.word	.LC2
+ 301 006c 8E030000 		.word	910
+ 302 0070 00000000 		.word	.LANCHOR0
+ 303 0074 31000000 		.word	.LC5
+ 304 0078 8F030000 		.word	911
+ 305 007c 7E000000 		.word	.LC7
+ 306 0080 91030000 		.word	913
+ 308              		.section	.text.modem_test_tx_callback,"ax",%progbits
+ 309              		.align	1
+ 310              		.global	modem_test_tx_callback
+ 311              		.syntax unified
+ 312              		.code	16
+ 313              		.thumb_func
+ 314              		.fpu softvfp
+ 316              	modem_test_tx_callback:
+ 317              		@ args = 0, pretend = 0, frame = 168
+ 318              		@ frame_needed = 0, uses_anonymous_args = 0
+ 319 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 320 0002 0400     		movs	r4, r0
+ 321 0004 ADB0     		sub	sp, sp, #180
+ 322 0006 FFF7FEFF 		bl	smtc_modem_hal_reload_wdog
+ 323 000a E422     		movs	r2, #228
+ 324 000c 267A     		ldrb	r6, [r4, #8]
+ 325 000e 2368     		ldr	r3, [r4]
+ 326 0010 9200     		lsls	r2, r2, #2
+ 327 0012 9B19     		adds	r3, r3, r6
+ 328 0014 9B18     		adds	r3, r3, r2
+ 329 0016 1B78     		ldrb	r3, [r3]
+ 330 0018 0A2B     		cmp	r3, #10
+ 331 001a 34D0     		beq	.L36
+ 332 001c 03AD     		add	r5, sp, #12
+ 333 001e 1822     		movs	r2, #24
+ 334 0020 0021     		movs	r1, #0
+ 335 0022 2800     		movs	r0, r5
+ 336 0024 FFF7FEFF 		bl	memset
+ 337 0028 0123     		movs	r3, #1
+ARM GAS  /tmp/ccGMlE7J.s 			page 7
+
+
+ 338 002a 2E70     		strb	r6, [r5]
+ 339 002c AB72     		strb	r3, [r5, #10]
+ 340 002e FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 341 0032 8C22     		movs	r2, #140
+ 342 0034 217A     		ldrb	r1, [r4, #8]
+ 343 0036 2368     		ldr	r3, [r4]
+ 344 0038 5143     		muls	r1, r2
+ 345 003a 1430     		adds	r0, r0, #20
+ 346 003c 5918     		adds	r1, r3, r1
+ 347 003e 09AE     		add	r6, sp, #36
+ 348 0040 E860     		str	r0, [r5, #12]
+ 349 0042 1831     		adds	r1, r1, #24
+ 350 0044 3000     		movs	r0, r6
+ 351 0046 FFF7FEFF 		bl	memcpy
+ 352 004a 2300     		movs	r3, r4
+ 353 004c 3278     		ldrb	r2, [r6]
+ 354 004e FF33     		adds	r3, r3, #255
+ 355 0050 012A     		cmp	r2, #1
+ 356 0052 28D1     		bne	.L38
+ 357 0054 0132     		adds	r2, r2, #1
+ 358 0056 6A70     		strb	r2, [r5, #1]
+ 359 0058 234A     		ldr	r2, .L49
+ 360 005a 6A60     		str	r2, [r5, #4]
+ 361 005c 5B7C     		ldrb	r3, [r3, #17]
+ 362 005e 002B     		cmp	r3, #0
+ 363 0060 1FD1     		bne	.L46
+ 364              	.L42:
+ 365 0062 9823     		movs	r3, #152
+ 366 0064 2268     		ldr	r2, [r4]
+ 367 0066 DB00     		lsls	r3, r3, #3
+ 368 0068 D358     		ldr	r3, [r2, r3]
+ 369 006a 0AA9     		add	r1, sp, #40
+ 370 006c A033     		adds	r3, r3, #160
+ 371 006e 1B68     		ldr	r3, [r3]
+ 372 0070 0BA8     		add	r0, sp, #44
+ 373 0072 9847     		blx	r3
+ 374 0074 6861     		str	r0, [r5, #20]
+ 375 0076 F37A     		ldrb	r3, [r6, #11]
+ 376              	.L48:
+ 377 0078 2200     		movs	r2, r4
+ 378 007a 2900     		movs	r1, r5
+ 379 007c 2068     		ldr	r0, [r4]
+ 380 007e 0932     		adds	r2, r2, #9
+ 381 0080 0096     		str	r6, [sp]
+ 382 0082 FFF7FEFF 		bl	rp_task_enqueue
+ 383              	.L36:
+ 384 0086 2DB0     		add	sp, sp, #180
+ 385              		@ sp needed
+ 386 0088 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 387              	.L41:
+ 388 008a FF21     		movs	r1, #255
+ 389 008c 0020     		movs	r0, #0
+ 390 008e FFF7FEFF 		bl	smtc_modem_hal_get_random_nb_in_range
+ 391 0092 E319     		adds	r3, r4, r7
+ 392 0094 0137     		adds	r7, r7, #1
+ 393 0096 5872     		strb	r0, [r3, #9]
+ 394 0098 FFB2     		uxtb	r7, r7
+ARM GAS  /tmp/ccGMlE7J.s 			page 8
+
+
+ 395              	.L39:
+ 396 009a F37A     		ldrb	r3, [r6, #11]
+ 397 009c BB42     		cmp	r3, r7
+ 398 009e F4D8     		bhi	.L41
+ 399 00a0 DFE7     		b	.L42
+ 400              	.L46:
+ 401 00a2 0027     		movs	r7, #0
+ 402 00a4 F9E7     		b	.L39
+ 403              	.L38:
+ 404 00a6 0322     		movs	r2, #3
+ 405 00a8 6A70     		strb	r2, [r5, #1]
+ 406 00aa 104A     		ldr	r2, .L49+4
+ 407 00ac 6A60     		str	r2, [r5, #4]
+ 408 00ae 5B7C     		ldrb	r3, [r3, #17]
+ 409 00b0 002B     		cmp	r3, #0
+ 410 00b2 17D1     		bne	.L47
+ 411              	.L45:
+ 412 00b4 9823     		movs	r3, #152
+ 413 00b6 2268     		ldr	r2, [r4]
+ 414 00b8 DB00     		lsls	r3, r3, #3
+ 415 00ba D358     		ldr	r3, [r2, r3]
+ 416 00bc 0AA9     		add	r1, sp, #40
+ 417 00be A433     		adds	r3, r3, #164
+ 418 00c0 1B68     		ldr	r3, [r3]
+ 419 00c2 0EA8     		add	r0, sp, #56
+ 420 00c4 9847     		blx	r3
+ 421 00c6 6861     		str	r0, [r5, #20]
+ 422 00c8 738B     		ldrh	r3, [r6, #26]
+ 423 00ca D5E7     		b	.L48
+ 424              	.L44:
+ 425 00cc FF21     		movs	r1, #255
+ 426 00ce 0020     		movs	r0, #0
+ 427 00d0 FFF7FEFF 		bl	smtc_modem_hal_get_random_nb_in_range
+ 428 00d4 E319     		adds	r3, r4, r7
+ 429 00d6 0137     		adds	r7, r7, #1
+ 430 00d8 5872     		strb	r0, [r3, #9]
+ 431 00da FFB2     		uxtb	r7, r7
+ 432              	.L43:
+ 433 00dc 738B     		ldrh	r3, [r6, #26]
+ 434 00de BB42     		cmp	r3, r7
+ 435 00e0 F4D8     		bhi	.L44
+ 436 00e2 E7E7     		b	.L45
+ 437              	.L47:
+ 438 00e4 0027     		movs	r7, #0
+ 439 00e6 F9E7     		b	.L43
+ 440              	.L50:
+ 441              		.align	2
+ 442              	.L49:
+ 443 00e8 00000000 		.word	lr1_stack_mac_tx_lora_launch_callback_for_rp
+ 444 00ec 00000000 		.word	lr1_stack_mac_tx_gfsk_launch_callback_for_rp
+ 446              		.section	.text.smtc_modem_test_start,"ax",%progbits
+ 447              		.align	1
+ 448              		.global	smtc_modem_test_start
+ 449              		.syntax unified
+ 450              		.code	16
+ 451              		.thumb_func
+ 452              		.fpu softvfp
+ARM GAS  /tmp/ccGMlE7J.s 			page 9
+
+
+ 454              	smtc_modem_test_start:
+ 455              		@ args = 0, pretend = 0, frame = 0
+ 456              		@ frame_needed = 0, uses_anonymous_args = 0
+ 457 0000 70B5     		push	{r4, r5, r6, lr}
+ 458 0002 FFF7FEFF 		bl	modem_get_test_mode_status
+ 459 0006 0324     		movs	r4, #3
+ 460 0008 0028     		cmp	r0, #0
+ 461 000a 1AD1     		bne	.L52
+ 462 000c FFF7FEFF 		bl	lorawan_api_isjoined
+ 463 0010 041E     		subs	r4, r0, #0
+ 464 0012 18D1     		bne	.L54
+ 465 0014 0120     		movs	r0, #1
+ 466 0016 FFF7FEFF 		bl	modem_set_test_mode_status
+ 467 001a AA22     		movs	r2, #170
+ 468 001c 0B4D     		ldr	r5, .L55
+ 469 001e 5200     		lsls	r2, r2, #1
+ 470 0020 2100     		movs	r1, r4
+ 471 0022 2800     		movs	r0, r5
+ 472 0024 FFF7FEFF 		bl	memset
+ 473 0028 FFF7FEFF 		bl	modem_get_rp
+ 474 002c 0321     		movs	r1, #3
+ 475 002e 2860     		str	r0, [r5]
+ 476 0030 2972     		strb	r1, [r5, #8]
+ 477 0032 FFF7FEFF 		bl	rp_release_hook
+ 478 0036 2B00     		movs	r3, r5
+ 479 0038 297A     		ldrb	r1, [r5, #8]
+ 480 003a 054A     		ldr	r2, .L55+4
+ 481 003c 2868     		ldr	r0, [r5]
+ 482 003e FFF7FEFF 		bl	rp_hook_init
+ 483              	.L52:
+ 484              		@ sp needed
+ 485 0042 2000     		movs	r0, r4
+ 486 0044 70BD     		pop	{r4, r5, r6, pc}
+ 487              	.L54:
+ 488 0046 0424     		movs	r4, #4
+ 489 0048 FBE7     		b	.L52
+ 490              	.L56:
+ 491 004a C046     		.align	2
+ 492              	.L55:
+ 493 004c 00000000 		.word	modem_test_context
+ 494 0050 00000000 		.word	modem_test_empty_callback
+ 496              		.section	.text.smtc_modem_test_tx_hop,"ax",%progbits
+ 497              		.align	1
+ 498              		.global	smtc_modem_test_tx_hop
+ 499              		.syntax unified
+ 500              		.code	16
+ 501              		.thumb_func
+ 502              		.fpu softvfp
+ 504              	smtc_modem_test_tx_hop:
+ 505              		@ args = 0, pretend = 0, frame = 0
+ 506              		@ frame_needed = 0, uses_anonymous_args = 0
+ 507 0000 10B5     		push	{r4, lr}
+ 508 0002 FFF7FEFF 		bl	modem_get_test_mode_status
+ 509 0006 0423     		movs	r3, #4
+ 510 0008 0028     		cmp	r0, #0
+ 511 000a 00D1     		bne	.L58
+ 512 000c 023B     		subs	r3, r3, #2
+ARM GAS  /tmp/ccGMlE7J.s 			page 10
+
+
+ 513              	.L58:
+ 514 000e 1800     		movs	r0, r3
+ 515              		@ sp needed
+ 516 0010 10BD     		pop	{r4, pc}
+ 518              		.section	.text.smtc_modem_test_tx_cw,"ax",%progbits
+ 519              		.align	1
+ 520              		.global	smtc_modem_test_tx_cw
+ 521              		.syntax unified
+ 522              		.code	16
+ 523              		.thumb_func
+ 524              		.fpu softvfp
+ 526              	smtc_modem_test_tx_cw:
+ 527              		@ args = 0, pretend = 0, frame = 184
+ 528              		@ frame_needed = 0, uses_anonymous_args = 0
+ 529 0000 70B5     		push	{r4, r5, r6, lr}
+ 530 0002 B0B0     		sub	sp, sp, #192
+ 531 0004 0500     		movs	r5, r0
+ 532 0006 0E00     		movs	r6, r1
+ 533 0008 FFF7FEFF 		bl	modem_get_test_mode_status
+ 534 000c 0223     		movs	r3, #2
+ 535 000e 0028     		cmp	r0, #0
+ 536 0010 42D0     		beq	.L61
+ 537 0012 02AC     		add	r4, sp, #8
+ 538 0014 1422     		movs	r2, #20
+ 539 0016 0021     		movs	r1, #0
+ 540 0018 2000     		movs	r0, r4
+ 541 001a FFF7FEFF 		bl	memset
+ 542 001e 0C22     		movs	r2, #12
+ 543 0020 2149     		ldr	r1, .L66
+ 544 0022 0723     		movs	r3, #7
+ 545 0024 E560     		str	r5, [r4, #12]
+ 546 0026 2674     		strb	r6, [r4, #16]
+ 547 0028 2270     		strb	r2, [r4]
+ 548 002a 8D42     		cmp	r5, r1
+ 549 002c 37D9     		bls	.L62
+ 550 002e A370     		strb	r3, [r4, #2]
+ 551 0030 6270     		strb	r2, [r4, #1]
+ 552 0032 0B33     		adds	r3, r3, #11
+ 553              	.L65:
+ 554 0034 0021     		movs	r1, #0
+ 555 0036 8C22     		movs	r2, #140
+ 556 0038 0DA8     		add	r0, sp, #52
+ 557 003a 6374     		strb	r3, [r4, #17]
+ 558 003c FFF7FEFF 		bl	memset
+ 559 0040 3422     		movs	r2, #52
+ 560 0042 6B46     		mov	r3, sp
+ 561 0044 0125     		movs	r5, #1
+ 562 0046 9B18     		adds	r3, r3, r2
+ 563 0048 1D70     		strb	r5, [r3]
+ 564 004a 0EAB     		add	r3, sp, #56
+ 565 004c 07CC     		ldmia	r4!, {r0, r1, r2}
+ 566 004e 07C3     		stmia	r3!, {r0, r1, r2}
+ 567 0050 06CC     		ldmia	r4!, {r1, r2}
+ 568 0052 06C3     		stmia	r3!, {r1, r2}
+ 569 0054 07AC     		add	r4, sp, #28
+ 570 0056 1822     		movs	r2, #24
+ 571 0058 0021     		movs	r1, #0
+ARM GAS  /tmp/ccGMlE7J.s 			page 11
+
+
+ 572 005a 2000     		movs	r0, r4
+ 573 005c FFF7FEFF 		bl	memset
+ 574 0060 124E     		ldr	r6, .L66+4
+ 575 0062 337A     		ldrb	r3, [r6, #8]
+ 576 0064 A572     		strb	r5, [r4, #10]
+ 577 0066 2370     		strb	r3, [r4]
+ 578 0068 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 579 006c FA23     		movs	r3, #250
+ 580 006e DB00     		lsls	r3, r3, #3
+ 581 0070 0C93     		str	r3, [sp, #48]
+ 582 0072 0223     		movs	r3, #2
+ 583 0074 0230     		adds	r0, r0, #2
+ 584 0076 6370     		strb	r3, [r4, #1]
+ 585 0078 0D4B     		ldr	r3, .L66+8
+ 586 007a 2900     		movs	r1, r5
+ 587 007c 0A90     		str	r0, [sp, #40]
+ 588 007e 3068     		ldr	r0, [r6]
+ 589 0080 0893     		str	r3, [sp, #32]
+ 590 0082 FFF7FEFF 		bl	rp_disable_failsafe
+ 591 0086 0DAB     		add	r3, sp, #52
+ 592 0088 0093     		str	r3, [sp]
+ 593 008a 0023     		movs	r3, #0
+ 594 008c 2100     		movs	r1, r4
+ 595 008e 1A00     		movs	r2, r3
+ 596 0090 3068     		ldr	r0, [r6]
+ 597 0092 FFF7FEFF 		bl	rp_task_enqueue
+ 598 0096 0023     		movs	r3, #0
+ 599              	.L61:
+ 600 0098 1800     		movs	r0, r3
+ 601 009a 30B0     		add	sp, sp, #192
+ 602              		@ sp needed
+ 603 009c 70BD     		pop	{r4, r5, r6, pc}
+ 604              	.L62:
+ 605 009e 6370     		strb	r3, [r4, #1]
+ 606 00a0 0123     		movs	r3, #1
+ 607 00a2 A370     		strb	r3, [r4, #2]
+ 608 00a4 3333     		adds	r3, r3, #51
+ 609 00a6 C5E7     		b	.L65
+ 610              	.L67:
+ 611              		.align	2
+ 612              	.L66:
+ 613 00a8 FF170D8F 		.word	-1894967297
+ 614 00ac 00000000 		.word	modem_test_context
+ 615 00b0 00000000 		.word	test_mode_cw_callback_for_rp
+ 617              		.section	.text.smtc_modem_test_get_nb_rx_packets,"ax",%progbits
+ 618              		.align	1
+ 619              		.global	smtc_modem_test_get_nb_rx_packets
+ 620              		.syntax unified
+ 621              		.code	16
+ 622              		.thumb_func
+ 623              		.fpu softvfp
+ 625              	smtc_modem_test_get_nb_rx_packets:
+ 626              		@ args = 0, pretend = 0, frame = 0
+ 627              		@ frame_needed = 0, uses_anonymous_args = 0
+ 628 0000 10B5     		push	{r4, lr}
+ 629 0002 0400     		movs	r4, r0
+ 630 0004 FFF7FEFF 		bl	modem_get_test_mode_status
+ARM GAS  /tmp/ccGMlE7J.s 			page 12
+
+
+ 631 0008 0223     		movs	r3, #2
+ 632 000a 0028     		cmp	r0, #0
+ 633 000c 04D0     		beq	.L69
+ 634 000e 034B     		ldr	r3, .L71
+ 635 0010 FC33     		adds	r3, r3, #252
+ 636 0012 1B69     		ldr	r3, [r3, #16]
+ 637 0014 2360     		str	r3, [r4]
+ 638 0016 0023     		movs	r3, #0
+ 639              	.L69:
+ 640              		@ sp needed
+ 641 0018 1800     		movs	r0, r3
+ 642 001a 10BD     		pop	{r4, pc}
+ 643              	.L72:
+ 644              		.align	2
+ 645              	.L71:
+ 646 001c 00000000 		.word	modem_test_context
+ 648              		.section	.text.smtc_modem_test_rssi,"ax",%progbits
+ 649              		.align	1
+ 650              		.global	smtc_modem_test_rssi
+ 651              		.syntax unified
+ 652              		.code	16
+ 653              		.thumb_func
+ 654              		.fpu softvfp
+ 656              	smtc_modem_test_rssi:
+ 657              		@ args = 0, pretend = 0, frame = 8
+ 658              		@ frame_needed = 0, uses_anonymous_args = 0
+ 659 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 660 0002 89B0     		sub	sp, sp, #36
+ 661 0004 0D00     		movs	r5, r1
+ 662 0006 1600     		movs	r6, r2
+ 663 0008 0790     		str	r0, [sp, #28]
+ 664 000a FFF7FEFF 		bl	modem_get_test_mode_status
+ 665 000e 0224     		movs	r4, #2
+ 666 0010 0028     		cmp	r0, #0
+ 667 0012 2CD0     		beq	.L74
+ 668 0014 062D     		cmp	r5, #6
+ 669 0016 2AD8     		bhi	.L74
+ 670 0018 A540     		lsls	r5, r5, r4
+ 671 001a 164B     		ldr	r3, .L78
+ 672 001c EF58     		ldr	r7, [r5, r3]
+ 673 001e 164B     		ldr	r3, .L78+4
+ 674 0020 9F42     		cmp	r7, r3
+ 675 0022 00D9     		bls	.L75
+ 676 0024 1F00     		movs	r7, r3
+ 677              	.L75:
+ 678 0026 1549     		ldr	r1, .L78+8
+ 679 0028 0024     		movs	r4, #0
+ 680 002a 0B00     		movs	r3, r1
+ 681 002c FF33     		adds	r3, r3, #255
+ 682 002e DC72     		strb	r4, [r3, #11]
+ 683 0030 134B     		ldr	r3, .L78+12
+ 684 0032 144D     		ldr	r5, .L78+16
+ 685 0034 0393     		str	r3, [sp, #12]
+ 686 0036 0193     		str	r3, [sp, #4]
+ 687 0038 0491     		str	r1, [sp, #16]
+ 688 003a 0291     		str	r1, [sp, #8]
+ 689 003c 0091     		str	r1, [sp]
+ARM GAS  /tmp/ccGMlE7J.s 			page 13
+
+
+ 690 003e 0222     		movs	r2, #2
+ 691 0040 2800     		movs	r0, r5
+ 692 0042 0968     		ldr	r1, [r1]
+ 693 0044 FFF7FEFF 		bl	smtc_lbt_init
+ 694 0048 3B00     		movs	r3, r7
+ 695 004a 3222     		movs	r2, #50
+ 696 004c 3100     		movs	r1, r6
+ 697 004e 2800     		movs	r0, r5
+ 698 0050 FFF7FEFF 		bl	smtc_lbt_set_parameters
+ 699 0054 0121     		movs	r1, #1
+ 700 0056 2800     		movs	r0, r5
+ 701 0058 FFF7FEFF 		bl	smtc_lbt_set_state
+ 702 005c FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 703 0060 2200     		movs	r2, r4
+ 704 0062 0300     		movs	r3, r0
+ 705 0064 0799     		ldr	r1, [sp, #28]
+ 706 0066 2800     		movs	r0, r5
+ 707 0068 0094     		str	r4, [sp]
+ 708 006a FFF7FEFF 		bl	smtc_lbt_listen_channel
+ 709              	.L74:
+ 710 006e 2000     		movs	r0, r4
+ 711 0070 09B0     		add	sp, sp, #36
+ 712              		@ sp needed
+ 713 0072 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 714              	.L79:
+ 715              		.align	2
+ 716              	.L78:
+ 717 0074 00000000 		.word	.LANCHOR1
+ 718 0078 38200700 		.word	467000
+ 719 007c 00000000 		.word	modem_test_context
+ 720 0080 00000000 		.word	modem_test_compute_rssi_callback
+ 721 0084 14010000 		.word	modem_test_context+276
+ 723              		.section	.text.smtc_modem_test_get_rssi,"ax",%progbits
+ 724              		.align	1
+ 725              		.global	smtc_modem_test_get_rssi
+ 726              		.syntax unified
+ 727              		.code	16
+ 728              		.thumb_func
+ 729              		.fpu softvfp
+ 731              	smtc_modem_test_get_rssi:
+ 732              		@ args = 0, pretend = 0, frame = 0
+ 733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 734 0000 10B5     		push	{r4, lr}
+ 735 0002 0400     		movs	r4, r0
+ 736 0004 FFF7FEFF 		bl	modem_get_test_mode_status
+ 737 0008 0222     		movs	r2, #2
+ 738 000a 0028     		cmp	r0, #0
+ 739 000c 0BD0     		beq	.L81
+ 740 000e 074B     		ldr	r3, .L84
+ 741 0010 1A00     		movs	r2, r3
+ 742 0012 FF32     		adds	r2, r2, #255
+ 743 0014 D17A     		ldrb	r1, [r2, #11]
+ 744 0016 0322     		movs	r2, #3
+ 745 0018 0029     		cmp	r1, #0
+ 746 001a 04D0     		beq	.L81
+ 747 001c 0022     		movs	r2, #0
+ 748 001e FE33     		adds	r3, r3, #254
+ARM GAS  /tmp/ccGMlE7J.s 			page 14
+
+
+ 749 0020 5B89     		ldrh	r3, [r3, #10]
+ 750 0022 4033     		adds	r3, r3, #64
+ 751 0024 2370     		strb	r3, [r4]
+ 752              	.L81:
+ 753 0026 1000     		movs	r0, r2
+ 754              		@ sp needed
+ 755 0028 10BD     		pop	{r4, pc}
+ 756              	.L85:
+ 757 002a C046     		.align	2
+ 758              	.L84:
+ 759 002c 00000000 		.word	modem_test_context
+ 761              		.section	.text.modem_test_set_rssi,"ax",%progbits
+ 762              		.align	1
+ 763              		.global	modem_test_set_rssi
+ 764              		.syntax unified
+ 765              		.code	16
+ 766              		.thumb_func
+ 767              		.fpu softvfp
+ 769              	modem_test_set_rssi:
+ 770              		@ args = 0, pretend = 0, frame = 0
+ 771              		@ frame_needed = 0, uses_anonymous_args = 0
+ 772              		@ link register save eliminated.
+ 773 0000 014B     		ldr	r3, .L87
+ 774              		@ sp needed
+ 775 0002 FE33     		adds	r3, r3, #254
+ 776 0004 5881     		strh	r0, [r3, #10]
+ 777 0006 7047     		bx	lr
+ 778              	.L88:
+ 779              		.align	2
+ 780              	.L87:
+ 781 0008 00000000 		.word	modem_test_context
+ 783              		.section	.text.smtc_modem_test_radio_reset,"ax",%progbits
+ 784              		.align	1
+ 785              		.global	smtc_modem_test_radio_reset
+ 786              		.syntax unified
+ 787              		.code	16
+ 788              		.thumb_func
+ 789              		.fpu softvfp
+ 791              	smtc_modem_test_radio_reset:
+ 792              		@ args = 0, pretend = 0, frame = 0
+ 793              		@ frame_needed = 0, uses_anonymous_args = 0
+ 794 0000 70B5     		push	{r4, r5, r6, lr}
+ 795 0002 FFF7FEFF 		bl	modem_get_test_mode_status
+ 796 0006 0224     		movs	r4, #2
+ 797 0008 0028     		cmp	r0, #0
+ 798 000a 0AD0     		beq	.L90
+ 799 000c 9824     		movs	r4, #152
+ 800 000e 104D     		ldr	r5, .L94
+ 801 0010 E400     		lsls	r4, r4, #3
+ 802 0012 2B68     		ldr	r3, [r5]
+ 803 0014 1B59     		ldr	r3, [r3, r4]
+ 804 0016 9A68     		ldr	r2, [r3, #8]
+ 805 0018 1868     		ldr	r0, [r3]
+ 806 001a 9047     		blx	r2
+ 807 001c 0028     		cmp	r0, #0
+ 808 001e 02D0     		beq	.L91
+ 809              	.L92:
+ARM GAS  /tmp/ccGMlE7J.s 			page 15
+
+
+ 810 0020 0424     		movs	r4, #4
+ 811              	.L90:
+ 812              		@ sp needed
+ 813 0022 2000     		movs	r0, r4
+ 814 0024 70BD     		pop	{r4, r5, r6, pc}
+ 815              	.L91:
+ 816 0026 2B68     		ldr	r3, [r5]
+ 817 0028 1B59     		ldr	r3, [r3, r4]
+ 818 002a DA68     		ldr	r2, [r3, #12]
+ 819 002c 1868     		ldr	r0, [r3]
+ 820 002e 9047     		blx	r2
+ 821 0030 0028     		cmp	r0, #0
+ 822 0032 F5D1     		bne	.L92
+ 823 0034 2B68     		ldr	r3, [r5]
+ 824 0036 0121     		movs	r1, #1
+ 825 0038 1B59     		ldr	r3, [r3, r4]
+ 826 003a 5A69     		ldr	r2, [r3, #20]
+ 827 003c 1868     		ldr	r0, [r3]
+ 828 003e 9047     		blx	r2
+ 829 0040 041E     		subs	r4, r0, #0
+ 830 0042 EDD1     		bne	.L92
+ 831 0044 FFF7FEFF 		bl	smtc_modem_hal_set_ant_switch
+ 832 0048 FFF7FEFF 		bl	smtc_modem_hal_stop_radio_tcxo
+ 833 004c E9E7     		b	.L90
+ 834              	.L95:
+ 835 004e C046     		.align	2
+ 836              	.L94:
+ 837 0050 00000000 		.word	modem_test_context
+ 839              		.section	.text.smtc_modem_test_nop,"ax",%progbits
+ 840              		.align	1
+ 841              		.global	smtc_modem_test_nop
+ 842              		.syntax unified
+ 843              		.code	16
+ 844              		.thumb_func
+ 845              		.fpu softvfp
+ 847              	smtc_modem_test_nop:
+ 848              		@ args = 0, pretend = 0, frame = 0
+ 849              		@ frame_needed = 0, uses_anonymous_args = 0
+ 850 0000 10B5     		push	{r4, lr}
+ 851 0002 FFF7FEFF 		bl	modem_get_test_mode_status
+ 852 0006 0223     		movs	r3, #2
+ 853 0008 0028     		cmp	r0, #0
+ 854 000a 0ED0     		beq	.L97
+ 855 000c 084C     		ldr	r4, .L99
+ 856 000e 217A     		ldrb	r1, [r4, #8]
+ 857 0010 2068     		ldr	r0, [r4]
+ 858 0012 FFF7FEFF 		bl	rp_task_abort
+ 859 0016 2068     		ldr	r0, [r4]
+ 860 0018 FFF7FEFF 		bl	rp_callback
+ 861 001c FFF7FEFF 		bl	smtc_modem_test_radio_reset
+ 862 0020 0021     		movs	r1, #0
+ 863 0022 2068     		ldr	r0, [r4]
+ 864 0024 FFF7FEFF 		bl	rp_disable_failsafe
+ 865 0028 0023     		movs	r3, #0
+ 866              	.L97:
+ 867              		@ sp needed
+ 868 002a 1800     		movs	r0, r3
+ARM GAS  /tmp/ccGMlE7J.s 			page 16
+
+
+ 869 002c 10BD     		pop	{r4, pc}
+ 870              	.L100:
+ 871 002e C046     		.align	2
+ 872              	.L99:
+ 873 0030 00000000 		.word	modem_test_context
+ 875              		.section	.text.smtc_modem_test_stop,"ax",%progbits
+ 876              		.align	1
+ 877              		.global	smtc_modem_test_stop
+ 878              		.syntax unified
+ 879              		.code	16
+ 880              		.thumb_func
+ 881              		.fpu softvfp
+ 883              	smtc_modem_test_stop:
+ 884              		@ args = 0, pretend = 0, frame = 0
+ 885              		@ frame_needed = 0, uses_anonymous_args = 0
+ 886 0000 70B5     		push	{r4, r5, r6, lr}
+ 887 0002 FFF7FEFF 		bl	modem_get_test_mode_status
+ 888 0006 0224     		movs	r4, #2
+ 889 0008 0028     		cmp	r0, #0
+ 890 000a 0FD0     		beq	.L102
+ 891 000c FFF7FEFF 		bl	smtc_modem_test_nop
+ 892 0010 041E     		subs	r4, r0, #0
+ 893 0012 0DD1     		bne	.L104
+ 894 0014 074D     		ldr	r5, .L105
+ 895 0016 297A     		ldrb	r1, [r5, #8]
+ 896 0018 2868     		ldr	r0, [r5]
+ 897 001a FFF7FEFF 		bl	rp_release_hook
+ 898 001e 2000     		movs	r0, r4
+ 899 0020 FFF7FEFF 		bl	modem_set_test_mode_status
+ 900 0024 2100     		movs	r1, r4
+ 901 0026 2868     		ldr	r0, [r5]
+ 902 0028 FFF7FEFF 		bl	rp_disable_failsafe
+ 903              	.L102:
+ 904              		@ sp needed
+ 905 002c 2000     		movs	r0, r4
+ 906 002e 70BD     		pop	{r4, r5, r6, pc}
+ 907              	.L104:
+ 908 0030 0424     		movs	r4, #4
+ 909 0032 FBE7     		b	.L102
+ 910              	.L106:
+ 911              		.align	2
+ 912              	.L105:
+ 913 0034 00000000 		.word	modem_test_context
+ 915              		.section	.text.smtc_modem_test_tx,"ax",%progbits
+ 916              		.align	1
+ 917              		.global	smtc_modem_test_tx
+ 918              		.syntax unified
+ 919              		.code	16
+ 920              		.thumb_func
+ 921              		.fpu softvfp
+ 923              	smtc_modem_test_tx:
+ 924              		@ args = 20, pretend = 0, frame = 240
+ 925              		@ frame_needed = 0, uses_anonymous_args = 0
+ 926 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 927 0002 BFB0     		sub	sp, sp, #252
+ 928 0004 0693     		str	r3, [sp, #24]
+ 929 0006 44AB     		add	r3, sp, #272
+ARM GAS  /tmp/ccGMlE7J.s 			page 17
+
+
+ 930 0008 1E78     		ldrb	r6, [r3]
+ 931 000a 45AB     		add	r3, sp, #276
+ 932 000c 1B78     		ldrb	r3, [r3]
+ 933 000e 0490     		str	r0, [sp, #16]
+ 934 0010 0793     		str	r3, [sp, #28]
+ 935 0012 46AB     		add	r3, sp, #280
+ 936 0014 1B78     		ldrb	r3, [r3]
+ 937 0016 0391     		str	r1, [sp, #12]
+ 938 0018 0893     		str	r3, [sp, #32]
+ 939 001a 48AB     		add	r3, sp, #288
+ 940 001c 1B78     		ldrb	r3, [r3]
+ 941 001e 0592     		str	r2, [sp, #20]
+ 942 0020 0993     		str	r3, [sp, #36]
+ 943 0022 FFF7FEFF 		bl	modem_get_test_mode_status
+ 944 0026 0225     		movs	r5, #2
+ 945 0028 0028     		cmp	r0, #0
+ 946 002a 00D1     		bne	.LCB983
+ 947 002c 89E0     		b	.L108	@long jump
+ 948              	.LCB983:
+ 949 002e 082E     		cmp	r6, #8
+ 950 0030 00D9     		bls	.LCB985
+ 951 0032 86E0     		b	.L108	@long jump
+ 952              	.LCB985:
+ 953 0034 079B     		ldr	r3, [sp, #28]
+ 954 0036 062B     		cmp	r3, #6
+ 955 0038 00D9     		bls	.LCB988
+ 956 003a 82E0     		b	.L108	@long jump
+ 957              	.LCB988:
+ 958 003c 089B     		ldr	r3, [sp, #32]
+ 959 003e 062B     		cmp	r3, #6
+ 960 0040 00D9     		bls	.LCB991
+ 961 0042 7EE0     		b	.L108	@long jump
+ 962              	.LCB991:
+ 963 0044 0AAD     		add	r5, sp, #40
+ 964 0046 1822     		movs	r2, #24
+ 965 0048 0021     		movs	r1, #0
+ 966 004a 2800     		movs	r0, r5
+ 967 004c FFF7FEFF 		bl	memset
+ 968 0050 8C22     		movs	r2, #140
+ 969 0052 0021     		movs	r1, #0
+ 970 0054 1BA8     		add	r0, sp, #108
+ 971 0056 FFF7FEFF 		bl	memset
+ 972 005a 694F     		ldr	r7, .L126
+ 973 005c 10AC     		add	r4, sp, #64
+ 974 005e 3B7A     		ldrb	r3, [r7, #8]
+ 975 0060 2B70     		strb	r3, [r5]
+ 976 0062 0123     		movs	r3, #1
+ 977 0064 AB72     		strb	r3, [r5, #10]
+ 978 0066 002E     		cmp	r6, #0
+ 979 0068 00D0     		beq	.LCB1011
+ 980 006a 6DE0     		b	.L109	@long jump
+ 981              	.LCB1011:
+ 982 006c 3100     		movs	r1, r6
+ 983 006e 2C22     		movs	r2, #44
+ 984 0070 2000     		movs	r0, r4
+ 985 0072 FFF7FEFF 		bl	memset
+ 986 0076 059A     		ldr	r2, [sp, #20]
+ARM GAS  /tmp/ccGMlE7J.s 			page 18
+
+
+ 987 0078 08AB     		add	r3, sp, #32
+ 988 007a 2262     		str	r2, [r4, #32]
+ 989 007c 4A22     		movs	r2, #74
+ 990 007e D218     		adds	r2, r2, r3
+ 991 0080 1300     		movs	r3, r2
+ 992 0082 069A     		ldr	r2, [sp, #24]
+ 993 0084 1A70     		strb	r2, [r3]
+ 994 0086 5F4B     		ldr	r3, .L126+4
+ 995 0088 5F4A     		ldr	r2, .L126+8
+ 996 008a E361     		str	r3, [r4, #28]
+ 997 008c 5F4B     		ldr	r3, .L126+12
+ 998 008e 2385     		strh	r3, [r4, #40]
+ 999 0090 5F4B     		ldr	r3, .L126+16
+ 1000 0092 1993     		str	r3, [sp, #100]
+ 1001 0094 0123     		movs	r3, #1
+ 1002 0096 6375     		strb	r3, [r4, #21]
+ 1003 0098 039B     		ldr	r3, [sp, #12]
+ 1004 009a E382     		strh	r3, [r4, #22]
+ 1005 009c 5D4B     		ldr	r3, .L126+20
+ 1006 009e 1493     		str	r3, [sp, #80]
+ 1007 00a0 8223     		movs	r3, #130
+ 1008 00a2 5B00     		lsls	r3, r3, #1
+ 1009 00a4 2383     		strh	r3, [r4, #24]
+ 1010 00a6 5C4B     		ldr	r3, .L126+24
+ 1011 00a8 1092     		str	r2, [sp, #64]
+ 1012 00aa 1193     		str	r3, [sp, #68]
+ 1013 00ac 5B4B     		ldr	r3, .L126+28
+ 1014 00ae 4C22     		movs	r2, #76
+ 1015 00b0 A360     		str	r3, [r4, #8]
+ 1016 00b2 0423     		movs	r3, #4
+ 1017 00b4 2373     		strb	r3, [r4, #12]
+ 1018 00b6 08AB     		add	r3, sp, #32
+ 1019 00b8 9B18     		adds	r3, r3, r2
+ 1020 00ba 1E70     		strb	r6, [r3]
+ 1021 00bc 1CAB     		add	r3, sp, #112
+ 1022 00be 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1023 00c0 07C3     		stmia	r3!, {r0, r1, r2}
+ 1024 00c2 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1025 00c4 07C3     		stmia	r3!, {r0, r1, r2}
+ 1026 00c6 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1027 00c8 07C3     		stmia	r3!, {r0, r1, r2}
+ 1028 00ca 06CC     		ldmia	r4!, {r1, r2}
+ 1029 00cc 06C3     		stmia	r3!, {r1, r2}
+ 1030 00ce 0323     		movs	r3, #3
+ 1031 00d0 6B70     		strb	r3, [r5, #1]
+ 1032 00d2 534B     		ldr	r3, .L126+32
+ 1033 00d4 3A68     		ldr	r2, [r7]
+ 1034 00d6 0B93     		str	r3, [sp, #44]
+ 1035 00d8 9823     		movs	r3, #152
+ 1036 00da DB00     		lsls	r3, r3, #3
+ 1037 00dc D358     		ldr	r3, [r2, r3]
+ 1038 00de 1CA9     		add	r1, sp, #112
+ 1039 00e0 A433     		adds	r3, r3, #164
+ 1040 00e2 1B68     		ldr	r3, [r3]
+ 1041 00e4 20A8     		add	r0, sp, #128
+ 1042              	.L124:
+ 1043 00e6 9847     		blx	r3
+ARM GAS  /tmp/ccGMlE7J.s 			page 19
+
+
+ 1044 00e8 0F90     		str	r0, [sp, #60]
+ 1045 00ea FFF7FEFF 		bl	smtc_modem_test_nop
+ 1046 00ee 051E     		subs	r5, r0, #0
+ 1047 00f0 00D0     		beq	.LCB1077
+ 1048 00f2 82E0     		b	.L123	@long jump
+ 1049              	.LCB1077:
+ 1050 00f4 424C     		ldr	r4, .L126
+ 1051 00f6 099B     		ldr	r3, [sp, #36]
+ 1052 00f8 2068     		ldr	r0, [r4]
+ 1053 00fa 217A     		ldrb	r1, [r4, #8]
+ 1054 00fc 002B     		cmp	r3, #0
+ 1055 00fe 65D1     		bne	.L112
+ 1056 0100 FFF7FEFF 		bl	rp_release_hook
+ 1057 0104 2300     		movs	r3, r4
+ 1058 0106 217A     		ldrb	r1, [r4, #8]
+ 1059 0108 464A     		ldr	r2, .L126+36
+ 1060              	.L125:
+ 1061 010a 2068     		ldr	r0, [r4]
+ 1062 010c FFF7FEFF 		bl	rp_hook_init
+ 1063 0110 049B     		ldr	r3, [sp, #16]
+ 1064 0112 454F     		ldr	r7, .L126+40
+ 1065 0114 002B     		cmp	r3, #0
+ 1066 0116 66D1     		bne	.L114
+ 1067 0118 2300     		movs	r3, r4
+ 1068 011a 0122     		movs	r2, #1
+ 1069 011c FF33     		adds	r3, r3, #255
+ 1070 011e 049E     		ldr	r6, [sp, #16]
+ 1071 0120 5A74     		strb	r2, [r3, #17]
+ 1072              	.L115:
+ 1073 0122 039B     		ldr	r3, [sp, #12]
+ 1074 0124 9E42     		cmp	r6, r3
+ 1075 0126 57D1     		bne	.L116
+ 1076              	.L117:
+ 1077 0128 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 1078 012c 6B46     		mov	r3, sp
+ 1079 012e 1BAA     		add	r2, sp, #108
+ 1080 0130 1430     		adds	r0, r0, #20
+ 1081 0132 9B89     		ldrh	r3, [r3, #12]
+ 1082 0134 0092     		str	r2, [sp]
+ 1083 0136 0D90     		str	r0, [sp, #52]
+ 1084 0138 3A00     		movs	r2, r7
+ 1085 013a 2068     		ldr	r0, [r4]
+ 1086 013c 0AA9     		add	r1, sp, #40
+ 1087 013e FFF7FEFF 		bl	rp_task_enqueue
+ 1088              	.L108:
+ 1089 0142 2800     		movs	r0, r5
+ 1090 0144 3FB0     		add	sp, sp, #252
+ 1091              		@ sp needed
+ 1092 0146 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1093              	.L109:
+ 1094 0148 1422     		movs	r2, #20
+ 1095 014a 0021     		movs	r1, #0
+ 1096 014c 2000     		movs	r0, r4
+ 1097 014e FFF7FEFF 		bl	memset
+ 1098 0152 059B     		ldr	r3, [sp, #20]
+ 1099 0154 354A     		ldr	r2, .L126+44
+ 1100 0156 E360     		str	r3, [r4, #12]
+ARM GAS  /tmp/ccGMlE7J.s 			page 20
+
+
+ 1101 0158 0599     		ldr	r1, [sp, #20]
+ 1102 015a 069B     		ldr	r3, [sp, #24]
+ 1103 015c 2374     		strb	r3, [r4, #16]
+ 1104 015e 1223     		movs	r3, #18
+ 1105 0160 9142     		cmp	r1, r2
+ 1106 0162 00D8     		bhi	.L111
+ 1107 0164 2233     		adds	r3, r3, #34
+ 1108              	.L111:
+ 1109 0166 10AC     		add	r4, sp, #64
+ 1110 0168 6374     		strb	r3, [r4, #17]
+ 1111 016a 479B     		ldr	r3, [sp, #284]
+ 1112 016c 0127     		movs	r7, #1
+ 1113 016e A380     		strh	r3, [r4, #4]
+ 1114 0170 0023     		movs	r3, #0
+ 1115 0172 A371     		strb	r3, [r4, #6]
+ 1116 0174 039B     		ldr	r3, [sp, #12]
+ 1117 0176 079A     		ldr	r2, [sp, #28]
+ 1118 0178 E371     		strb	r3, [r4, #7]
+ 1119 017a 2D4B     		ldr	r3, .L126+48
+ 1120 017c 2781     		strh	r7, [r4, #8]
+ 1121 017e 9D5D     		ldrb	r5, [r3, r6]
+ 1122 0180 2C4B     		ldr	r3, .L126+52
+ 1123 0182 2800     		movs	r0, r5
+ 1124 0184 9E5C     		ldrb	r6, [r3, r2]
+ 1125 0186 3100     		movs	r1, r6
+ 1126 0188 FFF7FEFF 		bl	ral_compute_lora_ldro
+ 1127 018c 089A     		ldr	r2, [sp, #32]
+ 1128 018e 2A4B     		ldr	r3, .L126+56
+ 1129 0190 3602     		lsls	r6, r6, #8
+ 1130 0192 9B5C     		ldrb	r3, [r3, r2]
+ 1131 0194 3543     		orrs	r5, r6
+ 1132 0196 1B04     		lsls	r3, r3, #16
+ 1133 0198 0006     		lsls	r0, r0, #24
+ 1134 019a 1D43     		orrs	r5, r3
+ 1135 019c 0543     		orrs	r5, r0
+ 1136 019e 1BAB     		add	r3, sp, #108
+ 1137 01a0 1F70     		strb	r7, [r3]
+ 1138 01a2 1095     		str	r5, [sp, #64]
+ 1139 01a4 1CAB     		add	r3, sp, #112
+ 1140 01a6 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1141 01a8 07C3     		stmia	r3!, {r0, r1, r2}
+ 1142 01aa 06CC     		ldmia	r4!, {r1, r2}
+ 1143 01ac 06C3     		stmia	r3!, {r1, r2}
+ 1144 01ae 0223     		movs	r3, #2
+ 1145 01b0 0AAC     		add	r4, sp, #40
+ 1146 01b2 6370     		strb	r3, [r4, #1]
+ 1147 01b4 214B     		ldr	r3, .L126+60
+ 1148 01b6 1CA9     		add	r1, sp, #112
+ 1149 01b8 0B93     		str	r3, [sp, #44]
+ 1150 01ba 114B     		ldr	r3, .L126
+ 1151 01bc 1DA8     		add	r0, sp, #116
+ 1152 01be 1A68     		ldr	r2, [r3]
+ 1153 01c0 9823     		movs	r3, #152
+ 1154 01c2 DB00     		lsls	r3, r3, #3
+ 1155 01c4 D358     		ldr	r3, [r2, r3]
+ 1156 01c6 A033     		adds	r3, r3, #160
+ 1157 01c8 1B68     		ldr	r3, [r3]
+ARM GAS  /tmp/ccGMlE7J.s 			page 21
+
+
+ 1158 01ca 8CE7     		b	.L124
+ 1159              	.L112:
+ 1160 01cc FFF7FEFF 		bl	rp_release_hook
+ 1161 01d0 2300     		movs	r3, r4
+ 1162 01d2 217A     		ldrb	r1, [r4, #8]
+ 1163 01d4 1A4A     		ldr	r2, .L126+64
+ 1164 01d6 98E7     		b	.L125
+ 1165              	.L116:
+ 1166 01d8 FF21     		movs	r1, #255
+ 1167 01da 0020     		movs	r0, #0
+ 1168 01dc FFF7FEFF 		bl	smtc_modem_hal_get_random_nb_in_range
+ 1169 01e0 B855     		strb	r0, [r7, r6]
+ 1170 01e2 0136     		adds	r6, r6, #1
+ 1171 01e4 9DE7     		b	.L115
+ 1172              	.L114:
+ 1173 01e6 2300     		movs	r3, r4
+ 1174 01e8 0022     		movs	r2, #0
+ 1175 01ea FF33     		adds	r3, r3, #255
+ 1176 01ec 5A74     		strb	r2, [r3, #17]
+ 1177 01ee 3800     		movs	r0, r7
+ 1178 01f0 039A     		ldr	r2, [sp, #12]
+ 1179 01f2 0499     		ldr	r1, [sp, #16]
+ 1180 01f4 FFF7FEFF 		bl	memcpy
+ 1181 01f8 96E7     		b	.L117
+ 1182              	.L123:
+ 1183 01fa 0425     		movs	r5, #4
+ 1184 01fc A1E7     		b	.L108
+ 1185              	.L127:
+ 1186 01fe C046     		.align	2
+ 1187              	.L126:
+ 1188 0200 00000000 		.word	modem_test_context
+ 1189 0204 00000000 		.word	.LANCHOR2
+ 1190 0208 50C30000 		.word	50000
+ 1191 020c FF010000 		.word	511
+ 1192 0210 0F1D2110 		.word	270605583
+ 1193 0214 28000218 		.word	402784296
+ 1194 0218 A8610000 		.word	25000
+ 1195 021c A0860100 		.word	100000
+ 1196 0220 00000000 		.word	lr1_stack_mac_tx_gfsk_launch_callback_for_rp
+ 1197 0224 00000000 		.word	modem_test_empty_callback
+ 1198 0228 09000000 		.word	modem_test_context+9
+ 1199 022c FF170D8F 		.word	-1894967297
+ 1200 0230 00000000 		.word	.LANCHOR3
+ 1201 0234 00000000 		.word	.LANCHOR4
+ 1202 0238 00000000 		.word	.LANCHOR5
+ 1203 023c 00000000 		.word	lr1_stack_mac_tx_lora_launch_callback_for_rp
+ 1204 0240 00000000 		.word	modem_test_tx_callback
+ 1206              		.section	.text.smtc_modem_test_rx_continuous,"ax",%progbits
+ 1207              		.align	1
+ 1208              		.global	smtc_modem_test_rx_continuous
+ 1209              		.syntax unified
+ 1210              		.code	16
+ 1211              		.thumb_func
+ 1212              		.fpu softvfp
+ 1214              	smtc_modem_test_rx_continuous:
+ 1215              		@ args = 0, pretend = 0, frame = 224
+ 1216              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccGMlE7J.s 			page 22
+
+
+ 1217 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1218 0002 BBB0     		sub	sp, sp, #236
+ 1219 0004 0D00     		movs	r5, r1
+ 1220 0006 0390     		str	r0, [sp, #12]
+ 1221 0008 0492     		str	r2, [sp, #16]
+ 1222 000a 0593     		str	r3, [sp, #20]
+ 1223 000c FFF7FEFF 		bl	modem_get_test_mode_status
+ 1224 0010 0224     		movs	r4, #2
+ 1225 0012 0028     		cmp	r0, #0
+ 1226 0014 6DD0     		beq	.L129
+ 1227 0016 082D     		cmp	r5, #8
+ 1228 0018 6BD8     		bhi	.L129
+ 1229 001a 049B     		ldr	r3, [sp, #16]
+ 1230 001c 062B     		cmp	r3, #6
+ 1231 001e 68D8     		bhi	.L129
+ 1232 0020 059B     		ldr	r3, [sp, #20]
+ 1233 0022 062B     		cmp	r3, #6
+ 1234 0024 65D8     		bhi	.L129
+ 1235 0026 564C     		ldr	r4, .L141
+ 1236 0028 0027     		movs	r7, #0
+ 1237 002a 2300     		movs	r3, r4
+ 1238 002c 8C22     		movs	r2, #140
+ 1239 002e FC33     		adds	r3, r3, #252
+ 1240 0030 3900     		movs	r1, r7
+ 1241 0032 17A8     		add	r0, sp, #92
+ 1242 0034 1F61     		str	r7, [r3, #16]
+ 1243 0036 FFF7FEFF 		bl	memset
+ 1244 003a 0123     		movs	r3, #1
+ 1245 003c 06AE     		add	r6, sp, #24
+ 1246 003e 5B42     		rsbs	r3, r3, #0
+ 1247 0040 3900     		movs	r1, r7
+ 1248 0042 1822     		movs	r2, #24
+ 1249 0044 3000     		movs	r0, r6
+ 1250 0046 2E93     		str	r3, [sp, #184]
+ 1251 0048 FFF7FEFF 		bl	memset
+ 1252 004c 0121     		movs	r1, #1
+ 1253 004e 237A     		ldrb	r3, [r4, #8]
+ 1254 0050 B172     		strb	r1, [r6, #10]
+ 1255 0052 3370     		strb	r3, [r6]
+ 1256 0054 0CAC     		add	r4, sp, #48
+ 1257 0056 BD42     		cmp	r5, r7
+ 1258 0058 4ED1     		bne	.L130
+ 1259 005a 2900     		movs	r1, r5
+ 1260 005c 2C22     		movs	r2, #44
+ 1261 005e 2000     		movs	r0, r4
+ 1262 0060 FFF7FEFF 		bl	memset
+ 1263 0064 039B     		ldr	r3, [sp, #12]
+ 1264 0066 0121     		movs	r1, #1
+ 1265 0068 2362     		str	r3, [r4, #32]
+ 1266 006a 464B     		ldr	r3, .L141+4
+ 1267 006c 464A     		ldr	r2, .L141+8
+ 1268 006e E361     		str	r3, [r4, #28]
+ 1269 0070 464B     		ldr	r3, .L141+12
+ 1270 0072 2385     		strh	r3, [r4, #40]
+ 1271 0074 464B     		ldr	r3, .L141+16
+ 1272 0076 1593     		str	r3, [sp, #84]
+ 1273 0078 FF23     		movs	r3, #255
+ARM GAS  /tmp/ccGMlE7J.s 			page 23
+
+
+ 1274 007a E382     		strh	r3, [r4, #22]
+ 1275 007c 454B     		ldr	r3, .L141+20
+ 1276 007e 6175     		strb	r1, [r4, #21]
+ 1277 0080 1093     		str	r3, [sp, #64]
+ 1278 0082 8223     		movs	r3, #130
+ 1279 0084 5B00     		lsls	r3, r3, #1
+ 1280 0086 2383     		strh	r3, [r4, #24]
+ 1281 0088 434B     		ldr	r3, .L141+24
+ 1282 008a 0C92     		str	r2, [sp, #48]
+ 1283 008c 0D93     		str	r3, [sp, #52]
+ 1284 008e 434B     		ldr	r3, .L141+28
+ 1285 0090 4C22     		movs	r2, #76
+ 1286 0092 A360     		str	r3, [r4, #8]
+ 1287 0094 0423     		movs	r3, #4
+ 1288 0096 2373     		strb	r3, [r4, #12]
+ 1289 0098 04AB     		add	r3, sp, #16
+ 1290 009a 9B18     		adds	r3, r3, r2
+ 1291 009c 1D70     		strb	r5, [r3]
+ 1292 009e 23AB     		add	r3, sp, #140
+ 1293 00a0 25CC     		ldmia	r4!, {r0, r2, r5}
+ 1294 00a2 25C3     		stmia	r3!, {r0, r2, r5}
+ 1295 00a4 25CC     		ldmia	r4!, {r0, r2, r5}
+ 1296 00a6 25C3     		stmia	r3!, {r0, r2, r5}
+ 1297 00a8 25CC     		ldmia	r4!, {r0, r2, r5}
+ 1298 00aa 25C3     		stmia	r3!, {r0, r2, r5}
+ 1299 00ac 05CC     		ldmia	r4!, {r0, r2}
+ 1300 00ae 05C3     		stmia	r3!, {r0, r2}
+ 1301 00b0 3B4B     		ldr	r3, .L141+32
+ 1302 00b2 7170     		strb	r1, [r6, #1]
+ 1303 00b4 0793     		str	r3, [sp, #28]
+ 1304              	.L131:
+ 1305 00b6 FFF7FEFF 		bl	smtc_modem_test_nop
+ 1306 00ba 041E     		subs	r4, r0, #0
+ 1307 00bc 5DD1     		bne	.L139
+ 1308 00be 304D     		ldr	r5, .L141
+ 1309 00c0 297A     		ldrb	r1, [r5, #8]
+ 1310 00c2 2868     		ldr	r0, [r5]
+ 1311 00c4 FFF7FEFF 		bl	rp_release_hook
+ 1312 00c8 2B00     		movs	r3, r5
+ 1313 00ca 297A     		ldrb	r1, [r5, #8]
+ 1314 00cc 354A     		ldr	r2, .L141+36
+ 1315 00ce 2868     		ldr	r0, [r5]
+ 1316 00d0 FFF7FEFF 		bl	rp_hook_init
+ 1317 00d4 FFF7FEFF 		bl	smtc_modem_hal_get_time_in_ms
+ 1318 00d8 FA23     		movs	r3, #250
+ 1319 00da DB00     		lsls	r3, r3, #3
+ 1320 00dc 0B93     		str	r3, [sp, #44]
+ 1321 00de 17AB     		add	r3, sp, #92
+ 1322 00e0 1430     		adds	r0, r0, #20
+ 1323 00e2 0093     		str	r3, [sp]
+ 1324 00e4 0990     		str	r0, [sp, #36]
+ 1325 00e6 FF23     		movs	r3, #255
+ 1326 00e8 2F4A     		ldr	r2, .L141+40
+ 1327 00ea 2868     		ldr	r0, [r5]
+ 1328 00ec 06A9     		add	r1, sp, #24
+ 1329 00ee FFF7FEFF 		bl	rp_task_enqueue
+ 1330              	.L129:
+ARM GAS  /tmp/ccGMlE7J.s 			page 24
+
+
+ 1331 00f2 2000     		movs	r0, r4
+ 1332 00f4 3BB0     		add	sp, sp, #236
+ 1333              		@ sp needed
+ 1334 00f6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1335              	.L130:
+ 1336 00f8 1422     		movs	r2, #20
+ 1337 00fa 3900     		movs	r1, r7
+ 1338 00fc 2000     		movs	r0, r4
+ 1339 00fe FFF7FEFF 		bl	memset
+ 1340 0102 039B     		ldr	r3, [sp, #12]
+ 1341 0104 039A     		ldr	r2, [sp, #12]
+ 1342 0106 E360     		str	r3, [r4, #12]
+ 1343 0108 284B     		ldr	r3, .L141+44
+ 1344 010a 9A42     		cmp	r2, r3
+ 1345 010c 31D9     		bls	.L132
+ 1346 010e 1223     		movs	r3, #18
+ 1347 0110 6374     		strb	r3, [r4, #17]
+ 1348 0112 6B1F     		subs	r3, r5, #5
+ 1349 0114 012B     		cmp	r3, #1
+ 1350 0116 2AD8     		bhi	.L133
+ 1351 0118 0C23     		movs	r3, #12
+ 1352              	.L140:
+ 1353 011a A380     		strh	r3, [r4, #4]
+ 1354 011c 244B     		ldr	r3, .L141+48
+ 1355 011e 0026     		movs	r6, #0
+ 1356 0120 E380     		strh	r3, [r4, #6]
+ 1357 0122 8023     		movs	r3, #128
+ 1358 0124 5B00     		lsls	r3, r3, #1
+ 1359 0126 2381     		strh	r3, [r4, #8]
+ 1360 0128 224B     		ldr	r3, .L141+52
+ 1361 012a 049A     		ldr	r2, [sp, #16]
+ 1362 012c 5D5D     		ldrb	r5, [r3, r5]
+ 1363 012e 224B     		ldr	r3, .L141+56
+ 1364 0130 2800     		movs	r0, r5
+ 1365 0132 9F5C     		ldrb	r7, [r3, r2]
+ 1366 0134 A674     		strb	r6, [r4, #18]
+ 1367 0136 3900     		movs	r1, r7
+ 1368 0138 FFF7FEFF 		bl	ral_compute_lora_ldro
+ 1369 013c 059A     		ldr	r2, [sp, #20]
+ 1370 013e 1F4B     		ldr	r3, .L141+60
+ 1371 0140 3F02     		lsls	r7, r7, #8
+ 1372 0142 9B5C     		ldrb	r3, [r3, r2]
+ 1373 0144 4C21     		movs	r1, #76
+ 1374 0146 1B04     		lsls	r3, r3, #16
+ 1375 0148 3D43     		orrs	r5, r7
+ 1376 014a 1D43     		orrs	r5, r3
+ 1377 014c 0123     		movs	r3, #1
+ 1378 014e 0006     		lsls	r0, r0, #24
+ 1379 0150 04AA     		add	r2, sp, #16
+ 1380 0152 5218     		adds	r2, r2, r1
+ 1381 0154 0543     		orrs	r5, r0
+ 1382 0156 1370     		strb	r3, [r2]
+ 1383 0158 0C95     		str	r5, [sp, #48]
+ 1384 015a 23AB     		add	r3, sp, #140
+ 1385 015c 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1386 015e 07C3     		stmia	r3!, {r0, r1, r2}
+ 1387 0160 06CC     		ldmia	r4!, {r1, r2}
+ARM GAS  /tmp/ccGMlE7J.s 			page 25
+
+
+ 1388 0162 06C3     		stmia	r3!, {r1, r2}
+ 1389 0164 164A     		ldr	r2, .L141+64
+ 1390 0166 06AB     		add	r3, sp, #24
+ 1391 0168 5E70     		strb	r6, [r3, #1]
+ 1392 016a 0792     		str	r2, [sp, #28]
+ 1393 016c A3E7     		b	.L131
+ 1394              	.L133:
+ 1395 016e 0823     		movs	r3, #8
+ 1396 0170 D3E7     		b	.L140
+ 1397              	.L132:
+ 1398 0172 3423     		movs	r3, #52
+ 1399 0174 6374     		strb	r3, [r4, #17]
+ 1400 0176 2C3B     		subs	r3, r3, #44
+ 1401 0178 CFE7     		b	.L140
+ 1402              	.L139:
+ 1403 017a 0424     		movs	r4, #4
+ 1404 017c B9E7     		b	.L129
+ 1405              	.L142:
+ 1406 017e C046     		.align	2
+ 1407              	.L141:
+ 1408 0180 00000000 		.word	modem_test_context
+ 1409 0184 00000000 		.word	.LANCHOR2
+ 1410 0188 50C30000 		.word	50000
+ 1411 018c FF010000 		.word	511
+ 1412 0190 0F1D2110 		.word	270605583
+ 1413 0194 28000218 		.word	402784296
+ 1414 0198 A8610000 		.word	25000
+ 1415 019c A0860100 		.word	100000
+ 1416 01a0 00000000 		.word	lr1_stack_mac_rx_gfsk_launch_callback_for_rp
+ 1417 01a4 00000000 		.word	modem_test_rx_callback
+ 1418 01a8 09000000 		.word	modem_test_context+9
+ 1419 01ac FF170D8F 		.word	-1894967297
+ 1420 01b0 00FFFFFF 		.word	-256
+ 1421 01b4 00000000 		.word	.LANCHOR3
+ 1422 01b8 00000000 		.word	.LANCHOR4
+ 1423 01bc 00000000 		.word	.LANCHOR5
+ 1424 01c0 00000000 		.word	lr1_stack_mac_rx_lora_launch_callback_for_rp
+ 1426              		.section	.text.smtc_modem_test_direct_radio_write,"ax",%progbits
+ 1427              		.align	1
+ 1428              		.global	smtc_modem_test_direct_radio_write
+ 1429              		.syntax unified
+ 1430              		.code	16
+ 1431              		.thumb_func
+ 1432              		.fpu softvfp
+ 1434              	smtc_modem_test_direct_radio_write:
+ 1435              		@ args = 0, pretend = 0, frame = 0
+ 1436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1437 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 1438 0002 1F00     		movs	r7, r3
+ 1439 0004 0400     		movs	r4, r0
+ 1440 0006 0D00     		movs	r5, r1
+ 1441 0008 1600     		movs	r6, r2
+ 1442 000a FFF7FEFF 		bl	modem_get_test_mode_status
+ 1443 000e 0300     		movs	r3, r0
+ 1444 0010 0220     		movs	r0, #2
+ 1445 0012 002B     		cmp	r3, #0
+ 1446 0014 0ED0     		beq	.L144
+ARM GAS  /tmp/ccGMlE7J.s 			page 26
+
+
+ 1447 0016 084B     		ldr	r3, .L149
+ 1448 0018 2100     		movs	r1, r4
+ 1449 001a 1A68     		ldr	r2, [r3]
+ 1450 001c 9823     		movs	r3, #152
+ 1451 001e DB00     		lsls	r3, r3, #3
+ 1452 0020 D058     		ldr	r0, [r2, r3]
+ 1453 0022 0097     		str	r7, [sp]
+ 1454 0024 3300     		movs	r3, r6
+ 1455 0026 2A00     		movs	r2, r5
+ 1456 0028 0068     		ldr	r0, [r0]
+ 1457 002a FFF7FEFF 		bl	sx126x_hal_write
+ 1458 002e 0028     		cmp	r0, #0
+ 1459 0030 00D0     		beq	.L144
+ 1460 0032 0420     		movs	r0, #4
+ 1461              	.L144:
+ 1462              		@ sp needed
+ 1463 0034 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 1464              	.L150:
+ 1465 0036 C046     		.align	2
+ 1466              	.L149:
+ 1467 0038 00000000 		.word	modem_test_context
+ 1469              		.section	.text.smtc_modem_test_direct_radio_read,"ax",%progbits
+ 1470              		.align	1
+ 1471              		.global	smtc_modem_test_direct_radio_read
+ 1472              		.syntax unified
+ 1473              		.code	16
+ 1474              		.thumb_func
+ 1475              		.fpu softvfp
+ 1477              	smtc_modem_test_direct_radio_read:
+ 1478              		@ args = 0, pretend = 0, frame = 0
+ 1479              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1480 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 1481 0002 1F00     		movs	r7, r3
+ 1482 0004 0400     		movs	r4, r0
+ 1483 0006 0D00     		movs	r5, r1
+ 1484 0008 1600     		movs	r6, r2
+ 1485 000a FFF7FEFF 		bl	modem_get_test_mode_status
+ 1486 000e 0300     		movs	r3, r0
+ 1487 0010 0220     		movs	r0, #2
+ 1488 0012 002B     		cmp	r3, #0
+ 1489 0014 0ED0     		beq	.L152
+ 1490 0016 084B     		ldr	r3, .L157
+ 1491 0018 2100     		movs	r1, r4
+ 1492 001a 1A68     		ldr	r2, [r3]
+ 1493 001c 9823     		movs	r3, #152
+ 1494 001e DB00     		lsls	r3, r3, #3
+ 1495 0020 D058     		ldr	r0, [r2, r3]
+ 1496 0022 0097     		str	r7, [sp]
+ 1497 0024 3300     		movs	r3, r6
+ 1498 0026 2A00     		movs	r2, r5
+ 1499 0028 0068     		ldr	r0, [r0]
+ 1500 002a FFF7FEFF 		bl	sx126x_hal_read
+ 1501 002e 0028     		cmp	r0, #0
+ 1502 0030 00D0     		beq	.L152
+ 1503 0032 0420     		movs	r0, #4
+ 1504              	.L152:
+ 1505              		@ sp needed
+ARM GAS  /tmp/ccGMlE7J.s 			page 27
+
+
+ 1506 0034 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 1507              	.L158:
+ 1508 0036 C046     		.align	2
+ 1509              	.L157:
+ 1510 0038 00000000 		.word	modem_test_context
+ 1512              		.global	modem_test_context
+ 1513              		.section	.bss.modem_test_context,"aw",%nobits
+ 1514              		.align	2
+ 1517              	modem_test_context:
+ 1518 0000 00000000 		.space	340
+ 1518      00000000 
+ 1518      00000000 
+ 1518      00000000 
+ 1518      00000000 
+ 1519              		.section	.rodata.__func__.0,"a"
+ 1520              		.set	.LANCHOR0,. + 0
+ 1523              	__func__.0:
+ 1524 0000 74657374 		.ascii	"test_mode_cw_callback_for_rp\000"
+ 1524      5F6D6F64 
+ 1524      655F6377 
+ 1524      5F63616C 
+ 1524      6C626163 
+ 1525              		.section	.rodata.modem_test_bw_convert,"a"
+ 1526              		.align	2
+ 1527              		.set	.LANCHOR4,. + 0
+ 1530              	modem_test_bw_convert:
+ 1531 0000 07090B08 		.ascii	"\007\011\013\010\012\014\015"
+ 1531      0A0C0D
+ 1532              		.section	.rodata.modem_test_bw_helper,"a"
+ 1533              		.align	2
+ 1534              		.set	.LANCHOR1,. + 0
+ 1537              	modem_test_bw_helper:
+ 1538 0000 48E80100 		.word	125000
+ 1539 0004 90D00300 		.word	250000
+ 1540 0008 A0860100 		.word	100000
+ 1541 000c 400D0300 		.word	200000
+ 1542 0010 801A0600 		.word	400000
+ 1543 0014 00350C00 		.word	800000
+ 1544 0018 006A1800 		.word	1600000
+ 1545              		.section	.rodata.modem_test_cr_convert,"a"
+ 1546              		.align	2
+ 1547              		.set	.LANCHOR5,. + 0
+ 1550              	modem_test_cr_convert:
+ 1551 0000 01020304 		.ascii	"\001\002\003\004\005\006\007"
+ 1551      050607
+ 1552              		.section	.rodata.modem_test_sf_convert,"a"
+ 1553              		.align	2
+ 1554              		.set	.LANCHOR3,. + 0
+ 1557              	modem_test_sf_convert:
+ 1558 0000 00050607 		.ascii	"\000\005\006\007\010\011\012\013\014"
+ 1558      08090A0B 
+ 1558      0C
+ 1559              		.section	.rodata.sync_word_gfsk,"a"
+ 1560              		.set	.LANCHOR2,. + 0
+ 1563              	sync_word_gfsk:
+ 1564 0000 C194C1   		.ascii	"\301\224\301"
+ 1565              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+ARM GAS  /tmp/ccGMlE7J.s 			page 28
+
+
+ARM GAS  /tmp/ccGMlE7J.s 			page 29
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 smtc_modem_test.c
+     /tmp/ccGMlE7J.s:12     .text.ral_compute_lora_ldro:0000000000000000 $t
+     /tmp/ccGMlE7J.s:19     .text.ral_compute_lora_ldro:0000000000000000 ral_compute_lora_ldro
+     /tmp/ccGMlE7J.s:29     .text.ral_compute_lora_ldro:000000000000000e $d
+     /tmp/ccGMlE7J.s:81     .text.modem_test_empty_callback:0000000000000000 $t
+     /tmp/ccGMlE7J.s:88     .text.modem_test_empty_callback:0000000000000000 modem_test_empty_callback
+     /tmp/ccGMlE7J.s:100    .text.modem_test_compute_rssi_callback:0000000000000000 $t
+     /tmp/ccGMlE7J.s:107    .text.modem_test_compute_rssi_callback:0000000000000000 modem_test_compute_rssi_callback
+     /tmp/ccGMlE7J.s:135    .text.modem_test_rx_callback:0000000000000000 $t
+     /tmp/ccGMlE7J.s:142    .text.modem_test_rx_callback:0000000000000000 modem_test_rx_callback
+     /tmp/ccGMlE7J.s:223    .text.modem_test_rx_callback:0000000000000094 $d
+     /tmp/ccGMlE7J.s:236    .text.test_mode_cw_callback_for_rp:0000000000000000 $t
+     /tmp/ccGMlE7J.s:243    .text.test_mode_cw_callback_for_rp:0000000000000000 test_mode_cw_callback_for_rp
+     /tmp/ccGMlE7J.s:300    .text.test_mode_cw_callback_for_rp:0000000000000068 $d
+     /tmp/ccGMlE7J.s:309    .text.modem_test_tx_callback:0000000000000000 $t
+     /tmp/ccGMlE7J.s:316    .text.modem_test_tx_callback:0000000000000000 modem_test_tx_callback
+     /tmp/ccGMlE7J.s:443    .text.modem_test_tx_callback:00000000000000e8 $d
+     /tmp/ccGMlE7J.s:447    .text.smtc_modem_test_start:0000000000000000 $t
+     /tmp/ccGMlE7J.s:454    .text.smtc_modem_test_start:0000000000000000 smtc_modem_test_start
+     /tmp/ccGMlE7J.s:493    .text.smtc_modem_test_start:000000000000004c $d
+     /tmp/ccGMlE7J.s:1517   .bss.modem_test_context:0000000000000000 modem_test_context
+     /tmp/ccGMlE7J.s:497    .text.smtc_modem_test_tx_hop:0000000000000000 $t
+     /tmp/ccGMlE7J.s:504    .text.smtc_modem_test_tx_hop:0000000000000000 smtc_modem_test_tx_hop
+     /tmp/ccGMlE7J.s:519    .text.smtc_modem_test_tx_cw:0000000000000000 $t
+     /tmp/ccGMlE7J.s:526    .text.smtc_modem_test_tx_cw:0000000000000000 smtc_modem_test_tx_cw
+     /tmp/ccGMlE7J.s:613    .text.smtc_modem_test_tx_cw:00000000000000a8 $d
+     /tmp/ccGMlE7J.s:618    .text.smtc_modem_test_get_nb_rx_packets:0000000000000000 $t
+     /tmp/ccGMlE7J.s:625    .text.smtc_modem_test_get_nb_rx_packets:0000000000000000 smtc_modem_test_get_nb_rx_packets
+     /tmp/ccGMlE7J.s:646    .text.smtc_modem_test_get_nb_rx_packets:000000000000001c $d
+     /tmp/ccGMlE7J.s:649    .text.smtc_modem_test_rssi:0000000000000000 $t
+     /tmp/ccGMlE7J.s:656    .text.smtc_modem_test_rssi:0000000000000000 smtc_modem_test_rssi
+     /tmp/ccGMlE7J.s:717    .text.smtc_modem_test_rssi:0000000000000074 $d
+     /tmp/ccGMlE7J.s:724    .text.smtc_modem_test_get_rssi:0000000000000000 $t
+     /tmp/ccGMlE7J.s:731    .text.smtc_modem_test_get_rssi:0000000000000000 smtc_modem_test_get_rssi
+     /tmp/ccGMlE7J.s:759    .text.smtc_modem_test_get_rssi:000000000000002c $d
+     /tmp/ccGMlE7J.s:762    .text.modem_test_set_rssi:0000000000000000 $t
+     /tmp/ccGMlE7J.s:769    .text.modem_test_set_rssi:0000000000000000 modem_test_set_rssi
+     /tmp/ccGMlE7J.s:781    .text.modem_test_set_rssi:0000000000000008 $d
+     /tmp/ccGMlE7J.s:784    .text.smtc_modem_test_radio_reset:0000000000000000 $t
+     /tmp/ccGMlE7J.s:791    .text.smtc_modem_test_radio_reset:0000000000000000 smtc_modem_test_radio_reset
+     /tmp/ccGMlE7J.s:837    .text.smtc_modem_test_radio_reset:0000000000000050 $d
+     /tmp/ccGMlE7J.s:840    .text.smtc_modem_test_nop:0000000000000000 $t
+     /tmp/ccGMlE7J.s:847    .text.smtc_modem_test_nop:0000000000000000 smtc_modem_test_nop
+     /tmp/ccGMlE7J.s:873    .text.smtc_modem_test_nop:0000000000000030 $d
+     /tmp/ccGMlE7J.s:876    .text.smtc_modem_test_stop:0000000000000000 $t
+     /tmp/ccGMlE7J.s:883    .text.smtc_modem_test_stop:0000000000000000 smtc_modem_test_stop
+     /tmp/ccGMlE7J.s:913    .text.smtc_modem_test_stop:0000000000000034 $d
+     /tmp/ccGMlE7J.s:916    .text.smtc_modem_test_tx:0000000000000000 $t
+     /tmp/ccGMlE7J.s:923    .text.smtc_modem_test_tx:0000000000000000 smtc_modem_test_tx
+     /tmp/ccGMlE7J.s:1188   .text.smtc_modem_test_tx:0000000000000200 $d
+     /tmp/ccGMlE7J.s:1207   .text.smtc_modem_test_rx_continuous:0000000000000000 $t
+     /tmp/ccGMlE7J.s:1214   .text.smtc_modem_test_rx_continuous:0000000000000000 smtc_modem_test_rx_continuous
+     /tmp/ccGMlE7J.s:1408   .text.smtc_modem_test_rx_continuous:0000000000000180 $d
+     /tmp/ccGMlE7J.s:1427   .text.smtc_modem_test_direct_radio_write:0000000000000000 $t
+     /tmp/ccGMlE7J.s:1434   .text.smtc_modem_test_direct_radio_write:0000000000000000 smtc_modem_test_direct_radio_write
+     /tmp/ccGMlE7J.s:1467   .text.smtc_modem_test_direct_radio_write:0000000000000038 $d
+ARM GAS  /tmp/ccGMlE7J.s 			page 30
+
+
+     /tmp/ccGMlE7J.s:1470   .text.smtc_modem_test_direct_radio_read:0000000000000000 $t
+     /tmp/ccGMlE7J.s:1477   .text.smtc_modem_test_direct_radio_read:0000000000000000 smtc_modem_test_direct_radio_read
+     /tmp/ccGMlE7J.s:1510   .text.smtc_modem_test_direct_radio_read:0000000000000038 $d
+     /tmp/ccGMlE7J.s:1514   .bss.modem_test_context:0000000000000000 $d
+     /tmp/ccGMlE7J.s:1523   .rodata.__func__.0:0000000000000000 __func__.0
+     /tmp/ccGMlE7J.s:1526   .rodata.modem_test_bw_convert:0000000000000000 $d
+     /tmp/ccGMlE7J.s:1530   .rodata.modem_test_bw_convert:0000000000000000 modem_test_bw_convert
+     /tmp/ccGMlE7J.s:1533   .rodata.modem_test_bw_helper:0000000000000000 $d
+     /tmp/ccGMlE7J.s:1537   .rodata.modem_test_bw_helper:0000000000000000 modem_test_bw_helper
+     /tmp/ccGMlE7J.s:1546   .rodata.modem_test_cr_convert:0000000000000000 $d
+     /tmp/ccGMlE7J.s:1550   .rodata.modem_test_cr_convert:0000000000000000 modem_test_cr_convert
+     /tmp/ccGMlE7J.s:1553   .rodata.modem_test_sf_convert:0000000000000000 $d
+     /tmp/ccGMlE7J.s:1557   .rodata.modem_test_sf_convert:0000000000000000 modem_test_sf_convert
+     /tmp/ccGMlE7J.s:1563   .rodata.sync_word_gfsk:0000000000000000 sync_word_gfsk
+     /tmp/ccGMlE7J.s:42     .text.ral_compute_lora_ldro:000000000000001b $d
+     /tmp/ccGMlE7J.s:42     .text.ral_compute_lora_ldro:000000000000001c $t
+
+UNDEFINED SYMBOLS
+__gnu_thumb1_case_uqi
+__aeabi_i2f
+__aeabi_ui2f
+__aeabi_fdiv
+__aeabi_f2iz
+smtc_modem_hal_reload_wdog
+memset
+smtc_modem_hal_get_time_in_ms
+memcpy
+rp_task_enqueue
+lr1_stack_mac_rx_lora_launch_callback_for_rp
+lr1_stack_mac_rx_gfsk_launch_callback_for_rp
+smtc_modem_hal_on_panic
+smtc_modem_hal_set_ant_switch
+smtc_modem_hal_get_random_nb_in_range
+lr1_stack_mac_tx_lora_launch_callback_for_rp
+lr1_stack_mac_tx_gfsk_launch_callback_for_rp
+modem_get_test_mode_status
+lorawan_api_isjoined
+modem_set_test_mode_status
+modem_get_rp
+rp_release_hook
+rp_hook_init
+rp_disable_failsafe
+smtc_lbt_init
+smtc_lbt_set_parameters
+smtc_lbt_set_state
+smtc_lbt_listen_channel
+smtc_modem_hal_stop_radio_tcxo
+rp_task_abort
+rp_callback
+sx126x_hal_write
+sx126x_hal_read
